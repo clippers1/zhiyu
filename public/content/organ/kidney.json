@@ -1,0 +1,27 @@
+{
+  "id": "kidney",
+  "name": "肾脏",
+  "en": "KIDNEYS",
+  "headline": "精密的过滤与调节系统",
+  "text": "过滤血液形成尿液，调节水、盐和酸碱平衡；也通过激素参与血压和红细胞生成的调节。",
+  "connection": "肌酐 · eGFR · 尿白蛋白",
+  "related": ["pressure"],
+  "kind": "organ",
+  "category": "urinary",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "kidney",
+      "publisher": "NIDDK",
+      "title": "Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+      "scope": "过滤血液，调节水盐、酸碱与激素功能",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

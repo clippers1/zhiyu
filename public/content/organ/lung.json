@@ -1,0 +1,27 @@
+{
+  "id": "lung",
+  "name": "肺",
+  "en": "LUNGS",
+  "headline": "身体与空气的交换站",
+  "text": "吸气时，氧气在肺泡进入血液；呼气时，血液中的二氧化碳被排出体外。",
+  "connection": "血氧 · 肺功能",
+  "related": [],
+  "kind": "organ",
+  "category": "respiration",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "lung",
+      "publisher": "NHLBI",
+      "title": "How the Lungs Work — The Lungs",
+      "url": "https://www.nhlbi.nih.gov/health/lungs",
+      "scope": "肺的气体交换与氧气、二氧化碳",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

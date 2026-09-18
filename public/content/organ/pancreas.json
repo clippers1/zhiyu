@@ -1,0 +1,38 @@
+{
+  "id": "pancreas",
+  "name": "胰腺",
+  "en": "PANCREAS",
+  "headline": "血糖平衡的重要调节者",
+  "text": "分泌胰岛素，参与血糖调节；也分泌消化酶，帮助分解食物中的碳水化合物、脂肪和蛋白质。",
+  "connection": "血糖 · 糖化血红蛋白",
+  "related": ["glucose"],
+  "kind": "organ",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "diabetes",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "What Is Diabetes?",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+      "scope": "葡萄糖、胰岛素与细胞供能",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "digestion",
+      "publisher": "NIDDK",
+      "title": "Your Digestive System & How it Works",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
+      "scope": "营养吸收、肝脏胆汁及胰腺消化酶",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

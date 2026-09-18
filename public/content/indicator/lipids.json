@@ -1,0 +1,56 @@
+{
+  "id": "lipids",
+  "title": "血脂",
+  "english": "BLOOD LIPIDS",
+  "subtitle": "脂肪的运输，也有不同的分工。",
+  "icon": "layers",
+  "color": "blue",
+  "tags": ["LDL-C / HDL-C", "甘油三酯"],
+  "number": "03",
+  "desc": "脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。",
+  "metrics": [
+    {
+      "name": "低密度脂蛋白胆固醇（LDL-C）",
+      "text": "常被叫作“坏胆固醇”。它与动脉粥样硬化风险密切相关，目标值需要结合个人整体心血管风险确定。",
+      "sourceIds": ["lipids"]
+    },
+    {
+      "name": "高密度脂蛋白胆固醇（HDL-C）",
+      "text": "参与把多余胆固醇带回肝脏，常被叫作“好胆固醇”。解读时仍要同时看 LDL-C、甘油三酯和个人整体风险。",
+      "sourceIds": ["lipids"]
+    },
+    {
+      "name": "甘油三酯（TG）与总胆固醇（TC）",
+      "text": "TG 是重要的能量储存形式，受饮食等因素影响；TC 是多种脂蛋白所携带胆固醇的总量。",
+      "sourceIds": ["lipids"]
+    }
+  ],
+  "chain": [
+    "肠道吸收与肝脏合成",
+    "脂蛋白运输脂类",
+    "细胞利用与储存",
+    "多余胆固醇回到肝脏"
+  ],
+  "tip": "化验单的参考区间不一定等于个人治疗目标。是否需要干预，通常还要看年龄、吸烟、血压、糖尿病和既往病史等。",
+  "organ": "肝脏 · 血管",
+  "kind": "indicator",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "lipids",
+      "publisher": "NLM · MedlinePlus",
+      "title": "Cholesterol Levels",
+      "url": "https://medlineplus.gov/lab-tests/cholesterol-levels/",
+      "scope": "LDL、HDL、总胆固醇、甘油三酯及综合风险评估",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["lipids"],
+  "tipSourceIds": ["lipids"]
+}

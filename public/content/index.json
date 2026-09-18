@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "metabolism",
+      "name": "营养与代谢"
+    },
+    {
+      "id": "circulation",
+      "name": "心血管健康"
+    },
+    {
+      "id": "respiration",
+      "name": "呼吸系统"
+    },
+    {
+      "id": "urinary",
+      "name": "泌尿系统"
+    }
+  ],
+  "items": [
+    {
+      "id": "glucose",
+      "kind": "indicator",
+      "title": "血糖",
+      "subtitle": "身体的能量，如何保持平衡？",
+      "english": "BLOOD GLUCOSE",
+      "icon": "droplet",
+      "color": "orange",
+      "number": "01",
+      "tags": ["空腹血糖", "糖化血红蛋白"],
+      "category": "metabolism",
+      "featured": true,
+      "searchText": "血糖 血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。 空腹血糖（FPG） 糖化血红蛋白（HbA1c） 口服葡萄糖耐量试验（OGTT） 空腹血糖 糖化血红蛋白 ",
+      "sourceLabel": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "referenceCount": 4
+    },
+    {
+      "id": "pressure",
+      "kind": "indicator",
+      "title": "血压",
+      "subtitle": "血液流动时，血管承受多少压力？",
+      "english": "BLOOD PRESSURE",
+      "icon": "heart-pulse",
+      "color": "purple",
+      "number": "02",
+      "tags": ["收缩压", "舒张压"],
+      "category": "circulation",
+      "featured": true,
+      "searchText": "血压 心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。 收缩压（高压） 舒张压（低压） 家庭与动态血压 收缩压 舒张压 ",
+      "sourceLabel": "世界卫生组织（WHO）",
+      "referenceCount": 4
+    },
+    {
+      "id": "lipids",
+      "kind": "indicator",
+      "title": "血脂",
+      "subtitle": "脂肪的运输，也有不同的分工。",
+      "english": "BLOOD LIPIDS",
+      "icon": "layers",
+      "color": "blue",
+      "number": "03",
+      "tags": ["LDL-C / HDL-C", "甘油三酯"],
+      "category": "metabolism",
+      "featured": true,
+      "searchText": "血脂 脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。 低密度脂蛋白胆固醇（LDL-C） 高密度脂蛋白胆固醇（HDL-C） 甘油三酯（TG）与总胆固醇（TC） LDL-C / HDL-C 甘油三酯 ",
+      "sourceLabel": "NLM · MedlinePlus",
+      "referenceCount": 1
+    },
+    {
+      "id": "heart",
+      "kind": "organ",
+      "title": "心脏",
+      "subtitle": "不停歇的生命泵",
+      "english": "HEART",
+      "icon": "heart",
+      "color": "green",
+      "number": "",
+      "tags": ["血压", "血脂"],
+      "category": "circulation",
+      "featured": false,
+      "searchText": "心脏 通过有节律的收缩，让血液把氧气和营养送到全身，再带走代谢废物。 血压 · 血脂",
+      "sourceLabel": "美国国立心肺血液研究所（NHLBI）",
+      "referenceCount": 1
+    },
+    {
+      "id": "lung",
+      "kind": "organ",
+      "title": "肺",
+      "subtitle": "身体与空气的交换站",
+      "english": "LUNGS",
+      "icon": "heart",
+      "color": "green",
+      "number": "",
+      "tags": ["血氧", "肺功能"],
+      "category": "respiration",
+      "featured": false,
+      "searchText": "肺 吸气时，氧气在肺泡进入血液；呼气时，血液中的二氧化碳被排出体外。 血氧 · 肺功能",
+      "sourceLabel": "NHLBI",
+      "referenceCount": 1
+    },
+    {
+      "id": "liver",
+      "kind": "organ",
+      "title": "肝脏",
+      "subtitle": "营养与代谢的中转站",
+      "english": "LIVER",
+      "icon": "heart",
+      "color": "green",
+      "number": "",
+      "tags": ["血糖", "血脂", "肝功能"],
+      "category": "metabolism",
+      "featured": false,
+      "searchText": "肝脏 处理吸收的营养，储存与释放葡萄糖，参与脂类代谢，并合成胆汁和多种蛋白质。 血糖 · 血脂 · 肝功能",
+      "sourceLabel": "NIDDK",
+      "referenceCount": 3
+    },
+    {
+      "id": "pancreas",
+      "kind": "organ",
+      "title": "胰腺",
+      "subtitle": "血糖平衡的重要调节者",
+      "english": "PANCREAS",
+      "icon": "heart",
+      "color": "green",
+      "number": "",
+      "tags": ["血糖", "糖化血红蛋白"],
+      "category": "metabolism",
+      "featured": false,
+      "searchText": "胰腺 分泌胰岛素和胰高血糖素，协同调节血糖；也分泌消化酶，帮助分解食物。 血糖 · 糖化血红蛋白",
+      "sourceLabel": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "referenceCount": 2
+    },
+    {
+      "id": "kidney",
+      "kind": "organ",
+      "title": "肾脏",
+      "subtitle": "精密的过滤与调节系统",
+      "english": "KIDNEYS",
+      "icon": "heart",
+      "color": "green",
+      "number": "",
+      "tags": ["肌酐", "eGFR", "尿白蛋白"],
+      "category": "urinary",
+      "featured": false,
+      "searchText": "肾脏 过滤血液形成尿液，调节水、盐和酸碱平衡；也通过激素参与血压和红细胞生成的调节。 肌酐 · eGFR · 尿白蛋白",
+      "sourceLabel": "NIDDK",
+      "referenceCount": 1
+    }
+  ]
+}

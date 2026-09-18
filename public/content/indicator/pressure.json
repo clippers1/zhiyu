@@ -1,0 +1,89 @@
+{
+  "id": "pressure",
+  "title": "血压",
+  "english": "BLOOD PRESSURE",
+  "subtitle": "血液流动时，血管承受多少压力？",
+  "icon": "heart-pulse",
+  "color": "purple",
+  "tags": ["收缩压", "舒张压"],
+  "number": "02",
+  "desc": "心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。",
+  "metrics": [
+    {
+      "name": "收缩压（高压）",
+      "text": "心脏收缩、向外泵血时，动脉内达到的较高压力。",
+      "sourceIds": ["hypertension"]
+    },
+    {
+      "name": "舒张压（低压）",
+      "text": "心脏舒张、再次充盈时，动脉仍维持的较低压力。",
+      "sourceIds": ["hypertension"]
+    },
+    {
+      "name": "家庭与动态血压",
+      "text": "连续规范测量比孤立的一次读数更有意义；诊室、家庭和动态测量使用的判断标准有所不同。",
+      "sourceIds": ["bp"]
+    }
+  ],
+  "chain": [
+    "心脏收缩泵血",
+    "血液进入动脉",
+    "血管阻力影响压力",
+    "肾脏调节水和盐"
+  ],
+  "tip": "测量前安静休息至少 5 分钟，坐姿测量、手臂与心脏同高，使用合适袖带。不同日期的规范测量更有参考价值。",
+  "organ": "心脏 · 血管 · 肾脏",
+  "kind": "indicator",
+  "category": "circulation",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "hypertension",
+      "publisher": "世界卫生组织（WHO）",
+      "title": "Hypertension",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/hypertension",
+      "scope": "收缩压、舒张压、高血压症状及反复测量",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bp",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Measuring Blood Pressure",
+      "url": "https://medlineplus.gov/lab-tests/measuring-blood-pressure/",
+      "scope": "测量姿势、袖带、休息时间及家庭血压",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "heart",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How the Heart Works — The Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart",
+      "scope": "心脏泵血与氧气、营养运输",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "kidney",
+      "publisher": "NIDDK",
+      "title": "Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+      "scope": "过滤血液，调节水盐、酸碱与激素功能",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["hypertension", "heart", "kidney"],
+  "tipSourceIds": ["bp"]
+}

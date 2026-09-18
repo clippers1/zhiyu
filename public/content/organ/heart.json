@@ -1,0 +1,27 @@
+{
+  "id": "heart",
+  "name": "心脏",
+  "en": "HEART",
+  "headline": "不停歇的生命泵",
+  "text": "通过有节律的收缩，让血液把氧气和营养送到全身，再带走代谢废物。",
+  "connection": "血压 · 血脂",
+  "related": ["pressure", "lipids"],
+  "kind": "organ",
+  "category": "circulation",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "heart",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How the Heart Works — The Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart",
+      "scope": "心脏泵血与氧气、营养运输",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

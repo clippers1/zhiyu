@@ -1,0 +1,49 @@
+{
+  "id": "liver",
+  "name": "肝脏",
+  "en": "LIVER",
+  "headline": "营养与代谢的中转站",
+  "text": "处理吸收的营养，参与糖和脂类代谢，并合成胆汁帮助消化脂肪。",
+  "connection": "血糖 · 血脂 · 肝功能",
+  "related": ["glucose", "lipids"],
+  "kind": "organ",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "digestion",
+      "publisher": "NIDDK",
+      "title": "Your Digestive System & How it Works",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
+      "scope": "营养吸收、肝脏胆汁及胰腺消化酶",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "insulin",
+      "publisher": "NIDDK",
+      "title": "Insulin Resistance & Prediabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/prediabetes-insulin-resistance",
+      "scope": "胰腺分泌胰岛素，肌肉、脂肪与肝脏对胰岛素的响应",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lipids",
+      "publisher": "NLM · MedlinePlus",
+      "title": "Cholesterol Levels",
+      "url": "https://medlineplus.gov/lab-tests/cholesterol-levels/",
+      "scope": "LDL、HDL、总胆固醇、甘油三酯及综合风险评估",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

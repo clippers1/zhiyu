@@ -1,77 +1,182 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Activity, ArrowRight, ArrowUpRight, BookOpen, Bookmark, Check, CircleHelp, Droplet, ExternalLink, Heart, HeartPulse, Layers3, Leaf, Menu, Play, Plus, Search, ShieldCheck, Sparkles, Sprout, TrendingUp, X } from 'lucide-react';
-import './styles.css';
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  BookOpen,
+  Bookmark,
+  Heart,
+  Map,
+  Search,
+  ShieldCheck,
+  Sprout,
+} from "lucide-react";
+import Home from "./components/Home";
+import Library from "./components/Library";
+import Article from "./components/Article";
+import OrganExplorer from "./components/OrganExplorer";
+import SearchDialog from "./components/SearchDialog";
+import Tour from "./components/Tour";
+import Modal from "./components/Modal";
+import { useBookmarks, useRoute } from "./hooks";
+import "./styles.css";
+import "./mobile.css";
 
-const indicators = [
-  { id: 'glucose', title: '血糖', english: 'BLOOD GLUCOSE', subtitle: '身体的能量，如何保持平衡？', icon: Droplet, color: 'orange', tags: ['空腹血糖', '糖化血红蛋白'], number: '01', desc: '血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。', metrics: [{name:'空腹血糖（FPG）', text:'观察至少 8 小时未摄入热量时的血糖水平，像一张当下的快照。'}, {name:'糖化血红蛋白（HbA1c）', text:'反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。'}, {name:'口服葡萄糖耐量试验（OGTT）', text:'观察喝下规定葡萄糖溶液后身体处理糖的能力，需按医疗机构规范进行。'}], chain: ['食物中的碳水化合物', '消化后形成葡萄糖', '胰岛素帮助细胞利用', '肝脏储存与释放'], tip:'空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。', organ:'胰腺 · 肝脏', source:'美国糖尿病协会（ADA）糖尿病诊疗标准', url:'https://professional.diabetes.org/standards-of-care' },
-  { id: 'pressure', title: '血压', english: 'BLOOD PRESSURE', subtitle: '血液流动时，血管承受多少压力？', icon: HeartPulse, color: 'purple', tags: ['收缩压', '舒张压'], number: '02', desc: '心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。', metrics: [{name:'收缩压（高压）', text:'心脏收缩、向外泵血时，动脉内达到的较高压力。'}, {name:'舒张压（低压）', text:'心脏舒张、再次充盈时，动脉仍维持的较低压力。'}, {name:'家庭与动态血压', text:'连续规范测量比孤立的一次读数更有意义；诊室、家庭和动态测量使用的判断标准有所不同。'}], chain: ['心脏收缩泵血', '血液进入动脉', '血管阻力影响压力', '肾脏调节水和盐'], tip:'测量前安静休息至少 5 分钟，坐姿测量、手臂与心脏同高，使用合适袖带。不同日期的规范测量更有参考价值。', organ:'心脏 · 血管 · 肾脏', source:'世界卫生组织（WHO）：高血压', url:'https://www.who.int/news-room/fact-sheets/detail/hypertension' },
-  { id: 'lipids', title: '血脂', english: 'BLOOD LIPIDS', subtitle: '脂肪的运输，也有不同的分工。', icon: Layers3, color: 'blue', tags: ['LDL-C / HDL-C', '甘油三酯'], number: '03', desc: '脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。', metrics: [{name:'低密度脂蛋白胆固醇（LDL-C）', text:'常被叫作“坏胆固醇”。它与动脉粥样硬化风险密切相关，目标值需要结合个人整体心血管风险确定。'}, {name:'高密度脂蛋白胆固醇（HDL-C）', text:'参与胆固醇的逆向运输，常被叫作“好胆固醇”，但并非数值越高越好。'}, {name:'甘油三酯（TG）与总胆固醇（TC）', text:'TG 是重要的能量储存形式，受饮食等因素影响；TC 是多种脂蛋白所携带胆固醇的总量。'}], chain: ['肠道吸收与肝脏合成', '脂蛋白运输脂类', '细胞利用与储存', '多余胆固醇回到肝脏'], tip:'化验单的参考区间不一定等于个人治疗目标。是否需要干预，通常还要看年龄、吸烟、血压、糖尿病和既往病史等。', organ:'肝脏 · 血管', source:'美国心脏协会（AHA）：胆固醇', url:'https://www.heart.org/en/health-topics/cholesterol' }
+const nav = [
+  { id: "map", title: "健康地图", short: "发现", icon: Map },
+  { id: "indicators", title: "指标百科", short: "指标", icon: BookOpen },
+  { id: "organs", title: "器官探索", short: "人体", icon: Heart },
+  { id: "saved", title: "我的收藏", short: "收藏", icon: Bookmark },
 ];
-const organs = [
- {id:'heart', name:'心脏', en:'HEART', headline:'不停歇的生命泵', text:'通过有节律的收缩，让血液把氧气和营养送到全身，再带走代谢废物。', connection:'血压 · 血脂', related:['pressure','lipids']},
- {id:'lung', name:'肺', en:'LUNGS', headline:'身体与空气的交换站', text:'吸气时，氧气在肺泡进入血液；呼气时，血液中的二氧化碳被排出体外。', connection:'血氧 · 肺功能', related:[]},
- {id:'liver', name:'肝脏', en:'LIVER', headline:'营养与代谢的中转站', text:'处理吸收的营养，储存与释放葡萄糖，参与脂类代谢，并合成胆汁和多种蛋白质。', connection:'血糖 · 血脂 · 肝功能', related:['glucose','lipids']},
- {id:'pancreas', name:'胰腺', en:'PANCREAS', headline:'血糖平衡的重要调节者', text:'分泌胰岛素和胰高血糖素，协同调节血糖；也分泌消化酶，帮助分解食物。', connection:'血糖 · 糖化血红蛋白', related:['glucose']},
- {id:'kidney', name:'肾脏', en:'KIDNEYS', headline:'精密的过滤与调节系统', text:'过滤血液形成尿液，调节水、盐和酸碱平衡；也通过激素参与血压和红细胞生成的调节。', connection:'肌酐 · eGFR · 尿白蛋白', related:['pressure']}
-];
-
-function BodyArt({selected='heart', onSelect=()=>{}, large=false}) {
- const props=(id)=>({className:`organ organ-${id} ${selected===id?'selected':''}`,onClick:()=>onSelect(id),onKeyDown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect(id)}},tabIndex:0,role:'button','aria-label':`了解${organs.find(o=>o.id===id).name}`});
- return <svg className={`body-art ${large?'large':''}`} viewBox="0 0 440 420" aria-label="人体器官互动示意图，位置经过简化">
- <defs><linearGradient id="bodyFill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#e4eeea"/><stop offset="1" stopColor="#cbded5"/></linearGradient><linearGradient id="heartFill" x1="0" x2="1" y1="0" y2="1"><stop stopColor="#e99a88"/><stop offset="1" stopColor="#cd645a"/></linearGradient><linearGradient id="lungFill"><stop stopColor="#c4cbd9"/><stop offset="1" stopColor="#a9b8cb"/></linearGradient></defs>
- <circle cx="228" cy="204" r="164" fill="#e6eeE7" opacity=".55"/><circle cx="228" cy="204" r="141" fill="none" stroke="#cfddd1" strokeDasharray="3 6"/><ellipse cx="228" cy="212" rx="195" ry="79" fill="none" stroke="#d4dfd2" transform="rotate(-34 228 212)"/>
- <path d="M205 103 L204 124 Q193 133 166 138 Q146 142 140 166 L112 254 Q108 265 120 270 Q133 275 139 260 L164 202 L164 270 Q171 296 166 320 L157 390 L211 390 L227 325 L242 390 L295 390 L286 320 Q281 296 288 270 L289 202 L314 260 Q320 275 333 270 Q345 265 341 254 L313 166 Q307 142 288 138 Q260 133 250 124 L250 103" fill="url(#bodyFill)" stroke="#b5ccbf" strokeWidth="1.5"/>
- <path d="M199 62 Q202 35 227 35 Q253 35 256 62 L255 83 Q252 111 227 116 Q203 111 200 86Z" fill="url(#bodyFill)" stroke="#b5ccbf" strokeWidth="1.5"/>
- <path d="M227 126 L227 180 M212 142 L227 159 L242 142" stroke="#91b8a6" strokeWidth="5" fill="none" strokeLinecap="round"/>
- <g {...props('lung')} fill="url(#lungFill)" stroke="#98a9be" strokeWidth="1.2"><path d="M214 155 Q197 146 183 169 Q171 190 175 219 Q190 228 214 210Z"/><path d="M239 155 Q255 146 270 169 Q280 191 277 219 Q264 227 240 210Z"/><path d="M214 165 L194 186 M202 177 L200 207 M240 165 L261 188 M251 178 L254 207" fill="none" opacity=".7"/></g>
- <g fill="none" strokeLinecap="round"><path d="M228 184 C236 211 221 232 227 276 L217 320 M227 276 L239 320" stroke="#d38b81" strokeWidth="4"/><path d="M237 180 L237 263 M235 247 L198 263 M236 248 L264 263" stroke="#8aaec4" strokeWidth="3"/></g>
- <g {...props('heart')}><path className="heart-shape" d="M227 183 C216 169 202 183 212 200 L230 220 Q252 204 249 190 Q244 178 234 184 L233 171 L227 170Z" fill="url(#heartFill)" stroke="#c8756a" strokeWidth="1.5"/></g>
- <g {...props('liver')}><path d="M178 230 Q205 218 242 228 L265 234 Q253 249 229 251 L212 246 Q191 261 177 250Z" fill="#be8b79" stroke="#a77767" strokeWidth="1.2"/><path d="M219 230 L212 246" stroke="#a77767" fill="none"/></g>
- <g {...props('pancreas')}><path d="M210 259 Q220 250 235 255 Q248 251 266 257 Q254 267 238 265 Q222 273 210 265Z" fill="#e7bd78" stroke="#c8a365" strokeWidth="1.2"/></g>
- <g {...props('kidney')} fill="#c58983" stroke="#ad756e" strokeWidth="1.2"><rect x="180" y="268" width="94" height="29" fill="transparent" stroke="none"/><path d="M197 270 C181 268 182 291 194 294 Q205 296 205 285 Q194 285 200 279 Q203 273 197 270Z"/><path d="M258 270 C274 268 273 291 261 294 Q250 296 250 285 Q261 285 255 279 Q252 273 258 270Z"/></g>
- <path d="M208 284 C211 292 207 308 227 313 C247 308 244 292 246 284" fill="none" stroke="#b4b997" strokeWidth="2"/><path d="M181 303 Q198 298 214 305 T269 303 M181 312 Q195 305 214 313 T271 312" fill="none" stroke="#b2c8b9" strokeWidth="5" strokeLinecap="round"/>
- <g className="flow-dots"><circle r="3.5" fill="#f1d3aa"><animateMotion dur="4s" repeatCount="indefinite" path="M228 184 C236 211 221 232 227 276 L217 320"/></circle><circle r="3" fill="#e7f6ed"><animateMotion dur="3.5s" repeatCount="indefinite" path="M237 263 L237 180"/></circle></g>
- <g stroke="#98b3a3" fill="none" strokeWidth="1"><path d="M252 192 L300 172 L326 172"/><path d="M192 239 L147 223 L105 223"/><path d="M266 281 L307 281 L326 296"/></g>
- <g fontSize="12" fill="#536d60" fontFamily="inherit"><text x="334" y="176">心脏</text><text x="72" y="227">肝脏</text><text x="333" y="303">肾脏</text></g>
- <circle cx="252" cy="192" r="3" fill="#719a85"/><circle cx="192" cy="239" r="3" fill="#719a85"/><circle cx="266" cy="281" r="3" fill="#719a85"/>
- <g transform="translate(82 112)"><rect width="82" height="29" rx="14.5" fill="#fff" stroke="#e3e9e0"/><circle cx="16" cy="14.5" r="4" fill="#73a78a"/><text x="28" y="19" fontSize="10" fill="#5f786b">协同运作中</text></g>
- </svg>
+function App() {
+  const { route, navigate, back } = useRoute();
+  const { saved, toggleSave, storageError } = useBookmarks();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [tour, setTour] = useState(null);
+  useEffect(() => {
+    setSearchOpen(false);
+    setTour(null);
+    document.title = `${route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
+  }, [route.page, route.id]);
+  const onOpen = (id) => navigate("article", id);
+  const onOrgan = (id) => navigate("organs", id);
+  const activePage = route.page === "article" ? "indicators" : route.page;
+  return (
+    <div className={route.page === "article" ? "app article-view" : "app"}>
+      <header className="header">
+        <div className="header-inner">
+          <a
+            href="#/map"
+            className="brand"
+            onClick={(event) => {
+              event.preventDefault();
+              navigate("map");
+            }}
+          >
+            <span className="brand-icon">
+              <Sprout size={26} />
+            </span>
+            <span className="brand-name">
+              知愈<span>ZH I Y U</span>
+            </span>
+            <span className="brand-divider" />
+            <span className="brand-tagline">让健康变得好懂</span>
+          </a>
+          <nav aria-label="主导航">
+            {nav.map((item) => (
+              <button
+                key={item.id}
+                className={activePage === item.id ? "active" : ""}
+                aria-current={activePage === item.id ? "page" : undefined}
+                onClick={() => navigate(item.id)}
+              >
+                {item.title}
+                {item.id === "saved" && saved.length > 0 && (
+                  <i>{saved.length}</i>
+                )}
+              </button>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <button
+              className="search-trigger"
+              onClick={() => setSearchOpen(true)}
+              aria-label="搜索指标或器官"
+            >
+              <Search size={17} />
+              <span>搜索指标、器官</span>
+              <kbd>⌕</kbd>
+            </button>
+            <button
+              className="avatar"
+              aria-label="查看我的收藏"
+              onClick={() => navigate("saved")}
+            >
+              知
+            </button>
+          </div>
+        </div>
+      </header>
+      <main id="main-content">
+        {route.page === "map" && (
+          <Home
+            go={navigate}
+            onOpen={onOpen}
+            onOrgan={onOrgan}
+            setTour={setTour}
+          />
+        )}
+        {route.page === "indicators" && (
+          <Library key="library" onOpen={onOpen} />
+        )}
+        {route.page === "organs" && (
+          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} />
+        )}
+        {route.page === "saved" && (
+          <Library
+            key="saved"
+            savedOnly
+            saved={saved}
+            onOpen={onOpen}
+            onBrowse={() => navigate("indicators")}
+          />
+        )}
+        {route.page === "article" && (
+          <Article
+            key={route.id}
+            id={route.id}
+            onBack={back}
+            onOrgan={onOrgan}
+            saved={saved}
+            toggleSave={toggleSave}
+            storageError={storageError}
+          />
+        )}
+        <footer>
+          <span className="footer-brand">
+            <Sprout size={17} /> 知愈 <i>让每一份了解，成为照顾自己的力量。</i>
+          </span>
+          <span>
+            <ShieldCheck size={13} />{" "}
+            内容用于健康科普，不替代医生诊断与个体化建议。
+          </span>
+        </footer>
+      </main>
+      <nav className="mobile-nav" aria-label="移动端导航">
+        {nav.map(({ id, short, title, icon: Icon }) => (
+          <button
+            key={id}
+            aria-label={title}
+            aria-current={activePage === id ? "page" : undefined}
+            className={activePage === id ? "active" : ""}
+            onClick={() => navigate(id)}
+          >
+            <span>
+              <Icon size={22} strokeWidth={activePage === id ? 2 : 1.6} />
+              {id === "saved" && saved.length > 0 && <i>{saved.length}</i>}
+            </span>
+            <b>{short}</b>
+          </button>
+        ))}
+      </nav>
+      {searchOpen && (
+        <Modal className="search-modal" onClose={() => setSearchOpen(false)}>
+          <SearchDialog
+            onOpen={(id) => {
+              setSearchOpen(false);
+              onOpen(id);
+            }}
+            onOrgan={(id) => {
+              setSearchOpen(false);
+              onOrgan(id);
+            }}
+          />
+        </Modal>
+      )}
+      {tour !== null && (
+        <Modal className="tour-modal" onClose={() => setTour(null)}>
+          <Tour tour={tour} setTour={setTour} go={navigate} />
+        </Modal>
+      )}
+    </div>
+  );
 }
-
-function App(){
- const [page,setPage]=useState('map'); const [activeOrgan,setActiveOrgan]=useState('heart'); const [detail,setDetail]=useState(null); const [query,setQuery]=useState(''); const [searchOpen,setSearchOpen]=useState(false); const [tour,setTour]=useState(null); const [saved,setSaved]=useState(()=>{try{return JSON.parse(localStorage.getItem('zhiyu-saved')||'[]')}catch{return []}}); const [mobileMenu,setMobileMenu]=useState(false);
- const dialogRef=useRef(null); const previousFocus=useRef(null);
- const modalOpen=Boolean(detail||searchOpen||tour!==null);
- useEffect(()=>{localStorage.setItem('zhiyu-saved',JSON.stringify(saved))},[saved]);
- useEffect(()=>{if(!modalOpen)return; previousFocus.current=document.activeElement; const before=document.body.style.overflow;document.body.style.overflow='hidden';const frame=requestAnimationFrame(()=>dialogRef.current?.querySelector('input,button,a')?.focus());function key(e){if(e.key==='Escape'){setDetail(null);setSearchOpen(false);setTour(null)}if(e.key==='Tab'){const items=dialogRef.current?.querySelectorAll('button,a[href],input,[tabindex="0"]');if(!items?.length)return;const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}document.addEventListener('keydown',key);return()=>{cancelAnimationFrame(frame);document.body.style.overflow=before;document.removeEventListener('keydown',key);previousFocus.current?.focus()}},[modalOpen]);
- function toggleSave(id){setSaved(s=>s.includes(id)?s.filter(x=>x!==id):[...s,id])}
- function go(p){setPage(p);setMobileMenu(false);window.scrollTo({top:0,behavior:'smooth'})}
- const selected=organs.find(o=>o.id===activeOrgan); const searchResults=[...indicators.map(i=>({...i,type:'indicator',search:i.title+i.tags.join('')+i.desc+i.metrics.map(m=>m.name).join('')})),...organs.map(o=>({...o,title:o.name,type:'organ',search:o.name+o.connection+o.text}))].filter(x=>!query||x.search.toLowerCase().includes(query.toLowerCase()));
- const nav=[['map','健康地图'],['indicators','指标百科'],['organs','器官探索'],['saved','我的收藏']];
- const close=()=>{setDetail(null);setSearchOpen(false);setTour(null)};
- function indicatorCard(item){const Icon=item.icon;return <button key={item.id} className={`indicator-card ${item.color}`} onClick={()=>setDetail(item)}><div className="card-top"><span className="metric-icon"><Icon size={22}/></span><span className="card-number">{item.number}</span></div><div className="metric-title"><h3>{item.title}</h3><span>{item.english}</span></div><p>{item.subtitle}</p><div className="tags">{item.tags.map(t=><span key={t}>{t}</span>)}</div><div className="card-bottom"><span>认识相关指标</span><ArrowUpRight size={17}/></div></button>}
- return <><header className="header"><div className="header-inner"><a href="#" className="brand" onClick={e=>{e.preventDefault();go('map')}}><span className="brand-icon"><Sprout size={26}/></span><span className="brand-name">知愈<span>ZH I Y U</span></span><span className="brand-divider"/><span className="brand-tagline">让健康变得好懂</span></a><nav className={mobileMenu?'open':''}>{nav.map(([id,title])=><button key={id} className={page===id?'active':''} onClick={()=>go(id)}>{title}{id==='saved'&&saved.length>0&&<i>{saved.length}</i>}</button>)}</nav><div className="header-actions"><button className="search-trigger" onClick={()=>{setQuery('');setSearchOpen(true)}} aria-label="搜索指标或器官"><Search size={17}/><span>搜索指标、器官</span><kbd>⌕</kbd></button><button className="avatar" aria-label="查看我的收藏" onClick={()=>go('saved')}>知</button><button className="menu-toggle icon-button" aria-label="展开菜单" onClick={()=>setMobileMenu(!mobileMenu)}><Menu/></button></div></div></header>
- <main>
- {page==='map'&&<><div className="page-eyebrow"><span><span className="status-dot"/>从了解身体开始，照顾好自己</span><span className="eyebrow-right"><Leaf size={13}/> 每一点了解，都是健康的积累</span></div>
- <section className="hero"><div className="hero-content"><div className="overline"><span/> YOUR BODY, CONNECTED</div><h1>看懂指标，<br/>也看懂<span>你的身体。</span></h1><p>身体里的每个数字，都有它的故事。<br/>从一张体检单出发，看见指标、器官与健康之间的联系。</p><div className="hero-actions"><button className="primary-button" onClick={()=>go('indicators')}>开启健康探索 <ArrowRight size={17}/></button><button className="play-button" onClick={()=>setTour(0)}><span><Play size={12} fill="currentColor"/></span> 1 分钟认识身体</button></div><div className="hero-note"><ShieldCheck size={15}/> 科学知识 · 可视化理解 · 轻松一点点</div></div><div className="hero-visual"><div className="visual-caption"><span className="live-dot"/> 你的身体，是一个相互连接的世界</div><BodyArt selected={activeOrgan} onSelect={id=>{setActiveOrgan(id);go('organs')}}/><div className="visual-bottom"><span>THE HUMAN BODY</span><span>点击器官，发现更多 <Plus size={12}/></span></div></div></section>
- <section className="indicator-section"><SectionTitle kicker="READ YOUR NUMBERS" title="体检单上的数字，在说什么？" desc="从最常见的三类指标，读懂身体发出的信号。" action="浏览指标百科" onClick={()=>go('indicators')}/><div className="indicator-grid">{indicators.map(indicatorCard)}</div></section>
- <div className="lower-grid"><section className="connection-card"><div className="small-overline"><span/> EVERYTHING IS CONNECTED</div><div className="connection-title"><h2>指标不是孤岛，身体是个整体。</h2><span className="mini-badge">关联探索</span></div><p>一起来看看，血糖是怎样被身体调节的。</p><div className="connection-flow"><div><span className="flow-icon peach"><Droplet size={22}/></span><b>吃进食物</b><small>葡萄糖进入血液</small></div><span className="flow-arrow"><i/><ArrowRight size={16}/></span><div><span className="flow-icon yellow"><Activity size={22}/></span><b>胰腺响应</b><small>释放胰岛素信号</small></div><span className="flow-arrow"><i/><ArrowRight size={16}/></span><div><span className="flow-icon green"><Layers3 size={22}/></span><b>细胞利用</b><small>摄取葡萄糖供能</small></div><span className="flow-arrow"><i/><ArrowRight size={16}/></span><div><span className="flow-icon blue"><TrendingUp size={22}/></span><b>回归平衡</b><small>血糖逐渐回落</small></div></div><button className="text-link" onClick={()=>setDetail(indicators[0])}>跟着一颗葡萄糖，走进身体 <ArrowRight size={15}/></button></section>
- <section className="daily-card"><div className="daily-top"><span><Sparkles size={15}/> 今天多懂一点</span><span>01 / 03</span></div><div className="daily-illustration"><div className="daily-orbit"/><HeartPulse size={51} strokeWidth={1.3}/><span className="tiny-plus">+</span><span className="tiny-dot"/></div><h3>没有症状，<br/>血压就一定正常吗？</h3><p>高血压常常没有明显症状。<br/>规律测量，比“凭感觉”更可靠。</p><button className="text-link" onClick={()=>setDetail(indicators[1])}>认识这个「无声的信号」 <ArrowRight size={15}/></button></section></div>
- <section className="organ-strip"><div className="organ-strip-icon"><Heart size={25}/></div><div><h3>认识身体里的「默契搭档」</h3><p>心脏、肝脏、肺、肾脏……每个器官都有自己的重要任务。</p></div><button onClick={()=>go('organs')}>探索人体器官 <ArrowUpRight size={17}/></button></section></>}
- {page==='indicators'&&<><PageIntro label="THE INDICATOR LIBRARY" title="读懂数字背后的身体语言。" description="认识指标的分工，理解它们之间的联系。健康判断，需要看完整的画面。"/><div className="indicator-grid library-grid">{indicators.map(indicatorCard)}</div><section className="reading-guide"><BookOpen size={25}/><div><h2>读体检单，可以从这三步开始</h2><div className="guide-grid"><div><span>01</span><h3>确认检查条件</h3><p>是否空腹、采样时间、近期运动和用药，都可能影响结果。</p></div><div><span>02</span><h3>结合相关指标</h3><p>同一个身体系统往往需要多个指标共同观察，单一异常不等于确诊。</p></div><div><span>03</span><h3>关注变化与背景</h3><p>对照历次结果，结合症状、病史和报告参考区间，必要时请医生评估。</p></div></div></div></section></>}
- {page==='organs'&&<><PageIntro label="MEET YOUR BODY" title="每个器官，都在认真工作。" description="点击人体示意图或下方标签，认识身体里相互协作的伙伴。"/><section className="organ-explorer"><div className="explorer-visual"><BodyArt selected={activeOrgan} onSelect={setActiveOrgan} large/><small>人体正面示意 · 位置与形态经过简化，非解剖教学图</small></div><div className="organ-information"><div className="organ-tabs">{organs.map(o=><button className={o.id===activeOrgan?'active':''} onClick={()=>setActiveOrgan(o.id)} key={o.id}>{o.name}</button>)}</div><span className="overline">{selected.en}</span><h2>{selected.name}<span> / {selected.headline}</span></h2><p className="organ-description">{selected.text}</p><div className="organ-related"><span>可以一起了解的指标</span><h3>{selected.connection}</h3><p>相关指标提供观察线索，需要结合检查条件与个人情况解读。</p>{selected.related.map(id=><button key={id} className="text-link" onClick={()=>setDetail(indicators.find(i=>i.id===id))}>了解{indicators.find(i=>i.id===id).title}<ArrowRight size={16}/></button>)}{selected.related.length===0&&<p className="coming-note">本期先从器官功能开始；血氧与肺功能专题将继续补充。</p>}</div></div></section></>}
- {page==='saved'&&<><PageIntro label="YOUR LITTLE HEALTH LIBRARY" title="把有用的知识，留给自己。" description="收藏你关心的指标，随时回来温习。收藏保存在当前浏览器中。"/>{saved.length?<div className="indicator-grid">{indicators.filter(i=>saved.includes(i.id)).map(indicatorCard)}</div>:<section className="empty-state"><span><Bookmark size={30}/></span><h2>你的健康知识库，等你开启</h2><p>在指标详情中点击「收藏」，把想记住的知识放在这里。</p><button className="primary-button" onClick={()=>go('indicators')}>去认识一个指标 <ArrowRight size={16}/></button></section>}</>}
- <footer><span className="footer-brand"><Sprout size={17}/> 知愈 <i>让每一份了解，成为照顾自己的力量。</i></span><span><ShieldCheck size={13}/> 内容用于健康科普，不替代医生诊断与个体化建议。</span></footer>
- </main>
- {modalOpen&&<div className="modal-backdrop" onClick={e=>{if(e.target===e.currentTarget)close()}}><section ref={dialogRef} className={`modal ${searchOpen?'search-modal':''} ${tour!==null?'tour-modal':''}`} role="dialog" aria-modal="true" aria-labelledby="dialog-title"><button className="close-button icon-button" aria-label="关闭弹窗" onClick={close}><X size={22}/></button>
- {detail&&<><div className={`detail-heading ${detail.color}`}><span className="overline">{detail.english}</span><h2 id="dialog-title">认识{detail.title}</h2><p>{detail.subtitle}</p></div><div className="detail-body"><p className="detail-intro">{detail.desc}</p><h3>一组指标，各有分工</h3><div className="metric-list">{detail.metrics.map((m,i)=><div key={m.name}><span>0{i+1}</span><div><h4>{m.name}</h4><p>{m.text}</p></div></div>)}</div><h3>把身体里的过程串起来</h3><div className="detail-chain">{detail.chain.map((t,i)=><React.Fragment key={t}><span><i>{i+1}</i>{t}</span>{i<3&&<ArrowRight size={16}/>}</React.Fragment>)}</div><div className="detail-tip"><CircleHelp size={19}/><div><b>看报告时，记住这一点</b><p>{detail.tip}</p></div></div><div className="detail-related"><span>关联器官：{detail.organ}</span><button className="text-link" onClick={()=>{setActiveOrgan(detail.id==='pressure'?'heart':detail.id==='glucose'?'pancreas':'liver');setDetail(null);go('organs')}}>探索器官 <ArrowUpRight size={14}/></button></div><div className="detail-footer"><a href={detail.url} target="_blank" rel="noreferrer">参考：{detail.source}<ExternalLink size={12}/></a><button className={`save-button ${saved.includes(detail.id)?'is-saved':''}`} onClick={()=>toggleSave(detail.id)}>{saved.includes(detail.id)?<Check size={16}/>:<Bookmark size={16}/>} {saved.includes(detail.id)?'已收藏':'收藏知识'}</button></div></div></>}
- {searchOpen&&<><h2 id="dialog-title">想了解身体的哪一部分？</h2><div className="search-input-wrap"><Search size={21}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="试试“血糖”“肝脏”或“LDL”" aria-label="搜索指标或器官"/></div><p className="search-hint">{query?`找到 ${searchResults.length} 个相关内容`:'从一个感兴趣的词开始'}</p><div className="search-results">{searchResults.map(r=><button key={r.id} onClick={()=>{setSearchOpen(false);if(r.type==='indicator')setDetail(indicators.find(i=>i.id===r.id));else{setActiveOrgan(r.id);go('organs')}}}><span><span className="search-type">{r.type==='indicator'?'指标':'器官'}</span><b>{r.title}</b><small>{r.subtitle||r.headline}</small></span><ArrowUpRight size={18}/></button>)}{searchResults.length===0&&<div className="search-empty"><Search size={26}/><p>暂时没有这个专题。试试血糖、血压、血脂或器官名称。</p></div>}</div></>}
- {tour!==null&&<><span className="overline">ONE MINUTE, A LITTLE CLOSER</span><h2 id="dialog-title">{['身体，是一个协作的系统','指标，是观察身体的窗口','看懂联系，比记住数字更重要'][tour]}</h2><div className="tour-art">{tour===0?<><HeartPulse/><span className="tour-dash"/><Activity/><span className="tour-dash"/><Sprout/></>:tour===1?<><Droplet/><span className="tour-dash"/><TrendingUp/><span className="tour-dash"/><Heart/></>:<><BookOpen/><span className="tour-dash"/><Layers3/><span className="tour-dash"/><ShieldCheck/></>}</div><p>{['心脏推动血液，肺交换氧气，肝脏处理营养，肾脏调节水盐。它们一直通过血液与信号相互配合。','血糖反映葡萄糖状态，血压描述血流对血管壁的压力，血脂帮助我们认识脂类运输。它们观察的是不同侧面。','先了解指标测量了什么，再连接相关器官与其他指标。结合个人背景和规范复查，才能更接近身体的真实状态。'][tour]}</p><div className="tour-controls"><div className="tour-dots">{[0,1,2].map(n=><button className={n===tour?'active':''} key={n} onClick={()=>setTour(n)} aria-label={`第 ${n+1} 步`}/>)}</div><button className="primary-button" onClick={()=>{if(tour<2)setTour(tour+1);else{setTour(null);go('organs')}}}>{tour===2?'开始探索':'继续了解'}<ArrowRight size={16}/></button></div></>}
- </section></div>}
- </>
-}
-function SectionTitle({kicker,title,desc,action,onClick}){return <div className="section-heading"><div><div className="section-kicker">{kicker}</div><h2>{title}</h2><p>{desc}</p></div>{action&&<button className="text-link" onClick={onClick}>{action}<ArrowUpRight size={16}/></button>}</div>}
-function PageIntro({label,title,description}){return <div className="page-intro"><span className="overline">{label}</span><h1>{title}</h1><p>{description}</p></div>}
-
-createRoot(document.getElementById('root')).render(<App/>);
+createRoot(document.getElementById("root")).render(<App />);

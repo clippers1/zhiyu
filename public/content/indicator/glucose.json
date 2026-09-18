@@ -1,0 +1,89 @@
+{
+  "id": "glucose",
+  "title": "血糖",
+  "english": "BLOOD GLUCOSE",
+  "subtitle": "身体的能量，如何保持平衡？",
+  "icon": "droplet",
+  "color": "orange",
+  "tags": ["空腹血糖", "糖化血红蛋白"],
+  "number": "01",
+  "desc": "血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。",
+  "metrics": [
+    {
+      "name": "空腹血糖（FPG）",
+      "text": "观察至少 8 小时未摄入热量时的血糖水平，像一张当下的快照。",
+      "sourceIds": ["tests"]
+    },
+    {
+      "name": "糖化血红蛋白（HbA1c）",
+      "text": "反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。",
+      "sourceIds": ["tests"]
+    },
+    {
+      "name": "口服葡萄糖耐量试验（OGTT）",
+      "text": "观察喝下规定葡萄糖溶液后身体处理糖的能力，需按医疗机构规范进行。",
+      "sourceIds": ["tests"]
+    }
+  ],
+  "chain": [
+    "食物中的碳水化合物",
+    "消化后形成葡萄糖",
+    "胰岛素帮助细胞利用",
+    "肝脏储存与释放"
+  ],
+  "tip": "空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。",
+  "organ": "胰腺 · 肝脏",
+  "kind": "indicator",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-09-18",
+  "reviewStatus": "pending",
+  "references": [
+    {
+      "id": "diabetes",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "What Is Diabetes?",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+      "scope": "葡萄糖、胰岛素与细胞供能",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "tests",
+      "publisher": "NIDDK",
+      "title": "Diabetes Tests & Diagnosis",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/tests-diagnosis",
+      "scope": "空腹血糖、HbA1c、OGTT 及检测条件",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "insulin",
+      "publisher": "NIDDK",
+      "title": "Insulin Resistance & Prediabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/prediabetes-insulin-resistance",
+      "scope": "胰腺分泌胰岛素，肌肉、脂肪与肝脏对胰岛素的响应",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "digestion",
+      "publisher": "NIDDK",
+      "title": "Your Digestive System & How it Works",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
+      "scope": "营养吸收、肝脏胆汁及胰腺消化酶",
+      "accessedAt": "2026-09-18",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["diabetes", "insulin"],
+  "tipSourceIds": ["tests"]
+}
