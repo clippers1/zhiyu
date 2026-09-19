@@ -53,7 +53,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
           <LoadState {...state} />
           {selected && (
             <>
-              <ReadingTools reading={reading} kind="organ" id={id} />
+              <ReadingTools reading={reading} kind="organ" id={id} content={selected} />
               <div className="organ-bookmark">
                 <button className={`save-button${bookmarks.savedOrgans.includes(id) ? " is-saved" : ""}`} disabled={!bookmarks.ready} aria-pressed={bookmarks.savedOrgans.includes(id)} onClick={() => bookmarks.toggleSave(id, "organ")}>
                   {bookmarks.savedOrgans.includes(id) ? <Check size={18} /> : <Bookmark size={18} />}
@@ -66,7 +66,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
                 {selected.name}
                 <span> / {selected.headline}</span>
               </h2>
-              <p className="organ-description">
+              <p className="organ-description" id="organ-overview">
                 {selected.text}
                 <Citation
                   ids={selected.references.map((r) => r.id)}
@@ -74,7 +74,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
                   prefix="organ-source"
                 />
               </p>
-              <div className="organ-related">
+              <div className="organ-related" id="organ-related">
                 <span>可以一起了解的指标</span>
                 <h3>{selected.connection}</h3>
                 <p>相关指标提供观察线索，需要结合检查条件与个人情况解读。</p>

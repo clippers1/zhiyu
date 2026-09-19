@@ -50,6 +50,13 @@
 .reading-large .source-list a { font-size: 16px; line-height: 1.9; }
 .reading-large .article-reader .detail-chain { flex-wrap: wrap; }
 .reading-large .article-reader .detail-chain > span { min-width: 90px; }
+.resume-reading, .continue-card { margin: 18px 0; padding: 18px 24px; border: 1px solid #d4dfc9; border-radius: 10px; background: #f4f7ee; }
+.resume-reading p, .continue-card p { font-size: 13px; color: #66795a; line-height: 1.9; margin: 0 0 12px; }
+.resume-reading button { min-height: 44px; padding: 8px 14px; margin: 0 10px 8px 0; color: #3e603f; border: 1px solid #c9d7bd; border-radius: 8px; background: #fffefa; }
+.continue-card h2 { font-size: 19px; margin: 0 0 12px; }
+.continue-card a { display: inline-block; color: #3e603f; font-weight: 600; min-height: 44px; padding: 10px 0; }
+.recent-list .reading-position-label { display: block; margin: 6px 0 0; line-height: 1.8; }
+#organ-overview, #organ-related, #organ-source-panel { scroll-margin-top: 110px; }
 @media (max-width: 600px) {
   .reading-tools, .reading-toc { padding: 12px 18px; }
   .reading-toc { gap: 4px; }

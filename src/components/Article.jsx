@@ -85,7 +85,7 @@ export default function Article({
               <ArrowRight size={13} />
             </a>
           </div>
-          <ReadingTools reading={reading} kind="indicator" id={id} />
+          <ReadingTools reading={reading} kind="indicator" id={id} content={detail} />
           <TopicReturn id={id} title={detail.title} />
           <nav className="reading-toc" aria-label="文章目录">
             <span>按需阅读</span>

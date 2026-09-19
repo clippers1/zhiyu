@@ -124,6 +124,7 @@ function ReaderApp() {
             onOpen={onOpen}
             onOrgan={onOrgan}
             setTour={setTour}
+            reading={reading}
           />
         )}
         {route.page === "indicators" && (

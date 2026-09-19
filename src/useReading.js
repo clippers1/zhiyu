@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { defaultReading, normalizeReading, READING_KEY, recordReading } from "./services/reading";
+import { defaultReading, normalizeReading, READING_KEY, recordReading, recordPosition } from "./services/reading";
 
 export function useReading() {
   const [value, setValue] = useState(defaultReading);
@@ -34,7 +34,9 @@ export function useReading() {
     try {
       if (!volatile.current) latest = normalizeReading(JSON.parse(localStorage.getItem(READING_KEY) || "null"));
     } catch { /* session-only fallback */ }
-    const next = normalizeReading(change(latest));
+    const changed = change(latest);
+    if (changed === latest) return latest;
+    const next = normalizeReading(changed);
     try {
       localStorage.setItem(READING_KEY, JSON.stringify(next));
       volatile.current = false;
@@ -45,9 +47,15 @@ export function useReading() {
     }
     current.current = next;
     setValue(next);
+    return next;
   }, []);
-  const record = useCallback((kind, id) => update(current => recordReading(current, kind, id)), [update]);
-  return { ...value, ready, error, record,
+  const record = useCallback((kind, id, revision) => {
+    const visit = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const next = update(current => recordReading(current, kind, id, Date.now(), { revision, visit }));
+    return next.entries.find(item => item.kind === kind && item.id === id);
+  }, [update]);
+  const savePosition = useCallback((kind, id, visit, position) => update(current => recordPosition(current, kind, id, visit, position)), [update]);
+  return { ...value, ready, error, record, savePosition,
     toggleSize: () => update(current => ({ ...current, large: !current.large })),
     toggleHistory: () => update(current => ({ ...current, enabled: !current.enabled, entries: [] })),
     clear: () => update(current => ({ ...current, entries: [] })),
