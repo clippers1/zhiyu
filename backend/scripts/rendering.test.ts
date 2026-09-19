@@ -79,6 +79,24 @@ try {
     }
     passed('rollback has no stale metadata; withdrawal removes HTML/API/list exposure and returns real 404');
 
+    const organPublication: any = (await payload.find({ collection: 'publications', where: { key: { equals: 'demo:organ:heart' } }, depth: 0, limit: 1 })).docs[0];
+    assert.ok(organPublication, 'Seed the heart demo before entry tests');
+    const organKey = 'list:[{"kind":"organ","limit":24}]';
+    assert.ok((await buildPage('/'))?.preloaded[organKey].items.some((item: any) => item.id === 'heart'));
+    try {
+      await payload.update({ collection: 'publications', id: organPublication.id, req: await req(), data: { withdrawn: true, reason: 'Isolated discovery withdrawal test' } });
+      assert.ok(!(await buildPage('/'))?.preloaded[organKey].items.some((item: any) => item.id === 'heart'));
+      if (base) {
+        const { response, html } = await request('/');
+        assert.equal(response.status, 200);
+        assert.ok(!html.includes('href="/organs/heart"'));
+        assert.match(html, /organ-heart[^>]+aria-disabled="true"/);
+      }
+      passed('homepage organ entry and diagram follow publication withdrawal');
+    } finally {
+      await payload.update({ collection: 'publications', id: organPublication.id, req: await req(), data: { withdrawn: organPublication.withdrawn, reason: 'Restore isolated discovery fixture' } });
+    }
+
     process.env.SITE_CONTENT_CHANNEL = 'official';
     assert.equal(await buildPage('/article/glucose'), null);
     assert.equal((pageMetadata(await buildPage('/saved')).robots as any).index, false);

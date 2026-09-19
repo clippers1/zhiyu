@@ -2,10 +2,11 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.5`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
+当前版本：`0.0.1-beta.6`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
+- **按目的进入**：从首页选择查体检术语、认识器官或找回读过的知识；器官入口只展示当前可用内容。
 - **看懂指标**：阅读血糖、血压、血脂专题，了解常见术语与指标含义。
 - **探索身体**：查看心脏、肺、肝脏、胰腺、肾脏的互动示意与相关知识。
 - **查找知识**：按关键词搜索，使用分类筛选与分页浏览专题。
@@ -85,6 +86,7 @@ npm run test:reading
 npx playwright install --with-deps chromium
 npm run test:ui
 node scripts/reading-smoke.mjs
+node scripts/discovery-smoke.mjs
 ```
 
 覆盖搜索、收藏、来源定位、文章链接与刷新、分页、错误重试及 320–768px 布局。截图保存到被 Git 忽略的 `artifacts/` 目录。
@@ -113,6 +115,7 @@ node scripts/reading-smoke.mjs
 - [纠错与来源复核](docs/feedback-and-maintenance.md)
 - [公开页面渲染与部署](docs/public-rendering.md)
 - [阅读体验与本地记录](docs/reading-experience.md)
+- [场景入口与查找路径](docs/discovery-entry.md)
 - [项目拓展计划](docs/roadmap.md)
 - [ToC 产品规划](docs/product-plan.md)
 - [知识来源与内容平台](docs/knowledge-platform.md)

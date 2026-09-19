@@ -18,11 +18,14 @@ import BodyArt from "./BodyArt";
 import { useContent } from "../hooks";
 import { IndicatorCard, LoadState, SectionTitle } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
+import StartHere from "./StartHere";
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [
     { kind: "indicator", featured: true, limit: 3 },
   ]);
   const indicators = state.data?.items || [];
+  const organState = useContent("list", [{ kind: "organ", limit: 24 }]);
+  const organs = organState.data?.items || [];
   const featured = indicators[0];
   const selected = indicators[1] || featured;
   return (
@@ -37,6 +40,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <Leaf size={13} /> 每一点了解，都是健康的积累
           </span>
         </div>
+        <StartHere />
         <section className="hero">
           <div className="hero-content">
             <div className="overline">
@@ -67,7 +71,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               </button>
             </div>
             <div className="hero-note">
-              <ShieldCheck size={15} /> 科学知识 · 可视化理解 · 轻松一点点
+              <ShieldCheck size={15} /> 来源可查 · 审校状态公开 · 按需阅读
             </div>
           </div>
           <div className="hero-visual">
@@ -76,6 +80,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             </div>
             <BodyArt
               selected="heart"
+              availableIds={organs.map(item => item.id)}
               onSelect={(id) => {
                 onOrgan(id);
               }}
@@ -83,7 +88,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <div className="visual-bottom">
               <span>THE HUMAN BODY</span>
               <span>
-                点击器官，发现更多 <Plus size={12} />
+                亮起的器官可探索 <Plus size={12} />
               </span>
             </div>
           </div>
@@ -92,17 +97,19 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
           <SectionTitle
             kicker="READ YOUR NUMBERS"
             title="体检单上的数字，在说什么？"
-            desc="从最常见的三类指标，读懂身体发出的信号。"
+            desc="从当前可用的专题开始，认识概念、关联与参考来源。"
             action="浏览指标百科"
             onClick={() => go("indicators")}
           />
+          <LoadState {...state} />
+          {state.data && !indicators.length && <p className="home-empty">当前暂无推荐专题。可前往指标百科查看全部可用内容；未展示不代表没有健康风险。</p>}
           <div className="indicator-grid">
             {indicators.map((item) => (
               <IndicatorCard key={item.id} item={item} onOpen={onOpen} />
             ))}
           </div>
         </section>
-        <div className="lower-grid">
+        <div className={`lower-grid${selected ? "" : " single-panel"}`}>
           <section className="connection-card">
             <div className="small-overline">
               <span /> EVERYTHING IS CONNECTED
@@ -158,10 +165,10 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               查看过程与参考资料 <ArrowRight size={15} />
             </RouteLink>}
           </section>
-          <section className="daily-card">
+          {selected && <section className="daily-card">
             <div className="daily-top">
               <span>
-                <Sparkles size={15} /> 编辑精选
+                <Sparkles size={15} /> 从这里读起
               </span>
               <span>{selected?.referenceCount || 0} 份参考资料</span>
             </div>
@@ -180,9 +187,18 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             {selected && <RouteLink page="article" id={selected.id} className="text-link" onNavigate={() => onOpen(selected.id)}>
               了解知识与来源 <ArrowRight size={15} />
             </RouteLink>}
-          </section>
+          </section>}
         </div>
-        <section className="organ-strip">
+        <section className="organ-topics" id="organ-topics" aria-labelledby="organ-topics-title">
+          <h2 id="organ-topics-title">先选一个想了解的器官</h2>
+          <p>以下入口来自当前可用的内容，不按症状推荐，也不判断个人健康状况。</p>
+          <LoadState {...organState} />
+          <div className="organ-topic-links">{organs.map(organ => <RouteLink page="organs" id={organ.id} key={organ.id} onNavigate={() => onOrgan(organ.id)}>
+            <b>{organ.title}</b><span>{organ.subtitle}</span><ArrowUpRight size={17} />
+          </RouteLink>)}</div>
+          {organState.data && !organs.length && <p className="home-empty">器官专题暂未开放，请先浏览指标百科。这里不会使用已撤回的旧内容。</p>}
+        </section>
+        {organs.length > 0 && <section className="organ-strip">
           <div className="organ-strip-icon">
             <Heart size={25} />
           </div>
@@ -190,12 +206,11 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <h3>认识身体里的「默契搭档」</h3>
             <p>心脏、肝脏、肺、肾脏……每个器官都有自己的重要任务。</p>
           </div>
-          <RouteLink page="organs" onNavigate={() => go("organs")}>
+          <RouteLink page="organs" id={organs[0].id} onNavigate={() => onOrgan(organs[0].id)}>
             探索人体器官 <ArrowUpRight size={17} />
           </RouteLink>
-        </section>
+        </section>}
       </>
-      <LoadState {...state} />
     </div>
   );
 }

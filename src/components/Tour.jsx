@@ -77,7 +77,7 @@ export default function Tour({ tour, setTour, go }) {
             if (tour < 2) setTour(tour + 1);
             else {
               setTour(null);
-              go("organs");
+              go("indicators");
             }
           }}
         >

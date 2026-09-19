@@ -29,6 +29,7 @@ export default function Library({
   }
   return (
     <>
+      <div id={savedOnly ? "reading-collection" : undefined}>
       <PageIntro
         label={
           savedOnly ? "YOUR LITTLE HEALTH LIBRARY" : "THE INDICATOR LIBRARY"
@@ -42,10 +43,16 @@ export default function Library({
             : "先找到一个关心的指标，再理解它与身体的联系。每篇内容都可追溯来源。"
         }
       />
+      </div>
+      {!savedOnly && <section className="lookup-help" aria-label="术语查找提示">
+        <h2>先输入体检单上的一个词</h2>
+        <p>支持指标名称、英文缩写和相关术语。这里只查找科普专题，不判断检查结果是否正常；请勿输入姓名、联系方式或完整报告。</p>
+      </section>}
       <section className="library-controls">
         <label className="library-search">
           <Search size={18} />
           <input
+            id={savedOnly ? "saved-search" : "indicator-search"}
             value={query}
             onChange={(e) => filter(setQuery, e.target.value)}
             placeholder="搜索指标、英文缩写或关键词"
@@ -70,6 +77,10 @@ export default function Library({
           ))}
         </div>
       </section>
+      {!savedOnly && !query && !category && data?.items.some(item => item.tags?.length) && <div className="term-suggestions" aria-label="可查找的术语示例">
+        <span>从已有专题试一试</span>
+        {[...new Set(data.items.flatMap(item => item.tags || []))].slice(0, 6).map(term => <button key={term} onClick={() => filter(setQuery, term)}>{term}</button>)}
+      </div>}
       <LoadState {...state} />
       {data && (
         <>

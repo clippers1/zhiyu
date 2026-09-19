@@ -33,7 +33,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading }) {
       </div>
       <section className="organ-explorer">
         <div className="explorer-visual">
-          <BodyArt selected={id} onSelect={onSelect} large />
+          <BodyArt selected={id} onSelect={onSelect} availableIds={organs.map(item => item.id)} large />
           <small>人体正面示意 · 位置与形态经过简化</small>
         </div>
         <div className="organ-information">

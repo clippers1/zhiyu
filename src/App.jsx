@@ -22,6 +22,7 @@ import { useBookmarks, useRoute } from "./hooks";
 import { useReading } from "./useReading";
 import { RecentReading } from "./components/ReadingTools";
 import "./reading.css";
+import "./discovery.css";
 
 const nav = [
   { id: "map", title: "健康地图", short: "发现", icon: Map },

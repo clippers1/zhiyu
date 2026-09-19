@@ -46,7 +46,10 @@ export async function buildPage(pathname: string) {
       load('list', [{ kind: 'indicator', ids: detail.related || [], limit: 24 }]),
     ]);
   } else if (route.page === 'map') {
-    await load('list', [{ kind: 'indicator', featured: true, limit: 3 }]);
+    await Promise.all([
+      load('list', [{ kind: 'indicator', featured: true, limit: 3 }]),
+      load('list', [{ kind: 'organ', limit: 24 }]),
+    ]);
   } else if (route.page === 'indicators') {
     await load('list', [{ kind: 'indicator', query: '', category: '', cursor: '0', limit: 6 }]);
   }

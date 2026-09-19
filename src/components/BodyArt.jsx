@@ -3,18 +3,20 @@ export default function BodyArt({
   selected = "heart",
   onSelect = () => {},
   large = false,
+  availableIds,
 }) {
   const props = (id) => ({
     className: `organ organ-${id} ${selected === id ? "selected" : ""}`,
-    onClick: () => onSelect(id),
+    onClick: () => { if (!availableIds || availableIds.includes(id)) onSelect(id); },
     onKeyDown: (e) => {
-      if (e.key === "Enter" || e.key === " ") {
+      if ((!availableIds || availableIds.includes(id)) && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
         onSelect(id);
       }
     },
-    tabIndex: 0,
+    tabIndex: !availableIds || availableIds.includes(id) ? 0 : -1,
     role: "button",
+    "aria-disabled": availableIds ? !availableIds.includes(id) : false,
     "aria-label": `了解${{ heart: "心脏", lung: "肺", liver: "肝脏", pancreas: "胰腺", kidney: "肾脏" }[id]}`,
   });
   return (
