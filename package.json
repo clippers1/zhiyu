@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-health-map",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.11",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,14 +14,17 @@
     "test:search": "node --test scripts/search.test.mjs",
     "test:topics": "node --test scripts/topics.test.mjs",
     "test:bookmarks": "node --test scripts/bookmarks.test.mjs",
+    "test:share": "node --test scripts/share.test.mjs",
     "test:ui": "node scripts/smoke.mjs"
   },
   "dependencies": {
+    "qrcode-generator": "1.4.4",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "jsqr": "1.4.0",
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.5",
     "@playwright/test": "^1.51.0"

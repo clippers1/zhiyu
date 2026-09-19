@@ -52,10 +52,11 @@ export function createContentRepository({
   fetcher = (...args) => fetch(...args),
 } = {}) {
   const cache = new Map();
-  async function read(url, signal) {
+  async function read(url, signal, refresh = false) {
     const response = await fetcher(url, {
       signal,
       headers: { Accept: "application/json" },
+      ...(refresh ? { cache: "no-store" } : {}),
     });
     if (!response.ok)
       throw new Error(
@@ -107,15 +108,16 @@ export function createContentRepository({
     saved(options, requestOptions) {
       return savedContent((args, config) => this.list(args, config), options, requestOptions);
     },
-    async get(kind, id, { signal } = {}) {
+    async get(kind, id, { signal, refresh = false } = {}) {
       if (!["indicator", "organ"].includes(kind) || !/^[a-z0-9-]+$/.test(id))
         throw new Error("内容地址不正确。");
       const content = apiBase
         ? await read(
             `${apiBase.replace(/\/$/, "")}/content/${kind}/${encodeURIComponent(id)}`,
             signal,
+            refresh,
           )
-        : await cached(`${assetBase}content/${kind}/${id}.json`);
+        : refresh ? await read(`${assetBase}content/${kind}/${id}.json`, signal, true) : await cached(`${assetBase}content/${kind}/${id}.json`);
       if (
         content.id !== id ||
         content.kind !== kind ||

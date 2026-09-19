@@ -23,6 +23,8 @@
 .reading-toc > span { font-weight: 600; }
 .reading-toc a { padding: 8px; color: #426548; text-decoration: underline; text-underline-offset: 4px; }
 .reading-toc a:hover { background: #edf2e6; }
+/* Without hydration, disabled save controls must not float over native links. */
+.reading-actions:not(.is-ready) { position: static; }
 .detail-body [id] { scroll-margin-top: 100px; }
 .organ-information .reading-tools { padding: 0 0 16px; margin-bottom: 20px; }
 .recent-reading { margin: 28px 0 40px; padding: 24px; border: 1px solid #dbe5d0; border-radius: 12px; background: #fffefa; }

@@ -1,0 +1,15 @@
+.share-card-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid #c9d7bd; border-radius: 8px; background: #f3f6ee; color: #3e603f; font-size: 13px; }
+.article-share-entry { padding: 12px 24px; }
+.organ-bookmark .share-card-trigger { margin: 8px 0 0 10px; }
+.share-card-trigger:disabled { opacity: .5; }
+.share-card-modal { width: 100%; max-width: 540px; padding: 28px; }
+.share-card-modal h2 { margin: 8px 32px 12px 0; font-size: 23px; line-height: 1.6; }
+.share-card-note, .share-card-status, .share-card-message { font-size: 13px; color: #65795c; line-height: 1.8; }
+.share-card-preview { display: block; width: 100%; height: auto; border: 1px solid #d7e1cf; border-radius: 10px; }
+.share-card-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.share-card-actions a, .share-card-actions button, .share-card-refresh { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 14px; border: 1px solid #c9d7bd; border-radius: 8px; background: #f3f6ee; color: #3e603f; font-size: 13px; }
+.share-card-actions a { background: #3e603f; color: white; }
+.share-card-link { display: block; font-size: 12px; color: #65795c; }
+.share-card-link input { width: 100%; min-width: 0; margin-top: 8px; padding: 12px; border: 1px solid #c9d7bd; border-radius: 6px; background: #fffefa; color: #3e603f; }
+.share-card-modal [role="alert"] { padding: 12px; line-height: 1.8; color: #745c29; background: #f7eddb; border-radius: 8px; }
+@media (max-width: 600px) { .share-card-modal { padding: 22px 18px; } .article-share-entry { padding: 12px 18px; } }

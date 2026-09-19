@@ -13,6 +13,7 @@ import { Citation, LoadState, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
+import ShareCardButton from "./ShareCard";
 
 export default function Article({
   id,
@@ -86,6 +87,7 @@ export default function Article({
             </a>
           </div>
           <ReadingTools reading={reading} kind="indicator" id={id} content={detail} />
+          <div className="article-share-entry"><ShareCardButton content={detail} /></div>
           <TopicReturn id={id} title={detail.title} />
           <nav className="reading-toc" aria-label="文章目录">
             <span>按需阅读</span>
@@ -174,7 +176,7 @@ export default function Article({
         </article>
       )}
       {detail && (
-        <div className="reading-actions">
+        <div className={`reading-actions${bookmarksReady ? " is-ready" : ""}`}>
           <div aria-live="polite">
             {storageError
               ? "无法正常读写收藏，本次更改可能未保存。若需移除旧收藏，请清除此站点的浏览器数据。"

@@ -7,6 +7,7 @@ import { RouteLink } from "./RouteLink";
 import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
 import { BookmarkNotice } from "./SavedLibrary";
+import ShareCardButton from "./ShareCard";
 
 export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks }) {
   const state = useContent("get", ["organ", id]);
@@ -59,6 +60,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
                   {bookmarks.savedOrgans.includes(id) ? <Check size={18} /> : <Bookmark size={18} />}
                   {bookmarks.savedOrgans.includes(id) ? "已收藏器官" : "收藏器官"}
                 </button>
+                <ShareCardButton content={selected} />
                 <BookmarkNotice bookmarks={bookmarks} />
               </div>
               <span className="overline">{selected.en}</span>
