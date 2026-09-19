@@ -10,13 +10,13 @@ export default function Modal({ children, className = "", onClose }) {
     const before = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const frame = requestAnimationFrame(() =>
-      dialogRef.current?.querySelector("input,button,a")?.focus(),
+      dialogRef.current?.querySelector("input,button,a,textarea,select")?.focus(),
     );
     function key(event) {
       if (event.key === "Escape") closeRef.current();
       if (event.key === "Tab") {
         const items = dialogRef.current?.querySelectorAll(
-          'button:not([disabled]),a[href],input,[tabindex="0"]',
+          'button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex="0"]',
         );
         if (!items?.length) return;
         const first = items[0],

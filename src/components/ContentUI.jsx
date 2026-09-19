@@ -1,4 +1,5 @@
 import React from "react";
+import { FeedbackPanel } from "./Feedback";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -129,6 +130,7 @@ export function Citation({ ids = [], references, prefix }) {
 }
 export function SourceReferences({ content, prefix = "source" }) {
   return (
+    <>
     <section
       className="source-panel"
       id={`${prefix}-panel`}
@@ -182,5 +184,7 @@ export function SourceReferences({ content, prefix = "source" }) {
         </span>
       </div>
     </section>
+    <FeedbackPanel key={`${content.kind}:${content.id}:${content.releaseID}`} content={content} />
+    </>
   );
 }

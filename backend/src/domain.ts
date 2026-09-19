@@ -24,6 +24,7 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
       scope: citation.scope, locator: citation.locator || '', language: source.language,
       type: source.sourceType, accessedAt: isoDate(source.checkedAt), publicationDate: isoDate(source.publicationDate),
       licenseStatus: source.licenseStatus, licenseNotes: source.licenseNotes || '',
+      availability: source.availability || 'unchecked',
       sourceVersion: source.edition || '', sourceRecordID: source.id,
     };
   });
@@ -68,6 +69,7 @@ export function validateForReview(snapshot: Awaited<ReturnType<typeof snapshotAr
   if (!article.scopeConfirmed || !article.applicability?.trim()) fail('请先明确并确认内容适用范围。');
   if (!body.references.length) fail('内容必须有具体参考来源。');
   for (const ref of body.references) {
+    if (ref.availability !== 'available') fail(`来源 ${ref.id} 尚未确认可用，请先完成人工检查。`);
     if (!ref.locator?.trim()) fail(`来源 ${ref.id} 缺少页码、段落或锚点定位。`);
     if (ref.licenseStatus === 'unverified' || !ref.licenseNotes?.trim()) fail(`来源 ${ref.id} 尚未完成引用/使用权限核对。`);
   }

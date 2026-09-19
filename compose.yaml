@@ -26,6 +26,7 @@ services:
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
       PAYLOAD_DB_PUSH: "false"
       ENABLE_DEMO_API: ${ENABLE_DEMO_API:-false}
+      FEEDBACK_TRUST_PROXY: ${FEEDBACK_TRUST_PROXY:-false}
     depends_on:
       db:
         condition: service_healthy

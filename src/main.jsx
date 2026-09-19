@@ -16,6 +16,8 @@ import OrganExplorer from "./components/OrganExplorer";
 import SearchDialog from "./components/SearchDialog";
 import Tour from "./components/Tour";
 import Modal from "./components/Modal";
+import { FeedbackTracker } from "./components/Feedback";
+import { feedbackBase } from "./services/feedback";
 import { useBookmarks, useRoute } from "./hooks";
 import "./styles.css";
 import "./mobile.css";
@@ -30,9 +32,11 @@ function App() {
   const { route, navigate, back } = useRoute();
   const { saved, toggleSave, storageError } = useBookmarks();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [tour, setTour] = useState(null);
   useEffect(() => {
     setSearchOpen(false);
+    setFeedbackOpen(false);
     setTour(null);
     document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
   }, [route.page, route.id]);
@@ -139,6 +143,7 @@ function App() {
             storageError={storageError}
           />
         )}
+        {feedbackBase && <div className="feedback-entry"><button className="feedback-footer" onClick={() => setFeedbackOpen(true)}>查询纠错进度</button></div>}
         <footer>
           <span className="footer-brand">
             <Sprout size={17} /> 知愈 <i>让每一份了解，成为照顾自己的力量。</i>
@@ -180,6 +185,7 @@ function App() {
           />
         </Modal>
       )}
+      {feedbackOpen && <Modal className="feedback-modal" onClose={() => setFeedbackOpen(false)}><FeedbackTracker /></Modal>}
       {tour !== null && (
         <Modal className="tour-modal" onClose={() => setTour(null)}>
           <Tour tour={tour} setTour={setTour} go={navigate} />

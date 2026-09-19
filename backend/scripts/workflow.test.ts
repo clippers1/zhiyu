@@ -38,7 +38,7 @@ try {
   await payload.create({ collection: 'categories', req: adminReq, data: { slug: `test-${suffix}`, name: 'Synthetic category' } });
   const source: any = await payload.create({ collection: 'sources', req: editorReq, overrideAccess: false, data: {
     title: 'Synthetic reference', publisher: 'Test fixture', url: `https://example.org/${suffix}`, sourceType: '其他',
-    language: 'en', checkedAt: new Date().toISOString(), licenseStatus: 'citation-only', licenseNotes: 'Synthetic original test text only.',
+    language: 'en', checkedAt: new Date().toISOString(), availability: 'available', licenseStatus: 'citation-only', licenseNotes: 'Synthetic original test text only.',
   } });
   const article: any = await payload.create({ collection: 'articles', req: editorReq, overrideAccess: false, data: {
     kind: 'indicator', slug: `test-${suffix}`, title: '测试知识', subtitle: 'Synthetic fixture only', english: 'TEST',

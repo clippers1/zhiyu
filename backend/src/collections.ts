@@ -36,9 +36,20 @@ export const Users: CollectionConfig = {
 
 export const Sources: CollectionConfig = {
   slug: 'sources', labels: { singular: '参考来源', plural: '参考来源库' },
-  admin: { useAsTitle: 'title', defaultColumns: ['title', 'publisher', 'licenseStatus', 'checkedAt'], description: '登记具体原文。可访问、来自官方机构，不等于已获转载许可或已完成医学审校。' },
+  admin: { useAsTitle: 'title', defaultColumns: ['title', 'publisher', 'licenseStatus', 'checkedAt', 'nextReviewAt', 'availability'], description: '登记具体原文。复核日期由编辑安排；到期不等于内容有误，可访问也不等于已获转载许可或已完成医学审校。' },
   access: { read: member, create: edit, update: edit, delete: never, readVersions: member },
   versions: { maxPerDoc: 100 },
+  hooks: {
+    beforeValidate: [({ data, originalDoc }) => {
+      const merged = { ...originalDoc, ...data };
+      if (merged.nextReviewAt && merged.checkedAt && new Date(merged.nextReviewAt) <= new Date(merged.checkedAt)) fail('下次复核日期应晚于本次核验日期。');
+      if (['changed', 'unavailable'].includes(merged.availability) && !merged.reviewNotes?.trim()) fail('发现来源变化或不可用时，请记录复核说明。');
+      return data;
+    }],
+    afterChange: [async ({ req, doc, operation }) => {
+      if (operation === 'update') await audit(req, 'source-update', `sources:${doc.id}`, '来源记录已更新；请评估相关已发布内容是否需要复核或撤回。');
+    }],
+  },
   fields: [
     text('title', '原文标题', true), text('publisher', '发布机构', true),
     { ...text('url', '原文 HTTPS 链接', true), unique: true, validate: (v: any) => { try { return new URL(v).protocol === 'https:' || '请填写 HTTPS 链接'; } catch { return '链接格式不正确'; } } } as Field,
@@ -47,6 +58,12 @@ export const Sources: CollectionConfig = {
     text('region', '适用地区'), text('edition', '版本 / 指南年份'),
     { name: 'publicationDate', label: '原文发布日期', type: 'date' },
     { name: 'checkedAt', label: '链接与内容核验日期', type: 'date', required: true },
+    { name: 'nextReviewAt', label: '下次人工复核日期', type: 'date', index: true, admin: { description: '留空表示尚未安排，后台首页单独提醒。不会自动标记为已复核。' } },
+    { name: 'availability', label: '最近人工检查结果', type: 'select', defaultValue: 'unchecked', options: [
+      { label: '尚未重新检查', value: 'unchecked' }, { label: '已检查，可用', value: 'available' },
+      { label: '原文发生变化，需要评估', value: 'changed' }, { label: '链接不可用', value: 'unavailable' },
+    ] },
+    { name: 'reviewNotes', label: '复核说明（内部）', type: 'textarea' },
     { name: 'licenseStatus', label: '引用 / 使用权限', type: 'select', required: true, defaultValue: 'unverified', options: [
       { label: '尚未核对', value: 'unverified' }, { label: '仅作为依据链接，正文为原创科普整理', value: 'citation-only' },
       { label: '已取得明确许可', value: 'licensed' }, { label: '已核验公共领域 / 开放许可', value: 'open' },

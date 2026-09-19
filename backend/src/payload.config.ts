@@ -6,6 +6,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { zh } from '@payloadcms/translations/languages/zh';
 import { en } from '@payloadcms/translations/languages/en';
 import { Articles, AuditEvents, Categories, Publications, Releases, Reviews, Sources, Users } from './collections';
+import { Feedback, FeedbackThrottles } from './feedback-collections';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,10 +14,10 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.SERVER_URL || 'http://localhost:3108',
   routes: { admin: '/admin', api: '/api/cms' },
-  admin: { user: 'users', importMap: { baseDir: dirname }, meta: { titleSuffix: ' · 知愈内容平台' } },
+  admin: { user: 'users', importMap: { baseDir: dirname }, meta: { titleSuffix: ' · 知愈内容平台' }, components: { beforeDashboard: ['./components/ContentHealth#ContentHealth'] } },
   i18n: { fallbackLanguage: 'zh', supportedLanguages: { zh, en } },
   editor: lexicalEditor(),
-  collections: [Users, Categories, Sources, Articles, Reviews, Releases, Publications, AuditEvents],
+  collections: [Users, Categories, Sources, Articles, Reviews, Releases, Publications, Feedback, FeedbackThrottles, AuditEvents],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI || '', max: 10 },
     push: process.env.PAYLOAD_DB_PUSH === 'true',
