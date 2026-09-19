@@ -4,6 +4,7 @@ import { createLocalReq, getPayload } from 'payload';
 import config from '../src/payload.config';
 import { feedbackAPI, consumeFeedbackLimit } from '../src/feedback-api';
 import { snapshotArticle, validateForReview } from '../src/domain';
+import { READING_REACTIONS, readingFeedbackBody } from '../reader/services/reading-feedback.js';
 
 if (new URL(process.env.DATABASE_URI || '').pathname !== '/zhiyu_test') throw new Error('Feedback tests require the isolated zhiyu_test database.');
 const payload = await getPayload({ config });
@@ -69,6 +70,21 @@ try {
   assert.equal(ticket.release, release.id); assert.equal(ticket.status, 'new');
   assert.ok(!JSON.stringify(ticket).includes(body.receipt));
   passed('visible channel/version binding, demo opt-in and idempotent submissions store only a token hash');
+
+  for (const reaction of READING_REACTIONS) {
+    const readingBody = readingFeedbackBody({ kind: 'organ', id: article.slug, demo: true, releaseID: release.id }, reaction.id, token(), true);
+    assert.equal((await api('submit', readingBody)).status, 201);
+    assert.equal((await api('submit', readingBody)).status, 200);
+    const readingHash = createHash('sha256').update(readingBody.receipt).digest('hex');
+    const stored = await payload.find({ collection: 'feedback', depth: 0, where: { receiptHash: { equals: readingHash } } });
+    assert.equal(stored.totalDocs, 1);
+    assert.equal(stored.docs[0].message, reaction.message);
+    assert.equal(stored.docs[0].category, reaction.category);
+    assert.equal((await api('status', { receipt: readingBody.receipt })).status, 200);
+    assert.equal((await api('delete', { receipt: readingBody.receipt })).status, 200);
+    assert.equal((await api('status', { receipt: readingBody.receipt })).status, 404);
+  }
+  passed('all fixed reading reactions persist once, retain version/category and support receipt lookup/deletion');
 
   await assert.rejects(payload.find({ collection: 'feedback', req: anonymous, overrideAccess: false }));
   await assert.rejects(payload.find({ collection: 'feedback', req: reviewerReq, overrideAccess: false }));

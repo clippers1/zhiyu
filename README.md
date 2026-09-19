@@ -2,7 +2,7 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.11`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错、专题阅读路线、收藏管理、本地继续阅读、分享卡片和公开页面服务端渲染，现有科普内容仍待专业审校。
+当前版本：`0.0.1-beta.12`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错、分层阅读、阅读感受反馈、专题阅读路线、收藏管理、本地继续阅读、分享卡片和公开页面服务端渲染，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
@@ -18,6 +18,8 @@
 - **维护待办**：后台显示待处理纠错、到期与未安排复核的来源，编辑可追踪关联草稿。
 - **公开页面**：完整部署时直接返回正文 HTML、独立标题与分享摘要；未知或撤回内容返回 404，待审校演示不参与搜索收录。
 - **按需阅读**：文章目录直达、大字号记忆，以及可手动开启、清空和关闭的本地阅读记录；默认不记录健康兴趣。
+- **先看重点**：指标页提供原文速览和可展开的术语问答，保留完整限制条件与来源，不自动生成医学结论。
+- **表达阅读感受**：可选择「有帮助」「仍没看懂」「没找到想了解的」，确认后发送给编辑，凭码查询或删除；不要求填写个人健康信息。
 
 当前包含 3 个指标专题和 5 个器官专题。收藏保存在浏览器本地，不支持跨设备同步。后台采用 Payload CMS + PostgreSQL，支持来源管理、知识编辑、医学审校、版本发布、回滚和撤回；未提供读者账号、App 或小程序客户端。
 
@@ -81,6 +83,7 @@ npm run test:search
 npm run test:topics
 npm run test:bookmarks
 npm run test:share
+npm run test:guide
 ```
 
 测试覆盖来源引用、关联内容、筛选分页、远程接口参数及失败重试，其中一万条合成摘要用于验证分页逻辑，不代表实际内容数量或线上性能保证。
@@ -94,6 +97,7 @@ node scripts/reading-smoke.mjs
 node scripts/discovery-smoke.mjs
 node scripts/search-smoke.mjs
 node scripts/share-smoke.mjs
+node scripts/reading-guide-smoke.mjs
 ```
 
 覆盖搜索、收藏、来源定位、文章链接与刷新、分页、错误重试及 320–768px 布局。截图保存到被 Git 忽略的 `artifacts/` 目录。
@@ -127,6 +131,7 @@ node scripts/share-smoke.mjs
 - [收藏管理](docs/bookmarks.md)
 - [继续阅读与位置恢复](docs/continue-reading.md)
 - [分享卡片与安全边界](docs/share-cards.md)
+- [分层阅读与阅读反馈](docs/layered-reading.md)
 - [检索规则与安全边界](docs/search-experience.md)
 - [项目拓展计划](docs/roadmap.md)
 - [ToC 产品规划](docs/product-plan.md)

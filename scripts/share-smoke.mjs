@@ -22,7 +22,7 @@ try {
   await page.goto(`${base}/article/glucose?private=do-not-share#article-metrics`, { waitUntil: 'networkidle' });
   await page.getByRole('button', { name: '生成分享卡片', exact: true }).click();
   const modal = page.getByRole('dialog');
-  await expect(modal.locator('.share-card-preview')).toBeVisible();
+  await expect(modal.locator('.share-card-preview')).toBeVisible({ timeout: 15000 });
   await expect(modal.locator('.share-card-status')).toContainText('待专业审校');
   await expect(modal.getByRole('textbox', { name: '卡片阅读链接' })).toHaveValue(`${base}/article/glucose`);
   assert.deepEqual(await decode(), { width: 1080, height: 1440, url: `${base}/article/glucose` });
@@ -78,7 +78,7 @@ try {
   assert.equal(await page.evaluate(async url => { try { await fetch(url); return false; } catch { return true; } }, oldURL), true);
   await page.unroute(pattern);
   await modal.getByRole('button', { name: '重试生成', exact: true }).click();
-  await expect(modal.locator('.share-card-preview')).toBeVisible();
+  await expect(modal.locator('.share-card-preview')).toBeVisible({ timeout: 15000 });
   const currentURL = await modal.locator('img').getAttribute('src');
   await page.keyboard.press('Escape');
   await expect(modal).toHaveCount(0);

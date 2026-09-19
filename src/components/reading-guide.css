@@ -1,0 +1,26 @@
+.quick-read { margin: 18px 24px; padding: 22px; border: 1px solid #d8e2ce; border-radius: 12px; background: #f4f7ee; }
+.quick-read h2 { margin: 8px 0 12px; font-size: 22px; color: #34513b; }
+.quick-read h3 { margin: 18px 0 6px; font-size: 15px; color: #34513b; }
+.quick-read p, .term-questions p { font-size: 14px; line-height: 1.95; color: #52644e; overflow-wrap: anywhere; }
+.quick-read .guide-note, .term-questions .guide-note, .reading-feedback .guide-note { font-size: 12px; line-height: 1.9; color: #64725b; }
+.quick-read-reminder { border-left: 3px solid #b4bf92; padding-left: 14px; }
+.quick-read a:not(.citations a), .guide-original { display: inline-block; min-height: 44px; padding: 10px 0; color: #3e603f; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.term-questions { margin: 28px 0; }
+.term-questions details { border-bottom: 1px solid #dce5d4; }
+.term-questions summary { cursor: pointer; padding: 16px 8px; min-height: 48px; color: #3e603f; font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+.term-questions details > p, .term-questions .guide-original { margin: 0 8px 12px; }
+.reading-feedback { margin: 24px 0; padding: 20px; background: #f4f7ee; border: 1px solid #d8e2ce; border-radius: 10px; }
+.reading-feedback h3 { margin: 0 0 12px; font-size: 18px; color: #34513b; }
+.reading-feedback p { font-size: 13px; line-height: 1.9; color: #52644e; }
+.reading-feedback fieldset { min-width: 0; border: 0; padding: 0; margin: 16px 0; }
+.reading-feedback legend { font-size: 13px; margin-bottom: 10px; }
+.reading-reactions { display: flex; flex-wrap: wrap; gap: 8px; }
+.reading-reactions label { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid #c9d7bd; border-radius: 8px; font-size: 13px; background: #fffefa; }
+.reading-feedback input { accent-color: #426548; }
+.reaction-consent { display: flex; align-items: flex-start; gap: 8px; margin-top: 16px; font-size: 12px; line-height: 1.9; }
+.reaction-consent input { flex: 0 0 auto; margin-top: 5px; }
+.reading-feedback button[type="submit"] { min-height: 44px; padding: 10px 16px; border: 1px solid #426548; background: #426548; color: white; border-radius: 8px; }
+.reading-feedback button:disabled, .reading-feedback fieldset:disabled { opacity: .6; }
+.reading-large .quick-read p, .reading-large .term-questions p { font-size: 18px; line-height: 2; }
+#article-quick-read, #article-questions { scroll-margin-top: 110px; }
+@media (max-width: 600px) { .quick-read { margin: 16px 18px; padding: 18px; } .reading-feedback { padding: 16px; } }

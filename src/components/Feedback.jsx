@@ -6,7 +6,7 @@ import "./feedback.css";
 
 const statusNames = { new: "已收到", triaging: "处理中", "awaiting-review": "等待专业复核", resolved: "已处理", dismissed: "暂不调整" };
 
-function Receipt({ value }) {
+export function Receipt({ value }) {
   const [copied, setCopied] = useState(false);
   const input = useRef(null);
   return <div className="feedback-receipt">

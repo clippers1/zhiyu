@@ -1,5 +1,6 @@
 import React from "react";
 import { FeedbackPanel } from "./Feedback";
+import ReadingFeedback from "./ReadingFeedback";
 import { RouteLink } from "./RouteLink";
 import {
   ArrowRight,
@@ -186,6 +187,7 @@ export function SourceReferences({ content, prefix = "source" }) {
         </span>
       </div>
     </section>
+    <ReadingFeedback key={`reaction:${content.kind}:${content.id}:${content.releaseID || `${content.version}:${content.updatedAt}`}`} content={content} />
     <FeedbackPanel key={`${content.kind}:${content.id}:${content.releaseID}`} content={content} />
     </>
   );

@@ -14,6 +14,8 @@ import { RouteLink } from "./RouteLink";
 import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
+import { readingGuide } from "../services/reading-guide";
+import { QuickRead, TermQuestions } from "./ReadingGuide";
 
 export default function Article({
   id,
@@ -27,6 +29,7 @@ export default function Article({
 }) {
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
+  const guide = readingGuide(detail);
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
@@ -89,10 +92,13 @@ export default function Article({
           <ReadingTools reading={reading} kind="indicator" id={id} content={detail} />
           <div className="article-share-entry"><ShareCardButton content={detail} /></div>
           <TopicReturn id={id} title={detail.title} />
+          <QuickRead guide={guide} content={detail} />
           <nav className="reading-toc" aria-label="文章目录">
             <span>按需阅读</span>
+            {(guide?.concept || guide?.reminder) && <a href="#article-quick-read">快速了解</a>}
             <a href="#article-overview">先了解概念</a>
             <a href="#article-metrics">认识指标</a>
+            {Boolean(guide?.questions.length) && <a href="#article-questions">术语问答</a>}
             <a href="#article-process">理解过程</a>
             <a href="#article-reminder">看报告提示</a>
             <a href="#article-source-panel">核对来源</a>
@@ -125,6 +131,7 @@ export default function Article({
                 </div>
               ))}
             </div>
+            <TermQuestions guide={guide} content={detail} />
             <h2 id="article-process">把身体里的过程串起来</h2>
             <div className="detail-chain">
               {detail.chain.map((step, i) => (

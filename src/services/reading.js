@@ -3,7 +3,7 @@ export const HISTORY_LIMIT = 20;
 export const HISTORY_AGE = 90 * 24 * 60 * 60 * 1000;
 export const defaultReading = () => ({ large: false, enabled: false, entries: [] });
 export const READING_SECTIONS = {
-  indicator: { "article-overview": "概念说明", "article-metrics": "指标说明", "article-process": "身体里的过程", "article-reminder": "看报告提示", "article-source-panel": "知识来源" },
+  indicator: { "article-quick-read": "快速了解", "article-overview": "概念说明", "article-metrics": "指标说明", "article-questions": "术语问答", "article-process": "身体里的过程", "article-reminder": "看报告提示", "article-source-panel": "知识来源" },
   organ: { "organ-overview": "器官功能", "organ-related": "关联指标", "organ-source-panel": "知识来源" },
 };
 const safeToken = value => typeof value === "string" && /^[a-zA-Z0-9:._-]{1,100}$/.test(value);
