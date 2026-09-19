@@ -2,6 +2,8 @@ import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir, readFile } from "node:fs/promises";
 
+const baseUrl = process.env.PLAYWRIGHT_BASE_URL || "http://localhost:5173";
+
 const browser = await chromium.launch({
   headless: true,
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
@@ -30,7 +32,9 @@ async function noOverflow(label) {
   );
 }
 try {
-  await page.goto("http://localhost:5173", { waitUntil: "networkidle" });
+  await page.goto(baseUrl, {
+    waitUntil: "networkidle",
+  });
   await expect(page.locator(".indicator-card")).toHaveCount(3);
   assert.equal(
     contentRequests.filter((url) => /\/indicator\/|\/organ\//.test(url)).length,
@@ -179,7 +183,7 @@ try {
   await page.route("**/content/index.json", (route) =>
     route.fulfill({ json: fixture }),
   );
-  await page.goto("http://localhost:5173/#/indicators");
+  await page.goto(`${baseUrl}/#/indicators`);
   await page.reload();
   await expect(page.locator(".indicator-card")).toHaveCount(6);
   const firstPage = await page.locator(".metric-title h3").allTextContents();
@@ -206,7 +210,7 @@ try {
       ? route.fulfill({ status: 503, json: { error: "temporary" } })
       : route.continue(),
   );
-  await page.goto("http://localhost:5173/#/article/glucose");
+  await page.goto(`${baseUrl}/#/article/glucose`);
   await expect(page.getByRole("alert")).toBeVisible();
   await page.getByRole("button", { name: "重新加载", exact: true }).click();
   await expect(
@@ -231,7 +235,7 @@ try {
   await expect(page.getByText("链接已复制", { exact: true })).toBeVisible();
   assert.equal(
     await page.evaluate(() => window.copiedLink),
-    "http://localhost:5173/#/article/glucose",
+    `${baseUrl}/#/article/glucose`,
   );
   assert.deepEqual(errors, []);
   console.log(

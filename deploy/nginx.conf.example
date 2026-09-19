@@ -1,0 +1,37 @@
+# Copy dist/ into your static document root and replace the example domain.
+# Configure HTTPS through your hosting platform or certificate provider.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name example.com;
+
+    root /usr/share/nginx/html;
+    index index.html;
+    server_tokens off;
+
+    gzip on;
+    gzip_vary on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+
+    location /assets/ {
+        try_files $uri =404;
+        expires 1y;
+    }
+
+    location /content/ {
+        try_files $uri =404;
+        expires -1;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+        expires -1;
+    }
+}

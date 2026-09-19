@@ -32,3 +32,11 @@ npm run test:ui
 ```
 
 可通过 `PLAYWRIGHT_CHROMIUM_EXECUTABLE` 环境变量指定现有浏览器。内容测试使用一万条合成摘要检查分页和筛选正确性；UI 测试覆盖引用、按需加载、链接刷新/返回、错误重试、收藏、搜索与 320–768px 布局，并将截图保存到 `artifacts/`。
+
+## 静态部署
+
+执行 `npm run build` 后，将生成的 `dist/` 目录发布到任意静态托管平台或 Web 服务器，无需运行 Node.js 服务。项目使用哈希路由，文章链接刷新不需要额外的路由回退配置。
+
+使用 Nginx 时可参考 [通用配置示例](deploy/nginx.conf.example)，按实际环境设置域名、站点目录和 HTTPS。建议 HTML 与内容 JSON 重新验证缓存，带哈希的 JS/CSS 使用长期缓存。
+
+可设置 `PLAYWRIGHT_BASE_URL` 环境变量，让 `npm run test:ui` 验证已部署的站点；不设置时默认访问本地开发服务。
