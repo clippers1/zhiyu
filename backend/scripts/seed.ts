@@ -35,7 +35,7 @@ try {
         language: source.language, checkedAt: source.accessedAt, publicationDate: source.publicationDate,
         licenseStatus: 'unverified', licenseNotes: '', region: '原始机构适用地区；待编辑核对',
       } });
-      citations.push({ key: source.id, source: stored.id, scope: source.scope, locator: '' });
+      citations.push({ key: source.id, source: stored.id, scope: source.scope, locator: source.locator || '' });
     }
     const article: any = await payload.create({ collection: 'articles', req, data: {
       slug: summary.id, kind: summary.kind, title: summary.title, subtitle: summary.subtitle,
@@ -43,6 +43,7 @@ try {
       tags: summary.tags.map((t: string) => ({ text: t })),
       applicability: '面向一般读者的基础科普；具体年龄、地区与特殊人群适用范围尚待专业审校。',
       limitations: '不用于个人诊断或治疗决策。', scopeConfirmed: false,
+      contentRisk: body.contentRisk || 'clinical', learning: body.learning || null,
       description: body.desc || body.text,
       descriptionSourceKeys: (body.descriptionSourceIds || body.references.map((r: any) => r.id)).join(','),
       metrics: (body.metrics || []).map((m: any) => ({ name: m.name, text: m.text, sourceKeys: m.sourceIds.join(',') })),

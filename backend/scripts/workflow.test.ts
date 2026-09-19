@@ -63,6 +63,40 @@ try {
   assert.equal(demoBody.references[0].licenseNotes, undefined);
   passed('demo isolated from formal API, always pending, without private license notes');
 
+  await assert.rejects(payload.create({ collection: 'releases', req: adminReq, data: {
+    article: article.id, channel: 'official', publicationBasis: 'source-curated', sourceCheckNotes: 'Must fail because the article is not foundational.',
+  } }));
+  const foundation: any = await payload.create({ collection: 'articles', req: editorReq, overrideAccess: false, data: {
+    kind: 'organ', slug: `foundation-${suffix}`, title: '基础知识测试', subtitle: 'Synthetic source-curated fixture',
+    category: `test-${suffix}`, applicability: 'Synthetic test users only.', scopeConfirmed: true, contentRisk: 'foundational',
+    description: 'Foundational version one', descriptionSourceKeys: 'ref',
+    citations: [{ key: 'ref', source: source.id, scope: 'Synthetic foundational claim', locator: 'Test paragraph' }],
+  } });
+  await assert.rejects(payload.create({ collection: 'releases', req: adminReq, data: {
+    article: foundation.id, channel: 'official', publicationBasis: 'source-curated',
+  } }));
+  const curated: any = await payload.create({ collection: 'releases', req: adminReq, data: {
+    article: foundation.id, channel: 'official', publicationBasis: 'source-curated',
+    sourceCheckNotes: 'Synthetic source, expression and simplification check; no medical review.',
+  } });
+  assert.equal(curated.publicData.publicationBasis, 'source-curated');
+  assert.equal(curated.publicData.reviewStatus, 'pending');
+  assert.equal(curated.publicData.demo, false);
+  assert.ok(curated.publicData.sourceCheck.checkedAt);
+  assert.equal(JSON.stringify(curated.publicData).includes('Synthetic source, expression'), false);
+  const curatedPublication: any = await payload.create({ collection: 'publications', req: adminReq, data: { release: curated.id, reason: 'Synthetic sourced publication' } });
+  const curatedBody: any = await (await api('official', ['content', 'organ', foundation.slug])).json();
+  assert.equal(curatedBody.publicationBasis, 'source-curated'); assert.equal(curatedBody.demo, false);
+  await payload.update({ collection: 'articles', id: foundation.id, req: editorReq, data: { description: 'Future foundation draft' } });
+  assert.equal((await (await api('official', ['content', 'organ', foundation.slug])).json()).text, 'Foundational version one');
+  const nextCurated: any = await payload.create({ collection: 'releases', req: adminReq, data: {
+    article: foundation.id, channel: 'official', publicationBasis: 'source-curated', sourceCheckNotes: 'Fresh synthetic check for changed content.',
+  } });
+  assert.notEqual(nextCurated.contentHash, curated.contentHash);
+  await payload.update({ collection: 'publications', id: curatedPublication.id, req: adminReq, data: { release: nextCurated.id, reason: 'Switch sourced revision' } });
+  assert.equal((await (await api('official', ['content', 'organ', foundation.slug])).json()).text, 'Future foundation draft');
+  passed('foundational source publication is explicit, version-bound, private-note safe and distinct from medical review');
+
   const selfArticle: any = await payload.create({ collection: 'articles', req: reviewerReq, overrideAccess: true, data: {
     kind: 'indicator', slug: `self-${suffix}`, title: 'Self review test', subtitle: 'Synthetic fixture',
     category: `test-${suffix}`, applicability: 'Test only', description: 'Self authored fixture',

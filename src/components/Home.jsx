@@ -74,7 +74,7 @@ export default function Home({ go, onOpen, onOrgan, setTour, reading }) {
               </button>
             </div>
             <div className="hero-note">
-              <ShieldCheck size={15} /> 来源可查 · 审校状态公开 · 按需阅读
+              <ShieldCheck size={15} /> 来源可查 · 核对状态公开 · 按需阅读
             </div>
           </div>
           <div className="hero-visual">
@@ -162,7 +162,7 @@ export default function Home({ go, onOpen, onOrgan, setTour, reading }) {
                   <TrendingUp size={22} />
                 </span>
                 <b>核验来源</b>
-                <small>查看依据与审校状态</small>
+                <small>查看依据与核对状态</small>
               </div>
             </div>
             {featured && <RouteLink page="article" id={featured.id} className="text-link" onNavigate={() => onOpen(featured.id)}>

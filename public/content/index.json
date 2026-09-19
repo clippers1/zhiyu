@@ -79,9 +79,9 @@
       "tags": ["血压", "血脂"],
       "category": "circulation",
       "featured": false,
-      "searchText": "心脏 通过有节律的收缩，让血液把氧气和营养送到全身，再带走代谢废物。 血压 · 血脂",
+      "searchText": "心脏 心房 心室 血液循环 肺循环 体循环 心脏的四个腔室依次接力：右侧把来自全身的血液送往肺，左侧再把来自肺的血液泵向全身。 血压 · 血脂",
       "sourceLabel": "美国国立心肺血液研究所（NHLBI）",
-      "referenceCount": 1
+      "referenceCount": 2
     },
     {
       "id": "lung",

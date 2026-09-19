@@ -21,7 +21,7 @@ try {
   const quick = page.locator('.quick-read');
   await expect(quick).toContainText(content.desc);
   await expect(quick).toContainText(content.tip);
-  await expect(quick).toContainText('待专业审校');
+  await expect(quick).toContainText('来源与表达待完整核对');
   await expect(page.locator('.term-questions details')).toHaveCount(content.metrics.length);
   for (const [index, metric] of content.metrics.entries()) {
     const question = page.locator('.term-questions details').nth(index);

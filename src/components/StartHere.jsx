@@ -15,6 +15,6 @@ export default function StartHere() {
         <Bookmark size={22} /><span><b>找回读过的知识</b><small>查看收藏，或管理本地阅读记录</small></span><ArrowUpRight size={18} />
       </a>
     </div>
-    <p className="start-boundary">这里只提供知识查找，不上传或解读个人报告。参考资料不等于专业审校，请留意每篇内容的审校状态。</p>
+    <p className="start-boundary">这里只提供知识查找，不上传或解读个人报告。每篇内容会分别说明来源核对与专业审校状态。</p>
   </section>;
 }

@@ -7,7 +7,7 @@ const pancreas = { kind: 'organ', id: 'pancreas', title: '胰腺', reviewStatus:
 test('routes use only published, explicitly related organs and do not duplicate steps', () => {
   const steps = readingRoute(detail, [pancreas, pancreas, { kind: 'organ', id: 'heart' }, { kind: 'indicator', id: 'liver' }]);
   assert.deepEqual(steps.map(step => step.href), ['/article/glucose', '/organs/pancreas', '/article/glucose#article-source-panel']);
-  assert.ok(steps.every(step => step.status === 'pending'));
+  assert.ok(steps.every(step => step.trust.reviewStatus === 'pending'));
   assert.equal(steps[1].title, '一起了解胰腺');
 });
 test('missing relationships leave a useful concept/source route, not a fabricated organ', () => {
@@ -18,5 +18,5 @@ test('missing relationships leave a useful concept/source route, not a fabricate
 });
 test('review labels remain independent for each publication', () => {
   const steps = readingRoute({ ...detail, reviewStatus: 'reviewed' }, [pancreas]);
-  assert.deepEqual(steps.map(step => step.status), ['reviewed', 'pending', 'reviewed']);
+  assert.deepEqual(steps.map(step => step.trust.reviewStatus), ['reviewed', 'pending', 'reviewed']);
 });

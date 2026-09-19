@@ -3,25 +3,65 @@
   "name": "心脏",
   "en": "HEART",
   "headline": "不停歇的生命泵",
-  "text": "通过有节律的收缩，让血液把氧气和营养送到全身，再带走代谢废物。",
+  "text": "心脏的四个腔室依次接力：右侧把来自全身的血液送往肺，左侧再把来自肺的血液泵向全身。",
   "connection": "血压 · 血脂",
   "related": ["pressure", "lipids"],
   "kind": "organ",
   "category": "circulation",
   "version": 1,
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-09-19",
   "reviewStatus": "pending",
   "references": [
     {
       "id": "heart",
       "publisher": "美国国立心肺血液研究所（NHLBI）",
-      "title": "How the Heart Works — The Heart",
-      "url": "https://www.nhlbi.nih.gov/health/heart",
-      "scope": "心脏泵血与氧气、营养运输",
-      "accessedAt": "2026-09-18",
+      "title": "How Blood Flows through the Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart/blood-flow",
+      "scope": "血液从全身进入右心、前往肺、返回左心并经主动脉流向全身的顺序",
+      "locator": "How does blood flow through the heart?",
+      "accessedAt": "2026-09-19",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "anatomy",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "What the Heart Looks Like",
+      "url": "https://www.nhlbi.nih.gov/health/heart/anatomy",
+      "scope": "心脏四个腔室及其左右分布",
+      "locator": "What are the parts of the heart?",
+      "accessedAt": "2026-09-19",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
-  ]
+  ],
+  "contentRisk": "foundational",
+  "learning": {
+    "type": "heart-flow-v1",
+    "title": "跟着血液走一圈",
+    "intro": "从全身回到心脏的血液，先经过右心前往肺，再回到左心并被泵向全身。你可以点选结构，或逐步观察这条路径。",
+    "simplification": "本图只展示四个心腔、肺和全身之间的主要方向，不按真实大小、位置、速度或心率绘制；血管和瓣膜结构也经过简化。",
+    "parts": [
+      { "id": "body", "label": "全身", "summary": "血液完成全身循环后，经大静脉回到心脏右侧。", "sourceIds": ["heart"] },
+      { "id": "right-atrium", "label": "右心房", "summary": "接收从全身回到心脏的血液。", "sourceIds": ["heart", "anatomy"] },
+      { "id": "right-ventricle", "label": "右心室", "summary": "把血液经肺动脉泵向肺。", "sourceIds": ["heart", "anatomy"] },
+      { "id": "lungs", "label": "肺", "summary": "血液在肺获得氧，再经肺静脉返回心脏。", "sourceIds": ["heart"] },
+      { "id": "left-atrium", "label": "左心房", "summary": "接收从肺回到心脏的血液。", "sourceIds": ["heart", "anatomy"] },
+      { "id": "left-ventricle", "label": "左心室", "summary": "产生将血液经主动脉泵向全身所需的压力。", "sourceIds": ["heart", "anatomy"] }
+    ],
+    "steps": [
+      { "id": "body-ra", "title": "从全身回到右心房", "text": "来自全身的血液经上、下腔静脉进入右心房。", "from": "body", "to": "right-atrium", "sourceIds": ["heart"] },
+      { "id": "ra-rv", "title": "右心房到右心室", "text": "血液从右心房进入右心室，准备被泵向肺。", "from": "right-atrium", "to": "right-ventricle", "sourceIds": ["heart"] },
+      { "id": "rv-lungs", "title": "右心室把血液送往肺", "text": "右心室将血液泵入肺动脉，血液由此到达肺。", "from": "right-ventricle", "to": "lungs", "sourceIds": ["heart"] },
+      { "id": "lungs-la", "title": "从肺返回左心房", "text": "血液在肺获得氧后，经肺静脉回到左心房。", "from": "lungs", "to": "left-atrium", "sourceIds": ["heart"] },
+      { "id": "la-lv", "title": "左心房到左心室", "text": "血液从左心房进入左心室，准备再次流向全身。", "from": "left-atrium", "to": "left-ventricle", "sourceIds": ["heart"] },
+      { "id": "lv-body", "title": "左心室把血液送向全身", "text": "左心室将血液泵入主动脉，血液由此进入全身循环。", "from": "left-ventricle", "to": "body", "sourceIds": ["heart"] }
+    ],
+    "questions": [
+      { "question": "从全身回到心脏的血液，首先进入哪个心腔？", "options": ["右心房", "左心房", "左心室"], "correctIndex": 0, "explanation": "来自全身的血液经大静脉进入右心房，再流向右心室。", "sourceIds": ["heart"] },
+      { "question": "把血液经主动脉泵向全身的是哪个心腔？", "options": ["右心室", "左心室", "右心房"], "correctIndex": 1, "explanation": "左心室产生将血液泵向全身所需的压力。", "sourceIds": ["heart"] }
+    ]
+  }
 }

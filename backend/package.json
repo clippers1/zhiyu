@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-content-platform",
-  "version": "0.0.1-beta.12",
+  "version": "0.0.1-beta.13",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
     "start": "next start --hostname 0.0.0.0 --port 3108",
     "payload": "payload",
     "seed": "tsx scripts/seed.ts",
+    "publish:heart-learning": "tsx scripts/publish-heart-learning.ts",
     "test:workflow": "tsx scripts/workflow.test.ts",
     "test:feedback": "tsx scripts/feedback.test.ts",
     "test:rendering": "tsx scripts/rendering.test.ts",

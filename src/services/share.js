@@ -1,5 +1,6 @@
 import qrcode from "qrcode-generator";
 import { routePath } from "./routes.js";
+import { contentTrust } from "./content-status.js";
 
 const plain = (value, max = 300) => Array.from(typeof value === "string" ? value.replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/g, " ").trim() : "").slice(0, max).join("");
 const dateLabel = value => /^\d{4}-\d{2}-\d{2}/.test(String(value || "")) ? String(value).slice(0, 10) : "未标注";
@@ -10,11 +11,12 @@ export function shareCardModel(content, origin, generatedAt = new Date()) {
   const url = `${site.origin}${routePath(content.kind === "organ" ? "organs" : "article", content.id)}`;
   const title = plain(content.kind === "organ" ? content.name : content.title);
   if (!title || !Array.isArray(content.references)) throw new Error("内容记录不完整，请重新加载。");
-  const reviewed = content.reviewStatus === "reviewed" && Boolean(content.review?.name);
+  const trust = contentTrust(content);
+  const reviewed = trust.kind === "reviewed";
   return {
     title, subtitle: plain(content.kind === "organ" ? content.headline : content.subtitle),
-    kindLabel: content.kind === "organ" ? "器官科普" : "指标科普", reviewed,
-    status: reviewed ? "该版本已完成专业审校" : "Beta 科普 · 待专业审校",
+    kindLabel: content.kind === "organ" ? "器官科普" : "指标科普", reviewed, verified: trust.trusted,
+    status: trust.label,
     referenceCount: content.references.length,
     version: plain(String(content.version || "未标注"), 32), updatedAt: dateLabel(content.updatedAt),
     generatedAt: generatedAt.toISOString().slice(0, 10), url,

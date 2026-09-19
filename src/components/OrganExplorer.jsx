@@ -8,6 +8,7 @@ import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
 import { BookmarkNotice } from "./SavedLibrary";
 import ShareCardButton from "./ShareCard";
+import VisualLearning from "./VisualLearning";
 
 export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks }) {
   const state = useContent("get", ["organ", id]);
@@ -100,6 +101,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
           )}
         </div>
       </section>
+      {selected && <VisualLearning content={selected} />}
       {selected && (
         <SourceReferences content={selected} prefix="organ-source" />
       )}

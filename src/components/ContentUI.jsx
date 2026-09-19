@@ -12,6 +12,7 @@ import {
   Layers3,
   RefreshCw,
 } from "lucide-react";
+import { contentTrust } from "../services/content-status";
 
 const icons = { droplet: Droplet, "heart-pulse": HeartPulse, layers: Layers3 };
 export function IndicatorCard({ item, onOpen }) {
@@ -132,6 +133,7 @@ export function Citation({ ids = [], references, prefix }) {
   );
 }
 export function SourceReferences({ content, prefix = "source" }) {
+  const trust = contentTrust(content);
   return (
     <>
     <section
@@ -157,6 +159,9 @@ export function SourceReferences({ content, prefix = "source" }) {
           {content.review.reviewedAt && ` · ${content.review.reviewedAt.slice(0, 10)}`}
         </p>
       )}
+      {trust.kind === "source-curated" && (
+        <p className="source-explanation">来源整理：本版本已核对具体来源、中文表达和示意边界，未进行独立专业审校 · {content.sourceCheck.checkedAt.slice(0, 10)}</p>
+      )}
       <ol className="source-list">
         {content.references.map((source, index) => (
           <li key={source.id} id={`${prefix}-${source.id}`}>
@@ -181,9 +186,7 @@ export function SourceReferences({ content, prefix = "source" }) {
           内容版本 v{content.version} · 整理于 {content.updatedAt}
         </span>
         <span>
-          {content.reviewStatus === "reviewed"
-            ? "已完成专业审校"
-            : "科普整理 · 待专业审校"}
+          {trust.label}
         </span>
       </div>
     </section>

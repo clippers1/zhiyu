@@ -23,7 +23,7 @@ try {
   await page.getByRole('button', { name: '生成分享卡片', exact: true }).click();
   const modal = page.getByRole('dialog');
   await expect(modal.locator('.share-card-preview')).toBeVisible({ timeout: 15000 });
-  await expect(modal.locator('.share-card-status')).toContainText('待专业审校');
+  await expect(modal.locator('.share-card-status')).toContainText('来源与表达待完整核对');
   await expect(modal.getByRole('textbox', { name: '卡片阅读链接' })).toHaveValue(`${base}/article/glucose`);
   assert.deepEqual(await decode(), { width: 1080, height: 1440, url: `${base}/article/glucose` });
   await mkdir('artifacts', { recursive: true });

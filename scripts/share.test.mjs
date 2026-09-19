@@ -25,7 +25,7 @@ test('cards use clean typed URLs and only an explicit subset of public fields', 
   assert.equal(card.url, 'https://example.test/article/glucose');
   assert.equal(card.filename, 'zhiyu-indicator-glucose.png');
   assert.equal(card.referenceCount, 1);
-  assert.match(card.status, /待专业审校/);
+  assert.match(card.status, /来源与表达待完整核对/);
   assert.ok(!JSON.stringify(card).includes('private') && !JSON.stringify(card).includes('secret'));
   assert.equal(shareCardModel({ ...content, kind: 'organ', id: 'liver', name: '肝脏', headline: '基本功能' }, 'https://example.test').url, 'https://example.test/organs/liver');
   assert.throws(() => shareCardModel(content, 'javascript:alert(1)'));
@@ -38,6 +38,14 @@ test('review status is conservative; merely declaring reviewed without a public 
   assert.ok(!card.title.includes('\u202e'));
   assert.equal(card.subtitle.length, 300);
   assert.equal(card.updatedAt, '未标注');
+});
+test('source-curated status requires an immutable public check timestamp and stays distinct from medical review', () => {
+  const incomplete = shareCardModel({ ...content, publicationBasis: 'source-curated' }, 'https://example.test');
+  assert.equal(incomplete.verified, false);
+  const curated = shareCardModel({ ...content, publicationBasis: 'source-curated', sourceCheck: { checkedAt: '2026-09-19T12:00:00Z' } }, 'https://example.test');
+  assert.equal(curated.reviewed, false);
+  assert.equal(curated.verified, true);
+  assert.match(curated.status, /未进行独立专业审校/);
 });
 test('bounded wrapping never lets a long line cover required warnings', () => {
   const measure = value => Array.from(value).length * 10;

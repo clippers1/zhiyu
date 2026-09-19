@@ -65,7 +65,7 @@ function ShareCard({ kind, id }) {
   }
   return <>
     <h2 id="dialog-title">把知识入口分享出去</h2>
-    <p className="share-card-note">卡片在当前浏览器生成，不上传图片；转发前请确认内容和审校状态。</p>
+    <p className="share-card-note">卡片在当前浏览器生成，不上传图片；转发前请确认内容和核对状态。</p>
     {state.loading && <p role="status">正在核对当前内容并生成卡片…</p>}
     {state.error && <div role="alert"><p>{state.error}</p><p>未生成旧内容卡片。可关闭后重新打开文章，确认内容是否已更新或撤回。</p></div>}
     {data && <>

@@ -1,5 +1,5 @@
 import { type CollectionConfig, type Field } from 'payload';
-import { audit, fail, hasRole, relationID, snapshotArticle, splitKeys, validateForReview } from './domain';
+import { audit, fail, hasRole, relationID, snapshotArticle, splitKeys, validateForReview, validateForSourcePublication } from './domain';
 
 const member = ({ req }: any) => Boolean(req.user);
 const admin = ({ req }: any) => hasRole(req.user, 'admin');
@@ -80,7 +80,7 @@ export const Categories: CollectionConfig = {
 
 export const Articles: CollectionConfig = {
   slug: 'articles', labels: { singular: '知识草稿', plural: '知识编辑' },
-  admin: { useAsTitle: 'title', defaultColumns: ['title', 'kind', 'slug', 'scopeConfirmed', 'updatedAt'], description: '这里保存编辑草稿。保存不会自动上线；请依次创建审校记录、内容修订和发布入口。' },
+  admin: { useAsTitle: 'title', defaultColumns: ['title', 'kind', 'slug', 'contentRisk', 'scopeConfirmed', 'updatedAt'], description: '这里保存编辑草稿。基础知识可在完成来源核对后发布；高风险内容仍需要真实专业审校。保存草稿不会自动上线。' },
   access: { read: member, create: edit, update: edit, delete: never, readVersions: member },
   versions: { maxPerDoc: 100 },
   hooks: {
@@ -116,6 +116,10 @@ export const Articles: CollectionConfig = {
     { name: 'applicability', label: '适用人群与地区', type: 'textarea', required: true },
     { name: 'limitations', label: '适用限制与特殊条件', type: 'textarea' },
     { name: 'scopeConfirmed', label: '编辑已核对适用范围', type: 'checkbox', defaultValue: false },
+    { name: 'contentRisk', label: '内容风险范围', type: 'select', defaultValue: 'clinical', options: [
+      { label: '基础知识（解剖、生理、术语）', value: 'foundational' },
+      { label: '高风险（疾病、数值标准、特殊人群、诊疗相关）', value: 'clinical' },
+    ], admin: { description: '旧内容和无法确认边界的内容默认按高风险处理。该字段不能替代来源与表达检查。' } },
     { name: 'description', label: '基础解释', type: 'textarea', required: true },
     text('descriptionSourceKeys', '基础解释来源编号（逗号分隔）'),
     { name: 'metrics', label: '指标分工', type: 'array', admin: { condition: indicatorOnly }, fields: [text('name', '名称', true), { name: 'text', label: '解释', type: 'textarea', required: true }, text('sourceKeys', '来源编号（逗号分隔）')] },
@@ -124,6 +128,7 @@ export const Articles: CollectionConfig = {
     { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: indicatorOnly } },
     { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
     text('organLabel', '关联说明'),
+    { name: 'learning', label: '互动学习脚本（首期 JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '首期支持 heart-flow-v1；结构、步骤和理解题都必须使用本文已有来源编号。' } },
     { name: 'relatedOrgans', label: '关联器官', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'organ' } } },
     { name: 'relatedIndicators', label: '关联指标', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'indicator' } } },
     { name: 'citations', label: '本文引用', type: 'array', required: true, minRows: 1, fields: [
@@ -171,35 +176,56 @@ export const Reviews: CollectionConfig = {
 
 export const Releases: CollectionConfig = {
   slug: 'releases', labels: { singular: '内容修订', plural: '可发布修订' },
-  admin: { useAsTitle: 'label', defaultColumns: ['label', 'channel', 'createdAt'], description: '从当前草稿生成不可变快照。正式修订必须引用匹配的通过审校记录；演示修订始终显示待审校。' },
+  admin: { useAsTitle: 'label', defaultColumns: ['label', 'channel', 'publicationBasis', 'createdAt'], description: '从当前草稿生成不可变快照。正式修订可基于专业审校，或对低风险基础知识做来源整理核对；两种状态公开区分。' },
   access: { read: member, create: publish, update: never, delete: never },
   hooks: { beforeChange: [async ({ data, req, operation }) => {
     if (operation !== 'create') fail('内容修订不可修改；请创建新的修订。');
     const s = await snapshotArticle(req, relationID(data.article));
     let reviewer = null;
+    let sourceCheck = null;
     if (data.channel === 'official') {
-      if (!data.review) fail('正式发布必须选择医学审校记录。');
-      const review: any = await req.payload.findByID({ collection: 'reviews', id: relationID(data.review), req, depth: 0, overrideAccess: true });
-      if (relationID(review.article) !== s.article.id || review.decision !== 'approved' || review.contentHash !== s.hash) fail('审校记录与当前正文或来源不一致，请重新审校。');
-      const user: any = await req.payload.findByID({ collection: 'users', id: relationID(review.reviewer), req, overrideAccess: true });
-      if (!user.qualificationVerified || !hasRole(user, 'reviewer')) fail('审校资格当前不可用。');
-      validateForReview(s);
-      reviewer = review.reviewerDisplay;
+      if (data.publicationBasis === 'source-curated') {
+        validateForSourcePublication(s);
+        if (!data.sourceCheckNotes?.trim()) fail('来源整理发布必须记录核对范围、图示简化和未覆盖内容。');
+        data.review = null;
+        data.sourceCheckBy = req.user?.id || null;
+        data.sourceCheckedAt = new Date().toISOString();
+        sourceCheck = { checkedAt: data.sourceCheckedAt, statement: '维护者已核对本版本的具体来源、表达与示意边界；未进行独立专业审校。' };
+      } else {
+        if (!data.review) fail('专业审校发布必须选择医学审校记录。');
+        const review: any = await req.payload.findByID({ collection: 'reviews', id: relationID(data.review), req, depth: 0, overrideAccess: true });
+        if (relationID(review.article) !== s.article.id || review.decision !== 'approved' || review.contentHash !== s.hash) fail('审校记录与当前正文或来源不一致，请重新审校。');
+        const user: any = await req.payload.findByID({ collection: 'users', id: relationID(review.reviewer), req, overrideAccess: true });
+        if (!user.qualificationVerified || !hasRole(user, 'reviewer')) fail('审校资格当前不可用。');
+        validateForReview(s);
+        reviewer = review.reviewerDisplay;
+      }
     } else if (!hasRole(req.user, 'admin')) fail('仅管理员可以创建明确标识为待审校的演示修订。', 403);
     data.label = `${s.article.title} · ${data.channel === 'official' ? '正式' : '演示'} · ${new Date().toISOString()}`;
     data.kind = s.article.kind; data.slug = s.article.slug;
     data.contentHash = s.hash;
     data.publicData = { ...s.body,
       references: s.body.references.map(({ licenseNotes, sourceRecordID, ...reference }: any) => reference),
-      reviewStatus: reviewer ? 'reviewed' : 'pending', review: reviewer, demo: !reviewer };
-    data.summary = { ...s.summary, reviewStatus: reviewer ? 'reviewed' : 'pending', demo: !reviewer };
+      reviewStatus: reviewer ? 'reviewed' : 'pending', review: reviewer,
+      publicationBasis: data.channel === 'demo' ? 'demo' : reviewer ? 'professional-review' : 'source-curated',
+      sourceCheck, demo: data.channel === 'demo' };
+    data.summary = { ...s.summary, reviewStatus: reviewer ? 'reviewed' : 'pending',
+      publicationBasis: data.channel === 'demo' ? 'demo' : reviewer ? 'professional-review' : 'source-curated',
+      sourceCheck, demo: data.channel === 'demo' };
     data.createdBy = req.user?.id || null;
     return data;
   }] },
   fields: [
     { name: 'article', label: '知识草稿', type: 'relationship', relationTo: 'articles', required: true },
-    { name: 'channel', label: '发布集合', type: 'select', required: true, defaultValue: 'official', options: [{ label: '正式（需要医学审校）', value: 'official' }, { label: '演示（明确标记待审校）', value: 'demo' }] },
+    { name: 'channel', label: '发布集合', type: 'select', required: true, defaultValue: 'official', options: [{ label: '正式', value: 'official' }, { label: '演示（来源尚未完成核对）', value: 'demo' }] },
+    { name: 'publicationBasis', label: '正式发布依据', type: 'select', required: true, defaultValue: 'professional-review', options: [
+      { label: '版本绑定的专业审校', value: 'professional-review' },
+      { label: '基础知识来源整理', value: 'source-curated' },
+    ], admin: { condition: (_: any, sibling: any) => sibling.channel === 'official' } },
     { name: 'review', label: '通过的医学审校记录', type: 'relationship', relationTo: 'reviews' },
+    { name: 'sourceCheckNotes', label: '来源、表达、图示简化及未覆盖范围核对记录', type: 'textarea', admin: { condition: (_: any, sibling: any) => sibling.channel === 'official' && sibling.publicationBasis === 'source-curated' } },
+    { name: 'sourceCheckBy', label: '来源整理核对人', type: 'relationship', relationTo: 'users', admin: { readOnly: true } },
+    { name: 'sourceCheckedAt', label: '来源整理核对时间', type: 'date', admin: { readOnly: true } },
     ...['label', 'kind', 'slug', 'contentHash'].map(name => ({ name, type: 'text', admin: { readOnly: true } } as Field)),
     { name: 'publicData', label: '正文快照', type: 'json', admin: { readOnly: true } },
     { name: 'summary', label: '摘要快照', type: 'json', admin: { readOnly: true } },
@@ -217,7 +243,10 @@ export const Publications: CollectionConfig = {
       const release: any = await req.payload.findByID({ collection: 'releases', id: relationID(data.release), req, depth: 0, overrideAccess: true });
       const key = `${release.channel}:${release.kind}:${release.slug}`;
       if (originalDoc?.id && originalDoc.key !== key) fail('不能用另一篇知识或另一个集合替换已有入口。');
-      if (release.channel === 'official' && release.publicData?.reviewStatus !== 'reviewed') fail('正式入口需要已审校修订。');
+      if (release.channel === 'official' && !(
+        release.publicData?.reviewStatus === 'reviewed' ||
+        (release.publicData?.publicationBasis === 'source-curated' && release.publicData?.sourceCheck?.checkedAt)
+      )) fail('正式入口需要匹配的专业审校或基础知识来源整理记录。');
       if (data.withdrawn && !data.reason?.trim()) fail('撤回时请说明原因。');
       Object.assign(data, { key, channel: release.channel, kind: release.kind, slug: release.slug,
         title: release.summary.title, category: release.summary.category, featured: release.summary.featured,

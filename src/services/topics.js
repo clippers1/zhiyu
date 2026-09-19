@@ -12,8 +12,8 @@ export function readingRoute(detail, availableOrgans = []) {
     return true;
   });
   return [
-    { key: "concept", title: `先认识${detail.title}`, description: "了解概念、指标说明和阅读提示。", href: routePath("article", detail.id), status: detail.reviewStatus },
-    ...organs.map(item => ({ key: `organ-${item.id}`, title: `一起了解${item.title}`, description: "阅读专题中已有的器官关联，认识它的基本功能。", href: routePath("organs", item.id), status: item.reviewStatus })),
-    { key: "sources", title: "最后核对来源", description: "查看参考原文、适用范围、内容版本与审校状态。", href: `${routePath("article", detail.id)}#article-source-panel`, status: detail.reviewStatus },
+    { key: "concept", title: `先认识${detail.title}`, description: "了解概念、指标说明和阅读提示。", href: routePath("article", detail.id), trust: detail },
+    ...organs.map(item => ({ key: `organ-${item.id}`, title: `一起了解${item.title}`, description: "阅读专题中已有的器官关联，认识它的基本功能。", href: routePath("organs", item.id), trust: item })),
+    { key: "sources", title: "最后核对来源", description: "查看参考原文、适用范围、内容版本与核对状态。", href: `${routePath("article", detail.id)}#article-source-panel`, trust: detail },
   ];
 }

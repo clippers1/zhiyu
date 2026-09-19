@@ -28,9 +28,9 @@ export async function drawShareCard(model) {
   ctx.strokeStyle = "#d7e1cf"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(80, 242); ctx.lineTo(1000, 242); ctx.stroke();
   lines(`认识${model.title}`, 354, 76, 3, 920, "#284b3b", 600);
   lines(model.subtitle, 670, 34, 3, 920, "#60725f");
-  ctx.fillStyle = model.reviewed ? "#e5eedf" : "#f3e8cf";
+  ctx.fillStyle = model.verified ? "#e5eedf" : "#f3e8cf";
   ctx.fillRect(80, 818, 920, 80);
-  text(model.status, 104, 869, 30, model.reviewed ? "#355638" : "#745c29", 600);
+  text(model.status, 104, 869, 30, model.verified ? "#355638" : "#745c29", 600);
   text(`${model.referenceCount} 份参考资料 · 完整来源见原文`, 80, 950, 28, "#60725f");
 
   const matrix = qrMatrix(model.url);
@@ -43,7 +43,7 @@ export async function drawShareCard(model) {
   ctx.fillStyle = "#132d23";
   matrix.forEach((row, r) => row.forEach((dark, c) => { if (dark) ctx.fillRect(x + (c + quiet) * cell, y + (r + quiet) * cell, cell, cell); }));
   text("扫码阅读完整专题", 398, 1055, 36, "#284b3b", 600);
-  text("查看依据、适用范围与审校状态", 398, 1110, 28, "#60725f");
+  text("查看依据、适用范围与核对状态", 398, 1110, 28, "#60725f");
   text("以扫码打开的最新内容为准", 398, 1157, 28, "#60725f");
   text(`内容版本 ${model.version} · 整理于 ${model.updatedAt}`, 398, 1215, 22, "#60725f");
   text(`卡片生成于 ${model.generatedAt}`, 398, 1255, 22, "#60725f");

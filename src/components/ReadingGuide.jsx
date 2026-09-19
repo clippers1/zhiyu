@@ -1,6 +1,7 @@
 import React from "react";
 import { Citation } from "./ContentUI";
 import "./reading-guide.css";
+import { contentTrust } from "../services/content-status";
 
 function Statement({ value, content }) {
   return <p>{value.text}<Citation ids={value.sourceIds} references={content.references} prefix="article-source" /></p>;
@@ -11,8 +12,7 @@ export function QuickRead({ guide, content }) {
   return <section className="quick-read" id="article-quick-read" aria-labelledby="quick-read-title">
     <span className="overline">先抓住重点，再展开了解</span>
     <h2 id="quick-read-title">快速了解{content.title}</h2>
-    <p className="guide-note">以下原句来自本页当前版本，不是额外的医学判断。
-      {content.reviewStatus !== "reviewed" || !content.review?.name ? " 本文仍待专业审校。" : " 审校信息与适用范围见文末。"}</p>
+    <p className="guide-note">以下原句来自本页当前版本，不是额外的医学判断。 {contentTrust(content).label}，适用范围见文末。</p>
     {guide.concept && <div><h3>先认识概念</h3><Statement value={guide.concept} content={content} /></div>}
     {guide.reminder && <div className="quick-read-reminder"><h3>解读时的边界</h3><Statement value={guide.reminder} content={content} /></div>}
     <a href="#article-overview">继续阅读全文</a>

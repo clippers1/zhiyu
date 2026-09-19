@@ -16,6 +16,7 @@ import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
 import { readingGuide } from "../services/reading-guide";
 import { QuickRead, TermQuestions } from "./ReadingGuide";
+import { contentTrust } from "../services/content-status";
 
 export default function Article({
   id,
@@ -30,6 +31,7 @@ export default function Article({
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
   const guide = readingGuide(detail);
+  const trust = contentTrust(detail);
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
@@ -78,9 +80,7 @@ export default function Article({
             <span className="overline">{detail.english}</span>
             <h1>认识{detail.title}</h1>
             <p>{detail.subtitle}</p>
-            {detail.reviewStatus !== "reviewed" && (
-              <p className="review-notice">Beta 科普内容 · 待专业审校</p>
-            )}
+            {trust.kind !== "reviewed" && <p className="review-notice">{trust.label}</p>}
             <a
               className="source-jump"
               href="#article-source-panel"

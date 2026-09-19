@@ -39,6 +39,16 @@ test("all published demo content has valid references, related records and index
       ...(entry.metrics || []).flatMap((metric) => metric.sourceIds),
     ])
       assert.ok(sourceIds.has(id), `${entry.id}: missing reference ${id}`);
+    if (entry.learning) {
+      assert.equal(entry.learning.type, "heart-flow-v1");
+      assert.ok(entry.learning.parts.length >= 4 && entry.learning.steps.length >= 2);
+      const partIds = new Set(entry.learning.parts.map((part) => part.id));
+      assert.equal(partIds.size, entry.learning.parts.length);
+      for (const item of [...entry.learning.parts, ...entry.learning.steps, ...entry.learning.questions]) {
+        for (const id of item.sourceIds) assert.ok(sourceIds.has(id), `${entry.id}: learning item missing reference ${id}`);
+      }
+      for (const step of entry.learning.steps) assert.ok(partIds.has(step.from) && partIds.has(step.to));
+    }
     for (const id of entry.related || [])
       assert.ok(keys.has(`indicator/${id}`));
   }
