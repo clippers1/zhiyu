@@ -1,5 +1,6 @@
 import { getPayload, type Where } from 'payload';
 import config from './payload.config';
+import { searchPublished } from './content-search';
 
 const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 const json = (body: unknown, status = 200) => Response.json(body, { status, headers });
@@ -29,12 +30,22 @@ export async function publicContent(request: Request, channel: 'demo' | 'officia
   if (!Number.isSafeInteger(offset) || offset > 100000 || offset % limit !== 0) return json({ error: 'invalid_cursor' }, 400);
   const filters: Where[] = [base];
   if (kind) filters.push({ kind: { equals: kind } });
-  if (query) filters.push({ searchText: { contains: query } });
   if (category) filters.push({ category: { equals: category } });
   if (params.get('featured') === 'true') filters.push({ featured: { equals: true } });
   const ids = params.has('ids') ? params.get('ids')!.split(',').filter(Boolean) : null;
   if (ids && (ids.length > 200 || ids.some(id => !/^[a-z0-9-]+$/.test(id)))) return json({ error: 'invalid_ids' }, 400);
-  if (ids?.length) filters.push({ slug: { in: ids } });
+  if (ids) filters.push({ slug: { in: ids } });
+  if (query) {
+    const search = await searchPublished(payload, { channel, kind: kind || null, category: category || null, ids,
+      featured: params.get('featured') === 'true', query, offset, limit, filters });
+    const categoryRecords = await payload.find({ collection: 'categories', overrideAccess: true, depth: 0, pagination: false, sort: 'id' });
+    const categories = await Promise.all(categoryRecords.docs.map(async c => {
+      const count = await payload.count({ collection: 'publications', overrideAccess: true,
+        where: { and: [base, ...(kind ? [{ kind: { equals: kind } }] : []), { category: { equals: c.slug } }] } });
+      return count.totalDocs ? { id: c.slug, name: c.name } : null;
+    }));
+    return json({ ...search, categories: categories.filter(Boolean), channel });
+  }
   const [result, categoryRecords] = await Promise.all([
     ids?.length === 0 ? Promise.resolve({ docs: [], totalDocs: 0, hasNextPage: false }) : payload.find({
       collection: 'publications', overrideAccess: true, depth: 0, limit, page: offset / limit + 1,

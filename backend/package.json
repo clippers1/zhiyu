@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-content-platform",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "test:workflow": "tsx scripts/workflow.test.ts",
     "test:feedback": "tsx scripts/feedback.test.ts",
     "test:rendering": "tsx scripts/rendering.test.ts",
+    "test:search": "tsx scripts/search.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

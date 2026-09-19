@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BookOpen, Bookmark, Search } from "lucide-react";
 import { useContent } from "../hooks";
 import { IndicatorCard, LoadState, PageIntro, Pagination } from "./ContentUI";
+import { useSearchInput } from "../useSearchInput";
+import SearchSuggestions from "./SearchSuggestions";
 
 export default function Library({
   savedOnly = false,
@@ -9,20 +11,20 @@ export default function Library({
   onOpen,
   onBrowse,
 }) {
-  const [query, setQuery] = useState("");
+  const { query, setQuery, effective, pending, inputProps } = useSearchInput();
   const [category, setCategory] = useState("");
   const [cursor, setCursor] = useState("0");
   const state = useContent("list", [
     {
       kind: "indicator",
-      query,
+      query: effective,
       category,
       cursor,
       limit: 6,
       ...(savedOnly ? { ids: saved } : {}),
     },
   ]);
-  const data = state.data;
+  const data = pending ? null : state.data;
   function filter(setter, value) {
     setter(value);
     setCursor("0");
@@ -52,6 +54,7 @@ export default function Library({
         <label className="library-search">
           <Search size={18} />
           <input
+            {...inputProps}
             id={savedOnly ? "saved-search" : "indicator-search"}
             value={query}
             onChange={(e) => filter(setQuery, e.target.value)}
@@ -81,7 +84,7 @@ export default function Library({
         <span>从已有专题试一试</span>
         {[...new Set(data.items.flatMap(item => item.tags || []))].slice(0, 6).map(term => <button key={term} onClick={() => filter(setQuery, term)}>{term}</button>)}
       </div>}
-      <LoadState {...state} />
+      {pending ? <p className="search-hint" role="status">输入完成后查找…</p> : <LoadState {...state} />}
       {data && (
         <>
           <div className="result-count">
@@ -113,6 +116,8 @@ export default function Library({
                   ? "在知识详情页点击收藏，即可在这里找到。"
                   : "换一个关键词，或查看全部指标。"}
               </p>
+              <SearchSuggestions suggestions={data.suggestions} onChoose={value => filter(setQuery, value)} />
+              {query && category && <button className="clear-category" onClick={() => filter(setCategory, "")}>保留关键词，清除分类限制</button>}
               <button
                 className="primary-button"
                 onClick={() => {

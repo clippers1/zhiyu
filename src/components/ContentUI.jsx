@@ -31,6 +31,7 @@ export function IndicatorCard({ item, onOpen }) {
         <span>{item.english}</span>
       </div>
       <p>{item.subtitle}</p>
+      {item.match && <span className="search-match">匹配：{item.match}</span>}
       <div className="tags">
         {item.tags.map((tag) => (
           <span key={tag}>{tag}</span>

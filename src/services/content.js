@@ -1,3 +1,4 @@
+import { normalizeSearch, searchRank, searchSuggestions, matchLabels } from "./search.js";
 const PAGE_LIMIT = 24;
 export function selectPage(
   catalog,
@@ -13,18 +14,19 @@ export function selectPage(
 ) {
   const size = Math.min(PAGE_LIMIT, Math.max(1, Number(limit) || 6));
   const offset = Math.max(0, Number.parseInt(cursor, 10) || 0);
-  const needle = query.trim().toLocaleLowerCase();
-  const filtered = catalog.items.filter(
+  const needle = normalizeSearch(query);
+  const searching = Boolean(query.trim());
+  const candidates = catalog.items.filter(
     (item) =>
       (!kind || item.kind === kind) &&
       (!category || item.category === category) &&
       (!ids || ids.includes(item.id)) &&
-      (!featured || item.featured) &&
-      (!needle ||
-        `${item.title} ${item.subtitle} ${item.searchText}`
-          .toLocaleLowerCase()
-          .includes(needle)),
+      (!featured || item.featured),
   );
+  const filtered = searching ? candidates.map((item, index) => ({ item, index, rank: searchRank(item, needle) }))
+    .filter(result => result.rank >= 0)
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map(({ item, rank }) => ({ ...item, match: matchLabels[rank] })) : candidates;
   const availableCategories = new Set(
     catalog.items
       .filter((item) => !kind || item.kind === kind)
@@ -34,6 +36,7 @@ export function selectPage(
     items: filtered.slice(offset, offset + size),
     total: filtered.length,
     nextCursor: offset + size < filtered.length ? String(offset + size) : null,
+    suggestions: searching && filtered.length === 0 ? searchSuggestions(candidates, query) : [],
     categories: catalog.categories.filter((category) =>
       availableCategories.has(category.id),
     ),
