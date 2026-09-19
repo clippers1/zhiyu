@@ -45,7 +45,8 @@ test('source-curated status requires an immutable public check timestamp and sta
   const curated = shareCardModel({ ...content, publicationBasis: 'source-curated', sourceCheck: { checkedAt: '2026-09-19T12:00:00Z' } }, 'https://example.test');
   assert.equal(curated.reviewed, false);
   assert.equal(curated.verified, true);
-  assert.match(curated.status, /未进行独立专业审校/);
+  assert.match(curated.status, /依据具体来源整理/);
+  assert.doesNotMatch(curated.status, /专业审校/);
 });
 test('bounded wrapping never lets a long line cover required warnings', () => {
   const measure = value => Array.from(value).length * 10;

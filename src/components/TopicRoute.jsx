@@ -48,7 +48,7 @@ export default function TopicRoute({ id }) {
           <small>{contentTrust(step.trust).label}</small>
         </div>
       </li>)}</ol>
-      <p className="topic-note">各篇内容独立展示来源核对与专业审校状态。有关联不表示异常由该器官引起，也不代表内容已覆盖全部相关知识。</p>
+      <p className="topic-note">各篇内容独立展示来源和版本状态。有关联不表示异常由该器官引起，也不代表内容已覆盖全部相关知识。</p>
       <RouteLink page="indicators" className="text-link">查找其他指标 <ArrowRight size={15} /></RouteLink>
     </>}
   </div>;

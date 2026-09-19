@@ -92,12 +92,12 @@
       "icon": "heart",
       "color": "green",
       "number": "",
-      "tags": ["血氧", "肺功能"],
+      "tags": ["肺泡", "气体交换"],
       "category": "respiration",
       "featured": false,
-      "searchText": "肺 吸气时，氧气在肺泡进入血液；呼气时，血液中的二氧化碳被排出体外。 血氧 · 肺功能",
-      "sourceLabel": "NHLBI",
-      "referenceCount": 1
+      "searchText": "肺 肺泡 气管 支气管 毛细血管 气体交换 氧气 二氧化碳 吸入的空气沿气道到达肺泡，氧气穿过肺泡薄壁进入周围毛细血管；与此同时，二氧化碳从血液进入肺泡，并随呼气排出。 心脏 · 血液循环",
+      "sourceLabel": "美国国立心肺血液研究所（NHLBI）",
+      "referenceCount": 2
     },
     {
       "id": "liver",

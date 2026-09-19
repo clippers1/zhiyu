@@ -17,7 +17,7 @@ export const fingerprint = (value: any) => createHash('sha256').update(JSON.stri
 function visualLearning(value: any, sourceKeys: Set<string>) {
   if (value == null) return null;
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail('互动学习内容格式不正确。');
-  if (value.type !== 'heart-flow-v1') fail('暂不支持这种互动学习类型。');
+  if (!['heart-flow-v1', 'lung-gas-exchange-v1'].includes(value.type)) fail('暂不支持这种互动学习类型。');
   const text = (input: any, label: string, max = 600) => {
     if (typeof input !== 'string' || !input.trim() || input.length > max) fail(`互动学习的${label}不完整。`);
     return input.trim();

@@ -41,7 +41,7 @@ try {
       slug: summary.id, kind: summary.kind, title: summary.title, subtitle: summary.subtitle,
       english: summary.english, category: summary.category, aliases: summary.searchText,
       tags: summary.tags.map((t: string) => ({ text: t })),
-      applicability: '面向一般读者的基础科普；具体年龄、地区与特殊人群适用范围尚待专业审校。',
+      applicability: '面向一般读者的基础科普；具体年龄、地区与特殊人群适用范围尚待来源与表达核对。',
       limitations: '不用于个人诊断或治疗决策。', scopeConfirmed: false,
       contentRisk: body.contentRisk || 'clinical', learning: body.learning || null,
       description: body.desc || body.text,
@@ -68,8 +68,8 @@ try {
     // Reruns never overwrite editorial work, switch releases, or undo a withdrawal.
     if (existingPublication.docs.length) continue;
     const release: any = await payload.create({ collection: 'releases', req, data: { article: article.id, channel: 'demo' } });
-    await payload.create({ collection: 'publications', req, data: { release: release.id, reason: '迁移既有 Beta 演示内容；未完成医学审校，不能用于正式发布。' } });
+    await payload.create({ collection: 'publications', req, data: { release: release.id, reason: '迁移既有 Beta 演示内容；尚未完成来源、适用范围与表达核对，不能用于正式发布。' } });
   }
-  console.log(`Imported ${records.size} content records. Medical approvals created: 0. Formal publications created: 0.`);
+  console.log(`Imported ${records.size} content records. Source checks created: 0. Formal publications created: 0.`);
 } finally { await payload.destroy(); }
 process.exit(0);

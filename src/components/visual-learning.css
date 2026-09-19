@@ -5,9 +5,11 @@
 .visual-learning header p, .learning-current p, .learning-boundary, .learning-check > p { line-height: 1.8; }
 .learning-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, .8fr); align-items: center; gap: 30px; margin-top: 26px; }
 .learning-diagram { display: block; width: 100%; height: auto; min-height: 350px; border-radius: 24px; background: rgba(255,255,255,.65); }
-.learning-path { fill: none; stroke-width: 7; opacity: .28; marker-end: url(#flow-arrow-blue); }
-.learning-path.flow-blue { stroke: #5683a4; }
+.learning-path { fill: none; stroke-width: 7; opacity: .28; }
+.learning-path.flow-blue, .learning-path.flow-oxygen { stroke: #5683a4; marker-end: url(#flow-arrow-blue); }
 .learning-path.flow-red { stroke: #c67469; marker-end: url(#flow-arrow-red); }
+.learning-path.flow-air { stroke: #648b68; marker-end: url(#flow-arrow-air); }
+.learning-path.flow-carbon { stroke: #b97a45; marker-end: url(#flow-arrow-carbon); }
 .learning-path.active { opacity: 1; stroke-width: 10; stroke-dasharray: 16 12; animation: learning-flow 1.2s linear infinite; }
 @keyframes learning-flow { to { stroke-dashoffset: -28; } }
 .learning-part { cursor: pointer; outline: none; }
@@ -19,6 +21,7 @@
 .learning-legend i { display: inline-block; width: 18px; height: 4px; margin: 0 5px 3px 12px; border-radius: 3px; }
 .learning-legend i:first-child { margin-left: 0; }
 .legend-blue { background: #5683a4; } .legend-red { background: #c67469; }
+.legend-air { background: #648b68; } .legend-carbon { background: #b97a45; }
 .learning-current { min-height: 285px; padding: 28px; border-radius: 22px; background: #fff; box-shadow: 0 12px 35px rgba(45,75,57,.08); }
 .learning-current h3 { margin: 10px 0; font-size: 24px; }
 .learning-controls { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 8px; margin-top: 22px; }

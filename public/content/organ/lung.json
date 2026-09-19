@@ -3,25 +3,64 @@
   "name": "肺",
   "en": "LUNGS",
   "headline": "身体与空气的交换站",
-  "text": "吸气时，氧气在肺泡进入血液；呼气时，血液中的二氧化碳被排出体外。",
-  "connection": "血氧 · 肺功能",
+  "text": "吸入的空气沿气道到达肺泡，氧气穿过肺泡薄壁进入周围毛细血管；与此同时，二氧化碳从血液进入肺泡，并随呼气排出。",
+  "connection": "心脏 · 血液循环",
   "related": [],
   "kind": "organ",
   "category": "respiration",
   "version": 1,
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-09-19",
   "reviewStatus": "pending",
   "references": [
     {
       "id": "lung",
-      "publisher": "NHLBI",
-      "title": "How the Lungs Work — The Lungs",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How the Lungs Work",
       "url": "https://www.nhlbi.nih.gov/health/lungs",
       "scope": "肺的气体交换与氧气、二氧化碳",
-      "accessedAt": "2026-09-18",
+      "locator": "What do the lungs do?",
+      "accessedAt": "2026-09-19",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "breathing",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How Breathing Works",
+      "url": "https://www.nhlbi.nih.gov/health/lungs/breathing-benefits",
+      "scope": "空气经鼻或口、气管和支气管到达肺泡，以及氧气和二氧化碳在肺泡与毛细血管之间交换并呼出的过程",
+      "locator": "Breathing in; Gas exchange; Breathing out",
+      "accessedAt": "2026-09-19",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
-  ]
+  ],
+  "contentRisk": "foundational",
+  "learning": {
+    "type": "lung-gas-exchange-v1",
+    "title": "跟着一口气到肺泡",
+    "intro": "空气进入肺后并不是直接和全身交换。它先沿气道到达肺泡，再由肺泡和周围毛细血管完成氧气与二氧化碳的交换。",
+    "simplification": "本图把大量分支的气道、肺泡和毛细血管各合并为一个示意结构，不按真实数量、大小、位置或呼吸速度绘制；氧气与二氧化碳的移动方向用文字和箭头共同表达。",
+    "parts": [
+      { "id": "nose-mouth", "label": "鼻 / 口", "summary": "吸气时，空气从鼻或口进入；呼气时，含二氧化碳较多的空气由此排出。", "sourceIds": ["breathing"] },
+      { "id": "trachea", "label": "气管", "summary": "空气从鼻或口进入后，沿气管向肺内移动。", "sourceIds": ["breathing"] },
+      { "id": "bronchi", "label": "支气管", "summary": "空气通过支气管继续进入肺，并向更细的气道分流。", "sourceIds": ["breathing"] },
+      { "id": "alveoli", "label": "肺泡", "summary": "空气到达肺泡后，氧气与二氧化碳在这里和周围毛细血管进行交换。", "sourceIds": ["lung", "breathing"] },
+      { "id": "capillaries", "label": "毛细血管", "summary": "氧气从肺泡进入周围毛细血管，二氧化碳则从血液移向肺泡。", "sourceIds": ["breathing"] }
+    ],
+    "steps": [
+      { "id": "air-trachea", "title": "空气从鼻或口进入气管", "text": "吸气时，空气从鼻或口进入，并沿气管向肺移动。", "from": "nose-mouth", "to": "trachea", "sourceIds": ["breathing"] },
+      { "id": "trachea-bronchi", "title": "空气进入支气管", "text": "空气经过气管后进入支气管，并继续向肺内较细的气道移动。", "from": "trachea", "to": "bronchi", "sourceIds": ["breathing"] },
+      { "id": "bronchi-alveoli", "title": "空气到达肺泡", "text": "空气通过支气管和更细的气道，最终到达肺泡。", "from": "bronchi", "to": "alveoli", "sourceIds": ["breathing"] },
+      { "id": "alveoli-capillaries", "title": "氧气进入血液", "text": "氧气穿过肺泡薄壁，进入肺泡周围的毛细血管。", "from": "alveoli", "to": "capillaries", "sourceIds": ["breathing"] },
+      { "id": "capillaries-alveoli", "title": "二氧化碳进入肺泡", "text": "与此同时，血液中的二氧化碳从毛细血管移入肺泡。", "from": "capillaries", "to": "alveoli", "sourceIds": ["lung", "breathing"] },
+      { "id": "alveoli-air", "title": "二氧化碳随呼气排出", "text": "呼气时，含二氧化碳较多的空气沿气道返回，并从鼻或口排出。", "from": "alveoli", "to": "nose-mouth", "sourceIds": ["breathing"] }
+    ],
+    "questions": [
+      { "question": "吸入的空气最终在哪里与周围毛细血管进行气体交换？", "options": ["气管", "支气管", "肺泡"], "correctIndex": 2, "explanation": "空气沿气道到达肺泡，氧气和二氧化碳在肺泡与周围毛细血管之间交换。", "sourceIds": ["breathing"] },
+      { "question": "气体交换时，二氧化碳向哪个方向移动？", "options": ["从血液进入肺泡", "从肺泡进入血液", "只停留在气管"], "correctIndex": 0, "explanation": "二氧化碳从毛细血管中的血液进入肺泡，随后随呼气排出。", "sourceIds": ["lung", "breathing"] }
+    ]
+  }
 }

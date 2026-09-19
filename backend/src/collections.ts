@@ -80,7 +80,7 @@ export const Categories: CollectionConfig = {
 
 export const Articles: CollectionConfig = {
   slug: 'articles', labels: { singular: '知识草稿', plural: '知识编辑' },
-  admin: { useAsTitle: 'title', defaultColumns: ['title', 'kind', 'slug', 'contentRisk', 'scopeConfirmed', 'updatedAt'], description: '这里保存编辑草稿。基础知识可在完成来源核对后发布；高风险内容仍需要真实专业审校。保存草稿不会自动上线。' },
+  admin: { useAsTitle: 'title', defaultColumns: ['title', 'kind', 'slug', 'contentRisk', 'scopeConfirmed', 'updatedAt'], description: '这里保存编辑草稿。基础知识完成来源核对后即可发布；疾病、数值标准、特殊人群和诊疗内容不在当前产品范围。保存草稿不会自动上线。' },
   access: { read: member, create: edit, update: edit, delete: never, readVersions: member },
   versions: { maxPerDoc: 100 },
   hooks: {
@@ -128,13 +128,13 @@ export const Articles: CollectionConfig = {
     { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: indicatorOnly } },
     { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
     text('organLabel', '关联说明'),
-    { name: 'learning', label: '互动学习脚本（首期 JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '首期支持 heart-flow-v1；结构、步骤和理解题都必须使用本文已有来源编号。' } },
+    { name: 'learning', label: '互动学习脚本（JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '支持已登记的心脏循环与肺部气体交换类型；结构、步骤和理解题都必须使用本文已有来源编号。' } },
     { name: 'relatedOrgans', label: '关联器官', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'organ' } } },
     { name: 'relatedIndicators', label: '关联指标', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'indicator' } } },
     { name: 'citations', label: '本文引用', type: 'array', required: true, minRows: 1, fields: [
       text('key', '本文来源编号', true), { name: 'source', label: '来源库记录', type: 'relationship', relationTo: 'sources', required: true },
       { name: 'scope', label: '支撑哪些知识点', type: 'textarea', required: true },
-      text('locator', '页码 / 段落标题 / 原文锚点（正式审校前必填）'),
+      text('locator', '页码 / 段落标题 / 原文锚点（正式发布前必填）'),
     ] },
     { name: 'featured', label: '首页精选', type: 'checkbox', defaultValue: false },
     { name: 'icon', label: '图标', type: 'select', options: ['droplet', 'heart-pulse', 'layers', 'heart'], defaultValue: 'heart' },
@@ -190,7 +190,7 @@ export const Releases: CollectionConfig = {
         data.review = null;
         data.sourceCheckBy = req.user?.id || null;
         data.sourceCheckedAt = new Date().toISOString();
-        sourceCheck = { checkedAt: data.sourceCheckedAt, statement: '维护者已核对本版本的具体来源、表达与示意边界；未进行独立专业审校。' };
+        sourceCheck = { checkedAt: data.sourceCheckedAt, statement: '维护者已核对本版本的具体来源、表达与示意边界。' };
       } else {
         if (!data.review) fail('专业审校发布必须选择医学审校记录。');
         const review: any = await req.payload.findByID({ collection: 'reviews', id: relationID(data.review), req, depth: 0, overrideAccess: true });
@@ -200,7 +200,7 @@ export const Releases: CollectionConfig = {
         validateForReview(s);
         reviewer = review.reviewerDisplay;
       }
-    } else if (!hasRole(req.user, 'admin')) fail('仅管理员可以创建明确标识为待审校的演示修订。', 403);
+    } else if (!hasRole(req.user, 'admin')) fail('仅管理员可以创建明确标识为待核对的演示修订。', 403);
     data.label = `${s.article.title} · ${data.channel === 'official' ? '正式' : '演示'} · ${new Date().toISOString()}`;
     data.kind = s.article.kind; data.slug = s.article.slug;
     data.contentHash = s.hash;

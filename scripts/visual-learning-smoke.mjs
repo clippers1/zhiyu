@@ -28,6 +28,21 @@ try {
     await page.setViewportSize({ width, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `visual learning overflows at ${width}px`);
   }
+  await page.goto(`${base}/organs/lung`, { waitUntil: 'networkidle' });
+  const lung = page.locator('.visual-learning');
+  await expect(lung).toContainText('跟着一口气到肺泡');
+  await expect(lung.locator('.learning-current')).toContainText('空气从鼻或口进入气管');
+  await lung.getByRole('button', { name: /毛细血管：/ }).click();
+  await expect(lung.locator('.learning-current')).toContainText('氧气从肺泡进入周围毛细血管');
+  await lung.getByRole('button', { name: '下一步' }).click();
+  await expect(lung.locator('.learning-current')).toContainText('空气进入支气管');
+  await lung.locator('.learning-check fieldset').nth(1).getByRole('button', { name: '从血液进入肺泡' }).click();
+  await expect(lung.locator('.learning-check fieldset').nth(1).locator('.learning-answer')).toContainText('理解正确');
+  assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => key.includes('answer') || key.includes('quiz'))), false);
+  for (const width of [320, 390, 768]) {
+    await page.setViewportSize({ width, height: 844 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `lung visual learning overflows at ${width}px`);
+  }
   const reduced = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   await reduced.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });
   await expect(reduced.getByRole('button', { name: '已减少动态' })).toBeDisabled();
@@ -39,10 +54,13 @@ try {
     await noJS.goto(`${base}/organs/heart`);
     await expect(noJS.locator('.learning-transcript')).toContainText('左心室把血液送向全身');
     await expect(noJS.locator('.learning-boundary')).toContainText('不按真实大小');
+    await noJS.goto(`${base}/organs/lung`);
+    await expect(noJS.locator('.learning-transcript')).toContainText('二氧化碳随呼气排出');
+    await expect(noJS.locator('.learning-boundary')).toContainText('不按真实数量');
     await noJS.close();
   }
   assert.deepEqual(errors, []);
-  console.log(`PASS heart flow steps, structure selection, controls, local-only quiz and responsive/reduced-motion${ssr ? ' plus no-JS transcript' : ''}`);
+  console.log(`PASS heart and lung learning steps, structure selection, controls, local-only quiz and responsive/reduced-motion${ssr ? ' plus no-JS transcripts' : ''}`);
 } finally {
   await browser.close();
 }

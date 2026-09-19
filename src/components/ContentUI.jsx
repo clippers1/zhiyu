@@ -160,7 +160,7 @@ export function SourceReferences({ content, prefix = "source" }) {
         </p>
       )}
       {trust.kind === "source-curated" && (
-        <p className="source-explanation">来源整理：本版本已核对具体来源、中文表达和示意边界，未进行独立专业审校 · {content.sourceCheck.checkedAt.slice(0, 10)}</p>
+        <p className="source-explanation">来源整理：本版本已核对具体来源、中文表达和示意边界 · {content.sourceCheck.checkedAt.slice(0, 10)}</p>
       )}
       <ol className="source-list">
         {content.references.map((source, index) => (
