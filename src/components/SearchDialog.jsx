@@ -28,6 +28,7 @@ export default function SearchDialog({ onOpen, onOrgan }) {
           aria-label="搜索指标或器官"
         />
       </div>
+      <p className="search-safety">按知识主题查找，不用于判断症状或诊断。请勿输入姓名、联系方式或完整体检报告。</p>
       <LoadState {...state} />
       {state.data && (
         <>
@@ -60,6 +61,8 @@ export default function SearchDialog({ onOpen, onOrgan }) {
               <div className="search-empty">
                 <Search size={26} />
                 <p>暂时没有这个专题。试试血糖、血压、血脂或器官名称。</p>
+                <p>没有搜索结果不代表没有健康风险，本工具不能判断是否需要就医。</p>
+                <div className="search-suggestions">{["血糖", "血压", "血脂"].map(word => <button key={word} onClick={() => setQuery(word)}>查找{word}</button>)}</div>
               </div>
             )}
           </div>

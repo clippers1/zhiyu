@@ -19,6 +19,9 @@ import { FeedbackTracker } from "./components/Feedback";
 import { ReaderProvider, useReader } from "./reader-context";
 import { RouteLink } from "./components/RouteLink";
 import { useBookmarks, useRoute } from "./hooks";
+import { useReading } from "./useReading";
+import { RecentReading } from "./components/ReadingTools";
+import "./reading.css";
 
 const nav = [
   { id: "map", title: "健康地图", short: "发现", icon: Map },
@@ -31,6 +34,7 @@ function ReaderApp() {
   const feedbackBase = runtime.feedbackBase;
   const { route, navigate, back } = useRoute(initialRoute, runtime.serverRendered);
   const { saved, toggleSave, storageError } = useBookmarks();
+  const reading = useReading();
   const [searchOpen, setSearchOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [tour, setTour] = useState(null);
@@ -44,7 +48,7 @@ function ReaderApp() {
   const onOrgan = (id) => navigate("organs", id);
   const activePage = route.page === "article" ? "indicators" : route.page;
   return (
-    <div className={route.page === "article" ? "app article-view" : "app"}>
+    <div className={`app${route.page === "article" ? " article-view" : ""}${reading.large ? " reading-large" : ""}`}>
       <header className="header">
         <div className="header-inner">
           <RouteLink
@@ -118,9 +122,10 @@ function ReaderApp() {
           <Library key="library" onOpen={onOpen} />
         )}
         {route.page === "organs" && (
-          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} />
+          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} reading={reading} />
         )}
         {route.page === "saved" && (
+          <>
           <Library
             key="saved"
             savedOnly
@@ -128,6 +133,8 @@ function ReaderApp() {
             onOpen={onOpen}
             onBrowse={() => navigate("indicators")}
           />
+          <RecentReading reading={reading} navigate={navigate} />
+          </>
         )}
         {route.page === "article" && (
           <Article
@@ -138,6 +145,7 @@ function ReaderApp() {
             saved={saved}
             toggleSave={toggleSave}
             storageError={storageError}
+            reading={reading}
           />
         )}
         {feedbackBase && <div className="feedback-entry"><button className="feedback-footer" onClick={() => setFeedbackOpen(true)}>查询纠错进度</button></div>}

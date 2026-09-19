@@ -11,6 +11,7 @@ import {
 import { useContent } from "../hooks";
 import { Citation, LoadState, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
+import { ReadingTools } from "./ReadingTools";
 
 export default function Article({
   id,
@@ -19,6 +20,7 @@ export default function Article({
   saved,
   toggleSave,
   storageError,
+  reading,
 }) {
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
@@ -26,7 +28,7 @@ export default function Article({
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
   async function share() {
-    const url = window.location.href;
+    const url = `${window.location.origin}${window.location.pathname}`;
     try {
       if (navigator.share) {
         await navigator.share({
@@ -68,20 +70,25 @@ export default function Article({
             {detail.reviewStatus !== "reviewed" && (
               <p className="review-notice">Beta 科普内容 · 待专业审校</p>
             )}
-            <button
+            <a
               className="source-jump"
-              onClick={() =>
-                document
-                  .getElementById("article-source-panel")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              href="#article-source-panel"
             >
               {detail.references.length} 份参考资料 · 整理于 {detail.updatedAt}
               <ArrowRight size={13} />
-            </button>
+            </a>
           </div>
+          <ReadingTools reading={reading} kind="indicator" id={id} />
+          <nav className="reading-toc" aria-label="文章目录">
+            <span>按需阅读</span>
+            <a href="#article-overview">先了解概念</a>
+            <a href="#article-metrics">认识指标</a>
+            <a href="#article-process">理解过程</a>
+            <a href="#article-reminder">看报告提示</a>
+            <a href="#article-source-panel">核对来源</a>
+          </nav>
           <div className="detail-body">
-            <p className="detail-intro">
+            <p className="detail-intro" id="article-overview">
               {detail.desc}
               <Citation
                 ids={detail.descriptionSourceIds}
@@ -89,7 +96,7 @@ export default function Article({
                 prefix="article-source"
               />
             </p>
-            <h2>一组指标，各有分工</h2>
+            <h2 id="article-metrics">一组指标，各有分工</h2>
             <div className="metric-list">
               {detail.metrics.map((metric, i) => (
                 <div key={metric.name}>
@@ -108,7 +115,7 @@ export default function Article({
                 </div>
               ))}
             </div>
-            <h2>把身体里的过程串起来</h2>
+            <h2 id="article-process">把身体里的过程串起来</h2>
             <div className="detail-chain">
               {detail.chain.map((step, i) => (
                 <React.Fragment key={step}>
@@ -120,7 +127,7 @@ export default function Article({
                 </React.Fragment>
               ))}
             </div>
-            <div className="detail-tip">
+            <div className="detail-tip" id="article-reminder">
               <CircleHelp size={19} />
               <div>
                 <b>看报告时，记住这一点</b>
@@ -171,7 +178,7 @@ export default function Article({
         <input
           className="share-url"
           readOnly
-          value={window.location.href}
+          value={`${window.location.origin}${window.location.pathname}`}
           aria-label="文章分享链接"
           onFocus={(event) => event.target.select()}
         />

@@ -2,7 +2,7 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.4`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
+当前版本：`0.0.1-beta.5`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
@@ -15,6 +15,7 @@
 - **内容纠错**：启用后台后，可对当前版本提交问题，凭专属查询码查看编辑回复或删除反馈；无需注册，不收集报告和联系方式。
 - **维护待办**：后台显示待处理纠错、到期与未安排复核的来源，编辑可追踪关联草稿。
 - **公开页面**：完整部署时直接返回正文 HTML、独立标题与分享摘要；未知或撤回内容返回 404，待审校演示不参与搜索收录。
+- **按需阅读**：文章目录直达、大字号记忆，以及可手动开启、清空和关闭的本地阅读记录；默认不记录健康兴趣。
 
 当前包含 3 个指标专题和 5 个器官专题。收藏保存在浏览器本地，不支持跨设备同步。后台采用 Payload CMS + PostgreSQL，支持来源管理、知识编辑、医学审校、版本发布、回滚和撤回；未提供读者账号、App 或小程序客户端。
 
@@ -73,6 +74,7 @@ docs/               架构说明与拓展计划
 npm run test:content
 npm run test:routes
 npm run test:feedback
+npm run test:reading
 ```
 
 测试覆盖来源引用、关联内容、筛选分页、远程接口参数及失败重试，其中一万条合成摘要用于验证分页逻辑，不代表实际内容数量或线上性能保证。
@@ -82,6 +84,7 @@ npm run test:feedback
 ```sh
 npx playwright install --with-deps chromium
 npm run test:ui
+node scripts/reading-smoke.mjs
 ```
 
 覆盖搜索、收藏、来源定位、文章链接与刷新、分页、错误重试及 320–768px 布局。截图保存到被 Git 忽略的 `artifacts/` 目录。
@@ -109,6 +112,7 @@ npm run test:ui
 - [内容平台使用与维护](docs/content-platform.md)
 - [纠错与来源复核](docs/feedback-and-maintenance.md)
 - [公开页面渲染与部署](docs/public-rendering.md)
+- [阅读体验与本地记录](docs/reading-experience.md)
 - [项目拓展计划](docs/roadmap.md)
 - [ToC 产品规划](docs/product-plan.md)
 - [知识来源与内容平台](docs/knowledge-platform.md)

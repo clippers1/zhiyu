@@ -52,6 +52,7 @@ function readRoute() {
 }
 export function useRoute(initialRoute, serverRendered = false) {
   const [route, setRoute] = useState(() => initialRoute || (typeof window === "undefined" ? { page: "map", id: "" } : readRoute()));
+  const routeKey = useRef(`${route.page}:${route.id}`);
   useEffect(() => {
     if (serverRendered) {
       const legacyPath = legacyRoutePath(window.location.hash);
@@ -61,7 +62,12 @@ export function useRoute(initialRoute, serverRendered = false) {
       return () => window.removeEventListener("pageshow", refreshRestoredPage);
     }
     const update = () => {
-      setRoute(readRoute());
+      const next = readRoute();
+      const key = `${next.page}:${next.id}`;
+      // Ordinary section anchors are native document navigation, not new pages.
+      if (routeKey.current === key) return;
+      routeKey.current = key;
+      setRoute(next);
       window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("hashchange", update);

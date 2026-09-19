@@ -4,8 +4,9 @@ import BodyArt from "./BodyArt";
 import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
+import { ReadingTools } from "./ReadingTools";
 
-export default function OrganExplorer({ id, onSelect, onOpen }) {
+export default function OrganExplorer({ id, onSelect, onOpen, reading }) {
   const state = useContent("get", ["organ", id]);
   const catalog = useContent("list", [{ kind: "organ", limit: 24 }]);
   const selected = state.data;
@@ -50,6 +51,7 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
           <LoadState {...state} />
           {selected && (
             <>
+              <ReadingTools reading={reading} kind="organ" id={id} />
               <span className="overline">{selected.en}</span>
               <h2>
                 {selected.name}
