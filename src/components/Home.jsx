@@ -19,6 +19,7 @@ import { useContent } from "../hooks";
 import { IndicatorCard, LoadState, SectionTitle } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import StartHere from "./StartHere";
+import { TopicCards } from "./TopicRoute";
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [
     { kind: "indicator", featured: true, limit: 3 },
@@ -109,6 +110,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             ))}
           </div>
         </section>
+        <TopicCards items={indicators} />
         <div className={`lower-grid${selected ? "" : " single-panel"}`}>
           <section className="connection-card">
             <div className="small-overline">

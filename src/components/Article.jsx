@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,6 +12,7 @@ import { useContent } from "../hooks";
 import { Citation, LoadState, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { ReadingTools } from "./ReadingTools";
+import { TopicReturn } from "./TopicRoute";
 
 export default function Article({
   id,
@@ -27,6 +28,11 @@ export default function Article({
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
+  useEffect(() => {
+    if (detail && window.location.hash === "#article-source-panel") {
+      document.getElementById("article-source-panel")?.scrollIntoView();
+    }
+  }, [detail]);
   async function share() {
     const url = `${window.location.origin}${window.location.pathname}`;
     try {
@@ -79,6 +85,7 @@ export default function Article({
             </a>
           </div>
           <ReadingTools reading={reading} kind="indicator" id={id} />
+          <TopicReturn id={id} title={detail.title} />
           <nav className="reading-toc" aria-label="文章目录">
             <span>按需阅读</span>
             <a href="#article-overview">先了解概念</a>
@@ -155,6 +162,13 @@ export default function Article({
             <p className="article-disclaimer">
               本文用于认识指标，不提供个人诊断或治疗方案。请结合体检报告及医生建议理解结果。
             </p>
+            <section className="topic-followup" aria-label="接下来读什么">
+              <h2>接下来读什么？</h2>
+              <p>可继续了解本文关联的器官，也可回到路线选择阅读顺序。关联不用于判断个人病因。</p>
+              <LoadState {...relatedState} />
+              {(relatedState.data?.items || []).map(organ => <RouteLink key={organ.id} page="organs" id={organ.id} onNavigate={() => onOrgan(organ.id)} className="text-link">继续了解{organ.title} <ArrowRight size={15} /></RouteLink>)}
+              <TopicReturn id={id} title={detail.title} />
+            </section>
           </div>
         </article>
       )}

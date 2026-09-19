@@ -2,7 +2,7 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.7`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
+当前版本：`0.0.1-beta.8`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错、专题阅读路线和公开页面服务端渲染，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
@@ -78,6 +78,7 @@ npm run test:routes
 npm run test:feedback
 npm run test:reading
 npm run test:search
+npm run test:topics
 ```
 
 测试覆盖来源引用、关联内容、筛选分页、远程接口参数及失败重试，其中一万条合成摘要用于验证分页逻辑，不代表实际内容数量或线上性能保证。
@@ -119,6 +120,7 @@ node scripts/search-smoke.mjs
 - [公开页面渲染与部署](docs/public-rendering.md)
 - [阅读体验与本地记录](docs/reading-experience.md)
 - [场景入口与查找路径](docs/discovery-entry.md)
+- [专题阅读路线](docs/topic-reading.md)
 - [检索规则与安全边界](docs/search-experience.md)
 - [项目拓展计划](docs/roadmap.md)
 - [ToC 产品规划](docs/product-plan.md)

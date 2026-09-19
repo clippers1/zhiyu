@@ -23,6 +23,8 @@ import { useReading } from "./useReading";
 import { RecentReading } from "./components/ReadingTools";
 import "./reading.css";
 import "./discovery.css";
+import "./topics.css";
+import TopicRoute from "./components/TopicRoute";
 
 const nav = [
   { id: "map", title: "健康地图", short: "发现", icon: Map },
@@ -43,11 +45,11 @@ function ReaderApp() {
     setSearchOpen(false);
     setFeedbackOpen(false);
     setTour(null);
-    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
+    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
   }, [route.page, route.id, runtime.serverRendered]);
   const onOpen = (id) => navigate("article", id);
   const onOrgan = (id) => navigate("organs", id);
-  const activePage = route.page === "article" ? "indicators" : route.page;
+  const activePage = ["article", "topics"].includes(route.page) ? "indicators" : route.page;
   return (
     <div className={`app${route.page === "article" ? " article-view" : ""}${reading.large ? " reading-large" : ""}`}>
       <header className="header">
@@ -102,6 +104,7 @@ function ReaderApp() {
         </div>
       </header>
       <main id="main-content">
+        {route.page === "topics" && <TopicRoute key={route.id} id={route.id} />}
         {route.page === "not-found" && (
           <section className="empty-state">
             <h1>这个页面不存在</h1>

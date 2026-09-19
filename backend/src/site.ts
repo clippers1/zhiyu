@@ -34,7 +34,7 @@ export async function buildPage(pathname: string) {
     return value;
   }
   let detail: any = null;
-  if (route.page === 'article') {
+  if (route.page === 'article' || route.page === 'topics') {
     detail = await load('get', ['indicator', route.id]);
     if (!detail) return null;
     await load('list', [{ kind: 'organ', ids: (detail.relatedOrgans || []).map((item: any) => item.id), limit: 24 }]);
@@ -63,7 +63,7 @@ export const loadPage = cache(buildPage);
 export function pageMetadata(page: Awaited<ReturnType<typeof buildPage>>): Metadata {
   if (!page) return { title: '内容不存在或已撤回 · 知愈', robots: { index: false, follow: false } };
   const titles: Record<string, string> = { map: '知愈 · 让健康变得好懂', indicators: '指标百科 · 知愈', saved: '我的收藏 · 知愈' };
-  const title = page.detail ? `${page.detail.title || page.detail.name}：${page.detail.subtitle || page.detail.headline} · 知愈` : titles[page.route.page];
+  const title = page.route.page === 'topics' ? `认识${page.detail.title}的阅读路线 · 知愈` : page.detail ? `${page.detail.title || page.detail.name}：${page.detail.subtitle || page.detail.headline} · 知愈` : titles[page.route.page];
   const description = `${page.channel === 'demo' ? 'Beta 科普内容，待专业审校。' : ''}${page.detail?.subtitle || page.detail?.headline || '用有来源的图文和互动认识体检指标、器官与身体之间的联系。'}内容用于健康科普，不替代医生诊断。`;
   const index = page.channel === 'official' && page.route.page !== 'saved';
   return {
@@ -86,7 +86,10 @@ export async function sitemapXML() {
       select: { kind: true, slug: true, updatedAt: true }, sort: 'id',
     });
     entries.push({ url: `${siteOrigin()}/` }, { url: `${siteOrigin()}/indicators` });
-    for (const doc of publications.docs) entries.push({ url: `${siteOrigin()}${doc.kind === 'organ' ? '/organs/' : '/article/'}${doc.slug}`, modified: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined });
+    for (const doc of publications.docs) {
+      entries.push({ url: `${siteOrigin()}${doc.kind === 'organ' ? '/organs/' : '/article/'}${doc.slug}`, modified: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined });
+      if (doc.kind === 'indicator') entries.push({ url: `${siteOrigin()}/topics/${doc.slug}`, modified: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined });
+    }
   }
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries.map(entry => `<url><loc>${escapeXML(entry.url)}</loc>${entry.modified ? `<lastmod>${escapeXML(entry.modified)}</lastmod>` : ''}</url>`).join('')}</urlset>`;
 }

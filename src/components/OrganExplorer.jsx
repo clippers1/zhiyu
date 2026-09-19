@@ -5,6 +5,7 @@ import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { ReadingTools } from "./ReadingTools";
+import { TopicReturn } from "./TopicRoute";
 
 export default function OrganExplorer({ id, onSelect, onOpen, reading }) {
   const state = useContent("get", ["organ", id]);
@@ -92,6 +93,11 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading }) {
       {selected && (
         <SourceReferences content={selected} prefix="organ-source" />
       )}
+      {selected && relatedItems.length > 0 && <section className="topic-followup" aria-label="相关阅读路线">
+        <h2>把相关知识串起来</h2>
+        <p>选择一个指标路线，回看概念或核对对应来源。</p>
+        {relatedItems.map(item => <TopicReturn key={item.id} id={item.id} title={item.title} />)}
+      </section>}
     </>
   );
 }

@@ -31,6 +31,17 @@ try {
     assert.equal(initial?.detail.reviewStatus, 'pending');
     assert.ok(initial?.preloaded['get:["indicator","glucose"]']);
     assert.equal((pageMetadata(initial).robots as any).index, false);
+    const topic = await buildPage('/topics/glucose');
+    assert.equal(topic?.detail.releaseID, previousRelease);
+    assert.match(String(pageMetadata(topic).title), /血糖的阅读路线/);
+    assert.equal((pageMetadata(topic).robots as any).index, false);
+    assert.equal(await buildPage('/topics/not-real'), null);
+    if (base) {
+      const { response, html } = await request('/topics/glucose');
+      assert.equal(response.status, 200);
+      assert.match(html, /专题阅读步骤/);
+      assert.match(html, /href="\/article\/glucose#article-source-panel"/);
+    }
     assert.equal((await buildPage('/saved'))?.detail, null);
     assert.deepEqual((await buildPage('/saved'))?.preloaded, {});
     assert.equal(await buildPage('/article/not-real'), null);
@@ -68,7 +79,7 @@ try {
     await payload.update({ collection: 'publications', id: publication.id, req: await req(), data: { withdrawn: true, reason: 'Isolated SSR withdrawal test' } });
     assert.equal(await buildPage('/article/glucose'), null);
     if (base) {
-      for (const path of ['/article/glucose', '/article/not-real', '/unknown-route']) {
+      for (const path of ['/article/glucose', '/article/not-real', '/topics/glucose', '/topics/not-real', '/unknown-route']) {
         const { response, html } = await request(path);
         assert.equal(response.status, 404, `${path} must not be a soft 404`);
         assert.ok(!html.includes('SSR_SYNTHETIC_BODY'));
@@ -76,8 +87,29 @@ try {
       }
       assert.equal((await request('/api/demo/content/indicator/glucose')).response.status, 404);
       assert.ok(!(await request('/')).html.includes('href="/article/glucose"'));
+      assert.ok(!(await request('/')).html.includes('href="/topics/glucose"'));
     }
     passed('rollback has no stale metadata; withdrawal removes HTML/API/list exposure and returns real 404');
+
+    // Restore the indicator while testing removal of its related organ.
+    await payload.update({ collection: 'publications', id: publication.id, req: await req(), data: { withdrawn: false, reason: 'Restore indicator for isolated topic test' } });
+    const relatedPublication: any = (await payload.find({ collection: 'publications', where: { key: { equals: 'demo:organ:pancreas' } }, depth: 0, limit: 1 })).docs[0];
+    assert.ok(relatedPublication);
+    try {
+      await payload.update({ collection: 'publications', id: relatedPublication.id, req: await req(), data: { withdrawn: true, reason: 'Isolated topic relationship withdrawal test' } });
+      const currentTopic = await buildPage('/topics/glucose');
+      const relatedList: any = Object.entries(currentTopic!.preloaded).find(([key]) => key.startsWith('list:'))?.[1];
+      assert.ok(!relatedList.items.some((item: any) => item.id === 'pancreas'));
+      if (base) {
+        const { response, html } = await request('/topics/glucose');
+        assert.equal(response.status, 200);
+        assert.ok(!html.includes('href="/organs/pancreas"'));
+        assert.match(html, /href="\/article\/glucose#article-source-panel"/);
+      }
+      passed('topic routes omit withdrawn organs and retain source navigation');
+    } finally {
+      await payload.update({ collection: 'publications', id: relatedPublication.id, req: await req(), data: { withdrawn: relatedPublication.withdrawn, reason: 'Restore isolated topic fixture' } });
+    }
 
     const organPublication: any = (await payload.find({ collection: 'publications', where: { key: { equals: 'demo:organ:heart' } }, depth: 0, limit: 1 })).docs[0];
     assert.ok(organPublication, 'Seed the heart demo before entry tests');
@@ -99,6 +131,7 @@ try {
 
     process.env.SITE_CONTENT_CHANNEL = 'official';
     assert.equal(await buildPage('/article/glucose'), null);
+    assert.equal(await buildPage('/topics/glucose'), null);
     assert.equal((pageMetadata(await buildPage('/saved')).robots as any).index, false);
     const sitemap = await sitemapXML();
     assert.ok(!sitemap.includes('/article/glucose'));

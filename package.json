@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-health-map",
-  "version": "0.0.1-beta.7",
+  "version": "0.0.1-beta.8",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "test:feedback": "node --test scripts/feedback.test.mjs",
     "test:reading": "node --test scripts/reading.test.mjs",
     "test:search": "node --test scripts/search.test.mjs",
+    "test:topics": "node --test scripts/topics.test.mjs",
     "test:ui": "node scripts/smoke.mjs"
   },
   "dependencies": {

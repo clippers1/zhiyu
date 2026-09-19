@@ -1,4 +1,4 @@
-const pages = new Set(["map", "indicators", "organs", "saved", "article"]);
+const pages = new Set(["map", "indicators", "organs", "saved", "article", "topics"]);
 const validId = /^[a-z0-9-]+$/;
 
 export function parseRoute(pathname) {
@@ -7,14 +7,14 @@ export function parseRoute(pathname) {
   const match = /^\/([a-z]+)(?:\/([a-z0-9-]+))?$/.exec(path);
   if (!match || !pages.has(match[1])) return { page: "not-found", id: "" };
   const [, page, id = ""] = match;
-  if ((page === "article" && !id) || (id && !["article", "organs"].includes(page))) {
+  if ((["article", "topics"].includes(page) && !id) || (id && !["article", "organs", "topics"].includes(page))) {
     return { page: "not-found", id: "" };
   }
   return { page, id: id || (page === "organs" ? "heart" : "") };
 }
 
 export function routePath(page, id = "") {
-  if (!pages.has(page) || (id && (!validId.test(id) || !["article", "organs"].includes(page))) || (page === "article" && !id)) {
+  if (!pages.has(page) || (id && (!validId.test(id) || !["article", "organs", "topics"].includes(page))) || (["article", "topics"].includes(page) && !id)) {
     throw new Error("Invalid route");
   }
   return page === "map" ? "/" : `/${page}${id ? `/${id}` : ""}`;
