@@ -1,22 +1,30 @@
-import { useEffect, useState } from "react";
-import { contentRepository } from "./services/content";
+import { useEffect, useRef, useState } from "react";
+import { contentKey, useReader } from "./reader-context";
 import { legacyRoutePath, parseRoute, routePath } from "./services/routes";
 
 export function useContent(method, args) {
+  const { preloaded, repository } = useReader();
   const key = JSON.stringify(args);
+  const initial = preloaded[contentKey(method, args)];
+  const consumedInitial = useRef(false);
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState({
-    key: "",
-    data: null,
-    loading: true,
+    key,
+    data: initial || null,
+    loading: !initial,
     error: null,
   });
   useEffect(() => {
+    if (!consumedInitial.current && initial && attempt === 0) {
+      consumedInitial.current = true;
+      return;
+    }
+    consumedInitial.current = true;
     let active = true;
     const controller = new AbortController();
     setState({ key, data: null, loading: true, error: null });
     const values = JSON.parse(key);
-    contentRepository[method](...values, { signal: controller.signal })
+    repository[method](...values, { signal: controller.signal })
       .then((data) => {
         if (active) setState({ key, data, loading: false, error: null });
       })
@@ -28,7 +36,7 @@ export function useContent(method, args) {
       active = false;
       controller.abort();
     };
-  }, [method, key, attempt]);
+  }, [method, key, attempt, repository]);
   return {
     ...(state.key === key ? state : { data: null, loading: true, error: null }),
     retry: () => setAttempt((a) => a + 1),
@@ -42,9 +50,16 @@ function readRoute() {
   }
   return parseRoute(window.location.pathname);
 }
-export function useRoute() {
-  const [route, setRoute] = useState(readRoute);
+export function useRoute(initialRoute, serverRendered = false) {
+  const [route, setRoute] = useState(() => initialRoute || (typeof window === "undefined" ? { page: "map", id: "" } : readRoute()));
   useEffect(() => {
+    if (serverRendered) {
+      const legacyPath = legacyRoutePath(window.location.hash);
+      if (legacyPath) window.location.replace(legacyPath + window.location.search);
+      const refreshRestoredPage = event => { if (event.persisted) window.location.reload(); };
+      window.addEventListener("pageshow", refreshRestoredPage);
+      return () => window.removeEventListener("pageshow", refreshRestoredPage);
+    }
     const update = () => {
       setRoute(readRoute());
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -55,10 +70,11 @@ export function useRoute() {
       window.removeEventListener("hashchange", update);
       window.removeEventListener("popstate", update);
     };
-  }, []);
+  }, [serverRendered]);
   function navigate(page, id = "") {
     const path = routePath(page, id);
     if (window.location.pathname === path) return;
+    if (serverRendered) { window.location.assign(path); return; }
     window.history.pushState({ zhiyu: true }, "", path);
     window.dispatchEvent(new PopStateEvent("popstate"));
   }
@@ -66,7 +82,7 @@ export function useRoute() {
     route,
     navigate,
     back: () =>
-      window.history.state?.zhiyu
+      (serverRendered ? document.referrer.startsWith(window.location.origin + "/") && window.history.length > 1 : window.history.state?.zhiyu)
         ? window.history.back()
         : navigate("indicators"),
   };
@@ -83,16 +99,19 @@ export function useBookmarks() {
       return [];
     }
   };
-  const [saved, setSaved] = useState(read);
+  const [saved, setSaved] = useState([]);
+  const [ready, setReady] = useState(false);
   const [storageError, setStorageError] = useState(false);
+  useEffect(() => { setSaved(read()); setReady(true); }, []);
   useEffect(() => {
+    if (!ready) return;
     try {
       localStorage.setItem("zhiyu-saved", JSON.stringify(saved));
       setStorageError(false);
     } catch {
       setStorageError(true);
     }
-  }, [saved]);
+  }, [saved, ready]);
   useEffect(() => {
     const update = (event) => {
       if (event.key === "zhiyu-saved") setSaved(read());

@@ -17,6 +17,7 @@ import {
 import BodyArt from "./BodyArt";
 import { useContent } from "../hooks";
 import { IndicatorCard, LoadState, SectionTitle } from "./ContentUI";
+import { RouteLink } from "./RouteLink";
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [
     { kind: "indicator", featured: true, limit: 3 },
@@ -52,12 +53,12 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               从一张体检单出发，看见指标、器官与健康之间的联系。
             </p>
             <div className="hero-actions">
-              <button
+              <RouteLink page="indicators"
                 className="primary-button"
-                onClick={() => go("indicators")}
+                onNavigate={() => go("indicators")}
               >
                 开启健康探索 <ArrowRight size={17} />
-              </button>
+              </RouteLink>
               <button className="play-button" onClick={() => setTour(0)}>
                 <span>
                   <Play size={12} fill="currentColor" />
@@ -153,9 +154,9 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
                 <small>查看依据与审校状态</small>
               </div>
             </div>
-            <button className="text-link" disabled={!featured} onClick={() => onOpen(featured.id)}>
+            {featured && <RouteLink page="article" id={featured.id} className="text-link" onNavigate={() => onOpen(featured.id)}>
               查看过程与参考资料 <ArrowRight size={15} />
-            </button>
+            </RouteLink>}
           </section>
           <section className="daily-card">
             <div className="daily-top">
@@ -176,9 +177,9 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <p>
               {selected?.subtitle || "从一个关心的问题开始了解。"}
             </p>
-            <button className="text-link" disabled={!selected} onClick={() => onOpen(selected.id)}>
+            {selected && <RouteLink page="article" id={selected.id} className="text-link" onNavigate={() => onOpen(selected.id)}>
               了解知识与来源 <ArrowRight size={15} />
-            </button>
+            </RouteLink>}
           </section>
         </div>
         <section className="organ-strip">
@@ -189,9 +190,9 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <h3>认识身体里的「默契搭档」</h3>
             <p>心脏、肝脏、肺、肾脏……每个器官都有自己的重要任务。</p>
           </div>
-          <button onClick={() => go("organs")}>
+          <RouteLink page="organs" onNavigate={() => go("organs")}>
             探索人体器官 <ArrowUpRight size={17} />
-          </button>
+          </RouteLink>
         </section>
       </>
       <LoadState {...state} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { FeedbackPanel } from "./Feedback";
+import { RouteLink } from "./RouteLink";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -15,9 +16,9 @@ const icons = { droplet: Droplet, "heart-pulse": HeartPulse, layers: Layers3 };
 export function IndicatorCard({ item, onOpen }) {
   const Icon = icons[item.icon] || BookOpen;
   return (
-    <button
+    <RouteLink page="article" id={item.id}
       className={`indicator-card ${item.color}`}
-      onClick={() => onOpen(item.id)}
+      onNavigate={() => onOpen(item.id)}
     >
       <div className="card-top">
         <span className="metric-icon">
@@ -41,7 +42,7 @@ export function IndicatorCard({ item, onOpen }) {
         </span>
         <ArrowUpRight size={17} />
       </div>
-    </button>
+    </RouteLink>
   );
 }
 export function LoadState({ loading, error, retry }) {
@@ -73,7 +74,7 @@ export function PageIntro({ label, title, description }) {
     </div>
   );
 }
-export function SectionTitle({ kicker, title, desc, action, onClick }) {
+export function SectionTitle({ kicker, title, desc, action, onClick, page = "indicators" }) {
   return (
     <div className="section-heading">
       <div>
@@ -82,10 +83,10 @@ export function SectionTitle({ kicker, title, desc, action, onClick }) {
         <p>{desc}</p>
       </div>
       {action && (
-        <button className="text-link" onClick={onClick}>
+        <RouteLink page={page} className="text-link" onNavigate={onClick}>
           {action}
           <ArrowUpRight size={16} />
-        </button>
+        </RouteLink>
       )}
     </div>
   );
@@ -116,13 +117,13 @@ export function Citation({ ids = [], references, prefix }) {
       {ids.map((id) => {
         const index = references.findIndex((r) => r.id === id);
         return index < 0 ? null : (
-          <button
+          <a href={`#${prefix}-${id}`}
             key={id}
-            onClick={() => jump(id)}
+            onClick={event => { event.preventDefault(); jump(id); }}
             aria-label={`查看参考资料 ${index + 1}`}
           >
             [{index + 1}]
-          </button>
+          </a>
         );
       })}
     </span>

@@ -141,18 +141,18 @@ button:hover .lucide-arrow-right {
   display: flex;
   gap: 28px;
 }
-.header nav > button {
+.header nav > :is(button, a) {
   position: relative;
   white-space: nowrap;
   font-size: 13px;
   color: #7a837c;
   padding: 0 2px;
 }
-.header nav > button.active {
+.header nav > :is(button, a).active {
   font-weight: 600;
   color: #345f49;
 }
-.header nav > button.active:after {
+.header nav > :is(button, a).active:after {
   content: "";
   position: absolute;
   bottom: 19px;
@@ -775,7 +775,7 @@ main {
   color: #929b89;
   margin-top: 6px;
 }
-.organ-strip > button {
+.organ-strip > :is(button, a) {
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -903,14 +903,14 @@ footer > span {
   margin-bottom: 40px;
   flex-wrap: wrap;
 }
-.organ-tabs button {
+.organ-tabs :is(button, a) {
   border-radius: 6px;
   background: #f3f5ef;
   padding: 9px 13px;
   font-size: 12px;
   color: #7c8d71;
 }
-.organ-tabs button.active {
+.organ-tabs :is(button, a).active {
   background: #486c50;
   color: white;
 }
@@ -1224,7 +1224,7 @@ footer > span {
   color: #929f87;
   margin: 20px 0 9px;
 }
-.search-results > button {
+.search-results > :is(button, a) {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -1234,10 +1234,10 @@ footer > span {
   padding: 15px 6px;
   color: #779069;
 }
-.search-results > button:hover {
+.search-results > :is(button, a):hover {
   background: #f3f6ed;
 }
-.search-results > button > span {
+.search-results > :is(button, a) > span {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1438,10 +1438,10 @@ footer > span {
   .header nav {
     gap: 19px;
   }
-  .header nav > button {
+  .header nav > :is(button, a) {
     font-size: 12px;
   }
-  .header nav > button.active:after {
+  .header nav > :is(button, a).active:after {
     bottom: 12px;
   }
   .search-trigger {
@@ -1603,7 +1603,7 @@ footer > span {
   .organ-tabs {
     gap: 5px;
   }
-  .organ-tabs button {
+  .organ-tabs :is(button, a) {
     padding: 8px 10px;
   }
   .organ-explorer {
@@ -1656,7 +1656,7 @@ footer > span {
     background: #fffefa;
     box-shadow: 0 5px 20px #34503b10;
   }
-  .header nav > button.active:after {
+  .header nav > :is(button, a).active:after {
     bottom: 9px;
   }
   .menu-toggle {
@@ -1939,7 +1939,7 @@ footer > span {
     font-size: 9px;
     line-height: 1.8;
   }
-  .organ-strip > button {
+  .organ-strip > :is(button, a) {
     font-size: 10px;
     margin: 3px 0 0 48px;
     gap: 10px;
@@ -2020,7 +2020,7 @@ footer > span {
     margin-bottom: 27px;
     gap: 7px;
   }
-  .organ-tabs button {
+  .organ-tabs :is(button, a) {
     font-size: 11px;
     padding: 8px 11px;
   }
@@ -2134,7 +2134,7 @@ footer > span {
   .search-input-wrap input {
     font-size: 11px;
   }
-  .search-results > button > span {
+  .search-results > :is(button, a) > span {
     gap: 8px;
   }
   .search-results small {
@@ -2181,7 +2181,7 @@ footer > span {
   .organ-strip > div:nth-child(2) {
     flex: 1 1 calc(100% - 60px);
   }
-  .organ-strip > button {
+  .organ-strip > :is(button, a) {
     flex-basis: calc(100% - 48px);
   }
 }

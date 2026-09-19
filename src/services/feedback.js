@@ -1,5 +1,3 @@
-export const feedbackBase = import.meta.env?.VITE_FEEDBACK_API_BASE_URL?.replace(/\/$/, "") || "";
-
 const messages = {
   rate_limited: "操作太频繁，请稍后再试。",
   content_changed: "这篇内容已更新，请刷新页面、确认新版后再提交。",
@@ -15,12 +13,12 @@ export function newReceipt() {
   return Array.from(crypto.getRandomValues(new Uint8Array(32)), value => value.toString(16).padStart(2, "0")).join("");
 }
 
-export async function sendFeedback(action, body, { base = feedbackBase, fetcher = fetch } = {}) {
+export async function sendFeedback(action, body, { base = "", fetcher = fetch } = {}) {
   if (!base) throw new Error("当前为离线演示，未启用纠错服务。");
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
   try {
-    const response = await fetcher(`${base}/${action}`, {
+    const response = await fetcher(`${base.replace(/\/$/, "")}/${action}`, {
       method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(body), signal: controller.signal, credentials: "omit", cache: "no-store",
     });

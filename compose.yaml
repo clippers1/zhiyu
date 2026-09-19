@@ -15,7 +15,9 @@ services:
       timeout: 3s
       retries: 15
   cms:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     restart: unless-stopped
     ports:
       - "127.0.0.1:${CMS_PORT:-3108}:3108"
@@ -27,6 +29,7 @@ services:
       PAYLOAD_DB_PUSH: "false"
       ENABLE_DEMO_API: ${ENABLE_DEMO_API:-false}
       FEEDBACK_TRUST_PROXY: ${FEEDBACK_TRUST_PROXY:-false}
+      SITE_CONTENT_CHANNEL: ${SITE_CONTENT_CHANNEL:-official}
     depends_on:
       db:
         condition: service_healthy

@@ -1,6 +1,6 @@
-# 内容平台使用与维护（0.0.1-beta.3）
+# 内容平台使用与维护（0.0.1-beta.4）
 
-本版本实现 PostgreSQL + Payload CMS 的最小内容平台。后台采用 Next.js 承载管理页面，读者网站仍为 Vite + React；这不等于已完成公开文章的 SSR / SSG 迁移。
+本版本实现 PostgreSQL + Payload CMS 的最小内容平台。Next.js 同时承载后台和公开页面，读者界面复用现有 React 组件；Vite 保留为离线演示。公开页面采用无缓存动态 SSR，不是 SSG/ISR，见 [公开页面渲染](public-rendering.md)。
 
 ## 已实现的边界
 
@@ -14,7 +14,7 @@
 - 数据库迁移、备份脚本和隔离的流程测试。
 - 读者纠错队列、查询码回复/删除、来源复核排期与后台首页维护待办，详见 [纠错与来源复核](feedback-and-maintenance.md)。
 
-没有实现自动医学审核、自动抓取医学正文、AI 问答、读者账号、读者健康记录、公开文章预渲染或邮件/站外提醒。来源到期仅在后台待办中提示，实际复核仍需人工完成。医学审校资格与内容质量需要真实专业人员负责。默认没有邮件服务，不支持邮件找回密码；已有管理员可管理成员账户。
+没有实现自动医学审核、自动抓取医学正文、AI 问答、读者账号、读者健康记录或邮件/站外提醒。来源到期仅在后台待办中提示，实际复核仍需人工完成。医学审校资格与内容质量需要真实专业人员负责。默认没有邮件服务，不支持邮件找回密码；已有管理员可管理成员账户。
 
 ## 两个发布集合
 
@@ -25,9 +25,9 @@
 
 演示 API 需要 `ENABLE_DEMO_API=true` 明确开启。当前迁移只创建演示修订，没有生成医学审校记录，也没有把旧文件伪装成已审核内容。正式集合在真实审校完成前可以为空。
 
-网站使用 `VITE_CONTENT_API_BASE_URL` 选择集合，例如 `/api/demo`。为空时保留静态离线演示模式。切换正式集合前，应完成实际医学审校和发布，避免网站显示空目录。
+完整网站使用 `SITE_CONTENT_CHANNEL=demo` 或 `official` 选择集合；独立 Vite 入口仍通过 `VITE_CONTENT_API_BASE_URL` 选择接口，为空时使用静态演示。切换正式集合前，应完成实际医学审校和发布，避免网站显示空目录。
 
-所有公开 API 响应使用 `Cache-Control: no-store`，不依赖后台变更后等待 CDN 过期。用户已经打开的旧页面不会被远程抹除，再次请求时获取当前发布内容；以后引入预渲染需要配套撤回与缓存失效机制。
+所有公开 API 和动态 HTML 使用 `Cache-Control: no-store`，不依赖后台变更后等待 CDN 过期。用户已经打开的旧页面不会被远程抹除，再次请求时获取当前发布内容；以后引入 SSG/ISR 或页面缓存，需要配套撤回与缓存失效机制。
 
 ## 后台编辑流程
 
@@ -91,8 +91,8 @@
 3. 应用迁移：`docker compose --env-file <私有环境文件> run --rm cms npm run payload -- migrate`。
 4. 导入时向一次性 CMS 容器额外提供 `BOOTSTRAP_EMAIL`、`BOOTSTRAP_PASSWORD`、`SEED_CONTENT_DIR` 和可选 `SEED_DEMO=true`；将项目的 `public/content` 只读挂载到 `SEED_CONTENT_DIR`。执行 `npm run seed`。
 5. `docker compose --env-file <私有环境文件> up -d cms`，确认 `/api/health` 返回成功。
-6. 参考 `deploy/nginx-content.locations.example`，把 `/admin`、`/_next/` 和 `/api/` 代理到后台；保留前端静态文件和 History 页面规则。使用 HTTPS 时，`SERVER_URL` 必须是实际站点来源，`COOKIE_SECURE=true`。
-7. 设置前端 `VITE_CONTENT_API_BASE_URL`，构建并发布。首次登录后修改初始密码、设置实际邮箱；随后妥善处理初始密码交付文件。
+6. 参考 `deploy/nginx-ssr.conf.example` 将完整网站代理到 Next.js，不再回退 Vite HTML。使用 HTTPS 时，`SERVER_URL` 必须是实际站点来源，`COOKIE_SECURE=true`。
+7. 设置 `SITE_CONTENT_CHANNEL` 并重启服务，确认 HTML、API 来自同一集合。首次登录后修改初始密码、设置实际邮箱；随后妥善处理初始密码交付文件。仅需独立 Vite 演示时仍可使用原静态部署方式。
 
 上述 `<私有环境文件>` 是占位说明，执行时替换为实际路径。私有环境、初始密码、数据库数据与备份均不能提交到 Git。生产环境固定 `PAYLOAD_DB_PUSH=false`，采用已提交的数据库迁移，不能用开发模式自动改生产表。
 
@@ -112,4 +112,4 @@
 
 ## 下一步
 
-完成真实医学审校与来源许可核对，发布首批正式内容；持续使用来源复核待办与读者纠错队列，接下来补公开页面预渲染。本版的完成标志是可运行、可追溯的内容维护工作流，不是内容已经具备医学背书。
+完成真实医学审校与来源许可核对，发布首批正式内容；持续使用来源复核待办与读者纠错队列，接下来完善场景搜索和分层阅读。本版的完成标志是可运行、可追溯的内容维护与阅读工作流，不是内容已经具备医学背书。

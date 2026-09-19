@@ -1,16 +1,17 @@
 {
   "name": "zhiyu-content-platform",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 3108",
-    "build": "payload generate:importmap && next build --webpack",
+    "dev": "node scripts/sync-reader.mjs && next dev --port 3108",
+    "build": "node scripts/sync-reader.mjs && payload generate:types && payload generate:importmap && next build --webpack",
     "start": "next start --hostname 0.0.0.0 --port 3108",
     "payload": "payload",
     "seed": "tsx scripts/seed.ts",
     "test:workflow": "tsx scripts/workflow.test.ts",
     "test:feedback": "tsx scripts/feedback.test.ts",
+    "test:rendering": "tsx scripts/rendering.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "@payloadcms/richtext-lexical": "3.90.1",
     "@payloadcms/translations": "3.90.1",
     "graphql": "^16.11.0",
+    "lucide-react": "^0.468.0",
     "next": "16.3.3",
     "payload": "3.90.1",
     "react": "^19.2.0",

@@ -2,7 +2,7 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.3`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布与读者纠错流程，现有科普内容仍待专业审校。
+当前版本：`0.0.1-beta.4`。这是以移动端阅读为重点的早期 Beta，已具备内容后台、版本发布、读者纠错和公开页面服务端渲染，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
@@ -14,6 +14,7 @@
 - **移动端阅读**：使用底部导航、独立文章页和入门导览；支持直接打开文章、刷新与返回。
 - **内容纠错**：启用后台后，可对当前版本提交问题，凭专属查询码查看编辑回复或删除反馈；无需注册，不收集报告和联系方式。
 - **维护待办**：后台显示待处理纠错、到期与未安排复核的来源，编辑可追踪关联草稿。
+- **公开页面**：完整部署时直接返回正文 HTML、独立标题与分享摘要；未知或撤回内容返回 404，待审校演示不参与搜索收录。
 
 当前包含 3 个指标专题和 5 个器官专题。收藏保存在浏览器本地，不支持跨设备同步。后台采用 Payload CMS + PostgreSQL，支持来源管理、知识编辑、医学审校、版本发布、回滚和撤回；未提供读者账号、App 或小程序客户端。
 
@@ -45,7 +46,7 @@ npm run preview
 
 ## 技术与目录
 
-读者网站使用 React 19、Vite 6 和 Lucide 图标。内容可通过 API 从 PostgreSQL 中读取；项目内的 JSON 保留为离线演示与初始迁移数据。正文按需加载，API 模式的搜索和分页在服务端完成。后台使用 Payload CMS 3 与 Next.js 16，公开文章尚未迁移为服务端渲染。
+读者界面使用 React 19 与 Lucide 图标；完整站点由 Next.js 16 输出公开 HTML，后台采用 Payload CMS 3 + PostgreSQL。Vite 6 保留为离线演示和独立前端开发入口，两种入口复用同一套组件。项目内 JSON 用于离线演示与初始迁移，线上正文来自发布快照，搜索和分页通过 API 完成。
 
 ```text
 src/
@@ -93,9 +94,9 @@ npm run test:ui
 
 ## 部署
 
-将 `npm run build` 生成的 `dist/` 目录发布到静态托管平台或 Web 服务器即可，无需常驻 Node.js 服务。
+完整站点：从根目录使用 Compose 构建 Next.js + CMS 服务，按 [服务端渲染说明](docs/public-rendering.md) 配置发布集合与反向代理。HTML 不缓存，保证发布、回滚和撤回在下次请求生效；只有正式集合进入 sitemap，演示集合保持 noindex。
 
-当前使用 History 路由，例如 `/article/glucose`，并兼容此前分享的 Hash 链接。服务器需对已定义的页面路径回退到 `index.html`，缺失的资源和内容 JSON 仍返回 404；目前按域名根路径部署。Nginx 可参考 [通用配置示例](deploy/nginx.conf.example)，启用后台时再加入 [内容平台代理示例](deploy/nginx-content.locations.example)。公开内容 API 禁用缓存以保证撤回及时生效，带哈希的 JS/CSS 使用长期缓存。
+离线演示：将 `npm run build` 生成的 `dist/` 发布到静态托管即可，无需 Node.js 常驻服务，但不具备服务端正文和内容级 404。使用 [静态 Nginx 示例](deploy/nginx.conf.example) 的 History 页面回退；完整站点则使用 [SSR 代理示例](deploy/nginx-ssr.conf.example)，不能继续把公开页面回退到 `index.html`。两种方式均保留旧 Hash 链接兼容，目前按域名根路径部署。
 
 ## 参与与后续方向
 
@@ -107,6 +108,7 @@ npm run test:ui
 - [内容与多端架构](docs/architecture.md)
 - [内容平台使用与维护](docs/content-platform.md)
 - [纠错与来源复核](docs/feedback-and-maintenance.md)
+- [公开页面渲染与部署](docs/public-rendering.md)
 - [项目拓展计划](docs/roadmap.md)
 - [ToC 产品规划](docs/product-plan.md)
 - [知识来源与内容平台](docs/knowledge-platform.md)

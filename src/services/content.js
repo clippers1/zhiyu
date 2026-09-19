@@ -119,7 +119,3 @@ export function createContentRepository({
     },
   };
 }
-export const contentRepository = createContentRepository({
-  apiBase: import.meta.env?.VITE_CONTENT_API_BASE_URL || "",
-  assetBase: import.meta.env?.BASE_URL || "/",
-});

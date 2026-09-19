@@ -1,0 +1,14 @@
+node_modules
+dist
+artifacts
+.git
+.env*
+backend/node_modules
+backend/.next
+backend/.env*
+backend/reader
+backend/public
+backend/tsconfig.tsbuildinfo
+backend/src/payload-types.ts
+backend/src/app/(payload)/admin/importMap.js
+backups

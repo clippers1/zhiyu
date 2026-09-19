@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Search } from "lucide-react";
 import { useContent } from "../hooks";
 import { LoadState, Pagination } from "./ContentUI";
+import { RouteLink } from "./RouteLink";
 
 export default function SearchDialog({ onOpen, onOrgan }) {
   const [query, setQuery] = useState("");
@@ -37,9 +38,9 @@ export default function SearchDialog({ onOpen, onOrgan }) {
           </p>
           <div className="search-results">
             {state.data.items.map((result) => (
-              <button
+              <RouteLink page={result.kind === "indicator" ? "article" : "organs"} id={result.id}
                 key={`${result.kind}-${result.id}`}
-                onClick={() =>
+                onNavigate={() =>
                   result.kind === "indicator"
                     ? onOpen(result.id)
                     : onOrgan(result.id)
@@ -53,7 +54,7 @@ export default function SearchDialog({ onOpen, onOrgan }) {
                   <small>{result.subtitle}</small>
                 </span>
                 <ArrowUpRight size={18} />
-              </button>
+              </RouteLink>
             ))}
             {state.data.total === 0 && (
               <div className="search-empty">

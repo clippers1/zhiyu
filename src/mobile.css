@@ -214,7 +214,7 @@
   line-height: 1.8;
   margin: 23px 0;
 }
-.article-reader .detail-related button {
+.article-reader .detail-related :is(button, a) {
   font-size: 12px;
   min-height: 40px;
 }
@@ -225,7 +225,7 @@
   vertical-align: super;
   line-height: 1;
 }
-.citations button {
+.citations :is(button, a) {
   color: #537b42;
   padding: 4px;
   font-size: 10px;
@@ -444,7 +444,7 @@
     backdrop-filter: blur(16px);
     border-top: 1px solid #e2e9da;
   }
-  .mobile-nav > button {
+  .mobile-nav > :is(button, a) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -454,7 +454,7 @@
     min-height: 52px;
     position: relative;
   }
-  .mobile-nav > button > span {
+  .mobile-nav > :is(button, a) > span {
     height: 27px;
     min-width: 42px;
     border-radius: 9px;
@@ -466,13 +466,13 @@
     font-size: 11px;
     font-weight: 400;
   }
-  .mobile-nav button.active {
+  .mobile-nav :is(button, a).active {
     color: #395f43;
   }
-  .mobile-nav button.active > span {
+  .mobile-nav :is(button, a).active > span {
     background: #e8efdf;
   }
-  .mobile-nav button.active b {
+  .mobile-nav :is(button, a).active b {
     font-weight: 550;
   }
   .mobile-nav i {
@@ -703,7 +703,7 @@
     line-height: 1.9;
     color: #7d8b70;
   }
-  .organ-strip > button {
+  .organ-strip > :is(button, a) {
     margin: 4px 0 0 48px;
     min-height: 44px;
     font-size: 12px;
@@ -1057,7 +1057,7 @@
     gap: 0;
     vertical-align: baseline;
   }
-  .citations button {
+  .citations :is(button, a) {
     padding: 8px 4px;
     font-size: 11px;
     min-width: 26px;
@@ -1114,7 +1114,7 @@
   .search-hint {
     font-size: 12px;
   }
-  .search-results > button {
+  .search-results > :is(button, a) {
     min-height: 65px;
     padding: 13px 5px;
   }

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useContent } from "../hooks";
 import { Citation, LoadState, SourceReferences } from "./ContentUI";
+import { RouteLink } from "./RouteLink";
 
 export default function Article({
   id,
@@ -135,13 +136,13 @@ export default function Article({
             </div>
             <div className="detail-related">
               <span>关联器官：{detail.organ}</span>
-              {(relatedState.data?.items || []).map((organ, index) => <button
+              {(relatedState.data?.items || []).map((organ, index) => <RouteLink page="organs" id={organ.id}
                 key={organ.id}
                 className="text-link"
-                onClick={() => onOrgan(organ.id)}
+                onNavigate={() => onOrgan(organ.id)}
               >
                 {index === 0 ? "探索器官" : `了解${organ.title}`} <ArrowUpRight size={14} />
-              </button>)}
+              </RouteLink>)}
             </div>
             <SourceReferences content={detail} prefix="article-source" />
             <p className="article-disclaimer">

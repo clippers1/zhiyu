@@ -51,7 +51,7 @@ try {
     "Home must not load full articles",
   );
   await page.screenshot({ path: "artifacts/desktop.png", fullPage: true });
-  await page.getByRole("button", { name: /01 血糖/ }).click();
+  await page.getByRole("link", { name: /01 血糖/ }).click();
   await expect(
     page.getByRole("heading", { name: "认识血糖", exact: true }),
   ).toBeVisible();
@@ -63,7 +63,7 @@ try {
   await expect(page.getByRole("region", { name: "知识来源" })).toBeAttached();
   assert.equal(await page.locator(".source-list a").count(), 4);
   await page
-    .getByRole("button", { name: "查看参考资料 2", exact: true })
+    .getByRole("link", { name: "查看参考资料 2", exact: true })
     .first()
     .click();
   await expect(page.locator("#article-source-tests")).toBeInViewport();
@@ -79,11 +79,11 @@ try {
     .getByRole("button", { name: "搜索指标或器官", exact: true })
     .click();
   await page.getByRole("textbox").fill("LDL");
-  await page.getByRole("button", { name: /指标 血脂/ }).click();
+  await page.getByRole("link", { name: /指标 血脂/ }).click();
   await expect(
     page.getByRole("heading", { name: "认识血脂", exact: true }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "探索器官", exact: true }).click();
+  await page.getByRole("link", { name: "探索器官", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肝脏");
   await expect(page.locator(".source-panel")).toContainText(
     "Your Digestive System",
@@ -91,7 +91,7 @@ try {
   await page.getByRole("button", { name: "了解肾脏", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肾脏");
   await desktopNav()
-    .getByRole("button", { name: "健康地图", exact: true })
+    .getByRole("link", { name: "健康地图", exact: true })
     .click();
   await page.getByRole("button", { name: "1 分钟认识身体" }).click();
   await page.getByRole("button", { name: "继续了解" }).click();
@@ -99,12 +99,12 @@ try {
   await page.getByRole("button", { name: "开始探索", exact: true }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await desktopNav()
-    .getByRole("button", { name: "健康地图", exact: true })
+    .getByRole("link", { name: "健康地图", exact: true })
     .click();
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(mobileNav()).toBeVisible();
   await page.screenshot({ path: "artifacts/mobile.png", fullPage: false });
-  await mobileNav().getByRole("button", { name: "指标百科" }).click();
+  await mobileNav().getByRole("link", { name: "指标百科" }).click();
   await page.getByRole("button", { name: "营养与代谢", exact: true }).click();
   await expect(page.locator(".indicator-card")).toHaveCount(2);
   await page.getByRole("textbox", { name: "筛选指标" }).fill("LDL");
@@ -116,7 +116,7 @@ try {
     path: "artifacts/mobile-library.png",
     fullPage: false,
   });
-  await page.getByRole("button", { name: /02 血压/ }).click();
+  await page.getByRole("link", { name: /02 血压/ }).click();
   await expect(
     page.getByRole("heading", { name: "认识血压", exact: true }),
   ).toBeVisible();
@@ -132,7 +132,7 @@ try {
   ).toBeVisible();
   assert.equal(page.url(), articleUrl);
   await page
-    .getByRole("button", { name: "查看参考资料 2", exact: true })
+    .getByRole("link", { name: "查看参考资料 2", exact: true })
     .last()
     .click();
   await expect(page.locator("#article-source-bp")).toBeInViewport();
@@ -150,16 +150,16 @@ try {
   for (const width of [320, 360, 390, 430, 768]) {
     await page.setViewportSize({ width, height: 844 });
     for (const name of ["器官探索", "我的收藏", "健康地图", "指标百科"]) {
-      await mobileNav().getByRole("button", { name, exact: true }).click();
+      await mobileNav().getByRole("link", { name, exact: true }).click();
       await expect(page.locator(".load-state")).toHaveCount(0);
       await noOverflow(`${width}/${name}`);
     }
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await mobileNav().getByRole("button", { name: "器官探索" }).click();
+  await mobileNav().getByRole("link", { name: "器官探索" }).click();
   await page
     .locator(".mobile-organ-tabs")
-    .getByRole("button", { name: "肝脏", exact: true })
+    .getByRole("link", { name: "肝脏", exact: true })
     .click();
   await expect(page.locator(".organ-information h2")).toContainText("肝脏");
   await page.screenshot({
@@ -257,7 +257,7 @@ try {
   await expect(page.getByRole("heading", { name: "认识血糖", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "返回上一页" }).click();
   await expect(page).toHaveURL(`${baseUrl}/indicators`);
-  await page.getByRole("button", { name: /02 血压/ }).click();
+  await page.getByRole("link", { name: /02 血压/ }).click();
   await page.goBack();
   await expect(page).toHaveURL(`${baseUrl}/indicators`);
   await page.goForward();

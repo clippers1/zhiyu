@@ -1,6 +1,7 @@
 import React, { useId, useRef, useState } from "react";
 import { MessageSquare, Check, Copy } from "lucide-react";
-import { feedbackBase, newReceipt, sendFeedback } from "../services/feedback";
+import { newReceipt, sendFeedback } from "../services/feedback";
+import { useReader } from "../reader-context";
 import "./feedback.css";
 
 const statusNames = { new: "已收到", triaging: "处理中", "awaiting-review": "等待专业复核", resolved: "已处理", dismissed: "暂不调整" };
@@ -19,6 +20,7 @@ function Receipt({ value }) {
 }
 
 export function FeedbackPanel({ content }) {
+  const { runtime: { feedbackBase } } = useReader();
   const id = useId();
   const [category, setCategory] = useState("accuracy");
   const [message, setMessage] = useState("");
@@ -40,7 +42,7 @@ export function FeedbackPanel({ content }) {
       const signature = JSON.stringify(body);
       if (attempt.current?.signature !== signature) attempt.current = { signature, receipt: newReceipt() };
       setReceipt(attempt.current.receipt);
-      const result = await sendFeedback("submit", { ...body, receipt: attempt.current.receipt });
+      const result = await sendFeedback("submit", { ...body, receipt: attempt.current.receipt }, { base: feedbackBase });
       if (result.received !== true) throw new Error("未能确认提交结果，请保留查询码查询或重试。");
       setReceived(true); setMessage("");
     } catch (failure) { setError(failure.message); }
@@ -72,6 +74,7 @@ export function FeedbackPanel({ content }) {
 }
 
 export function FeedbackTracker() {
+  const { runtime: { feedbackBase } } = useReader();
   const [receipt, setReceipt] = useState("");
   const [result, setResult] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -82,7 +85,7 @@ export function FeedbackTracker() {
     if (busy) return;
     setBusy(true); setError(""); setDeleted(false);
     try {
-      const data = await sendFeedback(action, { receipt: receipt.trim() });
+      const data = await sendFeedback(action, { receipt: receipt.trim() }, { base: feedbackBase });
       if (action === "delete") { setResult(null); setConfirmDelete(false); setDeleted(true); }
       else setResult(data);
     } catch (failure) { setError(failure.message); }

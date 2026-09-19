@@ -13,3 +13,5 @@ backend/tsconfig.tsbuildinfo
 backend/src/payload-types.ts
 backend/src/app/(payload)/admin/importMap.js
 backups/
+backend/reader/
+backend/public/

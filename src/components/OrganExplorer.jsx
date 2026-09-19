@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import BodyArt from "./BodyArt";
 import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
+import { RouteLink } from "./RouteLink";
 
 export default function OrganExplorer({ id, onSelect, onOpen }) {
   const state = useContent("get", ["organ", id]);
@@ -20,13 +21,13 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
       />
       <div className="organ-tabs mobile-organ-tabs">
         {organs.map(({ id: key, title: name }) => (
-          <button
+          <RouteLink page="organs" id={key}
             key={key}
             className={id === key ? "active" : ""}
-            onClick={() => onSelect(key)}
+            onNavigate={() => onSelect(key)}
           >
             {name}
-          </button>
+          </RouteLink>
         ))}
       </div>
       <section className="organ-explorer">
@@ -37,13 +38,13 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
         <div className="organ-information">
           <div className="organ-tabs desktop-organ-tabs">
             {organs.map(({ id: key, title: name }) => (
-              <button
+              <RouteLink page="organs" id={key}
                 key={key}
                 className={id === key ? "active" : ""}
-                onClick={() => onSelect(key)}
+                onNavigate={() => onSelect(key)}
               >
                 {name}
-              </button>
+              </RouteLink>
             ))}
           </div>
           <LoadState {...state} />
@@ -67,14 +68,14 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
                 <h3>{selected.connection}</h3>
                 <p>相关指标提供观察线索，需要结合检查条件与个人情况解读。</p>
                 {relatedItems.map((related) => (
-                  <button
+                  <RouteLink page="article" id={related.id}
                     key={related.id}
                     className="text-link"
-                    onClick={() => onOpen(related.id)}
+                    onNavigate={() => onOpen(related.id)}
                   >
                     了解{related.title}
                     <ArrowRight size={16} />
-                  </button>
+                  </RouteLink>
                 ))}
                 {selected.related.length === 0 && (
                   <p className="coming-note">

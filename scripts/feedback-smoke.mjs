@@ -60,7 +60,7 @@ try {
   await page.locator('.feedback-panel').screenshot({ path: 'artifacts/feedback-mobile.png', style: '.reading-bar, .reading-actions { visibility: hidden !important; }' });
   await page.getByRole('button', { name: '提交给编辑', exact: true }).click();
   if (!live) {
-    await expect(page.getByRole('alert')).toContainText('暂时不可用');
+    await expect(page.locator('.feedback-panel').getByRole('alert')).toContainText('暂时不可用');
     await page.getByRole('button', { name: '重试提交', exact: true }).click();
   }
   await expect(page.getByRole('heading', { name: '反馈已收到，谢谢你的提醒。' })).toBeVisible();
@@ -115,7 +115,7 @@ try {
   await expect(page.getByRole('dialog').getByRole('status')).toContainText('反馈已删除');
   deleted = true;
   await page.getByRole('button', { name: '查询处理结果', exact: true }).click();
-  await expect(page.getByRole('alert')).toContainText('未找到反馈');
+  await expect(page.getByRole('dialog').getByRole('alert')).toContainText('未找到反馈');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(page.getByRole('button', { name: '查询纠错进度', exact: true })).toBeFocused();
