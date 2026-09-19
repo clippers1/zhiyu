@@ -33,6 +33,7 @@
   ],
   "tip": "测量前安静休息至少 5 分钟，坐姿测量、手臂与心脏同高，使用合适袖带。不同日期的规范测量更有参考价值。",
   "organ": "心脏 · 血管 · 肾脏",
+  "relatedOrgans": [{ "id": "heart", "title": "心脏" }],
   "kind": "indicator",
   "category": "circulation",
   "version": 1,

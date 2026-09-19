@@ -1,8 +1,17 @@
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir, readFile } from "node:fs/promises";
+import { selectPage } from "../src/services/content.js";
 
 const baseUrl = process.env.PLAYWRIGHT_BASE_URL || "http://localhost:5173";
+const contentApi = process.env.CONTENT_API_BASE_URL;
+const apiPath = contentApi ? new URL(contentApi, baseUrl).pathname.replace(/\/$/, "") : "";
+const catalogRoute = contentApi
+  ? (url) => url.pathname === `${apiPath}/content`
+  : "**/content/index.json";
+const glucoseRoute = contentApi
+  ? `**${apiPath}/content/indicator/glucose`
+  : "**/content/indicator/glucose.json";
 
 const browser = await chromium.launch({
   headless: true,
@@ -46,7 +55,7 @@ try {
   await expect(
     page.getByRole("heading", { name: "认识血糖", exact: true }),
   ).toBeVisible();
-  await expect(page).toHaveURL(/#\/article\/glucose$/);
+  await expect(page).toHaveURL(/\/article\/glucose$/);
   assert.equal(
     contentRequests.filter((url) => /\/indicator\//.test(url)).length,
     1,
@@ -58,7 +67,7 @@ try {
     .first()
     .click();
   await expect(page.locator("#article-source-tests")).toBeInViewport();
-  await expect(page).toHaveURL(/#\/article\/glucose$/);
+  await expect(page).toHaveURL(/\/article\/glucose$/);
   await page.getByRole("button", { name: "收藏知识", exact: true }).click();
   await page.reload();
   await expect(
@@ -180,10 +189,15 @@ try {
       number: String(i),
     })),
   };
-  await page.route("**/content/index.json", (route) =>
-    route.fulfill({ json: fixture }),
-  );
-  await page.goto(`${baseUrl}/#/indicators`);
+  await page.route(catalogRoute, (route) => {
+    if (!contentApi) return route.fulfill({ json: fixture });
+    const params = new URL(route.request().url()).searchParams;
+    const options = Object.fromEntries(params);
+    if (params.has("ids")) options.ids = params.get("ids").split(",").filter(Boolean);
+    if (params.has("featured")) options.featured = params.get("featured") === "true";
+    return route.fulfill({ json: selectPage(fixture, options) });
+  });
+  await page.goto(`${baseUrl}/indicators`);
   await page.reload();
   await expect(page.locator(".indicator-card")).toHaveCount(6);
   const firstPage = await page.locator(".metric-title h3").allTextContents();
@@ -200,23 +214,23 @@ try {
   await expect(page.locator(".metric-title h3").first()).toHaveText(
     "分页样例 0",
   );
-  await page.unroute("**/content/index.json");
+  await page.unroute(catalogRoute);
 
   // A failed detail fetch must present a working retry instead of a blank page.
   let failures = 0;
   await page.goto("about:blank");
-  await page.route("**/content/indicator/glucose.json", (route) =>
+  await page.route(glucoseRoute, (route) =>
     ++failures === 1
       ? route.fulfill({ status: 503, json: { error: "temporary" } })
       : route.continue(),
   );
-  await page.goto(`${baseUrl}/#/article/glucose`);
+  await page.goto(`${baseUrl}/article/glucose`);
   await expect(page.getByRole("alert")).toBeVisible();
   await page.getByRole("button", { name: "重新加载", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "认识血糖", exact: true }),
   ).toBeVisible();
-  await page.unroute("**/content/indicator/glucose.json");
+  await page.unroute(glucoseRoute);
   await page.evaluate(() => {
     Object.defineProperty(navigator, "share", {
       configurable: true,
@@ -235,8 +249,21 @@ try {
   await expect(page.getByText("链接已复制", { exact: true })).toBeVisible();
   assert.equal(
     await page.evaluate(() => window.copiedLink),
-    `${baseUrl}/#/article/glucose`,
+    `${baseUrl}/article/glucose`,
   );
+  // Previously shared Hash URLs retain their destination after migration.
+  await page.goto(`${baseUrl}/?from=legacy#/article/glucose`);
+  await expect(page).toHaveURL(`${baseUrl}/article/glucose?from=legacy`);
+  await expect(page.getByRole("heading", { name: "认识血糖", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "返回上一页" }).click();
+  await expect(page).toHaveURL(`${baseUrl}/indicators`);
+  await page.getByRole("button", { name: /02 血压/ }).click();
+  await page.goBack();
+  await expect(page).toHaveURL(`${baseUrl}/indicators`);
+  await page.goForward();
+  await expect(page).toHaveURL(`${baseUrl}/article/pressure`);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "认识血压", exact: true })).toBeVisible();
   assert.deepEqual(errors, []);
   console.log(
     "PASS: citations, lazy content, deep links, back/reload, bookmarks, search, filters, pagination, retry, mobile navigation and 320–768px layouts. No page errors.",

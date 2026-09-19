@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-health-map",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test:content": "node --test scripts/content.test.mjs",
+    "test:routes": "node --test scripts/routes.test.mjs",
     "test:ui": "node scripts/smoke.mjs"
   },
   "dependencies": {

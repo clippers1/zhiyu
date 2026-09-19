@@ -30,6 +30,12 @@ server {
         deny all;
     }
 
+    # Only application routes fall back to HTML; missing data/assets stay 404.
+    location ~ ^/(map|indicators|saved|organs(/[a-z0-9-]+)?|article/[a-z0-9-]+)/?$ {
+        try_files /index.html =404;
+        expires -1;
+    }
+
     location / {
         try_files $uri $uri/ =404;
         expires -1;

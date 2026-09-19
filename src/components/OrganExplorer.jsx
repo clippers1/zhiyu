@@ -4,17 +4,13 @@ import BodyArt from "./BodyArt";
 import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
 
-const organNames = {
-  heart: "心脏",
-  lung: "肺",
-  liver: "肝脏",
-  pancreas: "胰腺",
-  kidney: "肾脏",
-};
-const indicatorNames = { glucose: "血糖", pressure: "血压", lipids: "血脂" };
 export default function OrganExplorer({ id, onSelect, onOpen }) {
   const state = useContent("get", ["organ", id]);
+  const catalog = useContent("list", [{ kind: "organ", limit: 24 }]);
   const selected = state.data;
+  const related = useContent("list", [{ kind: "indicator", ids: selected?.related || [], limit: 24 }]);
+  const organs = catalog.data?.items || [];
+  const relatedItems = related.data?.items || [];
   return (
     <>
       <PageIntro
@@ -23,7 +19,7 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
         description="轻点器官，看看它做什么、与哪些指标有关。"
       />
       <div className="organ-tabs mobile-organ-tabs">
-        {Object.entries(organNames).map(([key, name]) => (
+        {organs.map(({ id: key, title: name }) => (
           <button
             key={key}
             className={id === key ? "active" : ""}
@@ -40,7 +36,7 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
         </div>
         <div className="organ-information">
           <div className="organ-tabs desktop-organ-tabs">
-            {Object.entries(organNames).map(([key, name]) => (
+            {organs.map(({ id: key, title: name }) => (
               <button
                 key={key}
                 className={id === key ? "active" : ""}
@@ -70,13 +66,13 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
                 <span>可以一起了解的指标</span>
                 <h3>{selected.connection}</h3>
                 <p>相关指标提供观察线索，需要结合检查条件与个人情况解读。</p>
-                {selected.related.map((related) => (
+                {relatedItems.map((related) => (
                   <button
-                    key={related}
+                    key={related.id}
                     className="text-link"
-                    onClick={() => onOpen(related)}
+                    onClick={() => onOpen(related.id)}
                   >
-                    了解{indicatorNames[related] || related}
+                    了解{related.title}
                     <ArrowRight size={16} />
                   </button>
                 ))}

@@ -33,6 +33,7 @@
   ],
   "tip": "化验单的参考区间不一定等于个人治疗目标。是否需要干预，通常还要看年龄、吸烟、血压、糖尿病和既往病史等。",
   "organ": "肝脏 · 血管",
+  "relatedOrgans": [{ "id": "liver", "title": "肝脏" }],
   "kind": "indicator",
   "category": "metabolism",
   "version": 1,

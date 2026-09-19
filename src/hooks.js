@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { contentRepository } from "./services/content";
+import { legacyRoutePath, parseRoute, routePath } from "./services/routes";
 
 export function useContent(method, args) {
   const key = JSON.stringify(args);
@@ -34,27 +35,18 @@ export function useContent(method, args) {
   };
 }
 
-export function parseRoute(hash) {
-  const parts = hash.replace(/^#\/?/, "").split("/");
-  const page = ["map", "indicators", "organs", "saved", "article"].includes(
-    parts[0],
-  )
-    ? parts[0]
-    : "map";
-  return {
-    page,
-    id: /^[a-z0-9-]+$/.test(parts[1] || "")
-      ? parts[1]
-      : page === "organs"
-        ? "heart"
-        : "",
-  };
+function readRoute() {
+  const legacyPath = legacyRoutePath(window.location.hash);
+  if (legacyPath) {
+    window.history.replaceState(window.history.state, "", legacyPath + window.location.search);
+  }
+  return parseRoute(window.location.pathname);
 }
 export function useRoute() {
-  const [route, setRoute] = useState(() => parseRoute(window.location.hash));
+  const [route, setRoute] = useState(readRoute);
   useEffect(() => {
     const update = () => {
-      setRoute(parseRoute(window.location.hash));
+      setRoute(readRoute());
       window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("hashchange", update);
@@ -65,10 +57,10 @@ export function useRoute() {
     };
   }, []);
   function navigate(page, id = "") {
-    const hash = `#/${page}${id ? `/${id}` : ""}`;
-    if (window.location.hash === hash) return;
-    window.history.pushState({ zhiyu: true }, "", hash);
-    window.dispatchEvent(new HashChangeEvent("hashchange"));
+    const path = routePath(page, id);
+    if (window.location.pathname === path) return;
+    window.history.pushState({ zhiyu: true }, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
   }
   return {
     route,

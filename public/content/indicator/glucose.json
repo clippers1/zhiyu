@@ -33,6 +33,7 @@
   ],
   "tip": "空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。",
   "organ": "胰腺 · 肝脏",
+  "relatedOrgans": [{ "id": "pancreas", "title": "胰腺" }, { "id": "liver", "title": "肝脏" }],
   "kind": "indicator",
   "category": "metabolism",
   "version": 1,

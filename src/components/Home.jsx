@@ -22,6 +22,8 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
     { kind: "indicator", featured: true, limit: 3 },
   ]);
   const indicators = state.data?.items || [];
+  const featured = indicators[0];
+  const selected = indicators[1] || featured;
   return (
     <div className="home-content">
       <>
@@ -105,17 +107,17 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               <span /> EVERYTHING IS CONNECTED
             </div>
             <div className="connection-title">
-              <h2>指标不是孤岛，身体是个整体。</h2>
+              <h2>沿着一个问题，把知识串起来。</h2>
               <span className="mini-badge">关联探索</span>
             </div>
-            <p>一起来看看，血糖是怎样被身体调节的。</p>
+            <p>从关心的指标开始，理解关联，再回到知识的来源。</p>
             <div className="connection-flow">
               <div>
                 <span className="flow-icon peach">
                   <Droplet size={22} />
                 </span>
-                <b>吃进食物</b>
-                <small>葡萄糖进入血液</small>
+                <b>找到指标</b>
+                <small>从熟悉的术语开始</small>
               </div>
               <span className="flow-arrow">
                 <i />
@@ -125,8 +127,8 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
                 <span className="flow-icon yellow">
                   <Activity size={22} />
                 </span>
-                <b>胰腺响应</b>
-                <small>释放胰岛素信号</small>
+                <b>看懂解释</b>
+                <small>理解概念与适用范围</small>
               </div>
               <span className="flow-arrow">
                 <i />
@@ -136,8 +138,8 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
                 <span className="flow-icon green">
                   <Layers3 size={22} />
                 </span>
-                <b>细胞利用</b>
-                <small>摄取葡萄糖供能</small>
+                <b>探索关联</b>
+                <small>认识身体中的联系</small>
               </div>
               <span className="flow-arrow">
                 <i />
@@ -147,20 +149,20 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
                 <span className="flow-icon blue">
                   <TrendingUp size={22} />
                 </span>
-                <b>回归平衡</b>
-                <small>血糖逐渐回落</small>
+                <b>核验来源</b>
+                <small>查看依据与审校状态</small>
               </div>
             </div>
-            <button className="text-link" onClick={() => onOpen("glucose")}>
+            <button className="text-link" disabled={!featured} onClick={() => onOpen(featured.id)}>
               查看过程与参考资料 <ArrowRight size={15} />
             </button>
           </section>
           <section className="daily-card">
             <div className="daily-top">
               <span>
-                <Sparkles size={15} /> 今天多懂一点
+                <Sparkles size={15} /> 编辑精选
               </span>
-              <span>来自 WHO</span>
+              <span>{selected?.referenceCount || 0} 份参考资料</span>
             </div>
             <div className="daily-illustration">
               <div className="daily-orbit" />
@@ -169,16 +171,12 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               <span className="tiny-dot" />
             </div>
             <h3>
-              没有症状，
-              <br />
-              血压就一定正常吗？
+              {selected ? `一起认识${selected.title}` : "知识内容正在整理"}
             </h3>
             <p>
-              高血压常常没有明显症状。
-              <br />
-              规律测量，比“凭感觉”更可靠。
+              {selected?.subtitle || "从一个关心的问题开始了解。"}
             </p>
-            <button className="text-link" onClick={() => onOpen("pressure")}>
+            <button className="text-link" disabled={!selected} onClick={() => onOpen(selected.id)}>
               了解知识与来源 <ArrowRight size={15} />
             </button>
           </section>

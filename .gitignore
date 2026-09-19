@@ -4,3 +4,12 @@ test-results/
 playwright-report/
 .vite/
 artifacts/
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.next/
+backend/tsconfig.tsbuildinfo
+backend/src/payload-types.ts
+backend/src/app/(payload)/admin/importMap.js
+backups/

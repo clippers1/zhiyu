@@ -21,6 +21,7 @@ export default function Article({
 }) {
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
+  const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
   async function share() {
@@ -63,6 +64,9 @@ export default function Article({
             <span className="overline">{detail.english}</span>
             <h1>认识{detail.title}</h1>
             <p>{detail.subtitle}</p>
+            {detail.reviewStatus !== "reviewed" && (
+              <p className="review-notice">Beta 科普内容 · 待专业审校</p>
+            )}
             <button
               className="source-jump"
               onClick={() =>
@@ -131,20 +135,13 @@ export default function Article({
             </div>
             <div className="detail-related">
               <span>关联器官：{detail.organ}</span>
-              <button
+              {(relatedState.data?.items || []).map((organ, index) => <button
+                key={organ.id}
                 className="text-link"
-                onClick={() =>
-                  onOrgan(
-                    detail.id === "pressure"
-                      ? "heart"
-                      : detail.id === "glucose"
-                        ? "pancreas"
-                        : "liver",
-                  )
-                }
+                onClick={() => onOrgan(organ.id)}
               >
-                探索器官 <ArrowUpRight size={14} />
-              </button>
+                {index === 0 ? "探索器官" : `了解${organ.title}`} <ArrowUpRight size={14} />
+              </button>)}
             </div>
             <SourceReferences content={detail} prefix="article-source" />
             <p className="article-disclaimer">

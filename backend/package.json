@@ -1,0 +1,39 @@
+{
+  "name": "zhiyu-content-platform",
+  "version": "0.0.1-beta.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3108",
+    "build": "payload generate:importmap && next build --webpack",
+    "start": "next start --hostname 0.0.0.0 --port 3108",
+    "payload": "payload",
+    "seed": "tsx scripts/seed.ts",
+    "test:workflow": "tsx scripts/workflow.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.90.1",
+    "@payloadcms/next": "3.90.1",
+    "@payloadcms/richtext-lexical": "3.90.1",
+    "@payloadcms/translations": "3.90.1",
+    "graphql": "^16.11.0",
+    "next": "16.3.3",
+    "payload": "3.90.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sharp": "^0.35.4",
+    "tsx": "^4.20.0"
+  },
+  "overrides": {
+    "sharp": "$sharp",
+    "dompurify": "^3.4.13",
+    "esbuild": "^0.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  }
+}

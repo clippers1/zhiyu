@@ -1,0 +1,39 @@
+name: zhiyu-content
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zhiyu
+      POSTGRES_USER: zhiyu
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in a private environment file}
+    volumes:
+      - content-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U zhiyu -d zhiyu"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  cms:
+    build: ./backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${CMS_PORT:-3108}:3108"
+    environment:
+      DATABASE_URI: postgresql://zhiyu:${POSTGRES_PASSWORD}@db:5432/zhiyu
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:?Set PAYLOAD_SECRET}
+      SERVER_URL: ${SERVER_URL:-http://localhost:3108}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      PAYLOAD_DB_PUSH: "false"
+      ENABLE_DEMO_API: ${ENABLE_DEMO_API:-false}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3108/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+volumes:
+  content-db:

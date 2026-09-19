@@ -142,6 +142,16 @@ export function SourceReferences({ content, prefix = "source" }) {
       <p className="source-explanation">
         以下为对应知识点的参考原文；中文为科普整理，图示为简化示意。
       </p>
+      {content.applicability && (
+        <p className="source-explanation">适用范围：{content.applicability}</p>
+      )}
+      {content.reviewStatus === "reviewed" && content.review && (
+        <p className="source-explanation">
+          医学审校：{content.review.name}
+          {content.review.professionalTitle && ` · ${content.review.professionalTitle}`}
+          {content.review.reviewedAt && ` · ${content.review.reviewedAt.slice(0, 10)}`}
+        </p>
+      )}
       <ol className="source-list">
         {content.references.map((source, index) => (
           <li key={source.id} id={`${prefix}-${source.id}`}>
@@ -154,7 +164,8 @@ export function SourceReferences({ content, prefix = "source" }) {
               </a>
               <p>{source.scope}</p>
               <small>
-                英文原文 · {source.type} · 链接核验 {source.accessedAt}
+                {source.language === "zh" ? "中文原文" : source.language === "en" ? "英文原文" : "参考原文"} · {source.type} · 链接核验 {source.accessedAt}
+                {source.locator && ` · ${source.locator}`}
               </small>
             </div>
           </li>

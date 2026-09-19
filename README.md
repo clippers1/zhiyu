@@ -2,7 +2,7 @@
 
 知愈是一个面向普通读者的中文健康科普项目。通过体检指标解读、器官互动示意和可追溯的参考资料，帮助读者认识身体、理解健康知识。
 
-当前版本：`0.0.1-beta.1`。这是以移动端体验为重点的早期前端原型，内容与功能仍在完善中。
+当前版本：`0.0.1-beta.2`。这是以移动端阅读为重点的早期 Beta，已具备内容后台与版本发布流程，现有科普内容仍待专业审校。
 
 ## 目前可以做什么
 
@@ -13,7 +13,9 @@
 - **收藏与分享**：在当前浏览器保存收藏，通过链接分享文章。
 - **移动端阅读**：使用底部导航、独立文章页和入门导览；支持直接打开文章、刷新与返回。
 
-当前包含 3 个指标专题和 5 个器官专题。收藏保存在浏览器本地，不支持跨设备同步。项目尚未包含账号系统、内容管理后台、数据库、已部署的内容 API、App 或小程序客户端。
+当前包含 3 个指标专题和 5 个器官专题。收藏保存在浏览器本地，不支持跨设备同步。后台采用 Payload CMS + PostgreSQL，支持来源管理、知识编辑、医学审校、版本发布、回滚和撤回；未提供读者账号、App 或小程序客户端。
+
+正式内容 API 与待审校演示 API 相互独立。现有内容迁移不产生医学审校记录，也不自动进入正式发布集合。后台使用及部署见 [内容平台说明](docs/content-platform.md)。
 
 ## 内容说明
 
@@ -41,7 +43,7 @@ npm run preview
 
 ## 技术与目录
 
-项目使用 React 19、Vite 6 和 Lucide 图标，内容以 JSON 文件保存。摘要目录用于搜索和筛选，专题正文按需加载。
+读者网站使用 React 19、Vite 6 和 Lucide 图标。内容可通过 API 从 PostgreSQL 中读取；项目内的 JSON 保留为离线演示与初始迁移数据。正文按需加载，API 模式的搜索和分页在服务端完成。后台使用 Payload CMS 3 与 Next.js 16，公开文章尚未迁移为服务端渲染。
 
 ```text
 src/
@@ -52,11 +54,13 @@ public/
   content/          专题摘要、正文与参考资料
   favicon.svg       站点图标
 scripts/            内容测试与浏览器交互测试
+backend/            内容后台、API、数据库迁移与流程测试
+compose.yaml        PostgreSQL 与 CMS 服务
 deploy/             通用 Nginx 配置示例
 docs/               架构说明与拓展计划
 ```
 
-默认使用项目内的静态内容，无需配置环境变量或启动后端。需要接入自建内容服务时，可参考 `.env.example` 设置 `VITE_CONTENT_API_BASE_URL`；接口必须满足 [架构说明](docs/architecture.md) 中的契约，该配置本身不会创建后端。
+默认使用项目内的静态内容，无需配置环境变量或启动后端。启用本项目的内容平台后，可参考 `.env.example` 设置 `VITE_CONTENT_API_BASE_URL=/api/demo` 使用待审校演示集合，或设置为 `/api/v1` 使用正式发布集合。后端启动、账号和迁移说明见 [内容平台说明](docs/content-platform.md)。
 
 ## 测试
 
@@ -64,6 +68,7 @@ docs/               架构说明与拓展计划
 
 ```sh
 npm run test:content
+npm run test:routes
 ```
 
 测试覆盖来源引用、关联内容、筛选分页、远程接口参数及失败重试，其中一万条合成摘要用于验证分页逻辑，不代表实际内容数量或线上性能保证。
@@ -79,12 +84,15 @@ npm run test:ui
 
 - `PLAYWRIGHT_BASE_URL`：指定待测试站点，默认使用本地开发服务。
 - `PLAYWRIGHT_CHROMIUM_EXECUTABLE`：指定现有 Chromium 浏览器路径。
+- `CONTENT_API_BASE_URL`：API 模式的浏览器测试应设置为对应前缀，例如 `/api/demo`。
+
+后台提供独立数据库中的权限、审校、发布、回滚与撤回测试，不会向正式数据库写入测试医生身份。
 
 ## 部署
 
 将 `npm run build` 生成的 `dist/` 目录发布到静态托管平台或 Web 服务器即可，无需常驻 Node.js 服务。
 
-目前保留 Hash 路由，例如 `/#/article/glucose`，无需配置文章路径的服务器回退。Nginx 部署可参考 [通用配置示例](deploy/nginx.conf.example)，按自己的环境配置站点与 HTTPS。建议 HTML 和内容 JSON 重新验证缓存，带哈希的 JS/CSS 使用长期缓存。
+当前使用 History 路由，例如 `/article/glucose`，并兼容此前分享的 Hash 链接。服务器需对已定义的页面路径回退到 `index.html`，缺失的资源和内容 JSON 仍返回 404；目前按域名根路径部署。Nginx 可参考 [通用配置示例](deploy/nginx.conf.example)，启用后台时再加入 [内容平台代理示例](deploy/nginx-content.locations.example)。公开内容 API 禁用缓存以保证撤回及时生效，带哈希的 JS/CSS 使用长期缓存。
 
 ## 参与与后续方向
 
@@ -94,4 +102,8 @@ npm run test:ui
 
 - [版本记录](CHANGELOG.md)
 - [内容与多端架构](docs/architecture.md)
+- [内容平台使用与维护](docs/content-platform.md)
 - [项目拓展计划](docs/roadmap.md)
+- [ToC 产品规划](docs/product-plan.md)
+- [知识来源与内容平台](docs/knowledge-platform.md)
+- [History 与页面渲染决策](docs/rendering-and-routing.md)

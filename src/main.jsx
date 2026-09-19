@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     setSearchOpen(false);
     setTour(null);
-    document.title = `${route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
+    document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
   }, [route.page, route.id]);
   const onOpen = (id) => navigate("article", id);
   const onOrgan = (id) => navigate("organs", id);
@@ -44,7 +44,7 @@ function App() {
       <header className="header">
         <div className="header-inner">
           <a
-            href="#/map"
+            href="/"
             className="brand"
             onClick={(event) => {
               event.preventDefault();
@@ -96,6 +96,15 @@ function App() {
         </div>
       </header>
       <main id="main-content">
+        {route.page === "not-found" && (
+          <section className="empty-state">
+            <h1>这个页面不存在</h1>
+            <p>链接可能有误，可以回到健康地图继续查找。</p>
+            <button className="primary-button" onClick={() => navigate("map")}>
+              返回健康地图
+            </button>
+          </section>
+        )}
         {route.page === "map" && (
           <Home
             go={navigate}
