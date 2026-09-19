@@ -1,0 +1,24 @@
+.saved-kind { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+.saved-kind button, .saved-undo button, .remove-saved { min-height: 44px; border: 1px solid #c9d7bd; border-radius: 8px; background: #fffefa; color: #416347; padding: 10px 14px; font-size: 13px; }
+.saved-kind button[aria-pressed="true"] { background: #416347; color: white; }
+.saved-kind button:disabled { opacity: .5; cursor: default; }
+.saved-card { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.saved-card .indicator-card { flex: 1; }
+.saved-card .remove-saved { align-self: flex-end; }
+.saved-organ-card { display: block; flex: 1; color: #416347; border: 1px solid #d7e2cf; padding: 24px; border-radius: 14px; background: #f4f8ee; }
+.saved-organ-card h3 { font-size: 22px; margin: 12px 0; }
+.saved-organ-card p { font-size: 14px; line-height: 1.8; }
+.saved-organ-card span, .saved-organ-card small { font-size: 12px; }
+.saved-undo, .bookmark-warning { padding: 14px; background: #f3f2e7; border-radius: 8px; line-height: 1.8; margin: 12px 0; }
+.saved-undo button { margin-left: 12px; }
+.unavailable-saved { margin: 26px 0; }
+.unavailable-saved h2 { font-size: 20px; }
+.unavailable-saved p, .bookmark-confirm p { color: #65795c; line-height: 1.8; }
+.unavailable-saved ul { list-style: none; padding: 0; }
+.unavailable-saved li { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid #d7e2cf; }
+.unavailable-saved li span { overflow-wrap: anywhere; min-width: 0; }
+.unavailable-saved li button { flex-shrink: 0; }
+.bookmark-confirm { max-width: 440px; padding: 32px 24px; }
+.bookmark-confirm h2 { padding-right: 24px; }
+.bookmark-confirm > button:not(.close-button) { margin: 12px 12px 0 0; }
+.organ-bookmark { margin: 16px 0; }

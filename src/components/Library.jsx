@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BookOpen, Bookmark, Search } from "lucide-react";
 import { useContent } from "../hooks";
 import { IndicatorCard, LoadState, PageIntro, Pagination } from "./ContentUI";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
+import { RouteLink } from "./RouteLink";
 
 export default function Library({
   savedOnly = false,
   saved = [],
   onOpen,
   onBrowse,
+  kind = "indicator",
+  onRemove,
 }) {
   const { query, setQuery, effective, pending, inputProps } = useSearchInput();
   const [category, setCategory] = useState("");
   const [cursor, setCursor] = useState("0");
-  const state = useContent("list", [
+  const savedKey = JSON.stringify(saved);
+  useEffect(() => { if (savedOnly) setCursor("0"); }, [savedKey, savedOnly]);
+  const state = useContent(savedOnly ? "saved" : "list", [
     {
-      kind: "indicator",
+      kind,
       query: effective,
       category,
       cursor,
@@ -31,21 +36,13 @@ export default function Library({
   }
   return (
     <>
-      <div id={savedOnly ? "reading-collection" : undefined}>
+      {!savedOnly && <div>
       <PageIntro
-        label={
-          savedOnly ? "YOUR LITTLE HEALTH LIBRARY" : "THE INDICATOR LIBRARY"
-        }
-        title={
-          savedOnly ? "把有用的知识，留给自己。" : "读懂数字背后的身体语言。"
-        }
-        description={
-          savedOnly
-            ? "收藏你关心的指标，随时回来温习。收藏保存在当前浏览器中。"
-            : "先找到一个关心的指标，再理解它与身体的联系。每篇内容都可追溯来源。"
-        }
+        label="THE INDICATOR LIBRARY"
+        title="读懂数字背后的身体语言。"
+        description="先找到一个关心的指标，再理解它与身体的联系。每篇内容都可追溯来源。"
       />
-      </div>
+      </div>}
       {!savedOnly && <section className="lookup-help" aria-label="术语查找提示">
         <h2>先输入体检单上的一个词</h2>
         <p>支持指标名称、英文缩写和相关术语。这里只查找科普专题，不判断检查结果是否正常；请勿输入姓名、联系方式或完整报告。</p>
@@ -58,8 +55,8 @@ export default function Library({
             id={savedOnly ? "saved-search" : "indicator-search"}
             value={query}
             onChange={(e) => filter(setQuery, e.target.value)}
-            placeholder="搜索指标、英文缩写或关键词"
-            aria-label="筛选指标"
+            placeholder={kind === "organ" ? "搜索已收藏的器官" : "搜索指标、英文缩写或关键词"}
+            aria-label={kind === "organ" ? "筛选收藏器官" : "筛选指标"}
           />
         </label>
         <div className="category-filters">
@@ -67,7 +64,7 @@ export default function Library({
             className={!category ? "active" : ""}
             onClick={() => filter(setCategory, "")}
           >
-            全部指标
+            {kind === "organ" ? "全部器官" : "全部指标"}
           </button>
           {(data?.categories || []).map((c) => (
             <button
@@ -88,12 +85,17 @@ export default function Library({
       {data && (
         <>
           <div className="result-count">
-            {savedOnly ? "已收藏" : "找到"} {data.total} 个专题
+            {savedOnly ? "当前可阅读" : "找到"} {data.total} 个专题
             <span>按主题慢慢了解，不必一次记住</span>
           </div>
           <div className="indicator-grid library-grid">
             {data.items.map((item) => (
-              <IndicatorCard key={item.id} item={item} onOpen={onOpen} />
+              savedOnly ? <div className="saved-card" key={item.id}>
+                {kind === "indicator" ? <IndicatorCard item={item} onOpen={onOpen} /> : <RouteLink className="saved-organ-card" page="organs" id={item.id} onNavigate={() => onOpen(item.id)}>
+                  <span>器官科普</span><h3>{item.title}</h3><p>{item.subtitle}</p><small>{item.referenceCount} 份参考资料</small>
+                </RouteLink>}
+                <button className="remove-saved" aria-label={`移除${item.title}收藏`} onClick={() => { setCursor("0"); onRemove(item); }}>移除收藏</button>
+              </div> : <IndicatorCard key={item.id} item={item} onOpen={onOpen} />
             ))}
           </div>
           <Pagination
@@ -108,16 +110,17 @@ export default function Library({
               </span>
               <h2>
                 {savedOnly && !query && !category
-                  ? "你的健康知识库，等你开启"
+                  ? saved.length ? "当前没有可阅读的收藏" : "你的健康知识库，等你开启"
                   : "暂时没有匹配的内容"}
               </h2>
               <p>
                 {savedOnly
-                  ? "在知识详情页点击收藏，即可在这里找到。"
+                  ? query || category ? "当前收藏中没有匹配结果，可清除筛选后再找。" : "在指标或器官详情页点击收藏，即可在这里找到。"
                   : "换一个关键词，或查看全部指标。"}
               </p>
               <SearchSuggestions suggestions={data.suggestions} onChoose={value => filter(setQuery, value)} />
               {query && category && <button className="clear-category" onClick={() => filter(setCategory, "")}>保留关键词，清除分类限制</button>}
+              {savedOnly && (query || category) && <button className="clear-category" onClick={() => { setQuery(""); setCategory(""); setCursor("0"); }}>清除收藏筛选</button>}
               <button
                 className="primary-button"
                 onClick={() => {
@@ -127,7 +130,7 @@ export default function Library({
                   if (savedOnly) onBrowse();
                 }}
               >
-                浏览全部指标
+                {kind === "organ" ? "浏览器官专题" : "浏览全部指标"}
               </button>
             </div>
           )}

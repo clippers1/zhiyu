@@ -21,6 +21,7 @@ export default function Article({
   saved,
   toggleSave,
   storageError,
+  bookmarksReady,
   reading,
 }) {
   const state = useContent("get", ["indicator", id]);
@@ -176,11 +177,13 @@ export default function Article({
         <div className="reading-actions">
           <div aria-live="polite">
             {storageError
-              ? "当前无法保存到浏览器，收藏仅在本次会话有效。"
+              ? "无法正常读写收藏，本次更改可能未保存。若需移除旧收藏，请清除此站点的浏览器数据。"
               : shareMessage || "把有用的知识留给自己"}
           </div>
           <button
             className={`save-button ${saved.includes(id) ? "is-saved" : ""}`}
+            disabled={!bookmarksReady}
+            aria-pressed={saved.includes(id)}
             onClick={() => toggleSave(id)}
           >
             {saved.includes(id) ? <Check size={18} /> : <Bookmark size={18} />}{" "}

@@ -1,4 +1,5 @@
 import { normalizeSearch, searchRank, searchSuggestions, matchLabels } from "./search.js";
+import { savedContent } from "./bookmarks.js";
 const PAGE_LIMIT = 24;
 export function selectPage(
   catalog,
@@ -102,6 +103,9 @@ export function createContentRepository({
       )
         throw new Error("内容接口返回格式不正确。");
       return page;
+    },
+    saved(options, requestOptions) {
+      return savedContent((args, config) => this.list(args, config), options, requestOptions);
     },
     async get(kind, id, { signal } = {}) {
       if (!["indicator", "organ"].includes(kind) || !/^[a-z0-9-]+$/.test(id))

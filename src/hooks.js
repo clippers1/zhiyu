@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { contentKey, useReader } from "./reader-context";
 import { legacyRoutePath, parseRoute, routePath } from "./services/routes";
+import { createBookmarkStore } from "./services/bookmarks";
 
 export function useContent(method, args) {
   const { preloaded, repository } = useReader();
@@ -95,44 +96,22 @@ export function useRoute(initialRoute, serverRendered = false) {
 }
 
 export function useBookmarks() {
-  const read = () => {
-    try {
-      const value = JSON.parse(localStorage.getItem("zhiyu-saved") || "[]");
-      return Array.isArray(value)
-        ? value.filter((x) => typeof x === "string")
-        : [];
-    } catch {
-      return [];
-    }
-  };
-  const [saved, setSaved] = useState([]);
+  const store = useRef(null);
+  const [value, setValue] = useState({ saved: [], savedOrgans: [], storageError: false });
   const [ready, setReady] = useState(false);
-  const [storageError, setStorageError] = useState(false);
-  useEffect(() => { setSaved(read()); setReady(true); }, []);
   useEffect(() => {
-    if (!ready) return;
-    try {
-      localStorage.setItem("zhiyu-saved", JSON.stringify(saved));
-      setStorageError(false);
-    } catch {
-      setStorageError(true);
-    }
-  }, [saved, ready]);
-  useEffect(() => {
-    const update = (event) => {
-      if (event.key === "zhiyu-saved") setSaved(read());
-    };
+    store.current = createBookmarkStore({ getItem: key => localStorage.getItem(key), setItem: (key, data) => localStorage.setItem(key, data) });
+    setValue(store.current.sync(null));
+    setReady(true);
+    const update = event => setValue(store.current.sync(event.key));
     window.addEventListener("storage", update);
     return () => window.removeEventListener("storage", update);
   }, []);
+  const change = (kind, action, ids) => { if (store.current) setValue(store.current.change(kind, action, ids)); };
   return {
-    saved,
-    storageError,
-    toggleSave: (id) =>
-      setSaved((current) =>
-        current.includes(id)
-          ? current.filter((x) => x !== id)
-          : [...current, id],
-      ),
+    ...value, ready,
+    toggleSave: (id, kind = "indicator") => change(kind, "toggle", [id]),
+    remove: (kind, ids) => change(kind, "remove", ids),
+    add: (kind, ids) => change(kind, "add", ids),
   };
 }

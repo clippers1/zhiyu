@@ -25,6 +25,8 @@ import "./reading.css";
 import "./discovery.css";
 import "./topics.css";
 import TopicRoute from "./components/TopicRoute";
+import SavedLibrary from "./components/SavedLibrary";
+import "./bookmarks.css";
 
 const nav = [
   { id: "map", title: "健康地图", short: "发现", icon: Map },
@@ -36,7 +38,9 @@ function ReaderApp() {
   const { runtime, initialRoute } = useReader();
   const feedbackBase = runtime.feedbackBase;
   const { route, navigate, back } = useRoute(initialRoute, runtime.serverRendered);
-  const { saved, toggleSave, storageError } = useBookmarks();
+  const bookmarks = useBookmarks();
+  const { saved, savedOrgans, toggleSave, storageError } = bookmarks;
+  const savedCount = saved.length + savedOrgans.length;
   const reading = useReading();
   const [searchOpen, setSearchOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -77,8 +81,8 @@ function ReaderApp() {
                 onNavigate={() => navigate(item.id)}
               >
                 {item.title}
-                {item.id === "saved" && saved.length > 0 && (
-                  <i>{saved.length}</i>
+                {item.id === "saved" && savedCount > 0 && (
+                  <i>{savedCount}</i>
                 )}
               </RouteLink>
             ))}
@@ -126,17 +130,11 @@ function ReaderApp() {
           <Library key="library" onOpen={onOpen} />
         )}
         {route.page === "organs" && (
-          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} reading={reading} />
+          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} reading={reading} bookmarks={bookmarks} />
         )}
         {route.page === "saved" && (
           <>
-          <Library
-            key="saved"
-            savedOnly
-            saved={saved}
-            onOpen={onOpen}
-            onBrowse={() => navigate("indicators")}
-          />
+          <SavedLibrary bookmarks={bookmarks} navigate={navigate} />
           <RecentReading reading={reading} navigate={navigate} />
           </>
         )}
@@ -149,6 +147,7 @@ function ReaderApp() {
             saved={saved}
             toggleSave={toggleSave}
             storageError={storageError}
+            bookmarksReady={bookmarks.ready}
             reading={reading}
           />
         )}
@@ -174,7 +173,7 @@ function ReaderApp() {
           >
             <span>
               <Icon size={22} strokeWidth={activePage === id ? 2 : 1.6} />
-              {id === "saved" && saved.length > 0 && <i>{saved.length}</i>}
+              {id === "saved" && savedCount > 0 && <i>{savedCount}</i>}
             </span>
             <b>{short}</b>
           </RouteLink>
