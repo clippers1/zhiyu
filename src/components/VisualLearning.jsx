@@ -84,19 +84,20 @@ function useReducedMotion() {
 
 function DiagramDefs() {
   return <defs>
-    <marker id="flow-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path fill="#5683a4" d="M0 0 L10 5 L0 10 z" /></marker>
-    <marker id="flow-arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path fill="#c67469" d="M0 0 L10 5 L0 10 z" /></marker>
-    <marker id="flow-arrow-air" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path fill="#648b68" d="M0 0 L10 5 L0 10 z" /></marker>
-    <marker id="flow-arrow-carbon" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path fill="#b97a45" d="M0 0 L10 5 L0 10 z" /></marker>
+    <marker id="flow-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path fill="#5683a4" d="M1 1.5 L9 5 L1 8.5 z" /></marker>
+    <marker id="flow-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path fill="#c67469" d="M1 1.5 L9 5 L1 8.5 z" /></marker>
+    <marker id="flow-arrow-air" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path fill="#648b68" d="M1 1.5 L9 5 L1 8.5 z" /></marker>
+    <marker id="flow-arrow-carbon" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path fill="#b97a45" d="M1 1.5 L9 5 L1 8.5 z" /></marker>
     <filter id="part-shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="5" floodColor="#29493b" floodOpacity=".12" /></filter>
   </defs>;
 }
 
 function FlowPaths({ learning, activeStep, diagram }) {
-  return learning.steps.map((step, index) => {
-    const path = diagram.paths[step.id];
-    return path && <path key={step.id} d={path[0]} className={`learning-path ${path[1]}${activeStep === index ? " active" : ""}`} />;
-  });
+  const active = learning.steps[activeStep];
+  const path = diagram.paths[active?.id];
+  return path
+    ? <path d={path[0]} className={`learning-path ${path[1]} active`} aria-hidden="true" />
+    : null;
 }
 
 function HeartMedicalArtwork({ learning, activePart, activeStep, onPart, diagram }) {

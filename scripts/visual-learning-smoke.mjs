@@ -39,6 +39,10 @@ try {
   const lung = page.locator('.visual-learning');
   await expect(lung).toContainText('跟着一口气到肺泡');
   await expect(lung.locator('.lung-medical-diagram')).toHaveCount(1);
+  await expect(lung.locator('.learning-path')).toHaveCount(1);
+  await expect(lung.locator('.learning-path.active')).toHaveCount(1);
+  await expect(lung.locator('marker[markerUnits="userSpaceOnUse"]')).toHaveCount(4);
+  await expect(lung.locator('marker').first()).toHaveAttribute('markerWidth', '10');
   await expect.poll(() => page.evaluate(async () => Promise.all([
     '/media/lung-servier.png',
     '/media/alveoli-servier.png',
@@ -54,6 +58,7 @@ try {
   await expect(lung.locator('.learning-current')).toContainText('氧气从肺泡进入周围毛细血管');
   await lung.getByRole('button', { name: '下一步' }).click();
   await expect(lung.locator('.learning-current')).toContainText('空气进入支气管');
+  await expect(lung.locator('.learning-path')).toHaveCount(1);
   await expect(lung.locator('.learning-check')).toHaveCount(0);
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });

@@ -41,13 +41,13 @@
 .lung-medical-spot:focus-visible .lung-medical-spot-shape { stroke: #d49a51; stroke-width: 4; }
 .lung-medical-spot.active .lung-medical-spot-shape { fill: rgba(255,255,255,.24); stroke: #315d43; stroke-width: 3; filter: url(#part-shadow); }
 .lung-medical-label { fill: #29493b; font-size: 13px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(255,254,249,.94); stroke-width: 5px; stroke-linejoin: round; }
-.learning-path { fill: none; stroke-width: 7; opacity: .18; stroke-linecap: round; }
-.learning-path.flow-blue, .learning-path.flow-oxygen { stroke: #5683a4; marker-end: url(#flow-arrow-blue); }
-.learning-path.flow-red { stroke: #c67469; marker-end: url(#flow-arrow-red); }
-.learning-path.flow-air { stroke: #648b68; marker-end: url(#flow-arrow-air); }
-.learning-path.flow-carbon { stroke: #b97a45; marker-end: url(#flow-arrow-carbon); }
-.learning-path.active { opacity: 1; stroke-width: 9; stroke-dasharray: 15 11; animation: learning-flow 1.2s linear infinite; }
-@keyframes learning-flow { to { stroke-dashoffset: -26; } }
+.learning-path { fill: none; stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 8 8; }
+.learning-path.active.flow-blue, .learning-path.active.flow-oxygen { stroke: #5683a4; marker-end: url(#flow-arrow-blue); }
+.learning-path.active.flow-red { stroke: #c67469; marker-end: url(#flow-arrow-red); }
+.learning-path.active.flow-air { stroke: #648b68; marker-end: url(#flow-arrow-air); }
+.learning-path.active.flow-carbon { stroke: #b97a45; marker-end: url(#flow-arrow-carbon); }
+.learning-path.active { animation: learning-flow 1.15s linear infinite; }
+@keyframes learning-flow { to { stroke-dashoffset: -16; } }
 .diagram-orbit { fill: none; stroke: #dfe7da; stroke-width: 2; stroke-dasharray: 5 10; }
 .heart-shell { fill: #f3e2dd; stroke: #bb8177; stroke-width: 3; }
 .heart-septum { fill: none; stroke: rgba(133,91,84,.35); stroke-width: 4; }
