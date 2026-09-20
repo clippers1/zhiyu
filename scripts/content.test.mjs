@@ -52,6 +52,19 @@ test("all published demo content has valid references, related records and index
     }
     for (const id of entry.related || [])
       assert.ok(keys.has(`indicator/${id}`));
+    for (const item of entry.relatedOrgans || [])
+      assert.ok(keys.has(`organ/${item.id}`), `${entry.id}: missing related organ ${item.id}`);
+    if (entry.publicationReady) {
+      assert.equal(entry.contentRisk, "foundational");
+      assert.ok(entry.applicability && entry.limitations);
+      assert.ok(entry.descriptionSourceIds?.length);
+      assert.ok(entry.references.every(source => source.locator));
+      if (entry.kind === "indicator") {
+        assert.ok(entry.metrics?.length >= 3);
+        assert.ok(entry.chain?.length >= 3 && entry.chainSourceIds?.length);
+        assert.ok(entry.tip && entry.tipSourceIds?.length);
+      }
+    }
   }
 });
 test("10,000 summary records paginate without duplicates and combine filters", () => {

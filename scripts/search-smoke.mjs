@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { chromium, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 const base = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:5174';
+const screenshotDir = process.env.SCREENSHOT_DIR || 'artifacts';
 const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 const errors = [];
@@ -10,7 +11,7 @@ try {
   await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });
   const input = page.getByRole('textbox', { name: '筛选指标', exact: true });
   await expect(input).toHaveAttribute('maxlength', '200');
-  for (const [query, title] of [['ＬＤＬ－Ｃ', '血脂'], ['l d l c', '血脂'], ['ＨｂＡ１ｃ', '血糖'], ['blood glucose', '血糖'], ['高压', '血压']]) {
+  for (const [query, title] of [['ＬＤＬ－Ｃ', '血脂'], ['l d l c', '血脂'], ['ＨｂＡ１ｃ', '血糖'], ['blood glucose', '血糖'], ['高压', '血压'], ['CBC', '血常规'], ['eGFR', '肾功能'], ['FT4', '甲状腺功能'], ['尿检', '尿常规']]) {
     await input.fill(query);
     await expect(page.locator('.indicator-card')).toHaveCount(1);
     await expect(page.locator('.indicator-card h3')).toHaveText(title);
@@ -34,8 +35,9 @@ try {
   const dialog = page.getByRole('dialog');
   const search = dialog.getByRole('textbox');
   await search.fill('liver');
-  await expect(dialog.locator('.search-results > a')).toHaveCount(1);
-  await expect(dialog.locator('.search-results > a')).toContainText('肝脏');
+  await expect(dialog.locator('.search-results > a')).toHaveCount(2);
+  await expect(dialog.locator('.search-results > a').filter({ hasText: '肝脏' })).toHaveCount(1);
+  await expect(dialog.locator('.search-results > a').filter({ hasText: '肝功能' })).toHaveCount(1);
   await search.dispatchEvent('compositionstart');
   await search.fill('血');
   await page.waitForTimeout(350);
@@ -55,8 +57,8 @@ try {
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await mkdir('artifacts', { recursive: true });
-  await page.screenshot({ path: 'artifacts/search-mobile.png' });
+  await mkdir(screenshotDir, { recursive: true });
+  await page.screenshot({ path: `${screenshotDir}/search-mobile.png` });
   const stored = await page.evaluate(() => JSON.stringify({ ...localStorage }));
   assert.ok(!stored.includes('glcuose') && !stored.includes('BLOOD GLUCOSE'));
   assert.deepEqual(errors, []);

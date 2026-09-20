@@ -1,6 +1,6 @@
 {
   "name": "zhiyu-content-platform",
-  "version": "0.0.1-beta.18",
+  "version": "0.0.1-beta.19",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "seed": "tsx scripts/seed.ts",
     "publish:heart-learning": "tsx scripts/publish-organ-learning.ts heart",
     "publish:lung-learning": "tsx scripts/publish-organ-learning.ts lung",
+    "publish:content-pack": "tsx scripts/publish-content-pack.ts",
     "test:workflow": "tsx scripts/workflow.test.ts",
     "test:feedback": "tsx scripts/feedback.test.ts",
     "test:rendering": "tsx scripts/rendering.test.ts",

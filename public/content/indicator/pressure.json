@@ -1,5 +1,6 @@
 {
   "id": "pressure",
+  "catalogOrder": 2,
   "title": "血压",
   "english": "BLOOD PRESSURE",
   "subtitle": "血液流动时，血管承受多少压力？",
@@ -7,6 +8,7 @@
   "color": "purple",
   "tags": ["收缩压", "舒张压"],
   "number": "02",
+  "featured": true,
   "desc": "心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。",
   "metrics": [
     {

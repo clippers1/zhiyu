@@ -56,9 +56,9 @@ try {
     page.getByRole("heading", { name: "认识血糖", exact: true }),
   ).toBeVisible();
   await expect(page).toHaveURL(/\/article\/glucose$/);
-  assert.equal(
-    contentRequests.filter((url) => /\/indicator\//.test(url)).length,
-    1,
+  assert.ok(
+    contentRequests.filter((url) => /\/indicator\//.test(url)).length <= 1,
+    "SSR may preload the detail, but navigation must not request it more than once",
   );
   await expect(page.getByRole("region", { name: "知识来源" })).toBeAttached();
   assert.equal(await page.locator(".source-list a").count(), 4);
@@ -106,12 +106,12 @@ try {
   await page.screenshot({ path: "artifacts/mobile.png", fullPage: false });
   await mobileNav().getByRole("link", { name: "指标百科" }).click();
   await page.getByRole("button", { name: "营养与代谢", exact: true }).click();
-  await expect(page.locator(".indicator-card")).toHaveCount(2);
+  await expect(page.locator(".indicator-card")).toHaveCount(4);
   await page.getByRole("textbox", { name: "筛选指标" }).fill("LDL");
   await expect(page.locator(".indicator-card")).toHaveCount(1);
   await page.getByRole("textbox", { name: "筛选指标" }).fill("");
   await page.getByRole("button", { name: "全部指标", exact: true }).click();
-  await expect(page.locator(".indicator-card")).toHaveCount(3);
+  await expect(page.locator(".indicator-card")).toHaveCount(6);
   await page.screenshot({
     path: "artifacts/mobile-library.png",
     fullPage: false,
@@ -171,7 +171,7 @@ try {
     .click();
   await page.getByRole("textbox").fill("不存在的专题");
   await expect(
-    page.getByText("暂时没有这个专题。试试血糖、血压、血脂或器官名称。"),
+    page.getByText("暂时没有这个专题。试试血常规、肝功能、肾功能或器官名称。"),
   ).toBeVisible();
   await page.keyboard.press("Escape");
 

@@ -1,5 +1,6 @@
 {
   "id": "lipids",
+  "catalogOrder": 3,
   "title": "血脂",
   "english": "BLOOD LIPIDS",
   "subtitle": "脂肪的运输，也有不同的分工。",
@@ -7,6 +8,7 @@
   "color": "blue",
   "tags": ["LDL-C / HDL-C", "甘油三酯"],
   "number": "03",
+  "featured": true,
   "desc": "脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。",
   "metrics": [
     {

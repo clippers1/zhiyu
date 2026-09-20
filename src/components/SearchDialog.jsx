@@ -57,7 +57,7 @@ export default function SearchDialog({ onOpen, onOrgan }) {
             {state.data.total === 0 && (
               <div className="search-empty">
                 <Search size={26} />
-                <p>暂时没有这个专题。试试血糖、血压、血脂或器官名称。</p>
+                <p>暂时没有这个专题。试试血常规、肝功能、肾功能或器官名称。</p>
                 <p>没有搜索结果不代表没有健康风险，本工具不能判断是否需要就医。</p>
                 <SearchSuggestions suggestions={state.data.suggestions} onChoose={changeQuery} />
                 <div className="search-suggestions">{["血糖", "血压", "血脂"].map(word => <button key={word} onClick={() => changeQuery(word)}>查找{word}</button>)}</div>

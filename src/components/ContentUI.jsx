@@ -152,6 +152,9 @@ export function SourceReferences({ content, prefix = "source" }) {
       {content.applicability && (
         <p className="source-explanation">适用范围：{content.applicability}</p>
       )}
+      {content.limitations && (
+        <p className="source-explanation">不覆盖：{content.limitations}</p>
+      )}
       {content.reviewStatus === "reviewed" && content.review && (
         <p className="source-explanation">
           医学审校：{content.review.name}

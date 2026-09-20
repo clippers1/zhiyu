@@ -1,0 +1,8 @@
+[
+  { "id": "metabolism", "name": "营养与代谢" },
+  { "id": "circulation", "name": "心血管健康" },
+  { "id": "blood", "name": "血液与免疫" },
+  { "id": "endocrine", "name": "内分泌" },
+  { "id": "respiration", "name": "呼吸系统" },
+  { "id": "urinary", "name": "泌尿系统" }
+]

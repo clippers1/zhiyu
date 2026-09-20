@@ -1,13 +1,15 @@
 {
   "name": "zhiyu-health-map",
-  "version": "0.0.1-beta.18",
+  "version": "0.0.1-beta.19",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "test:content": "node --test scripts/content.test.mjs",
+    "content:build": "node scripts/build-content-catalog.mjs",
+    "content:check": "node scripts/build-content-catalog.mjs --check",
+    "test:content": "npm run content:check && node --test scripts/content.test.mjs",
     "test:routes": "node --test scripts/routes.test.mjs",
     "test:feedback": "node --test scripts/feedback.test.mjs",
     "test:reading": "node --test scripts/reading.test.mjs",
@@ -17,6 +19,7 @@
     "test:share": "node --test scripts/share.test.mjs",
     "test:guide": "node --test scripts/reading-guide.test.mjs",
     "test:learning": "node scripts/visual-learning-smoke.mjs",
+    "test:expansion": "node scripts/content-expansion-smoke.mjs",
     "test:ui": "node scripts/smoke.mjs"
   },
   "dependencies": {

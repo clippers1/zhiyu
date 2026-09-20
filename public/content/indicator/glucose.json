@@ -1,5 +1,6 @@
 {
   "id": "glucose",
+  "catalogOrder": 1,
   "title": "血糖",
   "english": "BLOOD GLUCOSE",
   "subtitle": "身体的能量，如何保持平衡？",
@@ -7,6 +8,7 @@
   "color": "orange",
   "tags": ["空腹血糖", "糖化血红蛋白"],
   "number": "01",
+  "featured": true,
   "desc": "血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。",
   "metrics": [
     {

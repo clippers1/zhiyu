@@ -58,9 +58,10 @@ try {
     if (!article.alreadyExists) {
       const body = bodies.get(slug);
       const organMap: Record<string, string[]> = { glucose: ['pancreas', 'liver'], pressure: ['heart'], lipids: ['liver'] };
+      const relatedOrganIDs = (body.relatedOrgans || []).map((item: any) => typeof item === 'string' ? item : item.id);
       await payload.update({ collection: 'articles', id: article.id, req, data: {
         relatedIndicators: (body.related || []).map((id: string) => records.get(id).id),
-        relatedOrgans: (organMap[slug] || []).map(id => records.get(id).id),
+        relatedOrgans: (relatedOrganIDs.length ? relatedOrganIDs : organMap[slug] || []).map((id: string) => records.get(id).id),
       } });
     }
     if (process.env.SEED_DEMO !== 'true') continue;

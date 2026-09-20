@@ -2,7 +2,7 @@
 
 ## 当前实际完成的范围
 
-读者界面使用 React，完整部署由 Next.js 输出 HTML，Vite 保留离线演示。当前有 3 个指标专题、5 个器官专题；平台包含 Payload CMS + PostgreSQL、后台成员登录及正式/演示内容 API。没有读者账号、个人体检报告处理或真实医学审校记录。平台的实际流程与边界见 [内容平台说明](content-platform.md)。
+读者界面使用 React，完整部署由 Next.js 输出 HTML，Vite 保留离线演示。当前有 9 个指标专题、5 个器官专题；平台包含 Payload CMS + PostgreSQL、后台成员登录及正式/演示内容 API。没有读者账号、个人体检报告处理或真实医学审校记录。平台的实际流程与边界见 [内容平台说明](content-platform.md)。
 
 - `backend/`：来源、知识、审校、修订、发布入口与审计；公开 API 仅读取显式发布快照。
 - `0.0.1-beta.3` 增加私有纠错队列与凭码查询/删除 API、来源复核排期和后台维护待办，见 [纠错与来源复核](feedback-and-maintenance.md)。

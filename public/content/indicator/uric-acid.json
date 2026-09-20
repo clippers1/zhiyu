@@ -1,0 +1,66 @@
+{
+  "id": "uric-acid",
+  "catalogOrder": 7,
+  "title": "尿酸",
+  "english": "URIC ACID",
+  "subtitle": "嘌呤分解后的产物，怎样离开身体？",
+  "icon": "droplet",
+  "color": "blue",
+  "tags": ["血尿酸", "尿尿酸", "UA"],
+  "searchAliases": ["尿酸检查", "血清尿酸", "SUA", "uric acid test", "purine"],
+  "number": "07",
+  "desc": "尿酸是身体分解嘌呤时形成的废物。大部分尿酸溶在血液中，经肾脏过滤后随尿液排出；尿酸检查可以使用血液或尿液样本。",
+  "metrics": [
+    {
+      "name": "血尿酸",
+      "text": "血液检查测量血液中的尿酸含量，反映生成与排出共同作用后的结果。",
+      "sourceIds": ["uric-acid"]
+    },
+    {
+      "name": "尿尿酸",
+      "text": "尿液检查观察一段时间内从尿液排出的尿酸，可从排出角度提供信息。",
+      "sourceIds": ["uric-acid"]
+    },
+    {
+      "name": "生成与排出",
+      "text": "尿酸水平可能因身体生成较多或排出不足而变化，单个结果不能独立说明是哪一个环节。",
+      "sourceIds": ["uric-acid"]
+    }
+  ],
+  "chain": [
+    "身体分解嘌呤",
+    "形成尿酸并进入血液",
+    "肾脏过滤尿酸",
+    "大部分随尿液排出"
+  ],
+  "chainSourceIds": ["uric-acid"],
+  "tip": "饮食、药物、肾脏排出和身体代谢都可能影响尿酸。一次结果只能描述当时的测量情况，不能单独用来判断原因或决定治疗。",
+  "organ": "肾脏 · 血液 · 尿液",
+  "relatedOrgans": [{ "id": "kidney", "title": "肾脏" }],
+  "kind": "indicator",
+  "category": "metabolism",
+  "featured": false,
+  "version": 1,
+  "updatedAt": "2026-09-20",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解尿酸来源、排出和检查形式的一般成年读者。",
+  "limitations": "不提供高尿酸或疾病诊断阈值、饮食处方、用药或治疗建议。",
+  "references": [
+    {
+      "id": "uric-acid",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Uric Acid Test",
+      "url": "https://medlineplus.gov/lab-tests/uric-acid-test/",
+      "scope": "尿酸的形成、肾脏排出以及血液和尿液检查",
+      "locator": "What is a uric acid test?; What is it used for?; What do the results mean?",
+      "accessedAt": "2026-09-20",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["uric-acid"],
+  "tipSourceIds": ["uric-acid"]
+}

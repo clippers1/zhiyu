@@ -1,0 +1,90 @@
+{
+  "id": "kidney-function",
+  "catalogOrder": 6,
+  "title": "肾功能",
+  "english": "KIDNEY FUNCTION TESTS",
+  "subtitle": "肌酐、eGFR 和尿白蛋白，如何互相补充？",
+  "icon": "droplet",
+  "color": "purple",
+  "tags": ["肌酐", "eGFR", "尿白蛋白肌酐比"],
+  "searchAliases": ["肾功", "血肌酐", "CREA", "CRE", "GFR", "肾小球滤过率", "尿微量白蛋白", "UACR", "ACR"],
+  "number": "06",
+  "desc": "肾功能通常要结合血液和尿液项目理解。血肌酐是计算估算肾小球滤过率（eGFR）的常用依据，尿白蛋白肌酐比则观察尿中白蛋白与肌酐的关系。",
+  "metrics": [
+    {
+      "name": "血肌酐",
+      "text": "肌酐是肌肉日常活动产生的废物，主要由肾脏从血液中过滤。血肌酐会受到肌肉量等因素影响。",
+      "sourceIds": ["creatinine"]
+    },
+    {
+      "name": "估算肾小球滤过率（eGFR）",
+      "text": "eGFR 通常根据血肌酐以及年龄、性别等信息估算，用来描述肾脏过滤血液的总体能力。",
+      "sourceIds": ["gfr"]
+    },
+    {
+      "name": "尿白蛋白肌酐比（UACR）",
+      "text": "UACR 比较尿中白蛋白与肌酐，有助于减少尿液浓稀差异对单次白蛋白结果的影响。",
+      "sourceIds": ["uacr"]
+    }
+  ],
+  "chain": [
+    "肾小球过滤血液",
+    "肌酐主要经肾脏排出",
+    "用血肌酐估算 eGFR",
+    "同时用尿液项目观察白蛋白"
+  ],
+  "chainSourceIds": ["creatinine", "gfr", "uacr"],
+  "tip": "肌酐、eGFR 和尿白蛋白提供的是不同角度。单次结果会受多种因素影响，不能只凭一个数值判断肾脏状态；持续变化通常比孤立结果更值得关注。",
+  "organ": "肾脏 · 血液过滤 · 尿液",
+  "relatedOrgans": [{ "id": "kidney", "title": "肾脏" }],
+  "kind": "indicator",
+  "category": "urinary",
+  "featured": false,
+  "version": 1,
+  "updatedAt": "2026-09-20",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解常见肾功能项目名称和相互关系的一般成年读者。",
+  "limitations": "不提供分期阈值、疾病判断、特殊人群公式选择或治疗建议；实际报告应采用出具机构的方法和参考信息。",
+  "references": [
+    {
+      "id": "creatinine",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Creatinine Test",
+      "url": "https://medlineplus.gov/lab-tests/creatinine-test/",
+      "scope": "肌酐来源、肾脏过滤和血液或尿液检测",
+      "locator": "What is a creatinine test?; What is it used for?",
+      "accessedAt": "2026-09-20",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "gfr",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Glomerular Filtration Rate (GFR) Test",
+      "url": "https://medlineplus.gov/lab-tests/glomerular-filtration-rate-gfr-test/",
+      "scope": "eGFR 的含义、估算信息和解释限制",
+      "locator": "What is a glomerular filtration rate (GFR) test?; How is eGFR calculated?",
+      "accessedAt": "2026-09-20",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "uacr",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Microalbumin Creatinine Ratio",
+      "url": "https://medlineplus.gov/lab-tests/microalbumin-creatinine-ratio/",
+      "scope": "尿白蛋白肌酐比的组成与用途",
+      "locator": "What is a microalbumin creatinine ratio test?; What is it used for?",
+      "accessedAt": "2026-09-20",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["creatinine", "gfr", "uacr"],
+  "tipSourceIds": ["creatinine", "gfr", "uacr"]
+}
