@@ -88,7 +88,7 @@ try {
   await expect(page.locator(".source-panel")).toContainText(
     "Your Digestive System",
   );
-  await page.getByRole("button", { name: "了解肾脏", exact: true }).click();
+  await page.getByRole("link", { name: "肾脏", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肾脏");
   await desktopNav()
     .getByRole("link", { name: "健康地图", exact: true })

@@ -894,6 +894,79 @@ footer > span {
   color: #91a083;
   margin: 8px 0;
 }
+.organ-artwork {
+  width: 100%;
+  max-width: 500px;
+  margin: 0;
+}
+.organ-artwork-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 400px;
+  overflow: hidden;
+  border: 1px solid #dbe2d7;
+  border-radius: 20px;
+  background: #fffef9;
+  padding: 50px 30px 44px;
+}
+.organ-artwork-stage::after {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(91, 119, 99, 0.08);
+  border-radius: 14px;
+  pointer-events: none;
+  content: "";
+}
+.organ-artwork-stage img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 16px rgba(45, 64, 54, 0.08));
+}
+.organ-artwork-stage img.portrait {
+  height: 354px;
+}
+.organ-artwork-stage img.landscape {
+  height: 260px;
+}
+.organ-artwork-kicker,
+.organ-artwork-detail {
+  position: absolute;
+  z-index: 1;
+  color: #718074;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.organ-artwork-kicker {
+  top: 30px;
+  left: 34px;
+  font-weight: 700;
+}
+.organ-artwork-detail {
+  right: 34px;
+  bottom: 28px;
+}
+.organ-artwork figcaption {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+  color: #6e7f72;
+  font-size: 11px;
+  line-height: 1.65;
+  text-align: center;
+}
+.organ-artwork figcaption small {
+  margin: 0;
+  color: #829086;
+  font-size: 10px;
+}
+.organ-artwork figcaption a {
+  color: #486e5d;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .organ-information {
   padding: 37px;
 }

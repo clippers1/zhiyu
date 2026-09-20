@@ -840,7 +840,7 @@
     border-radius: 14px;
   }
   .explorer-visual {
-    padding: 6px 15px 16px;
+    padding: 16px 15px 18px;
   }
   .explorer-visual .body-art {
     height: 305px;
@@ -849,6 +849,29 @@
   }
   .explorer-visual small {
     font-size: 10px;
+  }
+  .organ-artwork {
+    max-width: 430px;
+  }
+  .organ-artwork-stage {
+    min-height: 300px;
+    padding: 43px 20px 38px;
+    border-radius: 16px;
+  }
+  .organ-artwork-stage img,
+  .organ-artwork-stage img.portrait {
+    height: 245px;
+  }
+  .organ-artwork-stage img.landscape {
+    height: 190px;
+  }
+  .organ-artwork-kicker {
+    top: 24px;
+    left: 28px;
+  }
+  .organ-artwork-detail {
+    right: 28px;
+    bottom: 22px;
   }
   .organ-information {
     padding: 25px;

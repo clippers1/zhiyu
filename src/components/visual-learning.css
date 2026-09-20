@@ -28,6 +28,19 @@
 .heart-part-spot:focus-visible ellipse { stroke: #d49a51; stroke-width: 4; }
 .heart-part-spot.active ellipse { fill: rgba(255,255,255,.14); stroke: #315d43; stroke-width: 3; }
 @keyframes heart-medical-flow { to { stroke-dashoffset: -21; } }
+.lung-medical-diagram { background: #fffef9; }
+.lung-medical-paper { fill: #fffef9; }
+.lung-medical-image { pointer-events: none; filter: saturate(.88) contrast(.98); }
+.lung-medical-connector { fill: none; stroke: #8ea092; stroke-width: 1.5; stroke-dasharray: 5 7; }
+.lung-medical-panel-label { fill: #718078; font-size: 12px; font-weight: 650; letter-spacing: .05em; }
+.lung-medical-spot { cursor: pointer; outline: none; }
+.lung-medical-spot-shape { fill: transparent; stroke: transparent; stroke-width: 2; transition: fill .18s ease, stroke .18s ease; }
+.lung-medical-spot-nose-mouth .lung-medical-spot-shape { fill: rgba(248,250,245,.96); stroke: #d6ded3; }
+.lung-medical-spot:hover .lung-medical-spot-shape,
+.lung-medical-spot:focus-visible .lung-medical-spot-shape { fill: rgba(255,255,255,.28); stroke: rgba(49,93,67,.5); stroke-dasharray: 5 7; }
+.lung-medical-spot:focus-visible .lung-medical-spot-shape { stroke: #d49a51; stroke-width: 4; }
+.lung-medical-spot.active .lung-medical-spot-shape { fill: rgba(255,255,255,.24); stroke: #315d43; stroke-width: 3; filter: url(#part-shadow); }
+.lung-medical-label { fill: #29493b; font-size: 13px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(255,254,249,.94); stroke-width: 5px; stroke-linejoin: round; }
 .learning-path { fill: none; stroke-width: 7; opacity: .18; stroke-linecap: round; }
 .learning-path.flow-blue, .learning-path.flow-oxygen { stroke: #5683a4; marker-end: url(#flow-arrow-blue); }
 .learning-path.flow-red { stroke: #c67469; marker-end: url(#flow-arrow-red); }
@@ -98,6 +111,7 @@
   .learning-controls .learning-play { grid-column: 1 / -1; grid-row: 1; }
   .learning-transcript ol { columns: 1; }
   .heart-medical-diagram { border-radius: 18px; }
+  .lung-medical-label { font-size: 15px; }
 }
 @media (max-width: 360px) {
   .visual-learning { margin-inline: 10px; padding-inline: 14px; }
@@ -109,4 +123,5 @@
   .heart-flow-dot { display: none; }
   .part-surface { transition: none; }
   .heart-part-spot ellipse { transition: none; }
+  .lung-medical-spot-shape { transition: none; }
 }

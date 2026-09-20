@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight, Bookmark, Check } from "lucide-react";
-import BodyArt from "./BodyArt";
+import OrganArtwork from "./OrganArtwork";
 import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
@@ -37,8 +37,7 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
       </div>
       <section className="organ-explorer">
         <div className="explorer-visual">
-          <BodyArt selected={id} onSelect={onSelect} availableIds={organs.map(item => item.id)} large />
-          <small>人体正面示意 · 位置与形态经过简化</small>
+          <OrganArtwork id={id} />
         </div>
         <div className="organ-information">
           <div className="organ-tabs desktop-organ-tabs">

@@ -14,6 +14,7 @@ try {
   const learning = page.locator('.visual-learning');
   await expect(learning).toContainText('跟着血液走一圈');
   await expect.poll(() => page.evaluate(async () => (await fetch('/media/heart-servier.png')).status)).toBe(200);
+  await expect(page.locator('.organ-artwork-heart img')).toHaveAttribute('src', '/media/heart-servier.png');
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });
     await learning.screenshot({ path: `${screenshotDir}/heart-mobile.png` });
@@ -37,6 +38,11 @@ try {
   await page.goto(`${base}/organs/lung`, { waitUntil: 'networkidle' });
   const lung = page.locator('.visual-learning');
   await expect(lung).toContainText('跟着一口气到肺泡');
+  await expect(lung.locator('.lung-medical-diagram')).toHaveCount(1);
+  await expect.poll(() => page.evaluate(async () => Promise.all([
+    '/media/lung-servier.png',
+    '/media/alveoli-servier.png',
+  ].map(async src => (await fetch(src)).status)))).toEqual([200, 200]);
   if (screenshotDir) {
     await lung.screenshot({ path: `${screenshotDir}/lung-mobile.png` });
     await page.setViewportSize({ width: 1280, height: 900 });
@@ -52,6 +58,23 @@ try {
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `lung visual learning overflows at ${width}px`);
+  }
+  for (const [id, asset] of [
+    ['liver', 'liver-servier.png'],
+    ['kidney', 'kidney-servier.png'],
+    ['pancreas', 'pancreas-servier.png'],
+  ]) {
+    await page.goto(`${base}/organs/${id}`, { waitUntil: 'networkidle' });
+    const artwork = page.locator(`.organ-artwork-${id}`);
+    await expect(artwork.locator('img')).toHaveAttribute('src', `/media/${asset}`);
+    await expect(artwork).toContainText('Servier Medical Art by Servier');
+    await expect.poll(() => page.evaluate(async src => (await fetch(src)).status, `/media/${asset}`)).toBe(200);
+    if (screenshotDir) {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await artwork.screenshot({ path: `${screenshotDir}/${id}-artwork-mobile.png` });
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await artwork.screenshot({ path: `${screenshotDir}/${id}-artwork-desktop.png` });
+    }
   }
   const reduced = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   await reduced.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });

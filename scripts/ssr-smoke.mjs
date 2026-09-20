@@ -3,6 +3,7 @@ import { chromium, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 
 const base = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3110';
+const screenshotDir = process.env.SCREENSHOT_DIR || 'artifacts';
 const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined });
 const errors = [];
 try {
@@ -79,8 +80,8 @@ try {
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/article/glucose`, { waitUntil: 'networkidle' });
-  await mkdir('artifacts', { recursive: true });
-  await page.screenshot({ path: 'artifacts/ssr-mobile.png' });
+  await mkdir(screenshotDir, { recursive: true });
+  await page.screenshot({ path: `${screenshotDir}/ssr-mobile.png` });
   assert.deepEqual(errors, [], 'No hydration or browser errors');
   console.log('PASS no-JS reading/navigation, real 404, metadata/noindex, hydration, existing bookmarks, search, sharing, history and mobile layouts.');
 } finally { await browser.close(); }
