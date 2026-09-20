@@ -13,6 +13,7 @@ try {
   await page.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });
   const learning = page.locator('.visual-learning');
   await expect(learning).toContainText('跟着血液走一圈');
+  await expect.poll(() => page.evaluate(async () => (await fetch('/media/heart-servier.png')).status)).toBe(200);
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });
     await learning.screenshot({ path: `${screenshotDir}/heart-mobile.png` });
@@ -62,7 +63,7 @@ try {
     const noJS = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     await noJS.goto(`${base}/organs/heart`);
     await expect(noJS.locator('.learning-transcript')).toContainText('左心室把血液送向全身');
-    await expect(noJS.locator('.learning-boundary')).toContainText('不按真实大小');
+    await expect(noJS.locator('.learning-boundary')).toContainText('底图展示心脏剖面结构');
     await noJS.goto(`${base}/organs/lung`);
     await expect(noJS.locator('.learning-transcript')).toContainText('二氧化碳随呼气排出');
     await expect(noJS.locator('.learning-boundary')).toContainText('不按真实数量');

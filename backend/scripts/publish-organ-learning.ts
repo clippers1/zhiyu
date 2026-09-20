@@ -8,9 +8,9 @@ import { relationID, snapshotArticle } from '../src/domain';
 const organSpecs = {
   heart: {
     applicability: '面向一般成年读者的基础心脏结构与血液循环科普；为简化示意，不用于个体判断。',
-    limitations: '不覆盖疾病、检查数值、特殊人群、诊断或治疗；图形不代表真实大小、位置、速度或心率。',
-    sourceCheckNotes: '核对 NHLBI 的四心腔和血流顺序；中文为重新组织，SVG 为原创简化示意；不覆盖瓣膜细节、疾病、数值或诊疗。',
-    releaseReason: '上线心脏与血液循环互动样板',
+    limitations: '不覆盖疾病、检查数值、特殊人群、诊断或治疗；医学底图展示剖面结构，高亮与动画不代表真实血液颜色、速度或心率。',
+    sourceCheckNotes: '核对 NHLBI 的四心腔和血流顺序；中文为重新组织；医学底图来自 Servier Medical Art（CC BY 4.0）并在页面署名，动画图层由本项目制作；不覆盖疾病、数值或诊疗。',
+    releaseReason: '更新心脏与血液循环医学插图版互动样板',
   },
   lung: {
     applicability: '面向一般成年读者的基础呼吸结构与肺泡气体交换科普；为简化示意，不用于个体判断。',
@@ -39,7 +39,7 @@ try {
 
   const sourceSpecs = body.references.map((source: any) => ({ ...source,
     licenseStatus: 'citation-only', availability: 'available',
-    licenseNotes: '仅作为事实依据和外链；中文文字与 SVG 均由本项目重新组织和绘制，不复制来源图片、视频或长段原文。',
+    licenseNotes: '仅作为事实依据和外链；中文文字由本项目重新组织，不复制来源图片、视频或长段原文。',
   }));
   const citations = [];
   for (const sourceSpec of sourceSpecs) {

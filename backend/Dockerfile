@@ -12,6 +12,7 @@ COPY backend/ .
 COPY src/ /workspace/src/
 COPY public/favicon.svg /workspace/public/favicon.svg
 COPY public/content/ /workspace/backend/public/content/
+COPY public/media/ /workspace/backend/public/media/
 RUN PAYLOAD_SECRET=build-placeholder-not-a-runtime-secret npm run build
 
 FROM node:22-bookworm-slim AS runner

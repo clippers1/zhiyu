@@ -1,21 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useId, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from "lucide-react";
 import { Citation } from "./ContentUI";
 import "./visual-learning.css";
 
 const diagrams = {
   "heart-flow-v1": {
-    title: "心脏、肺与全身之间的简化血液循环图",
-    description: "图中用器官轮廓展示全身、四个心腔和肺，动态箭头与下方文字共同说明血液流动方向。",
-    paths: {
-      "body-ra": ["M143 270 C178 270 192 224 232 218", "flow-blue"],
-      "ra-rv": ["M276 248 C272 264 278 277 292 288", "flow-blue"],
-      "rv-lungs": ["M302 332 C205 286 218 140 282 118", "flow-blue"],
-      "lungs-la": ["M364 118 C422 136 431 182 394 211", "flow-red"],
-      "la-lv": ["M383 248 C397 266 391 285 371 299", "flow-red"],
-      "lv-body": ["M341 350 C280 403 145 382 112 324", "flow-red"],
-    },
+    title: "心脏内部结构与血液流动方向图",
+    description: "以医学心脏剖面插图为底图，每次只高亮一个相关区域，并用一小段动态路径说明当前血液流动方向。",
     legend: [{ className: "legend-blue", label: "从全身前往肺" }, { className: "legend-red", label: "从肺返回并前往全身" }],
+    attribution: {
+      name: "Servier Medical Art by Servier",
+      url: "https://smart.servier.com/smart_image/smart-heart/",
+      license: "CC BY 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    },
   },
   "lung-gas-exchange-v1": {
     title: "空气进入肺泡并与毛细血管交换气体的简化图",
@@ -30,6 +28,40 @@ const diagrams = {
     },
     legend: [{ className: "legend-air", label: "空气沿气道移动" }, { className: "legend-blue", label: "氧气进入血液" }, { className: "legend-carbon", label: "二氧化碳进入肺泡并呼出" }],
   },
+};
+
+const heartFlowVisuals = {
+  "body-ra": {
+    path: "M91 78 C91 145 103 223 150 294", tone: "flow-blue", duration: "2.4s", spot: [150, 288, 105, 132],
+    label: { line: "M150 294 L92 324 L40 324", x: 22, y: 307, width: 92, textX: 68, textY: 329, text: "右心房" },
+  },
+  "ra-rv": {
+    path: "M153 300 C171 339 198 378 232 421", tone: "flow-blue", duration: "2.4s", spot: [226, 410, 120, 150],
+    label: { line: "M232 421 L114 462 L54 462", x: 28, y: 445, width: 102, textX: 79, textY: 467, text: "右心室" },
+  },
+  "rv-lungs": {
+    path: "M232 421 C261 374 278 321 278 261 C278 203 285 148 317 104", tone: "flow-blue", duration: "3s", spot: [278, 252, 122, 186],
+    label: { line: "M317 104 L405 78 L512 78", x: 414, y: 61, width: 120, textX: 474, textY: 83, text: "前往肺部" },
+  },
+  "lungs-la": {
+    path: "M528 214 C487 218 450 235 407 274", tone: "flow-red", duration: "2.4s", spot: [408, 274, 96, 112],
+    label: { line: "M407 274 L482 304 L538 304", x: 446, y: 287, width: 92, textX: 492, textY: 309, text: "左心房" },
+  },
+  "la-lv": {
+    path: "M407 278 C407 321 410 365 416 430", tone: "flow-red", duration: "2.4s", spot: [414, 412, 112, 152],
+    label: { line: "M416 430 L478 469 L536 469", x: 443, y: 452, width: 95, textX: 491, textY: 474, text: "左心室" },
+  },
+  "lv-body": {
+    path: "M416 430 C374 371 347 308 334 239 C321 169 304 100 281 46", tone: "flow-red", duration: "3s", spot: [334, 230, 130, 214],
+    label: { line: "M281 46 L214 77 L112 77", x: 30, y: 60, width: 182, textX: 121, textY: 82, text: "主动脉 · 前往全身" },
+  },
+};
+
+const heartPartSpots = {
+  "right-atrium": [150, 288, 62, 72],
+  "right-ventricle": [226, 410, 70, 90],
+  "left-atrium": [408, 274, 58, 65],
+  "left-ventricle": [414, 412, 68, 92],
 };
 
 function useReducedMotion() {
@@ -70,42 +102,44 @@ function InteractivePart({ part, selected, pressed, onPart, tone = "neutral", la
   </g>;
 }
 
-function HeartArtwork({ learning, activePart, activeStep, onPart, diagram }) {
+function HeartMedicalArtwork({ learning, activePart, activeStep, onPart, diagram }) {
+  const clipID = `heart-focus-${useId().replaceAll(":", "")}`;
   const parts = Object.fromEntries(learning.parts.map(part => [part.id, part]));
   const active = learning.steps[activeStep];
-  const selected = id => activePart === id || active?.from === id || active?.to === id;
-  return <>
-    <path className="diagram-orbit" d="M95 216 C112 105 202 44 305 46 C442 48 534 143 523 266 C515 353 440 394 337 394" />
-    <FlowPaths learning={learning} activeStep={activeStep} diagram={diagram} />
-    <g className="heart-anatomy" aria-hidden="true">
-      <path className="heart-shell" d="M220 197 C218 151 252 150 307 176 C356 143 424 161 427 220 C431 292 374 361 327 381 C276 356 220 293 220 197Z" />
-      <path className="heart-septum" d="M326 181 C323 234 326 305 327 367" />
+  const visual = heartFlowVisuals[active.id];
+  const [spotX, spotY, spotWidth, spotHeight] = visual.spot;
+  return <svg className="heart-medical-diagram" viewBox="0 0 560 610" role="img" aria-labelledby="heart-medical-title heart-medical-desc">
+    <title id="heart-medical-title">{diagram.title}</title>
+    <desc id="heart-medical-desc">{diagram.description}</desc>
+    <defs>
+      <clipPath id={clipID}><ellipse cx={spotX} cy={spotY} rx={spotWidth} ry={spotHeight} /></clipPath>
+      <filter id="heart-spot-shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="8" floodColor="#542f2b" floodOpacity=".12" /></filter>
+    </defs>
+    <rect className="heart-medical-paper" width="560" height="610" />
+    <image className="heart-medical-base" href="/media/heart-servier.png" x="30" y="0" width="500" height="1011" />
+    <image className="heart-medical-focus" href="/media/heart-servier.png" x="30" y="0" width="500" height="1011" clipPath={`url(#${clipID})`} />
+    <ellipse className="heart-focus-ring" cx={spotX} cy={spotY} rx={spotWidth} ry={spotHeight} />
+    <g className={`heart-flow ${visual.tone}`} aria-hidden="true">
+      <path className="heart-flow-halo" d={visual.path} />
+      <path className="heart-flow-line" d={visual.path} />
+      <circle className="heart-flow-dot" r="6"><animateMotion path={visual.path} dur={visual.duration} repeatCount="indefinite" /></circle>
+      <circle className="heart-flow-dot heart-flow-dot-small" r="4"><animateMotion path={visual.path} dur={visual.duration} begin="-.8s" repeatCount="indefinite" /></circle>
+      <path className="heart-label-line" d={visual.label.line} />
+      <circle className="heart-label-dot" cx={visual.path.match(/[-\d.]+/g)?.slice(-2)[0]} cy={visual.path.match(/[-\d.]+/g)?.slice(-2)[1]} r="4" />
+      <rect className="heart-label-bg" x={visual.label.x} y={visual.label.y} width={visual.label.width} height="34" rx="4" />
+      <text className="heart-label-text" x={visual.label.textX} y={visual.label.textY} textAnchor="middle">{visual.label.text}</text>
     </g>
-    <InteractivePart part={parts.body} selected={selected("body")} pressed={activePart === "body"} onPart={onPart} tone="body" labelX="88" labelY="277">
-      <circle className="part-surface" cx="88" cy="270" r="55" />
-      <circle className="part-detail" cx="88" cy="270" r="43" />
-    </InteractivePart>
-    <InteractivePart part={parts.lungs} selected={selected("lungs")} pressed={activePart === "lungs"} onPart={onPart} tone="lung" labelX="322" labelY="111">
-      <path className="part-surface" d="M306 46 L306 92 C293 62 273 47 253 51 C224 57 211 89 217 126 C223 158 244 173 277 165 C302 158 311 135 311 107 L311 46Z" />
-      <path className="part-surface" d="M334 46 L334 92 C347 62 367 47 387 51 C416 57 429 89 423 126 C417 158 396 173 363 165 C338 158 329 135 329 107 L329 46Z" />
-      <path className="part-detail part-line" d="M320 37 L320 108 M320 74 L279 111 M320 74 L361 111" />
-    </InteractivePart>
-    <InteractivePart part={parts["right-atrium"]} selected={selected("right-atrium")} pressed={activePart === "right-atrium"} onPart={onPart} tone="venous" labelX="271" labelY="219">
-      <path className="part-surface" d="M235 181 C250 167 284 170 307 185 L306 244 C285 253 252 248 237 230 C228 219 226 191 235 181Z" />
-    </InteractivePart>
-    <InteractivePart part={parts["right-ventricle"]} selected={selected("right-ventricle")} pressed={activePart === "right-ventricle"} onPart={onPart} tone="venous" labelX="282" labelY="307">
-      <path className="part-surface" d="M237 246 C258 255 286 255 307 247 L319 362 C280 341 245 305 237 246Z" />
-    </InteractivePart>
-    <InteractivePart part={parts["left-atrium"]} selected={selected("left-atrium")} pressed={activePart === "left-atrium"} onPart={onPart} tone="arterial" labelX="374" labelY="219">
-      <path className="part-surface" d="M335 184 C359 167 398 171 414 190 C422 203 417 228 407 239 C389 251 357 251 337 241Z" />
-    </InteractivePart>
-    <InteractivePart part={parts["left-ventricle"]} selected={selected("left-ventricle")} pressed={activePart === "left-ventricle"} onPart={onPart} tone="arterial" labelX="369" labelY="307">
-      <path className="part-surface" d="M337 248 C357 255 389 254 407 242 C403 296 371 344 329 368 L329 274Z" />
-    </InteractivePart>
-    <text className="diagram-side" x="272" y="158" textAnchor="middle">身体右侧</text>
-    <text className="diagram-side" x="374" y="158" textAnchor="middle">身体左侧</text>
-    <text className="diagram-caption" x="322" y="414" textAnchor="middle">示意图 · 位置、比例和速度均经过简化</text>
-  </>;
+    {Object.entries(heartPartSpots).map(([id, [cx, cy, rx, ry]]) => {
+      const part = parts[id];
+      return <g key={id} role="button" tabIndex="0" aria-label={`${part.label}：${part.summary}`} aria-pressed={activePart === id}
+        className={`heart-part-spot${activePart === id ? " active" : ""}`} onClick={() => onPart(id)}
+        onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onPart(id); } }}>
+        <ellipse cx={cx} cy={cy} rx={rx} ry={ry} />
+      </g>;
+    })}
+    <text className="heart-orientation" x="18" y="27"><tspan x="18">正面剖视图</tspan><tspan x="18" dy="17">图像左侧对应身体右侧</tspan></text>
+    <text className="heart-stage-number" x="536" y="42" textAnchor="end">{String(activeStep + 1).padStart(2, "0")}</text>
+  </svg>;
 }
 
 function LungArtwork({ learning, activePart, activeStep, onPart, diagram }) {
@@ -148,15 +182,16 @@ function LungArtwork({ learning, activePart, activeStep, onPart, diagram }) {
 
 function LearningDiagram({ learning, activePart, activeStep, onPart }) {
   const diagram = diagrams[learning.type];
+  if (learning.type === "heart-flow-v1") {
+    return <HeartMedicalArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />;
+  }
   const titleID = `${learning.type}-title`;
   const descriptionID = `${learning.type}-desc`;
   return <svg className={`learning-diagram ${learning.type}`} viewBox="0 0 620 430" role="img" aria-labelledby={`${titleID} ${descriptionID}`}>
     <title id={titleID}>{diagram.title}</title>
     <desc id={descriptionID}>{diagram.description}</desc>
     <DiagramDefs />
-    {learning.type === "heart-flow-v1"
-      ? <HeartArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />
-      : <LungArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />}
+    <LungArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />
   </svg>;
 }
 
@@ -185,6 +220,11 @@ export default function VisualLearning({ content }) {
       <div>
         <LearningDiagram learning={learning} activePart={part} activeStep={step} onPart={id => { setPlaying(false); setPart(id); }} />
         <p className="learning-legend">{diagram.legend.map(item => <React.Fragment key={item.label}><i className={item.className} /> {item.label}</React.Fragment>)}；颜色只是辅助，箭头和文字会同时说明方向。</p>
+        {diagram.attribution && <p className="learning-attribution">医学底图：<a href={diagram.attribution.url} target="_blank" rel="noreferrer">{diagram.attribution.name}</a>，<a href={diagram.attribution.licenseUrl} target="_blank" rel="noreferrer">{diagram.attribution.license}</a>。</p>}
+        <div className="learning-route" aria-label="选择讲解步骤">
+          {learning.steps.map((item, index) => <button key={item.id} type="button" className={step === index && !part ? "active" : ""}
+            aria-current={step === index && !part ? "step" : undefined} onClick={() => move(index)}>{index + 1}</button>)}
+        </div>
       </div>
       <div className="learning-current" aria-live="polite">
         {selectedPart ? <><span>点选结构</span><h3>{selectedPart.label}</h3><p>{selectedPart.summary}<Citation ids={selectedPart.sourceIds} references={content.references} prefix="organ-source" /></p></>

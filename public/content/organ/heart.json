@@ -8,7 +8,7 @@
   "related": ["pressure", "lipids"],
   "kind": "organ",
   "category": "circulation",
-  "version": 1,
+  "version": 2,
   "updatedAt": "2026-09-20",
   "reviewStatus": "pending",
   "references": [
@@ -41,8 +41,8 @@
   "learning": {
     "type": "heart-flow-v1",
     "title": "跟着血液走一圈",
-    "intro": "从全身回到心脏的血液，先经过右心前往肺，再回到左心并被泵向全身。你可以点选结构，或逐步观察这条路径。",
-    "simplification": "本图只展示四个心腔、肺和全身之间的主要方向，不按真实大小、位置、速度或心率绘制；血管和瓣膜结构也经过简化。",
+    "intro": "从全身回到心脏的血液，先经过右心前往肺，再回到左心并被泵向全身。你可以点选图中的心腔，或逐步观察这条路径。",
+    "simplification": "底图展示心脏剖面结构；高亮、颜色和动画仅用于说明主要流动方向，没有完整呈现所有血管、瓣膜和分支，也不代表真实血液颜色、流速或心率。",
     "parts": [
       { "id": "body", "label": "全身", "summary": "血液完成全身循环后，经大静脉回到心脏右侧。", "sourceIds": ["heart"] },
       { "id": "right-atrium", "label": "右心房", "summary": "接收从全身回到心脏的血液。", "sourceIds": ["heart", "anatomy"] },
