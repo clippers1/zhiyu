@@ -9,7 +9,7 @@
   "kind": "organ",
   "category": "circulation",
   "version": 1,
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-09-20",
   "reviewStatus": "pending",
   "references": [
     {
@@ -58,10 +58,6 @@
       { "id": "lungs-la", "title": "从肺返回左心房", "text": "血液在肺获得氧后，经肺静脉回到左心房。", "from": "lungs", "to": "left-atrium", "sourceIds": ["heart"] },
       { "id": "la-lv", "title": "左心房到左心室", "text": "血液从左心房进入左心室，准备再次流向全身。", "from": "left-atrium", "to": "left-ventricle", "sourceIds": ["heart"] },
       { "id": "lv-body", "title": "左心室把血液送向全身", "text": "左心室将血液泵入主动脉，血液由此进入全身循环。", "from": "left-ventricle", "to": "body", "sourceIds": ["heart"] }
-    ],
-    "questions": [
-      { "question": "从全身回到心脏的血液，首先进入哪个心腔？", "options": ["右心房", "左心房", "左心室"], "correctIndex": 0, "explanation": "来自全身的血液经大静脉进入右心房，再流向右心室。", "sourceIds": ["heart"] },
-      { "question": "把血液经主动脉泵向全身的是哪个心腔？", "options": ["右心室", "左心室", "右心房"], "correctIndex": 1, "explanation": "左心室产生将血液泵向全身所需的压力。", "sourceIds": ["heart"] }
     ]
   }
 }

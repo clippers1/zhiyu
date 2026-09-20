@@ -128,7 +128,7 @@ export const Articles: CollectionConfig = {
     { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: indicatorOnly } },
     { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
     text('organLabel', '关联说明'),
-    { name: 'learning', label: '互动学习脚本（JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '支持已登记的心脏循环与肺部气体交换类型；结构、步骤和理解题都必须使用本文已有来源编号。' } },
+    { name: 'learning', label: '互动学习脚本（JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '支持已登记的心脏循环与肺部气体交换类型；结构和步骤都必须使用本文已有来源编号。' } },
     { name: 'relatedOrgans', label: '关联器官', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'organ' } } },
     { name: 'relatedIndicators', label: '关联指标', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'indicator' } } },
     { name: 'citations', label: '本文引用', type: 'array', required: true, minRows: 1, fields: [

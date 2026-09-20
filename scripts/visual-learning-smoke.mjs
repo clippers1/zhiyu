@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
 import { chromium, expect } from '@playwright/test';
 
 const base = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:5174';
 const ssr = process.env.TEST_SSR === 'true';
+const screenshotDir = process.env.SCREENSHOT_DIR;
 const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined });
 const errors = [];
 try {
@@ -11,6 +13,13 @@ try {
   await page.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });
   const learning = page.locator('.visual-learning');
   await expect(learning).toContainText('跟着血液走一圈');
+  if (screenshotDir) {
+    await mkdir(screenshotDir, { recursive: true });
+    await learning.screenshot({ path: `${screenshotDir}/heart-mobile.png` });
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await learning.screenshot({ path: `${screenshotDir}/heart-desktop.png` });
+    await page.setViewportSize({ width: 390, height: 844 });
+  }
   await expect(learning.locator('.learning-current')).toContainText('从全身回到右心房');
   await learning.getByRole('button', { name: /右心室：/ }).click();
   await expect(learning.locator('.learning-current')).toContainText('把血液经肺动脉泵向肺');
@@ -19,11 +28,7 @@ try {
   await learning.getByRole('button', { name: '逐步播放' }).click();
   await expect(learning.locator('.learning-current')).toContainText('右心室把血液送往肺', { timeout: 4000 });
   await learning.getByRole('button', { name: '暂停' }).click();
-  await learning.locator('.learning-check fieldset').first().getByRole('button', { name: '左心房' }).click();
-  await expect(learning.locator('.learning-answer').first()).toContainText('再顺着路径看一遍');
-  await learning.locator('.learning-check fieldset').first().getByRole('button', { name: '右心房' }).click();
-  await expect(learning.locator('.learning-answer').first()).toContainText('理解正确');
-  assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => key.includes('answer') || key.includes('quiz'))), false);
+  await expect(learning.locator('.learning-check')).toHaveCount(0);
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `visual learning overflows at ${width}px`);
@@ -31,14 +36,18 @@ try {
   await page.goto(`${base}/organs/lung`, { waitUntil: 'networkidle' });
   const lung = page.locator('.visual-learning');
   await expect(lung).toContainText('跟着一口气到肺泡');
+  if (screenshotDir) {
+    await lung.screenshot({ path: `${screenshotDir}/lung-mobile.png` });
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await lung.screenshot({ path: `${screenshotDir}/lung-desktop.png` });
+    await page.setViewportSize({ width: 390, height: 844 });
+  }
   await expect(lung.locator('.learning-current')).toContainText('空气从鼻或口进入气管');
   await lung.getByRole('button', { name: /毛细血管：/ }).click();
   await expect(lung.locator('.learning-current')).toContainText('氧气从肺泡进入周围毛细血管');
   await lung.getByRole('button', { name: '下一步' }).click();
   await expect(lung.locator('.learning-current')).toContainText('空气进入支气管');
-  await lung.locator('.learning-check fieldset').nth(1).getByRole('button', { name: '从血液进入肺泡' }).click();
-  await expect(lung.locator('.learning-check fieldset').nth(1).locator('.learning-answer')).toContainText('理解正确');
-  assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => key.includes('answer') || key.includes('quiz'))), false);
+  await expect(lung.locator('.learning-check')).toHaveCount(0);
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `lung visual learning overflows at ${width}px`);
@@ -60,7 +69,7 @@ try {
     await noJS.close();
   }
   assert.deepEqual(errors, []);
-  console.log(`PASS heart and lung learning steps, structure selection, controls, local-only quiz and responsive/reduced-motion${ssr ? ' plus no-JS transcripts' : ''}`);
+  console.log(`PASS heart and lung learning steps, organic diagrams, structure selection, controls and responsive/reduced-motion${ssr ? ' plus no-JS transcripts' : ''}`);
 } finally {
   await browser.close();
 }

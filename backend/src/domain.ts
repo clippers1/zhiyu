@@ -40,15 +40,8 @@ function visualLearning(value: any, sourceKeys: Set<string>) {
     sourceIds: keys(step?.sourceIds, '步骤解释'),
   }));
   if (new Set(steps.map((step: any) => step.id)).size !== steps.length || steps.some((step: any) => !/^[a-z0-9-]+$/.test(step.id) || !partIds.has(step.from) || !partIds.has(step.to))) fail('互动学习的步骤标识或结构关系不正确。');
-  const questions = Array.isArray(value.questions) ? value.questions.map((question: any) => {
-    if (!Array.isArray(question?.options) || question.options.length < 2 || question.options.length > 5) fail('理解题应包含 2–5 个选项。');
-    if (!Number.isInteger(question.correctIndex) || question.correctIndex < 0 || question.correctIndex >= question.options.length) fail('理解题正确选项不正确。');
-    return { question: text(question.question, '题目'), options: question.options.map((option: any) => text(option, '选项', 120)),
-      correctIndex: question.correctIndex, explanation: text(question.explanation, '答案解释'), sourceIds: keys(question.sourceIds, '答案解释') };
-  }) : [];
-  if (questions.length > 3) fail('首期互动学习最多包含 3 道理解题。');
   return { type: value.type, title: text(value.title, '标题', 100), intro: text(value.intro, '介绍'),
-    simplification: text(value.simplification, '简化说明'), parts, steps, questions };
+    simplification: text(value.simplification, '简化说明'), parts, steps };
 }
 
 export async function snapshotArticle(req: PayloadRequest, articleID: number) {
