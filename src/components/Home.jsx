@@ -20,8 +20,7 @@ import { IndicatorCard, LoadState, SectionTitle } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import StartHere from "./StartHere";
 import { TopicCards } from "./TopicRoute";
-import { ContinueReading } from "./ReadingTools";
-export default function Home({ go, onOpen, onOrgan, setTour, reading }) {
+export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [
     { kind: "indicator", featured: true, limit: 3 },
   ]);
@@ -43,7 +42,6 @@ export default function Home({ go, onOpen, onOrgan, setTour, reading }) {
           </span>
         </div>
         <StartHere />
-        <ContinueReading reading={reading} />
         <section className="hero">
           <div className="hero-content">
             <div className="overline">

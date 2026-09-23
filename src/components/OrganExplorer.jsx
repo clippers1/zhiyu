@@ -1,16 +1,14 @@
 import React from "react";
-import { ArrowRight, Bookmark, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import OrganArtwork from "./OrganArtwork";
 import { useContent } from "../hooks";
 import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
-import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
-import { BookmarkNotice } from "./SavedLibrary";
 import ShareCardButton from "./ShareCard";
 import VisualLearning from "./VisualLearning";
 
-export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks }) {
+export default function OrganExplorer({ id, onSelect, onOpen }) {
   const state = useContent("get", ["organ", id]);
   const catalog = useContent("list", [{ kind: "organ", limit: 24 }]);
   const selected = state.data;
@@ -54,14 +52,8 @@ export default function OrganExplorer({ id, onSelect, onOpen, reading, bookmarks
           <LoadState {...state} />
           {selected && (
             <>
-              <ReadingTools reading={reading} kind="organ" id={id} content={selected} />
               <div className="organ-bookmark">
-                <button className={`save-button${bookmarks.savedOrgans.includes(id) ? " is-saved" : ""}`} disabled={!bookmarks.ready} aria-pressed={bookmarks.savedOrgans.includes(id)} onClick={() => bookmarks.toggleSave(id, "organ")}>
-                  {bookmarks.savedOrgans.includes(id) ? <Check size={18} /> : <Bookmark size={18} />}
-                  {bookmarks.savedOrgans.includes(id) ? "已收藏器官" : "收藏器官"}
-                </button>
                 <ShareCardButton content={selected} />
-                <BookmarkNotice bookmarks={bookmarks} />
               </div>
               <span className="overline">{selected.en}</span>
               <h2>

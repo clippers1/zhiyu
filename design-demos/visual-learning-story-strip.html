@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>方向 B · 连续故事带</title>
+  <style>
+    @font-face{font-family:ZhiyuSans;src:url('./assets/noto-sans-sc.woff2')}@font-face{font-family:ZhiyuSerif;src:url('./assets/noto-serif-sc.woff2');font-weight:700}
+    /* Assumption: mobile reading should feel like following a story, not operating a diagram. */
+    *{box-sizing:border-box}body{margin:0;background:#e8ede5;color:#243e34;font-family:ZhiyuSans,sans-serif}button{font-family:ZhiyuSans,sans-serif}.phone{width:390px;min-height:844px;margin:auto;background:#fbfcf8;padding:28px 20px}.eyebrow{font-size:12px;letter-spacing:.12em;color:#738371}.title{margin:7px 0 8px;font:700 30px/1.15 ZhiyuSerif,serif}.intro{margin:0;color:#55685e;font-size:14px;line-height:1.65}.strip{margin-top:26px;border-top:1px solid #dce4d9}.row{display:grid;grid-template-columns:42px 38px 1fr;min-height:78px;align-items:center;border-bottom:1px solid #dce4d9;cursor:pointer}.num{font:italic 18px Georgia,serif;color:#96a294}.track{height:100%;position:relative}.track:before{content:"";position:absolute;left:17px;top:0;bottom:0;width:3px;background:#84a0af}.row:nth-child(n+5) .track:before{background:#c08276}.dot{position:absolute;left:10px;top:30px;width:17px;height:17px;border:4px solid #fbfcf8;border-radius:50%;background:#6b8fa3;box-shadow:0 0 0 1px #6b8fa3}.row:nth-child(n+5) .dot{background:#bc786c;box-shadow:0 0 0 1px #bc786c}.copy b{display:block;font:700 16px ZhiyuSerif,serif}.copy span{display:block;margin-top:5px;color:#718175;font-size:12px}.row.active{background:#f1f4ec}.row.active .copy b{font-size:19px}.row.active .dot{transform:scale(1.25);box-shadow:0 0 0 5px #dce8d9}.detail{margin-top:20px;padding:19px 18px;background:#294c3b;color:#fff}.detail small{letter-spacing:.1em;color:#bcd0c2}.detail h2{margin:7px 0 6px;font:700 21px ZhiyuSerif,serif}.detail p{margin:0;color:#dbe7de;font-size:14px;line-height:1.65}.controls{display:flex;gap:8px;margin-top:12px}.controls button{flex:1;min-height:44px;border:1px solid #cbd7c8;background:#fff;color:#315143}.controls .play{flex:2;background:#315d43;color:#fff;border-color:#315d43}
+  </style>
+</head><body><main class="phone">
+  <div class="eyebrow">方向 B · 连续故事带</div><h1 class="title">血液怎样完成一圈</h1><p class="intro">像读一段短故事一样向下看，路线始终连续，不要求用户理解整张复杂图。</p>
+  <section class="strip">
+    <div class="row active"><span class="num">01</span><i class="track"><i class="dot"></i></i><span class="copy"><b>全身</b><span>血液带着二氧化碳返回</span></span></div>
+    <div class="row"><span class="num">02</span><i class="track"><i class="dot"></i></i><span class="copy"><b>右心房</b><span>接收从全身回来的血液</span></span></div>
+    <div class="row"><span class="num">03</span><i class="track"><i class="dot"></i></i><span class="copy"><b>右心室</b><span>把血液送往肺</span></span></div>
+    <div class="row"><span class="num">04</span><i class="track"><i class="dot"></i></i><span class="copy"><b>肺</b><span>进行气体交换</span></span></div>
+    <div class="row"><span class="num">05</span><i class="track"><i class="dot"></i></i><span class="copy"><b>左心房</b><span>接收从肺回来的血液</span></span></div>
+    <div class="row"><span class="num">06</span><i class="track"><i class="dot"></i></i><span class="copy"><b>左心室</b><span>把血液再次泵向全身</span></span></div>
+  </section>
+  <section class="detail"><small>正在了解 · 01</small><h2>从全身回到右心房</h2><p>来自全身的血液经上、下腔静脉进入右心房。</p></section>
+  <div class="controls"><button>上一步</button><button class="play">自动讲解</button><button>下一步</button></div>
+  <script>document.querySelectorAll('.row').forEach((n,i)=>n.onclick=()=>{document.querySelector('.row.active')?.classList.remove('active');n.classList.add('active');document.querySelector('.detail small').textContent=`正在了解 · 0${i+1}`})</script>
+</main></body></html>

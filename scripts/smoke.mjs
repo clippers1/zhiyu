@@ -68,11 +68,6 @@ try {
     .click();
   await expect(page.locator("#article-source-tests")).toBeInViewport();
   await expect(page).toHaveURL(/\/article\/glucose$/);
-  await page.getByRole("button", { name: "收藏知识", exact: true }).click();
-  await page.reload();
-  await expect(
-    page.getByRole("button", { name: "已收藏", exact: true }),
-  ).toBeVisible();
   await page.getByRole("button", { name: "返回上一页" }).click();
   await expect(page.getByRole("heading", { name: /看懂指标/ })).toBeVisible();
   await page
@@ -149,7 +144,7 @@ try {
   await expect(mobileNav()).toBeVisible();
   for (const width of [320, 360, 390, 430, 768]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const name of ["器官探索", "我的收藏", "健康地图", "指标百科"]) {
+    for (const name of ["器官探索", "健康地图", "指标百科"]) {
       await mobileNav().getByRole("link", { name, exact: true }).click();
       await expect(page.locator(".load-state")).toHaveCount(0);
       await noOverflow(`${width}/${name}`);
@@ -266,7 +261,7 @@ try {
   await expect(page.getByRole("heading", { name: "认识血压", exact: true })).toBeVisible();
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: citations, lazy content, deep links, back/reload, bookmarks, search, filters, pagination, retry, mobile navigation and 320–768px layouts. No page errors.",
+    "PASS: citations, lazy content, deep links, back/reload, search, filters, pagination, retry, mobile navigation and 320–768px layouts. No page errors.",
   );
 } finally {
   await browser.close();

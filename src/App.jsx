@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   BookOpen,
-  Bookmark,
   Heart,
   Map,
   Search,
+  Settings2,
   ShieldCheck,
   Sprout,
 } from "lucide-react";
@@ -15,39 +15,31 @@ import OrganExplorer from "./components/OrganExplorer";
 import SearchDialog from "./components/SearchDialog";
 import Tour from "./components/Tour";
 import Modal from "./components/Modal";
-import { FeedbackTracker } from "./components/Feedback";
 import { ReaderProvider, useReader } from "./reader-context";
 import { RouteLink } from "./components/RouteLink";
-import { useBookmarks, useRoute } from "./hooks";
+import { useRoute } from "./hooks";
 import { useReading } from "./useReading";
-import { RecentReading } from "./components/ReadingTools";
+import ToolsModal from "./components/ToolsModal";
 import "./reading.css";
 import "./discovery.css";
 import "./topics.css";
 import TopicRoute from "./components/TopicRoute";
-import SavedLibrary from "./components/SavedLibrary";
-import "./bookmarks.css";
 
 const nav = [
   { id: "map", title: "健康地图", short: "发现", icon: Map },
   { id: "indicators", title: "指标百科", short: "指标", icon: BookOpen },
   { id: "organs", title: "器官探索", short: "人体", icon: Heart },
-  { id: "saved", title: "我的收藏", short: "收藏", icon: Bookmark },
 ];
 function ReaderApp() {
   const { runtime, initialRoute } = useReader();
-  const feedbackBase = runtime.feedbackBase;
   const { route, navigate, back } = useRoute(initialRoute, runtime.serverRendered);
-  const bookmarks = useBookmarks();
-  const { saved, savedOrgans, toggleSave, storageError } = bookmarks;
-  const savedCount = saved.length + savedOrgans.length;
   const reading = useReading();
   const [searchOpen, setSearchOpen] = useState(false);
-  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const [tour, setTour] = useState(null);
   useEffect(() => {
     setSearchOpen(false);
-    setFeedbackOpen(false);
+    setToolsOpen(false);
     setTour(null);
     if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
   }, [route.page, route.id, runtime.serverRendered]);
@@ -81,9 +73,6 @@ function ReaderApp() {
                 onNavigate={() => navigate(item.id)}
               >
                 {item.title}
-                {item.id === "saved" && savedCount > 0 && (
-                  <i>{savedCount}</i>
-                )}
               </RouteLink>
             ))}
           </nav>
@@ -98,11 +87,12 @@ function ReaderApp() {
               <kbd>⌕</kbd>
             </button>
             <button
-              className="avatar"
-              aria-label="查看我的收藏"
-              onClick={() => navigate("saved")}
+              className="tools-trigger"
+              aria-label="偏好设置"
+              aria-haspopup="dialog"
+              onClick={() => setToolsOpen(true)}
             >
-              知
+              <Settings2 size={19} />
             </button>
           </div>
         </div>
@@ -118,26 +108,19 @@ function ReaderApp() {
             </button>
           </section>
         )}
-        {route.page === "map" && (
+        {(route.page === "map" || route.page === "saved") && (
           <Home
             go={navigate}
             onOpen={onOpen}
             onOrgan={onOrgan}
             setTour={setTour}
-            reading={reading}
           />
         )}
         {route.page === "indicators" && (
           <Library key="library" onOpen={onOpen} />
         )}
         {route.page === "organs" && (
-          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} reading={reading} bookmarks={bookmarks} />
-        )}
-        {route.page === "saved" && (
-          <>
-          <SavedLibrary bookmarks={bookmarks} navigate={navigate} />
-          <RecentReading reading={reading} navigate={navigate} />
-          </>
+          <OrganExplorer id={route.id} onSelect={onOrgan} onOpen={onOpen} />
         )}
         {route.page === "article" && (
           <Article
@@ -145,14 +128,9 @@ function ReaderApp() {
             id={route.id}
             onBack={back}
             onOrgan={onOrgan}
-            saved={saved}
-            toggleSave={toggleSave}
-            storageError={storageError}
-            bookmarksReady={bookmarks.ready}
             reading={reading}
           />
         )}
-        {feedbackBase && <div className="feedback-entry"><button className="feedback-footer" onClick={() => setFeedbackOpen(true)}>查询纠错进度</button></div>}
         <footer>
           <span className="footer-brand">
             <Sprout size={17} /> 知愈 <i>让每一份了解，成为照顾自己的力量。</i>
@@ -174,7 +152,6 @@ function ReaderApp() {
           >
             <span>
               <Icon size={22} strokeWidth={activePage === id ? 2 : 1.6} />
-              {id === "saved" && savedCount > 0 && <i>{savedCount}</i>}
             </span>
             <b>{short}</b>
           </RouteLink>
@@ -194,7 +171,7 @@ function ReaderApp() {
           />
         </Modal>
       )}
-      {feedbackOpen && <Modal className="feedback-modal" onClose={() => setFeedbackOpen(false)}><FeedbackTracker /></Modal>}
+      {toolsOpen && <ToolsModal reading={reading} onClose={() => setToolsOpen(false)} />}
       {tour !== null && (
         <Modal className="tour-modal" onClose={() => setTour(null)}>
           <Tour tour={tour} setTour={setTour} go={navigate} />

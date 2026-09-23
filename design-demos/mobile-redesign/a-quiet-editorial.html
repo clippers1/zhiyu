@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方向 A · 安静纸感 — 移动端重设计</title>
+<style>
+/* ============ 假设与说明 ============
+   方向 A「安静纸感」：排版克制优先。
+   - 一套 4px 栅格间距（4/8/12/16/24/32）
+   - 一套字阶（11/13/15/17/22/28），正文 15px、行高 1.85
+   - 去掉卡片套卡片：列表用发丝线分隔代替层层边框
+   - 单一强调色（深绿 #3d5c46），Georgia 斜体数字保留为品牌签名
+   - 交互人体图不再隐藏，收成一条可横滑的器官带
+   - 内容全部来自 zhiyu 线上真实数据
+===================================== */
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/noto-sans-sc.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Noto Serif SC"; src: url("../assets/noto-serif-sc.woff2") format("woff2"); font-weight: 200 900; }
+* { box-sizing: border-box; margin: 0; }
+:root {
+  --paper: #f7f5ee;
+  --card: #fffdf7;
+  --ink: #2b3d33;
+  --ink-2: #5c6e5f;
+  --ink-3: #8d998a;
+  --hair: #e6e3d7;
+  --hair-2: #efece0;
+  --accent: #3d5c46;
+  --accent-deep: #2f4a37;
+  --wash: #eef0e4;
+  --warm: #c99b6a;
+  --serif: Georgia, "Noto Serif SC", serif;
+}
+body {
+  font-family: "Noto Sans SC", -apple-system, sans-serif;
+  background: #e9e7de;
+  color: var(--ink);
+  padding: 44px 40px 70px;
+  -webkit-font-smoothing: antialiased;
+}
+.canvas-head { max-width: 1360px; margin: 0 auto 34px; }
+.canvas-head .tag { display: inline-block; font-size: 11px; letter-spacing: .18em; color: #8a8a76; border: 1px solid #cfccba; padding: 5px 10px; border-radius: 999px; margin-bottom: 14px; }
+.canvas-head h1 { font-family: var(--serif); font-size: 30px; font-weight: 500; color: #37453a; letter-spacing: .02em; }
+.canvas-head p { font-size: 13px; color: #7d8878; margin-top: 10px; line-height: 1.9; max-width: 640px; }
+.row { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; max-width: 1360px; margin: 0 auto; }
+.shot { width: 375px; flex-shrink: 0; }
+.shot > .label { font-size: 12px; color: #6f7a68; margin: 0 0 10px 4px; letter-spacing: .08em; }
+.shot > .label b { color: #3d5c46; font-weight: 600; margin-right: 8px; }
+.phone {
+  background: var(--paper);
+  border: 1px solid #d5d2c2;
+  border-radius: 34px;
+  overflow: hidden;
+  box-shadow: 0 22px 50px rgba(60,70,55,.14), 0 2px 6px rgba(60,70,55,.08);
+  height: 812px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.statusbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 26px 6px; font-size: 12px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+.statusbar .right { display: flex; gap: 5px; align-items: center; }
+.batt { width: 20px; height: 10px; border: 1px solid #2b3d3355; border-radius: 3px; position: relative; }
+.batt::before { content: ""; position: absolute; inset: 1.5px; right: 5px; background: #2b3d33; border-radius: 1px; }
+.batt::after { content: ""; position: absolute; right: -3.5px; top: 2.5px; width: 2px; height: 4px; background: #2b3d3355; border-radius: 1px; }
+.sig { letter-spacing: 1px; font-size: 10px; }
+.screen { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.scroll { flex: 1; overflow-y: auto; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+/* header */
+.mast { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 12px; flex-shrink: 0; }
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand .glyph { width: 34px; height: 34px; border-radius: 10px; background: var(--wash); color: var(--accent); display: grid; place-items: center; font-family: var(--serif); font-size: 19px; transform: rotate(-4deg); }
+.brand .name { font-size: 19px; font-weight: 700; letter-spacing: .12em; }
+.brand .name small { display: block; font-size: 8px; font-weight: 500; letter-spacing: .34em; color: var(--ink-3); margin-top: 1px; }
+.mast .act { width: 38px; height: 38px; border-radius: 50%; background: transparent; border: 1px solid var(--hair); display: grid; place-items: center; color: var(--ink-2); }
+/* eyebrow line */
+.eyebrow { display: flex; align-items: center; gap: 8px; padding: 2px 20px 12px; font-size: 11px; color: var(--ink-3); letter-spacing: .06em; }
+.eyebrow i { width: 18px; height: 1px; background: #b9b6a4; }
+/* section head */
+.sec { padding: 22px 20px 12px; }
+.sec .kick { font-size: 10px; letter-spacing: .22em; color: #9aa38e; font-weight: 600; margin-bottom: 7px; }
+.sec h2 { font-size: 21px; font-weight: 650; letter-spacing: .02em; color: #2e4136; }
+.sec .sub { font-size: 13px; color: var(--ink-2); margin-top: 6px; line-height: 1.8; }
+/* hero greeting */
+.hero { padding: 6px 20px 24px; }
+.hero .hi { font-family: var(--serif); font-size: 27px; line-height: 1.5; letter-spacing: .01em; color: #2e4136; }
+.hero .hi em { font-style: normal; color: var(--accent); }
+.hero p { font-size: 13px; line-height: 1.9; color: var(--ink-2); margin-top: 10px; }
+.hero .cta { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fffdf7; font-size: 14px; padding: 12px 18px; border-radius: 10px; font-weight: 500; }
+.hero .cta svg { transition: transform .2s; }
+.hero .cta:hover svg { transform: translateX(3px); }
+.hero .note { display: flex; gap: 6px; align-items: center; font-size: 11px; color: var(--ink-3); margin-top: 14px; }
+/* start entries: quiet list rows */
+.entries { margin: 0 20px; border-top: 1px solid var(--hair); }
+.entry { display: flex; align-items: center; gap: 14px; padding: 15px 2px; border-bottom: 1px solid var(--hair); }
+.entry .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--wash); color: var(--accent-deep); display: grid; place-items: center; flex-shrink: 0; }
+.entry b { font-size: 15px; font-weight: 600; display: block; }
+.entry small { font-size: 12px; color: var(--ink-3); margin-top: 2px; display: block; }
+.entry .go { margin-left: auto; color: #b4b1a0; }
+/* organ band (hero-visual 不再消失) */
+.band { margin: 4px 0 6px; padding: 0 20px; }
+.band-strip { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px 8px; }
+.band-strip::-webkit-scrollbar { display: none; }
+.organ-chip { flex-shrink: 0; width: 108px; border: 1px solid var(--hair); background: var(--card); border-radius: 14px; padding: 13px 13px 11px; }
+.organ-chip .n { font-family: var(--serif); font-style: italic; font-size: 12px; color: #a9a690; }
+.organ-chip b { display: block; font-size: 15px; font-weight: 650; margin-top: 6px; color: #2e4136; }
+.organ-chip small { display: block; font-size: 10px; color: var(--ink-3); margin-top: 3px; line-height: 1.5; }
+.organ-chip.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.organ-chip.on .n { color: var(--accent); }
+/* indicator rows: index 列表而非卡片盒 */
+.idx { margin: 0 20px; }
+.idx-row { display: flex; gap: 15px; align-items: flex-start; padding: 16px 2px; border-bottom: 1px solid var(--hair); }
+.idx-row .no { font-family: var(--serif); font-style: italic; font-size: 21px; color: #b0ad97; line-height: 1; width: 34px; flex-shrink: 0; padding-top: 3px; }
+.idx-row .body { flex: 1; min-width: 0; }
+.idx-row h3 { font-size: 17px; font-weight: 650; color: #2e4136; display: flex; align-items: baseline; gap: 8px; }
+.idx-row h3 span { font-size: 9px; letter-spacing: .12em; color: var(--ink-3); font-weight: 500; }
+.idx-row .st { font-size: 13px; color: var(--ink-2); margin-top: 4px; line-height: 1.75; }
+.idx-row .tg { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.idx-row .tg span { font-size: 10px; color: var(--ink-2); background: var(--wash); border-radius: 5px; padding: 3px 7px; }
+.idx-row .dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 9px; flex-shrink: 0; }
+.dot.o { background: #d9a06c; } .dot.p { background: #a79ec0; } .dot.b { background: #8fb0c2; }
+.idx-more { display: flex; justify-content: center; padding: 16px 0 4px; }
+.idx-more button { font-size: 13px; color: var(--accent); padding: 10px 18px; border: 1px solid var(--hair); border-radius: 999px; background: var(--card); }
+/* reading guide 三步 */
+.guide { margin: 8px 20px 0; padding: 20px; background: var(--wash); border-radius: 16px; }
+.guide h3 { font-size: 16px; font-weight: 650; color: #2e4136; }
+.guide .step { display: flex; gap: 13px; margin-top: 16px; }
+.guide .step i { font-family: var(--serif); font-style: italic; font-size: 17px; color: #9aa38e; width: 22px; flex-shrink: 0; }
+.guide .step b { font-size: 13.5px; font-weight: 600; display: block; }
+.guide .step p { font-size: 12px; color: var(--ink-2); line-height: 1.8; margin-top: 3px; }
+/* footer note */
+.foot { padding: 26px 20px 30px; font-size: 10.5px; color: #a5a291; line-height: 1.8; display: flex; gap: 7px; align-items: flex-start; }
+/* tab bar */
+.tabbar { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hair); background: #fffdf7f2; padding: 8px 10px 20px; }
+.tabbar a { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #99a08e; text-decoration: none; padding: 5px 0; }
+.tabbar a.on { color: var(--accent-deep); font-weight: 600; }
+/* ===== list page ===== */
+.searchbar { margin: 8px 20px 0; display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--hair); border-radius: 12px; padding: 12px 14px; color: var(--ink-3); font-size: 14px; }
+.chips { display: flex; gap: 8px; padding: 14px 20px 4px; overflow-x: auto; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex-shrink: 0; font-size: 12.5px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--hair); color: var(--ink-2); background: transparent; }
+.chip.on { background: var(--accent); border-color: var(--accent); color: #fffdf7; }
+.count { padding: 16px 20px 4px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; align-items: baseline; }
+.count b { font-size: 14px; color: var(--ink-2); font-weight: 600; }
+/* ===== article ===== */
+.art-head { padding: 14px 20px 20px; border-bottom: 1px solid var(--hair); }
+.art-head .crumb { display: flex; align-items: center; justify-content: space-between; color: var(--ink-3); font-size: 12px; margin-bottom: 16px; }
+.art-head .en { font-size: 10px; letter-spacing: .2em; color: #9aa38e; font-weight: 600; }
+.art-head h1 { font-family: var(--serif); font-size: 26px; line-height: 1.45; color: #2e4136; margin-top: 8px; }
+.art-head .sb { font-size: 14px; color: var(--ink-2); margin-top: 8px; line-height: 1.8; }
+.art-head .meta { display: flex; gap: 14px; margin-top: 14px; font-size: 11px; color: var(--ink-3); flex-wrap: wrap; }
+.art-head .meta .lk { color: var(--accent); border-bottom: 1px solid #b9c7ba; padding-bottom: 1px; }
+.quick { margin: 16px 20px 0; padding: 16px 18px; background: var(--wash); border-radius: 14px; }
+.quick h4 { font-size: 10px; letter-spacing: .2em; color: #9aa38e; font-weight: 600; }
+.quick p { font-size: 14px; line-height: 1.9; color: #45573f; margin-top: 8px; }
+.art-body { padding: 6px 20px 10px; }
+.art-body h2 { font-size: 18px; font-weight: 650; color: #2e4136; margin: 26px 0 4px; display: flex; align-items: baseline; gap: 9px; }
+.art-body h2 i { font-family: var(--serif); font-style: italic; font-size: 14px; color: #a9a690; font-weight: 400; }
+.metric { padding: 14px 0 16px; border-bottom: 1px solid var(--hair-2); }
+.metric b { font-size: 15px; font-weight: 600; color: #33473a; }
+.metric p { font-size: 14px; line-height: 1.9; color: var(--ink-2); margin-top: 6px; }
+.metric sup { font-size: 10px; color: var(--accent); }
+/* chain 纵向时间线 */
+.chain { margin: 14px 0 6px; }
+.chain .cs { display: flex; gap: 13px; padding: 9px 0; }
+.chain .cs i { width: 24px; height: 24px; border-radius: 50%; background: var(--wash); color: var(--accent-deep); display: grid; place-items: center; font-size: 11px; font-style: normal; font-weight: 600; flex-shrink: 0; }
+.chain .cs span { font-size: 14px; color: var(--ink-2); line-height: 1.75; padding-top: 2px; }
+.chain .link { width: 1px; height: 10px; background: var(--hair); margin-left: 12px; }
+.tip { margin: 20px 0 4px; padding: 16px 18px; border-left: 3px solid var(--warm); background: #f8f3e8; border-radius: 4px 12px 12px 4px; }
+.tip b { font-size: 13.5px; font-weight: 650; color: #7c6236; }
+.tip p { font-size: 13.5px; line-height: 1.9; color: #7c7250; margin-top: 5px; }
+.sources { margin: 26px 20px 0; border-top: 1px solid var(--hair); padding-top: 18px; }
+.sources h3 { font-size: 15px; font-weight: 650; color: #2e4136; display: flex; justify-content: space-between; align-items: baseline; }
+.sources h3 span { font-size: 11px; color: var(--ink-3); font-weight: 400; }
+.src { padding: 13px 0; border-bottom: 1px solid var(--hair-2); }
+.src .pub { font-size: 11px; color: var(--ink-3); }
+.src a { display: flex; gap: 6px; align-items: center; font-size: 14px; color: #3c5a44; margin-top: 4px; line-height: 1.6; }
+.src .sc { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+.save { position: absolute; left: 16px; right: 16px; bottom: 86px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fffdf7f5; border: 1px solid var(--hair); border-radius: 14px; padding: 10px 12px 10px 16px; box-shadow: 0 8px 24px rgba(50,60,45,.10); backdrop-filter: blur(8px); }
+.save p { font-size: 11px; color: var(--ink-3); }
+.save button { background: var(--accent); color: #fffdf7; font-size: 13px; font-weight: 500; padding: 10px 16px; border-radius: 10px; display: flex; gap: 6px; align-items: center; }
+</style>
+</head>
+<body>
+<div class="canvas-head">
+  <span class="tag">方向 A · QUIET EDITORIAL</span>
+  <h1>安静纸感 — 排版克制，层级靠字阶与留白</h1>
+  <p>解决现状三件事：①一套 4px 栅格 + 6 级字阶，替换现在 8 种行高与随手间距；②列表从「卡片盒」改为发丝线索引行，视觉噪点直降；③首页交互人体图不再隐藏，收成可横滑的器官带。单强调色 + Georgia 斜体数字延续现有品牌签名。</p>
+</div>
+<div class="row">
+
+  <!-- ================= HOME ================= -->
+  <div class="shot">
+    <p class="label"><b>首页</b>健康地图（重排后）</p>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span class="right"><span class="sig">▪▪▪</span><span class="batt"></span></span></div>
+      <div class="screen">
+        <div class="mast">
+          <div class="brand"><span class="glyph">芽</span><span class="name">知愈<small>ZHIYU</small></span></div>
+          <button class="act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        </div>
+        <div class="eyebrow"><i></i>从了解身体开始，照顾好自己</div>
+        <div class="scroll">
+          <div class="hero">
+            <div class="hi">看懂指标，<br>也看懂<em>你的身体。</em></div>
+            <p>身体里的每个数字，都有它的故事。从一张体检单出发，看见指标、器官与健康之间的联系。</p>
+            <a class="cta">开启健康探索 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <div class="note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>来源可查 · 核对状态公开 · 按需阅读</div>
+          </div>
+          <div class="entries">
+            <a class="entry"><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span><span><b>查体检单上的术语</b><small>按指标名称或英文缩写查找知识</small></span><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></a>
+            <a class="entry"><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span><b>认识一个器官</b><small>先选器官，再了解功能与关联指标</small></span><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></a>
+            <a class="entry"><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span><span><b>找回读过的知识</b><small>查看收藏，或管理本地阅读记录</small></span><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></a>
+          </div>
+          <div class="sec">
+            <div class="kick">READ YOUR NUMBERS</div>
+            <h2>体检单上的数字，在说什么？</h2>
+            <div class="sub">从 9 个可用专题开始，认识概念、关联与来源。</div>
+          </div>
+          <div class="idx">
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">01</span>
+              <span class="body">
+                <h3>血糖 <span>BLOOD GLUCOSE</span></h3>
+                <div class="st">身体的能量，如何保持平衡？</div>
+                <div class="tg"><span>空腹血糖</span><span>糖化血红蛋白</span></div>
+              </span>
+              <span class="dot o"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">02</span>
+              <span class="body">
+                <h3>血压 <span>BLOOD PRESSURE</span></h3>
+                <div class="st">血液流动时，血管承受多少压力？</div>
+                <div class="tg"><span>收缩压</span><span>舒张压</span></div>
+              </span>
+              <span class="dot p"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">03</span>
+              <span class="body">
+                <h3>血脂 <span>BLOOD LIPIDS</span></h3>
+                <div class="st">脂肪的运输，也有不同的分工。</div>
+                <div class="tg"><span>LDL-C / HDL-C</span><span>甘油三酯</span></div>
+              </span>
+              <span class="dot b"></span>
+            </a>
+          </div>
+          <div class="idx-more"><button>查看全部 9 个专题</button></div>
+          <div class="sec">
+            <div class="kick">MEET YOUR BODY</div>
+            <h2>先选一个想了解的器官</h2>
+            <div class="sub">轻点器官，看看它做什么、与哪些指标有关。</div>
+          </div>
+          <div class="band">
+            <div class="band-strip">
+              <a class="organ-chip on" style="text-decoration:none;color:inherit"><span class="n">i.</span><b>心脏</b><small>不停歇的生命泵</small></a>
+              <a class="organ-chip" style="text-decoration:none;color:inherit"><span class="n">ii.</span><b>肺</b><small>身体与空气的交换站</small></a>
+              <a class="organ-chip" style="text-decoration:none;color:inherit"><span class="n">iii.</span><b>肝脏</b><small>营养与代谢的中转站</small></a>
+              <a class="organ-chip" style="text-decoration:none;color:inherit"><span class="n">iv.</span><b>胰腺</b><small>血糖平衡的重要调节者</small></a>
+              <a class="organ-chip" style="text-decoration:none;color:inherit"><span class="n">v.</span><b>肾脏</b><small>精密的过滤与调节系统</small></a>
+            </div>
+          </div>
+          <div class="guide">
+            <h3>读体检单，可以从这三步开始</h3>
+            <div class="step"><i>i.</i><div><b>确认检查条件</b><p>是否空腹、采样时间、近期运动和用药，都可能影响结果。</p></div></div>
+            <div class="step"><i>ii.</i><div><b>结合相关指标</b><p>同一个身体系统往往需要多个指标共同观察，单一异常不等于确诊。</p></div></div>
+            <div class="step"><i>iii.</i><div><b>关注变化与背景</b><p>对照历次结果，结合症状、病史和报告参考区间，必要时请医生评估。</p></div></div>
+          </div>
+          <div class="foot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>内容用于健康科普，不替代医生诊断与个体化建议。</div>
+        </div>
+        <div class="tabbar">
+          <a class="on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>发现</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>指标</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>人体</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>收藏</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= INDICATORS ================= -->
+  <div class="shot">
+    <p class="label"><b>指标百科</b>索引行 + 横滑分类</p>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span class="right"><span class="sig">▪▪▪</span><span class="batt"></span></span></div>
+      <div class="screen">
+        <div class="mast">
+          <div class="brand"><span class="glyph">芽</span><span class="name">指标百科</span></div>
+          <button class="act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        </div>
+        <div class="scroll">
+          <div class="sec" style="padding-top:8px">
+            <div class="kick">THE INDICATOR LIBRARY</div>
+            <h2>读懂数字背后的身体语言。</h2>
+            <div class="sub">先找到一个关心的指标，再理解它与身体的联系。每篇内容都可追溯来源。</div>
+          </div>
+          <div class="searchbar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>搜索指标、英文缩写或关键词</div>
+          <div class="chips">
+            <button class="chip on">全部指标</button>
+            <button class="chip">营养与代谢</button>
+            <button class="chip">心血管健康</button>
+            <button class="chip">泌尿系统</button>
+            <button class="chip">血液与免疫</button>
+            <button class="chip">内分泌</button>
+          </div>
+          <div class="count"><span><b>9</b> 个专题</span><span>支持中文名与英文缩写</span></div>
+          <div class="idx">
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">01</span>
+              <span class="body">
+                <h3>血糖 <span>BLOOD GLUCOSE</span></h3>
+                <div class="st">身体的能量，如何保持平衡？</div>
+                <div class="tg"><span>空腹血糖</span><span>糖化血红蛋白</span><span>FPG</span></div>
+              </span>
+              <span class="dot o"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">02</span>
+              <span class="body">
+                <h3>血压 <span>BLOOD PRESSURE</span></h3>
+                <div class="st">血液流动时，血管承受多少压力？</div>
+                <div class="tg"><span>收缩压</span><span>舒张压</span></div>
+              </span>
+              <span class="dot p"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">03</span>
+              <span class="body">
+                <h3>血脂 <span>BLOOD LIPIDS</span></h3>
+                <div class="st">脂肪的运输，也有不同的分工。</div>
+                <div class="tg"><span>LDL-C / HDL-C</span><span>甘油三酯</span></div>
+              </span>
+              <span class="dot b"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">04</span>
+              <span class="body">
+                <h3>血常规 <span>COMPLETE BLOOD COUNT</span></h3>
+                <div class="st">红细胞、白细胞和血小板，各自在看什么？</div>
+                <div class="tg"><span>CBC</span><span>红细胞</span><span>白细胞</span></div>
+              </span>
+              <span class="dot o"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">05</span>
+              <span class="body">
+                <h3>肝功能 <span>LIVER FUNCTION TESTS</span></h3>
+                <div class="st">酶、胆红素和蛋白质，分别反映什么？</div>
+                <div class="tg"><span>ALT / AST</span><span>胆红素</span></div>
+              </span>
+              <span class="dot b"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">06</span>
+              <span class="body">
+                <h3>肾功能 <span>KIDNEY FUNCTION TESTS</span></h3>
+                <div class="st">肌酐、eGFR 和尿白蛋白，如何互相补充？</div>
+                <div class="tg"><span>肌酐</span><span>eGFR</span></div>
+              </span>
+              <span class="dot p"></span>
+            </a>
+            <a class="idx-row" style="text-decoration:none;color:inherit">
+              <span class="no">07</span>
+              <span class="body">
+                <h3>尿酸 <span>URIC ACID</span></h3>
+                <div class="st">嘌呤分解后的产物，怎样离开身体？</div>
+                <div class="tg"><span>血尿酸</span><span>尿尿酸</span><span>UA</span></div>
+              </span>
+              <span class="dot b"></span>
+            </a>
+          </div>
+          <div class="foot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>这里只查找科普专题，不判断检查结果是否正常；请勿输入姓名、联系方式或完整报告。</div>
+        </div>
+        <div class="tabbar">
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>发现</a>
+          <a class="on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>指标</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>人体</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>收藏</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE ================= -->
+  <div class="shot">
+    <p class="label"><b>详情页</b>阅读动线：速览 → 分工 → 过程 → 提示 → 来源</p>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span class="right"><span class="sig">▪▪▪</span><span class="batt"></span></span></div>
+      <div class="screen" style="position:relative">
+        <div class="scroll">
+          <div class="art-head">
+            <div class="crumb">
+              <span style="display:flex;gap:7px;align-items:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>返回</span>
+              <span>知愈 · 指标解读</span>
+              <span style="display:flex;gap:7px;align-items:center">分享<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98m-.01-10.98-6.81 3.98"/></svg></span>
+            </div>
+            <div class="en">BLOOD GLUCOSE</div>
+            <h1>认识血糖</h1>
+            <div class="sb">身体的能量，如何保持平衡？</div>
+            <div class="meta"><span>依据来源整理 · v1</span><span>整理于 2026-09-18</span><a class="lk">4 份参考资料</a></div>
+          </div>
+          <div class="quick">
+            <h4>快速了解</h4>
+            <p>血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。</p>
+          </div>
+          <div class="art-body">
+            <h2><i>i.</i>一组指标，各有分工</h2>
+            <div class="metric"><b>空腹血糖（FPG）<sup>[2]</sup></b><p>观察至少 8 小时未摄入热量时的血糖水平，像一张当下的快照。</p></div>
+            <div class="metric"><b>糖化血红蛋白（HbA1c）<sup>[2]</sup></b><p>反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。</p></div>
+            <div class="metric"><b>口服葡萄糖耐量试验（OGTT）<sup>[2]</sup></b><p>观察喝下规定葡萄糖溶液后身体处理糖的能力，需按医疗机构规范进行。</p></div>
+            <h2><i>ii.</i>把身体里的过程串起来</h2>
+            <div class="chain">
+              <div class="cs"><i>1</i><span>食物中的碳水化合物</span></div><div class="link"></div>
+              <div class="cs"><i>2</i><span>消化后形成葡萄糖</span></div><div class="link"></div>
+              <div class="cs"><i>3</i><span>胰岛素帮助细胞利用</span></div><div class="link"></div>
+              <div class="cs"><i>4</i><span>肝脏储存与释放</span></div>
+            </div>
+            <div class="tip">
+              <b>看报告时，记住这一点</b>
+              <p>空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。<sup style="color:#a3834f;font-size:10px">[2]</sup></p>
+            </div>
+            <div style="display:flex;gap:14px;margin-top:18px;font-size:12px;color:var(--ink-2)">
+              <span>关联器官：胰腺 · 肝脏</span>
+              <a style="color:var(--accent);border-bottom:1px solid #b9c7ba">探索器官</a>
+            </div>
+          </div>
+          <div class="sources">
+            <h3>知识来源<span>4 份参考资料</span></h3>
+            <div class="src">
+              <div class="pub">美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）</div>
+              <a>What Is Diabetes? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+              <div class="sc">葡萄糖、胰岛素与细胞供能</div>
+            </div>
+            <div class="src">
+              <div class="pub">NIDDK</div>
+              <a>Diabetes Tests &amp; Diagnosis <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+              <div class="sc">空腹血糖、HbA1c、OGTT 及检测条件</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-3);padding:14px 0 30px"><span>内容版本 v1 · 整理于 2026-09-18</span><span>依据来源整理</span></div>
+          </div>
+        </div>
+        <div class="save">
+          <p>把有用的知识留给自己</p>
+          <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>收藏知识</button>
+        </div>
+        <div class="tabbar" style="border-top:1px solid var(--hair)">
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>发现</a>
+          <a class="on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>指标</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>人体</a>
+          <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>收藏</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

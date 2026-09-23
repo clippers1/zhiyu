@@ -4,37 +4,21 @@
   flex-wrap: wrap;
   gap: 10px;
   padding: 14px 24px;
-  border-bottom: 1px solid #e3e8dc;
+  border-bottom: 1px solid var(--zc-line);
   font-size: 13px;
   line-height: 1.8;
 }
-.reading-tools > span { flex: 1; min-width: 150px; color: #66795a; }
+.reading-tools > span { flex: 1; min-width: 150px; color: #4f6b58; }
 .reading-tools > p { width: 100%; }
-.reading-tools button, .history-actions button, .search-suggestions button {
-  min-height: 44px;
-  border: 1px solid #c9d7bd;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
-  color: #3e603f;
-  background: #f3f6ee;
-}
-.reading-tools button[aria-pressed="true"], .history-actions button[aria-pressed="true"] { background: #426548; color: white; }
+
 .reading-toc > span { font-weight: 600; }
-.reading-toc a { padding: 8px; color: #426548; text-decoration: underline; text-underline-offset: 4px; }
-.reading-toc a:hover { background: #edf2e6; }
-/* Without hydration, disabled save controls must not float over native links. */
-.reading-actions:not(.is-ready) { position: static; }
+.reading-toc a { padding: 8px; color: #2e8450; text-decoration: underline; text-underline-offset: 4px; }
+.reading-toc a:hover { background: var(--zc-soft); }
 .detail-body [id] { scroll-margin-top: 100px; }
 .organ-information .reading-tools { padding: 0 0 16px; margin-bottom: 20px; }
-.recent-reading { margin: 28px 0 40px; padding: 24px; border: 1px solid #dbe5d0; border-radius: 12px; background: #fffefa; }
-.recent-reading h2 { font-size: 22px; }
-.recent-reading p, .search-safety { font-size: 13px; line-height: 1.9; color: #66795a; }
-.history-actions, .search-suggestions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
-.history-actions button:disabled { opacity: .55; }
-.recent-list { list-style: none; padding: 0; margin-top: 20px; }
-.recent-list a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 0; border-top: 1px solid #e3e8dc; color: #426548; }
-.recent-list small { font-size: 12px; margin-left: 12px; color: #66795a; }
+.recent-list { list-style: none; padding: 0; margin-top: 8px; }
+.recent-list a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 0; border-top: 1px solid var(--zc-line); color: #2e8450; }
+.recent-list small { font-size: 12px; margin-left: 12px; color: #4f6b58; }
 .recent-list time { font-size: 12px; white-space: nowrap; }
 .reading-large .article-reader .detail-intro,
 .reading-large .article-reader .metric-list p,
@@ -52,15 +36,9 @@
 .reading-large .source-list a { font-size: 16px; line-height: 1.9; }
 .reading-large .article-reader .detail-chain { flex-wrap: wrap; }
 .reading-large .article-reader .detail-chain > span { min-width: 90px; }
-.resume-reading, .continue-card { margin: 18px 0; padding: 18px 24px; border: 1px solid #d4dfc9; border-radius: 10px; background: #f4f7ee; }
-.resume-reading p, .continue-card p { font-size: 13px; color: #66795a; line-height: 1.9; margin: 0 0 12px; }
-.resume-reading button { min-height: 44px; padding: 8px 14px; margin: 0 10px 8px 0; color: #3e603f; border: 1px solid #c9d7bd; border-radius: 8px; background: #fffefa; }
+.resume-reading, .continue-card { margin: 18px 0; padding: 18px 24px; box-shadow: var(--zc-shadow); border-radius: 10px; background: var(--zc-soft); }
+.resume-reading p, .continue-card p { font-size: 13px; color: #4f6b58; line-height: 1.9; margin: 0 0 12px; }
+.resume-reading button { min-height: 44px; padding: 8px 14px; margin: 0 10px 8px 0; color: #2e8450; border: 1px solid var(--zc-line); border-radius: 8px; background: var(--zc-card); }
 .continue-card h2 { font-size: 19px; margin: 0 0 12px; }
-.continue-card a { display: inline-block; color: #3e603f; font-weight: 600; min-height: 44px; padding: 10px 0; }
-.recent-list .reading-position-label { display: block; margin: 6px 0 0; line-height: 1.8; }
+.continue-card a { display: inline-block; color: #2e8450; font-weight: 600; min-height: 44px; padding: 10px 0; }
 #organ-overview, #organ-related, #organ-source-panel { scroll-margin-top: 110px; }
-@media (max-width: 600px) {
-  .reading-tools, .reading-toc { padding: 12px 18px; }
-  .reading-toc { gap: 4px; }
-  .recent-reading { padding: 18px; }
-}

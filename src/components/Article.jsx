@@ -3,15 +3,12 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  Bookmark,
-  Check,
   CircleHelp,
   Share2,
 } from "lucide-react";
 import { useContent } from "../hooks";
 import { Citation, LoadState, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
-import { ReadingTools } from "./ReadingTools";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
 import { readingGuide } from "../services/reading-guide";
@@ -22,11 +19,6 @@ export default function Article({
   id,
   onBack,
   onOrgan,
-  saved,
-  toggleSave,
-  storageError,
-  bookmarksReady,
-  reading,
 }) {
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
@@ -89,7 +81,6 @@ export default function Article({
               <ArrowRight size={13} />
             </a>
           </div>
-          <ReadingTools reading={reading} kind="indicator" id={id} content={detail} />
           <div className="article-share-entry"><ShareCardButton content={detail} /></div>
           <TopicReturn id={id} title={detail.title} />
           <QuickRead guide={guide} content={detail} />
@@ -183,21 +174,13 @@ export default function Article({
         </article>
       )}
       {detail && (
-        <div className={`reading-actions${bookmarksReady ? " is-ready" : ""}`}>
+        <div className="reading-actions is-ready">
           <div aria-live="polite">
-            {storageError
-              ? "无法正常读写收藏，本次更改可能未保存。若需移除旧收藏，请清除此站点的浏览器数据。"
-              : shareMessage || "把有用的知识留给自己"}
+            {shareMessage || "觉得有用，就分享给需要的人"}
           </div>
-          <button
-            className={`save-button ${saved.includes(id) ? "is-saved" : ""}`}
-            disabled={!bookmarksReady}
-            aria-pressed={saved.includes(id)}
-            onClick={() => toggleSave(id)}
-          >
-            {saved.includes(id) ? <Check size={18} /> : <Bookmark size={18} />}{" "}
-            {saved.includes(id) ? "已收藏" : "收藏知识"}
-          </button>
+          <div className="reading-actions-buttons">
+            <ShareCardButton content={detail} />
+          </div>
         </div>
       )}
       {showLink && (

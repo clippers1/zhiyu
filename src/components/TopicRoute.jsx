@@ -23,7 +23,30 @@ export function TopicReturn({ id, title }) {
   return <RouteLink className="text-link" page="topics" id={id}>查看{title}阅读路线 <ArrowRight size={15} /></RouteLink>;
 }
 
+function TopicIndex() {
+  const state = useContent("list", [{ kind: "indicator", limit: 12 }]);
+  const items = state.data?.items || [];
+  return <div className="topic-reader">
+    <RouteLink page="map" className="text-link">返回健康地图</RouteLink>
+    <LoadState {...state} />
+    {state.data && <>
+      <header className="topic-heading">
+        <span className="overline">READING ROUTE · 专题阅读路线</span>
+        <h1>选一条专题，顺着读下去</h1>
+        <p>从概念到关联器官，再回到参考来源。每条路线都标注当前核对状态。</p>
+      </header>
+      <div className="topic-cards">{items.map(item => <RouteLink key={item.id} page="topics" id={item.id}>
+        <span>专题阅读路线</span><h3>认识{item.title}</h3><p>{item.subtitle}</p>
+        <span>{contentTrust(item).short}</span>
+        <b>查看路线 <ArrowRight size={16} /></b>
+      </RouteLink>)}</div>
+      {!items.length && <p className="topic-note">专题路线整理中，可先浏览指标百科。</p>}
+    </>}
+  </div>;
+}
+
 export default function TopicRoute({ id }) {
+  if (!id) return <TopicIndex />;
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
   const related = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map(item => item.id), limit: 24 }]);

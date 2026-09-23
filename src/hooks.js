@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { contentKey, useReader } from "./reader-context";
 import { legacyRoutePath, parseRoute, routePath } from "./services/routes";
-import { createBookmarkStore } from "./services/bookmarks";
 
 export function useContent(method, args) {
   const { preloaded, repository } = useReader();
@@ -92,26 +91,5 @@ export function useRoute(initialRoute, serverRendered = false) {
       (serverRendered ? document.referrer.startsWith(window.location.origin + "/") && window.history.length > 1 : window.history.state?.zhiyu)
         ? window.history.back()
         : navigate("indicators"),
-  };
-}
-
-export function useBookmarks() {
-  const store = useRef(null);
-  const [value, setValue] = useState({ saved: [], savedOrgans: [], storageError: false });
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    store.current = createBookmarkStore({ getItem: key => localStorage.getItem(key), setItem: (key, data) => localStorage.setItem(key, data) });
-    setValue(store.current.sync(null));
-    setReady(true);
-    const update = event => setValue(store.current.sync(event.key));
-    window.addEventListener("storage", update);
-    return () => window.removeEventListener("storage", update);
-  }, []);
-  const change = (kind, action, ids) => { if (store.current) setValue(store.current.change(kind, action, ids)); };
-  return {
-    ...value, ready,
-    toggleSave: (id, kind = "indicator") => change(kind, "toggle", [id]),
-    remove: (kind, ids) => change(kind, "remove", ids),
-    add: (kind, ids) => change(kind, "add", ids),
   };
 }

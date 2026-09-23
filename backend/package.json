@@ -13,7 +13,6 @@
     "publish:lung-learning": "tsx scripts/publish-organ-learning.ts lung",
     "publish:content-pack": "tsx scripts/publish-content-pack.ts",
     "test:workflow": "tsx scripts/workflow.test.ts",
-    "test:feedback": "tsx scripts/feedback.test.ts",
     "test:rendering": "tsx scripts/rendering.test.ts",
     "test:search": "tsx scripts/search.test.ts",
     "typecheck": "tsc --noEmit"
