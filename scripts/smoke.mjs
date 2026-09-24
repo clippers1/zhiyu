@@ -44,7 +44,9 @@ try {
   await page.goto(baseUrl, {
     waitUntil: "networkidle",
   });
-  await expect(page.locator(".question-card")).toHaveCount(9);
+  await expect(page.locator(".question-card")).toHaveCount(3);
+  await expect(page.locator(".home-reading-path a")).toHaveCount(1);
+  await expect(page.locator(".home-reading-path a")).toHaveAttribute("href", "/topics");
   assert.equal(
     contentRequests.filter((url) => /\/indicator\/|\/organ\//.test(url)).length,
     0,
@@ -62,6 +64,12 @@ try {
   );
   await expect(page.getByRole("region", { name: "知识来源" })).toBeAttached();
   assert.equal(await page.locator(".source-list a").count(), 4);
+  assert.ok(await page.evaluate(() => {
+    const reminder = document.querySelector('#article-reminder');
+    const figure = document.querySelector('#article-figure');
+    const metrics = document.querySelector('#article-metrics');
+    return reminder && figure && metrics && (reminder.compareDocumentPosition(figure) & Node.DOCUMENT_POSITION_FOLLOWING) && (figure.compareDocumentPosition(metrics) & Node.DOCUMENT_POSITION_FOLLOWING);
+  }), 'The published caveat and figure precede the deeper metrics');
   await page
     .getByRole("link", { name: "查看参考资料 2", exact: true })
     .first()

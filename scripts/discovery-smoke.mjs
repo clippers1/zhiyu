@@ -10,8 +10,9 @@ const errors = [];
 page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
-  await expect(page.locator('.question-card')).toHaveCount(9);
-  await expect(page.locator('.organ-topic-links a')).toHaveCount(5);
+  await expect(page.locator('.question-card')).toHaveCount(3);
+  await expect(page.locator('.home-reading-path a')).toHaveCount(1);
+  await expect(page.locator('.organ-topic-links a')).toHaveCount(1);
   await page.locator('.home-search-trigger').focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/indicators#indicator-search$/);
@@ -26,10 +27,8 @@ try {
   await expect(page.locator('#article-source-panel')).toBeInViewport();
 
   await page.goto(base, { waitUntil: 'networkidle' });
-  await page.getByRole('link', { name: /想认识身体原理/ }).click();
-  await expect(page.getByRole('heading', { name: /进一步理解：身体如何运作/ })).toBeInViewport();
-  await page.locator('.organ-topic-links').getByRole('link', { name: /肝脏/ }).click();
-  await expect(page.locator('.organ-information h2')).toContainText('肝脏');
+  await page.locator('.organ-topic-links').getByRole('link', { name: /心脏/ }).click();
+  await expect(page.locator('.organ-information h2')).toContainText('心脏');
   await page.goto(base, { waitUntil: 'networkidle' });
   await expect(page.getByRole('button', { name: '1 分钟认识身体' })).toBeVisible();
   // H02 首页不再有收藏/阅读记录入口；本地记录只在文章内显式开启。
@@ -45,12 +44,10 @@ try {
   if (ssr) {
     const noJS = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     await noJS.goto(base);
-    await noJS.getByRole('link', { name: /想认识身体原理/ }).click();
-    await expect(noJS.getByRole('heading', { name: /进一步理解：身体如何运作/ })).toBeInViewport();
     await noJS.locator('.organ-topic-links').getByRole('link', { name: /心脏/ }).click();
     await expect(noJS.locator('.organ-information h2')).toContainText('心脏');
     await noJS.goto(base);
-    await noJS.getByRole('link', { name: /体检项目看不懂/ }).click();
+    await noJS.getByRole('link', { name: /按体检项目查/ }).click();
     await expect(noJS.locator('#indicator-search')).toBeInViewport();
     await expect(noJS.locator('.question-row')).toHaveCount(6);
     await noJS.close();
@@ -60,15 +57,15 @@ try {
     let fail = false;
     await page.route('**/content/index.json', route => fail ? route.abort() : route.fulfill({ json: fixture }));
     await page.goto(base, { waitUntil: 'networkidle' });
-    await expect(page.locator('.organ-topic-links a')).toHaveCount(4);
-    await expect(page.locator('.body-art .organ-heart')).toHaveAttribute('aria-disabled', 'true');
-    await expect(page.locator('.body-art .organ-heart')).toHaveAttribute('tabindex', '-1');
+    await expect(page.locator('.organ-topic-links a')).toHaveCount(1);
     await expect(page.locator('.organ-topic-links a[href="/organs/heart"]')).toHaveCount(0);
     fixture = { ...catalog, items: [] };
     await page.reload({ waitUntil: 'networkidle' });
     await expect(page.locator('.organ-topic-links a')).toHaveCount(0);
     await expect(page.locator('.question-card')).toHaveCount(0);
-    await expect(page.getByText(/器官专题暂未开放/)).toBeVisible();
+    await expect(page.locator('.home-reading-path')).toHaveCount(0);
+    await expect(page.locator('#organ-topics')).toHaveCount(0);
+    await expect(page.getByText(/目前没有可阅读的问题/)).toBeVisible();
     await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });
     await expect(page.locator('.term-suggestions')).toHaveCount(0);
     await expect(page.getByRole('heading', { name: '没有匹配的项目' })).toBeVisible();
@@ -78,7 +75,7 @@ try {
     fail = false;
     fixture = catalog;
     await page.locator('#organ-topics').getByRole('button', { name: '重新加载' }).click();
-    await expect(page.locator('.organ-topic-links a')).toHaveCount(5);
+    await expect(page.locator('.organ-topic-links a')).toHaveCount(1);
     await page.unroute('**/content/index.json');
   }
   await page.setViewportSize({ width: 390, height: 844 });

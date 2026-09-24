@@ -11,6 +11,7 @@
     "content:check": "node scripts/build-content-catalog.mjs --check",
     "test:content": "npm run content:check && node --test scripts/content.test.mjs",
     "test:routes": "node --test scripts/routes.test.mjs",
+    "test:discovery": "node --test scripts/discovery.test.mjs",
     "test:search": "node --test scripts/search.test.mjs",
     "test:topics": "node --test scripts/topics.test.mjs",
     "test:share": "node --test scripts/share.test.mjs",

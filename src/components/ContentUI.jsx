@@ -2,68 +2,27 @@ import React from "react";
 import { RouteLink } from "./RouteLink";
 import {
   ArrowRight,
-  ArrowUpRight,
   BookOpen,
-  Droplet,
   ExternalLink,
-  HeartPulse,
-  Layers3,
   RefreshCw,
 } from "lucide-react";
 import { contentTrust } from "../services/content-status";
 
-const icons = { droplet: Droplet, "heart-pulse": HeartPulse, layers: Layers3 };
-export function IndicatorCard({ item, onOpen }) {
-  const Icon = icons[item.icon] || BookOpen;
-  return (
-    <RouteLink page="article" id={item.id}
-      className={`indicator-card ${item.color}`}
-      onNavigate={() => onOpen(item.id)}
-    >
-      <div className="card-top">
-        <span className="metric-icon">
-          <Icon size={22} />
-        </span>
-        <span className="card-number">{item.number}</span>
-      </div>
-      <div className="metric-title">
-        <h3>{item.title}</h3>
-        <span>{item.english}</span>
-      </div>
-      <p>{item.subtitle}</p>
-      {item.match && <span className="search-match">匹配：{item.match}</span>}
-      <div className="tags">
-        {item.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </div>
-      <div className="card-bottom">
-        <span>
-          <BookOpen size={12} /> {item.referenceCount} 份参考资料
-        </span>
-        <ArrowUpRight size={17} />
-      </div>
-    </RouteLink>
-  );
-}
 export function QuestionRow({ item, onOpen }) {
   return (
     <RouteLink page="article" id={item.id}
       className="question-row"
       onNavigate={() => onOpen(item.id)}
     >
-      <span className="question-row-term">
-        <b>{item.title}</b>
-        <small>{item.english}</small>
-      </span>
       <span className="question-row-main">
         <h3>{item.question || `认识${item.title}`}</h3>
+        <span className="question-row-term"><b>{item.title}</b>{item.english && <small>{item.english}</small>}</span>
         <p>{item.questionAnswer || item.subtitle}</p>
         {item.match && <span className="search-match">匹配：{item.match}</span>}
       </span>
       <span className="question-row-meta">
-        {item.referenceCount} 份参考资料
-        <ArrowRight size={16} />
+        {contentTrust(item).short} · {item.referenceCount} 份参考资料
+        <ArrowRight size={16} aria-hidden="true" />
       </span>
     </RouteLink>
   );
@@ -87,32 +46,6 @@ export function LoadState({ loading, error, retry }) {
       </div>
     );
   return null;
-}
-export function PageIntro({ label, title, description }) {
-  return (
-    <div className="page-intro">
-      <span className="overline">{label}</span>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </div>
-  );
-}
-export function SectionTitle({ kicker, title, desc, action, onClick, page = "indicators" }) {
-  return (
-    <div className="section-heading">
-      <div>
-        <div className="section-kicker">{kicker}</div>
-        <h2>{title}</h2>
-        <p>{desc}</p>
-      </div>
-      {action && (
-        <RouteLink page={page} className="text-link" onNavigate={onClick}>
-          {action}
-          <ArrowUpRight size={16} />
-        </RouteLink>
-      )}
-    </div>
-  );
 }
 export function Pagination({ cursor, nextCursor, onChange }) {
   const hasPrevious = cursor !== "0";

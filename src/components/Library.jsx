@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { useContent } from "../hooks";
-import { LoadState, PageIntro, Pagination, QuestionRow } from "./ContentUI";
+import { LoadState, Pagination, QuestionRow } from "./ContentUI";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
@@ -27,14 +27,8 @@ export default function Library({ onOpen }) {
   }
   return (
     <>
-      <div>
-        <PageIntro
-          label="TEST QUESTIONS"
-          title="看体检项目，从问题找答案。"
-          description="每篇内容先回答一个具体问题，再展开解释、局限和来源。搜索支持项目名称、英文缩写和大白话说法。"
-        />
-      </div>
-      <section className="library-controls">
+      <section className="library-controls" aria-labelledby="library-title">
+        <h1 id="library-title">查体检项目</h1>
         <label className="library-search">
           <Search size={18} />
           <input
@@ -63,6 +57,7 @@ export default function Library({ onOpen }) {
             </button>
           ))}
         </div>
+        <p className="library-help">可用项目名、缩写或日常说法查找；这里不判断个人检查结果。</p>
       </section>
       {pending ? <p className="search-hint" role="status">输入完成后查找…</p> : <LoadState {...state} />}
       {data && (

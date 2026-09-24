@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import OrganArtwork from "./OrganArtwork";
 import { useContent } from "../hooks";
-import { Citation, LoadState, PageIntro, SourceReferences } from "./ContentUI";
+import { Citation, LoadState, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
@@ -17,11 +17,10 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
   const relatedItems = related.data?.items || [];
   return (
     <>
-      <PageIntro
-        label="MEET YOUR BODY"
-        title="每个器官，都在认真工作。"
-        description="轻点器官，看看它做什么、与哪些指标有关。"
-      />
+      <div className="organ-page-heading">
+        <h1>认识身体</h1>
+        <p>先了解一个器官的基本功能，再按需查看已开放的关联项目与来源。</p>
+      </div>
       <div className="organ-tabs mobile-organ-tabs">
         {organs.map(({ id: key, title: name }) => (
           <RouteLink page="organs" id={key}
@@ -33,10 +32,7 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
           </RouteLink>
         ))}
       </div>
-      <section className="organ-explorer">
-        <div className="explorer-visual">
-          <OrganArtwork id={id} />
-        </div>
+      <section className={`organ-explorer${selected ? "" : " no-visual"}`}>
         <div className="organ-information">
           <div className="organ-tabs desktop-organ-tabs">
             {organs.map(({ id: key, title: name }) => (
@@ -50,11 +46,9 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
             ))}
           </div>
           <LoadState {...state} />
+          {selected?.related?.length > 0 && <LoadState {...related} />}
           {selected && (
             <>
-              <div className="organ-bookmark">
-                <ShareCardButton content={selected} />
-              </div>
               <span className="overline">{selected.en}</span>
               <h2>
                 {selected.name}
@@ -82,15 +76,21 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
                     <ArrowRight size={16} />
                   </RouteLink>
                 ))}
-                {selected.related.length === 0 && (
+                {related.data && relatedItems.length === 0 && (
                   <p className="coming-note">
-                    本期先从器官功能开始；血氧与肺功能专题将继续补充。
+                    目前没有已开放的关联项目，可继续阅读器官功能与来源。
                   </p>
                 )}
+              </div>
+              <div className="organ-bookmark">
+                <ShareCardButton content={selected} />
               </div>
             </>
           )}
         </div>
+        {selected && <div className="explorer-visual">
+          <OrganArtwork id={id} />
+        </div>}
       </section>
       {selected && <VisualLearning content={selected} />}
       {selected && (

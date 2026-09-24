@@ -5,7 +5,7 @@
 .topic-cards > a { padding: 24px; box-shadow: var(--zc-shadow); border-radius: 20px; background: var(--zc-soft); color: inherit; text-decoration: none; }
 .topic-cards > a:hover { border-color: #6c8d6c; background: #ecf7e8; }
 .topic-cards span { font-size: 12px; color: #59745c; }
-.topic-cards h3 { font-size: 21px; margin: 14px 0 8px; }
+.topic-cards h2, .topic-cards h3 { font-size: 21px; margin: 14px 0 8px; }
 .topic-cards p { font-size: 14px; line-height: 1.7; color: var(--zc-ink-3); }
 .topic-cards b { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 18px; }
 .topic-reader { max-width: 780px; margin: 32px auto 56px; }

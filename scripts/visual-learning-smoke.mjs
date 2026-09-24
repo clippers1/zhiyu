@@ -97,6 +97,14 @@ try {
     await expect(noJS.locator('.learning-boundary')).toContainText('不按真实数量');
     await noJS.close();
   }
+  if (!ssr) {
+    const unavailable = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await unavailable.route('**/content/organ/heart.json', route => route.fulfill({ status: 404, json: { error: 'withdrawn' } }));
+    await unavailable.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });
+    await expect(unavailable.locator('.organ-artwork')).toHaveCount(0);
+    await expect(unavailable.locator('.organ-information [role="alert"]')).toBeVisible();
+    await unavailable.close();
+  }
   assert.deepEqual(errors, []);
   console.log(`PASS heart and lung learning steps, organic diagrams, structure selection, controls and responsive/reduced-motion${ssr ? ' plus no-JS transcripts' : ''}`);
 } finally {

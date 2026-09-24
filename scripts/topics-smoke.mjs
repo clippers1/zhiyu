@@ -10,6 +10,7 @@ const errors = [];
 page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
+  await page.locator('.home-reading-path a[href="/topics"]').click();
   await expect(page.locator('.topic-cards a')).toHaveCount(3);
   await page.locator('.topic-cards a[href="/topics/glucose"]').click();
   await expect(page.getByRole('heading', { name: '认识血糖的阅读路线' })).toBeVisible();
@@ -23,6 +24,10 @@ try {
   await page.getByRole('link', { name: '最后核对来源' }).click();
   await expect(page).toHaveURL(/\/article\/glucose#article-source-panel$/);
   await expect(page.locator('#article-source-panel')).toBeInViewport();
+  await page.getByRole('link', { name: /从其他体检问题继续读/ }).click();
+  await expect(page.locator('.topic-cards a')).toHaveCount(3);
+  await page.locator('.topic-cards a[href="/topics/pressure"]').click();
+  await expect(page.locator('.topic-steps')).toContainText('血压');
   assert.equal(await page.evaluate(() => localStorage.getItem('zhiyu-reading-v1')), null);
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
@@ -34,6 +39,7 @@ try {
   if (ssr) {
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(base);
+    await noJS.locator('.home-reading-path a[href="/topics"]').click();
     await noJS.locator('.topic-cards a[href="/topics/glucose"]').click();
     await expect(noJS.locator('.topic-steps li')).toHaveCount(4);
     await expect(noJS.locator('link[rel="canonical"]')).toHaveAttribute('href', `${base}/topics/glucose`);

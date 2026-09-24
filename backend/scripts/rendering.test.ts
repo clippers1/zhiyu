@@ -34,6 +34,9 @@ try {
     const topic = await buildPage('/topics/glucose');
     assert.equal(topic?.detail.releaseID, previousRelease);
     assert.match(String(pageMetadata(topic).title), /血糖的阅读路线/);
+    const topicIndex = await buildPage('/topics');
+    assert.ok(topicIndex);
+    assert.match(String(pageMetadata(topicIndex).title), /从体检单开始/);
     assert.equal((pageMetadata(topic).robots as any).index, false);
     assert.equal(await buildPage('/topics/not-real'), null);
     if (base) {

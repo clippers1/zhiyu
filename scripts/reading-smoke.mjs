@@ -42,8 +42,8 @@ try {
   const searchDialog = page.getByRole('dialog');
   await page.getByRole('textbox', { name: '搜索体检项目或器官', exact: true }).fill('不存在的专题xyz');
   await expect(searchDialog.locator('.search-results > a')).toHaveCount(0);
-  await searchDialog.getByRole('button', { name: '查找血糖', exact: true }).click();
-  await searchDialog.getByRole('link', { name: /项目.*血糖项目主要看什么/ }).first().click();
+  await searchDialog.getByRole('link', { name: '浏览已开放的体检项目' }).click();
+  await page.getByRole('link', { name: /血糖项目主要看什么/ }).first().click();
   await expect(page.getByRole('heading', { name: '血糖项目主要看什么？' })).toBeVisible();
   assert.equal(await page.evaluate(k => localStorage.getItem(k), key), '{"large":false}', 'Search never writes history');
 

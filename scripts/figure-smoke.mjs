@@ -30,6 +30,13 @@ try {
   await expect(page.locator('.reading-toc a[href="#article-figure"]')).toBeVisible();
   // The image actually loads from /media.
   expect(await image.evaluate(img => img.naturalWidth > 0)).toBe(true);
+  const fallback = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await fallback.route('**/media/pancreas-servier.png', route => route.fulfill({ status: 404, body: '' }));
+  await fallback.goto(`${base}/article/glucose`, { waitUntil: 'networkidle' });
+  await expect(fallback.locator('#article-figure')).toContainText('图片暂时无法显示');
+  await expect(fallback.locator('#article-figure')).toContainText('图示边界');
+  await expect(fallback.locator('#article-source-panel')).toBeAttached();
+  await fallback.close();
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'figure must not overflow on mobile');
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });

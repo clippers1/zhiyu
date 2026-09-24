@@ -36,6 +36,16 @@
 .reading-large .source-list,
 .reading-large .source-list a { font-size: 16px; line-height: 1.9; }
 .reading-large .article-reader .detail-chain { flex-wrap: wrap; }
+.article-reader .detail-heading .detail-answer { font-size: 17px; line-height: 1.7; }
+.article-reader .detail-heading .review-notice { font-size: 14px; line-height: 1.6; margin: 10px 0; }
+.article-reader .article-priority-limit { margin-top: 16px; color: var(--zc-ink); }
+.article-reader .article-priority-limit b { font-size: 16px; font-weight: 600; }
+.article-reader .article-priority-limit p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.article-reader article > .article-figure { margin: 20px 35px; }
+.article-reader .article-figure-stage > p { font-size: 15px; line-height: 1.7; text-align: center; color: var(--zc-ink-2); }
+@media (max-width: 768px) {
+  .article-reader article > .article-figure { margin: 18px 20px; }
+}
 .reading-large .article-reader .detail-chain > span { min-width: 90px; }
 .resume-reading, .continue-card { margin: 18px 0; padding: 18px 24px; box-shadow: var(--zc-shadow); border-radius: 10px; background: var(--zc-soft); }
 .resume-reading p, .continue-card p { font-size: 13px; color: #4f6b58; line-height: 1.9; margin: 0 0 12px; }

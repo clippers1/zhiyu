@@ -5,19 +5,7 @@ import { LoadState } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { readingRoute } from "../services/topics";
 import { contentTrust } from "../services/content-status";
-
-export function TopicCards({ items }) {
-  if (!items.length) return null;
-  return <section className="topic-section" aria-labelledby="topic-section-title">
-    <h2 id="topic-section-title">选一个专题，顺着读下去</h2>
-    <p>从概念到关联器官，再回到参考来源。可按顺序阅读，也可直接跳到关心的部分。</p>
-    <div className="topic-cards">{items.map(item => <RouteLink key={item.id} page="topics" id={item.id}>
-      <span>专题阅读路线</span><h3>{item.question || `认识${item.title}`}</h3><p>{item.subtitle}</p>
-      <span>{contentTrust(item).short}</span>
-      <b>查看路线 <ArrowRight size={16} /></b>
-    </RouteLink>)}</div>
-  </section>;
-}
+import { selectDiscovery } from "../services/discovery";
 
 export function TopicReturn({ id, title }) {
   return <RouteLink className="text-link" page="topics" id={id}>查看{title}阅读路线 <ArrowRight size={15} /></RouteLink>;
@@ -25,22 +13,22 @@ export function TopicReturn({ id, title }) {
 
 function TopicIndex() {
   const state = useContent("list", [{ kind: "indicator", limit: 12 }]);
-  const items = state.data?.items || [];
+  const { questions } = selectDiscovery(state.data?.items);
   return <div className="topic-reader">
     <RouteLink page="map" className="text-link">返回首页</RouteLink>
     <LoadState {...state} />
     {state.data && <>
       <header className="topic-heading">
-        <span className="overline">READING ROUTE · 专题阅读路线</span>
-        <h1>选一条专题，顺着读下去</h1>
-        <p>从概念到关联器官，再回到参考来源。每条路线都标注当前核对状态。</p>
+        <h1>拿到体检单，从哪里开始？</h1>
+        <p>选一个你关心的项目，了解它的含义、局限和来源。下面只是阅读入口，不是检查顺序，也不解读个人结果。</p>
       </header>
-      <div className="topic-cards">{items.map(item => <RouteLink key={item.id} page="topics" id={item.id}>
-        <span>专题阅读路线</span><h3>认识{item.title}</h3><p>{item.subtitle}</p>
+      <div className="topic-cards">{questions.map(item => <RouteLink key={item.id} page="topics" id={item.id}>
+        <span>{item.title}</span><h2>{item.question}</h2><p>{item.questionAnswer}</p>
         <span>{contentTrust(item).short}</span>
-        <b>查看路线 <ArrowRight size={16} /></b>
+        <b>阅读解释与来源 <ArrowRight size={16} /></b>
       </RouteLink>)}</div>
-      {!items.length && <p className="topic-note">专题路线整理中，可先浏览指标百科。</p>}
+      {!questions.length && <p className="topic-note">目前没有可用的问题路线，可先浏览体检项目目录。</p>}
+      <RouteLink page="indicators" className="text-link">查找全部已开放项目 <ArrowRight size={16} /></RouteLink>
     </>}
   </div>;
 }

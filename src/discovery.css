@@ -53,5 +53,61 @@
 @media (max-width: 768px) {
   .organ-topics > p { font-size: 13px; line-height: 1.85; color: #4f6b58; }
   .home-empty { border-radius: 16px; }
-  .spelling-suggestions button, .clear-category { border-radius: 999px; border: 1px solid var(--zc-line, var(--zc-line)); background: #ffffff; }
+.spelling-suggestions button, .clear-category { border-radius: 999px; border: 1px solid var(--zc-line, var(--zc-line)); background: #ffffff; }
+}
+.home-content .hero { padding: 24px 28px; background: var(--zc-card); border: 1px solid var(--zc-line); box-shadow: none; }
+.home-content .hero-content { padding: 0; }
+.home-content .hero h1 { margin: 0; font-size: clamp(25px, 3vw, 32px); line-height: 1.35; letter-spacing: 0; }
+.home-content .hero-content > p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.home-content .home-search-trigger { max-width: 100%; min-height: 48px; margin-top: 16px; font-size: 15px; color: var(--zc-ink-2); box-shadow: none; }
+.home-content .home-search-trigger > span { white-space: normal; text-overflow: clip; }
+.home-content .home-intents { margin-top: 12px; }
+.home-content .intent-chip { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--zc-ink); }
+.home-content .indicator-section { margin-top: 28px; }
+.home-section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.home-section-heading h2, .home-reading-path h2 { font-size: 22px; line-height: 1.4; }
+.home-section-heading > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 14px; }
+.home-content .question-card { box-shadow: none; border: 1px solid var(--zc-line); }
+.home-content .question-kicker { font-size: 13px; letter-spacing: 0; }
+.home-content .question-card h3 { font-size: 18px; line-height: 1.5; }
+.home-content .question-card > p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.home-content .question-meta { display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+.home-reading-path { margin: 32px 0; }
+.home-reading-path > a { display: block; padding: 20px; margin-top: 14px; border: 1px solid var(--zc-line); border-radius: 13px; background: var(--zc-card); color: inherit; }
+.home-reading-path > a > span { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.home-reading-path h3 { margin: 10px 0 6px; font-size: 19px; }
+.home-reading-path p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.home-reading-path > a > span:last-child { margin-top: 12px; }
+.home-content .organ-topics { margin-top: 32px; }
+.home-content .organ-topic-links { grid-template-columns: 1fr; margin-top: 0; }
+.home-content .organ-topic-links a { color: var(--zc-ink); border: 1px solid var(--zc-line); }
+.home-content .organ-topic-links span { font-size: 15px; color: var(--zc-ink-2); }
+.home-content .organ-topics .play-button { margin-top: 12px; min-height: 44px; font-size: 14px; }
+@media (max-width: 768px) {
+  .home-content .hero { padding: 12px 0 0; background: none; border: 0; }
+  .home-content .question-grid { margin: 0; background: none; box-shadow: none; border-radius: 0; gap: 8px; }
+  .home-content .question-card { border-radius: 12px; padding: 16px; }
+  .home-content .question-card:last-child { border-bottom: 1px solid var(--zc-line); }
+}
+.library-controls { padding: 20px; }
+.library-controls h1 { font-size: clamp(24px, 3vw, 30px); line-height: 1.4; margin: 0 0 16px; }
+.library-help { margin-top: 14px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.library-search { min-height: 48px; }
+.library-search input { font-size: 16px; color: var(--zc-ink); }
+.question-row { grid-template-columns: minmax(0, 1fr) auto; gap: 16px; }
+.question-row-main h3 { font-size: 18px; line-height: 1.5; }
+.question-row-main .question-row-term { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-size: 14px; color: var(--zc-ink-2); }
+.question-row-main .question-row-term b { font-size: 14px; font-weight: 500; color: inherit; }
+.question-row-main .question-row-term small { font-size: 13px; letter-spacing: 0; }
+.question-row-main > p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.question-row-meta { font-size: 13px; }
+.organ-page-heading { margin: 0 0 20px; }
+.organ-page-heading h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.4; }
+.organ-page-heading p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.organ-information .organ-description { font-size: 16px; line-height: 1.75; color: var(--zc-ink-2); }
+.organ-information .organ-related p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
+.organ-explorer.no-visual { grid-template-columns: 1fr; min-height: 0; }
+@media (max-width: 850px) {
+  .question-row { grid-template-columns: minmax(0, 1fr); }
+  .question-row-main h3 { font-size: 18px; }
 }

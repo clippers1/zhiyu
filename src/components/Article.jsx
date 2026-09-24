@@ -13,23 +13,25 @@ import { RouteLink } from "./RouteLink";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
 import { readingGuide } from "../services/reading-guide";
-import { QuickRead, TermQuestions } from "./ReadingGuide";
+import { TermQuestions } from "./ReadingGuide";
 import { contentTrust } from "../services/content-status";
 
 function FigureBlock({ figure }) {
+  const [imageFailed, setImageFailed] = useState(false);
   const refs = figure?.sourceIds || [];
   if (!figure || !refs.length) return null;
   return (
     <figure className="article-figure" id="article-figure">
       <div className="article-figure-stage">
-        <img
+        {imageFailed ? <p role="status">图片暂时无法显示，可继续阅读下方的文字解释与来源。</p> : <img
           src={figure.src}
           alt={figure.alt}
           width={figure.width || undefined}
           height={figure.height || undefined}
           decoding="async"
           loading="lazy"
-        />
+          onError={() => setImageFailed(true)}
+        />}
       </div>
       <figcaption>
         <span>{figure.caption}</span>
@@ -120,12 +122,19 @@ export default function Article({
           <div className={`detail-heading ${detail.color}`}>
             <span className="overline">{detail.english}</span>
             <h1>{detail.question || `认识${detail.title}`}</h1>
+            <p className="review-notice">{trust.label}</p>
             {detail.questionAnswer && (
               <p className="detail-answer" id="article-answer">
                 {detail.questionAnswer}
               </p>
             )}
-            {trust.kind !== "reviewed" && <p className="review-notice">{trust.label}</p>}
+            {detail.tip && <div className="detail-tip article-priority-limit" id="article-reminder">
+              <CircleHelp size={19} aria-hidden="true" />
+              <div>
+                <b>不能仅凭这一项判断</b>
+                <p>{detail.tip}<Citation ids={detail.tipSourceIds} references={detail.references} prefix="article-source" /></p>
+              </div>
+            </div>}
             <a
               className="source-jump"
               href="#article-source-panel"
@@ -134,17 +143,16 @@ export default function Article({
               <ArrowRight size={13} />
             </a>
           </div>
+          {figure && <FigureBlock key={detail.id} figure={figure} />}
           <div className="article-share-entry"><ShareCardButton content={detail} /></div>
-          <TopicReturn id={id} title={detail.title} />
-          <QuickRead guide={guide} content={detail} />
             <nav className="reading-toc" aria-label="文章目录">
-              <span>按需阅读</span>
+              <span>深入阅读</span>
               <a href="#article-overview">它是什么</a>
-              <a href="#article-metrics">常见项目</a>
               {figure && <a href="#article-figure">图解</a>}
+              <a href="#article-metrics">常见项目</a>
               {Boolean(guide?.questions.length) && <a href="#article-questions">术语问答</a>}
               <a href="#article-process">理解过程</a>
-              <a href="#article-reminder">不能说明什么</a>
+              {detail.tip && <a href="#article-reminder">不能说明什么</a>}
               <a href="#article-source-panel">核对来源</a>
             </nav>
           <div className="detail-body">
@@ -176,7 +184,6 @@ export default function Article({
               ))}
             </div>
             <TermQuestions guide={guide} content={detail} />
-            {figure && <FigureBlock figure={figure} />}
             <h2 id="article-process">把身体里的过程串起来</h2>
             <div className="detail-chain">
               {detail.chain.map((step, i) => (
@@ -188,20 +195,6 @@ export default function Article({
                   {i < detail.chain.length - 1 && <ArrowRight size={16} />}
                 </React.Fragment>
               ))}
-            </div>
-            <div className="detail-tip" id="article-reminder">
-              <CircleHelp size={19} />
-              <div>
-                <b>不能仅凭这一项判断</b>
-                <p>
-                  {detail.tip}
-                  <Citation
-                    ids={detail.tipSourceIds}
-                    references={detail.references}
-                    prefix="article-source"
-                  />
-                </p>
-              </div>
             </div>
             <div className="detail-related">
               <span>关联器官：{detail.organ}</span>
@@ -219,10 +212,11 @@ export default function Article({
             </p>
             <section className="topic-followup" aria-label="接下来读什么">
               <h2>接下来读什么？</h2>
-              <p>可继续了解本文关联的器官，也可回到路线选择阅读顺序。关联不用于判断个人病因。</p>
+              <p>可继续了解本文关联的器官，或再选一个体检项目。关联不用于判断个人病因。</p>
               <LoadState {...relatedState} />
               {(relatedState.data?.items || []).map(organ => <RouteLink key={organ.id} page="organs" id={organ.id} onNavigate={() => onOrgan(organ.id)} className="text-link">继续了解{organ.title} <ArrowRight size={15} /></RouteLink>)}
               <TopicReturn id={id} title={detail.title} />
+              <RouteLink page="topics" className="text-link">从其他体检问题继续读 <ArrowRight size={15} /></RouteLink>
             </section>
           </div>
         </article>

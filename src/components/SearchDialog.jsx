@@ -48,7 +48,7 @@ export default function SearchDialog({ onOpen, onOrgan }) {
                     {result.kind === "indicator" ? "项目" : "器官"}
                   </span>
                   <b>{result.kind === "indicator" && result.question ? result.question : result.title}</b>
-                  <small>{result.subtitle}</small>
+                  <small>{result.kind === "indicator" ? result.questionAnswer || result.subtitle : result.subtitle}</small>
                   {result.match && <small className="search-match">匹配：{result.match}</small>}
                 </span>
                 <ArrowUpRight size={18} />
@@ -60,7 +60,7 @@ export default function SearchDialog({ onOpen, onOrgan }) {
                 <p>没有找到匹配的项目。试试“血糖”“肝功能”或项目缩写，也可以换一种问法。</p>
                 <p>没有搜索结果不代表没有健康风险，本工具不能判断是否需要就医。</p>
                 <SearchSuggestions suggestions={state.data.suggestions} onChoose={changeQuery} />
-                <div className="search-suggestions">{["血糖", "血压", "血脂"].map(word => <button key={word} onClick={() => changeQuery(word)}>查找{word}</button>)}</div>
+                <RouteLink page="indicators" className="text-link">浏览已开放的体检项目</RouteLink>
               </div>
             )}
           </div>
