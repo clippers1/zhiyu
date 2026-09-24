@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { BookOpen, Search } from "lucide-react";
+import React, { useState } from "react";
+import { Search } from "lucide-react";
 import { useContent } from "../hooks";
-import { IndicatorCard, LoadState, PageIntro, Pagination } from "./ContentUI";
+import { LoadState, PageIntro, Pagination, QuestionRow } from "./ContentUI";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
-import { RouteLink } from "./RouteLink";
 
-export default function Library({
-  onOpen,
-}) {
+// H03：体检项目列表按问题索引组织。项目名/缩写/别名仍可搜索，
+// 只显示当前已发布内容，不提供器官以外的新范围。
+export default function Library({ onOpen }) {
   const { query, setQuery, effective, pending, inputProps } = useSearchInput();
   const [category, setCategory] = useState("");
   const [cursor, setCursor] = useState("0");
@@ -29,16 +28,12 @@ export default function Library({
   return (
     <>
       <div>
-      <PageIntro
-        label="THE INDICATOR LIBRARY"
-        title="读懂数字背后的身体语言。"
-        description="先找到一个关心的指标，再理解它与身体的联系。每篇内容都可追溯来源。"
-      />
+        <PageIntro
+          label="TEST QUESTIONS"
+          title="看体检项目，从问题找答案。"
+          description="每篇内容先回答一个具体问题，再展开解释、局限和来源。搜索支持项目名称、英文缩写和大白话说法。"
+        />
       </div>
-      <section className="lookup-help" aria-label="术语查找提示">
-        <h2>先输入体检单上的一个词</h2>
-        <p>支持指标名称、英文缩写和相关术语。这里只查找科普专题，不判断检查结果是否正常；请勿输入姓名、联系方式或完整报告。</p>
-      </section>
       <section className="library-controls">
         <label className="library-search">
           <Search size={18} />
@@ -47,16 +42,16 @@ export default function Library({
             id="indicator-search"
             value={query}
             onChange={(e) => filter(setQuery, e.target.value)}
-            placeholder="搜索指标、英文缩写或关键词"
-            aria-label="筛选指标"
+            placeholder="搜索项目名称、缩写或你的问题"
+            aria-label="筛选体检项目"
           />
         </label>
-        <div className="category-filters">
+        <div className="category-filters" aria-label="按分类筛选">
           <button
             className={!category ? "active" : ""}
             onClick={() => filter(setCategory, "")}
           >
-            全部指标
+            全部项目
           </button>
           {(data?.categories || []).map((c) => (
             <button
@@ -69,20 +64,16 @@ export default function Library({
           ))}
         </div>
       </section>
-      {!query && !category && data?.items.some(item => item.tags?.length) && <div className="term-suggestions" aria-label="可查找的术语示例">
-        <span>从已有专题试一试</span>
-        {[...new Set(data.items.flatMap(item => item.tags || []))].slice(0, 6).map(term => <button key={term} onClick={() => filter(setQuery, term)}>{term}</button>)}
-      </div>}
       {pending ? <p className="search-hint" role="status">输入完成后查找…</p> : <LoadState {...state} />}
       {data && (
         <>
           <div className="result-count">
-            找到 {data.total} 个专题
-            <span>按主题慢慢了解，不必一次记住</span>
+            找到 {data.total} 个项目专题
+            <span>按问题慢慢了解，不必一次记住</span>
           </div>
-          <div className="indicator-grid library-grid">
+          <div className="question-list">
             {data.items.map((item) => (
-              <IndicatorCard key={item.id} item={item} onOpen={onOpen} />
+              <QuestionRow key={item.id} item={item} onOpen={onOpen} />
             ))}
           </div>
           <Pagination
@@ -92,11 +83,9 @@ export default function Library({
           />
           {data.total === 0 && (
             <div className="empty-state">
-              <span>
-                <Search size={28} />
-              </span>
-              <h2>暂时没有匹配的内容</h2>
-              <p>换一个关键词，或查看全部指标。</p>
+              <Search size={28} />
+              <h2>没有匹配的项目</h2>
+              <p>换一个说法，例如“血糖”“血脂”或项目缩写；也可以查看全部问题。</p>
               <SearchSuggestions suggestions={data.suggestions} onChoose={value => filter(setQuery, value)} />
               {query && category && <button className="clear-category" onClick={() => filter(setCategory, "")}>保留关键词，清除分类限制</button>}
               <button
@@ -107,40 +96,12 @@ export default function Library({
                   setCursor("0");
                 }}
               >
-                浏览全部指标
+                浏览全部问题
               </button>
             </div>
           )}
         </>
       )}
-      <section className="reading-guide">
-          <BookOpen size={25} />
-          <div>
-            <h2>读体检单，可以从这三步开始</h2>
-            <div className="guide-grid">
-              {[
-                [
-                  "确认检查条件",
-                  "是否空腹、采样时间、近期运动和用药，都可能影响结果。",
-                ],
-                [
-                  "结合相关指标",
-                  "同一个身体系统往往需要多个指标共同观察，单一异常不等于确诊。",
-                ],
-                [
-                  "关注变化与背景",
-                  "对照历次结果，结合症状、病史和报告参考区间，必要时请医生评估。",
-                ],
-              ].map(([title, text], i) => (
-                <div key={title}>
-                  <span>0{i + 1}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-      </section>
     </>
   );
 }

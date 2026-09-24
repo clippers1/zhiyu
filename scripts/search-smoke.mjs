@@ -9,29 +9,29 @@ const errors = [];
 page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });
-  const input = page.getByRole('textbox', { name: '筛选指标', exact: true });
+  const input = page.getByRole('textbox', { name: '筛选体检项目', exact: true });
   await expect(input).toHaveAttribute('maxlength', '200');
   for (const [query, title] of [['ＬＤＬ－Ｃ', '血脂'], ['l d l c', '血脂'], ['ＨｂＡ１ｃ', '血糖'], ['blood glucose', '血糖'], ['高压', '血压'], ['CBC', '血常规'], ['eGFR', '肾功能'], ['FT4', '甲状腺功能'], ['尿检', '尿常规']]) {
     await input.fill(query);
-    await expect(page.locator('.indicator-card')).toHaveCount(1);
-    await expect(page.locator('.indicator-card h3')).toHaveText(title);
-    await expect(page.locator('.indicator-card .search-match')).toBeVisible();
+    await expect(page.locator('.question-row')).toHaveCount(1);
+    await expect(page.locator('.question-row .question-row-term b')).toHaveText(title);
+    await expect(page.locator('.question-row .search-match')).toBeVisible();
   }
   await input.fill('glcuose');
-  await expect(page.locator('.indicator-card')).toHaveCount(0);
+  await expect(page.locator('.question-row')).toHaveCount(0);
   await page.getByRole('button', { name: '查找BLOOD GLUCOSE', exact: true }).click();
   await expect(input).toHaveValue('BLOOD GLUCOSE');
-  await expect(page.locator('.indicator-card h3')).toHaveText('血糖');
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText('血糖');
   await page.getByRole('button', { name: '心血管健康', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '暂时没有匹配的内容' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '没有匹配的项目' })).toBeVisible();
   await page.getByRole('button', { name: '保留关键词，清除分类限制' }).click();
   await expect(input).toHaveValue('BLOOD GLUCOSE');
-  await expect(page.locator('.indicator-card h3')).toHaveText('血糖');
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText('血糖');
   await input.fill('%');
-  await expect(page.getByRole('heading', { name: '暂时没有匹配的内容' })).toBeVisible();
-  await expect(page.locator('.indicator-card')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: '没有匹配的项目' })).toBeVisible();
+  await expect(page.locator('.question-row')).toHaveCount(0);
 
-  await page.getByRole('button', { name: '搜索指标或器官', exact: true }).click();
+  await page.getByRole('button', { name: '搜索体检项目或器官', exact: true }).click();
   const dialog = page.getByRole('dialog');
   const search = dialog.getByRole('textbox');
   await search.fill('liver');
@@ -45,7 +45,7 @@ try {
   await expect(dialog.getByRole('status')).toContainText('输入完成后查找');
   await search.fill('血糖');
   await search.dispatchEvent('compositionend');
-  await expect(dialog.locator('.search-results > a').first()).toContainText('指标血糖');
+  await expect(dialog.locator('.search-results > a').first()).toContainText('项目血糖');
   await search.fill('glcuose');
   await expect(dialog.locator('.search-results > a')).toHaveCount(0);
   await dialog.getByRole('button', { name: '查找BLOOD GLUCOSE', exact: true }).click();

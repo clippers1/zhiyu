@@ -44,6 +44,39 @@ function visualLearning(value: any, sourceKeys: Set<string>) {
     simplification: text(value.simplification, '简化说明'), parts, steps };
 }
 
+// Indicators may carry one verified static diagram. It must reference an
+// existing attribution record registered in docs/media-attribution.md, cite
+// only sources already present in this article, and explain its simplification.
+// Unverified media never reaches the published snapshot: absent field means no
+// figure, so pages keep a text-only reading path.
+function figureBlock(value: any, sourceKeys: Set<string>) {
+  if (value == null) return null;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) fail('图解内容格式不正确。');
+  const text = (input: any, label: string, max: number) => {
+    if (typeof input !== 'string' || !input.trim() || input.length > max) fail(`图解的${label}不完整。`);
+    return input.trim();
+  };
+  if (typeof value.src !== 'string' || !/^\/media\/[a-z0-9-]+\.png$/.test(value.src)) fail('图解图片路径不正确，仅允许站内 /media/ 下的 PNG。');
+  const sourceIds = Array.isArray(value.sourceIds) && value.sourceIds.length && value.sourceIds.every((key: any) => typeof key === 'string' && sourceKeys.has(key))
+    ? [...new Set(value.sourceIds)] : null;
+  if (!sourceIds) fail('图解引用了不存在的来源编号。');
+  const attribution = value.attribution;
+  if (!attribution || typeof attribution !== 'object' || Array.isArray(attribution)) fail('图解缺少素材权利说明。');
+  const attributionOut = {
+    name: text(attribution.name, '素材名称', 120), url: text(attribution.url, '素材来源链接', 300),
+    license: text(attribution.license, '授权名称', 60), licenseUrl: text(attribution.licenseUrl, '授权链接', 300),
+  };
+  for (const key of ['url', 'licenseUrl'] as const) {
+    if (!/^https:\/\//.test(attributionOut[key])) fail(`图解的${key === 'url' ? '素材来源链接' : '授权链接'}必须使用 HTTPS。`);
+  }
+  return {
+    src: value.src, width: Number.isInteger(value.width) && value.width > 0 ? value.width : null,
+    height: Number.isInteger(value.height) && value.height > 0 ? value.height : null,
+    alt: text(value.alt, '替代文本', 200), caption: text(value.caption, '图注', 300),
+    simplification: text(value.simplification, '简化说明', 600), sourceIds, attribution: attributionOut,
+  };
+}
+
 export async function snapshotArticle(req: PayloadRequest, articleID: number) {
   const article: any = await req.payload.findByID({ collection: 'articles', id: articleID, depth: 2, req, overrideAccess: true });
   const references = (article.citations || []).map((citation: any) => {
@@ -66,6 +99,7 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
   };
   const body = article.kind === 'indicator' ? {
     ...common, title: article.title, english: article.english || '', subtitle: article.subtitle,
+    question: article.question || '', questionAnswer: article.questionAnswer || '',
     icon: article.icon, color: article.color, number: article.number || '',
     tags: (article.tags || []).map((t: any) => t.text),
     desc: article.description, descriptionSourceIds: splitKeys(article.descriptionSourceKeys),
@@ -74,6 +108,7 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
     tip: article.tip, tipSourceIds: splitKeys(article.tipSourceKeys),
     organ: article.organLabel || '',
     relatedOrgans: (article.relatedOrgans || []).map((r: any) => ({ id: r.slug, title: r.title })),
+    figure: figureBlock(article.figure, new Set(references.map((reference: any) => reference.id))),
   } : {
     ...common, name: article.title, en: article.english || '', headline: article.subtitle,
     text: article.description, connection: article.organLabel || '',
@@ -83,11 +118,13 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
   };
   const summary = {
     id: article.slug, kind: article.kind, title: article.title, subtitle: article.subtitle,
+    question: article.kind === 'indicator' ? (article.question || '') : '',
+    questionAnswer: article.kind === 'indicator' ? (article.questionAnswer || '') : '',
     english: article.english || '', icon: article.icon, color: article.color,
     number: article.number || '', tags: (article.tags || []).map((t: any) => t.text),
     category: article.category, featured: Boolean(article.featured),
     referenceCount: references.length, sourceLabel: references[0]?.publisher || '',
-    searchText: [article.title, article.subtitle, article.aliases || '', article.description,
+    searchText: [article.title, article.subtitle, article.question || '', article.aliases || '', article.description,
       ...(article.metrics || []).map((m: any) => `${m.name} ${m.text}`)].join(' '),
   };
   // Last-modified time is operational metadata, not part of medical approval.

@@ -14,12 +14,14 @@ test("direct History URLs resolve including trailing slashes and default organ",
 });
 
 test("invalid routes do not silently render the home page", () => {
-  for (const path of ["/missing", "/article", "/topics", "/topics/glucose/extra", "/saved/extra", "/article/glucose/extra", "/article/%2e%2e", "//organs", "/map/heart"]) {
+  for (const path of ["/missing", "/article", "/topics/glucose/extra", "/saved/extra", "/article/glucose/extra", "/article/%2e%2e", "//organs", "/map/heart"]) {
     assert.equal(parseRoute(path).page, "not-found", path);
   }
+  // PRD 7.6: /topics must have a readable index page instead of 404.
+  assert.deepEqual(parseRoute("/topics"), { page: "topics", id: "" });
+  assert.equal(routePath("topics"), "/topics");
   assert.throws(() => routePath("article", "../private"));
   assert.throws(() => routePath("article"));
-  assert.throws(() => routePath("topics"));
   assert.throws(() => routePath("saved", "glucose"));
 });
 

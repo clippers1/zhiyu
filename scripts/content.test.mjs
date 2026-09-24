@@ -50,6 +50,16 @@ test("all published demo content has valid references, related records and index
       }
       for (const step of entry.learning.steps) assert.ok(partIds.has(step.from) && partIds.has(step.to));
     }
+    if (entry.figure) {
+      assert.ok(entry.kind === "indicator", "figure is indicator-only");
+      assert.match(entry.figure.src, /^\/media\/[a-z0-9-]+\.png$/);
+      for (const id of entry.figure.sourceIds)
+        assert.ok(sourceIds.has(id), `${entry.id}: figure missing reference ${id}`);
+      assert.ok(entry.figure.alt && entry.figure.caption && entry.figure.simplification);
+      assert.ok(entry.figure.attribution?.name && entry.figure.attribution?.license);
+      assert.equal(new URL(entry.figure.attribution.url).protocol, "https:");
+      assert.equal(new URL(entry.figure.attribution.licenseUrl).protocol, "https:");
+    }
     for (const id of entry.related || [])
       assert.ok(keys.has(`indicator/${id}`));
     for (const item of entry.relatedOrgans || [])

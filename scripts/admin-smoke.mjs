@@ -19,16 +19,15 @@ try {
   await page.locator('button[type="submit"]').click();
   await expect(page).toHaveURL(/\/admin\/?$/);
   await expect(page.locator('a[href="/admin/collections/articles"]').first()).toBeVisible();
-  await page.goto(`${base}/admin/collections/articles`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/admin/collections/articles?limit=100`, { waitUntil: 'networkidle' });
   await expect(page.getByRole('link', { name: '血糖', exact: true })).toBeVisible();
   await page.getByRole('link', { name: '血糖', exact: true }).click();
   await expect(page.locator('input[name="title"]')).toHaveValue('血糖');
   await expect(page.locator('textarea[name="description"]')).toContainText('葡萄糖');
   await mkdir('artifacts', { recursive: true });
   await page.screenshot({ path: 'artifacts/content-admin.png', fullPage: false });
-  const result = await page.request.get(`${base}/api/cms/reviews?limit=1`, { headers: { Origin: new URL(base).origin } });
-  assert.equal(result.status(), 200);
-  assert.equal((await result.json()).totalDocs, 0, 'Production seed must not fabricate medical reviews');
+  const reviews = await page.evaluate(() => fetch('/api/cms/reviews?limit=1', { credentials: 'include' }).then(r => r.json()));
+  assert.equal(reviews.totalDocs, 0, 'Production seed must not fabricate medical review records');
   assert.deepEqual(errors, []);
   console.log('PASS admin browser login, content list/editor and no fabricated medical review records.');
 } finally { await browser.close(); }

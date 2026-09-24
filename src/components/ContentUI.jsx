@@ -46,6 +46,28 @@ export function IndicatorCard({ item, onOpen }) {
     </RouteLink>
   );
 }
+export function QuestionRow({ item, onOpen }) {
+  return (
+    <RouteLink page="article" id={item.id}
+      className="question-row"
+      onNavigate={() => onOpen(item.id)}
+    >
+      <span className="question-row-term">
+        <b>{item.title}</b>
+        <small>{item.english}</small>
+      </span>
+      <span className="question-row-main">
+        <h3>{item.question || `认识${item.title}`}</h3>
+        <p>{item.questionAnswer || item.subtitle}</p>
+        {item.match && <span className="search-match">匹配：{item.match}</span>}
+      </span>
+      <span className="question-row-meta">
+        {item.referenceCount} 份参考资料
+        <ArrowRight size={16} />
+      </span>
+    </RouteLink>
+  );
+}
 export function LoadState({ loading, error, retry }) {
   if (loading)
     return (

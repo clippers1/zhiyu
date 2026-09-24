@@ -4,9 +4,14 @@
   "title": "血脂",
   "english": "BLOOD LIPIDS",
   "subtitle": "脂肪的运输，也有不同的分工。",
+  "question": "血脂单里几个名称有什么区别？",
+  "questionAnswer": "血脂项目分别观察不同脂蛋白运输的胆固醇和甘油三酯，它们分工不同，不能互相替代。",
   "icon": "layers",
   "color": "blue",
-  "tags": ["LDL-C / HDL-C", "甘油三酯"],
+  "tags": [
+    "LDL-C / HDL-C",
+    "甘油三酯"
+  ],
   "number": "03",
   "featured": true,
   "desc": "脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。",
@@ -14,17 +19,23 @@
     {
       "name": "低密度脂蛋白胆固醇（LDL-C）",
       "text": "常被叫作“坏胆固醇”。它与动脉粥样硬化风险密切相关，目标值需要结合个人整体心血管风险确定。",
-      "sourceIds": ["lipids"]
+      "sourceIds": [
+        "lipids"
+      ]
     },
     {
       "name": "高密度脂蛋白胆固醇（HDL-C）",
       "text": "参与把多余胆固醇带回肝脏，常被叫作“好胆固醇”。解读时仍要同时看 LDL-C、甘油三酯和个人整体风险。",
-      "sourceIds": ["lipids"]
+      "sourceIds": [
+        "lipids"
+      ]
     },
     {
       "name": "甘油三酯（TG）与总胆固醇（TC）",
       "text": "TG 是重要的能量储存形式，受饮食等因素影响；TC 是多种脂蛋白所携带胆固醇的总量。",
-      "sourceIds": ["lipids"]
+      "sourceIds": [
+        "lipids"
+      ]
     }
   ],
   "chain": [
@@ -35,7 +46,12 @@
   ],
   "tip": "化验单的参考区间不一定等于个人治疗目标。是否需要干预，通常还要看年龄、吸烟、血压、糖尿病和既往病史等。",
   "organ": "肝脏 · 血管",
-  "relatedOrgans": [{ "id": "liver", "title": "肝脏" }],
+  "relatedOrgans": [
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
   "kind": "indicator",
   "category": "metabolism",
   "version": 1,
@@ -54,6 +70,10 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["lipids"],
-  "tipSourceIds": ["lipids"]
+  "descriptionSourceIds": [
+    "lipids"
+  ],
+  "tipSourceIds": [
+    "lipids"
+  ]
 }

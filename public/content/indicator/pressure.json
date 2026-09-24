@@ -4,9 +4,14 @@
   "title": "血压",
   "english": "BLOOD PRESSURE",
   "subtitle": "血液流动时，血管承受多少压力？",
+  "question": "血压单上的两个数字在说什么？",
+  "questionAnswer": "血压记录心脏泵血和舒张时血管承受的压力，规范测量下的多次读数比孤立一次更有参考价值。",
   "icon": "heart-pulse",
   "color": "purple",
-  "tags": ["收缩压", "舒张压"],
+  "tags": [
+    "收缩压",
+    "舒张压"
+  ],
   "number": "02",
   "featured": true,
   "desc": "心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。",
@@ -14,17 +19,23 @@
     {
       "name": "收缩压（高压）",
       "text": "心脏收缩、向外泵血时，动脉内达到的较高压力。",
-      "sourceIds": ["hypertension"]
+      "sourceIds": [
+        "hypertension"
+      ]
     },
     {
       "name": "舒张压（低压）",
       "text": "心脏舒张、再次充盈时，动脉仍维持的较低压力。",
-      "sourceIds": ["hypertension"]
+      "sourceIds": [
+        "hypertension"
+      ]
     },
     {
       "name": "家庭与动态血压",
       "text": "连续规范测量比孤立的一次读数更有意义；诊室、家庭和动态测量使用的判断标准有所不同。",
-      "sourceIds": ["bp"]
+      "sourceIds": [
+        "bp"
+      ]
     }
   ],
   "chain": [
@@ -35,7 +46,12 @@
   ],
   "tip": "测量前安静休息至少 5 分钟，坐姿测量、手臂与心脏同高，使用合适袖带。不同日期的规范测量更有参考价值。",
   "organ": "心脏 · 血管 · 肾脏",
-  "relatedOrgans": [{ "id": "heart", "title": "心脏" }],
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    }
+  ],
   "kind": "indicator",
   "category": "circulation",
   "version": 1,
@@ -87,6 +103,12 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["hypertension", "heart", "kidney"],
-  "tipSourceIds": ["bp"]
+  "descriptionSourceIds": [
+    "hypertension",
+    "heart",
+    "kidney"
+  ],
+  "tipSourceIds": [
+    "bp"
+  ]
 }

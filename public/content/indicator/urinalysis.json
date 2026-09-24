@@ -4,27 +4,47 @@
   "title": "尿常规",
   "english": "URINALYSIS",
   "subtitle": "外观、试纸和显微镜，分别观察什么？",
+  "question": "尿常规能看出什么？",
+  "questionAnswer": "尿常规从外观、化学和显微镜三个角度观察一份尿液样本，不同机构的项目组合可能不同。",
   "icon": "droplet",
   "color": "orange",
-  "tags": ["尿液分析", "尿试纸", "尿沉渣"],
-  "searchAliases": ["尿检", "尿液检查", "尿沉渣镜检", "尿蛋白", "尿糖", "尿潜血", "UA"],
+  "tags": [
+    "尿液分析",
+    "尿试纸",
+    "尿沉渣"
+  ],
+  "searchAliases": [
+    "尿检",
+    "尿液检查",
+    "尿沉渣镜检",
+    "尿蛋白",
+    "尿糖",
+    "尿潜血",
+    "UA"
+  ],
   "number": "09",
   "desc": "尿常规也叫尿液分析，是对尿液进行外观、化学和显微镜观察的一组检查。不同医疗机构的组合可能不同，结果描述的是尿液样本中的多种特征。",
   "metrics": [
     {
       "name": "外观观察",
       "text": "可以记录尿液的颜色和清澈程度，为后续化学与显微镜检查提供样本信息。",
-      "sourceIds": ["urinalysis"]
+      "sourceIds": [
+        "urinalysis"
+      ]
     },
     {
       "name": "试纸化学检查",
       "text": "试纸可检测酸碱度、蛋白质、葡萄糖、血液等项目；具体项目取决于所用试纸和检查目的。",
-      "sourceIds": ["urinalysis"]
+      "sourceIds": [
+        "urinalysis"
+      ]
     },
     {
       "name": "显微镜检查",
       "text": "显微镜下可观察细胞、结晶、管型和微生物等成分，通常需要与其他结果一起理解。",
-      "sourceIds": ["urinalysis"]
+      "sourceIds": [
+        "urinalysis"
+      ]
     }
   ],
   "chain": [
@@ -33,10 +53,17 @@
     "用试纸检测化学成分",
     "必要时进行显微镜观察"
   ],
-  "chainSourceIds": ["urinalysis"],
+  "chainSourceIds": [
+    "urinalysis"
+  ],
   "tip": "采样方式、留取时间、饮水和药物等都可能影响尿液样本。一个异常项目不能单独确定原因，也不能代替结合症状和其他检查的判断。",
   "organ": "肾脏 · 尿路 · 尿液",
-  "relatedOrgans": [{ "id": "kidney", "title": "肾脏" }],
+  "relatedOrgans": [
+    {
+      "id": "kidney",
+      "title": "肾脏"
+    }
+  ],
   "kind": "indicator",
   "category": "urinary",
   "featured": false,
@@ -61,6 +88,10 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["urinalysis"],
-  "tipSourceIds": ["urinalysis"]
+  "descriptionSourceIds": [
+    "urinalysis"
+  ],
+  "tipSourceIds": [
+    "urinalysis"
+  ]
 }

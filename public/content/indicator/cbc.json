@@ -4,27 +4,49 @@
   "title": "血常规",
   "english": "COMPLETE BLOOD COUNT",
   "subtitle": "红细胞、白细胞和血小板，各自在看什么？",
+  "question": "血常规里常见名称各指什么？",
+  "questionAnswer": "血常规用一组结果分别描述红细胞、白细胞和血小板的数量与特征，需要放在一起理解。",
   "icon": "droplet",
   "color": "orange",
-  "tags": ["CBC", "红细胞", "白细胞", "血小板"],
-  "searchAliases": ["全血细胞计数", "血细胞计数", "血红蛋白", "血小板计数", "WBC", "RBC", "PLT", "HGB"],
+  "tags": [
+    "CBC",
+    "红细胞",
+    "白细胞",
+    "血小板"
+  ],
+  "searchAliases": [
+    "全血细胞计数",
+    "血细胞计数",
+    "血红蛋白",
+    "血小板计数",
+    "WBC",
+    "RBC",
+    "PLT",
+    "HGB"
+  ],
   "number": "04",
   "desc": "血常规也叫全血细胞计数（CBC），用一组结果描述血液中不同细胞的数量和部分特征。它把红细胞、白细胞和血小板放在同一张基础检查里观察。",
   "metrics": [
     {
       "name": "红细胞、血红蛋白与红细胞压积",
       "text": "红细胞负责携带氧气；血红蛋白是红细胞中的携氧蛋白，红细胞压积描述红细胞在血液中所占的比例。",
-      "sourceIds": ["cbc"]
+      "sourceIds": [
+        "cbc"
+      ]
     },
     {
       "name": "白细胞（WBC）",
       "text": "白细胞是免疫系统的一部分。血常规可报告白细胞总数，有些检查还会进一步区分不同类型。",
-      "sourceIds": ["cbc"]
+      "sourceIds": [
+        "cbc"
+      ]
     },
     {
       "name": "血小板（PLT）",
       "text": "血小板参与凝血。血小板计数描述一定体积血液中的血小板数量。",
-      "sourceIds": ["cbc"]
+      "sourceIds": [
+        "cbc"
+      ]
     }
   ],
   "chain": [
@@ -33,10 +55,21 @@
     "同时观察大小与携氧相关指标",
     "结合参考区间和检查背景阅读"
   ],
-  "chainSourceIds": ["cbc"],
+  "chainSourceIds": [
+    "cbc"
+  ],
   "tip": "血常规是一组结果，不宜只盯一个箭头。参考区间会因实验室、人群和检测方法不同而变化，结果需要和症状、既往结果及其他检查一起理解。",
   "organ": "血液 · 骨髓 · 免疫系统",
-  "relatedOrgans": [{ "id": "heart", "title": "心脏" }, { "id": "lung", "title": "肺" }],
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    },
+    {
+      "id": "lung",
+      "title": "肺"
+    }
+  ],
   "kind": "indicator",
   "category": "blood",
   "featured": false,
@@ -61,6 +94,10 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["cbc"],
-  "tipSourceIds": ["cbc"]
+  "descriptionSourceIds": [
+    "cbc"
+  ],
+  "tipSourceIds": [
+    "cbc"
+  ]
 }

@@ -16,6 +16,7 @@
 .reading-toc a:hover { background: var(--zc-soft); }
 .detail-body [id] { scroll-margin-top: 100px; }
 .organ-information .reading-tools { padding: 0 0 16px; margin-bottom: 20px; }
+.reading-actions:not(.is-ready) { position: static; }
 .recent-list { list-style: none; padding: 0; margin-top: 8px; }
 .recent-list a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 0; border-top: 1px solid var(--zc-line); color: #2e8450; }
 .recent-list small { font-size: 12px; margin-left: 12px; color: #4f6b58; }

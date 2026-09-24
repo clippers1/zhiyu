@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   CircleHelp,
+  Settings2,
   Share2,
 } from "lucide-react";
 import { useContent } from "../hooks";
@@ -15,10 +16,48 @@ import { readingGuide } from "../services/reading-guide";
 import { QuickRead, TermQuestions } from "./ReadingGuide";
 import { contentTrust } from "../services/content-status";
 
+function FigureBlock({ figure }) {
+  const refs = figure?.sourceIds || [];
+  if (!figure || !refs.length) return null;
+  return (
+    <figure className="article-figure" id="article-figure">
+      <div className="article-figure-stage">
+        <img
+          src={figure.src}
+          alt={figure.alt}
+          width={figure.width || undefined}
+          height={figure.height || undefined}
+          decoding="async"
+          loading="lazy"
+        />
+      </div>
+      <figcaption>
+        <span>{figure.caption}</span>
+        <Citation ids={refs} references={figure.references} prefix="article-source" />
+      </figcaption>
+      <p className="article-figure-note">
+        <b>图示边界：</b>
+        {figure.simplification}
+      </p>
+      <small className="article-figure-attribution">
+        插图：
+        <a href={figure.attribution.url} target="_blank" rel="noreferrer">
+          {figure.attribution.name}
+        </a>
+        {" · "}
+        <a href={figure.attribution.licenseUrl} target="_blank" rel="noreferrer">
+          {figure.attribution.license}
+        </a>
+      </small>
+    </figure>
+  );
+}
+
 export default function Article({
   id,
   onBack,
   onOrgan,
+  onTools,
 }) {
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
@@ -27,6 +66,10 @@ export default function Article({
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
+  const figure = detail?.figure ? {
+    ...detail.figure,
+    references: detail.references,
+  } : null;
   useEffect(() => {
     if (detail && window.location.hash === "#article-source-panel") {
       document.getElementById("article-source-panel")?.scrollIntoView();
@@ -59,19 +102,29 @@ export default function Article({
           <ArrowLeft size={20} />
           <span>返回</span>
         </button>
-        <span>知愈 · 指标解读</span>
-        <button onClick={share} disabled={!detail} aria-label="分享这篇知识">
-          <Share2 size={18} />
-          <span>分享</span>
-        </button>
+        <span>知愈 · 体检项目</span>
+        <span className="reading-bar-tools">
+          <button onClick={onTools} aria-label="偏好设置" aria-haspopup="dialog">
+            <Settings2 size={18} />
+            <span>偏好</span>
+          </button>
+          <button onClick={share} disabled={!detail} aria-label="分享这篇知识">
+            <Share2 size={18} />
+            <span>分享</span>
+          </button>
+        </span>
       </div>
       <LoadState {...state} />
       {detail && (
         <article>
           <div className={`detail-heading ${detail.color}`}>
             <span className="overline">{detail.english}</span>
-            <h1>认识{detail.title}</h1>
-            <p>{detail.subtitle}</p>
+            <h1>{detail.question || `认识${detail.title}`}</h1>
+            {detail.questionAnswer && (
+              <p className="detail-answer" id="article-answer">
+                {detail.questionAnswer}
+              </p>
+            )}
             {trust.kind !== "reviewed" && <p className="review-notice">{trust.label}</p>}
             <a
               className="source-jump"
@@ -84,16 +137,16 @@ export default function Article({
           <div className="article-share-entry"><ShareCardButton content={detail} /></div>
           <TopicReturn id={id} title={detail.title} />
           <QuickRead guide={guide} content={detail} />
-          <nav className="reading-toc" aria-label="文章目录">
-            <span>按需阅读</span>
-            {(guide?.concept || guide?.reminder) && <a href="#article-quick-read">快速了解</a>}
-            <a href="#article-overview">先了解概念</a>
-            <a href="#article-metrics">认识指标</a>
-            {Boolean(guide?.questions.length) && <a href="#article-questions">术语问答</a>}
-            <a href="#article-process">理解过程</a>
-            <a href="#article-reminder">看报告提示</a>
-            <a href="#article-source-panel">核对来源</a>
-          </nav>
+            <nav className="reading-toc" aria-label="文章目录">
+              <span>按需阅读</span>
+              <a href="#article-overview">它是什么</a>
+              <a href="#article-metrics">常见项目</a>
+              {figure && <a href="#article-figure">图解</a>}
+              {Boolean(guide?.questions.length) && <a href="#article-questions">术语问答</a>}
+              <a href="#article-process">理解过程</a>
+              <a href="#article-reminder">不能说明什么</a>
+              <a href="#article-source-panel">核对来源</a>
+            </nav>
           <div className="detail-body">
             <p className="detail-intro" id="article-overview">
               {detail.desc}
@@ -103,7 +156,7 @@ export default function Article({
                 prefix="article-source"
               />
             </p>
-            <h2 id="article-metrics">一组指标，各有分工</h2>
+            <h2 id="article-metrics">常见相关项目</h2>
             <div className="metric-list">
               {detail.metrics.map((metric, i) => (
                 <div key={metric.name}>
@@ -123,6 +176,7 @@ export default function Article({
               ))}
             </div>
             <TermQuestions guide={guide} content={detail} />
+            {figure && <FigureBlock figure={figure} />}
             <h2 id="article-process">把身体里的过程串起来</h2>
             <div className="detail-chain">
               {detail.chain.map((step, i) => (
@@ -138,7 +192,7 @@ export default function Article({
             <div className="detail-tip" id="article-reminder">
               <CircleHelp size={19} />
               <div>
-                <b>看报告时，记住这一点</b>
+                <b>不能仅凭这一项判断</b>
                 <p>
                   {detail.tip}
                   <Citation

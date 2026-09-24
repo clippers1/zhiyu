@@ -110,6 +110,8 @@ export const Articles: CollectionConfig = {
     { name: 'kind', label: '内容类型', type: 'select', options: [{ label: '指标', value: 'indicator' }, { label: '器官', value: 'organ' }], required: true },
     { ...text('slug', '稳定标识（英文小写 / 数字 / 连字符）', true), validate: (v: any) => /^[a-z0-9-]+$/.test(v) || '标识只能包含英文小写、数字和连字符' } as Field,
     text('title', '中文标题', true), text('subtitle', '一句话介绍', true), text('english', '英文名称'),
+    { ...text('question', '问题式标题（读者会怎么问）'), admin: { condition: indicatorOnly, description: '例如“血糖项目主要看什么？”。应能在正文中找到答案，不新增医学结论。' } } as Field,
+    { ...text('questionAnswer', '问题的一句话回答'), admin: { condition: indicatorOnly, description: '必须与正文已有解释一致，不引入新的来源或结论。' } } as Field,
     text('category', '分类标识', true),
     { name: 'aliases', label: '搜索别名与缩写', type: 'textarea' },
     { name: 'tags', label: '标签', type: 'array', fields: [text('text', '标签', true)] },
@@ -129,6 +131,7 @@ export const Articles: CollectionConfig = {
     { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
     text('organLabel', '关联说明'),
     { name: 'learning', label: '互动学习脚本（JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '支持已登记的心脏循环与肺部气体交换类型；结构和步骤都必须使用本文已有来源编号。' } },
+    { name: 'figure', label: '图解（JSON，可选）', type: 'json', admin: { condition: indicatorOnly, description: '仅接受 /media/ 下已登记权利的静态图（PNG）；必须填写替代文本、图注、简化说明和素材权利，并引用本文已有来源编号。未核对素材时不填写，页面保持纯文字。' } },
     { name: 'relatedOrgans', label: '关联器官', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'organ' } } },
     { name: 'relatedIndicators', label: '关联指标', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'indicator' } } },
     { name: 'citations', label: '本文引用', type: 'array', required: true, minRows: 1, fields: [

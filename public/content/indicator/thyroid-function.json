@@ -4,27 +4,46 @@
   "title": "甲状腺功能",
   "english": "THYROID FUNCTION TESTS",
   "subtitle": "TSH、T4 和 T3，怎样构成调节反馈？",
+  "question": "甲功报告里的 TSH、T3、T4 是什么关系？",
+  "questionAnswer": "TSH 是调节信号，T4 和 T3 是甲状腺激素，三者构成反馈关系，需要结合起来理解。",
   "icon": "heart-pulse",
   "color": "purple",
-  "tags": ["TSH", "T4", "T3"],
-  "searchAliases": ["甲功", "促甲状腺激素", "游离甲状腺素", "FT4", "FT3", "甲状腺激素"],
+  "tags": [
+    "TSH",
+    "T4",
+    "T3"
+  ],
+  "searchAliases": [
+    "甲功",
+    "促甲状腺激素",
+    "游离甲状腺素",
+    "FT4",
+    "FT3",
+    "甲状腺激素"
+  ],
   "number": "08",
   "desc": "甲状腺功能血液检查常测量 TSH 和甲状腺激素。脑下垂体释放 TSH，向甲状腺发出调节信号；甲状腺产生的 T4 和 T3 参与身体能量使用等过程。",
   "metrics": [
     {
       "name": "促甲状腺激素（TSH）",
       "text": "TSH 由脑下垂体产生，调节甲状腺制造和释放激素，常作为甲状腺功能评估的重要起点。",
-      "sourceIds": ["thyroid-tests"]
+      "sourceIds": [
+        "thyroid-tests"
+      ]
     },
     {
       "name": "甲状腺素（T4）",
       "text": "T4 是甲状腺产生的主要激素之一，检查可测总 T4 或游离 T4。",
-      "sourceIds": ["thyroid-tests"]
+      "sourceIds": [
+        "thyroid-tests"
+      ]
     },
     {
       "name": "三碘甲状腺原氨酸（T3）",
       "text": "T3 是另一种甲状腺激素，通常与 TSH、T4 以及具体检查目的一起理解。",
-      "sourceIds": ["thyroid-tests"]
+      "sourceIds": [
+        "thyroid-tests"
+      ]
     }
   ],
   "chain": [
@@ -33,7 +52,9 @@
     "甲状腺产生 T4 和 T3",
     "激素反馈影响 TSH 信号"
   ],
-  "chainSourceIds": ["thyroid-tests"],
+  "chainSourceIds": [
+    "thyroid-tests"
+  ],
   "tip": "TSH、T4、T3 需要结合起来看。检查项目还可能包括甲状腺抗体或影像；这里仅解释常见激素名称，不根据组合结果判断疾病。",
   "organ": "甲状腺 · 脑下垂体 · 激素反馈",
   "relatedOrgans": [],
@@ -61,6 +82,10 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["thyroid-tests"],
-  "tipSourceIds": ["thyroid-tests"]
+  "descriptionSourceIds": [
+    "thyroid-tests"
+  ],
+  "tipSourceIds": [
+    "thyroid-tests"
+  ]
 }

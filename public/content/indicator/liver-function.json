@@ -4,27 +4,49 @@
   "title": "肝功能",
   "english": "LIVER FUNCTION TESTS",
   "subtitle": "酶、胆红素和蛋白质，分别反映什么？",
+  "question": "肝功能检查都查些什么？",
+  "questionAnswer": "肝功能是一组血液检测，测量酶、蛋白质和胆红素等不同侧面，不是单个数值。",
   "icon": "layers",
   "color": "blue",
-  "tags": ["ALT / AST", "胆红素", "白蛋白"],
-  "searchAliases": ["肝功", "谷丙转氨酶", "谷草转氨酶", "丙氨酸氨基转移酶", "天门冬氨酸氨基转移酶", "ALP", "GGT", "TBIL", "ALB"],
+  "tags": [
+    "ALT / AST",
+    "胆红素",
+    "白蛋白"
+  ],
+  "searchAliases": [
+    "肝功",
+    "谷丙转氨酶",
+    "谷草转氨酶",
+    "丙氨酸氨基转移酶",
+    "天门冬氨酸氨基转移酶",
+    "ALP",
+    "GGT",
+    "TBIL",
+    "ALB"
+  ],
   "number": "05",
   "desc": "肝功能检查不是单个数值，而是一组血液检测。它们测量某些酶、蛋白质和胆红素，帮助了解肝脏相关的细胞变化、胆汁处理和蛋白合成功能。",
   "metrics": [
     {
       "name": "ALT、AST 等酶",
       "text": "ALT 和 AST 是常见酶项目。细胞受到影响时，血液中的酶水平可能改变；单个酶不能独立说明具体原因。",
-      "sourceIds": ["liver-tests"]
+      "sourceIds": [
+        "liver-tests"
+      ]
     },
     {
       "name": "胆红素",
       "text": "胆红素来自红细胞正常分解后的处理过程，肝脏参与加工并通过胆汁排出。",
-      "sourceIds": ["liver-tests"]
+      "sourceIds": [
+        "liver-tests"
+      ]
     },
     {
       "name": "白蛋白与总蛋白",
       "text": "白蛋白是由肝脏制造的重要蛋白质；总蛋白还包括其他血液蛋白，通常需要结合多项结果理解。",
-      "sourceIds": ["liver-tests"]
+      "sourceIds": [
+        "liver-tests"
+      ]
     }
   ],
   "chain": [
@@ -33,10 +55,17 @@
     "观察多项结果组成的模式",
     "结合病史、用药和其他检查解释"
   ],
-  "chainSourceIds": ["liver-tests"],
+  "chainSourceIds": [
+    "liver-tests"
+  ],
   "tip": "“肝功能”包含多个项目，不是所有项目都直接代表肝脏功能，也不能凭一项异常判断原因。不同实验室的项目组合和参考区间可能不同。",
   "organ": "肝脏 · 胆汁 · 血液蛋白",
-  "relatedOrgans": [{ "id": "liver", "title": "肝脏" }],
+  "relatedOrgans": [
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
   "kind": "indicator",
   "category": "metabolism",
   "featured": false,
@@ -61,6 +90,10 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["liver-tests"],
-  "tipSourceIds": ["liver-tests"]
+  "descriptionSourceIds": [
+    "liver-tests"
+  ],
+  "tipSourceIds": [
+    "liver-tests"
+  ]
 }

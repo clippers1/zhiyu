@@ -4,9 +4,14 @@
   "title": "血糖",
   "english": "BLOOD GLUCOSE",
   "subtitle": "身体的能量，如何保持平衡？",
+  "question": "血糖项目主要看什么？",
+  "questionAnswer": "血糖检查观察的是血液中葡萄糖的状态，不同项目（空腹、糖化血红蛋白、糖耐量）回答的是不同时间范围的问题。",
   "icon": "droplet",
   "color": "orange",
-  "tags": ["空腹血糖", "糖化血红蛋白"],
+  "tags": [
+    "空腹血糖",
+    "糖化血红蛋白"
+  ],
   "number": "01",
   "featured": true,
   "desc": "血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。",
@@ -14,17 +19,23 @@
     {
       "name": "空腹血糖（FPG）",
       "text": "观察至少 8 小时未摄入热量时的血糖水平，像一张当下的快照。",
-      "sourceIds": ["tests"]
+      "sourceIds": [
+        "tests"
+      ]
     },
     {
       "name": "糖化血红蛋白（HbA1c）",
       "text": "反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。",
-      "sourceIds": ["tests"]
+      "sourceIds": [
+        "tests"
+      ]
     },
     {
       "name": "口服葡萄糖耐量试验（OGTT）",
       "text": "观察喝下规定葡萄糖溶液后身体处理糖的能力，需按医疗机构规范进行。",
-      "sourceIds": ["tests"]
+      "sourceIds": [
+        "tests"
+      ]
     }
   ],
   "chain": [
@@ -34,8 +45,34 @@
     "肝脏储存与释放"
   ],
   "tip": "空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。",
+  "figure": {
+    "src": "/media/pancreas-servier.png",
+    "width": 936,
+    "height": 370,
+    "alt": "胰腺外形医学插图：胰腺位于胃后，头端与十二指肠相邻，尾部靠近脾脏。",
+    "caption": "胰腺：分泌胰岛素帮助身体利用葡萄糖的器官。",
+    "simplification": "图为胰腺外形示意，非真实比例，不显示胰岛细胞分布和疾病状态；胰岛素如何帮助葡萄糖进入细胞，见正文与来源。",
+    "sourceIds": [
+      "insulin"
+    ],
+    "attribution": {
+      "name": "Servier Medical Art by Servier",
+      "url": "https://smart.servier.com/smart_image/pancreas-overview/",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
   "organ": "胰腺 · 肝脏",
-  "relatedOrgans": [{ "id": "pancreas", "title": "胰腺" }, { "id": "liver", "title": "肝脏" }],
+  "relatedOrgans": [
+    {
+      "id": "pancreas",
+      "title": "胰腺"
+    },
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
   "kind": "indicator",
   "category": "metabolism",
   "version": 1,
@@ -87,6 +124,11 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["diabetes", "insulin"],
-  "tipSourceIds": ["tests"]
+  "descriptionSourceIds": [
+    "diabetes",
+    "insulin"
+  ],
+  "tipSourceIds": [
+    "tests"
+  ]
 }

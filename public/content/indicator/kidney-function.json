@@ -4,27 +4,49 @@
   "title": "肾功能",
   "english": "KIDNEY FUNCTION TESTS",
   "subtitle": "肌酐、eGFR 和尿白蛋白，如何互相补充？",
+  "question": "肌酐和肾功能是什么关系？",
+  "questionAnswer": "血肌酐是估算肾小球滤过率的常用依据，但单独一项肌酐不能完整判断肾脏状态，需要结合其他项目。",
   "icon": "droplet",
   "color": "purple",
-  "tags": ["肌酐", "eGFR", "尿白蛋白肌酐比"],
-  "searchAliases": ["肾功", "血肌酐", "CREA", "CRE", "GFR", "肾小球滤过率", "尿微量白蛋白", "UACR", "ACR"],
+  "tags": [
+    "肌酐",
+    "eGFR",
+    "尿白蛋白肌酐比"
+  ],
+  "searchAliases": [
+    "肾功",
+    "血肌酐",
+    "CREA",
+    "CRE",
+    "GFR",
+    "肾小球滤过率",
+    "尿微量白蛋白",
+    "UACR",
+    "ACR"
+  ],
   "number": "06",
   "desc": "肾功能通常要结合血液和尿液项目理解。血肌酐是计算估算肾小球滤过率（eGFR）的常用依据，尿白蛋白肌酐比则观察尿中白蛋白与肌酐的关系。",
   "metrics": [
     {
       "name": "血肌酐",
       "text": "肌酐是肌肉日常活动产生的废物，主要由肾脏从血液中过滤。血肌酐会受到肌肉量等因素影响。",
-      "sourceIds": ["creatinine"]
+      "sourceIds": [
+        "creatinine"
+      ]
     },
     {
       "name": "估算肾小球滤过率（eGFR）",
       "text": "eGFR 通常根据血肌酐以及年龄、性别等信息估算，用来描述肾脏过滤血液的总体能力。",
-      "sourceIds": ["gfr"]
+      "sourceIds": [
+        "gfr"
+      ]
     },
     {
       "name": "尿白蛋白肌酐比（UACR）",
       "text": "UACR 比较尿中白蛋白与肌酐，有助于减少尿液浓稀差异对单次白蛋白结果的影响。",
-      "sourceIds": ["uacr"]
+      "sourceIds": [
+        "uacr"
+      ]
     }
   ],
   "chain": [
@@ -33,10 +55,19 @@
     "用血肌酐估算 eGFR",
     "同时用尿液项目观察白蛋白"
   ],
-  "chainSourceIds": ["creatinine", "gfr", "uacr"],
+  "chainSourceIds": [
+    "creatinine",
+    "gfr",
+    "uacr"
+  ],
   "tip": "肌酐、eGFR 和尿白蛋白提供的是不同角度。单次结果会受多种因素影响，不能只凭一个数值判断肾脏状态；持续变化通常比孤立结果更值得关注。",
   "organ": "肾脏 · 血液过滤 · 尿液",
-  "relatedOrgans": [{ "id": "kidney", "title": "肾脏" }],
+  "relatedOrgans": [
+    {
+      "id": "kidney",
+      "title": "肾脏"
+    }
+  ],
   "kind": "indicator",
   "category": "urinary",
   "featured": false,
@@ -85,6 +116,14 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["creatinine", "gfr", "uacr"],
-  "tipSourceIds": ["creatinine", "gfr", "uacr"]
+  "descriptionSourceIds": [
+    "creatinine",
+    "gfr",
+    "uacr"
+  ],
+  "tipSourceIds": [
+    "creatinine",
+    "gfr",
+    "uacr"
+  ]
 }

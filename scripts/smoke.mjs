@@ -44,16 +44,16 @@ try {
   await page.goto(baseUrl, {
     waitUntil: "networkidle",
   });
-  await expect(page.locator(".indicator-card")).toHaveCount(3);
+  await expect(page.locator(".question-card")).toHaveCount(9);
   assert.equal(
     contentRequests.filter((url) => /\/indicator\/|\/organ\//.test(url)).length,
     0,
     "Home must not load full articles",
   );
   await page.screenshot({ path: "artifacts/desktop.png", fullPage: true });
-  await page.getByRole("link", { name: /01 血糖/ }).click();
+  await page.locator(".question-card", { hasText: "血糖项目主要看什么" }).click();
   await expect(
-    page.getByRole("heading", { name: "认识血糖", exact: true }),
+    page.getByRole("heading", { name: "血糖项目主要看什么？", exact: true }),
   ).toBeVisible();
   await expect(page).toHaveURL(/\/article\/glucose$/);
   assert.ok(
@@ -69,14 +69,14 @@ try {
   await expect(page.locator("#article-source-tests")).toBeInViewport();
   await expect(page).toHaveURL(/\/article\/glucose$/);
   await page.getByRole("button", { name: "返回上一页" }).click();
-  await expect(page.getByRole("heading", { name: /看懂指标/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /看懂体检单/ })).toBeVisible();
   await page
-    .getByRole("button", { name: "搜索指标或器官", exact: true })
+    .getByRole("button", { name: "搜索体检项目或器官", exact: true })
     .click();
   await page.getByRole("textbox").fill("LDL");
-  await page.getByRole("link", { name: /指标 血脂/ }).click();
+  await page.getByRole("link", { name: /项目 血脂/ }).click();
   await expect(
-    page.getByRole("heading", { name: "认识血脂", exact: true }),
+    page.getByRole("heading", { name: "血脂单里几个名称有什么区别？", exact: true }),
   ).toBeVisible();
   await page.getByRole("link", { name: "探索器官", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肝脏");
@@ -86,7 +86,7 @@ try {
   await page.getByRole("link", { name: "肾脏", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肾脏");
   await desktopNav()
-    .getByRole("link", { name: "健康地图", exact: true })
+    .getByRole("link", { name: "发现", exact: true })
     .click();
   await page.getByRole("button", { name: "1 分钟认识身体" }).click();
   await page.getByRole("button", { name: "继续了解" }).click();
@@ -94,26 +94,23 @@ try {
   await page.getByRole("button", { name: "开始探索", exact: true }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await desktopNav()
-    .getByRole("link", { name: "健康地图", exact: true })
+    .getByRole("link", { name: "发现", exact: true })
     .click();
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(mobileNav()).toBeVisible();
   await page.screenshot({ path: "artifacts/mobile.png", fullPage: false });
-  await mobileNav().getByRole("link", { name: "指标百科" }).click();
-  await page.getByRole("button", { name: "营养与代谢", exact: true }).click();
-  await expect(page.locator(".indicator-card")).toHaveCount(4);
-  await page.getByRole("textbox", { name: "筛选指标" }).fill("LDL");
-  await expect(page.locator(".indicator-card")).toHaveCount(1);
-  await page.getByRole("textbox", { name: "筛选指标" }).fill("");
-  await page.getByRole("button", { name: "全部指标", exact: true }).click();
-  await expect(page.locator(".indicator-card")).toHaveCount(6);
+  await mobileNav().getByRole("link", { name: "看体检项目" }).click();
+  await page.getByRole("textbox", { name: "筛选体检项目" }).fill("LDL");
+  await expect(page.locator(".question-row")).toHaveCount(1);
+  await page.getByRole("textbox", { name: "筛选体检项目" }).fill("");
+  await expect(page.locator(".question-row")).toHaveCount(6);
   await page.screenshot({
     path: "artifacts/mobile-library.png",
     fullPage: false,
   });
-  await page.getByRole("link", { name: /02 血压/ }).click();
+  await page.getByRole("link", { name: /血压单上的两个数字/ }).click();
   await expect(
-    page.getByRole("heading", { name: "认识血压", exact: true }),
+    page.getByRole("heading", { name: "血压单上的两个数字在说什么？", exact: true }),
   ).toBeVisible();
   await expect(mobileNav()).toBeHidden();
   await page.screenshot({
@@ -123,7 +120,7 @@ try {
   const articleUrl = page.url();
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "认识血压", exact: true }),
+    page.getByRole("heading", { name: "血压单上的两个数字在说什么？", exact: true }),
   ).toBeVisible();
   assert.equal(page.url(), articleUrl);
   await page
@@ -144,14 +141,14 @@ try {
   await expect(mobileNav()).toBeVisible();
   for (const width of [320, 360, 390, 430, 768]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const name of ["器官探索", "健康地图", "指标百科"]) {
+    for (const name of ["认识身体", "发现", "看体检项目"]) {
       await mobileNav().getByRole("link", { name, exact: true }).click();
       await expect(page.locator(".load-state")).toHaveCount(0);
       await noOverflow(`${width}/${name}`);
     }
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await mobileNav().getByRole("link", { name: "器官探索" }).click();
+  await mobileNav().getByRole("link", { name: "认识身体" }).click();
   await page
     .locator(".mobile-organ-tabs")
     .getByRole("link", { name: "肝脏", exact: true })
@@ -162,11 +159,11 @@ try {
     fullPage: false,
   });
   await page
-    .getByRole("button", { name: "搜索指标或器官", exact: true })
+    .getByRole("button", { name: "搜索体检项目或器官", exact: true })
     .click();
   await page.getByRole("textbox").fill("不存在的专题");
   await expect(
-    page.getByText("暂时没有这个专题。试试血常规、肝功能、肾功能或器官名称。"),
+    page.getByText("没有找到匹配的项目。试试“血糖”“肝功能”或项目缩写，也可以换一种问法。"),
   ).toBeVisible();
   await page.keyboard.press("Escape");
 
@@ -181,6 +178,8 @@ try {
       ...sample,
       id: `fixture-${i}`,
       title: `分页样例 ${i}`,
+      question: null,
+      questionAnswer: null,
       number: String(i),
     })),
   };
@@ -194,19 +193,19 @@ try {
   });
   await page.goto(`${baseUrl}/indicators`);
   await page.reload();
-  await expect(page.locator(".indicator-card")).toHaveCount(6);
-  const firstPage = await page.locator(".metric-title h3").allTextContents();
+  await expect(page.locator(".question-row")).toHaveCount(6);
+  const firstPage = await page.locator(".question-row-term b").allTextContents();
   await page.getByRole("button", { name: "下一页", exact: true }).click();
-  await expect(page.locator(".metric-title h3").first()).toHaveText(
+  await expect(page.locator(".question-row-term b").first()).toHaveText(
     "分页样例 6",
   );
   assert.ok(
-    (await page.locator(".metric-title h3").allTextContents()).every(
+    (await page.locator(".question-row-term b").allTextContents()).every(
       (title) => !firstPage.includes(title),
     ),
   );
   await page.getByRole("button", { name: "返回首页", exact: true }).click();
-  await expect(page.locator(".metric-title h3").first()).toHaveText(
+  await expect(page.locator(".question-row-term b").first()).toHaveText(
     "分页样例 0",
   );
   await page.unroute(catalogRoute);
@@ -223,7 +222,7 @@ try {
   await expect(page.getByRole("alert")).toBeVisible();
   await page.getByRole("button", { name: "重新加载", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "认识血糖", exact: true }),
+    page.getByRole("heading", { name: "血糖项目主要看什么？", exact: true }),
   ).toBeVisible();
   await page.unroute(glucoseRoute);
   await page.evaluate(() => {
@@ -249,16 +248,16 @@ try {
   // Previously shared Hash URLs retain their destination after migration.
   await page.goto(`${baseUrl}/?from=legacy#/article/glucose`);
   await expect(page).toHaveURL(`${baseUrl}/article/glucose?from=legacy`);
-  await expect(page.getByRole("heading", { name: "认识血糖", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "血糖项目主要看什么？", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "返回上一页" }).click();
   await expect(page).toHaveURL(`${baseUrl}/indicators`);
-  await page.getByRole("link", { name: /02 血压/ }).click();
+  await page.getByRole("link", { name: /血压单上的两个数字/ }).click();
   await page.goBack();
   await expect(page).toHaveURL(`${baseUrl}/indicators`);
   await page.goForward();
   await expect(page).toHaveURL(`${baseUrl}/article/pressure`);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "认识血压", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "血压单上的两个数字在说什么？", exact: true })).toBeVisible();
   assert.deepEqual(errors, []);
   console.log(
     "PASS: citations, lazy content, deep links, back/reload, search, filters, pagination, retry, mobile navigation and 320–768px layouts. No page errors.",

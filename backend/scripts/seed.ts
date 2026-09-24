@@ -39,11 +39,12 @@ try {
     }
     const article: any = await payload.create({ collection: 'articles', req, data: {
       slug: summary.id, kind: summary.kind, title: summary.title, subtitle: summary.subtitle,
+      question: body.question || '', questionAnswer: body.questionAnswer || '',
       english: summary.english, category: summary.category, aliases: summary.searchText,
       tags: summary.tags.map((t: string) => ({ text: t })),
       applicability: '面向一般读者的基础科普；具体年龄、地区与特殊人群适用范围尚待来源与表达核对。',
       limitations: '不用于个人诊断或治疗决策。', scopeConfirmed: false,
-      contentRisk: body.contentRisk || 'clinical', learning: body.learning || null,
+      contentRisk: body.contentRisk || 'clinical', learning: body.learning || null, figure: body.figure || null,
       description: body.desc || body.text,
       descriptionSourceKeys: (body.descriptionSourceIds || body.references.map((r: any) => r.id)).join(','),
       metrics: (body.metrics || []).map((m: any) => ({ name: m.name, text: m.text, sourceKeys: m.sourceIds.join(',') })),

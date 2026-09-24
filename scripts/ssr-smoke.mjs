@@ -15,7 +15,7 @@ try {
     await expect(noJS.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
     await expect(noJS.locator('link[rel="canonical"]')).toHaveAttribute('href', new URL(path, base).href);
     if (path.includes('glucose')) {
-      await expect(noJS.getByRole('heading', { name: '认识血糖', exact: true })).toBeVisible();
+      await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
       await expect(noJS.locator('.detail-intro')).toContainText('葡萄糖');
       await expect(noJS.locator('.source-list a')).toHaveCount(4);
       await expect(noJS.getByRole('link', { name: '探索器官', exact: true })).toHaveAttribute('href', '/organs/liver');
@@ -23,12 +23,12 @@ try {
     if (path.includes('liver')) await expect(noJS.locator('.organ-description')).toContainText('处理吸收的营养');
   }
   await noJS.goto(`${base}/`);
-  await noJS.getByRole('link', { name: /01 血糖/ }).click();
-  await expect(noJS.getByRole('heading', { name: '认识血糖' })).toBeVisible();
+  await noJS.getByRole('link', { name: /血糖项目主要看什么/ }).first().click();
+  await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
   for (const path of ['/article/does-not-exist', '/no-such-page', '/assets/no-such.js']) {
     const response = await noJS.goto(`${base}${path}`);
     assert.equal(response.status(), 404);
-    await expect(noJS.getByRole('heading', { name: '认识血糖' })).toHaveCount(0);
+    await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？' })).toHaveCount(0);
   }
   const sitemap = await noJS.request.get(`${base}/sitemap.xml`);
   assert.equal(sitemap.status(), 200); assert.ok(!(await sitemap.text()).includes('<url>'));
@@ -42,27 +42,24 @@ try {
   await page.goto(`${base}/article/glucose`, { waitUntil: 'networkidle' });
   assert.equal(detailRequests.length, 0, 'SSR hydration must not refetch the initial article');
   await expect(page).toHaveTitle(/血糖.*知愈/);
-  await page.getByRole('button', { name: '收藏知识', exact: true }).click();
-  await page.reload({ waitUntil: 'networkidle' });
-  await expect(page.getByRole('button', { name: '已收藏', exact: true })).toBeVisible();
-  assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('zhiyu-saved')).includes('glucose')), true);
+  await expect(page.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
+  // H02 起收藏库入口随基线移除；/saved 由首页兼容渲染，旧链接不 404。
   await page.goto(`${base}/saved`, { waitUntil: 'networkidle' });
-  await expect(page.locator('.indicator-card')).toHaveCount(1);
-  await page.getByRole('link', { name: /01 血糖/ }).click();
-  await expect(page.getByRole('heading', { name: '认识血糖' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /看懂体检单/ })).toBeVisible();
+  await page.goto(`${base}/article/glucose`, { waitUntil: 'networkidle' });
   await page.getByRole('link', { name: '查看参考资料 2', exact: true }).first().click();
   await expect(page.locator('#article-source-tests')).toBeInViewport();
   await page.getByRole('link', { name: '探索器官', exact: true }).click();
   await expect(page.locator('.organ-information h2')).toContainText('肝脏');
-  await page.getByRole('button', { name: '搜索指标或器官', exact: true }).click();
+  await page.getByRole('button', { name: '搜索体检项目或器官', exact: true }).click();
   await page.getByRole('textbox').fill('LDL');
-  await page.getByRole('link', { name: /指标 血脂/ }).click();
+  await page.getByRole('link', { name: /项目 血脂/ }).click();
   await expect(page).toHaveTitle(/血脂.*知愈/);
   await page.goBack({ waitUntil: 'networkidle' });
   await expect(page.locator('.organ-information h2')).toContainText('肝脏');
   await page.goto(`${base}/?from=legacy#/article/glucose`, { waitUntil: 'networkidle' });
   await expect(page).toHaveURL(`${base}/article/glucose?from=legacy`);
-  await expect(page.getByRole('heading', { name: '认识血糖' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '血糖项目主要看什么？' })).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${base}/article/glucose`);
   await page.evaluate(() => {
     Object.defineProperty(navigator, 'share', { configurable: true, value: undefined });
@@ -83,5 +80,5 @@ try {
   await mkdir(screenshotDir, { recursive: true });
   await page.screenshot({ path: `${screenshotDir}/ssr-mobile.png` });
   assert.deepEqual(errors, [], 'No hydration or browser errors');
-  console.log('PASS no-JS reading/navigation, real 404, metadata/noindex, hydration, existing bookmarks, search, sharing, history and mobile layouts.');
+  console.log('PASS no-JS reading/navigation, real 404, metadata/noindex, hydration, search, sharing, history and mobile layouts.');
 } finally { await browser.close(); }

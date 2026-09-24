@@ -20,7 +20,7 @@ async function decode() {
 }
 try {
   await page.goto(`${base}/article/glucose?private=do-not-share#article-metrics`, { waitUntil: 'networkidle' });
-  await page.getByRole('button', { name: '生成分享卡片', exact: true }).click();
+  await page.locator('.article-share-entry .share-card-trigger').click();
   const modal = page.getByRole('dialog');
   await expect(modal.locator('.share-card-preview')).toBeVisible({ timeout: 15000 });
   await expect(modal.locator('.share-card-status')).toContainText('来源与表达待完整核对');
@@ -83,26 +83,26 @@ try {
   await page.keyboard.press('Escape');
   await expect(modal).toHaveCount(0);
   assert.equal(await page.evaluate(async url => { try { await fetch(url); return false; } catch { return true; } }, currentURL), true);
-  await expect(page.getByRole('button', { name: '生成分享卡片', exact: true })).toBeFocused();
+  await expect(page.locator('.article-share-entry .share-card-trigger')).toBeFocused();
 
   // A new public title must be used instead of the article bootstrap snapshot.
   const detail = await (await page.request.get(`${base}${ssr ? '/api/demo/content/indicator/glucose' : '/content/indicator/glucose.json'}`)).json();
   await page.route(pattern, route => route.fulfill({ json: { ...detail, title: '已发布新标题'.repeat(35), subtitle: '长摘要'.repeat(150) } }));
-  await page.getByRole('button', { name: '生成分享卡片', exact: true }).click();
+  await page.locator('.article-share-entry .share-card-trigger').click();
   await expect(modal.locator('img')).toHaveAttribute('alt', /已发布新标题/);
   assert.equal((await decode()).url, `${base}/article/glucose`);
   await page.unroute(pattern);
   await page.keyboard.press('Escape');
-  assert.equal(await page.evaluate(() => localStorage.getItem('zhiyu-reading-v1')), null);
+  assert.equal(await page.evaluate(() => localStorage.getItem('zhiyu-reading')), null);
   await page.goto(`${base}/organs/liver`, { waitUntil: 'networkidle' });
-  await page.getByRole('button', { name: '生成分享卡片', exact: true }).click();
+  await page.locator('.organ-bookmark .share-card-trigger').click();
   await expect(modal.locator('img')).toHaveAttribute('alt', /肝脏/);
   assert.equal((await decode()).url, `${base}/organs/liver`);
   if (ssr) {
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(`${base}/article/glucose`);
     await expect(noJS.getByRole('button', { name: '生成分享卡片', exact: true })).toBeDisabled();
-    await expect(noJS.getByRole('heading', { name: '认识血糖', exact: true })).toBeVisible();
+    await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
     await noJS.close();
   }
   assert.deepEqual(errors, []);

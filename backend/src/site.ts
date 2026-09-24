@@ -49,7 +49,7 @@ export async function buildPage(pathname: string) {
     ]);
   } else if (route.page === 'map') {
     await Promise.all([
-      load('list', [{ kind: 'indicator', featured: true, limit: 3 }]),
+      load('list', [{ kind: 'indicator', limit: 24 }]),
       load('list', [{ kind: 'organ', limit: 24 }]),
     ]);
   } else if (route.page === 'indicators') {

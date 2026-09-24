@@ -16,7 +16,7 @@ try {
   await expect(page.locator('.topic-steps li')).toHaveCount(4);
   await expect(page.locator('.topic-steps')).toContainText('来源与表达待完整核对');
   await page.locator('.topic-steps a').first().click();
-  await expect(page.getByRole('heading', { name: '认识血糖', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
   await page.locator('.topic-followup a[href="/organs/pancreas"]').click();
   await expect(page.locator('.organ-information h2')).toContainText('胰腺');
   await page.getByRole('link', { name: '查看血糖阅读路线' }).click();

@@ -26,9 +26,9 @@ import "./topics.css";
 import TopicRoute from "./components/TopicRoute";
 
 const nav = [
-  { id: "map", title: "健康地图", short: "发现", icon: Map },
-  { id: "indicators", title: "指标百科", short: "指标", icon: BookOpen },
-  { id: "organs", title: "器官探索", short: "人体", icon: Heart },
+  { id: "map", title: "发现", short: "发现", icon: Map },
+  { id: "indicators", title: "看体检项目", short: "体检项目", icon: BookOpen },
+  { id: "organs", title: "认识身体", short: "认识身体", icon: Heart },
 ];
 function ReaderApp() {
   const { runtime, initialRoute } = useReader();
@@ -41,7 +41,7 @@ function ReaderApp() {
     setSearchOpen(false);
     setToolsOpen(false);
     setTour(null);
-    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "指标解读" : nav.find((n) => n.id === route.page)?.title || "健康地图"} · 知愈`;
+    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "体检项目" : nav.find((n) => n.id === route.page)?.title || "发现"} · 知愈`;
   }, [route.page, route.id, runtime.serverRendered]);
   const onOpen = (id) => navigate("article", id);
   const onOrgan = (id) => navigate("organs", id);
@@ -62,7 +62,7 @@ function ReaderApp() {
               知愈<span>ZH I Y U</span>
             </span>
             <span className="brand-divider" />
-            <span className="brand-tagline">让健康变得好懂</span>
+            <span className="brand-tagline">看懂体检单，从一个问题开始</span>
           </RouteLink>
           <nav aria-label="主导航">
             {nav.map((item) => (
@@ -80,10 +80,10 @@ function ReaderApp() {
             <button
               className="search-trigger"
               onClick={() => setSearchOpen(true)}
-              aria-label="搜索指标或器官"
+              aria-label="搜索体检项目或器官"
             >
               <Search size={17} />
-              <span>搜索指标、器官</span>
+              <span>搜索体检项目、器官</span>
               <kbd>⌕</kbd>
             </button>
             <button
@@ -102,9 +102,9 @@ function ReaderApp() {
         {route.page === "not-found" && (
           <section className="empty-state">
             <h1>这个页面不存在</h1>
-            <p>链接可能有误，可以回到健康地图继续查找。</p>
+            <p>链接可能有误，可以回到首页继续查找。</p>
             <button className="primary-button" onClick={() => navigate("map")}>
-              返回健康地图
+              返回首页
             </button>
           </section>
         )}
@@ -128,12 +128,12 @@ function ReaderApp() {
             id={route.id}
             onBack={back}
             onOrgan={onOrgan}
-            reading={reading}
+            onTools={() => setToolsOpen(true)}
           />
         )}
         <footer>
           <span className="footer-brand">
-            <Sprout size={17} /> 知愈 <i>让每一份了解，成为照顾自己的力量。</i>
+            <Sprout size={17} /> 知愈 <i>看懂一个健康问题，再知道哪些事不能仅凭一项结果判断。</i>
           </span>
           <span>
             <ShieldCheck size={13} />{" "}

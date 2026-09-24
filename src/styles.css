@@ -287,6 +287,119 @@ main {
   overflow: hidden;
   position: relative;
 }
+.home-content .hero {
+  height: auto;
+  display: block;
+  padding: 40px 43px 36px;
+  background: #e7f1e0;
+}
+.home-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 24px;
+  padding: 15px 18px;
+  border-radius: 13px;
+  background: var(--zc-card);
+  border: 1px solid var(--zc-line);
+  box-shadow: var(--zc-shadow);
+  color: #9eb691;
+  font-size: 13px;
+  text-align: left;
+}
+.home-search-trigger:hover {
+  border-color: #b7c9a8;
+}
+.home-search-trigger > span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-search-trigger > svg {
+  color: var(--zc-green);
+}
+.home-search-trigger kbd {
+  border: 1px solid var(--zc-line);
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-size: 11px;
+  color: var(--zc-ink-3);
+}
+.home-intents {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 11px;
+  color: #769573;
+}
+.intent-chip {
+  border: 1px solid #b7c9a8;
+  background: var(--zc-card);
+  color: var(--zc-green);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 11.5px;
+}
+.intent-chip:hover {
+  background: var(--zc-soft);
+}
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--zc-shadow);
+  border-radius: 13px;
+  background: var(--zc-card);
+  padding: 22px 24px 18px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border: 1px solid transparent;
+}
+.question-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--zc-ink)10;
+  border-color: #bdcfb8;
+}
+.question-kicker {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: #75986e;
+  font-weight: 600;
+}
+.question-card h3 {
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 600;
+  color: var(--zc-ink);
+}
+.question-card > p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #7d9284;
+  flex: 1;
+}
+.question-meta {
+  font-size: 9px;
+  color: #94a78f;
+  border-top: 1px solid var(--zc-line);
+  padding-top: 12px;
+}
+.home-organ-visual {
+  margin-top: 20px;
+  height: 400px;
+  background: radial-gradient(ellipse at 48% 53%, var(--zc-soft)aa, transparent 68%);
+  border-radius: 15px;
+  box-shadow: var(--zc-shadow);
+}
 .hero-content {
   padding: 43px 0 30px 43px;
   position: relative;
@@ -1176,6 +1289,13 @@ footer > span {
   font-size: 12px;
   color: #87a084;
 }
+.detail-heading .detail-answer {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--zc-ink);
+  font-weight: 500;
+  margin-top: 2px;
+}
 .detail-body {
   padding: 27px 35px;
 }
@@ -1192,6 +1312,59 @@ footer > span {
 }
 .metric-list {
   margin-bottom: 27px;
+}
+.article-figure {
+  margin: 0 0 27px;
+  padding: 18px;
+  background: var(--zc-card);
+  box-shadow: var(--zc-shadow);
+  border-radius: 16px;
+}
+.article-figure-stage {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  padding: 16px;
+}
+.article-figure-stage img {
+  display: block;
+  max-width: 100%;
+  max-height: 340px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.article-figure figcaption {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+  color: var(--zc-ink-3);
+  font-size: 11px;
+  line-height: 1.65;
+  text-align: center;
+}
+.article-figure-note {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #88a381;
+}
+.article-figure-note b {
+  font-weight: 550;
+}
+.article-figure-attribution {
+  display: block;
+  margin-top: 6px;
+  color: #798f80;
+  font-size: 10px;
+  text-align: center;
+}
+.article-figure-attribution a {
+  color: var(--zc-green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .metric-list > div {
   display: flex;
@@ -1471,6 +1644,15 @@ footer > span {
     padding: 0 30px;
     gap: 20px;
   }
+  .home-content .hero {
+    padding: 30px 26px 28px;
+  }
+  .question-grid {
+    gap: 12px;
+  }
+  .question-card {
+    padding: 18px 18px 14px;
+  }
   .brand-tagline,
   .brand-divider {
     display: none;
@@ -1535,6 +1717,15 @@ footer > span {
   }
   .header-inner {
     padding: 0 22px;
+  }
+  .home-content .hero {
+    padding: 26px 22px 24px;
+  }
+  .question-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-organ-visual {
+    height: 320px;
   }
   .header nav {
     gap: 19px;

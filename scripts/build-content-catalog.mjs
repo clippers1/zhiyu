@@ -24,7 +24,7 @@ function summary(kind, body) {
       ...(body.learning.steps || []).flatMap(item => [item.title, item.text])]
     : [];
   const searchText = unique([
-    title, subtitle, english, ...(body.searchAliases || []), ...tags,
+    title, subtitle, english, body.question || "", ...(body.searchAliases || []), ...tags,
     body.desc || body.text,
     ...(body.metrics || []).flatMap(item => [item.name, item.text]),
     body.organ || body.connection,
@@ -35,6 +35,8 @@ function summary(kind, body) {
     kind,
     title,
     subtitle,
+    question: kind === "indicator" ? clean(body.question) : "",
+    questionAnswer: kind === "indicator" ? clean(body.questionAnswer) : "",
     english,
     icon: body.icon || "heart",
     color: body.color || "green",

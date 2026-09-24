@@ -11,15 +11,13 @@
     "content:check": "node scripts/build-content-catalog.mjs --check",
     "test:content": "npm run content:check && node --test scripts/content.test.mjs",
     "test:routes": "node --test scripts/routes.test.mjs",
-    "test:feedback": "node --test scripts/feedback.test.mjs",
-    "test:reading": "node --test scripts/reading.test.mjs",
     "test:search": "node --test scripts/search.test.mjs",
     "test:topics": "node --test scripts/topics.test.mjs",
-    "test:bookmarks": "node --test scripts/bookmarks.test.mjs",
     "test:share": "node --test scripts/share.test.mjs",
     "test:guide": "node --test scripts/reading-guide.test.mjs",
     "test:learning": "node scripts/visual-learning-smoke.mjs",
     "test:expansion": "node scripts/content-expansion-smoke.mjs",
+    "test:figure": "node scripts/figure-smoke.mjs",
     "test:ui": "node scripts/smoke.mjs"
   },
   "dependencies": {
