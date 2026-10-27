@@ -106,8 +106,10 @@ function figuresBlock(value: any, sourceKeys: Set<string>) {
 // Long-form bodies: sections and FAQ answers each cite existing source keys.
 // Depths are bounded so a malformed pack cannot grow a snapshot without limit.
 function longForm(value: any, sourceKeys: Set<string>) {
-  const sectionsValue = value?.sections;
-  const faqValue = value?.faq;
+  // Payload returns [] for an unset array field; an empty array means "no
+  // long-form body", not "a malformed one".
+  const sectionsValue = value?.sections?.length ? value.sections : null;
+  const faqValue = value?.faq?.length ? value.faq : null;
   if (sectionsValue == null && faqValue == null) return { sections: undefined, faq: undefined };
   const keys = (input: any, label: string) => {
     if (!Array.isArray(input) || !input.length || input.some(key => typeof key !== 'string' || !sourceKeys.has(key))) fail(`正文的${label}引用了不存在的来源编号。`);
