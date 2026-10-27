@@ -29,7 +29,7 @@ try {
     const initial = await buildPage('/article/glucose');
     assert.equal(initial?.detail.releaseID, previousRelease);
     assert.equal(initial?.detail.reviewStatus, 'pending');
-    assert.ok(initial?.preloaded['get:["indicator","glucose"]']);
+    assert.ok(initial?.preloaded['get:["article","glucose"]']);
     assert.equal((pageMetadata(initial).robots as any).index, false);
     const topic = await buildPage('/topics/glucose');
     assert.equal(topic?.detail.releaseID, previousRelease);

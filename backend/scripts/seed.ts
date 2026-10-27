@@ -45,6 +45,13 @@ try {
       applicability: '面向一般读者的基础科普；具体年龄、地区与特殊人群适用范围尚待来源与表达核对。',
       limitations: '不用于个人诊断或治疗决策。', scopeConfirmed: false,
       contentRisk: body.contentRisk || 'clinical', learning: body.learning || null, figure: body.figure || null,
+      format: summary.kind === 'story' ? 'article' : (body.format || 'entry'),
+      sections: (body.sections || []).map((section: any) => ({
+        title: section.title, short: section.short || '', figure: section.figure || '',
+        paragraphs: (section.paragraphs || []).map((paragraph: any) => ({ text: paragraph.text, sourceKeys: (paragraph.sourceIds || []).join(',') })),
+      })),
+      faq: (body.faq || []).map((item: any) => ({ question: item.question, answer: item.answer, sourceKeys: (item.sourceIds || []).join(',') })),
+      figures: body.figures || null,
       description: body.desc || body.text,
       descriptionSourceKeys: (body.descriptionSourceIds || body.references.map((r: any) => r.id)).join(','),
       metrics: (body.metrics || []).map((m: any) => ({ name: m.name, text: m.text, sourceKeys: m.sourceIds.join(',') })),
