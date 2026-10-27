@@ -10,7 +10,7 @@
 - `0.0.1-beta.3` 增加私有纠错队列与凭码查询/删除 API、来源复核排期和后台维护待办，见 [纠错与来源复核](feedback-and-maintenance.md)。
 - `0.0.1-beta.4` 通过 Next.js 服务端渲染公开页面，共享根目录 React 源码；发布快照、正文 HTML 与元信息按请求生成，见 [公开页面渲染](public-rendering.md)。
 - `public/content/index.json`：离线演示摘要目录与初始迁移数据，不含专题完整正文。
-- `public/content/indicator/*.json`、`organ/*.json`：每篇正文独立加载，包含结构化来源与版本。
+- `public/content/indicator/*.json`、`organ/*.json`、`story/*.json`：每篇正文独立加载，包含结构化来源与版本。指标与故事可携带 `format` / `sections` / `faq` / `figures` 长文字段，词条保留 `metrics` / `chain`。
 - `src/services/content.js`：内容访问层，提供 `list` 和 `get`。本地与远程模式使用同一契约。
 - `src/components`：首页、目录、文章、器官、搜索与来源显示分别维护。
 - 当前开发版本使用 History 路由，支持刷新、浏览器返回与独立文章链接，例如 `/article/glucose`；旧 Hash 链接由浏览器兼容转换。`0.0.1-beta.1` 标签保留改造前实现。
@@ -29,7 +29,7 @@
 
 `GET /content?kind=indicator&query=血糖&category=metabolism&cursor=...&limit=6`
 
-可选参数：`kind`（indicator / organ）、`query`、`category`、`cursor`、`limit`、`featured=true`、`ids=glucose,pressure`。传入空 `ids=` 必须返回零条，而不是全量数据。分类应根据内容类型返回，不能根据当前搜索结果任意丢失分类选项。
+可选参数：`kind`（indicator / organ / story）、`query`、`category`、`cursor`、`limit`、`featured=true`、`ids=glucose,pressure`。传入空 `ids=` 必须返回零条，而不是全量数据。分类应根据内容类型返回，不能根据当前搜索结果任意丢失分类选项。
 
 ```json
 {
@@ -54,7 +54,7 @@
 }
 ```
 
-`GET /content/indicator/glucose` / `GET /content/organ/heart`：返回对应 JSON 文件的结构。不存在时返回 404。游标在 UI 中视作不透明字符串，远程服务可使用稳定排序键分页。本地模式使用偏移量模拟，不承诺并发写入下的一致分页。服务端应限制页大小，返回的列表不应携带完整正文。跨域部署须配置 CORS。
+`GET /content/indicator/glucose` / `GET /content/organ/heart` / `GET /content/article/glucose`：返回对应 JSON 文件的结构；`article` 按目录解析指标或故事。不存在时返回 404。游标在 UI 中视作不透明字符串，远程服务可使用稳定排序键分页。本地模式使用偏移量模拟，不承诺并发写入下的一致分页。服务端应限制页大小，返回的列表不应携带完整正文。跨域部署须配置 CORS。
 
 ## 来源、版本与审核
 
