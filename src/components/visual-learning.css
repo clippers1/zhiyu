@@ -1,12 +1,67 @@
-.visual-learning { margin: 42px auto; max-width: 1180px; padding: 40px; border: 1px solid var(--zc-line); border-radius: 28px; background: var(--zc-soft); color: var(--zc-ink); }
-.visual-learning > header { max-width: 760px; }
-.visual-learning > header > span, .learning-current > span { color: #64805f; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.visual-learning h2 { margin: 8px 0 12px; font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); text-wrap: pretty; }
-.visual-learning header p, .learning-current p, .learning-boundary { line-height: 1.8; }
-.learning-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, .75fr); align-items: start; gap: 30px; margin-top: 26px; }
-.learning-diagram { display: block; width: 100%; height: auto; border: 1px solid rgba(111,139,104,.16); border-radius: 26px; background: #fcfdf9; }
-.heart-medical-diagram { display: block; width: 100%; max-width: 600px; height: auto; margin: 0 auto; overflow: hidden; border: 1px solid #dce1da; border-radius: 22px; background: var(--zc-card); }
-.heart-medical-paper { fill: var(--zc-card); }
+/* 互动图解 · 纸面规则
+   Semantic diagram colors (venous blue, arterial red, air green, carbon clay)
+   are content-bearing and stay distinct; the container uses paper rules. */
+
+.visual-learning {
+  max-width: 1180px;
+  margin: var(--s-12) 0;
+  padding: var(--s-6) 0 var(--s-4);
+  border-top: 1px solid var(--rule-strong);
+  color: var(--ink);
+}
+.visual-learning > header {
+  max-width: 720px;
+}
+.visual-learning > header > span,
+.learning-current > span {
+  color: var(--ink-3);
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.visual-learning h2 {
+  margin: var(--s-2) 0 var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  font-weight: 600;
+  text-wrap: pretty;
+}
+.visual-learning header p,
+.learning-current p,
+.learning-boundary {
+  line-height: 1.85;
+}
+.visual-learning header p {
+  font-size: var(--t-15);
+  color: var(--ink-2);
+}
+.learning-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.8fr);
+  align-items: start;
+  gap: var(--s-8);
+  margin-top: var(--s-6);
+}
+.learning-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-input);
+  background: var(--surface);
+}
+.heart-medical-diagram {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-input);
+  background: var(--surface);
+}
+.heart-medical-paper { fill: var(--surface); }
 .heart-medical-base { opacity: .24; filter: saturate(.42) contrast(.9); }
 .heart-medical-focus { filter: saturate(.94) contrast(1.02) url(#heart-spot-shadow); }
 .heart-focus-ring { fill: none; stroke: rgba(255,255,255,.88); stroke-width: 2; filter: drop-shadow(0 0 11px rgba(255,255,255,.75)); pointer-events: none; }
@@ -18,7 +73,7 @@
 .heart-flow-dot-small { opacity: .85; }
 .heart-label-line { fill: none; stroke: #466157; stroke-width: 1.5; }
 .heart-label-dot { fill: currentColor; }
-.heart-label-bg { fill: rgba(255,254,249,.95); stroke: #d6ddd3; }
+.heart-label-bg { fill: rgba(255,254,249,.95); stroke: var(--rule-strong); }
 .heart-label-text { fill: #24483a; font-size: 13px; font-weight: 750; }
 .heart-orientation { fill: #697b72; font-size: 11px; font-weight: 650; letter-spacing: .04em; }
 .heart-stage-number { fill: #aab4ae; font-family: var(--serif); font-size: 40px; }
@@ -26,29 +81,29 @@
 .heart-part-spot ellipse { fill: transparent; stroke: transparent; stroke-width: 2; transition: fill .18s ease, stroke .18s ease; }
 .heart-part-spot:hover ellipse, .heart-part-spot:focus-visible ellipse { fill: rgba(255,255,255,.12); stroke: rgba(41,73,59,.52); stroke-dasharray: 5 7; }
 .heart-part-spot:focus-visible ellipse { stroke: #d49a51; stroke-width: 4; }
-.heart-part-spot.active ellipse { fill: rgba(255,255,255,.14); stroke: var(--zc-green-deep); stroke-width: 3; }
+.heart-part-spot.active ellipse { fill: rgba(255,255,255,.14); stroke: var(--accent-deep); stroke-width: 3; }
 @keyframes heart-medical-flow { to { stroke-dashoffset: -21; } }
-.lung-medical-diagram { background: var(--zc-card); }
-.lung-medical-paper { fill: var(--zc-card); }
+.lung-medical-diagram { background: var(--surface); }
+.lung-medical-paper { fill: var(--surface); }
 .lung-medical-image { pointer-events: none; filter: saturate(.88) contrast(.98); }
 .lung-medical-connector { fill: none; stroke: #8ea092; stroke-width: 1.5; stroke-dasharray: 5 7; }
 .lung-medical-panel-label { fill: #718078; font-size: 12px; font-weight: 650; letter-spacing: .05em; }
 .lung-medical-spot { cursor: pointer; outline: none; }
 .lung-medical-spot-shape { fill: transparent; stroke: transparent; stroke-width: 2; transition: fill .18s ease, stroke .18s ease; }
-.lung-medical-spot-nose-mouth .lung-medical-spot-shape { fill: rgba(248,250,245,.96); stroke: #d6ded3; }
+.lung-medical-spot-nose-mouth .lung-medical-spot-shape { fill: rgba(248,250,245,.96); stroke: var(--rule-strong); }
 .lung-medical-spot:hover .lung-medical-spot-shape,
 .lung-medical-spot:focus-visible .lung-medical-spot-shape { fill: rgba(255,255,255,.28); stroke: rgba(49,93,67,.5); stroke-dasharray: 5 7; }
 .lung-medical-spot:focus-visible .lung-medical-spot-shape { stroke: #d49a51; stroke-width: 4; }
-.lung-medical-spot.active .lung-medical-spot-shape { fill: rgba(255,255,255,.24); stroke: var(--zc-green-deep); stroke-width: 3; filter: url(#part-shadow); }
-.lung-medical-label { fill: var(--zc-ink); font-size: 13px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(255,254,249,.94); stroke-width: 5px; stroke-linejoin: round; }
+.lung-medical-spot.active .lung-medical-spot-shape { fill: rgba(255,255,255,.24); stroke: var(--accent-deep); stroke-width: 3; filter: url(#part-shadow); }
+.lung-medical-label { fill: var(--ink); font-size: 13px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(255,254,249,.94); stroke-width: 5px; stroke-linejoin: round; }
 .learning-path { fill: none; stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 8 8; }
 .learning-path.active.flow-blue, .learning-path.active.flow-oxygen { stroke: #5683a4; marker-end: url(#flow-arrow-blue); }
 .learning-path.active.flow-red { stroke: #c67469; marker-end: url(#flow-arrow-red); }
-.learning-path.active.flow-air { stroke: var(--zc-green); marker-end: url(#flow-arrow-air); }
+.learning-path.active.flow-air { stroke: var(--accent); marker-end: url(#flow-arrow-air); }
 .learning-path.active.flow-carbon { stroke: #b97a45; marker-end: url(#flow-arrow-carbon); }
 .learning-path.active { animation: learning-flow 1.15s linear infinite; }
 @keyframes learning-flow { to { stroke-dashoffset: -16; } }
-.diagram-orbit { fill: none; stroke: #dfe7da; stroke-width: 2; stroke-dasharray: 5 10; }
+.diagram-orbit { fill: none; stroke: var(--rule); stroke-width: 2; stroke-dasharray: 5 10; }
 .heart-shell { fill: #f3e2dd; stroke: #bb8177; stroke-width: 3; }
 .heart-septum { fill: none; stroke: rgba(133,91,84,.35); stroke-width: 4; }
 .lung-lobe { fill: #edf2e9; stroke: #9caf97; stroke-width: 2.5; }
@@ -63,7 +118,7 @@
 .part-surface { fill: var(--part-fill); stroke: var(--part-stroke); stroke-width: 2.5; transition: fill .18s ease, stroke .18s ease, filter .18s ease; }
 .part-detail { fill: none; stroke: color-mix(in srgb, var(--part-stroke) 72%, white); stroke-width: 2; pointer-events: none; }
 .part-line { stroke-linecap: round; stroke-linejoin: round; }
-.part-label { fill: var(--zc-ink); font-size: 15px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(252,253,249,.88); stroke-width: 4px; stroke-linejoin: round; }
+.part-label { fill: var(--ink); font-size: 15px; font-weight: 750; pointer-events: none; paint-order: stroke; stroke: rgba(252,253,249,.88); stroke-width: 4px; stroke-linejoin: round; }
 .learning-part:hover .part-surface, .learning-part:focus-visible .part-surface, .learning-part.active .part-surface { fill: var(--part-active); stroke-width: 4; filter: url(#part-shadow); }
 .learning-part:focus-visible { outline: none; }
 .learning-part:focus-visible .part-surface { stroke: #d49a51; }
@@ -75,47 +130,43 @@
 .capillary-inner { fill: none; stroke: #c79489; stroke-width: 3; stroke-dasharray: 5 7; }
 .diagram-side { fill: #71856f; font-size: 11px; font-weight: 650; letter-spacing: .08em; }
 .diagram-caption { fill: #849181; font-size: 11px; }
-.learning-legend { margin: 10px 8px 0; color: #647665; font-size: 12px; line-height: 1.7; }
-.learning-legend i { display: inline-block; width: 18px; height: 4px; margin: 0 5px 3px 12px; border-radius: 3px; }
+.learning-legend { margin: var(--s-2) 0 0; color: var(--ink-3); font-size: var(--t-13); line-height: 1.7; }
+.learning-legend i { display: inline-block; width: 18px; height: 4px; margin: 0 5px 3px 12px; border-radius: 2px; }
 .learning-legend i:first-child { margin-left: 0; }
 .legend-blue { background: #5683a4; } .legend-red { background: #c67469; }
-.legend-air { background: var(--zc-green); } .legend-carbon { background: #b97a45; }
-.learning-attribution { margin: 5px 8px 0; color: #748078; font-size: 11px; line-height: 1.7; }
-.learning-attribution a { color: #486e5d; text-underline-offset: 2px; }
-.learning-route { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin: 18px 8px 0; }
-.learning-route button { position: relative; height: 28px; border: 0; border-top: 2px solid var(--zc-line); background: transparent; color: var(--zc-ink-3); font: 700 11px/1 var(--sans); cursor: pointer; }
-.learning-route button::before { position: absolute; top: -5px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--zc-line); transform: translateX(-50%); content: ""; }
-.learning-route button:hover, .learning-route button:focus-visible { color: var(--zc-green-deep); }
-.learning-route button:focus-visible { outline: 3px solid #d9a765; outline-offset: 3px; }
-.learning-route button.active { border-top-color: var(--zc-green-deep); color: var(--zc-green-deep); }
-.learning-route button.active::before { background: var(--zc-green-deep); box-shadow: 0 0 0 4px var(--zc-soft); }
-.learning-current { min-height: 270px; padding: 28px; border-radius: 22px; background: #fff; box-shadow: 0 12px 35px rgba(45,75,57,.08); }
-.learning-current h3 { margin: 10px 0; font-size: 24px; text-wrap: pretty; }
-.learning-controls { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 8px; margin-top: 22px; }
-.learning-controls button, .learning-reset { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 42px; border: 1px solid var(--zc-line); border-radius: 12px; background: var(--zc-card); color: var(--zc-ink); font: inherit; cursor: pointer; }
-.learning-controls button:focus-visible, .learning-reset:focus-visible { outline: 3px solid #d9a765; outline-offset: 2px; }
+.legend-air { background: var(--accent); } .legend-carbon { background: #b97a45; }
+.learning-attribution { margin: 5px 0 0; color: var(--ink-3); font-size: var(--t-11); line-height: 1.7; }
+.learning-attribution a { color: var(--accent); text-underline-offset: 2px; }
+.learning-route { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin: var(--s-4) 0 0; }
+.learning-route button { position: relative; height: 32px; border: 0; border-top: 2px solid var(--rule); background: transparent; color: var(--ink-3); font: 700 11px/1 var(--sans); cursor: pointer; }
+.learning-route button::before { position: absolute; top: -5px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--rule-strong); transform: translateX(-50%); content: ""; }
+.learning-route button:hover, .learning-route button:focus-visible { color: var(--accent-deep); }
+.learning-route button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.learning-route button.active { border-top-color: var(--accent); color: var(--accent-deep); }
+.learning-route button.active::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-wash); }
+.learning-current { min-height: 270px; padding: var(--s-4); border: 1px solid var(--rule); border-radius: var(--r-input); background: var(--surface); }
+.learning-current h3 { margin: var(--s-2) 0; font-family: var(--serif); font-size: var(--t-20); font-weight: 600; text-wrap: pretty; }
+.learning-current p { font-size: var(--t-13); color: var(--ink-2); }
+.learning-controls { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: var(--s-2); margin-top: var(--s-3); }
+.learning-controls button, .learning-reset { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; border: 1px solid var(--rule-strong); border-radius: var(--r-input); background: var(--surface); color: var(--ink-2); font: inherit; font-size: var(--t-13); cursor: pointer; }
+.learning-controls button:focus-visible, .learning-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .learning-controls button:disabled { cursor: not-allowed; opacity: .5; }
-.learning-controls .learning-play { border-color: var(--zc-green-deep); background: var(--zc-green-deep); color: #fff; }
-.learning-reset { margin-top: 12px; border: 0; background: transparent; font-size: 13px; }
-.learning-transcript { margin-top: 28px; border-top: 1px solid var(--zc-line); padding-top: 18px; }
-.learning-transcript summary { cursor: pointer; font-weight: 700; }
+.learning-controls .learning-play { border-color: var(--accent); background: var(--accent); color: #fff; }
+.learning-controls .learning-play:hover { background: var(--accent-deep); }
+.learning-reset { margin-top: var(--s-2); border: 0; background: transparent; color: var(--accent); }
+.learning-transcript { margin-top: var(--s-6); border-top: 1px solid var(--rule); padding-top: var(--s-4); }
+.learning-transcript summary { cursor: pointer; font-weight: 600; min-height: 44px; }
 .learning-transcript ol { columns: 2; column-gap: 36px; padding-left: 22px; }
-.learning-transcript li { break-inside: avoid; margin: 16px 0; padding-right: 10px; }
-.learning-transcript p { margin: 5px 0; line-height: 1.65; }
-.learning-boundary { margin-top: 24px; padding: 16px 18px; border-radius: 14px; background: #f3ead9; color: #6b5837; }
-@media (max-width: 800px) {
-  .visual-learning { margin: 28px 16px; padding: 24px 18px; border-radius: 22px; }
-  .learning-layout { grid-template-columns: 1fr; gap: 18px; }
-  .learning-current { min-height: 0; padding: 22px 18px; }
+.learning-transcript li { break-inside: avoid; margin: var(--s-3) 0; padding-right: 10px; }
+.learning-transcript p { margin: 5px 0; line-height: 1.7; font-size: var(--t-13); color: var(--ink-2); }
+.learning-boundary { margin-top: var(--s-4); padding: var(--s-4); border-radius: var(--r-input); background: var(--clay-wash); color: var(--ink-2); font-size: var(--t-13); }
+
+@media (max-width: 900px) {
+  .learning-layout { grid-template-columns: 1fr; gap: var(--s-4); }
+  .learning-current { min-height: 0; }
   .learning-controls { grid-template-columns: 1fr 1fr; }
   .learning-controls .learning-play { grid-column: 1 / -1; grid-row: 1; }
   .learning-transcript ol { columns: 1; }
-  .heart-medical-diagram { border-radius: 18px; }
-  .lung-medical-label { font-size: 15px; }
-}
-@media (max-width: 360px) {
-  .visual-learning { margin-inline: 10px; padding-inline: 14px; }
-  .learning-legend { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .learning-path.active { animation: none; stroke-dasharray: none; }

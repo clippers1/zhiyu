@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { useContent } from "../hooks";
-import { LoadState, Pagination, QuestionRow } from "./ContentUI";
+import { LoadState, Pagination, QuestionRow, RunHead } from "./ContentUI";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
-// H03：体检项目列表按问题索引组织。项目名/缩写/别名仍可搜索，
-// 只显示当前已发布内容，不提供器官以外的新范围。
+// 体检项目：搜索置顶，分类胶囊横向滚动，列表按问题索引组织。
+// 只显示当前已发布内容，项目名/缩写/别名仍可搜索。
 export default function Library({ onOpen }) {
   const { query, setQuery, effective, pending, inputProps } = useSearchInput();
   const [category, setCategory] = useState("");
@@ -27,10 +27,14 @@ export default function Library({ onOpen }) {
   }
   return (
     <>
-      <section className="library-controls" aria-labelledby="library-title">
-        <h1 id="library-title">查体检项目</h1>
+      <header className="library-head">
+        <RunHead><b>体检项目</b> / 索引</RunHead>
+        <h1 className="statement library-title">读懂数字背后的身体语言。</h1>
+      </header>
+      <section className="library-controls" aria-labelledby="library-title-label">
+        <h2 id="library-title-label" className="visually-hidden">查找体检项目</h2>
         <label className="library-search">
-          <Search size={18} />
+          <Search size={18} aria-hidden="true" />
           <input
             {...inputProps}
             id="indicator-search"

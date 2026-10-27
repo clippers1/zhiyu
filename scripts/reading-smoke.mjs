@@ -88,7 +88,7 @@ try {
   if (process.env.TEST_SSR === 'true') {
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(`${base}/article/glucose`);
-    await expect(noJS.locator('.reading-actions')).toHaveCSS('position', 'static');
+    await expect(noJS.locator('.reading-bar')).toHaveCSS('position', 'static');
     await noJS.getByRole('navigation', { name: '文章目录' }).getByRole('link', { name: '它是什么' }).click();
     await expect(noJS.locator('#article-overview')).toBeInViewport();
     await noJS.close();

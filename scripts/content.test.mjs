@@ -6,6 +6,44 @@ import {
   selectPage,
 } from "../src/services/content.js";
 
+const KIND_DIRS = ["indicator", "organ", "story"];
+const chineseChars = value => (String(value || "").match(/[一-鿿]/g) || []).length;
+
+// Long-form content is held to a higher bar than entry-style records: a page
+// that only restates its own summary is the failure mode this gate exists for.
+function assertLongForm(entry, name) {
+  assert.ok(Array.isArray(entry.sections) && entry.sections.length >= 4, `${name}: sections >= 4`);
+  let body = 0;
+  for (const section of entry.sections) {
+    assert.ok(typeof section.title === "string" && section.title.trim(), `${name}: section title`);
+    assert.ok(Array.isArray(section.paragraphs) && section.paragraphs.length >= 2, `${name}: two paragraphs per section`);
+    for (const paragraph of section.paragraphs) {
+      body += chineseChars(paragraph.text);
+      assert.ok(Array.isArray(paragraph.sourceIds) && paragraph.sourceIds.length, `${name}: unsourced paragraph`);
+    }
+  }
+  assert.ok(body >= 900, `${name}: body has ${body} Chinese characters; at least 900 required`);
+
+  assert.ok(Array.isArray(entry.faq) && entry.faq.length >= 4, `${name}: faq >= 4`);
+  const questions = new Set();
+  const answers = new Set([
+    entry.desc,
+    ...(entry.metrics || []).map(metric => metric.text),
+    ...entry.sections.flatMap(section => section.paragraphs.map(paragraph => paragraph.text)),
+  ].map(text => String(text || "").trim()));
+  for (const item of entry.faq) {
+    assert.ok(item.question && item.answer, `${name}: faq item incomplete`);
+    assert.doesNotMatch(item.question, /^如何理解.+？$/, `${name}: generated ${item.question} question`);
+    assert.ok(!questions.has(item.question), `${name}: duplicate question ${item.question}`);
+    questions.add(item.question);
+    assert.ok(!answers.has(item.answer.trim()), `${name}: faq answer restates the prose verbatim`);
+    assert.ok(Array.isArray(item.sourceIds) && item.sourceIds.length, `${name}: unsourced faq answer`);
+  }
+
+  assert.ok(Array.isArray(entry.figures) && entry.figures.length >= 1, `${name}: one figure required`);
+  assert.ok(entry.references.filter(source => source.locator).length >= 3, `${name}: three located sources`);
+}
+
 test("all published demo content has valid references, related records and indexed metadata", async () => {
   const catalog = JSON.parse(
     await fs.readFile("public/content/index.json", "utf8"),
@@ -19,6 +57,7 @@ test("all published demo content has valid references, related records and index
         "utf8",
       ),
     );
+    const name = `${entry.kind}/${entry.id}`;
     assert.equal(entry.id, summary.id);
     assert.equal(entry.kind, summary.kind);
     assert.equal(summary.referenceCount, entry.references.length);
@@ -37,6 +76,8 @@ test("all published demo content has valid references, related records and index
       ...(entry.descriptionSourceIds || []),
       ...(entry.tipSourceIds || []),
       ...(entry.metrics || []).flatMap((metric) => metric.sourceIds),
+      ...(entry.faq || []).flatMap((item) => item.sourceIds),
+      ...(entry.sections || []).flatMap((section) => section.paragraphs.flatMap((paragraph) => paragraph.sourceIds)),
     ])
       assert.ok(sourceIds.has(id), `${entry.id}: missing reference ${id}`);
     if (entry.learning) {
@@ -50,20 +91,46 @@ test("all published demo content has valid references, related records and index
       }
       for (const step of entry.learning.steps) assert.ok(partIds.has(step.from) && partIds.has(step.to));
     }
-    if (entry.figure) {
-      assert.ok(entry.kind === "indicator", "figure is indicator-only");
-      assert.match(entry.figure.src, /^\/media\/[a-z0-9-]+\.png$/);
-      for (const id of entry.figure.sourceIds)
+    const figures = [...(entry.figure ? [{...entry.figure, key: "legacy"}] : []), ...(entry.figures || [])];
+    for (const figure of figures) {
+      assert.ok(entry.kind !== "organ", "figures are not used on organ pages");
+      // A figure is either a registered inline diagram (no asset to licence) or
+      // a static PNG under /media/ with a full attribution record.
+      if (figure.diagram) {
+        assert.match(figure.diagram, /^[a-z0-9-]+$/);
+        assert.equal(figure.src, undefined, `${entry.id}: diagram figures carry no file path`);
+      } else {
+        assert.match(figure.src, /^\/media\/[a-z0-9-]+\.png$/);
+      }
+      for (const id of figure.sourceIds)
         assert.ok(sourceIds.has(id), `${entry.id}: figure missing reference ${id}`);
-      assert.ok(entry.figure.alt && entry.figure.caption && entry.figure.simplification);
-      assert.ok(entry.figure.attribution?.name && entry.figure.attribution?.license);
-      assert.equal(new URL(entry.figure.attribution.url).protocol, "https:");
-      assert.equal(new URL(entry.figure.attribution.licenseUrl).protocol, "https:");
+      assert.ok(figure.alt && figure.caption && figure.simplification);
+      assert.ok(figure.attribution?.name);
+      if (figure.attribution.kind === "self-made") {
+        assert.equal(figure.attribution.licenseUrl, undefined, "self-made figures carry no third-party licence");
+      } else {
+        assert.ok(figure.attribution.license);
+        assert.equal(new URL(figure.attribution.url).protocol, "https:");
+        assert.equal(new URL(figure.attribution.licenseUrl).protocol, "https:");
+      }
+    }
+    if (entry.figures) {
+      for (const figure of entry.figures)
+        assert.match(figure.key, /^[a-z0-9-]+$/, `${entry.id}: figure key`);
+      for (const section of entry.sections || [])
+        if (section.figure) assert.ok(entry.figures.some(figure => figure.key === section.figure), `${entry.id}: unknown figure ${section.figure}`);
     }
     for (const id of entry.related || [])
-      assert.ok(keys.has(`indicator/${id}`));
+      assert.ok(keys.has(`indicator/${id}`) || keys.has(`story/${id}`), `${entry.id}: related content missing`);
     for (const item of entry.relatedOrgans || [])
       assert.ok(keys.has(`organ/${item.id}`), `${entry.id}: missing related organ ${item.id}`);
+    if (entry.kind === "story") {
+      assert.ok(!entry.metrics && !entry.chain, `${name}: stories do not reuse indicator templates`);
+      assertLongForm(entry, name);
+    } else if (entry.format === "article") {
+      assertLongForm(entry, name);
+      assert.ok(entry.metrics?.length >= 3, `${name}: long-form indicators keep a metrics list`);
+    }
     if (entry.publicationReady) {
       assert.equal(entry.contentRisk, "foundational");
       assert.ok(entry.applicability && entry.limitations);
@@ -75,6 +142,13 @@ test("all published demo content has valid references, related records and index
         assert.ok(entry.tip && entry.tipSourceIds?.length);
       }
     }
+  }
+});
+
+test("every content directory in the catalog is also readable by the reader", async () => {
+  for (const kind of KIND_DIRS) {
+    const files = await fs.readdir(`public/content/${kind}`);
+    assert.ok(files.every(file => file.endsWith(".json")), `${kind}: unexpected file`);
   }
 });
 test("10,000 summary records paginate without duplicates and combine filters", () => {
@@ -168,4 +242,36 @@ test("failed JSON requests can be retried and unsafe ids are rejected", async ()
   assert.equal((await repository.get("indicator", "glucose")).id, "glucose");
   await assert.rejects(() => repository.get("indicator", "../private"));
   assert.equal(count, 2);
+});
+
+test("the shared /article/:id route resolves indicators and stories from the catalog", async () => {
+  const catalog = JSON.parse(await fs.readFile("public/content/index.json", "utf8"));
+  const asked = [];
+  const repository = createContentRepository({
+    fetcher: async url => {
+      asked.push(url);
+      // Mirrors the static host: an unknown file falls back to the HTML shell.
+      if (url === "/content/index.json") return { ok: true, json: async () => catalog };
+      const match = /^\/content\/([a-z]+)\/([a-z0-9-]+)\.json$/.exec(url);
+      const item = match && catalog.items.find(entry => entry.kind === match[1] && entry.id === match[2]);
+      if (!item) return { ok: true, json: async () => ({ id: "missing", kind: match?.[1] || "unknown", references: [] }) };
+      return { ok: true, json: async () => JSON.parse(await fs.readFile(`public${url}`, "utf8")) };
+    },
+  });
+  assert.equal((await repository.get("article", "glucose")).kind, "indicator");
+  assert.equal((await repository.get("article", "stairs-heart")).kind, "story");
+  assert.ok(!asked.some(url => url.includes("/story/glucose")), "an indicator id must not probe the story path");
+  // The static host answers unknown paths with the HTML shell, so the catalog,
+  // not a 404 status, decides whether an article exists.
+  await assert.rejects(() => repository.get("article", "does-not-exist"), /不存在/);
+});
+
+test("a transport error still surfaces as a retryable failure", async () => {
+  const failing = createContentRepository({
+    fetcher: async url => {
+      if (url === "/content/index.json") return { ok: true, json: async () => ({ items: [{ id: "glucose", kind: "indicator" }] }) };
+      return { ok: false, status: 503, json: async () => ({}) };
+    },
+  });
+  await assert.rejects(() => failing.get("article", "glucose"), /加载失败/);
 });

@@ -12,22 +12,218 @@
     "收缩压",
     "舒张压"
   ],
+  "searchAliases": [
+    "血压测量",
+    "量血压",
+    "高压",
+    "低压",
+    "收缩压",
+    "舒张压",
+    "家庭血压",
+    "动态血压",
+    "blood pressure"
+  ],
   "number": "02",
+  "format": "article",
   "featured": true,
   "desc": "心脏把血液泵入血管时，血液对血管壁产生压力。血压既与心脏泵血有关，也受血管阻力、血液容量及肾脏调节影响。",
+  "sections": [
+    {
+      "title": "两个数字，对应心脏的两个动作",
+      "short": "两个数字",
+      "paragraphs": [
+        {
+          "text": "一次血压测量会记录两个数字。上面（或前面）那个是收缩压：心脏收缩、把血液泵进动脉时，动脉内达到的较高压力。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "下面（或后面）那个是舒张压：心脏舒张、两次搏动之间重新充盈时，动脉里仍然维持的较低压力。它记录的不是「零」，而是血管在间歇期依然承受的压力。",
+          "sourceIds": [
+            "bp",
+            "who"
+          ]
+        },
+        {
+          "text": "两个数字用同一单位记录，写作「收缩压/舒张压」。它们描述的是同一个瞬间的两端，不能只挑一个看。",
+          "sourceIds": [
+            "bp"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "压力不只来自心脏，也来自血管和血量",
+      "short": "压力来自哪里",
+      "paragraphs": [
+        {
+          "text": "血压测量的其实是动脉里的压力——也就是把血液从心脏送往全身组织的那一类血管。每次心跳，血液被泵入动脉，动脉壁随之承受一次压力变化。",
+          "sourceIds": [
+            "bp",
+            "heart"
+          ]
+        },
+        {
+          "text": "心脏是泵，但血压并不是它一个人决定的。血液在血管里流动时遇到的阻力、循环中血液的总量，以及肾脏对水和盐的调节，都会影响最终读数。",
+          "sourceIds": [
+            "who"
+          ]
+        },
+        {
+          "text": "血管的口径会变化：变窄时，同样的血量需要更高压力才能通过。这也是为什么血压既反映心脏的工作，也反映血管的状态。",
+          "sourceIds": [
+            "who"
+          ]
+        },
+        {
+          "text": "肾脏通过调节水和盐的排出，影响循环中的血量。所以血压异常时，医生往往不只关注心脏，也会看肾脏和其他因素。",
+          "sourceIds": [
+            "who",
+            "kidney"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么要在安静、坐姿、合适袖带下量",
+      "short": "测量条件",
+      "paragraphs": [
+        {
+          "text": "血压是一个会随时变化的数值。运动、饮酒、吸烟、含咖啡因的饮料，甚至只是刚爬完楼梯，都可能让读数暂时升高。规范测量要求测量前安静休息，并避免这些影响因素。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "姿势和袖带同样重要：坐姿、背部有支撑、手臂与心脏大致同高，袖带大小合适。条件不一致时，两次读数之间的差别可能来自测量方式，而不是身体变化。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "测量姿势也会改变读数：坐着、躺着或站着，测出来的压力并不相同。第一次测量时医生可能会对比不同体位，之后固定一种姿势，读数之间才有可比性。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "有些人一到诊室就紧张，读数偏高，离开后又恢复正常。这种情况常被称为「白大衣效应」，也是家庭测量有价值的原因之一。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "年龄和某些药物同样会影响血压。这也是为什么规范测量开始前，医生或护士会先确认你正在服用的药物，而不是只看数字本身。",
+          "sourceIds": [
+            "bp",
+            "who"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "一次偏高说明什么，不说明什么",
+      "short": "一次偏高",
+      "paragraphs": [
+        {
+          "text": "单次读数会波动。医生通常不会只凭一次测量就下结论，而会参考不同日期的多次读数，并结合病史、家族史和其他症状。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "反过来也成立：一次读数在参考范围内，不等于可以忽略其他信号。血压只是身体状态的一个侧面，需要放在整体情况里看。",
+          "sourceIds": [
+            "bp",
+            "who"
+          ]
+        },
+        {
+          "text": "本文不提供血压分级标准，也不判断个人读数是否需要处理。这些判断依赖具体数值、测量条件和个体情况，应由医生完成。",
+          "sourceIds": [
+            "bp"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "读趋势，而不是读孤立的一个点",
+      "short": "读趋势",
+      "paragraphs": [
+        {
+          "text": "如果医生建议在家测量，重点通常不是某一天的数值，而是一段时间里的模式：多数读数在什么范围，什么时候偏高，和用药、作息有没有关系。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "家庭测量不能替代定期就诊，但它能提供诊室里看不到的信息。记录时连同日期、时间和测量条件一起写下，比只抄一个数字更有用。",
+          "sourceIds": [
+            "bp"
+          ]
+        },
+        {
+          "text": "测量本身也可能带来焦虑，越紧张读数越高。如果发现自己每次测完都更紧张，可以把这一点告诉医生，而不是反复测量试图「测出一个好数字」。",
+          "sourceIds": [
+            "bp",
+            "who"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "为什么我每次量的血压都不一样？",
+      "answer": "血压本身就会随活动、情绪、饮食和测量条件波动。不同时间、不同姿势、不同袖带得到的数字本来就不会完全相同，所以规范测量和多次记录比单次结果更有意义。",
+      "sourceIds": [
+        "bp"
+      ]
+    },
+    {
+      "question": "在家量和在医院量，哪个更准？",
+      "answer": "两者回答的问题不同。诊室测量有统一流程，但可能受紧张影响；家庭测量能反映日常状态，但依赖设备和方法是否正确。医生通常会结合两类读数判断。",
+      "sourceIds": [
+        "bp"
+      ]
+    },
+    {
+      "question": "量血压前需要空腹吗？",
+      "answer": "血压测量通常不要求空腹，但测量前应避免运动、饮酒、吸烟和含咖啡因的饮料，并先去洗手间。具体要求以给你测量或开具检查的机构说明为准。",
+      "sourceIds": [
+        "bp"
+      ]
+    },
+    {
+      "question": "为什么两只手臂的读数不一样？",
+      "answer": "两侧手臂的读数存在差异是常见现象，与血管解剖和测量条件有关。首次测量时医生可能会对比两侧，之后通常使用读数较高的一侧作为参考；具体做法由医生决定。",
+      "sourceIds": [
+        "bp"
+      ]
+    },
+    {
+      "question": "血压偏高就一定要吃药吗？",
+      "answer": "本文不提供治疗建议。是否需要用药取决于多次测量的结果、整体心血管风险和其他健康状况，必须由医生评估后决定，不能根据一次读数自行判断。",
+      "sourceIds": [
+        "bp",
+        "who"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "收缩压（高压）",
       "text": "心脏收缩、向外泵血时，动脉内达到的较高压力。",
       "sourceIds": [
-        "hypertension"
+        "bp"
       ]
     },
     {
       "name": "舒张压（低压）",
       "text": "心脏舒张、再次充盈时，动脉仍维持的较低压力。",
       "sourceIds": [
-        "hypertension"
+        "bp"
       ]
     },
     {
@@ -44,38 +240,68 @@
     "血管阻力影响压力",
     "肾脏调节水和盐"
   ],
+  "chainSourceIds": [
+    "who",
+    "kidney"
+  ],
   "tip": "测量前安静休息至少 5 分钟，坐姿测量、手臂与心脏同高，使用合适袖带。不同日期的规范测量更有参考价值。",
+  "figures": [
+    {
+      "key": "pulse",
+      "diagram": "pressure-pulse",
+      "alt": "示意图：心脏收缩时动脉内压力升高到收缩压，舒张时压力回落到舒张压，两次搏动之间压力不会降到零。",
+      "caption": "收缩压和舒张压是同一个搏动周期里的高点与低点。",
+      "simplification": "图为压力变化示意，曲线形状经过简化，不按真实时间或数值比例绘制，也不表示任何血压分级标准。实际读数以规范测量和报告单为准。",
+      "sourceIds": [
+        "bp"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "心脏 · 血管 · 肾脏",
   "relatedOrgans": [
     {
       "id": "heart",
       "title": "心脏"
+    },
+    {
+      "id": "kidney",
+      "title": "肾脏"
     }
   ],
   "kind": "indicator",
   "category": "circulation",
-  "version": 1,
-  "updatedAt": "2026-09-18",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解血压两个数字的含义、测量条件与读数波动的一般成年读者。",
+  "limitations": "不提供血压分级或诊断标准、个人读数判断、用药与生活方式处方；孕期、儿童及特殊人群应使用对应的参考信息。",
   "references": [
-    {
-      "id": "hypertension",
-      "publisher": "世界卫生组织（WHO）",
-      "title": "Hypertension",
-      "url": "https://www.who.int/news-room/fact-sheets/detail/hypertension",
-      "scope": "收缩压、舒张压、高血压症状及反复测量",
-      "accessedAt": "2026-09-18",
-      "language": "en",
-      "type": "机构健康科普",
-      "publicationDate": null
-    },
     {
       "id": "bp",
       "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
       "title": "Measuring Blood Pressure",
       "url": "https://medlineplus.gov/lab-tests/measuring-blood-pressure/",
-      "scope": "测量姿势、袖带、休息时间及家庭血压",
-      "accessedAt": "2026-09-18",
+      "scope": "收缩压与舒张压的含义、测量前准备、姿势与袖带、读数波动与重复测量",
+      "locator": "What is a blood pressure measurement?; Will I need to do anything to prepare for the test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "who",
+      "publisher": "世界卫生组织（WHO）",
+      "title": "Hypertension",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/hypertension",
+      "scope": "血压的影响因素、风险因素与总体健康影响",
+      "locator": "Overview; Risk factors",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -85,26 +311,28 @@
       "publisher": "美国国立心肺血液研究所（NHLBI）",
       "title": "How the Heart Works — The Heart",
       "url": "https://www.nhlbi.nih.gov/health/heart",
-      "scope": "心脏泵血与氧气、营养运输",
-      "accessedAt": "2026-09-18",
+      "scope": "心脏泵血与氧气、营养运输；电活动控制心跳频率与节律",
+      "locator": "The heart is an organ about the size of your fist…",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     },
     {
       "id": "kidney",
-      "publisher": "NIDDK",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
       "title": "Your Kidneys & How They Work",
       "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
       "scope": "过滤血液，调节水盐、酸碱与激素功能",
-      "accessedAt": "2026-09-18",
+      "locator": "Why are the kidneys important?; How do my kidneys work?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
   ],
   "descriptionSourceIds": [
-    "hypertension",
+    "who",
     "heart",
     "kidney"
   ],

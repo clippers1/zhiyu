@@ -27,7 +27,7 @@ import TopicRoute from "./components/TopicRoute";
 
 const nav = [
   { id: "map", title: "发现", short: "发现", icon: Map },
-  { id: "indicators", title: "看体检项目", short: "体检项目", icon: BookOpen },
+  { id: "indicators", title: "体检项目", short: "体检项目", icon: BookOpen },
   { id: "organs", title: "认识身体", short: "认识身体", icon: Heart },
 ];
 function ReaderApp() {

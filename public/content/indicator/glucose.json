@@ -12,9 +12,195 @@
     "空腹血糖",
     "糖化血红蛋白"
   ],
+  "searchAliases": [
+    "血糖检查",
+    "血糖测定",
+    "空腹血糖",
+    "餐后血糖",
+    "随机血糖",
+    "糖化血红蛋白",
+    "HbA1c",
+    "A1C",
+    "OGTT",
+    "口服葡萄糖耐量试验",
+    "FPG",
+    "blood glucose"
+  ],
   "number": "01",
+  "format": "article",
   "featured": true,
   "desc": "血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。",
+  "sections": [
+    {
+      "title": "血糖不是一种「糖」，而是血液里流动的燃料",
+      "paragraphs": [
+        {
+          "text": "血液里的葡萄糖主要来自食物中的碳水化合物，也有一部分来自肝脏储存的糖原。它随血液被送到肌肉、脂肪和其他细胞，参与供能。",
+          "sourceIds": [
+            "diabetes",
+            "digestion"
+          ]
+        },
+        {
+          "text": "血液中的葡萄糖浓度并不是一个固定值。进食后会升高，活动、空腹或睡眠时可能下降；身体通过胰岛素等信号，让葡萄糖进入细胞，或暂时收进肝脏。",
+          "sourceIds": [
+            "insulin",
+            "digestion"
+          ]
+        },
+        {
+          "text": "所以「血糖」描述的是一段时间里的状态，而不是一个固定属性。某个时刻的一个数字，只能说明当时的情况，不能代表全天，也不能代表几个月。",
+          "sourceIds": [
+            "diabetes"
+          ]
+        }
+      ],
+      "short": "血糖不是一种「糖」"
+    },
+    {
+      "title": "空腹、餐后和随机：三个不同的时间窗",
+      "paragraphs": [
+        {
+          "text": "空腹血糖要求在至少 8 小时没有摄入热量之后采样，观察身体在没有新食物进入时的血糖水平。它更像一张「安静的底片」。",
+          "sourceIds": [
+            "tests"
+          ]
+        },
+        {
+          "text": "口服葡萄糖耐量试验（OGTT）则先喝下规定量的葡萄糖溶液，再在规定时间点采样，观察身体处理这一批葡萄糖的过程。同样是抽血，它回答的是「进来之后怎么处理」，而不是「安静时是多少」。",
+          "sourceIds": [
+            "tests"
+          ]
+        },
+        {
+          "text": "随机血糖不限定与进食的时间关系，通常在需要快速了解当时情况时使用。三种样本的时间背景不同，数值放在一起比较没有意义，必须先确认它属于哪一种。",
+          "sourceIds": [
+            "tests",
+            "glucose-test"
+          ]
+        }
+      ],
+      "short": "空腹、餐后和随机"
+    },
+    {
+      "title": "糖化血红蛋白看的是「平均」，不是「今天」",
+      "figure": "windows",
+      "paragraphs": [
+        {
+          "text": "葡萄糖会附着在红细胞的血红蛋白上，血液中的葡萄糖越多，附着的比例越高。糖化血红蛋白（HbA1c）测量的就是带有葡萄糖的那部分血红蛋白所占的比例。",
+          "sourceIds": [
+            "a1c"
+          ]
+        },
+        {
+          "text": "红细胞在血液中会存留几个月，因此 HbA1c 反映的是过去约 2–3 个月的平均血糖情况，而不是抽血当天的数值。这是它和空腹血糖最根本的区别。",
+          "sourceIds": [
+            "a1c"
+          ]
+        },
+        {
+          "text": "因为是平均值，短时间内的大幅波动可能被「平均」掉；反过来，如果红细胞的寿命或血红蛋白本身发生变化，例如近期失血、接受输血，或存在某些血红蛋白变异，读数也可能偏离真实水平。",
+          "sourceIds": [
+            "a1c"
+          ]
+        }
+      ],
+      "short": "糖化血红蛋白看的是「平均」"
+    },
+    {
+      "title": "胰岛素和肝脏：把血糖「收起来」的两个角色",
+      "paragraphs": [
+        {
+          "text": "胰腺分泌胰岛素，相当于向细胞发出信号：血液里有葡萄糖，可以开始摄取和使用。肌肉和脂肪组织响应这个信号，把葡萄糖运进细胞。",
+          "sourceIds": [
+            "insulin",
+            "diabetes"
+          ]
+        },
+        {
+          "text": "肝脏既是仓库也是调度员。进食后它把多余的葡萄糖储存起来，空腹时再释放一部分，维持血液中的供应。胰腺同时分泌消化酶，帮助分解食物中的碳水化合物、脂肪和蛋白质。",
+          "sourceIds": [
+            "digestion",
+            "insulin"
+          ]
+        },
+        {
+          "text": "如果细胞对胰岛素的响应变弱，身体可能需要分泌更多胰岛素才能达到同样的效果。这个过程通常没有明显感觉，也不会在某一次血糖读数上直接显示出来。",
+          "sourceIds": [
+            "insulin"
+          ]
+        }
+      ],
+      "short": "胰岛素和肝脏"
+    },
+    {
+      "title": "拿到一张血糖单，先看什么",
+      "paragraphs": [
+        {
+          "text": "先确认每个数字对应哪种采样：空腹、餐后、随机，还是糖化血红蛋白。同一个人的这些项目本来就不应该相同，混在一起看只会制造困惑。",
+          "sourceIds": [
+            "tests",
+            "a1c"
+          ]
+        },
+        {
+          "text": "再看检查条件是否一致：是否真的空腹、距离进食多久、当天有没有生病、熬夜或剧烈运动。条件不同，两次结果之间的比较就失去意义。",
+          "sourceIds": [
+            "glucose-test",
+            "a1c"
+          ]
+        },
+        {
+          "text": "最后要记得，一次异常通常需要结合症状、复查和其他检查来理解。本文只解释项目名称和彼此关系，不判断个人结果，也不回答是否需要治疗。",
+          "sourceIds": [
+            "tests",
+            "glucose-test"
+          ]
+        }
+      ],
+      "short": "拿到一张血糖单"
+    }
+  ],
+  "faq": [
+    {
+      "question": "抽血前一定要空腹吗？",
+      "answer": "取决于查的是哪一项。空腹血糖需要至少 8 小时不摄入热量；糖化血红蛋白不需要空腹，一天中任何时间都可以抽血。具体准备要求以开具检查的机构说明为准。",
+      "sourceIds": [
+        "tests",
+        "a1c"
+      ]
+    },
+    {
+      "question": "为什么两家医院的参考区间不一样？",
+      "answer": "参考区间通常来自特定人群的测量结果，并受到检测方法、仪器和单位的影响。不同实验室使用的方法和人群不完全相同，区间也就不同。读结果时应使用这张报告单上标注的区间。",
+      "sourceIds": [
+        "lab-results"
+      ]
+    },
+    {
+      "question": "糖化血红蛋白在参考区间内，是不是就说明血糖一定没问题？",
+      "answer": "不能这样推断。它反映的是一段时间的平均水平，可能掩盖短期内的升高或降低；某些影响红细胞或血红蛋白的情况也会让读数偏离。它和空腹、餐后血糖回答的是不同的问题。",
+      "sourceIds": [
+        "a1c"
+      ]
+    },
+    {
+      "question": "家用血糖仪的数字能和医院的检验结果直接对照吗？",
+      "answer": "两者的样本、仪器和测量方式不同，数值不宜直接对照。家用设备更适合观察同一台设备、相近条件下的变化趋势；设备是否准确，需要按说明书和医疗机构的方法核对。",
+      "sourceIds": [
+        "glucose-test",
+        "lab-results"
+      ]
+    },
+    {
+      "question": "一次结果和上次不一样，需要立刻复查吗？",
+      "answer": "本文不提供个人处理建议。单次结果可能受进食、睡眠、生病、压力和采样条件影响；是否需要复查、何时复查，应由了解你情况的医生结合症状和其他检查决定。",
+      "sourceIds": [
+        "a1c",
+        "glucose-test"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "空腹血糖（FPG）",
@@ -27,7 +213,7 @@
       "name": "糖化血红蛋白（HbA1c）",
       "text": "反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。",
       "sourceIds": [
-        "tests"
+        "a1c"
       ]
     },
     {
@@ -35,6 +221,14 @@
       "text": "观察喝下规定葡萄糖溶液后身体处理糖的能力，需按医疗机构规范进行。",
       "sourceIds": [
         "tests"
+      ]
+    },
+    {
+      "name": "随机血糖",
+      "text": "不限定与进食的时间关系，用于观察当时的状态；不能与空腹或餐后结果直接比较。",
+      "sourceIds": [
+        "tests",
+        "glucose-test"
       ]
     }
   ],
@@ -44,24 +238,43 @@
     "胰岛素帮助细胞利用",
     "肝脏储存与释放"
   ],
+  "chainSourceIds": [
+    "digestion",
+    "insulin"
+  ],
   "tip": "空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。",
-  "figure": {
-    "src": "/media/pancreas-servier.png",
-    "width": 936,
-    "height": 370,
-    "alt": "胰腺外形医学插图：胰腺位于胃后，头端与十二指肠相邻，尾部靠近脾脏。",
-    "caption": "胰腺：分泌胰岛素帮助身体利用葡萄糖的器官。",
-    "simplification": "图为胰腺外形示意，非真实比例，不显示胰岛细胞分布和疾病状态；胰岛素如何帮助葡萄糖进入细胞，见正文与来源。",
-    "sourceIds": [
-      "insulin"
-    ],
-    "attribution": {
-      "name": "Servier Medical Art by Servier",
-      "url": "https://smart.servier.com/smart_image/pancreas-overview/",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  "figures": [
+    {
+      "key": "flow",
+      "alt": "示意图：食物中的碳水化合物在消化后变成葡萄糖进入血液，胰岛素向细胞发出信号，葡萄糖进入肌肉和脂肪细胞供能，多余的由肝脏储存。",
+      "caption": "葡萄糖进入血液后，胰岛素帮它找到去处：进入细胞供能，或先存进肝脏。",
+      "simplification": "图为简化示意，不是解剖图，也未按真实比例绘制。图中只画出主要方向，省略了其他激素、器官和调节环节；箭头不表示速度或数量。",
+      "sourceIds": [
+        "insulin",
+        "digestion"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      },
+      "diagram": "glucose-flow"
+    },
+    {
+      "key": "windows",
+      "alt": "示意图：空腹血糖、口服葡萄糖耐量试验和糖化血红蛋白分别覆盖不同的时间范围，空腹与餐后是某一时点，糖化血红蛋白覆盖约两到三个月。",
+      "caption": "同一个人的血糖，在不同时间窗里本来就是不同的数字。",
+      "simplification": "图为时间范围示意，横轴不按等比例绘制，也不表示具体数值高低。不同项目的采样时间和适用场景以检查机构说明及来源原文为准。",
+      "sourceIds": [
+        "tests",
+        "a1c"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      },
+      "diagram": "glucose-windows"
     }
-  },
+  ],
   "organ": "胰腺 · 肝脏",
   "relatedOrgans": [
     {
@@ -75,9 +288,13 @@
   ],
   "kind": "indicator",
   "category": "metabolism",
-  "version": 1,
-  "updatedAt": "2026-09-18",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解血糖相关检查项目名称、时间范围与基本生理关系的一般成年读者。",
+  "limitations": "不提供血糖数值标准、糖尿病或其他疾病诊断、用药与饮食处方，也不解释个人检查结果；孕期、儿童及特殊人群应使用对应的参考信息。",
   "references": [
     {
       "id": "diabetes",
@@ -85,40 +302,80 @@
       "title": "What Is Diabetes?",
       "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
       "scope": "葡萄糖、胰岛素与细胞供能",
-      "accessedAt": "2026-09-18",
+      "locator": "What is diabetes?; What are the different types of diabetes?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     },
     {
       "id": "tests",
-      "publisher": "NIDDK",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
       "title": "Diabetes Tests & Diagnosis",
       "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/tests-diagnosis",
-      "scope": "空腹血糖、HbA1c、OGTT 及检测条件",
-      "accessedAt": "2026-09-18",
+      "scope": "空腹血糖、HbA1c、随机血糖、OGTT 及检测条件",
+      "locator": "What tests are used to diagnose diabetes? — Fasting plasma glucose test; A1C test; Random plasma glucose test; Oral glucose tolerance test",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     },
     {
       "id": "insulin",
-      "publisher": "NIDDK",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
       "title": "Insulin Resistance & Prediabetes",
       "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/prediabetes-insulin-resistance",
       "scope": "胰腺分泌胰岛素，肌肉、脂肪与肝脏对胰岛素的响应",
-      "accessedAt": "2026-09-18",
+      "locator": "What is insulin resistance?; What is prediabetes?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     },
     {
       "id": "digestion",
-      "publisher": "NIDDK",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
       "title": "Your Digestive System & How it Works",
       "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
       "scope": "营养吸收、肝脏胆汁及胰腺消化酶",
-      "accessedAt": "2026-09-18",
+      "locator": "What is the digestive system?; How does my digestive system work?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "a1c",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "The A1C Test & Diabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+      "scope": "HbA1c 测量的是什么、覆盖的时间范围、结果波动与影响因素",
+      "locator": "What is the A1C test?; Why do diabetes blood test results vary? — Blood glucose levels move up and down; A1C tests can be affected by changes in red blood cells or hemoglobin",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "glucose-test",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Blood Glucose Test",
+      "url": "https://medlineplus.gov/lab-tests/blood-glucose-test/",
+      "scope": "血糖检查的采样准备、样本类型与结果阅读限制",
+      "locator": "What is a blood glucose test?; Will I need to do anything to prepare for the test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源、实验室方法差异与结果解释限制",
+      "locator": "What is a reference range?; What can affect my results?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -129,6 +386,7 @@
     "insulin"
   ],
   "tipSourceIds": [
-    "tests"
+    "tests",
+    "a1c"
   ]
 }

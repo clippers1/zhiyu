@@ -1,113 +1,712 @@
-.organ-topics h2 { margin: 0 0 16px; font-size: 22px; font-weight: 600; }
-.start-boundary, .lookup-help p, .organ-topics > p, .home-empty { font-size: 13px; line-height: 1.9; color: #4f6b58; }
-.start-boundary { margin: 12px 0 0; }
-.organ-topics { margin: 36px 0; scroll-margin-top: 100px; }
-.organ-topic-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 18px; }
-.organ-topic-links a { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 18px; border-radius: 10px; color: #2e8450; background: var(--zc-card); }
-.organ-topic-links b { font-size: 17px; }
-.organ-topic-links span { grid-column: 1; font-size: 12px; line-height: 1.8; color: #4f6b58; }
-.organ-topic-links svg { grid-column: 2; grid-row: 1 / 3; align-self: center; }
-.body-art .organ[aria-disabled="true"] { opacity: .3; cursor: default; pointer-events: none; }
-.home-empty { padding: 18px; background: var(--zc-soft); border-radius: 8px; }
-.lower-grid.single-panel { grid-template-columns: 1fr; }
-.lookup-help { padding: 16px 20px; margin-bottom: 20px; border-left: 3px solid var(--zc-line); background: var(--zc-soft); }
-.lookup-help h2 { font-size: 17px; margin: 0 0 8px; }
-.lookup-help p { margin: 0; }
-#indicator-search, #reading-collection { scroll-margin-top: 110px; }
-.term-suggestions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 18px; font-size: 12px; color: #4f6b58; }
-.term-suggestions button { min-height: 44px; padding: 9px 13px; border: 1px solid var(--zc-line); border-radius: 7px; background: var(--zc-card); color: #2e8450; }
-.term-suggestions button:hover { background: var(--zc-soft); }
-.spelling-suggestions { padding: 14px; margin: 16px 0; border-radius: 12px; text-align: left; }
-.spelling-suggestions p { font-size: 13px; line-height: 1.8; }
-.spelling-suggestions > div { display: flex; flex-wrap: wrap; gap: 8px; }
-.spelling-suggestions button, .clear-category { min-height: 44px; padding: 9px 12px; border: 1px solid var(--zc-line); border-radius: 7px; color: #2e8450; background: var(--zc-card); font-size: 13px; margin: 5px 0; }
-.search-match { display: block; font-size: 12px; color: #2e8450; line-height: 1.8; margin-top: 6px; }
-/* H03 question index rows */
-.question-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px; }
-.question-row { display: grid; grid-template-columns: 200px 1fr auto; gap: 20px; align-items: center; padding: 20px 22px; border-radius: 12px; background: var(--zc-card); box-shadow: var(--zc-shadow); border: 1px solid transparent; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
-.question-row:hover { transform: translateY(-2px); border-color: #bdcfb8; box-shadow: 0 8px 24px var(--zc-ink)10; }
-.question-row-term { display: flex; flex-direction: column; gap: 4px; }
-.question-row-term b { font-size: 17px; font-weight: 600; color: var(--zc-ink); }
-.question-row-term small { font-size: 8px; letter-spacing: 1.3px; color: #9ea792; }
-.question-row-main { min-width: 0; }
-.question-row-main h3 { font-size: 15px; font-weight: 600; line-height: 1.6; color: var(--zc-ink); }
-.question-row-main > p { font-size: 11.5px; line-height: 1.85; color: #7d9284; margin-top: 5px; }
-.question-row-meta { display: flex; align-items: center; gap: 10px; font-size: 10px; color: #72976b; white-space: nowrap; }
-@media (max-width: 850px) {
-  .question-row { grid-template-columns: 1fr; gap: 10px; padding: 16px 16px 14px; }
-  .question-row-term { flex-direction: row; align-items: baseline; gap: 10px; }
-  .question-row-main h3 { font-size: 15px; }
-  .question-row-meta { justify-content: flex-start; border-top: 1px solid var(--zc-line); padding-top: 10px; }
+/* 发现 / 体检项目 / 认识身体
+   Paper-index composition: hairlines and numbering, no cards or shadows. */
+
+/* ---------- 发现 · 主列 ---------- */
+.home-content {
+  padding-top: var(--s-6);
 }
-@media (max-width: 768px) {
-  .question-list { margin: 0 calc(-1 * var(--zc-page-pad)) 26px; gap: 0; background: var(--zc-card); box-shadow: var(--zc-shadow); border-radius: 22px; overflow: hidden; }
-  .question-row { border: 0; border-bottom: 1px solid var(--zc-line); border-radius: 0; }
-  .question-row:last-child { border-bottom: 0; }
-  .question-row:hover { transform: none; }
-  .question-row-main h3 { font-size: 15px; }
+.home-main {
+  min-width: 0;
 }
-@media (max-width: 900px) and (min-width: 769px) {
-  .organ-topics h2 { font-size: 20px; }
+.home-statement {
+  margin-top: var(--s-2);
+  max-width: 12em;
 }
-/* Direction C mobile: only rules not covered by mobile.css */
-@media (max-width: 768px) {
-  .organ-topics > p { font-size: 13px; line-height: 1.85; color: #4f6b58; }
-  .home-empty { border-radius: 16px; }
-.spelling-suggestions button, .clear-category { border-radius: 999px; border: 1px solid var(--zc-line, var(--zc-line)); background: #ffffff; }
+.home-lede {
+  margin-top: var(--s-3);
 }
-.home-content .hero { padding: 24px 28px; background: var(--zc-card); border: 1px solid var(--zc-line); box-shadow: none; }
-.home-content .hero-content { padding: 0; }
-.home-content .hero h1 { margin: 0; font-size: clamp(25px, 3vw, 32px); line-height: 1.35; letter-spacing: 0; }
-.home-content .hero-content > p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.home-content .home-search-trigger { max-width: 100%; min-height: 48px; margin-top: 16px; font-size: 15px; color: var(--zc-ink-2); box-shadow: none; }
-.home-content .home-search-trigger > span { white-space: normal; text-overflow: clip; }
-.home-content .home-intents { margin-top: 12px; }
-.home-content .intent-chip { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--zc-ink); }
-.home-content .indicator-section { margin-top: 28px; }
-.home-section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-.home-section-heading h2, .home-reading-path h2 { font-size: 22px; line-height: 1.4; }
-.home-section-heading > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 14px; }
-.home-content .question-card { box-shadow: none; border: 1px solid var(--zc-line); }
-.home-content .question-kicker { font-size: 13px; letter-spacing: 0; }
-.home-content .question-card h3 { font-size: 18px; line-height: 1.5; }
-.home-content .question-card > p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.home-content .question-meta { display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
-.home-reading-path { margin: 32px 0; }
-.home-reading-path > a { display: block; padding: 20px; margin-top: 14px; border: 1px solid var(--zc-line); border-radius: 13px; background: var(--zc-card); color: inherit; }
-.home-reading-path > a > span { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
-.home-reading-path h3 { margin: 10px 0 6px; font-size: 19px; }
-.home-reading-path p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.home-reading-path > a > span:last-child { margin-top: 12px; }
-.home-content .organ-topics { margin-top: 32px; }
-.home-content .organ-topic-links { grid-template-columns: 1fr; margin-top: 0; }
-.home-content .organ-topic-links a { color: var(--zc-ink); border: 1px solid var(--zc-line); }
-.home-content .organ-topic-links span { font-size: 15px; color: var(--zc-ink-2); }
-.home-content .organ-topics .play-button { margin-top: 12px; min-height: 44px; font-size: 14px; }
-@media (max-width: 768px) {
-  .home-content .hero { padding: 12px 0 0; background: none; border: 0; }
-  .home-content .question-grid { margin: 0; background: none; box-shadow: none; border-radius: 0; gap: 8px; }
-  .home-content .question-card { border-radius: 12px; padding: 16px; }
-  .home-content .question-card:last-child { border-bottom: 1px solid var(--zc-line); }
+.home-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+  min-height: 48px;
+  margin-top: var(--s-6);
+  padding: 0 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--ink-3);
+  font-size: var(--t-15);
+  line-height: 1.5;
 }
-.library-controls { padding: 20px; }
-.library-controls h1 { font-size: clamp(24px, 3vw, 30px); line-height: 1.4; margin: 0 0 16px; }
-.library-help { margin-top: 14px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.library-search { min-height: 48px; }
-.library-search input { font-size: 16px; color: var(--zc-ink); }
-.question-row { grid-template-columns: minmax(0, 1fr) auto; gap: 16px; }
-.question-row-main h3 { font-size: 18px; line-height: 1.5; }
-.question-row-main .question-row-term { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-size: 14px; color: var(--zc-ink-2); }
-.question-row-main .question-row-term b { font-size: 14px; font-weight: 500; color: inherit; }
-.question-row-main .question-row-term small { font-size: 13px; letter-spacing: 0; }
-.question-row-main > p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.question-row-meta { font-size: 13px; }
-.organ-page-heading { margin: 0 0 20px; }
-.organ-page-heading h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.4; }
-.organ-page-heading p { margin-top: 8px; font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.organ-information .organ-description { font-size: 16px; line-height: 1.75; color: var(--zc-ink-2); }
-.organ-information .organ-related p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.organ-explorer.no-visual { grid-template-columns: 1fr; min-height: 0; }
-@media (max-width: 850px) {
-  .question-row { grid-template-columns: minmax(0, 1fr); }
-  .question-row-main h3 { font-size: 18px; }
+.home-search-trigger:hover {
+  border-color: var(--ink-3);
+  color: var(--ink-2);
+}
+.home-search-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 主推一篇 */
+.home-feature {
+  display: block;
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--rule-strong);
+}
+.feature-kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.feature-no {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-size: var(--t-15);
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.feature-term {
+  font-size: var(--t-13);
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+.feature-title {
+  display: block;
+  margin-top: var(--s-2);
+  text-wrap: balance;
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+.feature-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--t-15);
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.feature-plate {
+  display: grid;
+  place-items: center;
+  margin-top: var(--s-4);
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.feature-plate img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+.feature-read {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  margin-top: var(--s-1);
+  color: var(--accent);
+  font-size: var(--t-15);
+  font-weight: 600;
+}
+.home-feature:hover .feature-title {
+  color: var(--accent-deep);
+}
+.home-feature:hover .feature-read {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* 按项目读 */
+.home-index {
+  margin-top: var(--s-2);
+}
+.home-empty {
+  margin-top: var(--s-6);
+}
+
+/* 阅读路线入口 */
+.home-reading-path {
+  margin-top: var(--s-8);
+  border-top: 1px solid var(--rule-strong);
+}
+.home-reading-path > a {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 56px;
+  padding: var(--s-2) 0;
+  color: var(--ink);
+}
+.path-label {
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.path-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--t-15);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.home-reading-path svg {
+  color: var(--ink-3);
+}
+.home-reading-path a:hover .path-title {
+  color: var(--accent-deep);
+}
+.home-reading-path a:hover svg {
+  color: var(--accent);
+}
+
+/* 右栏 */
+.home-note {
+  margin-top: var(--s-8);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-13);
+  line-height: 1.9;
+  color: var(--ink-3);
+}
+.home-note b {
+  display: block;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.home-note p {
+  margin-top: var(--s-1);
+}
+.home-note .stamp {
+  margin-top: var(--s-3);
+}
+.home-rail .section-head {
+  padding-top: var(--s-6);
+}
+.home-rail .body-row {
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: var(--s-3);
+}
+.home-rail .body-thumb {
+  width: 56px;
+  height: 46px;
+}
+.home-rail .play-button {
+  margin-top: var(--s-2);
+}
+.home-rail .load-state {
+  min-height: 72px;
+}
+
+@media (min-width: 1101px) {
+  .home-content {
+    padding-top: var(--s-12);
+  }
+  .home-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 0 var(--s-12);
+    align-items: start;
+  }
+  .home-statement {
+    font-size: var(--t-48);
+    line-height: 1.3;
+    margin-top: var(--s-3);
+  }
+  .home-lede {
+    margin-top: 14px;
+    max-width: 560px;
+    font-size: var(--t-17);
+  }
+  .home-search-trigger {
+    max-width: 420px;
+    margin-top: var(--s-6);
+  }
+  .home-feature {
+    margin-top: 40px;
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    align-items: start;
+  }
+  /* Only a feature with a plate splits into text/illustration columns;
+     a typographic feature keeps the full column width. */
+  .home-feature.has-plate {
+    grid-template-columns: minmax(0, 1fr) 240px;
+    grid-template-areas:
+      "kicker plate"
+      "title plate"
+      "sub plate"
+      "read plate";
+    gap: 0 var(--s-8);
+  }
+  .feature-kicker { grid-area: kicker; }
+  .feature-title { grid-area: title; font-size: var(--t-30); line-height: 1.45; }
+  .feature-sub { grid-area: sub; font-size: var(--t-17); margin-top: var(--s-2); }
+  .feature-read { grid-area: read; margin-top: 14px; }
+  .feature-plate {
+    grid-area: plate;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .feature-plate img {
+    max-width: 240px;
+    max-height: 300px;
+    width: auto;
+  }
+  .home-rail {
+    border-left: 1px solid var(--rule);
+    padding-left: var(--s-8);
+    margin-top: var(--s-12);
+  }
+  .home-rail .section-head {
+    padding-top: 0;
+  }
+  .home-rail .section-head h2 {
+    font-size: var(--t-11);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    color: var(--ink-3);
+  }
+  .home-rail .section-head a {
+    font-size: var(--t-11);
+  }
+  .home-note {
+    margin-top: var(--s-8);
+  }
+}
+
+/* ---------- 体检项目 ---------- */
+.library-head {
+  padding-top: var(--s-6);
+}
+.library-title {
+  margin-top: var(--s-2);
+}
+.library-controls {
+  margin-top: var(--s-6);
+}
+#indicator-search {
+  scroll-margin-top: calc(var(--header-h) + var(--s-4));
+}
+.library-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--ink-3);
+}
+.library-search:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.library-search input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--s-3) 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  font-size: var(--t-15);
+  color: var(--ink);
+}
+.library-search input::placeholder {
+  color: var(--ink-3);
+}
+.category-filters {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.category-filters::-webkit-scrollbar {
+  display: none;
+}
+.category-filters button {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: var(--t-13);
+}
+.category-filters button:hover {
+  border-color: var(--ink-3);
+}
+.category-filters button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.library-help {
+  margin-top: var(--s-3);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.result-count {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: var(--s-6) 0 var(--s-1);
+  font-size: var(--t-13);
+  color: var(--ink-2);
+}
+.result-count > span {
+  font-size: var(--t-11);
+  color: var(--ink-3);
+}
+.question-list {
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--s-4);
+}
+.question-row {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: var(--s-3);
+  align-items: start;
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+}
+.question-number {
+  padding-top: 3px;
+  font-family: var(--serif);
+  font-size: var(--t-15);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.question-row-main {
+  min-width: 0;
+}
+.question-row-main h3 {
+  font-size: var(--t-17);
+  font-weight: 600;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.question-row-term {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 3px;
+  font-size: var(--t-13);
+  color: var(--ink-3);
+}
+.question-row-term b {
+  font-size: var(--t-13);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.question-row-term small {
+  font-size: var(--t-11);
+  letter-spacing: 0.1em;
+  overflow-wrap: anywhere;
+}
+.question-row-main > p {
+  margin-top: 3px;
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.question-row-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 2px;
+  font-size: var(--t-11);
+  line-height: 1.6;
+  color: var(--ink-3);
+  white-space: nowrap;
+  text-align: right;
+}
+.question-row-meta svg {
+  color: var(--ink-3);
+}
+.question-row:hover h3 {
+  color: var(--accent-deep);
+}
+.question-row:hover .question-row-meta svg {
+  color: var(--accent);
+}
+.question-row .search-match {
+  margin-top: var(--s-1);
+  color: var(--accent);
+}
+.search-hint {
+  margin-top: var(--s-3);
+}
+.term-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-4);
+  font-size: var(--t-13);
+  color: var(--ink-3);
+}
+.term-suggestions button {
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--t-13);
+}
+.term-suggestions button:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .question-row {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: var(--s-2) var(--s-3);
+  }
+  .question-row-meta {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--s-2);
+    text-align: left;
+  }
+  .result-count > span {
+    display: none;
+  }
+}
+
+/* ---------- 认识身体 ---------- */
+.organ-page {
+  padding-top: var(--s-6);
+}
+.organ-page-heading {
+  margin-top: var(--s-2);
+}
+.organ-page-heading p {
+  margin-top: var(--s-3);
+}
+.organ-tabs {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.organ-tabs::-webkit-scrollbar {
+  display: none;
+}
+.organ-tabs a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: var(--t-13);
+  white-space: nowrap;
+}
+.organ-tabs a:hover {
+  border-color: var(--ink-3);
+}
+.organ-tabs a.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.mobile-organ-tabs {
+  display: flex;
+}
+.desktop-organ-tabs {
+  display: none;
+}
+.organ-explorer {
+  margin-top: var(--s-6);
+  scroll-margin-top: calc(var(--header-h) + var(--s-4));
+}
+.explorer-visual {
+  min-width: 0;
+}
+.organ-information {
+  min-width: 0;
+  margin-top: var(--s-6);
+}
+.organ-information .overline {
+  display: block;
+}
+.organ-information h2 {
+  margin-top: var(--s-2);
+  font-size: var(--t-24);
+  line-height: 1.4;
+}
+.organ-information h2 > span {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--sans);
+  font-size: var(--t-13);
+  font-weight: 400;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+.organ-description {
+  margin-top: var(--s-4);
+  font-size: var(--t-17);
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+.organ-related {
+  margin-top: var(--s-8);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+.organ-related > span {
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.organ-related h3 {
+  margin-top: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-17);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.organ-related p {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.organ-related .text-link {
+  margin-top: var(--s-1);
+}
+.organ-related .coming-note {
+  margin-top: var(--s-2);
+}
+.organ-bookmark {
+  margin-top: var(--s-4);
+}
+.coming-note {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.organ-artwork {
+  margin: 0;
+}
+.organ-artwork-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: var(--s-8) var(--s-4) var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-input);
+  background: var(--surface);
+}
+.organ-artwork-stage img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 230px;
+}
+.organ-artwork-stage img.portrait {
+  height: 280px;
+}
+.organ-artwork-stage img.landscape {
+  height: 190px;
+}
+.organ-artwork-kicker {
+  position: absolute;
+  top: var(--s-3);
+  left: var(--s-4);
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.organ-artwork-detail {
+  position: absolute;
+  right: var(--s-4);
+  bottom: var(--s-3);
+  font-size: var(--t-11);
+  color: var(--ink-3);
+}
+.organ-artwork figcaption {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.organ-artwork figcaption small {
+  display: block;
+  font-size: var(--t-11);
+  margin-top: 2px;
+}
+.organ-artwork figcaption a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.organ-information .load-state {
+  min-height: 200px;
+}
+
+@media (min-width: 769px) {
+  .mobile-organ-tabs {
+    display: none;
+  }
+  .desktop-organ-tabs {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: var(--s-6);
+  }
+  .organ-explorer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--s-12);
+    align-items: start;
+  }
+  .organ-explorer.no-visual {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .organ-information {
+    margin-top: 0;
+  }
+  .organ-artwork-stage img {
+    height: 280px;
+  }
+  .organ-artwork-stage img.portrait {
+    height: 330px;
+  }
+  .organ-artwork-stage img.landscape {
+    height: 220px;
+  }
+}
+
+@media (min-width: 1101px) {
+  .organ-page {
+    padding-top: var(--s-12);
+  }
+  .organ-explorer {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s-16);
+  }
 }

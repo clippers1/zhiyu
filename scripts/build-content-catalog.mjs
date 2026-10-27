@@ -11,11 +11,23 @@ const check = process.argv.includes("--check");
 const clean = value => String(value || "").replace(/\s+/g, " ").trim();
 const unique = values => [...new Set(values.map(clean).filter(Boolean))];
 
+// Long-form bodies are searchable too: section paragraphs and FAQ answers are
+// the only place many of their terms appear.
+function sectionText(body) {
+  return (body.sections || []).flatMap(section => [
+    section.title,
+    ...(section.paragraphs || []).map(paragraph => paragraph.text),
+  ]);
+}
+function faqText(body) {
+  return (body.faq || []).flatMap(item => [item.question, item.answer]);
+}
+
 function summary(kind, body) {
   const title = clean(body.title || body.name);
   const subtitle = clean(body.subtitle || body.headline);
   const english = clean(body.english || body.en);
-  const tags = kind === "indicator"
+  const tags = kind === "indicator" || kind === "story"
     ? unique(body.tags || [])
     : unique(body.tags || clean(body.connection).split("·"));
   const learningText = body.learning
@@ -27,6 +39,7 @@ function summary(kind, body) {
     title, subtitle, english, body.question || "", ...(body.searchAliases || []), ...tags,
     body.desc || body.text,
     ...(body.metrics || []).flatMap(item => [item.name, item.text]),
+    ...sectionText(body), ...faqText(body),
     body.organ || body.connection,
     ...learningText,
   ]).join(" ");
@@ -35,14 +48,15 @@ function summary(kind, body) {
     kind,
     title,
     subtitle,
-    question: kind === "indicator" ? clean(body.question) : "",
-    questionAnswer: kind === "indicator" ? clean(body.questionAnswer) : "",
+    question: kind === "organ" ? "" : clean(body.question),
+    questionAnswer: kind === "organ" ? "" : clean(body.questionAnswer),
     english,
     icon: body.icon || "heart",
     color: body.color || "green",
     number: body.number || "",
     tags,
     category: body.category,
+    format: body.format || (kind === "story" ? "article" : "entry"),
     featured: Boolean(body.featured),
     searchText,
     sourceLabel: body.references?.[0]?.publisher || "",
@@ -55,7 +69,7 @@ export async function buildCatalog() {
   const categoryIDs = new Set(categories.map(item => item.id));
   assert.equal(categoryIDs.size, categories.length, "category ids must be unique");
   const records = [];
-  for (const kind of ["indicator", "organ"]) {
+  for (const kind of ["indicator", "organ", "story"]) {
     const files = (await readdir(path.join(contentDir, kind))).filter(file => file.endsWith(".json"));
     for (const file of files) {
       const body = JSON.parse(await readFile(path.join(contentDir, kind, file), "utf8"));

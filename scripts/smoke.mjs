@@ -44,7 +44,9 @@ try {
   await page.goto(baseUrl, {
     waitUntil: "networkidle",
   });
-  await expect(page.locator(".question-card")).toHaveCount(3);
+  await expect(page.locator(".home-feature")).toHaveCount(1);
+  await expect(page.locator(".home-longform .index-row")).toHaveCount(3);
+  await expect(page.locator(".home-index:not(.home-longform) .index-row")).toHaveCount(6);
   await expect(page.locator(".home-reading-path a")).toHaveCount(1);
   await expect(page.locator(".home-reading-path a")).toHaveAttribute("href", "/topics");
   assert.equal(
@@ -53,7 +55,9 @@ try {
     "Home must not load full articles",
   );
   await page.screenshot({ path: "artifacts/desktop.png", fullPage: true });
-  await page.locator(".question-card", { hasText: "血糖项目主要看什么" }).click();
+  // The first long-form entry is the rewritten glucose article; the feature is
+  // the newest story, which has its own coverage in the story smoke run.
+  await page.locator(".home-longform .index-row", { hasText: "血糖项目主要看什么" }).click();
   await expect(
     page.getByRole("heading", { name: "血糖项目主要看什么？", exact: true }),
   ).toBeVisible();
@@ -63,7 +67,7 @@ try {
     "SSR may preload the detail, but navigation must not request it more than once",
   );
   await expect(page.getByRole("region", { name: "知识来源" })).toBeAttached();
-  assert.equal(await page.locator(".source-list a").count(), 4);
+  assert.equal(await page.locator(".source-list a").count(), 7);
   assert.ok(await page.evaluate(() => {
     const reminder = document.querySelector('#article-reminder');
     const figure = document.querySelector('#article-figure');
@@ -77,7 +81,7 @@ try {
   await expect(page.locator("#article-source-tests")).toBeInViewport();
   await expect(page).toHaveURL(/\/article\/glucose$/);
   await page.getByRole("button", { name: "返回上一页" }).click();
-  await expect(page.getByRole("heading", { name: /看懂体检单/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /从一张体检单读起/ })).toBeVisible();
   await page
     .getByRole("button", { name: "搜索体检项目或器官", exact: true })
     .click();
@@ -107,7 +111,7 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(mobileNav()).toBeVisible();
   await page.screenshot({ path: "artifacts/mobile.png", fullPage: false });
-  await mobileNav().getByRole("link", { name: "看体检项目" }).click();
+  await mobileNav().getByRole("link", { name: "体检项目" }).click();
   await page.getByRole("textbox", { name: "筛选体检项目" }).fill("LDL");
   await expect(page.locator(".question-row")).toHaveCount(1);
   await page.getByRole("textbox", { name: "筛选体检项目" }).fill("");
@@ -149,7 +153,7 @@ try {
   await expect(mobileNav()).toBeVisible();
   for (const width of [320, 360, 390, 430, 768]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const name of ["认识身体", "发现", "看体检项目"]) {
+    for (const name of ["认识身体", "发现", "体检项目"]) {
       await mobileNav().getByRole("link", { name, exact: true }).click();
       await expect(page.locator(".load-state")).toHaveCount(0);
       await noOverflow(`${width}/${name}`);

@@ -1,0 +1,320 @@
+{
+  "id": "stairs-heart",
+  "catalogOrder": 201,
+  "title": "为什么爬几层楼，心跳就快了？",
+  "english": "STAIRS & HEART RATE",
+  "subtitle": "肌肉要先「借」到更多氧，心脏只能加快送达。",
+  "question": "为什么爬几层楼，心跳就快了？",
+  "questionAnswer": "爬楼时腿部肌肉需要更多氧气和能量，心脏通过加快跳动把含氧血液更快送到肌肉；停下来后它还会继续快一阵，把欠下的氧补回来。",
+  "icon": "heart-pulse",
+  "color": "purple",
+  "tags": [
+    "心率",
+    "运动",
+    "耗氧"
+  ],
+  "searchAliases": [
+    "爬楼梯心跳快",
+    "爬楼心慌",
+    "运动心率",
+    "运动后心跳",
+    "为什么心跳加快",
+    "心跳加速"
+  ],
+  "number": "",
+  "format": "article",
+  "featured": false,
+  "kind": "story",
+  "category": "circulation",
+  "desc": "爬楼时，腿部肌肉的工作量在几秒内上升，它们需要更多含氧血液。心脏能做的只有两件事：跳得更快，以及每次泵出更多血。",
+  "sections": [
+    {
+      "title": "先有「要用氧」的信号，才有心跳加快",
+      "short": "肌肉先要用氧",
+      "paragraphs": [
+        {
+          "text": "爬楼时，大腿和小腿的肌肉持续收缩，能量消耗比站着时高得多。细胞要产生能量，需要氧气参与，而氧气靠血液运来。",
+          "sourceIds": [
+            "heart",
+            "activity"
+          ]
+        },
+        {
+          "text": "血液里携带氧气的是红细胞中的血红蛋白。血液到哪里，氧气就到哪里；肌肉活动越强，对这条路线的需求就越大。",
+          "sourceIds": [
+            "heart"
+          ]
+        },
+        {
+          "text": "所以心跳加快不是心脏「自己决定」的，而是身体对肌肉需求作出的反应：先有需求，后有加速。",
+          "sourceIds": [
+            "heart",
+            "activity"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "心脏能做的两件事：更快，或更有力",
+      "short": "更快或更有力",
+      "paragraphs": [
+        {
+          "text": "心脏是一个泵。它把血液送出的方式只有两种：增加每分钟跳动的次数，或者让每次跳动泵出更多的血量。",
+          "sourceIds": [
+            "heart"
+          ]
+        },
+        {
+          "text": "心脏内部的电活动控制着跳动的频率和节律。当身体需要更多血液时，这套节律会被调快，于是你能感觉到胸口或颈部的搏动变明显。",
+          "sourceIds": [
+            "heart"
+          ]
+        },
+        {
+          "text": "血液的方向由瓣膜控制，它们只允许血液单向流动。所以加快泵血不会让血液「倒流」，只是同一套通路跑得更频繁。",
+          "sourceIds": [
+            "flow"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "呼吸也会跟上，不只是心脏",
+      "short": "呼吸也会跟上",
+      "paragraphs": [
+        {
+          "text": "回到心脏的血液要先经过肺补充氧气。爬楼时呼吸变快变深，就是为了让更多血液在肺里完成气体交换。",
+          "sourceIds": [
+            "flow",
+            "activity"
+          ]
+        },
+        {
+          "text": "氧气从肺泡进入血液，同时二氧化碳从血液进入肺泡并被呼出，这个过程叫气体交换。爬楼时肌肉产生的二氧化碳更多，需要更快地被运到肺里排出去。",
+          "sourceIds": [
+            "lungs"
+          ]
+        },
+        {
+          "text": "含氧的血液从肺回到心脏左侧，再由左心室泵向全身。左心室要产生足够高的压力，血液才能到达正在用力的腿部。",
+          "sourceIds": [
+            "flow"
+          ]
+        },
+        {
+          "text": "这条链路里任何一环跟不上，身体都会用更快的呼吸和心跳来补偿，所以你感觉到的往往是「心慌 + 喘」同时出现。",
+          "sourceIds": [
+            "flow",
+            "heart"
+          ]
+        },
+        {
+          "text": "呼吸的快慢并不完全由意志控制。大脑会根据身体对氧气的需要和二氧化碳的排出情况来调节呼吸频率，这也是为什么爬楼时你会不自觉地喘起来。",
+          "sourceIds": [
+            "lungs"
+          ]
+        }
+      ],
+      "figure": "chain"
+    },
+    {
+      "title": "停下来之后，为什么还要喘一阵",
+      "short": "停下来还要喘",
+      "paragraphs": [
+        {
+          "text": "这里说的「欠账」不是一种精确的计量，而是描述身体在运动结束后仍在进行的一系列调整：把堆积的二氧化碳运走，让呼吸和循环回到接近安静时的水平。",
+          "sourceIds": [
+            "lungs",
+            "heart"
+          ]
+        },
+        {
+          "text": "停止爬楼后，肌肉不再需要那么多氧，但身体在这段时间里还有一些「欠账」要补：把代谢产生的二氧化碳运走，让血液的酸碱和气体水平回到平时的状态。",
+          "sourceIds": [
+            "heart"
+          ]
+        },
+        {
+          "text": "所以心跳和呼吸不会立刻恢复，而是逐渐回落。这个回落过程的长短与运动强度、当时的体力状态有关，并不是一个固定秒数。",
+          "sourceIds": [
+            "activity"
+          ]
+        },
+        {
+          "text": "规律的身体活动能让心脏和肺更有效率地工作，同样的爬楼量对身体的负担会不同；但这是长期变化，不是一次爬楼就能感受到的。",
+          "sourceIds": [
+            "activity"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "哪些情况不该用「正常反应」解释",
+      "short": "什么时候要问医生",
+      "paragraphs": [
+        {
+          "text": "爬楼后心跳加快、呼吸变急，本身是常见的生理反应。但如果在轻微活动时就出现明显不适，或伴随胸痛、晕厥、明显心悸，就不属于「用运动反应解释」的范围。",
+          "sourceIds": [
+            "pulse"
+          ]
+        },
+        {
+          "text": "本文只解释运动时心率变化的一般机制，不判断任何人的心脏状况。静息心率在不同年龄、不同个体之间本来就有差别，单次测量也不足以说明问题。",
+          "sourceIds": [
+            "pulse"
+          ]
+        },
+        {
+          "text": "如果对自己的心率或运动耐受有疑问，可以把具体感受和测量记录告诉医生，由医生结合病史、体格检查和其他检查判断。",
+          "sourceIds": [
+            "pulse",
+            "heart"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "为什么爬楼时心跳快，但坐下休息一会儿就好了？",
+      "answer": "爬楼时肌肉需要更多含氧血液，心脏通过加快跳动来满足需求；停止活动后需求下降，心跳会逐渐回落，所以休息一会儿会感觉好转。回落速度因人而异。",
+      "sourceIds": [
+        "heart",
+        "activity"
+      ]
+    },
+    {
+      "question": "心跳快就是心脏不好吗？",
+      "answer": "不能这样判断。运动、情绪、发热、脱水等很多情况都会让心跳加快，这是身体在调整供血。是否有问题需要结合出现的情境、持续时间和其他症状，由医生评估。",
+      "sourceIds": [
+        "pulse"
+      ]
+    },
+    {
+      "question": "为什么爬楼后是喘和心慌一起出现？",
+      "answer": "因为氧气要靠血液运输，而血液要在肺里完成气体交换。心脏加快供血和呼吸加快换气是同一条链路上的两个环节，通常会同时被调动。",
+      "sourceIds": [
+        "flow",
+        "heart"
+      ]
+    },
+    {
+      "question": "静息心率多少算正常？",
+      "answer": "静息心率存在年龄和个体差异，不同来源给出的参考范围也不同。本文不提供个人判断标准；如果静息心率让你担心，应结合测量条件和身体状况咨询医生。",
+      "sourceIds": [
+        "pulse"
+      ]
+    },
+    {
+      "question": "经常爬楼会让心跳变慢吗？",
+      "answer": "规律的身体活动可以改善心肺的工作效率，长期坚持的人在做同样活动时往往感觉更轻松。但这是长期适应，不适合用一两次爬楼后的心率去衡量。",
+      "sourceIds": [
+        "activity"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "key": "chain",
+      "diagram": "stairs-heart",
+      "alt": "示意图：爬楼时腿部肌肉需要更多氧气，心脏加快跳动把含氧血液送到肌肉，呼吸同时加快以在肺里完成气体交换。",
+      "caption": "爬楼时，肌肉、心脏和肺在同一条链路上一起被调动。",
+      "simplification": "图为简化示意，不是解剖图，也未按真实比例绘制。图中省略了神经与激素调节、血管舒缩等环节；箭头不表示血流速度或方向细节。",
+      "sourceIds": [
+        "heart",
+        "flow"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    },
+    {
+      "id": "lung",
+      "title": "肺"
+    }
+  ],
+  "organ": "心脏 · 肺 · 骨骼肌",
+  "version": 1,
+  "updatedAt": "2026-10-27",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解运动时心率与呼吸变化一般机制的一般成年读者。",
+  "limitations": "不提供个人心率正常范围、运动处方、心脏疾病判断或就医建议；运动中如出现胸痛、晕厥等不适，应及时寻求医疗帮助。",
+  "references": [
+    {
+      "id": "heart",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How the Heart Works — The Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart",
+      "scope": "心脏泵血、血液运输氧气与营养物质、电活动控制心率与节律",
+      "locator": "The heart is an organ about the size of your fist…; Your heart's electrical system controls the rate and rhythm of your heartbeat",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "flow",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How Blood Flows through the Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart/blood-flow",
+      "scope": "右心把血液送往肺、肺加氧后回到左心、左心室产生高压泵向全身；瓣膜控制方向",
+      "locator": "How Blood Flows through the Heart — Adding oxygen to blood; Heart valves",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lungs",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "How the Lungs Work — The Lungs",
+      "url": "https://www.nhlbi.nih.gov/health/lungs",
+      "scope": "呼吸时氧气进入血液、二氧化碳排出的气体交换过程；大脑根据身体需要调节呼吸频率",
+      "locator": "The Lungs — When you inhale (breathe in), air enters your lungs…; Your brain controls your breathing rate",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "activity",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Physical Activity and Your Heart",
+      "url": "https://www.nhlbi.nih.gov/health/heart/physical-activity",
+      "scope": "身体活动的定义、对心脏和肺的益处",
+      "locator": "What Is Physical Activity?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "pulse",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Pulse",
+      "url": "https://medlineplus.gov/ency/article/003399.htm",
+      "scope": "脉搏测量的用途、运动后脉搏提供的信息、静息心率的年龄差异",
+      "locator": "Why the Test is Performed; Normal Results",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "heart",
+    "activity"
+  ],
+  "tipSourceIds": [
+    "pulse"
+  ]
+}

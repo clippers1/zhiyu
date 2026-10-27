@@ -12,9 +12,216 @@
     "LDL-C / HDL-C",
     "甘油三酯"
   ],
+  "searchAliases": [
+    "血脂检查",
+    "胆固醇",
+    "总胆固醇",
+    "低密度脂蛋白",
+    "高密度脂蛋白",
+    "甘油三酯",
+    "LDL",
+    "HDL",
+    "TG",
+    "TC",
+    "cholesterol"
+  ],
   "number": "03",
+  "format": "article",
   "featured": true,
   "desc": "脂类需要搭乘脂蛋白在血液中运输。胆固醇参与细胞膜和激素的合成；但过多的低密度脂蛋白胆固醇会增加动脉粥样硬化风险。",
+  "sections": [
+    {
+      "title": "血脂不是一种脂肪，而是几辆运输车",
+      "short": "几辆运输车",
+      "paragraphs": [
+        {
+          "text": "胆固醇和甘油三酯都不溶于水，没法自己在血液里漂浮。它们必须被包装进脂蛋白——由脂类和蛋白质组成的小颗粒——才能随血液运输到全身。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "脂蛋白并不是同一种颗粒。按密度和蛋白质含量的不同，它们被分成几类，各自负责不同的运输任务。化验单上的项目名，往往就直接对应其中某一类。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "所以化验单上的「血脂」，测的不是某一种脂肪，而是这些运输车各自携带的胆固醇和甘油三酯的量。不同的项目，看的是不同车队。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "胆固醇本身是身体需要的物质，参与细胞膜等结构的构成；问题不在于「有没有」，而在于它在血液里以什么形式、有多少。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "理解这一点，比记住「好」「坏」两个标签更有用：LDL 和 HDL 都是脂蛋白，区别在于它们主要负责把胆固醇往哪个方向运。",
+          "sourceIds": [
+            "chol"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "LDL 与 HDL：方向不同的两类运输",
+      "short": "LDL 与 HDL",
+      "paragraphs": [
+        {
+          "text": "低密度脂蛋白（LDL）把胆固醇运送到身体各处的组织。它常被叫作「坏胆固醇」，但这个叫法容易让人误解：它并不是坏东西，而是数量过多、在血管壁堆积时与风险相关。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "高密度脂蛋白（HDL）参与把胆固醇运回肝脏处理。它常被叫作「好胆固醇」，但这不意味着越高越好，也不意味着只看它一项就够。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "高水平的 LDL 胆固醇可能在血管壁逐渐堆积，形成斑块，使血流通道变窄。这个过程是长期、缓慢的，不会在某一天突然出现。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "把 LDL 和 HDL 放在一起看，才能理解这张单子在描述什么：一边是运出去的量，一边是运回来的量。",
+          "sourceIds": [
+            "lipids"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "甘油三酯是另一种存法",
+      "short": "甘油三酯",
+      "paragraphs": [
+        {
+          "text": "甘油三酯是身体储存能量的主要形式。它和胆固醇不是一回事：胆固醇用于构建结构，甘油三酯用于储能。",
+          "sourceIds": [
+            "lipids"
+          ]
+        },
+        {
+          "text": "因为与能量储存有关，甘油三酯的水平对近期饮食、体重和活动情况比较敏感。一次大餐之后的读数，和空腹状态下本来就可能不同。",
+          "sourceIds": [
+            "lipids"
+          ]
+        },
+        {
+          "text": "总胆固醇（TC）则是各类脂蛋白所携带胆固醇的总和。它是一个总数，所以单看它很难知道具体是哪一类运输出了问题。",
+          "sourceIds": [
+            "lipids"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "参考区间不等于个人目标",
+      "short": "参考区间",
+      "paragraphs": [
+        {
+          "text": "化验单上的参考区间来自特定人群的统计结果。它描述的是「多数健康人落在哪里」，而不是「你的目标应该是多少」。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "检测方法也会带来差别：同一个人在不同实验室、用不同仪器测出的数值可能略有不同。这属于测量本身的差异，不一定代表身体状况发生了变化。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "对血脂来说，个人目标往往还要结合年龄、家族史、吸烟、血压、血糖等因素综合判断。同样的 LDL 数值，放在不同的人身上，意义可能不同。",
+          "sourceIds": [
+            "chol"
+          ]
+        },
+        {
+          "text": "这也解释了为什么报告单上会出现「请结合临床」这类提示：参考区间只提供了一个起点，不是结论。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "一张血脂单的阅读顺序",
+      "short": "阅读顺序",
+      "paragraphs": [
+        {
+          "text": "先看这一组项目是否齐全：通常包括总胆固醇、LDL、HDL 和甘油三酯。缺项时，对整体的判断会受到限制。",
+          "sourceIds": [
+            "lipids",
+            "chol"
+          ]
+        },
+        {
+          "text": "再看 LDL，它是目前讨论最多的一项；然后看 HDL 和甘油三酯，它们提供补充信息。单看任何一项，都容易得出片面结论。",
+          "sourceIds": [
+            "chol",
+            "lipids"
+          ]
+        },
+        {
+          "text": "最后确认这份报告对应的采样条件（是否空腹、距上次进食多久）和参考区间来源。本文只解释项目名称与关系，不解读个人数值，也不提供饮食或用药建议。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "如果同一份报告里既有计算值又有直接测量值，可以留意报告注明的计算方法。不同方法之间的数字不一定要完全一致，理解这一点能减少不必要的困惑。",
+          "sourceIds": [
+            "lipids"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "LDL 和 HDL 到底哪个更重要？",
+      "answer": "两者回答不同问题：LDL 与胆固醇向组织运输及血管壁堆积相关，HDL 参与把胆固醇运回肝脏。解读时需要放在一起看，并综合甘油三酯和其他风险因素，不能只挑一项。",
+      "sourceIds": [
+        "chol",
+        "lipids"
+      ]
+    },
+    {
+      "question": "查血脂需要空腹吗？",
+      "answer": "要求因检查项目和机构而异。是否空腹、空腹多久会影响甘油三酯等项目的读数，具体准备方式应以开具检查的机构说明为准。",
+      "sourceIds": [
+        "lab-results"
+      ]
+    },
+    {
+      "question": "为什么报告上的 LDL 写着「计算值」？",
+      "answer": "LDL 有时是根据总胆固醇、HDL 和甘油三酯计算出来的，有时是直接测量的。两种方式都可以提供参考，但计算值在甘油三酯很高时可能不够准确，报告中通常会注明采用的方法。",
+      "sourceIds": [
+        "lipids"
+      ]
+    },
+    {
+      "question": "血脂在参考区间内就没事吗？",
+      "answer": "不能这样推断。参考区间来自一般人群，个人目标还要结合整体心血管风险。数值在区间内也不代表可以忽略吸烟、血压、血糖等其他因素。",
+      "sourceIds": [
+        "lab-results",
+        "chol"
+      ]
+    },
+    {
+      "question": "吃素或很瘦，血脂就一定正常吗？",
+      "answer": "不能这样推断。血脂受遗传、体重、活动、其他疾病和药物等多种因素影响，饮食只是其中之一。体型和饮食习惯不能替代实际检测。",
+      "sourceIds": [
+        "chol"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "低密度脂蛋白胆固醇（LDL-C）",
@@ -27,7 +234,7 @@
       "name": "高密度脂蛋白胆固醇（HDL-C）",
       "text": "参与把多余胆固醇带回肝脏，常被叫作“好胆固醇”。解读时仍要同时看 LDL-C、甘油三酯和个人整体风险。",
       "sourceIds": [
-        "lipids"
+        "chol"
       ]
     },
     {
@@ -44,7 +251,26 @@
     "细胞利用与储存",
     "多余胆固醇回到肝脏"
   ],
+  "chainSourceIds": [
+    "chol"
+  ],
   "tip": "化验单的参考区间不一定等于个人治疗目标。是否需要干预，通常还要看年龄、吸烟、血压、糖尿病和既往病史等。",
+  "figures": [
+    {
+      "key": "transport",
+      "diagram": "lipid-transport",
+      "alt": "示意图：脂蛋白把胆固醇和甘油三酯运出肝脏，LDL 把胆固醇送往组织，HDL 参与把胆固醇运回肝脏，甘油三酯作为能量储存形式。",
+      "caption": "同一批脂类，由不同运输车按不同方向运送。",
+      "simplification": "图为运输方向示意，省略了多种脂蛋白亚类、酶和受体环节，也未按真实比例绘制；箭头不表示数量或速度。",
+      "sourceIds": [
+        "chol"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "肝脏 · 血管",
   "relatedOrgans": [
     {
@@ -54,26 +280,56 @@
   ],
   "kind": "indicator",
   "category": "metabolism",
-  "version": 1,
-  "updatedAt": "2026-09-18",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解血脂各项目含义、脂蛋白运输关系与参考区间限制的一般成年读者。",
+  "limitations": "不提供血脂目标值、心血管风险分级、饮食或用药处方，也不解释个人检查结果；儿童、孕期及特殊人群应使用对应的参考信息。",
   "references": [
     {
+      "id": "chol",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Blood Cholesterol",
+      "url": "https://www.nhlbi.nih.gov/health/blood-cholesterol",
+      "scope": "胆固醇的作用、脂蛋白运输、LDL 与 HDL 的分工",
+      "locator": "What is blood cholesterol?; Lipoproteins",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
       "id": "lipids",
-      "publisher": "NLM · MedlinePlus",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
       "title": "Cholesterol Levels",
       "url": "https://medlineplus.gov/lab-tests/cholesterol-levels/",
-      "scope": "LDL、HDL、总胆固醇、甘油三酯及综合风险评估",
-      "accessedAt": "2026-09-18",
+      "scope": "血脂项目组成、LDL 计算值与直接测量、甘油三酯与总胆固醇",
+      "locator": "What is a cholesterol test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源、检测方法差异与结果解释限制",
+      "locator": "What is a reference range?; What can affect my results?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
   ],
   "descriptionSourceIds": [
+    "chol",
     "lipids"
   ],
   "tipSourceIds": [
-    "lipids"
+    "chol"
   ]
 }

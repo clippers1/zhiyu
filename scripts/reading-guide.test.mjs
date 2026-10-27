@@ -11,13 +11,37 @@ test('quick reading and questions reuse published statements verbatim, including
     assert.equal(guide.concept.text, content.desc);
     assert.equal(guide.reminder.text, content.tip);
     assert.deepEqual(guide.concept.sourceIds, content.descriptionSourceIds);
-    assert.equal(guide.questions.length, content.metrics.length);
-    guide.questions.forEach((question, index) => {
-      assert.equal(question.answer.text, content.metrics[index].text);
-      assert.deepEqual(question.answer.sourceIds, content.metrics[index].sourceIds);
-    });
+    if (content.faq?.length) {
+      // Long-form articles publish their own questions; the guide must use them
+      // verbatim rather than inventing "如何理解…" from the metric list.
+      assert.equal(guide.questions.length, content.faq.length);
+      guide.questions.forEach((question, index) => {
+        assert.equal(question.question, content.faq[index].question);
+        assert.equal(question.answer.text, content.faq[index].answer);
+        assert.deepEqual(question.answer.sourceIds, content.faq[index].sourceIds);
+      });
+      assert.ok(guide.questions.every(question => !/^如何理解/.test(question.question)));
+    } else {
+      assert.equal(guide.questions.length, content.metrics.length);
+      guide.questions.forEach((question, index) => {
+        assert.equal(question.answer.text, content.metrics[index].text);
+        assert.deepEqual(question.answer.sourceIds, content.metrics[index].sourceIds);
+      });
+    }
     assert.equal(JSON.stringify(content), before);
   }
+});
+
+test('faq entries with unknown citations are dropped instead of shown without a source', () => {
+  const content = {
+    kind: 'indicator', references: [{ id: 'known' }], desc: 'd', descriptionSourceIds: ['known'],
+    faq: [
+      { question: '有来源的问题？', answer: 'a', sourceIds: ['known'] },
+      { question: '无来源的问题？', answer: 'b', sourceIds: ['missing'] },
+      { question: '空来源的问题？', answer: 'c', sourceIds: [] },
+    ],
+  };
+  assert.deepEqual(readingGuide(content).questions.map(item => item.question), ['有来源的问题？']);
 });
 
 test('missing or unknown citations do not produce unsourced shortcuts; non-indicator records are ignored', () => {

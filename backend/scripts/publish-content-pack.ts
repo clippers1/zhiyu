@@ -15,11 +15,11 @@ if (!publishAll && !requested.length) throw new Error('Choose content ids or use
 const bundledContent = path.resolve('public/content');
 const contentDir = process.env.SEED_CONTENT_DIR || (existsSync(bundledContent) ? bundledContent : path.resolve('../public/content'));
 
-type Pack = { kind: 'indicator' | 'organ'; body: any };
+type Pack = { kind: 'indicator' | 'organ' | 'story'; body: any };
 
 async function loadPacks(): Promise<Pack[]> {
   const packs: Pack[] = [];
-  for (const kind of ['indicator', 'organ'] as const) {
+  for (const kind of ['indicator', 'organ', 'story'] as const) {
     for (const file of await readdir(path.join(contentDir, kind))) {
       if (!file.endsWith('.json')) continue;
       const body = JSON.parse(await readFile(path.join(contentDir, kind, file), 'utf8'));
@@ -53,6 +53,23 @@ function validatePack({ kind, body }: Pack) {
   }
   const groups = [body.descriptionSourceIds, ...(body.metrics || []).map((item: any) => item.sourceIds)];
   if (kind === 'indicator') groups.push(body.chainSourceIds, body.tipSourceIds);
+  if (kind === 'story') groups.push(body.tipSourceIds);
+  const longForm = kind === 'story' || body.format === 'article';
+  if (longForm) {
+    // Same minimums as scripts/content.test.mjs: a page that only restates its
+    // own summary is not publishable as a long-form article.
+    if (!Array.isArray(body.sections) || body.sections.length < 4) throw new Error(`${body.id}: long-form content needs at least 4 sections.`);
+    if (!Array.isArray(body.faq) || body.faq.length < 4) throw new Error(`${body.id}: long-form content needs at least 4 FAQ entries.`);
+    if (!Array.isArray(body.figures) || !body.figures.length) throw new Error(`${body.id}: long-form content needs at least one figure.`);
+    const chinese = (value: string) => (String(value || '').match(/[\u4e00-\u9fff]/g) || []).length;
+    const bodyText = body.sections.flatMap((section: any) => section.paragraphs || []).reduce((sum: number, paragraph: any) => sum + chinese(paragraph.text), 0);
+    if (bodyText < 900) throw new Error(`${body.id}: long-form body has ${bodyText} Chinese characters; at least 900 required.`);
+    for (const section of body.sections) {
+      if (!Array.isArray(section.paragraphs) || section.paragraphs.length < 2) throw new Error(`${body.id}: each section needs at least two paragraphs.`);
+      groups.push(...section.paragraphs.map((paragraph: any) => paragraph.sourceIds));
+    }
+    for (const item of body.faq) groups.push(item.sourceIds);
+  }
   for (const group of groups) {
     if (!Array.isArray(group) || !group.length || group.some(id => !sourceIDs.has(id))) throw new Error(`${body.id}: every key section must cite an existing source.`);
   }
@@ -129,8 +146,8 @@ try {
       title: body.title || body.name,
       subtitle: body.subtitle || body.headline,
       english: body.english || body.en || '',
-      question: kind === 'indicator' ? (body.question || '') : '',
-      questionAnswer: kind === 'indicator' ? (body.questionAnswer || '') : '',
+      question: kind === 'organ' ? '' : (body.question || ''),
+      questionAnswer: kind === 'organ' ? '' : (body.questionAnswer || ''),
       category: body.category,
       aliases: [...(body.searchAliases || []), ...(body.tags || [])].join(' '),
       tags: (body.tags || []).map((text: string) => ({ text })),
@@ -138,8 +155,17 @@ try {
       limitations: body.limitations,
       scopeConfirmed: true,
       contentRisk: body.contentRisk,
+      format: kind === 'story' ? 'article' : (body.format || 'entry'),
       learning: body.learning || null,
       figure: body.figure || null,
+      sections: (body.sections || []).map((section: any) => ({
+        title: section.title,
+        short: section.short || '',
+        figure: section.figure || '',
+        paragraphs: (section.paragraphs || []).map((paragraph: any) => ({ text: paragraph.text, sourceKeys: keys(paragraph.sourceIds) })),
+      })),
+      faq: (body.faq || []).map((item: any) => ({ question: item.question, answer: item.answer, sourceKeys: keys(item.sourceIds) })),
+      figures: body.figures || null,
       description: body.desc || body.text,
       descriptionSourceKeys: keys(body.descriptionSourceIds || body.references.map((source: any) => source.id)),
       metrics: (body.metrics || []).map((item: any) => ({ name: item.name, text: item.text, sourceKeys: keys(item.sourceIds) })),

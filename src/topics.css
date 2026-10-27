@@ -1,31 +1,169 @@
-.topic-section { margin: 36px 0; }
-.topic-section > h2 { font-size: 24px; margin-bottom: 10px; }
-.topic-section > p, .topic-heading > p, .topic-note { color: var(--zc-ink-3); line-height: 1.8; }
-.topic-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
-.topic-cards > a { padding: 24px; box-shadow: var(--zc-shadow); border-radius: 20px; background: var(--zc-soft); color: inherit; text-decoration: none; }
-.topic-cards > a:hover { border-color: #6c8d6c; background: #ecf7e8; }
-.topic-cards span { font-size: 12px; color: #59745c; }
-.topic-cards h2, .topic-cards h3 { font-size: 21px; margin: 14px 0 8px; }
-.topic-cards p { font-size: 14px; line-height: 1.7; color: var(--zc-ink-3); }
-.topic-cards b { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 18px; }
-.topic-reader { max-width: 780px; margin: 32px auto 56px; }
-.topic-heading { margin: 30px 0; }
-.topic-heading h1 { font-size: clamp(26px, 5vw, 38px); line-height: 1.4; margin: 16px 0; }
-.topic-steps { list-style: none; padding: 0; margin: 26px 0; }
-.topic-steps li { display: flex; gap: 18px; padding: 24px 0; border-top: 1px solid #d9e6d8; }
-.topic-number { flex-shrink: 0; color: #5e955e; font-size: 23px; font-weight: 600; }
-.topic-steps h2 { font-size: 20px; margin: 0 0 10px; }
-.topic-steps a { color: inherit; text-decoration: none; }
-.topic-steps a:hover { text-decoration: underline; }
-.topic-steps p { color: var(--zc-ink-3); line-height: 1.8; margin: 0 0 8px; }
-.topic-steps small { color: #786c53; }
-.topic-followup { margin: 26px 0; padding: 22px; background: var(--zc-soft); box-shadow: var(--zc-shadow); border-radius: 16px; }
-.topic-followup h2 { margin: 0 0 12px; font-size: 20px; }
-.topic-followup p { color: var(--zc-ink-3); line-height: 1.7; }
-.topic-followup .text-link { display: flex; width: fit-content; margin-top: 12px; }
-@media (max-width: 768px) {
-  .topic-cards { grid-template-columns: 1fr; }
-  .topic-cards > a { padding: 20px; }
-  .topic-reader { margin: 24px 0 40px; }
-  .topic-steps li { gap: 12px; }
+/* 专题阅读路线 · 纸本索引 */
+
+.topic-reader {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: var(--s-6);
+}
+.topic-reader > .text-link {
+  margin-top: var(--s-2);
+}
+.topic-heading {
+  margin: var(--s-6) 0 var(--s-8);
+}
+.topic-heading .overline {
+  display: block;
+}
+.topic-heading h1 {
+  margin-top: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  font-weight: 600;
+  line-height: 1.44;
+}
+.topic-heading p {
+  margin-top: var(--s-2);
+  font-size: var(--t-15);
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.topic-heading p:last-child {
+  color: var(--ink-3);
+  font-size: var(--t-13);
+}
+.topic-heading .review-notice {
+  font-size: var(--t-13);
+  color: var(--clay);
+}
+.topic-note {
+  margin-top: var(--s-4);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.topic-cards {
+  margin-top: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+.topic-cards > a {
+  display: block;
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+}
+.topic-cards > a > span:first-child {
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.topic-cards h2 {
+  margin-top: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-20);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.topic-cards h2:hover {
+  color: var(--accent-deep);
+}
+.topic-cards p {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.topic-cards > a > span:nth-last-child(2) {
+  display: inline-block;
+  margin-top: var(--s-2);
+  font-size: var(--t-11);
+  color: var(--clay);
+}
+.topic-cards b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  font-weight: 400;
+  color: var(--accent);
+}
+.topic-cards > a:hover b {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.topic-steps {
+  list-style: none;
+  margin: var(--s-6) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.topic-steps li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+}
+.topic-number {
+  padding-top: 3px;
+  font-family: var(--serif);
+  font-size: var(--t-15);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.topic-steps h2 {
+  font-family: var(--serif);
+  font-size: var(--t-17);
+  font-weight: 600;
+  line-height: 1.55;
+}
+.topic-steps a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.topic-steps a:hover {
+  color: var(--accent-deep);
+}
+.topic-steps p {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.topic-steps small {
+  display: block;
+  margin-top: var(--s-1);
+  font-size: var(--t-11);
+  color: var(--clay);
+}
+/* End-of-page route block on organ pages; article closings use the hairline
+   section defined in reading.css so they do not stack two accent-wash blocks. */
+.organ-page > .topic-followup {
+  margin: var(--s-8) 0;
+  padding: var(--s-4);
+  border-radius: var(--r-input);
+  background: var(--accent-wash);
+}
+.topic-followup h2 {
+  font-size: var(--t-20);
+}
+.topic-followup h2 + p {
+  margin-top: var(--s-1);
+}
+.topic-followup .text-link {
+  display: flex;
+  width: fit-content;
+  margin-top: var(--s-1);
+}
+.topic-reader > .text-link:last-child {
+  margin-bottom: var(--s-8);
+}
+
+@media (min-width: 769px) {
+  .topic-reader {
+    padding-top: var(--s-12);
+  }
+  .topic-heading h1 {
+    font-size: var(--t-30);
+  }
 }

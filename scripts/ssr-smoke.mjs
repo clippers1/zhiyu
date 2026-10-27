@@ -17,7 +17,7 @@ try {
     if (path.includes('glucose')) {
       await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
       await expect(noJS.locator('.detail-intro')).toContainText('葡萄糖');
-      await expect(noJS.locator('.source-list a')).toHaveCount(4);
+      await expect(noJS.locator('.source-list a')).toHaveCount(7);
       await expect(noJS.getByRole('link', { name: '探索器官', exact: true })).toHaveAttribute('href', '/organs/liver');
     }
     if (path.includes('liver')) await expect(noJS.locator('.organ-description')).toContainText('处理吸收的营养');
@@ -45,7 +45,7 @@ try {
   await expect(page.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
   // H02 起收藏库入口随基线移除；/saved 由首页兼容渲染，旧链接不 404。
   await page.goto(`${base}/saved`, { waitUntil: 'networkidle' });
-  await expect(page.getByRole('heading', { name: /看懂体检单/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /从一张体检单读起/ })).toBeVisible();
   await page.goto(`${base}/article/glucose`, { waitUntil: 'networkidle' });
   await page.getByRole('link', { name: '查看参考资料 2', exact: true }).first().click();
   await expect(page.locator('#article-source-tests')).toBeInViewport();

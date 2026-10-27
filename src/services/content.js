@@ -105,18 +105,28 @@ export function createContentRepository({
       return page;
     },
     async get(kind, id, { signal, refresh = false } = {}) {
-      if (!["indicator", "organ"].includes(kind) || !/^[a-z0-9-]+$/.test(id))
+      // "article" is the shared /article/:id namespace: a long-form indicator or
+      // a story. The catalog already knows which one an id is, so the reader
+      // never has to probe a wrong path and log a 404.
+      if (!["indicator", "organ", "story", "article"].includes(kind) || !/^[a-z0-9-]+$/.test(id))
         throw new Error("内容地址不正确。");
-      const content = apiBase
-        ? await read(
-            `${apiBase.replace(/\/$/, "")}/content/${kind}/${encodeURIComponent(id)}`,
-            signal,
-            refresh,
-          )
-        : refresh ? await read(`${assetBase}content/${kind}/${id}.json`, signal, true) : await cached(`${assetBase}content/${kind}/${id}.json`);
+      let resolved = kind;
+      if (kind === "article" && !apiBase) {
+        // The catalog was already loaded for the page; use it to pick the path
+        // instead of probing both kinds and logging a 404 on the wrong one.
+        const items = (await cached(`${assetBase}content/index.json`)).items || [];
+        resolved = items.find(item => item.id === id && ["indicator", "story"].includes(item.kind))?.kind;
+        if (!resolved) throw new Error("这篇内容暂时不存在。");
+      }
+      const url = apiBase
+        ? `${apiBase.replace(/\/$/, "")}/content/${kind}/${encodeURIComponent(id)}`
+        : `${assetBase}content/${resolved}/${id}.json`;
+      // refresh keeps its no-store semantics for share cards: re-check the
+      // current publication rather than reusing what the page already has.
+      const content = refresh ? await read(url, signal, true) : await cached(url);
       if (
         content.id !== id ||
-        content.kind !== kind ||
+        !(kind === "article" ? ["indicator", "story"] : [kind]).includes(content.kind) ||
         !Array.isArray(content.references)
       )
         throw new Error("内容记录不完整。");

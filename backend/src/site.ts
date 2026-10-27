@@ -35,9 +35,15 @@ export async function buildPage(pathname: string) {
   }
   let detail: any = null;
   if (route.page === 'article' || (route.page === 'topics' && route.id)) {
-    detail = await load('get', ['indicator', route.id]);
+    // /article/:id serves indicators and stories; /topics/:id is indicator-only.
+    detail = await load('get', [route.page === 'article' ? 'article' : 'indicator', route.id]);
     if (!detail) return null;
-    await load('list', [{ kind: 'organ', ids: (detail.relatedOrgans || []).map((item: any) => item.id), limit: 24 }]);
+    await Promise.all([
+      load('list', [{ kind: 'organ', ids: (detail.relatedOrgans || []).map((item: any) => item.id), limit: 24 }]),
+      // The next-entry link is part of the readable page, so its catalog order
+      // must be present in the server-rendered HTML as well.
+      route.page === 'article' ? load('list', [{ kind: detail.kind === 'story' ? 'story' : 'indicator', limit: 24 }]) : Promise.resolve(),
+    ]);
   } else if (route.page === 'topics') {
     await load('list', [{ kind: 'indicator', limit: 12 }]);
   } else if (route.page === 'organs') {
@@ -51,6 +57,7 @@ export async function buildPage(pathname: string) {
     await Promise.all([
       load('list', [{ kind: 'indicator', limit: 24 }]),
       load('list', [{ kind: 'organ', limit: 24 }]),
+      load('list', [{ kind: 'story', limit: 24 }]),
     ]);
   } else if (route.page === 'indicators') {
     await load('list', [{ kind: 'indicator', query: '', category: '', cursor: '0', limit: 6 }]);
@@ -64,7 +71,7 @@ export const loadPage = cache(buildPage);
 
 export function pageMetadata(page: Awaited<ReturnType<typeof buildPage>>): Metadata {
   if (!page) return { title: '内容不存在或已撤回 · 知愈', robots: { index: false, follow: false } };
-  const titles: Record<string, string> = { map: '知愈 · 让健康变得好懂', indicators: '体检项目 · 知愈', topics: '从体检单开始 · 知愈', saved: '我的收藏 · 知愈' };
+  const titles: Record<string, string> = { map: '知愈 · 让健康变得好懂', indicators: '体检项目 · 知愈', topics: '从体检单开始 · 知愈', saved: '发现 · 知愈' };
   const title = page.route.page === 'topics' && page.route.id ? `认识${page.detail.title}的阅读路线 · 知愈` : page.detail ? `${page.detail.title || page.detail.name}：${page.detail.subtitle || page.detail.headline} · 知愈` : titles[page.route.page];
   const description = `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}${page.detail?.subtitle || page.detail?.headline || '用有来源的图文和互动认识体检指标、器官与身体之间的联系。'}内容用于健康科普，不替代医生诊断。`;
   const index = page.channel === 'official' && page.route.page !== 'saved';

@@ -3,6 +3,7 @@ import * as migration_20260919_042202_beta3_feedback_maintenance from './2026091
 import * as migration_20260919_145935_beta13_source_learning from './20260919_145935_beta13_source_learning';
 import * as migration_20260923_h02_question_titles from './20260923_h02_question_titles';
 import * as migration_20260923_h04_indicator_figure from './20260923_h04_indicator_figure';
+import * as migration_20261027_longform_story from './20261027_longform_story';
 
 export const migrations = [
   {
@@ -29,5 +30,10 @@ export const migrations = [
     up: migration_20260923_h04_indicator_figure.up,
     down: migration_20260923_h04_indicator_figure.down,
     name: '20260923_h04_indicator_figure'
+  },
+  {
+    up: migration_20261027_longform_story.up,
+    down: migration_20261027_longform_story.down,
+    name: '20261027_longform_story'
   },
 ];

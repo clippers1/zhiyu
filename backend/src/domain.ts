@@ -49,32 +49,90 @@ function visualLearning(value: any, sourceKeys: Set<string>) {
 // only sources already present in this article, and explain its simplification.
 // Unverified media never reaches the published snapshot: absent field means no
 // figure, so pages keep a text-only reading path.
-function figureBlock(value: any, sourceKeys: Set<string>) {
+function figureBlock(value: any, sourceKeys: Set<string>, fallbackKey = 'legacy') {
   if (value == null) return null;
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail('图解内容格式不正确。');
   const text = (input: any, label: string, max: number) => {
     if (typeof input !== 'string' || !input.trim() || input.length > max) fail(`图解的${label}不完整。`);
     return input.trim();
   };
-  if (typeof value.src !== 'string' || !/^\/media\/[a-z0-9-]+\.png$/.test(value.src)) fail('图解图片路径不正确，仅允许站内 /media/ 下的 PNG。');
+  const diagram = typeof value.diagram === 'string' ? value.diagram : null;
+  if (diagram) {
+    if (!/^[a-z0-9-]+$/.test(diagram)) fail('自制示意图的标识只能使用英文小写、数字和连字符。');
+  } else if (typeof value.src !== 'string' || !/^\/media\/[a-z0-9-]+\.png$/.test(value.src)) {
+    fail('图解图片路径不正确，仅允许站内 /media/ 下的 PNG 或已登记的站内示意图标识。');
+  }
   const sourceIds = Array.isArray(value.sourceIds) && value.sourceIds.length && value.sourceIds.every((key: any) => typeof key === 'string' && sourceKeys.has(key))
     ? [...new Set(value.sourceIds)] : null;
   if (!sourceIds) fail('图解引用了不存在的来源编号。');
   const attribution = value.attribution;
   if (!attribution || typeof attribution !== 'object' || Array.isArray(attribution)) fail('图解缺少素材权利说明。');
-  const attributionOut = {
-    name: text(attribution.name, '素材名称', 120), url: text(attribution.url, '素材来源链接', 300),
-    license: text(attribution.license, '授权名称', 60), licenseUrl: text(attribution.licenseUrl, '授权链接', 300),
-  };
-  for (const key of ['url', 'licenseUrl'] as const) {
-    if (!/^https:\/\//.test(attributionOut[key])) fail(`图解的${key === 'url' ? '素材来源链接' : '授权链接'}必须使用 HTTPS。`);
+  const selfMade = attribution.kind === 'self-made';
+  const attributionOut: any = { kind: selfMade ? 'self-made' : 'third-party', name: text(attribution.name, '素材名称', 120) };
+  if (!selfMade) {
+    attributionOut.url = text(attribution.url, '素材来源链接', 300);
+    attributionOut.license = text(attribution.license, '授权名称', 60);
+    attributionOut.licenseUrl = text(attribution.licenseUrl, '授权链接', 300);
+    for (const key of ['url', 'licenseUrl'] as const) {
+      if (!/^https:\/\//.test(attributionOut[key])) fail(`图解的${key === 'url' ? '素材来源链接' : '授权链接'}必须使用 HTTPS。`);
+    }
   }
   return {
-    src: value.src, width: Number.isInteger(value.width) && value.width > 0 ? value.width : null,
-    height: Number.isInteger(value.height) && value.height > 0 ? value.height : null,
+    key: typeof value.key === 'string' && /^[a-z0-9-]+$/.test(value.key) ? value.key : fallbackKey,
+    ...(diagram ? { diagram } : {
+      src: value.src, width: Number.isInteger(value.width) && value.width > 0 ? value.width : null,
+      height: Number.isInteger(value.height) && value.height > 0 ? value.height : null,
+    }),
     alt: text(value.alt, '替代文本', 200), caption: text(value.caption, '图注', 300),
     simplification: text(value.simplification, '简化说明', 600), sourceIds, attribution: attributionOut,
   };
+}
+
+// A long-form page may carry several figures, each keyed so a section can name
+// the one it explains. A single malformed figure fails the whole snapshot
+// rather than silently dropping from the page.
+function figuresBlock(value: any, sourceKeys: Set<string>) {
+  if (value == null) return [];
+  if (!Array.isArray(value) || value.length > 6) fail('图解列表应为 1–6 项。');
+  const figures = value.map((figure: any) => figureBlock(figure, sourceKeys));
+  if (new Set(figures.map((figure: any) => figure.key)).size !== figures.length) fail('图解的 key 不可重复。');
+  for (const figure of figures) {
+    const known = figure.diagram || figure.src;
+    if (figures.filter((other: any) => (other.diagram || other.src) === known).length > 1) fail('同一张图不可在正文中重复登记。');
+  }
+  return figures;
+}
+
+// Long-form bodies: sections and FAQ answers each cite existing source keys.
+// Depths are bounded so a malformed pack cannot grow a snapshot without limit.
+function longForm(value: any, sourceKeys: Set<string>) {
+  const sectionsValue = value?.sections;
+  const faqValue = value?.faq;
+  if (sectionsValue == null && faqValue == null) return { sections: undefined, faq: undefined };
+  const keys = (input: any, label: string) => {
+    if (!Array.isArray(input) || !input.length || input.some(key => typeof key !== 'string' || !sourceKeys.has(key))) fail(`正文的${label}引用了不存在的来源编号。`);
+    return [...new Set(input)];
+  };
+  const max = (input: any, label: string) => {
+    if (typeof input !== 'string' || !input.trim() || input.length > 1200) fail(`正文的${label}不完整或过长。`);
+    return input.trim();
+  };
+  const sections = Array.isArray(sectionsValue) ? sectionsValue.map((section: any) => ({
+    title: max(section?.title, '小标题'),
+    short: section?.short?.trim() || undefined,
+    figure: section?.figure?.trim() || undefined,
+    paragraphs: (Array.isArray(section?.paragraphs) ? section.paragraphs : []).map((paragraph: any) => ({
+      text: max(paragraph?.text, '段落'), sourceIds: keys(paragraph?.sourceKeys ? splitKeys(paragraph.sourceKeys) : paragraph?.sourceIds, '段落'),
+    })),
+  })) : undefined;
+  if (sections && (!sections.length || sections.length > 12)) fail('长文应包含 1–12 个分节。');
+  if (sections?.some((section: any) => !section.paragraphs.length)) fail('长文的每个分节至少需要一段正文。');
+  const faq = Array.isArray(faqValue) ? faqValue.map((item: any) => ({
+    question: max(item?.question, '问题'), answer: max(item?.answer, '回答'),
+    sourceIds: keys(item?.sourceKeys ? splitKeys(item.sourceKeys) : item?.sourceIds, '回答'),
+  })) : undefined;
+  if (faq && faq.length > 20) fail('常见问题最多 20 条。');
+  return { sections, faq };
 }
 
 export async function snapshotArticle(req: PayloadRequest, articleID: number) {
@@ -91,17 +149,24 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
       sourceVersion: source.edition || '', sourceRecordID: source.id,
     };
   });
+  const long = longForm(article, new Set(references.map((reference: any) => reference.id)));
+  const figures = figuresBlock(article.figures, new Set(references.map((reference: any) => reference.id)));
   const common = {
     id: article.slug, kind: article.kind, category: article.category,
     version: 1, updatedAt: isoDate(article.updatedAt), reviewStatus: 'pending', references,
     applicability: article.applicability, limitations: article.limitations || '',
     contentRisk: article.contentRisk || 'clinical',
   };
-  const body = article.kind === 'indicator' ? {
-    ...common, title: article.title, english: article.english || '', subtitle: article.subtitle,
+  const articleFields = {
+    title: article.title, english: article.english || '', subtitle: article.subtitle,
     question: article.question || '', questionAnswer: article.questionAnswer || '',
     icon: article.icon, color: article.color, number: article.number || '',
     tags: (article.tags || []).map((t: any) => t.text),
+    sections: long.sections, faq: long.faq,
+    ...(figures.length ? { figures } : {}),
+  };
+  const body = article.kind === 'indicator' ? {
+    ...common, ...articleFields,
     desc: article.description, descriptionSourceIds: splitKeys(article.descriptionSourceKeys),
     metrics: (article.metrics || []).map((m: any) => ({ name: m.name, text: m.text, sourceIds: splitKeys(m.sourceKeys) })),
     chain: (article.chain || []).map((s: any) => s.text), chainSourceIds: splitKeys(article.chainSourceKeys),
@@ -109,6 +174,12 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
     organ: article.organLabel || '',
     relatedOrgans: (article.relatedOrgans || []).map((r: any) => ({ id: r.slug, title: r.title })),
     figure: figureBlock(article.figure, new Set(references.map((reference: any) => reference.id))),
+  } : article.kind === 'story' ? {
+    ...common, ...articleFields,
+    desc: article.description, descriptionSourceIds: splitKeys(article.descriptionSourceKeys),
+    tip: article.tip, tipSourceIds: splitKeys(article.tipSourceKeys),
+    organ: article.organLabel || '',
+    relatedOrgans: (article.relatedOrgans || []).map((r: any) => ({ id: r.slug, title: r.title })),
   } : {
     ...common, name: article.title, en: article.english || '', headline: article.subtitle,
     text: article.description, connection: article.organLabel || '',
@@ -118,14 +189,17 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
   };
   const summary = {
     id: article.slug, kind: article.kind, title: article.title, subtitle: article.subtitle,
-    question: article.kind === 'indicator' ? (article.question || '') : '',
-    questionAnswer: article.kind === 'indicator' ? (article.questionAnswer || '') : '',
+    question: article.kind === 'organ' ? '' : (article.question || ''),
+    questionAnswer: article.kind === 'organ' ? '' : (article.questionAnswer || ''),
     english: article.english || '', icon: article.icon, color: article.color,
     number: article.number || '', tags: (article.tags || []).map((t: any) => t.text),
     category: article.category, featured: Boolean(article.featured),
+    format: article.kind === 'story' ? 'article' : (article.format || 'entry'),
     referenceCount: references.length, sourceLabel: references[0]?.publisher || '',
     searchText: [article.title, article.subtitle, article.question || '', article.aliases || '', article.description,
-      ...(article.metrics || []).map((m: any) => `${m.name} ${m.text}`)].join(' '),
+      ...(article.metrics || []).map((m: any) => `${m.name} ${m.text}`),
+      ...(long.sections || []).flatMap((section: any) => [section.title, ...section.paragraphs.map((paragraph: any) => paragraph.text)]),
+      ...(long.faq || []).flatMap((item: any) => [item.question, item.answer])].join(' '),
   };
   // Last-modified time is operational metadata, not part of medical approval.
   const { updatedAt, ...medicalBody } = body;
@@ -147,6 +221,13 @@ export function validateForReview(snapshot: Awaited<ReturnType<typeof snapshotAr
     ...(article.metrics || []).map((m: any) => splitKeys(m.sourceKeys)),
     splitKeys(article.tipSourceKeys), splitKeys(article.chainSourceKeys),
   );
+  if (article.kind === 'story') groups.push(splitKeys(article.tipSourceKeys));
+  if (article.sections?.length || article.faq?.length) {
+    if (!article.sections?.length || !article.faq?.length) fail('图文长文需要同时提供分节正文和常见问题。');
+    groups.push(...(article.sections || []).flatMap((section: any) => section.paragraphs.map((paragraph: any) => splitKeys(paragraph.sourceKeys))));
+    groups.push(...(article.faq || []).map((item: any) => splitKeys(item.sourceKeys)));
+    if ((article.figures || []).length === 0) fail('图文长文至少需要一张图解。');
+  }
   if (groups.some(ids => ids.length === 0)) fail('关键知识点必须填写对应来源编号。');
 }
 

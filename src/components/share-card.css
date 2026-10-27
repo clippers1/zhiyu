@@ -1,15 +1,124 @@
-.share-card-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--zc-line); border-radius: 8px; background: var(--zc-soft); color: var(--zc-green-deep); font-size: 13px; }
-.article-share-entry { padding: 12px 24px; }
-.organ-bookmark .share-card-trigger { margin: 8px 0 0 10px; }
-.share-card-trigger:disabled { opacity: .5; }
-.share-card-modal { width: 100%; max-width: 540px; padding: 28px; }
-.share-card-modal h2 { margin: 8px 32px 12px 0; font-size: 23px; line-height: 1.6; }
-.share-card-note, .share-card-status, .share-card-message { font-size: 13px; color: var(--zc-ink-2); line-height: 1.8; }
-.share-card-preview { display: block; width: 100%; height: auto; border: 1px solid var(--zc-line); border-radius: 10px; }
-.share-card-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.share-card-actions a, .share-card-actions button, .share-card-refresh { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 14px; border: 1px solid var(--zc-line); border-radius: 8px; background: var(--zc-soft); color: var(--zc-green-deep); font-size: 13px; }
-.share-card-actions a { background: var(--zc-green-deep); color: #fff; }
-.share-card-link { display: block; font-size: 12px; color: var(--zc-ink-2); }
-.share-card-link input { width: 100%; min-width: 0; margin-top: 8px; padding: 12px; border: 1px solid var(--zc-line); border-radius: 6px; background: var(--zc-card); color: var(--zc-green-deep); }
-.share-card-modal [role="alert"] { padding: 12px; line-height: 1.8; color: var(--zc-warm); background: #f7eddb; border-radius: 8px; }
-@media (max-width: 600px) { .share-card-modal { padding: 22px 18px; } .article-share-entry { padding: 12px 18px; } }
+.share-card-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--t-13);
+}
+.share-card-trigger:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+.share-card-trigger:disabled {
+  opacity: .5;
+}
+.article-share-entry {
+  display: flex;
+}
+.organ-bookmark {
+  display: flex;
+}
+.share-card-modal {
+  width: 100%;
+  max-width: 540px;
+  padding: var(--s-8) var(--s-6) var(--s-6);
+}
+.share-card-modal h2 {
+  margin: var(--s-2) var(--s-8) var(--s-3) 0;
+  font-size: var(--t-24);
+  line-height: 1.5;
+}
+.share-card-note,
+.share-card-status,
+.share-card-message {
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.share-card-note {
+  margin-top: var(--s-2);
+  color: var(--ink-3);
+}
+.share-card-status {
+  margin-top: var(--s-2);
+  color: var(--clay);
+}
+.share-card-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--s-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-input);
+}
+.share-card-actions {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  margin-top: var(--s-3);
+}
+.share-card-actions a,
+.share-card-actions button,
+.share-card-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--t-13);
+}
+.share-card-actions a {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.share-card-actions a:hover {
+  background: var(--accent-deep);
+}
+.share-card-actions button:hover,
+.share-card-refresh:hover {
+  border-color: var(--accent);
+}
+.share-card-refresh {
+  margin-top: var(--s-3);
+}
+.share-card-link {
+  display: block;
+  margin-top: var(--s-3);
+  font-size: var(--t-13);
+  color: var(--ink-2);
+}
+.share-card-link input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin-top: var(--s-2);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--t-13);
+}
+.share-card-modal [role="alert"] {
+  padding: var(--s-3);
+  margin-top: var(--s-3);
+  border-left: 2px solid var(--clay);
+  border-radius: 0 var(--r-input) var(--r-input) 0;
+  background: var(--clay-wash);
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--clay);
+}
+@media (max-width: 600px) {
+  .share-card-modal { padding: var(--s-6) var(--s-4) var(--s-4); }
+}

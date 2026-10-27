@@ -1,5 +1,7 @@
 # 知愈：内容与多端架构
 
+> 本文以已实现系统和技术约束为主；下文对多端与扩容的可行性分析不构成产品立项。当前产品范围以 [产品蓝图](product-blueprint-2026.md) 为准。
+
 ## 当前实际完成的范围
 
 读者界面使用 React，完整部署由 Next.js 输出 HTML，Vite 保留离线演示。当前有 9 个指标专题、5 个器官专题；平台包含 Payload CMS + PostgreSQL、后台成员登录及正式/演示内容 API。没有读者账号、个人体检报告处理或真实医学审校记录。平台的实际流程与边界见 [内容平台说明](content-platform.md)。
@@ -27,7 +29,7 @@
 
 `GET /content?kind=indicator&query=血糖&category=metabolism&cursor=...&limit=6`
 
-可选参数：`kind`（indicator / organ）、`query`、`category`、`cursor`、`limit`、`featured=true`、`ids=glucose,pressure`。传入空 `ids=` 表示空收藏，必须返回零条，而不是全量数据。分类应根据内容类型返回，不能根据当前搜索结果任意丢失分类选项。
+可选参数：`kind`（indicator / organ）、`query`、`category`、`cursor`、`limit`、`featured=true`、`ids=glucose,pressure`。传入空 `ids=` 必须返回零条，而不是全量数据。分类应根据内容类型返回，不能根据当前搜索结果任意丢失分类选项。
 
 ```json
 {
@@ -73,11 +75,11 @@
 
 公众号文章适合承载精简图文并引导进入 H5/小程序，不能直接承载这套网页中的所有交互动画。公开知识页已有正文 HTML 和逐篇分享元信息，当前采用无缓存动态 SSR，SSG/ISR 暂缓。微信自定义分享卡片仍需按平台要求接入 JS-SDK；当前系统分享/复制链接仍只是链接分享，不代表已完成真实平台分享验收。
 
-最新规划将来源库、CMS 与医学审校流程提前，与移动端阅读体验并行推进，再扩展完整主题、公开页面预渲染和外部渠道。详见 [知识平台](knowledge-platform.md)、[渲染决策](rendering-and-routing.md) 与 [实施计划](roadmap.md)。现在没有生成 App 安装包、小程序工程、PWA 离线缓存或公众号接入。
+当前产品范围和交付顺序以 [产品蓝图](product-blueprint-2026.md) 为准；本文上述多端可行性分析不代表新增 App、小程序、公众号或页面预渲染已立项。公开页现采用动态 SSR，见 [公开页面渲染](public-rendering.md)；现在没有生成 App 安装包、小程序工程、PWA 离线缓存或公众号接入。
 
 ## 验证
 
 - `npm run test:content`：内容引用完整性、10,000 条合成摘要的筛选分页、远程适配器参数、失败重试。
-- `npm run test:ui`：启动 5173 开发服务后执行；检查桌面/移动端、来源定位、浏览器返回/刷新、收藏、搜索、分页、错误重试与按需请求。
+- `npm run test:ui`：启动 5173 开发服务后执行；检查桌面/移动端、来源定位、浏览器返回/刷新、发现页索引、搜索、分页、错误重试与按需请求。
 - `npm run build`：生产构建。
 - `npm run test:routes`：History 地址解析、错误路径及旧 Hash 链接转换。

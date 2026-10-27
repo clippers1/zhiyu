@@ -2,11 +2,114 @@ import React from "react";
 import { RouteLink } from "./RouteLink";
 import {
   ArrowRight,
-  BookOpen,
   ExternalLink,
   RefreshCw,
 } from "lucide-react";
+import { artworkFor } from "../services/artworks";
 import { contentTrust } from "../services/content-status";
+
+export function RunHead({ children, className = "" }) {
+  return <p className={`runhead ${className}`.trim()}>{children}</p>;
+}
+
+export function SectionHead({ id, title, action }) {
+  return (
+    <div className="section-head">
+      <h2 id={id}>{title}</h2>
+      {action}
+    </div>
+  );
+}
+
+export function IndexRow({ item, onOpen }) {
+  // A story's title and question are the same sentence; repeating it in the
+  // meta line reads like a duplication bug, so only the metadata is shown.
+  const heading = item.question || `认识${item.title}`;
+  const term = item.title.trim() === heading.trim() ? "" : item.title;
+  const meta = [term, item.english, Number.isFinite(item.referenceCount) && `${item.referenceCount} 份来源`].filter(Boolean);
+  return (
+    <RouteLink
+      page="article"
+      id={item.id}
+      className="index-row"
+      onNavigate={onOpen ? () => onOpen(item.id) : undefined}
+    >
+      <span className="index-number" aria-hidden="true">
+        {item.kind === "story" ? "长文" : item.number || "—"}
+      </span>
+      <div className="index-body">
+        <h3>{heading}</h3>
+        <p className="index-meta">{meta.join(" · ")}</p>
+      </div>
+      <span className="index-arrow" aria-hidden="true"><ArrowRight size={16} /></span>
+    </RouteLink>
+  );
+}
+
+export function BodyRow({ item, onOpen }) {
+  const artwork = artworkFor(item.id);
+  return (
+    <RouteLink
+      page="organs"
+      id={item.id}
+      className="body-row"
+      onNavigate={onOpen ? () => onOpen(item.id) : undefined}
+    >
+      <span className="body-thumb" aria-hidden="true">
+        {artwork
+          ? <img src={artwork.src} alt="" width={artwork.width} height={artwork.height} loading="lazy" decoding="async" />
+          : <span>{item.title.slice(0, 1)}</span>}
+      </span>
+      <span className="body-copy">
+        <b>{item.title}</b>
+        <span>
+          {item.subtitle}
+          {Number.isFinite(item.referenceCount) && ` · ${item.referenceCount} 份来源`}
+        </span>
+      </span>
+      <span className="body-arrow" aria-hidden="true"><ArrowRight size={16} /></span>
+    </RouteLink>
+  );
+}
+
+export function Caveat({ id, title, children }) {
+  return (
+    <div className="caveat" id={id}>
+      <b>{title}</b>
+      <p>{children}</p>
+    </div>
+  );
+}
+
+export function BoundaryNote({ trust, children }) {
+  return (
+    <section className="boundary-note" aria-label="内容边界">
+      <p><b>内容边界</b> · {children}</p>
+      {trust && <span className="stamp">{trust.short}</span>}
+    </section>
+  );
+}
+
+export function NextEntry({ item, onOpen }) {
+  if (!item) return null;
+  return (
+    <nav className="next-entry" aria-label="下一篇">
+      <span className="next-label">下一篇</span>
+      <RouteLink
+        page="article"
+        id={item.id}
+        className="next-link"
+        onNavigate={onOpen ? () => onOpen(item.id) : undefined}
+      >
+        <span>
+          <b>{item.question || `认识${item.title}`}</b>
+          <em>{item.number}{item.english ? ` · ${item.english}` : ""}</em>
+        </span>
+        <ArrowRight size={18} aria-hidden="true" />
+      </RouteLink>
+    </nav>
+  );
+}
 
 export function QuestionRow({ item, onOpen }) {
   return (
@@ -14,6 +117,7 @@ export function QuestionRow({ item, onOpen }) {
       className="question-row"
       onNavigate={() => onOpen(item.id)}
     >
+      <span className="question-number" aria-hidden="true">{item.number || "—"}</span>
       <span className="question-row-main">
         <h3>{item.question || `认识${item.title}`}</h3>
         <span className="question-row-term"><b>{item.title}</b>{item.english && <small>{item.english}</small>}</span>
@@ -21,12 +125,13 @@ export function QuestionRow({ item, onOpen }) {
         {item.match && <span className="search-match">匹配：{item.match}</span>}
       </span>
       <span className="question-row-meta">
-        {contentTrust(item).short} · {item.referenceCount} 份参考资料
+        {contentTrust(item).short} · {item.referenceCount} 份来源
         <ArrowRight size={16} aria-hidden="true" />
       </span>
     </RouteLink>
   );
 }
+
 export function LoadState({ loading, error, retry }) {
   if (loading)
     return (
@@ -47,6 +152,7 @@ export function LoadState({ loading, error, retry }) {
     );
   return null;
 }
+
 export function Pagination({ cursor, nextCursor, onChange }) {
   const hasPrevious = cursor !== "0";
   if (!hasPrevious && !nextCursor) return null;
@@ -62,6 +168,7 @@ export function Pagination({ cursor, nextCursor, onChange }) {
     </div>
   );
 }
+
 export function Citation({ ids = [], references, prefix }) {
   function jump(id) {
     document
@@ -85,18 +192,17 @@ export function Citation({ ids = [], references, prefix }) {
     </span>
   );
 }
+
 export function SourceReferences({ content, prefix = "source" }) {
   const trust = contentTrust(content);
   return (
-    <>
     <section
       className="source-panel"
       id={`${prefix}-panel`}
       aria-label="知识来源"
     >
       <div className="source-heading">
-        <BookOpen size={18} />
-        <h3>知识来源</h3>
+        <h2>知识来源</h2>
         <span>{content.references.length} 份参考资料</span>
       </div>
       <p className="source-explanation">
@@ -121,12 +227,12 @@ export function SourceReferences({ content, prefix = "source" }) {
       <ol className="source-list">
         {content.references.map((source, index) => (
           <li key={source.id} id={`${prefix}-${source.id}`}>
-            <span className="source-index">{index + 1}</span>
+            <span className="source-index" aria-hidden="true">{index + 1}</span>
             <div>
               <span className="source-publisher">{source.publisher}</span>
               <a href={source.url} target="_blank" rel="noreferrer">
                 {source.title}
-                <ExternalLink size={13} />
+                <ExternalLink size={13} aria-hidden="true" />
               </a>
               <p>{source.scope}</p>
               <small>
@@ -141,11 +247,8 @@ export function SourceReferences({ content, prefix = "source" }) {
         <span>
           内容版本 v{content.version} · 整理于 {content.updatedAt}
         </span>
-        <span>
-          {trust.label}
-        </span>
+        <span>{trust.label}</span>
       </div>
     </section>
-    </>
   );
 }

@@ -1,55 +1,464 @@
-.reading-tools, .reading-toc {
+/* 图文详情 · 纸本索引
+   Fixed order: runhead, H1, answer, caveat, figure, sections, sources,
+   boundary note, next entry. */
+
+.article-reader {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ---------- topbar ---------- */
+.reading-bar {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: var(--header-h);
+  margin: 0 calc(-1 * var(--pad));
+  padding: 0 var(--pad);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.reading-bar-left,
+.reading-bar-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+.reading-bar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  padding: 0 var(--s-2);
+  border-radius: var(--r-pill);
+  color: var(--ink-2);
+  font-size: var(--t-13);
+}
+.reading-bar button:hover {
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+}
+.reading-bar-context {
+  font-size: var(--t-13);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.share-message:empty {
+  display: none;
+}
+.share-message {
+  margin-top: var(--s-3);
+  font-size: var(--t-13);
+  color: var(--accent);
+}
+
+/* ---------- head ---------- */
+.article-head {
+  padding-top: var(--s-6);
+}
+.article-head .runhead {
+  margin: 0;
+}
+.article-english {
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+.article-head h1 {
+  margin-top: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  font-weight: 600;
+  line-height: 1.44;
+  letter-spacing: 0.01em;
+}
+.detail-answer {
+  margin-top: var(--s-3);
+  font-size: var(--t-17);
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.article-head .caveat {
+  margin-top: 22px;
+}
+
+/* ---------- figure ---------- */
+.article-figure {
+  margin-top: var(--s-6);
+}
+.article-figure-stage {
+  display: grid;
+  place-items: center;
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.diagram {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  height: auto;
+  padding: var(--s-2) 0;
+}
+.article-figure-stage img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 340px;
+  height: auto;
+}
+.article-figure-stage > p {
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+  text-align: center;
+}
+.article-figure figcaption {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.article-figure-attribution {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-11);
+}
+.article-figure-attribution a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.article-figure-note {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.article-figure-note b {
+  color: var(--ink-2);
+}
+
+/* ---------- toc ---------- */
+.reading-toc {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 14px 24px;
-  border-bottom: 1px solid var(--zc-line);
-  font-size: 13px;
-  line-height: 1.8;
+  gap: var(--s-1);
+  margin-top: var(--s-6);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
-.reading-tools > span { flex: 1; min-width: 150px; color: #4f6b58; }
-.reading-tools > p { width: 100%; }
+.reading-toc > span {
+  margin-right: var(--s-2);
+  font-size: var(--t-11);
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.reading-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  font-size: var(--t-13);
+  color: var(--ink-2);
+}
+.reading-toc a:hover {
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+}
 
-.reading-toc > span { font-weight: 600; }
-.reading-toc a { padding: 8px; color: #2e8450; text-decoration: underline; text-underline-offset: 4px; }
-.reading-toc a:hover { background: var(--zc-soft); }
-.detail-body [id] { scroll-margin-top: 100px; }
-.organ-information .reading-tools { padding: 0 0 16px; margin-bottom: 20px; }
-.reading-actions:not(.is-ready) { position: static; }
-.recent-list { list-style: none; padding: 0; margin-top: 8px; }
-.recent-list a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 0; border-top: 1px solid var(--zc-line); color: #2e8450; }
-.recent-list small { font-size: 12px; margin-left: 12px; color: #4f6b58; }
-.recent-list time { font-size: 12px; white-space: nowrap; }
+/* ---------- body ---------- */
+.detail-body {
+  padding-top: var(--s-2);
+}
+.detail-body [id] {
+  scroll-margin-top: calc(var(--header-h) + var(--s-3));
+}
+.detail-body h2 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  margin-top: 38px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-size: var(--t-20);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.detail-body h2 i {
+  font-style: normal;
+  font-size: var(--t-13);
+  color: var(--accent);
+}
+.detail-intro {
+  font-size: var(--t-17);
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+/* Long-form body: each section is a heading plus cited paragraphs. Section
+   figures sit inside the section they explain, not in a shared plate block. */
+.article-section {
+  margin-top: 38px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.article-section:first-of-type {
+  margin-top: var(--s-2);
+}
+.article-section h2 {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.article-section p {
+  margin-top: var(--s-3);
+  font-size: var(--t-15);
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+.article-section p.detail-intro {
+  font-size: var(--t-17);
+}
+.article-section .article-figure {
+  margin-top: var(--s-6);
+}
+.article-section .article-figure figcaption > span {
+  font-size: var(--t-13);
+}
+.metric-list {
+  margin-top: var(--s-1);
+}
+.metric-list > div {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 10px;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.metric-list > div:first-child {
+  border-top: 1px solid var(--rule);
+}
+.metric-list > div > span {
+  padding-top: 3px;
+  font-family: var(--serif);
+  font-size: var(--t-13);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.metric-list h3 {
+  font-size: var(--t-15);
+  font-weight: 600;
+  line-height: 1.7;
+}
+.metric-list p {
+  margin-top: var(--s-1);
+  font-size: var(--t-15);
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+
+.detail-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-1);
+}
+.detail-chain > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) 14px var(--s-2) var(--s-1);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  font-size: var(--t-13);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.detail-chain i {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+  font-family: var(--serif);
+  font-size: var(--t-11);
+  font-style: normal;
+}
+.detail-chain > svg {
+  color: var(--rule-strong);
+}
+.detail-related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-1) var(--s-3);
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-13);
+  color: var(--ink-3);
+}
+.detail-related > span {
+  margin-right: var(--s-1);
+}
+
+/* ---------- terms ---------- */
+.term-questions {
+  margin-top: var(--s-6);
+}
+.term-questions h2 {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+.term-questions .guide-note {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.term-questions details {
+  border-bottom: 1px solid var(--rule);
+}
+.term-questions details:first-of-type {
+  margin-top: var(--s-2);
+  border-top: 1px solid var(--rule);
+}
+.term-questions summary {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 48px;
+  padding: var(--s-3) 0;
+  font-size: var(--t-15);
+  font-weight: 600;
+  line-height: 1.7;
+  cursor: pointer;
+  list-style: none;
+}
+.term-questions summary::-webkit-details-marker {
+  display: none;
+}
+.term-questions summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: var(--serif);
+  font-size: var(--t-20);
+  font-weight: 400;
+  color: var(--ink-3);
+  line-height: 1;
+}
+.term-questions details[open] summary::after {
+  content: "−";
+}
+.term-questions p {
+  padding-bottom: var(--s-3);
+  font-size: var(--t-15);
+  line-height: 1.9;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.term-questions .guide-original {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--t-13);
+  color: var(--accent);
+}
+.term-questions .guide-original:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- sources + boundary ---------- */
+.article-reader .source-panel {
+  margin-top: var(--s-8);
+}
+.article-reader .source-heading {
+  margin-top: 0;
+}
+.article-share-entry {
+  margin-top: var(--s-6);
+}
+.boundary-note {
+  margin-top: var(--s-6);
+}
+.article-reader .next-entry {
+  margin-top: var(--s-8);
+}
+
+/* ---------- follow-up (kept compatible, lightly restyled) ---------- */
+.topic-followup {
+  margin-top: var(--s-8);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+.topic-followup h2 {
+  border: 0;
+  margin-top: 0;
+  padding-top: 0;
+  font-size: var(--t-20);
+}
+.topic-followup p {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.topic-followup .text-link {
+  margin-top: var(--s-1);
+  margin-right: var(--s-3);
+}
+
+/* ---------- large reading preference ---------- */
 .reading-large .article-reader .detail-intro,
 .reading-large .article-reader .metric-list p,
-.reading-large .article-reader .detail-tip p,
+.reading-large .article-reader .detail-answer,
 .reading-large .organ-description,
-.reading-large .organ-related p { font-size: 18px; line-height: 2; }
+.reading-large .organ-related p,
+.reading-large .term-questions p { font-size: 18px; line-height: 2; }
 .reading-large .article-reader .metric-list h3,
-.reading-large .article-reader .detail-tip b { font-size: 19px; }
+.reading-large .article-head h1 { font-size: 26px; }
 .reading-large .article-reader .detail-chain > span,
 .reading-large .article-reader .detail-related,
 .reading-large .article-reader .detail-related a,
-.reading-large .article-disclaimer,
 .reading-large .source-panel p,
-.reading-large .source-list,
 .reading-large .source-list a { font-size: 16px; line-height: 1.9; }
-.reading-large .article-reader .detail-chain { flex-wrap: wrap; }
-.article-reader .detail-heading .detail-answer { font-size: 17px; line-height: 1.7; }
-.article-reader .detail-heading .review-notice { font-size: 14px; line-height: 1.6; margin: 10px 0; }
-.article-reader .article-priority-limit { margin-top: 16px; color: var(--zc-ink); }
-.article-reader .article-priority-limit b { font-size: 16px; font-weight: 600; }
-.article-reader .article-priority-limit p { font-size: 15px; line-height: 1.7; color: var(--zc-ink-2); }
-.article-reader article > .article-figure { margin: 20px 35px; }
-.article-reader .article-figure-stage > p { font-size: 15px; line-height: 1.7; text-align: center; color: var(--zc-ink-2); }
-@media (max-width: 768px) {
-  .article-reader article > .article-figure { margin: 18px 20px; }
+
+@media (min-width: 769px) {
+  .article-head {
+    padding-top: var(--s-8);
+  }
+  .article-head h1 {
+    font-size: var(--t-30);
+  }
+  .article-english {
+    display: inline;
+  }
+  .article-figure-stage img {
+    max-height: 400px;
+  }
+  .detail-body {
+    padding-top: var(--s-3);
+  }
 }
-.reading-large .article-reader .detail-chain > span { min-width: 90px; }
-.resume-reading, .continue-card { margin: 18px 0; padding: 18px 24px; box-shadow: var(--zc-shadow); border-radius: 10px; background: var(--zc-soft); }
-.resume-reading p, .continue-card p { font-size: 13px; color: #4f6b58; line-height: 1.9; margin: 0 0 12px; }
-.resume-reading button { min-height: 44px; padding: 8px 14px; margin: 0 10px 8px 0; color: #2e8450; border: 1px solid var(--zc-line); border-radius: 8px; background: var(--zc-card); }
-.continue-card h2 { font-size: 19px; margin: 0 0 12px; }
-.continue-card a { display: inline-block; color: #2e8450; font-weight: 600; min-height: 44px; padding: 10px 0; }
-#organ-overview, #organ-related, #organ-source-panel { scroll-margin-top: 110px; }
+
+@media (max-width: 768px) {
+  .reading-bar {
+    margin: 0 calc(-1 * var(--pad));
+  }
+  .article-figure {
+    margin-top: var(--s-6);
+  }
+}

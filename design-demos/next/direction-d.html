@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方向 D · 纸本索引 — 知愈页面与设计规范</title>
+<style>
+/* ============================================================
+   方向 D「纸本索引」
+   - 底色是纸，不是绿色面板；绿色只做唯一强调色
+   - 发丝线组织层级，不用卡片套卡片；无阴影
+   - 编号 01–09 作为产品签名（数据里已有 number 字段）
+   - 器官医学插图是唯一大图，浮在纸上不加框
+   - 9 级字阶 / 9 级间距 / 输入框 4px、胶囊 999px
+   - 全部文案与数字来自 public/content 真实内容
+   ============================================================ */
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/noto-sans-sc.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Noto Serif SC"; src: url("../assets/noto-serif-sc.woff2") format("woff2"); font-weight: 200 900; font-display: swap; }
+
+:root {
+  --paper: #f7f5ef;
+  --surface: #ffffff;
+  --ink: #1a241e;
+  --ink-2: #46544c;
+  --ink-3: #667268;
+  --rule: #e4e0d5;
+  --rule-strong: #d3cec0;
+  --accent: #2c6246;
+  --accent-deep: #1f4a34;
+  --accent-wash: #e7eee6;
+  --clay: #8a4e2c;
+  --clay-wash: #f3e9e1;
+  --sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  --t-11: 11px; --t-13: 13px; --t-15: 15px; --t-17: 17px;
+  --t-20: 20px; --t-24: 24px; --t-30: 30px; --t-38: 38px; --t-48: 48px;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-6: 24px; --s-8: 32px; --s-12: 48px; --s-16: 64px; --s-24: 96px;
+  --r-input: 4px; --r-pill: 999px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+body {
+  font-family: var(--sans);
+  background: #e9e6dc;
+  color: var(--ink);
+  padding: 44px 40px 80px;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--t-15);
+}
+
+/* ---------- 画布说明 ---------- */
+.canvas-head { max-width: 1400px; margin: 0 auto var(--s-8); }
+.canvas-head .tag {
+  display: inline-block; font-size: var(--t-11); letter-spacing: .18em;
+  color: #7d755f; border: 1px solid #cfc9b6; padding: 5px 10px;
+  border-radius: var(--r-pill); margin-bottom: var(--s-3);
+}
+.canvas-head h1 { font-family: var(--serif); font-size: var(--t-30); font-weight: 600; letter-spacing: .02em; color: #33392f; }
+.canvas-head p { font-size: var(--t-13); color: #78715f; margin-top: var(--s-2); line-height: 1.9; max-width: 780px; }
+.tokens { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); margin-top: var(--s-4); }
+.tokens span { display: inline-flex; align-items: center; gap: 6px; font-size: var(--t-11); color: #6d6653; }
+.tokens i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #d5cfbc; display: inline-block; }
+
+.row { display: flex; gap: 34px; justify-content: center; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
+.shot { width: 390px; flex-shrink: 0; }
+.shot > .label { font-size: var(--t-13); color: #6f6a58; margin: 0 0 var(--s-2) 4px; }
+.shot > .label b { color: var(--accent); font-weight: 600; margin-right: 8px; font-family: var(--serif); }
+
+.phone {
+  background: var(--paper);
+  border: 1px solid #cfc9b6;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(60, 60, 45, .13), 0 2px 5px rgba(60, 60, 45, .07);
+  height: 844px;
+  display: flex; flex-direction: column;
+}
+.scroll { flex: 1; overflow-y: auto; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+
+/* ---------- 页头 ---------- */
+.masthead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 20px; border-bottom: 1px solid var(--rule);
+  position: sticky; top: 0; background: var(--paper); z-index: 5;
+}
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand .glyph { width: 30px; height: 30px; display: grid; place-items: center; color: var(--accent); }
+.brand .name { font-family: var(--serif); font-size: var(--t-20); font-weight: 600; letter-spacing: .16em; }
+.mast-acts { display: flex; gap: var(--s-1); }
+.icon-btn { width: 40px; height: 40px; display: grid; place-items: center; color: var(--ink-2); border-radius: var(--r-pill); }
+.icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 通用排版 ---------- */
+.runhead {
+  font-size: var(--t-11); letter-spacing: .2em; color: var(--ink-3);
+  padding: 22px 20px 0; text-transform: uppercase;
+}
+.runhead b { color: var(--accent); font-weight: 600; }
+.statement {
+  font-family: var(--serif); font-size: var(--t-30); line-height: 1.42;
+  font-weight: 600; letter-spacing: .01em; padding: 10px 20px 0;
+}
+.lede { font-size: var(--t-15); line-height: 1.85; color: var(--ink-2); padding: 10px 20px 0; }
+
+/* ---------- 主推一篇 ---------- */
+.feature { padding: 26px 20px 0; }
+.feature .no { font-family: var(--serif); font-size: var(--t-15); color: var(--accent); letter-spacing: .1em; }
+.feature .term { font-size: var(--t-13); letter-spacing: .14em; color: var(--ink-3); margin-left: 10px; }
+.feature h2 { font-family: var(--serif); font-size: var(--t-24); line-height: 1.5; font-weight: 600; margin-top: var(--s-2); }
+.feature .sub { font-size: var(--t-15); line-height: 1.8; color: var(--ink-2); margin-top: 6px; }
+.plate {
+  margin: var(--s-4) 0 0; padding: var(--s-4) 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  display: grid; place-items: center;
+}
+.plate img { width: 100%; max-width: 300px; height: auto; display: block; }
+.readlink {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  color: var(--accent); font-size: var(--t-15); font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
+.readlink:hover { border-bottom-color: var(--accent); }
+
+/* ---------- 索引行 ---------- */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; padding: 34px 20px 10px; }
+.section-head h2 { font-family: var(--serif); font-size: var(--t-20); font-weight: 600; }
+.section-head .more { font-size: var(--t-13); color: var(--accent); }
+.index { padding: 0 20px; }
+.index-row {
+  display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px;
+  align-items: start; padding: 16px 0; border-top: 1px solid var(--rule);
+}
+.index-row:last-child { border-bottom: 1px solid var(--rule); }
+.index-row .no { font-family: var(--serif); font-size: var(--t-15); color: var(--ink-3); padding-top: 3px; }
+.index-row h3 { font-size: var(--t-17); line-height: 1.55; font-weight: 600; }
+.index-row .meta { font-size: var(--t-13); line-height: 1.9; color: var(--ink-3); margin-top: 3px; }
+.index-row .arrow { color: var(--ink-3); padding-top: 6px; }
+
+/* 来源戳 */
+.stamp { display: inline-flex; align-items: center; gap: 6px; font-size: var(--t-11); color: var(--clay); letter-spacing: .04em; }
+.stamp::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--clay); }
+
+/* ---------- 身体 ---------- */
+.body-list { padding: 0 20px 8px; }
+.body-row {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 16px;
+  align-items: center; padding: 12px 0; border-top: 1px solid var(--rule);
+}
+.body-row:last-child { border-bottom: 1px solid var(--rule); }
+.body-row img { width: 64px; height: 52px; object-fit: contain; }
+.body-row b { display: block; font-size: var(--t-17); font-weight: 600; }
+.body-row span { font-size: var(--t-13); color: var(--ink-3); }
+.body-row .go { color: var(--ink-3); }
+
+/* ---------- 页脚 ---------- */
+.foot {
+  padding: 26px 20px 30px; margin-top: 22px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-13); line-height: 1.85; color: var(--ink-3);
+}
+.foot b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------- 底部导航 ---------- */
+.tabbar {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule); background: var(--paper);
+  padding: 8px 0 10px;
+}
+.tabbar a { display: grid; justify-items: center; gap: 3px; color: var(--ink-3); font-size: var(--t-11); padding: 6px 0; position: relative; }
+.tabbar a.on { color: var(--accent); font-weight: 600; }
+.tabbar a.on::before { content: ""; position: absolute; top: -9px; width: 22px; height: 2px; background: var(--accent); }
+
+/* ---------- 详情页 ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px 10px 8px; border-bottom: 1px solid var(--rule);
+  position: sticky; top: 0; background: var(--paper); z-index: 5;
+}
+.topbar .left, .topbar .right { display: flex; align-items: center; gap: 2px; }
+.topbar .ctx { font-size: var(--t-13); color: var(--ink-3); }
+.detail { padding: 0 20px; }
+.detail .runhead { padding: 22px 0 0; }
+.detail h1 { font-family: var(--serif); font-size: var(--t-30); line-height: 1.44; font-weight: 600; margin-top: 8px; }
+.detail .answer { font-size: var(--t-17); line-height: 1.85; color: var(--ink-2); margin-top: 12px; }
+.caveat {
+  margin-top: 22px; padding: 16px 16px 16px 14px;
+  border-left: 2px solid var(--clay); background: var(--clay-wash);
+  border-radius: 0 var(--r-input) var(--r-input) 0;
+}
+.caveat b { display: block; font-size: var(--t-13); color: var(--clay); letter-spacing: .04em; }
+.caveat p { font-size: var(--t-15); line-height: 1.8; color: var(--ink-2); margin-top: 6px; }
+.cite { font-size: var(--t-11); color: var(--accent); vertical-align: super; margin-left: 2px; }
+
+.figure { margin-top: 26px; }
+.figure img { width: 100%; height: auto; display: block; }
+.figure figcaption { font-size: var(--t-13); line-height: 1.8; color: var(--ink-3); margin-top: 10px; }
+.figure .attr { font-size: var(--t-11); color: var(--ink-3); margin-top: 3px; display: block; }
+
+.detail h2 {
+  font-family: var(--serif); font-size: var(--t-20); font-weight: 600;
+  margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule);
+}
+.detail h2 i { font-style: normal; color: var(--accent); margin-right: 8px; }
+.detail p.body { font-size: var(--t-17); line-height: 1.9; color: var(--ink-2); }
+.metric { margin-top: 18px; }
+.metric b { font-size: var(--t-15); font-weight: 600; }
+.metric p { font-size: var(--t-15); line-height: 1.85; color: var(--ink-2); margin-top: 4px; }
+.chain { list-style: none; margin-top: 8px; }
+.chain li {
+  display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px;
+  padding: 12px 0; border-top: 1px solid var(--rule);
+  font-size: var(--t-15); color: var(--ink-2); line-height: 1.7;
+}
+.chain li:first-child { border-top: 0; }
+.chain li span:first-child { font-family: var(--serif); color: var(--accent); font-size: var(--t-13); }
+.sources { list-style: none; margin-top: 8px; }
+.sources li { padding: 12px 0; border-top: 1px solid var(--rule); font-size: var(--t-13); line-height: 1.7; color: var(--ink-2); }
+.sources li b { font-weight: 600; color: var(--ink); }
+.sources li a { color: var(--accent); border-bottom: 1px solid var(--rule-strong); }
+.sources li small { display: block; color: var(--ink-3); font-size: var(--t-11); margin-top: 2px; }
+.footnote {
+  margin: 30px 0 0; padding: 16px; background: var(--accent-wash);
+  border-radius: var(--r-input); font-size: var(--t-13); line-height: 1.85; color: var(--ink-2);
+}
+.footnote b { color: var(--accent-deep); }
+.next { margin: 30px 0 40px; border-top: 1px solid var(--rule-strong); padding-top: 16px; }
+.next small { font-size: var(--t-11); letter-spacing: .18em; color: var(--ink-3); }
+.next a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0 0; }
+.next b { font-family: var(--serif); font-size: var(--t-20); font-weight: 600; display: block; }
+.next em { font-style: normal; font-size: var(--t-13); color: var(--ink-3); }
+
+/* ---------- 桌面 ---------- */
+.desktop-wrap { max-width: 1400px; margin: 40px auto 0; }
+.desktop { background: var(--paper); border: 1px solid #cfc9b6; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(60, 60, 45, .13); }
+.d-head { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 40px; padding: 0 40px; height: 68px; border-bottom: 1px solid var(--rule); }
+.d-brand { display: flex; align-items: center; gap: 10px; }
+.d-brand .name { font-family: var(--serif); font-size: var(--t-24); font-weight: 600; letter-spacing: .16em; }
+.d-brand .tagline { font-size: var(--t-13); color: var(--ink-3); padding-left: 14px; border-left: 1px solid var(--rule); }
+.d-nav { display: flex; gap: 30px; font-size: var(--t-15); color: var(--ink-2); }
+.d-nav a.on { color: var(--accent); font-weight: 600; }
+.d-acts { display: flex; align-items: center; gap: 14px; }
+.d-search { display: flex; align-items: center; gap: 9px; width: 250px; padding: 9px 12px; border: 1px solid var(--rule-strong); border-radius: var(--r-input); color: var(--ink-3); font-size: var(--t-13); background: var(--surface); }
+.d-main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; }
+.d-col { padding: 44px 40px 56px; }
+.d-rail { border-left: 1px solid var(--rule); padding: 44px 32px 56px; }
+.d-runhead { font-size: var(--t-11); letter-spacing: .2em; color: var(--ink-3); text-transform: uppercase; }
+.d-runhead b { color: var(--accent); }
+.d-statement { font-family: var(--serif); font-size: var(--t-48); line-height: 1.3; font-weight: 600; margin-top: 12px; letter-spacing: .01em; }
+.d-lede { font-size: var(--t-17); line-height: 1.85; color: var(--ink-2); margin-top: 14px; max-width: 560px; }
+.d-feature { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule-strong); display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+.d-feature .no { font-family: var(--serif); color: var(--accent); font-size: var(--t-15); }
+.d-feature .term { font-size: var(--t-13); letter-spacing: .14em; color: var(--ink-3); margin-left: 10px; }
+.d-feature h2 { font-family: var(--serif); font-size: var(--t-30); line-height: 1.45; font-weight: 600; margin-top: 8px; }
+.d-feature .sub { font-size: var(--t-17); line-height: 1.8; color: var(--ink-2); margin-top: 8px; }
+.d-feature .plate { border: 0; padding: 0; margin: 0; }
+.d-feature .plate img { max-width: 290px; }
+.d-index { margin-top: 40px; }
+.d-index .section-head { padding: 0 0 12px; }
+.d-index-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+.d-index-grid .index-row { grid-template-columns: 28px minmax(0, 1fr) auto; }
+.d-rail h3 { font-size: var(--t-11); letter-spacing: .2em; color: var(--ink-3); font-weight: 400; text-transform: uppercase; }
+.d-rail .body-list { padding: 0; }
+.d-rail .body-row { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 12px; }
+.d-rail .body-row img { width: 56px; height: 46px; }
+.d-note { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: var(--t-13); line-height: 1.9; color: var(--ink-3); }
+.d-note b { color: var(--ink-2); }
+.d-foot { border-top: 1px solid var(--rule); padding: 20px 40px; display: flex; justify-content: space-between; font-size: var(--t-13); color: var(--ink-3); }
+</style>
+</head>
+<body>
+
+<header class="canvas-head">
+  <span class="tag">方向 D · 纸本索引</span>
+  <h1>把知愈做成一本带索引的身体读本</h1>
+  <p>底色是纸，绿色只做唯一强调色；层级靠发丝线、字号和编号，不靠卡片套卡片。编号 01–09 直接取自内容数据，让没有封面的内容也立得住；五张 CC BY 4.0 器官插图是唯一大图。所有文案、条目与来源均为线上真实内容。</p>
+  <div class="tokens">
+    <span><i style="background:#f7f5ef"></i>纸 #F7F5EF</span>
+    <span><i style="background:#1a241e"></i>墨 #1A241E 14.65:1</span>
+    <span><i style="background:#46544c"></i>次 #46544C 7.32:1</span>
+    <span><i style="background:#667268"></i>弱 #667268 4.62:1</span>
+    <span><i style="background:#2c6246"></i>强调 #2C6246 6.55:1</span>
+    <span><i style="background:#8a4e2c"></i>注记 #8A4E2C 6.01:1</span>
+    <span><i style="background:#e4e0d5"></i>发丝线 #E4E0D5</span>
+  </div>
+</header>
+
+<div class="row">
+
+  <!-- ================= 手机 · 发现 ================= -->
+  <div class="shot">
+    <div class="label"><b>1</b>发现 · 手机 390</div>
+    <div class="phone">
+      <div class="masthead">
+        <div class="brand">
+          <span class="glyph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-7"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7Z"/><path d="M12 13C12 9.5 9.5 7 6 7c0 3.5 2.5 6 6 6Z"/></svg></span>
+          <span class="name">知愈</span>
+        </div>
+        <div class="mast-acts">
+          <button class="icon-btn" aria-label="搜索"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <div class="runhead"><b>发现</b> &nbsp;/&nbsp; 身体与日常</div>
+        <h1 class="statement">从一张体检单<br>读起。</h1>
+        <p class="lede">九个常见项目，讲清它能说明什么，以及不能说明什么。</p>
+
+        <article class="feature">
+          <span class="no">01</span><span class="term">BLOOD GLUCOSE</span>
+          <h2>血糖项目主要看什么？</h2>
+          <p class="sub">身体的能量，如何保持平衡？</p>
+          <figure class="plate">
+            <img src="../../public/media/pancreas-servier.png" alt="胰腺外形医学插图">
+          </figure>
+          <a class="readlink" href="#">
+            读这一篇
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </article>
+
+        <div class="section-head">
+          <h2>按项目读</h2>
+          <a class="more" href="#">全部 9 个</a>
+        </div>
+        <div class="index">
+          <a class="index-row" href="#">
+            <span class="no">02</span>
+            <div>
+              <h3>血压单上的两个数字在说什么？</h3>
+              <div class="meta">血压 · 收缩压 / 舒张压 · 4 份来源</div>
+            </div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">03</span>
+            <div>
+              <h3>血脂单里几个名称有什么区别？</h3>
+              <div class="meta">血脂 · LDL-C / HDL-C · 1 份来源</div>
+            </div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">06</span>
+            <div>
+              <h3>肌酐和肾功能是什么关系？</h3>
+              <div class="meta">肾功能 · 肌酐 / eGFR · 3 份来源</div>
+            </div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+        </div>
+
+        <div class="section-head">
+          <h2>认识身体</h2>
+          <a class="more" href="#">全部 5 个</a>
+        </div>
+        <div class="body-list">
+          <a class="body-row" href="#">
+            <img src="../../public/media/heart-servier.png" alt="">
+            <span><b>心脏</b><span>不停歇的生命泵 · 2 份来源</span></span>
+            <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="body-row" href="#">
+            <img src="../../public/media/lung-servier.png" alt="">
+            <span><b>肺</b><span>身体与空气的交换站 · 2 份来源</span></span>
+            <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+        </div>
+
+        <div class="foot">
+          <b>知愈</b> · 内容用于健康科普，不替代医生诊断与个体化建议。<br>
+          <span class="stamp" style="margin-top:6px">当前内容来源待核对</span>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="on" href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 4.5 6.5 4 4 5.5v13c2.5-1.5 6-1 8 1 2-2 5.5-2.5 8-1v-13c-2.5-1.5-6-1-8 1Z"/><path d="M12 6.5v13"/></svg>发现</a>
+        <a href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h6.5v13H4z"/><path d="M13.5 5.5H20v13h-6.5z"/></svg>体检项目</a>
+        <a href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 7.6a4.1 4.1 0 0 1 7 3c0 5-7 9.4-7 9.4Z"/></svg>认识身体</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ================= 手机 · 详情 ================= -->
+  <div class="shot">
+    <div class="label"><b>2</b>图文详情 · 手机 390</div>
+    <div class="phone">
+      <div class="topbar">
+        <div class="left">
+          <button class="icon-btn" aria-label="返回"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg></button>
+          <span class="ctx">知愈 · 体检项目</span>
+        </div>
+        <div class="right">
+          <button class="icon-btn" aria-label="分享"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="m8 6.5 4-3.5 4 3.5"/><path d="M5 13v6.5h14V13"/></svg></button>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <article class="detail">
+          <div class="runhead">01 / <b>血糖</b> &nbsp;BLOOD GLUCOSE</div>
+          <h1>血糖项目主要看什么？</h1>
+          <p class="answer">血糖检查观察的是血液中葡萄糖的状态，不同项目（空腹、糖化血红蛋白、糖耐量）回答的是不同时间范围的问题。</p>
+
+          <div class="caveat">
+            <b>不能仅凭这一项判断</b>
+            <p>空腹、餐后和随机血糖的解读方式不同。一次异常通常需要结合症状和复查，不能直接下结论。<span class="cite">[2]</span></p>
+          </div>
+
+          <figure class="figure">
+            <img src="../../public/media/pancreas-servier.png" alt="胰腺外形医学插图：胰腺位于胃后，头端与十二指肠相邻，尾部靠近脾脏。">
+            <figcaption>胰腺：分泌胰岛素帮助身体利用葡萄糖的器官。
+              <span class="attr">Servier Medical Art · CC BY 4.0</span>
+            </figcaption>
+          </figure>
+
+          <h2><i>一</i>它是什么</h2>
+          <p class="body">血糖是血液中的葡萄糖，是身体的重要能量来源。胰岛素帮助葡萄糖进入细胞，肝脏则像仓库一样储存或释放糖。<span class="cite">[1]</span></p>
+
+          <h2><i>二</i>一组指标，各有分工</h2>
+          <div class="metric">
+            <b>空腹血糖（FPG）</b><span class="cite">[2]</span>
+            <p>观察至少 8 小时未摄入热量时的血糖水平，像一张当下的快照。</p>
+          </div>
+          <div class="metric">
+            <b>糖化血红蛋白（HbA1c）</b><span class="cite">[2]</span>
+            <p>反映过去约 2–3 个月的平均血糖情况。贫血、血红蛋白变异等可能影响结果。</p>
+          </div>
+
+          <h2><i>三</i>身体里发生的过程</h2>
+          <ol class="chain">
+            <li><span>1</span><span>食物中的碳水化合物</span></li>
+            <li><span>2</span><span>消化后形成葡萄糖</span></li>
+            <li><span>3</span><span>胰岛素帮助细胞利用</span></li>
+            <li><span>4</span><span>肝脏储存与释放</span></li>
+          </ol>
+
+          <h2><i>四</i>知识来源</h2>
+          <ol class="sources">
+            <li><b>美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）</b><br><a href="#">What Is Diabetes?</a><small>糖尿病 · 血糖与胰岛素基础 · 核验于 2026-09-18</small></li>
+            <li><b>NIDDK</b><br><a href="#">Diabetes Tests &amp; Diagnosis</a><small>空腹血糖、HbA1c、OGTT 及检测条件 · 核验于 2026-09-18</small></li>
+          </ol>
+
+          <p class="footnote"><b>内容边界</b> · 本页依据具体来源整理，用于理解检查项目名称与关系，不解释个人报告，也不构成诊断建议。<br><span class="stamp" style="margin-top:6px">来源待核对</span></p>
+
+          <div class="next">
+            <small>下一篇</small>
+            <a href="#">
+              <span><b>血压单上的两个数字在说什么？</b><em>02 · BLOOD PRESSURE</em></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 手机 · 体检项目 ================= -->
+  <div class="shot">
+    <div class="label"><b>3</b>体检项目 · 手机 390</div>
+    <div class="phone">
+      <div class="masthead">
+        <div class="brand">
+          <span class="glyph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-7"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7Z"/><path d="M12 13C12 9.5 9.5 7 6 7c0 3.5 2.5 6 6 6Z"/></svg></span>
+          <span class="name">知愈</span>
+        </div>
+        <div class="mast-acts">
+          <button class="icon-btn" aria-label="搜索"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <div class="runhead"><b>体检项目</b> &nbsp;/&nbsp; 索引</div>
+        <h1 class="statement" style="font-size:24px;line-height:1.5">读懂数字背后的身体语言。</h1>
+
+        <div style="padding:16px 20px 0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--rule-strong);border-radius:var(--r-input);color:var(--ink-3);font-size:15px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            搜索项目名称、缩写或你的问题
+          </div>
+          <div style="display:flex;gap:8px;overflow:hidden;margin-top:14px">
+            <span style="flex:none;padding:7px 13px;border-radius:var(--r-pill);background:var(--accent);color:#fff;font-size:13px">全部项目</span>
+            <span style="flex:none;padding:7px 13px;border-radius:var(--r-pill);border:1px solid var(--rule-strong);color:var(--ink-2);font-size:13px">营养与代谢</span>
+            <span style="flex:none;padding:7px 13px;border-radius:var(--r-pill);border:1px solid var(--rule-strong);color:var(--ink-2);font-size:13px">心血管健康</span>
+            <span style="flex:none;padding:7px 13px;border-radius:var(--r-pill);border:1px solid var(--rule-strong);color:var(--ink-2);font-size:13px">血液与免疫</span>
+          </div>
+          <p style="margin-top:14px;font-size:13px;line-height:1.85;color:var(--ink-3)">可用项目名、缩写或日常说法查找；这里不判断个人检查结果。</p>
+        </div>
+
+        <div class="index" style="padding-top:8px">
+          <a class="index-row" href="#">
+            <span class="no">01</span>
+            <div><h3>血糖项目主要看什么？</h3><div class="meta">血糖 · BLOOD GLUCOSE · 4 份来源</div></div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">02</span>
+            <div><h3>血压单上的两个数字在说什么？</h3><div class="meta">血压 · BLOOD PRESSURE · 4 份来源</div></div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">03</span>
+            <div><h3>血脂单里几个名称有什么区别？</h3><div class="meta">血脂 · BLOOD LIPIDS · 1 份来源</div></div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">04</span>
+            <div><h3>血常规里常见名称各指什么？</h3><div class="meta">血常规 · COMPLETE BLOOD COUNT · 1 份来源</div></div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="index-row" href="#">
+            <span class="no">05</span>
+            <div><h3>肝功能检查都查些什么？</h3><div class="meta">肝功能 · LIVER FUNCTION TESTS · 1 份来源</div></div>
+            <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          </a>
+        </div>
+
+        <div class="foot">
+          <b>知愈</b> · 内容用于健康科普，不替代医生诊断与个体化建议。
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 4.5 6.5 4 4 5.5v13c2.5-1.5 6-1 8 1 2-2 5.5-2.5 8-1v-13c-2.5-1.5-6-1-8 1Z"/><path d="M12 6.5v13"/></svg>发现</a>
+        <a class="on" href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h6.5v13H4z"/><path d="M13.5 5.5H20v13h-6.5z"/></svg>体检项目</a>
+        <a href="#"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 7.6a4.1 4.1 0 0 1 7 3c0 5-7 9.4-7 9.4Z"/></svg>认识身体</a>
+      </nav>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= 桌面 · 发现 ================= -->
+<div class="desktop-wrap">
+  <div class="shot" style="width:100%">
+    <div class="label"><b>4</b>发现 · 桌面 1280</div>
+    <div class="desktop">
+      <div class="d-head">
+        <div class="d-brand">
+          <span style="width:32px;height:32px;display:grid;place-items:center;color:var(--accent)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-7"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7Z"/><path d="M12 13C12 9.5 9.5 7 6 7c0 3.5 2.5 6 6 6Z"/></svg></span>
+          <span class="name">知愈</span>
+          <span class="tagline">看懂体检单，从一个问题开始</span>
+        </div>
+        <nav class="d-nav">
+          <a class="on" href="#">发现</a>
+          <a href="#">体检项目</a>
+          <a href="#">认识身体</a>
+        </nav>
+        <div class="d-acts">
+          <div class="d-search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            搜索项目名称、缩写
+          </div>
+        </div>
+      </div>
+
+      <div class="d-main">
+        <div class="d-col">
+          <div class="d-runhead"><b>发现</b> &nbsp;/&nbsp; 身体与日常</div>
+          <h1 class="d-statement">从一张体检单<br>读起。</h1>
+          <p class="d-lede">九个常见项目，讲清它能说明什么，以及不能说明什么。先弄懂你眼前的那一项，再决定要不要往深里看。</p>
+
+          <article class="d-feature">
+            <div>
+              <span class="no">01</span><span class="term">BLOOD GLUCOSE</span>
+              <h2>血糖项目主要看什么？</h2>
+              <p class="sub">身体的能量，如何保持平衡？</p>
+              <a class="readlink" href="#" style="margin-top:14px">
+                读这一篇
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </a>
+            </div>
+            <figure class="plate">
+              <img src="../../public/media/pancreas-servier.png" alt="胰腺外形医学插图">
+            </figure>
+          </article>
+
+          <div class="d-index">
+            <div class="section-head">
+              <h2>按项目读</h2>
+              <a class="more" href="#">全部 9 个 →</a>
+            </div>
+            <div class="d-index-grid">
+              <a class="index-row" href="#"><span class="no">02</span><div><h3>血压单上的两个数字在说什么？</h3><div class="meta">血压 · 4 份来源</div></div><span class="arrow">↗</span></a>
+              <a class="index-row" href="#"><span class="no">03</span><div><h3>血脂单里几个名称有什么区别？</h3><div class="meta">血脂 · 1 份来源</div></div><span class="arrow">↗</span></a>
+              <a class="index-row" href="#"><span class="no">04</span><div><h3>血常规里常见名称各指什么？</h3><div class="meta">血常规 · 1 份来源</div></div><span class="arrow">↗</span></a>
+              <a class="index-row" href="#"><span class="no">05</span><div><h3>肝功能检查都查些什么？</h3><div class="meta">肝功能 · 1 份来源</div></div><span class="arrow">↗</span></a>
+              <a class="index-row" href="#"><span class="no">06</span><div><h3>肌酐和肾功能是什么关系？</h3><div class="meta">肾功能 · 3 份来源</div></div><span class="arrow">↗</span></a>
+              <a class="index-row" href="#"><span class="no">07</span><div><h3>尿酸是什么？</h3><div class="meta">尿酸 · 1 份来源</div></div><span class="arrow">↗</span></a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="d-rail">
+          <h3>认识身体 / THE BODY</h3>
+          <div class="body-list">
+            <a class="body-row" href="#">
+              <img src="../../public/media/heart-servier.png" alt="">
+              <span><b>心脏</b><span>不停歇的生命泵</span></span>
+              <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            </a>
+            <a class="body-row" href="#">
+              <img src="../../public/media/lung-servier.png" alt="">
+              <span><b>肺</b><span>身体与空气的交换站</span></span>
+              <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            </a>
+            <a class="body-row" href="#">
+              <img src="../../public/media/liver-servier.png" alt="">
+              <span><b>肝脏</b><span>营养与代谢的中转站</span></span>
+              <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            </a>
+            <a class="body-row" href="#">
+              <img src="../../public/media/pancreas-servier.png" alt="">
+              <span><b>胰腺</b><span>血糖平衡的重要调节者</span></span>
+              <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            </a>
+            <a class="body-row" href="#">
+              <img src="../../public/media/kidney-servier.png" alt="">
+              <span><b>肾脏</b><span>精密的过滤与调节系统</span></span>
+              <span class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            </a>
+          </div>
+          <div class="d-note">
+            <b>这里是什么</b><br>
+            从现有 9 个常见检查项目和 5 个器官条目出发，每篇都标出它依据的具体来源和整理日期，写明能说明什么、不能说明什么。<br><br>
+            <span class="stamp">当前内容来源待核对</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="d-foot">
+        <span>知愈 · 看懂体检单，从一个问题开始</span>
+        <span>内容用于健康科普，不替代医生诊断与个体化建议。</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

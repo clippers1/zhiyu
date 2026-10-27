@@ -5,7 +5,7 @@ import { contentTrust } from "./content-status.js";
 const plain = (value, max = 300) => Array.from(typeof value === "string" ? value.replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/g, " ").trim() : "").slice(0, max).join("");
 const dateLabel = value => /^\d{4}-\d{2}-\d{2}/.test(String(value || "")) ? String(value).slice(0, 10) : "未标注";
 export function shareCardModel(content, origin, generatedAt = new Date()) {
-  if (!content || !["indicator", "organ"].includes(content.kind)) throw new Error("暂不支持这类内容的分享卡片。");
+  if (!content || !["indicator", "organ", "story"].includes(content.kind)) throw new Error("暂不支持这类内容的分享卡片。");
   const site = new URL(origin);
   if (!["http:", "https:"].includes(site.protocol)) throw new Error("分享地址不正确。");
   const url = `${site.origin}${routePath(content.kind === "organ" ? "organs" : "article", content.id)}`;
@@ -15,7 +15,8 @@ export function shareCardModel(content, origin, generatedAt = new Date()) {
   const reviewed = trust.kind === "reviewed";
   return {
     title, subtitle: plain(content.kind === "organ" ? content.headline : content.subtitle),
-    kindLabel: content.kind === "organ" ? "器官科普" : "指标科普", reviewed, verified: trust.trusted,
+    kindLabel: content.kind === "organ" ? "器官科普" : content.kind === "story" ? "身体与日常" : "指标科普",
+    reviewed, verified: trust.trusted,
     status: trust.label,
     referenceCount: content.references.length,
     version: plain(String(content.version || "未标注"), 32), updatedAt: dateLabel(content.updatedAt),

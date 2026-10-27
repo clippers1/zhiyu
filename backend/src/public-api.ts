@@ -11,9 +11,11 @@ export async function publicContent(request: Request, channel: 'demo' | 'officia
   const base: Where = { and: [{ channel: { equals: channel } }, { withdrawn: { equals: false } }] };
   if (parts.length === 3 && parts[0] === 'content') {
     const [, kind, slug] = parts;
-    if (!['indicator', 'organ'].includes(kind) || !/^[a-z0-9-]+$/.test(slug)) return json({ error: 'not_found' }, 404);
+    if (!['indicator', 'organ', 'story', 'article'].includes(kind) || !/^[a-z0-9-]+$/.test(slug)) return json({ error: 'not_found' }, 404);
+    // /content/article/:id is the shared reader route for indicators and stories.
+    const kinds = kind === 'article' ? ['indicator', 'story'] : [kind];
     const result = await payload.find({ collection: 'publications', depth: 0, limit: 1, overrideAccess: true,
-      where: { and: [base, { kind: { equals: kind } }, { slug: { equals: slug } }] }, select: { publicData: true },
+      where: { and: [base, { kind: { in: kinds } }, { slug: { equals: slug } }] }, select: { publicData: true },
     });
     return result.docs[0] ? json(result.docs[0].publicData) : json({ error: 'not_found' }, 404);
   }
@@ -24,7 +26,7 @@ export async function publicContent(request: Request, channel: 'demo' | 'officia
   const category = params.get('category');
   const rawLimit = params.get('limit') || '6';
   const rawCursor = params.get('cursor') || '0';
-  if ((kind && !['indicator', 'organ'].includes(kind)) || !/^\d+$/.test(rawLimit) || !/^\d+$/.test(rawCursor) || query.length > 200) return json({ error: 'invalid_query' }, 400);
+  if ((kind && !['indicator', 'organ', 'story'].includes(kind)) || !/^\d+$/.test(rawLimit) || !/^\d+$/.test(rawCursor) || query.length > 200) return json({ error: 'invalid_query' }, 400);
   const limit = Math.min(24, Math.max(1, Number(rawLimit)));
   const offset = Number(rawCursor);
   if (!Number.isSafeInteger(offset) || offset > 100000 || offset % limit !== 0) return json({ error: 'invalid_cursor' }, 400);

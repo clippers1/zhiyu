@@ -8,6 +8,7 @@ const publish = ({ req }: any) => hasRole(req.user, 'admin', 'publisher');
 const never = () => false;
 const text = (name: string, label: string, required = false): Field => ({ name, label, type: 'text', required });
 const indicatorOnly = (_: any, sibling: any) => sibling.kind === 'indicator';
+const readerFacing = (_: any, sibling: any) => sibling.kind !== 'organ';
 
 export const Users: CollectionConfig = {
   slug: 'users', labels: { singular: '后台成员', plural: '后台成员' },
@@ -107,11 +108,18 @@ export const Articles: CollectionConfig = {
   },
   fields: [
     { name: 'key', type: 'text', unique: true, admin: { hidden: true } },
-    { name: 'kind', label: '内容类型', type: 'select', options: [{ label: '指标', value: 'indicator' }, { label: '器官', value: 'organ' }], required: true },
+    { name: 'kind', label: '内容类型', type: 'select', options: [
+      { label: '指标', value: 'indicator' }, { label: '器官', value: 'organ' },
+      { label: '身体与日常长文', value: 'story' },
+    ], required: true },
+    { name: 'format', label: '版式', type: 'select', defaultValue: 'entry', options: [
+      { label: '词条（指标分工 + 过程）', value: 'entry' },
+      { label: '图文长文（分节正文 + 常见问题）', value: 'article' },
+    ], admin: { description: '长文需要分节正文、常见问题和至少一张已登记权利的图解；发布前会检查。' } },
     { ...text('slug', '稳定标识（英文小写 / 数字 / 连字符）', true), validate: (v: any) => /^[a-z0-9-]+$/.test(v) || '标识只能包含英文小写、数字和连字符' } as Field,
     text('title', '中文标题', true), text('subtitle', '一句话介绍', true), text('english', '英文名称'),
-    { ...text('question', '问题式标题（读者会怎么问）'), admin: { condition: indicatorOnly, description: '例如“血糖项目主要看什么？”。应能在正文中找到答案，不新增医学结论。' } } as Field,
-    { ...text('questionAnswer', '问题的一句话回答'), admin: { condition: indicatorOnly, description: '必须与正文已有解释一致，不引入新的来源或结论。' } } as Field,
+    { ...text('question', '问题式标题（读者会怎么问）'), admin: { condition: readerFacing, description: '例如“血糖项目主要看什么？”。应能在正文中找到答案，不新增医学结论。' } } as Field,
+    { ...text('questionAnswer', '问题的一句话回答'), admin: { condition: readerFacing, description: '必须与正文已有解释一致，不引入新的来源或结论。' } } as Field,
     text('category', '分类标识', true),
     { name: 'aliases', label: '搜索别名与缩写', type: 'textarea' },
     { name: 'tags', label: '标签', type: 'array', fields: [text('text', '标签', true)] },
@@ -127,9 +135,33 @@ export const Articles: CollectionConfig = {
     { name: 'metrics', label: '指标分工', type: 'array', admin: { condition: indicatorOnly }, fields: [text('name', '名称', true), { name: 'text', label: '解释', type: 'textarea', required: true }, text('sourceKeys', '来源编号（逗号分隔）')] },
     { name: 'chain', label: '过程示意', type: 'array', admin: { condition: indicatorOnly }, fields: [text('text', '步骤', true)] },
     { ...text('chainSourceKeys', '过程示意来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
-    { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: indicatorOnly } },
-    { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: indicatorOnly } } as Field,
+    { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: (_: any, sibling: any) => sibling.kind !== 'organ' } },
+    { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: (_: any, sibling: any) => sibling.kind !== 'organ' } } as Field,
     text('organLabel', '关联说明'),
+    { name: 'sections', label: '长文正文分节', type: 'array', admin: {
+      condition: (_: any, sibling: any) => sibling.kind !== 'organ',
+      description: '每节包含小标题和至少两段带来源编号的正文；可指定本页的一张图解跟在节后。',
+    }, fields: [
+      text('title', '小标题', true),
+      text('short', '目录短标签（可选，不超过 14 字）'),
+      { name: 'paragraphs', label: '段落', type: 'array', minRows: 1, required: true, fields: [
+        { name: 'text', label: '正文', type: 'textarea', required: true },
+        text('sourceKeys', '来源编号（逗号分隔）', true),
+      ] },
+      text('figure', '本节图解标识（对应图解里的 key）'),
+    ] },
+    { name: 'faq', label: '常见问题', type: 'array', admin: {
+      condition: (_: any, sibling: any) => sibling.kind !== 'organ',
+      description: '问题必须来自读者会问的原话，答案不得与正文或指标说明逐字重复；每条都要有来源编号。',
+    }, fields: [
+      text('question', '问题', true),
+      { name: 'answer', label: '回答', type: 'textarea', required: true },
+      text('sourceKeys', '来源编号（逗号分隔）', true),
+    ] },
+    { name: 'figures', label: '图解列表（JSON，可选）', type: 'json', admin: {
+      condition: (_: any, sibling: any) => sibling.kind !== 'organ',
+      description: '每项需要 key、alt、图注、简化说明、来源编号和素材权利。自制示意图填写 attribution.kind=self-made 与 diagram 标识；第三方图片使用 /media/ 下已登记权利的 PNG。',
+    } },
     { name: 'learning', label: '互动学习脚本（JSON）', type: 'json', admin: { condition: (_: any, sibling: any) => sibling.kind === 'organ', description: '支持已登记的心脏循环与肺部气体交换类型；结构和步骤都必须使用本文已有来源编号。' } },
     { name: 'figure', label: '图解（JSON，可选）', type: 'json', admin: { condition: indicatorOnly, description: '仅接受 /media/ 下已登记权利的静态图（PNG）；必须填写替代文本、图注、简化说明和素材权利，并引用本文已有来源编号。未核对素材时不填写，页面保持纯文字。' } },
     { name: 'relatedOrgans', label: '关联器官', type: 'relationship', relationTo: 'articles', hasMany: true, filterOptions: { kind: { equals: 'organ' } } },

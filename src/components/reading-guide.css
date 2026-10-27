@@ -1,14 +1,27 @@
-.quick-read { margin: 18px 24px; padding: 22px; box-shadow: var(--zc-shadow); border-radius: 16px; background: var(--zc-card); }
-.quick-read h2 { margin: 8px 0 12px; font-size: 22px; color: var(--zc-ink); }
-.quick-read h3 { margin: 18px 0 6px; font-size: 15px; color: var(--zc-ink); }
-.quick-read p, .term-questions p { font-size: 14px; line-height: 1.95; color: var(--zc-ink-2); overflow-wrap: anywhere; }
-.quick-read .guide-note, .term-questions .guide-note { font-size: 12px; line-height: 1.9; color: var(--zc-ink-3); }
-.quick-read-reminder { border-left: 3px solid var(--zc-bright-soft); padding-left: 14px; }
-.quick-read a:not(.citations a), .guide-original { display: inline-block; min-height: 44px; padding: 10px 0; color: var(--zc-green); font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
-.term-questions { margin: 28px 0; }
-.term-questions details { border-bottom: 1px solid var(--zc-line); }
-.term-questions summary { cursor: pointer; padding: 16px 8px; min-height: 48px; color: var(--zc-green-deep); font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
-.term-questions details > p, .term-questions .guide-original { margin: 0 8px 12px; }
-.reading-large .quick-read p, .reading-large .term-questions p { font-size: 18px; line-height: 2; }
-#article-quick-read, #article-questions { scroll-margin-top: 110px; }
-@media (max-width: 600px) { .quick-read { margin: 16px 18px; padding: 18px; } }
+.term-questions .guide-note {
+  margin-top: var(--s-1);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.term-questions p {
+  font-size: var(--t-15);
+  line-height: 1.9;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.term-questions .guide-original {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--s-1) 0;
+  color: var(--accent);
+  font-size: var(--t-13);
+}
+.term-questions .guide-original:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+#article-questions {
+  scroll-margin-top: calc(var(--header-h) + var(--s-3));
+}

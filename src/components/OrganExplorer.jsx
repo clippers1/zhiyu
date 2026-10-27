@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import OrganArtwork from "./OrganArtwork";
 import { useContent } from "../hooks";
-import { Citation, LoadState, SourceReferences } from "./ContentUI";
+import { Citation, LoadState, RunHead, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
@@ -15,36 +15,30 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
   const related = useContent("list", [{ kind: "indicator", ids: selected?.related || [], limit: 24 }]);
   const organs = catalog.data?.items || [];
   const relatedItems = related.data?.items || [];
+  const tabs = (className) => (
+    <div className={`organ-tabs ${className}`}>
+      {organs.map(({ id: key, title: name }) => (
+        <RouteLink page="organs" id={key}
+          key={key}
+          className={id === key ? "active" : ""}
+          onNavigate={() => onSelect(key)}
+        >
+          {name}
+        </RouteLink>
+      ))}
+    </div>
+  );
   return (
-    <>
-      <div className="organ-page-heading">
-        <h1>认识身体</h1>
-        <p>先了解一个器官的基本功能，再按需查看已开放的关联项目与来源。</p>
-      </div>
-      <div className="organ-tabs mobile-organ-tabs">
-        {organs.map(({ id: key, title: name }) => (
-          <RouteLink page="organs" id={key}
-            key={key}
-            className={id === key ? "active" : ""}
-            onNavigate={() => onSelect(key)}
-          >
-            {name}
-          </RouteLink>
-        ))}
-      </div>
+    <div className="organ-page">
+      <header className="organ-page-heading">
+        <RunHead><b>认识身体</b> / 结构与功能</RunHead>
+        <h1 className="statement">先认识器官，再理解指标。</h1>
+        <p className="lede">了解一个器官的基本功能，再按需查看已开放的关联项目与来源。关联不用于判断病因。</p>
+      </header>
+      {tabs("mobile-organ-tabs")}
       <section className={`organ-explorer${selected ? "" : " no-visual"}`}>
         <div className="organ-information">
-          <div className="organ-tabs desktop-organ-tabs">
-            {organs.map(({ id: key, title: name }) => (
-              <RouteLink page="organs" id={key}
-                key={key}
-                className={id === key ? "active" : ""}
-                onNavigate={() => onSelect(key)}
-              >
-                {name}
-              </RouteLink>
-            ))}
-          </div>
+          {tabs("desktop-organ-tabs")}
           <LoadState {...state} />
           {selected?.related?.length > 0 && <LoadState {...related} />}
           {selected && (
@@ -52,7 +46,7 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
               <span className="overline">{selected.en}</span>
               <h2>
                 {selected.name}
-                <span> / {selected.headline}</span>
+                <span>/ {selected.headline}</span>
               </h2>
               <p className="organ-description" id="organ-overview">
                 {selected.text}
@@ -101,6 +95,6 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
         <p>选择一个指标路线，回看概念或核对对应来源。</p>
         {relatedItems.map(item => <TopicReturn key={item.id} id={item.id} title={item.title} />)}
       </section>}
-    </>
+    </div>
   );
 }

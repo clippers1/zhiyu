@@ -1,29 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  CircleHelp,
   Settings2,
   Share2,
 } from "lucide-react";
 import { useContent } from "../hooks";
-import { Citation, LoadState, SourceReferences } from "./ContentUI";
+import {
+  BoundaryNote,
+  Caveat,
+  Citation,
+  LoadState,
+  NextEntry,
+  RunHead,
+  SourceReferences,
+} from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
 import { readingGuide } from "../services/reading-guide";
 import { TermQuestions } from "./ReadingGuide";
 import { contentTrust } from "../services/content-status";
+import { nextIndicator } from "../services/discovery";
+import { diagramFor } from "./Diagrams";
 
-function FigureBlock({ figure }) {
+function FigureBlock({ figure, id = "article-figure" }) {
   const [imageFailed, setImageFailed] = useState(false);
+  const imageRef = useRef(null);
   const refs = figure?.sourceIds || [];
+  const Diagram = diagramFor(figure?.diagram);
+  // 服务端先输出 <img>，请求可能在 hydration 前就失败，React 收不到那次
+  // error 事件；挂载后补查一次解码结果，避免一直停在坏图上。
+  useEffect(() => setImageFailed(false), [figure?.src]);
+  useEffect(() => {
+    const node = imageRef.current;
+    if (node?.complete && node.naturalWidth === 0) setImageFailed(true);
+  }, [figure?.src]);
   if (!figure || !refs.length) return null;
+  const selfMade = figure.attribution.kind === "self-made";
   return (
-    <figure className="article-figure" id="article-figure">
+    <figure className="article-figure" id={id}>
       <div className="article-figure-stage">
-        {imageFailed ? <p role="status">图片暂时无法显示，可继续阅读下方的文字解释与来源。</p> : <img
+        {Diagram ? (
+          <Diagram id={`${id}-diagram`} />
+        ) : imageFailed ? <p role="status">图片暂时无法显示，可继续阅读下方的文字解释与来源。</p> : <img
+          ref={imageRef}
           src={figure.src}
           alt={figure.alt}
           width={figure.width || undefined}
@@ -36,42 +58,101 @@ function FigureBlock({ figure }) {
       <figcaption>
         <span>{figure.caption}</span>
         <Citation ids={refs} references={figure.references} prefix="article-source" />
+        <small className="article-figure-attribution">
+          插图：
+          {selfMade ? (
+            <span>{figure.attribution.name}</span>
+          ) : (
+            <>
+              <a href={figure.attribution.url} target="_blank" rel="noreferrer">
+                {figure.attribution.name}
+              </a>
+              {" · "}
+              <a href={figure.attribution.licenseUrl} target="_blank" rel="noreferrer">
+                {figure.attribution.license}
+              </a>
+            </>
+          )}
+        </small>
       </figcaption>
       <p className="article-figure-note">
         <b>图示边界：</b>
         {figure.simplification}
       </p>
-      <small className="article-figure-attribution">
-        插图：
-        <a href={figure.attribution.url} target="_blank" rel="noreferrer">
-          {figure.attribution.name}
-        </a>
-        {" · "}
-        <a href={figure.attribution.licenseUrl} target="_blank" rel="noreferrer">
-          {figure.attribution.license}
-        </a>
-      </small>
     </figure>
   );
+}
+
+// Published figures are declared next to the prose they explain. A section can
+// name one by key; whatever is left over becomes the opening plate.
+function attachFigures(detail) {
+  const list = (detail?.figures || []).map(figure => ({ ...figure, references: detail.references }));
+  const byKey = new Map(list.map(figure => [figure.key, figure]));
+  const placed = new Set((detail?.sections || []).map(section => section.figure).filter(Boolean));
+  return {
+    byKey,
+    opening: list.find(figure => !placed.has(figure.key)) || null,
+    firstAnchor: list[0] ? (placed.has(list[0].key) ? `article-figure-${list[0].key}` : "article-figure") : null,
+  };
+}
+
+const SECTION_NUMBERS = ["一", "二", "三", "四", "五", "六", "七", "八", "九"];
+
+function SectionBody({ section, content, first }) {
+  return section.paragraphs.map((paragraph, index) => (
+    <p key={index} className={first && index === 0 ? "detail-intro" : undefined}>
+      {paragraph.text}
+      <Citation ids={paragraph.sourceIds} references={content.references} prefix="article-source" />
+    </p>
+  ));
+}
+
+function LongForm({ detail, figures }) {
+  return detail.sections.map((section, index) => (
+    <section className="article-section" key={section.title}>
+      <h2 id={index === 0 ? "article-overview" : `article-section-${index + 1}`}>
+        <i>{SECTION_NUMBERS[index] || index + 1}</i>
+        {section.title}
+      </h2>
+      <SectionBody section={section} content={detail} first={index === 0} />
+      {section.figure && figures.byKey.get(section.figure) && (
+        <FigureBlock
+          figure={figures.byKey.get(section.figure)}
+          id={`article-figure-${section.figure}`}
+        />
+      )}
+    </section>
+  ));
 }
 
 export default function Article({
   id,
   onBack,
   onOrgan,
+  onOpen,
   onTools,
 }) {
-  const state = useContent("get", ["indicator", id]);
+  // /article/:id serves both long-form indicators and stories, so the route is
+  // resolved against the shared reader namespace rather than a fixed kind.
+  const state = useContent("get", ["article", id]);
   const detail = state.data;
+  const isOrgan = detail?.kind === "organ";
+  const isStory = detail?.kind === "story";
+  const longForm = Boolean(detail?.sections?.length);
   const guide = readingGuide(detail);
   const trust = contentTrust(detail);
+  const catalog = useContent("list", [{ kind: isStory ? "story" : "indicator", limit: 24 }]);
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
+  const next = nextIndicator(catalog.data?.items, id, isStory ? "story" : "indicator");
+  const figures = attachFigures(detail);
+  const questions = longForm && detail?.faq?.length ? detail.faq : guide?.questions || [];
   const [shareMessage, setShareMessage] = useState("");
   const [showLink, setShowLink] = useState(false);
-  const figure = detail?.figure ? {
+  const entryFigure = !longForm && detail?.figure ? {
     ...detail.figure,
     references: detail.references,
   } : null;
+  const relatedOrgans = relatedState.data?.items || [];
   useEffect(() => {
     if (detail && window.location.hash === "#article-source-panel") {
       document.getElementById("article-source-panel")?.scrollIntoView();
@@ -100,105 +181,142 @@ export default function Article({
   return (
     <div className="article-reader">
       <div className="reading-bar">
-        <button onClick={onBack} aria-label="返回上一页">
-          <ArrowLeft size={20} />
-          <span>返回</span>
-        </button>
-        <span>知愈 · 体检项目</span>
-        <span className="reading-bar-tools">
+        <div className="reading-bar-left">
+          <button onClick={onBack} aria-label="返回上一页">
+            <ArrowLeft size={20} />
+            <span>返回</span>
+          </button>
+          <span className="reading-bar-context">
+            知愈 · {isOrgan ? "认识身体" : isStory ? "身体与日常" : "体检项目"}
+          </span>
+        </div>
+        <div className="reading-bar-tools">
           <button onClick={onTools} aria-label="偏好设置" aria-haspopup="dialog">
             <Settings2 size={18} />
-            <span>偏好</span>
           </button>
           <button onClick={share} disabled={!detail} aria-label="分享这篇知识">
             <Share2 size={18} />
-            <span>分享</span>
           </button>
-        </span>
+        </div>
       </div>
+      <p className="share-message" role="status">{shareMessage}</p>
       <LoadState {...state} />
       {detail && (
         <article>
-          <div className={`detail-heading ${detail.color}`}>
-            <span className="overline">{detail.english}</span>
+          <header className="article-head">
+            <RunHead>
+              {isStory ? (
+                <><b>身体与日常</b> / 长文</>
+              ) : (
+                <>
+                  {detail.number ? `${detail.number} / ` : ""}
+                  <b>{detail.title}</b>
+                  {detail.english && <span className="article-english"> {detail.english}</span>}
+                </>
+              )}
+            </RunHead>
             <h1>{detail.question || `认识${detail.title}`}</h1>
-            <p className="review-notice">{trust.label}</p>
             {detail.questionAnswer && (
-              <p className="detail-answer" id="article-answer">
-                {detail.questionAnswer}
-              </p>
+              <p className="detail-answer" id="article-answer">{detail.questionAnswer}</p>
             )}
-            {detail.tip && <div className="detail-tip article-priority-limit" id="article-reminder">
-              <CircleHelp size={19} aria-hidden="true" />
-              <div>
-                <b>不能仅凭这一项判断</b>
-                <p>{detail.tip}<Citation ids={detail.tipSourceIds} references={detail.references} prefix="article-source" /></p>
-              </div>
-            </div>}
-            <a
-              className="source-jump"
-              href="#article-source-panel"
-            >
-              {detail.references.length} 份参考资料 · 整理于 {detail.updatedAt}
-              <ArrowRight size={13} />
-            </a>
-          </div>
-          {figure && <FigureBlock key={detail.id} figure={figure} />}
-          <div className="article-share-entry"><ShareCardButton content={detail} /></div>
-            <nav className="reading-toc" aria-label="文章目录">
-              <span>深入阅读</span>
-              <a href="#article-overview">它是什么</a>
-              {figure && <a href="#article-figure">图解</a>}
-              <a href="#article-metrics">常见项目</a>
-              {Boolean(guide?.questions.length) && <a href="#article-questions">术语问答</a>}
-              <a href="#article-process">理解过程</a>
-              {detail.tip && <a href="#article-reminder">不能说明什么</a>}
-              <a href="#article-source-panel">核对来源</a>
-            </nav>
+            {detail.tip && (
+              <Caveat id="article-reminder" title={isStory ? "不能只凭这一点判断" : "不能仅凭这一项判断"}>
+                {detail.tip}
+                <Citation ids={detail.tipSourceIds} references={detail.references} prefix="article-source" />
+              </Caveat>
+            )}
+          </header>
+          {entryFigure && <FigureBlock key={detail.id} figure={entryFigure} />}
+          {figures.opening && <FigureBlock key={`${detail.id}-opening`} figure={figures.opening} />}
+          <nav className="reading-toc" aria-label="文章目录">
+            <span>深入阅读</span>
+            <a href="#article-overview">它是什么</a>
+            {figures.firstAnchor && <a href={`#${figures.firstAnchor}`}>图解</a>}
+            {longForm && detail.sections.slice(1).map((section, index) => (
+              <a key={section.title} href={`#article-section-${index + 2}`}>{section.short || section.title}</a>
+            ))}
+            {Boolean(detail.metrics?.length) && <a href="#article-metrics">常见项目</a>}
+            {questions.length > 0 && <a href="#article-questions">{longForm && detail.faq?.length ? "常见问题" : "术语问答"}</a>}
+            {!longForm && detail.chain?.length > 0 && <a href="#article-process">理解过程</a>}
+            {detail.tip && <a href="#article-reminder">不能说明什么</a>}
+            <a href="#article-source-panel">核对来源</a>
+          </nav>
           <div className="detail-body">
-            <p className="detail-intro" id="article-overview">
-              {detail.desc}
-              <Citation
-                ids={detail.descriptionSourceIds}
-                references={detail.references}
-                prefix="article-source"
-              />
-            </p>
-            <h2 id="article-metrics">常见相关项目</h2>
-            <div className="metric-list">
-              {detail.metrics.map((metric, i) => (
-                <div key={metric.name}>
-                  <span>0{i + 1}</span>
-                  <div>
-                    <h3>{metric.name}</h3>
-                    <p>
-                      {metric.text}
-                      <Citation
-                        ids={metric.sourceIds}
-                        references={detail.references}
-                        prefix="article-source"
-                      />
-                    </p>
-                  </div>
+            {longForm ? (
+              <>
+                <LongForm detail={detail} figures={figures} />
+                {Boolean(detail.metrics?.length) && (
+                  <>
+                    <h2 id="article-metrics">{isStory ? "" : <i>附</i>}常见项目与分工</h2>
+                    <div className="metric-list">
+                      {detail.metrics.map((metric, i) => (
+                        <div key={metric.name}>
+                          <span>0{i + 1}</span>
+                          <div>
+                            <h3>{metric.name}</h3>
+                            <p>
+                              {metric.text}
+                              <Citation
+                                ids={metric.sourceIds}
+                                references={detail.references}
+                                prefix="article-source"
+                              />
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <h2 id="article-overview"><i>一</i>它是什么</h2>
+                <p className="detail-intro">
+                  {detail.desc}
+                  <Citation
+                    ids={detail.descriptionSourceIds}
+                    references={detail.references}
+                    prefix="article-source"
+                  />
+                </p>
+                <h2 id="article-metrics"><i>二</i>一组指标，各有分工</h2>
+                <div className="metric-list">
+                  {detail.metrics.map((metric, i) => (
+                    <div key={metric.name}>
+                      <span>0{i + 1}</span>
+                      <div>
+                        <h3>{metric.name}</h3>
+                        <p>
+                          {metric.text}
+                          <Citation
+                            ids={metric.sourceIds}
+                            references={detail.references}
+                            prefix="article-source"
+                          />
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <TermQuestions guide={guide} content={detail} />
-            <h2 id="article-process">把身体里的过程串起来</h2>
-            <div className="detail-chain">
-              {detail.chain.map((step, i) => (
-                <React.Fragment key={step}>
-                  <span>
-                    <i>{i + 1}</i>
-                    {step}
-                  </span>
-                  {i < detail.chain.length - 1 && <ArrowRight size={16} />}
-                </React.Fragment>
-              ))}
-            </div>
+                <h2 id="article-process"><i>三</i>身体里发生的过程</h2>
+                <div className="detail-chain">
+                  {detail.chain.map((step, i) => (
+                    <React.Fragment key={step}>
+                      <span>
+                        <i>{i + 1}</i>
+                        {step}
+                      </span>
+                      {i < detail.chain.length - 1 && <ArrowRight size={16} />}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </>
+            )}
+            <TermQuestions items={questions} content={detail} />
             <div className="detail-related">
-              <span>关联器官：{detail.organ}</span>
-              {(relatedState.data?.items || []).map((organ, index) => <RouteLink page="organs" id={organ.id}
+              {detail.organ && <span>关联器官：{detail.organ}</span>}
+              {relatedOrgans.map((organ, index) => <RouteLink page="organs" id={organ.id}
                 key={organ.id}
                 className="text-link"
                 onNavigate={() => onOrgan(organ.id)}
@@ -207,29 +325,27 @@ export default function Article({
               </RouteLink>)}
             </div>
             <SourceReferences content={detail} prefix="article-source" />
-            <p className="article-disclaimer">
-              本文用于认识指标，不提供个人诊断或治疗方案。请结合体检报告及医生建议理解结果。
-            </p>
-            <section className="topic-followup" aria-label="接下来读什么">
-              <h2>接下来读什么？</h2>
-              <p>可继续了解本文关联的器官，或再选一个体检项目。关联不用于判断个人病因。</p>
+            <BoundaryNote trust={trust}>
+              {isStory
+                ? "本文用于认识身体与日常现象，不解释个人检查结果，也不构成诊断或治疗建议。"
+                : "本文用于认识指标名称与相互关系，不解释个人报告，也不构成诊断或治疗建议。请结合体检报告及医生建议理解结果。"}
+            </BoundaryNote>
+            <div className="article-share-entry"><ShareCardButton content={detail} /></div>
+            <section className="topic-followup" aria-label="继续阅读">
+              <h2>继续读</h2>
+              <p>
+                {relatedOrgans.length
+                  ? "可继续了解本文关联的器官，或再选一个体检项目。关联不用于判断个人病因。"
+                  : "可以继续读下一篇，或回到项目索引换一个体检项目。"}
+              </p>
               <LoadState {...relatedState} />
-              {(relatedState.data?.items || []).map(organ => <RouteLink key={organ.id} page="organs" id={organ.id} onNavigate={() => onOrgan(organ.id)} className="text-link">继续了解{organ.title} <ArrowRight size={15} /></RouteLink>)}
-              <TopicReturn id={id} title={detail.title} />
+              {relatedOrgans.map(organ => <RouteLink key={organ.id} page="organs" id={organ.id} onNavigate={() => onOrgan(organ.id)} className="text-link">继续了解{organ.title} <ArrowRight size={15} /></RouteLink>)}
+              {!isStory && <TopicReturn id={id} title={detail.title} />}
               <RouteLink page="topics" className="text-link">从其他体检问题继续读 <ArrowRight size={15} /></RouteLink>
             </section>
+            <NextEntry item={next} onOpen={onOpen} />
           </div>
         </article>
-      )}
-      {detail && (
-        <div className="reading-actions is-ready">
-          <div aria-live="polite">
-            {shareMessage || "觉得有用，就分享给需要的人"}
-          </div>
-          <div className="reading-actions-buttons">
-            <ShareCardButton content={detail} />
-          </div>
-        </div>
       )}
       {showLink && (
         <input

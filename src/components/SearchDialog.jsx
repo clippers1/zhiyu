@@ -34,26 +34,26 @@ export default function SearchDialog({ onOpen, onOrgan }) {
               : "从一个项目名或你的问题开始"}
           </p>
           <div className="search-results">
-            {state.data.items.map((result) => (
-              <RouteLink page={result.kind === "indicator" ? "article" : "organs"} id={result.id}
+            {state.data.items.map((result) => {
+              const page = result.kind === "indicator" ? "article" : result.kind === "story" ? "article" : "organs";
+              const type = result.kind === "indicator" ? "项目" : result.kind === "story" ? "长文" : "器官";
+              return (
+              <RouteLink page={page} id={result.id}
                 key={`${result.kind}-${result.id}`}
                 onNavigate={() =>
-                  result.kind === "indicator"
-                    ? onOpen(result.id)
-                    : onOrgan(result.id)
+                  result.kind === "organ" ? onOrgan(result.id) : onOpen(result.id)
                 }
               >
                 <span>
-                  <span className="search-type">
-                    {result.kind === "indicator" ? "项目" : "器官"}
-                  </span>
-                  <b>{result.kind === "indicator" && result.question ? result.question : result.title}</b>
-                  <small>{result.kind === "indicator" ? result.questionAnswer || result.subtitle : result.subtitle}</small>
+                  <span className="search-type">{type}</span>
+                  <b>{result.kind !== "organ" && result.question ? result.question : result.title}</b>
+                  <small>{result.kind !== "organ" ? result.questionAnswer || result.subtitle : result.subtitle}</small>
                   {result.match && <small className="search-match">匹配：{result.match}</small>}
                 </span>
                 <ArrowUpRight size={18} />
               </RouteLink>
-            ))}
+              );
+            })}
             {state.data.total === 0 && (
               <div className="search-empty">
                 <Search size={26} />
