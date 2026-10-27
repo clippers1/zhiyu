@@ -5,6 +5,7 @@ import {
   createContentRepository,
   selectPage,
 } from "../src/services/content.js";
+import { DIAGRAM_NAMES } from "../src/services/diagram-names.js";
 
 const KIND_DIRS = ["indicator", "organ", "story"];
 const chineseChars = value => (String(value || "").match(/[一-鿿]/g) || []).length;
@@ -98,6 +99,7 @@ test("all published demo content has valid references, related records and index
       // a static PNG under /media/ with a full attribution record.
       if (figure.diagram) {
         assert.match(figure.diagram, /^[a-z0-9-]+$/);
+        assert.ok(DIAGRAM_NAMES.includes(figure.diagram), `${entry.id}: unknown diagram ${figure.diagram}`);
         assert.equal(figure.src, undefined, `${entry.id}: diagram figures carry no file path`);
       } else {
         assert.match(figure.src, /^\/media\/[a-z0-9-]+\.png$/);

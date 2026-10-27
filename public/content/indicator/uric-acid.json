@@ -18,10 +18,209 @@
     "血清尿酸",
     "SUA",
     "uric acid test",
-    "purine"
+    "purine",
+    "嘌呤",
+    "高尿酸"
   ],
   "number": "07",
+  "format": "article",
+  "featured": false,
   "desc": "尿酸是身体分解嘌呤时形成的废物。大部分尿酸溶在血液中，经肾脏过滤后随尿液排出；尿酸检查可以使用血液或尿液样本。",
+  "sections": [
+    {
+      "title": "尿酸从哪里来",
+      "short": "从哪里来",
+      "paragraphs": [
+        {
+          "text": "嘌呤是一类化学物质，身体细胞更新时会释放，也存在于某些食物和饮料中。身体分解嘌呤后，会形成尿酸。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "食物来源的嘌呤主要与动物内脏、部分海鲜和某些饮料有关；身体自身细胞更新也会持续产生嘌呤，这一部分不受饮食控制。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "尿酸是正常的代谢废物，不是外来毒素。问题的关键通常不在「有没有」，而在生成量与排出量之间是否平衡。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "大部分人日常产生的尿酸都能被处理掉；只有当生成过多或排出不足时，血液中的尿酸才可能逐渐升高。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "尿酸怎样离开身体",
+      "short": "怎样排出",
+      "paragraphs": [
+        {
+          "text": "尿酸溶在血液中运输，主要经肾脏过滤后随尿液排出。因此肾脏的排出能力，是决定血尿酸水平的重要一环。",
+          "sourceIds": [
+            "uric-acid",
+            "kidney"
+          ]
+        },
+        {
+          "text": "尿酸检查既可以用血液样本，也可以用尿液样本。血液检查反映的是当时血液中的水平；尿液检查观察的是一段时间内从尿液排出的量。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "两者回答的问题不同：一个看「血里有多少」，一个看「排出了多少」。单看其中一个，很难判断问题出在生成还是排出环节。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "尿液检查有时需要收集一段时间的全部尿液，而不是单次取样。留取方式会直接影响结果的含义，检查前应确认清楚。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "水平升高，可能来自哪一环",
+      "short": "可能来自哪一环",
+      "paragraphs": [
+        {
+          "text": "血尿酸升高可能因为身体生成得更多，也可能因为肾脏排出得更少。饮食中嘌呤较多、饮酒、某些疾病和药物都可能参与其中。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "单次结果无法区分是生成问题还是排出问题。这正是为什么医生可能需要同时看血液和尿液结果，或者安排复查。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "另外，尿酸水平本身也会波动。近期饮食、饮水量和身体状态都可能影响某一次测量，所以趋势通常比单点更有信息量。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "所以看到一次偏高的结果，更有意义的做法是回忆当时的饮食、饮酒和用药情况，并把它告诉医生，而不是自己调整饮食试图「压下去」。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "尿酸与关节、肾脏的关系",
+      "short": "与关节肾脏",
+      "paragraphs": [
+        {
+          "text": "当血液中的尿酸持续偏高时，它可能在关节及周围组织中形成结晶，引起疼痛和肿胀。这种情况在医学上有专门的名称，但本文不讨论疾病诊断。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "这些情况的出现与尿酸水平、持续时间和个体情况都有关系，不能简单地用「尿酸高就一定会发生」来描述。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "尿酸也可能参与尿路结石的形成。不过并不是所有尿酸高的人都会出现这些问题，个体差异很大。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "因此，看到尿酸偏高时，重要的不是自己对照某个数字下结论，而是把它交给医生，结合症状、病史和其他检查一起理解。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "拿到结果时先确认什么",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先确认样本类型：这次查的是血尿酸，还是尿尿酸，还是两者都有。它们的参考区间和含义都不同。",
+          "sourceIds": [
+            "uric-acid",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "再确认检查条件：近期饮食、饮酒、饮水和用药都可能影响结果。把这些信息告诉医生，比反复猜测数字更有帮助。",
+          "sourceIds": [
+            "uric-acid"
+          ]
+        },
+        {
+          "text": "如果同一份报告里还有肾功能项目，可以一起看：尿酸排出依赖肾脏，两者放在一起能提供更完整的背景。",
+          "sourceIds": [
+            "uric-acid",
+            "kidney",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "本文只解释尿酸的形成、排出和检查形式，不提供阈值、饮食处方或用药建议，也不判断个人结果。",
+          "sourceIds": [
+            "uric-acid",
+            "lab-results"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "尿酸高一定是吃出来的吗？",
+      "answer": "不一定。尿酸水平取决于生成和排出两方面，饮食只是其中一个因素。肾脏排出能力、某些疾病和药物也可能参与，需要医生综合判断。",
+      "sourceIds": [
+        "uric-acid"
+      ]
+    },
+    {
+      "question": "血尿酸和尿尿酸，哪个更准？",
+      "answer": "两者回答的问题不同：血尿酸反映血液中的水平，尿尿酸反映一段时间内的排出量。它们不是互相替代的关系，是否需要同时检查由医生决定。",
+      "sourceIds": [
+        "uric-acid"
+      ]
+    },
+    {
+      "question": "尿酸偏高但没有症状，需要处理吗？",
+      "answer": "本文不提供个人处理建议。是否需要进一步检查或干预，取决于数值、持续时间、伴随情况和整体健康状况，应由医生评估。",
+      "sourceIds": [
+        "uric-acid"
+      ]
+    },
+    {
+      "question": "喝水多能降尿酸吗？",
+      "answer": "饮水量会影响尿液浓缩程度，但本文不提供饮水或饮食处方。任何生活调整都应与医生讨论，尤其是已经存在肾脏或其他健康问题时。",
+      "sourceIds": [
+        "uric-acid"
+      ]
+    },
+    {
+      "question": "查尿酸要空腹吗？",
+      "answer": "要求因机构和检查组合而异，部分机构会要求空腹。具体准备方式以开具检查时的说明为准。",
+      "sourceIds": [
+        "uric-acid",
+        "lab-results"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "血尿酸",
@@ -55,6 +254,22 @@
     "uric-acid"
   ],
   "tip": "饮食、药物、肾脏排出和身体代谢都可能影响尿酸。一次结果只能描述当时的测量情况，不能单独用来判断原因或决定治疗。",
+  "figures": [
+    {
+      "key": "path",
+      "diagram": "uric-acid-path",
+      "alt": "示意图：嘌呤分解形成尿酸进入血液，经肾脏过滤后随尿液排出；生成过多或排出不足都可能让血尿酸升高。",
+      "caption": "尿酸的两端：生成与排出。",
+      "simplification": "图为路径示意，省略了肠道等其他排出途径与多种影响因素，也未按真实比例绘制。",
+      "sourceIds": [
+        "uric-acid"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "肾脏 · 血液 · 尿液",
   "relatedOrgans": [
     {
@@ -64,9 +279,8 @@
   ],
   "kind": "indicator",
   "category": "metabolism",
-  "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -79,8 +293,32 @@
       "title": "Uric Acid Test",
       "url": "https://medlineplus.gov/lab-tests/uric-acid-test/",
       "scope": "尿酸的形成、肾脏排出以及血液和尿液检查",
-      "locator": "What is a uric acid test?; What is it used for?; What do the results mean?",
-      "accessedAt": "2026-09-20",
+      "locator": "What is a uric acid test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源与结果解释限制",
+      "locator": "What is a reference range?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "kidney",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+      "scope": "肾脏过滤血液、生成尿液的过程",
+      "locator": "How do my kidneys work?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null

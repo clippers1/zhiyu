@@ -52,9 +52,16 @@ try {
   }
   await page.close();
 
-  // An entry-style article without figures keeps the plain reading path.
+  // An article whose record carries no figure keeps the plain reading path.
   const plain = await browser.newPage({ viewport: { width: 390, height: 844 } });
   plain.on('pageerror', error => errors.push(`plain: ${error.message}`));
+  const source = JSON.parse(await readFile('public/content/indicator/cbc.json', 'utf8'));
+  const bare = {
+    ...source,
+    figures: [],
+    sections: source.sections.map(({ figure, ...section }) => section),
+  };
+  await plain.route('**/content/indicator/cbc.json', route => route.fulfill({ json: bare }));
   await plain.goto(`${base}/article/cbc`, { waitUntil: 'networkidle' });
   await expect(plain.locator('.article-figure')).toHaveCount(0);
   await expect(plain.locator('svg.diagram')).toHaveCount(0);

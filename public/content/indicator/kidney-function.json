@@ -22,10 +22,204 @@
     "肾小球滤过率",
     "尿微量白蛋白",
     "UACR",
-    "ACR"
+    "ACR",
+    "肾功能检查",
+    "kidney function"
   ],
   "number": "06",
+  "format": "article",
+  "featured": false,
   "desc": "肾功能通常要结合血液和尿液项目理解。血肌酐是计算估算肾小球滤过率（eGFR）的常用依据，尿白蛋白肌酐比则观察尿中白蛋白与肌酐的关系。",
+  "sections": [
+    {
+      "title": "肾脏在做什么，检查在测什么",
+      "short": "肾脏在做什么",
+      "paragraphs": [
+        {
+          "text": "肾脏每天过滤大量血液，把代谢废物和多余的水分排出去，同时把身体需要的物质留下来。过滤发生在肾小球里，那是一团细小的毛细血管。",
+          "sourceIds": [
+            "gfr",
+            "kidney"
+          ]
+        },
+        {
+          "text": "肾功能检查测的不是「肾脏本身」，而是通过血液和尿液里能测到的物质，侧面推断过滤和排泄的情况。这也是为什么通常需要好几个项目一起看。",
+          "sourceIds": [
+            "gfr"
+          ]
+        },
+        {
+          "text": "肾脏还参与调节水盐、酸碱平衡，并通过激素影响血压和红细胞生成。这些功能不一定能从常规肾功能项目里直接读出来。",
+          "sourceIds": [
+            "kidney"
+          ]
+        },
+        {
+          "text": "过滤之后，肾小管还会把一部分有用的物质重新吸收回血液，并把废物继续留在尿液里。这个「先过滤再回收」的过程，是肾脏既能排出废物、又不浪费身体所需物质的原因。",
+          "sourceIds": [
+            "kidney"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "血肌酐：一个常用的观察窗口",
+      "short": "血肌酐",
+      "paragraphs": [
+        {
+          "text": "肌酐是肌肉日常活动产生的废物，主要由肾脏从血液中过滤后随尿液排出。血液里的肌酐水平，因此常被用来观察肾脏的过滤情况。",
+          "sourceIds": [
+            "creatinine"
+          ]
+        },
+        {
+          "text": "但肌酐也受肌肉量影响：肌肉多的人基础值可能更高，肌肉少的人可能偏低。同样的肾功能，在不同人身上测出的肌酐不一定相同。",
+          "sourceIds": [
+            "creatinine"
+          ]
+        },
+        {
+          "text": "所以血肌酐正常，并不总是等于肾脏完全正常；单次升高，也不能直接说明具体原因。",
+          "sourceIds": [
+            "creatinine"
+          ]
+        },
+        {
+          "text": "有些医院会同时报告尿肌酐。它和血肌酐回答的问题不同：血肌酐反映血液里的水平，尿肌酐则描述一段时间内从尿液排出的量。",
+          "sourceIds": [
+            "creatinine"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "eGFR：把肌酐换算成一个更直观的数字",
+      "short": "eGFR",
+      "paragraphs": [
+        {
+          "text": "估算肾小球滤过率（eGFR）通常根据血肌酐以及年龄、性别等信息计算，用来描述肾脏过滤血液的总体能力。它把肌酐这个间接指标换算成了一个更直观的数字。",
+          "sourceIds": [
+            "gfr"
+          ]
+        },
+        {
+          "text": "eGFR 是「估算」值，不是直接测量出来的。直接测量 GFR 需要注射特定物质并观察清除速度，操作复杂，通常只在特定情况下使用。",
+          "sourceIds": [
+            "gfr"
+          ]
+        },
+        {
+          "text": "因为是估算，eGFR 在不同人之间的可比性有限。年龄、体型和其他健康状况都会影响结果，报告上的区间也需要结合这些因素理解。",
+          "sourceIds": [
+            "gfr"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "尿白蛋白：从尿液一侧补充信息",
+      "short": "尿白蛋白",
+      "paragraphs": [
+        {
+          "text": "尿白蛋白检查使用的是一次尿样，通常不需要留取整天的尿液；这也是它便于复查的原因之一。",
+          "sourceIds": [
+            "uacr"
+          ]
+        },
+        {
+          "text": "白蛋白是血液中常见的蛋白质，正常情况下只有极微量会通过肾脏进入尿液。如果尿液中白蛋白明显增多，可能提示肾小球过滤出现了变化。",
+          "sourceIds": [
+            "uacr"
+          ]
+        },
+        {
+          "text": "单次尿液的浓淡会影响白蛋白的浓度，所以常用尿白蛋白与肌酐的比值（UACR）来表示，减少喝水多少带来的干扰。",
+          "sourceIds": [
+            "uacr"
+          ]
+        },
+        {
+          "text": "尿白蛋白也可能因为运动、发热、某些药物等因素短暂升高。因此异常结果通常需要复查确认，而不是一次就下结论。",
+          "sourceIds": [
+            "uacr"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "三个项目怎么互相补充",
+      "short": "互相补充",
+      "paragraphs": [
+        {
+          "text": "血肌酐提供过滤的间接线索，eGFR 把它换算成总体过滤能力的估算值，尿白蛋白则从「漏出了多少」这个角度提供信息。三者观察的不是同一件事。",
+          "sourceIds": [
+            "creatinine",
+            "gfr",
+            "uacr"
+          ]
+        },
+        {
+          "text": "这也是为什么医生常常同时开血液和尿液检查：只看血液，可能错过尿液一侧的变化；只看尿液，也无法了解总体过滤能力。",
+          "sourceIds": [
+            "gfr",
+            "uacr"
+          ]
+        },
+        {
+          "text": "如果几个项目指向的方向不一致，医生可能会重复检查或增加其他项目，而不是凭单一结果下结论。",
+          "sourceIds": [
+            "creatinine",
+            "uacr"
+          ]
+        },
+        {
+          "text": "本文只解释项目名称与相互关系，不提供分期阈值、疾病判断或治疗建议。结果的含义需要医生结合年龄、病史、用药和其他检查来解释。",
+          "sourceIds": [
+            "gfr",
+            "creatinine"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "肌酐正常，肾功能就没问题吗？",
+      "answer": "不能这样推断。肌酐受肌肉量等因素影响，而且在肾脏问题的早期，血肌酐可能仍处于参考区间内。医生通常还会参考 eGFR、尿白蛋白和其他检查。",
+      "sourceIds": [
+        "creatinine",
+        "gfr"
+      ]
+    },
+    {
+      "question": "eGFR 和直接测的 GFR 有什么区别？",
+      "answer": "eGFR 是根据血肌酐等信息计算出的估算值；直接测量的 GFR 需要注射特定物质并观察清除速度，操作复杂，通常只在特定情况下使用。日常报告里的多为估算值。",
+      "sourceIds": [
+        "gfr"
+      ]
+    },
+    {
+      "question": "尿里有泡沫就是蛋白尿吗？",
+      "answer": "不一定。尿液出现泡沫可能和排尿速度、尿液浓缩程度等有关。是否存在白蛋白增多，需要靠尿白蛋白相关检查判断，不能凭外观下结论。",
+      "sourceIds": [
+        "uacr"
+      ]
+    },
+    {
+      "question": "查肾功能要空腹吗？",
+      "answer": "单纯肾功能血液检查通常不要求空腹，但如果同时查血脂、血糖等项目，可能会有空腹要求。具体以开具检查的机构说明为准。",
+      "sourceIds": [
+        "creatinine"
+      ]
+    },
+    {
+      "question": "尿白蛋白偏高一次，需要马上复查吗？",
+      "answer": "本文不提供个人处理建议。运动、发热、药物等都可能让结果短暂升高，是否需要复查、何时复查应由医生根据你的具体情况决定。",
+      "sourceIds": [
+        "uacr"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "血肌酐",
@@ -61,6 +255,23 @@
     "uacr"
   ],
   "tip": "肌酐、eGFR 和尿白蛋白提供的是不同角度。单次结果会受多种因素影响，不能只凭一个数值判断肾脏状态；持续变化通常比孤立结果更值得关注。",
+  "figures": [
+    {
+      "key": "filter",
+      "diagram": "kidney-filter",
+      "alt": "示意图：血液流经肾小球被过滤，血肌酐用于估算 eGFR；尿白蛋白肌酐比从尿液一侧补充过滤情况的信息。",
+      "caption": "血液和尿液两侧的项目，描述的是同一套过滤过程的不同侧面。",
+      "simplification": "图为过滤过程示意，省略了肾小管重吸收等环节，也未按真实比例绘制；箭头不表示过滤速度或数量。",
+      "sourceIds": [
+        "gfr",
+        "creatinine"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "肾脏 · 血液过滤 · 尿液",
   "relatedOrgans": [
     {
@@ -70,9 +281,8 @@
   ],
   "kind": "indicator",
   "category": "urinary",
-  "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -85,8 +295,8 @@
       "title": "Creatinine Test",
       "url": "https://medlineplus.gov/lab-tests/creatinine-test/",
       "scope": "肌酐来源、肾脏过滤和血液或尿液检测",
-      "locator": "What is a creatinine test?; What is it used for?",
-      "accessedAt": "2026-09-20",
+      "locator": "What is a creatinine test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -96,9 +306,9 @@
       "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
       "title": "Glomerular Filtration Rate (GFR) Test",
       "url": "https://medlineplus.gov/lab-tests/glomerular-filtration-rate-gfr-test/",
-      "scope": "eGFR 的含义、估算信息和解释限制",
-      "locator": "What is a glomerular filtration rate (GFR) test?; How is eGFR calculated?",
-      "accessedAt": "2026-09-20",
+      "scope": "eGFR 的含义、估算信息与直接测量 GFR 的区别",
+      "locator": "What are estimated glomerular filtration rate (eGFR) and GFR tests?; What do the results mean?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -108,9 +318,21 @@
       "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
       "title": "Microalbumin Creatinine Ratio",
       "url": "https://medlineplus.gov/lab-tests/microalbumin-creatinine-ratio/",
-      "scope": "尿白蛋白肌酐比的组成与用途",
-      "locator": "What is a microalbumin creatinine ratio test?; What is it used for?",
-      "accessedAt": "2026-09-20",
+      "scope": "尿白蛋白肌酐比的组成、用途与复查原因",
+      "locator": "What is a microalbumin creatinine ratio test?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "kidney",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+      "scope": "肾脏的过滤与调节功能",
+      "locator": "Why are the kidneys important?; How do my kidneys work?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null

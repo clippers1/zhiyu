@@ -22,10 +22,204 @@
     "ALP",
     "GGT",
     "TBIL",
-    "ALB"
+    "ALB",
+    "肝脏检查",
+    "liver panel"
   ],
   "number": "05",
+  "format": "article",
+  "featured": false,
   "desc": "肝功能检查不是单个数值，而是一组血液检测。它们测量某些酶、蛋白质和胆红素，帮助了解肝脏相关的细胞变化、胆汁处理和蛋白合成功能。",
+  "sections": [
+    {
+      "title": "「肝功能」是一组检查，不是一个指标",
+      "short": "一组检查",
+      "paragraphs": [
+        {
+          "text": "肝功能检查（也叫肝功能组合）从一份血液样本里测量几种由肝脏产生或处理的物质。常见项目包括白蛋白、总蛋白、几种酶和胆红素。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "之所以把它们放在一起，是因为肝脏承担的工作本来就不止一项：合成蛋白质、处理胆红素、参与胆汁生成。不同项目反映的是不同侧面。",
+          "sourceIds": [
+            "liver-tests",
+            "liver"
+          ]
+        },
+        {
+          "text": "所以「肝功能不好」不是一个可以由单项检查直接得出的结论。医生看的是一组结果之间形成的模式。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "肝脏是身体里少数承担多种任务的器官：它处理吸收来的营养，参与糖和脂类代谢，合成胆汁帮助消化脂肪，同时还要处理体内产生的废物。肝功能检查试图用血液里能测到的物质，侧面观察这些工作。",
+          "sourceIds": [
+            "liver"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ALT、AST 等酶：细胞状态的一条线索",
+      "short": "酶",
+      "paragraphs": [
+        {
+          "text": "ALT、AST、ALP、GGT 都是主要存在于肝脏的酶。酶是加速体内化学反应的蛋白质；当肝细胞受到影响时，血液中的酶水平可能发生变化。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "不同酶在体内的分布不完全相同，所以哪几种酶升高、升高多少，有时能提供不同方向的线索。但单凭一项酶，无法确定具体原因。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "酶的水平也会受到其他因素影响，例如药物、剧烈运动或其他器官的状况。这就是为什么异常结果通常需要结合病史一起解释。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "胆红素：红细胞分解后的处理",
+      "short": "胆红素",
+      "paragraphs": [
+        {
+          "text": "红细胞在体内有一定的寿命，分解后会产生胆红素。肝脏参与加工胆红素，并让它通过胆汁排出体外。",
+          "sourceIds": [
+            "liver-tests",
+            "hemoglobin"
+          ]
+        },
+        {
+          "text": "胆红素在报告里可能分为不同形式。不同形式的比例变化，提示的环节不同，这也是医生会把它们放在一起看的原因。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "胆红素需要经过肝脏加工，再随胆汁进入肠道。这个路径上任何一段发生变化，都可能让血液中的胆红素水平出现波动。",
+          "sourceIds": [
+            "liver-tests",
+            "liver"
+          ]
+        },
+        {
+          "text": "胆红素升高并不自动等于肝脏有问题：红细胞分解增加等情况也可能影响结果。判断需要结合其他项目。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "白蛋白与总蛋白：合成功能的侧面",
+      "short": "蛋白质",
+      "paragraphs": [
+        {
+          "text": "白蛋白是由肝脏制造的一种蛋白质，在血液中含量较高。总蛋白则包括白蛋白和球蛋白等其他蛋白质。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "球蛋白部分主要由免疫系统产生。所以总蛋白的组成变化，可能来自肝脏，也可能来自免疫系统的变化，需要分开看。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "因为白蛋白由肝脏合成，它的水平可以作为观察肝脏合成功能的一个侧面。但白蛋白也会受营养状况、其他疾病和体液分布影响。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "所以白蛋白偏低不能单独归因于肝脏。医生会把它和酶、胆红素以及其他检查结果放在一起考虑。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "读肝功能报告时，可以注意什么",
+      "short": "怎么读",
+      "paragraphs": [
+        {
+          "text": "先确认这份报告包含哪些项目。不同机构、不同体检套餐的组合可能不同，缺项会让判断受到限制。",
+          "sourceIds": [
+            "liver-tests",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "如果服用长期药物或补充剂，把清单一并告诉医生，比自己猜测哪一项受影响更可靠。一些药物确实会影响肝功能指标。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "再看这组结果是否呈现出某种模式：是酶的变化为主，还是胆红素或蛋白质的变化为主。模式比单项数值更能说明方向。",
+          "sourceIds": [
+            "liver-tests"
+          ]
+        },
+        {
+          "text": "最后记住：本文只解释项目名称与分工，不提供正常范围、疾病判断或用药建议。异常结果的含义，需要医生结合症状、用药史和其他检查来解释。",
+          "sourceIds": [
+            "liver-tests",
+            "lab-results"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "转氨酶高就是肝炎吗？",
+      "answer": "不能这样判断。转氨酶升高可能与肝脏有关，也可能受药物、运动或其他因素影响。它是一条线索，需要结合其他肝功能项目、病史和检查才能解释。",
+      "sourceIds": [
+        "liver-tests"
+      ]
+    },
+    {
+      "question": "肝功能正常，肝脏就一定没问题吗？",
+      "answer": "不能这样推断。肝功能检查反映的是它所测量的那些侧面，并不能覆盖肝脏的全部状态。是否需要进一步检查，应由医生根据整体情况判断。",
+      "sourceIds": [
+        "liver-tests",
+        "lab-results"
+      ]
+    },
+    {
+      "question": "为什么每次体检的肝功能项目不完全一样？",
+      "answer": "肝功能是一组检查的统称，具体包含哪些项目取决于机构、套餐和检查目的。比较两次结果前，先确认项目组合是否相同。",
+      "sourceIds": [
+        "liver-tests"
+      ]
+    },
+    {
+      "question": "查肝功能要空腹吗？",
+      "answer": "部分项目会受进食影响，具体要求取决于检查组合和机构安排。应按开具检查时的说明准备；如果同时查血脂等项目，通常会有空腹要求。",
+      "sourceIds": [
+        "liver-tests",
+        "lab-results"
+      ]
+    },
+    {
+      "question": "吃护肝保健品能改善肝功能指标吗？",
+      "answer": "本文不提供任何补充剂或药物的效果判断。某些保健品和药物本身可能影响肝功能指标；是否使用、如何使用，应咨询医生或药师。",
+      "sourceIds": [
+        "liver-tests"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "ALT、AST 等酶",
@@ -50,15 +244,32 @@
     }
   ],
   "chain": [
-    "采集血液样本",
-    "测量酶、胆红素和蛋白质",
-    "观察多项结果组成的模式",
-    "结合病史、用药和其他检查解释"
+    "肝脏合成蛋白质",
+    "处理胆红素",
+    "生成并排出胆汁",
+    "细胞变化反映在酶水平上"
   ],
   "chainSourceIds": [
-    "liver-tests"
+    "liver-tests",
+    "liver"
   ],
   "tip": "“肝功能”包含多个项目，不是所有项目都直接代表肝脏功能，也不能凭一项异常判断原因。不同实验室的项目组合和参考区间可能不同。",
+  "figures": [
+    {
+      "key": "tests",
+      "diagram": "liver-tests",
+      "alt": "示意图：一份血液样本分别测量蛋白质、酶和胆红素三类物质，它们分别对应肝脏的合成、细胞状态和胆汁处理等不同侧面。",
+      "caption": "肝功能不是一项检查，而是几类物质放在一起看。",
+      "simplification": "图为项目分类示意，未按真实比例绘制，也省略了其他肝功能项目；分组仅用于说明不同侧面，不代表诊断分类。",
+      "sourceIds": [
+        "liver-tests"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "肝脏 · 胆汁 · 血液蛋白",
   "relatedOrgans": [
     {
@@ -68,9 +279,8 @@
   ],
   "kind": "indicator",
   "category": "metabolism",
-  "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -83,8 +293,44 @@
       "title": "Liver Function Tests",
       "url": "https://medlineplus.gov/lab-tests/liver-function-tests/",
       "scope": "常见肝功能项目、各项测量内容及综合解释原则",
-      "locator": "What are liver function tests?; What are they used for?; What do the results mean?",
-      "accessedAt": "2026-09-20",
+      "locator": "What are liver function tests?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "liver",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Your Digestive System & How it Works",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
+      "scope": "肝脏在消化与代谢中的作用，包括胆汁的生成",
+      "locator": "What is the digestive system?; How does my digestive system work?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hemoglobin",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Hemoglobin Test",
+      "url": "https://medlineplus.gov/lab-tests/hemoglobin-test/",
+      "scope": "红细胞与血红蛋白的携氧作用",
+      "locator": "What is a hemoglobin test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源、检测方法差异与结果解释限制",
+      "locator": "What is a reference range?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null

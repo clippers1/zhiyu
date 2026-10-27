@@ -27,8 +27,8 @@ try {
   await input.fill('eGFR');
   await page.locator('.question-row').click();
   await expect(page.getByRole('heading', { name: '肌酐和肾功能是什么关系？', exact: true })).toBeVisible();
-  await expect(page.locator('.source-list li')).toHaveCount(3);
-  await expect(page.getByText(/不提供分期阈值/)).toBeVisible();
+  await expect(page.locator('.source-list li')).toHaveCount(4);
+  await expect(page.getByText(/^不覆盖：不提供分期阈值/)).toBeVisible();
   await expect(page.getByRole('link', { name: /继续了解肾脏|探索肾脏/ })).toBeVisible();
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'mobile content expansion must not overflow');
   if (screenshotDir) {

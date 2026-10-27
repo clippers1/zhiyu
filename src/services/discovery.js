@@ -36,12 +36,14 @@ export function selectDiscovery(indicators = [], organs = [], stories = []) {
   // an editorial surface, not a catalog. Everything still comes from published
   // summaries; nothing is generated or reordered by popularity.
   const feature = longForm[0] || orderedQuestions[0] || null;
+  const longFormRows = longForm.filter(item => item.id !== feature?.id).slice(0, 3);
+  // The strip above is editorial and capped; anything it cannot hold stays
+  // reachable in the index below. Nothing appears in both lists.
+  const listed = new Set([feature?.id, ...longFormRows.map(item => item.id)]);
   return {
     feature,
-    indexRows: orderedQuestions
-      .filter(item => item.id !== feature?.id && item.format !== "article")
-      .slice(0, 6),
-    longForm: longForm.filter(item => item.id !== feature?.id).slice(0, 3),
+    indexRows: orderedQuestions.filter(item => !listed.has(item.id)).slice(0, 6),
+    longForm: longFormRows,
     questions: orderedQuestions.slice(0, 3),
     stories: orderedStories,
     organs: availableOrgans.slice(0, 5),

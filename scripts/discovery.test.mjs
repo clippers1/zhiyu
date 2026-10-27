@@ -57,7 +57,7 @@ test("unreadable or absent summaries cannot create empty recommendations", () =>
   assert.deepEqual(selectDiscovery({}, {}), empty);
 });
 
-test("long-form articles and stories lead the feature, and the index stays short-form", () => {
+test("long-form articles and stories lead the feature, and each entry appears once", () => {
   const indicators = [
     question("alpha", "01"),
     question("beta", "02", { format: "article" }),
@@ -70,13 +70,24 @@ test("long-form articles and stories lead the feature, and the index stays short
   ];
   const result = selectDiscovery(indicators, [organ("heart")], stories);
   assert.equal(result.feature.id, "stairs");
-  // The featured story is not repeated underneath, and long-form indicators
-  // move out of the short index rather than appearing in both lists.
+  // The featured story is not repeated underneath; long-form entries fill the
+  // editorial strip first, and the index picks up whatever it cannot hold.
   assert.deepEqual(result.longForm.map(item => item.id), ["lab", "beta"]);
   assert.deepEqual(result.indexRows.map(item => item.id), ["alpha", "gamma"]);
   assert.deepEqual(result.stories.map(item => item.id), ["stairs", "lab"]);
   assert.equal(result.totalStories, 2);
   assert.equal(result.totalIndicators, 3);
+});
+
+test("a long-form entry the strip cannot hold stays reachable in the index", () => {
+  const indicators = ["01", "02", "03", "04", "05", "06"].map((number, index) =>
+    question(`long${index}`, number, { format: "article" }),
+  );
+  const result = selectDiscovery(indicators, []);
+  assert.equal(result.feature.id, "long0");
+  // Three rows fill the strip; the rest appear once, in the index below.
+  assert.deepEqual(result.longForm.map(item => item.id), ["long1", "long2", "long3"]);
+  assert.deepEqual(result.indexRows.map(item => item.id), ["long4", "long5"]);
 });
 
 test("without stories or long-form articles the first numbered indicator leads", () => {

@@ -67,8 +67,8 @@
   "kind": "indicator",
   "category": "urinary",
   "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -86,6 +86,42 @@
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
+    },
+    {
+      "id": "protein",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Protein in Urine",
+      "url": "https://medlineplus.gov/lab-tests/protein-in-urine/",
+      "scope": "尿液中蛋白质的来源、肾脏过滤与试纸筛查",
+      "locator": "What is a protein in urine test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "kidney",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work",
+      "scope": "肾脏过滤血液、生成尿液以及泌尿系统的基本结构",
+      "locator": "How do my kidneys work?; Why are the kidneys important?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "检查结果解释的限制与参考区间",
+      "locator": "What is a reference range?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
     }
   ],
   "descriptionSourceIds": [
@@ -93,5 +129,215 @@
   ],
   "tipSourceIds": [
     "urinalysis"
+  ],
+  "format": "article",
+  "figures": [
+    {
+      "key": "layers",
+      "diagram": "urinalysis-layers",
+      "alt": "示意图：同一份尿液样本分别进行外观观察、试纸化学检测和显微镜检查，三个层面提供不同信息。",
+      "caption": "一份样本，三个观察层面。",
+      "simplification": "图为检查流程示意，未按真实比例绘制；各层面包含的项目因机构和试纸不同而有差异，图中仅列出常见类别。",
+      "sourceIds": [
+        "urinalysis"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "title": "尿常规观察的是什么",
+      "short": "观察什么",
+      "paragraphs": [
+        {
+          "text": "尿常规也叫尿液分析，是对一份尿液样本进行的检查。它不测量某个单一物质，而是从外观、化学和显微镜几个层面描述这份尿液。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "尿液是肾脏过滤血液后形成的。健康肾脏每天过滤大量血液，把代谢废物和多余的水分排出去，同时把身体需要的物质留下。",
+          "sourceIds": [
+            "kidney"
+          ]
+        },
+        {
+          "text": "所以尿液里出现什么、有多少，可以间接反映过滤和排出过程的一些侧面。但它终究只是一份样本，不能替代对整个身体的判断。",
+          "sourceIds": [
+            "urinalysis",
+            "kidney"
+          ]
+        },
+        {
+          "text": "尿常规也是常见的组合检查：体检、入院、手术前或孕期都可能安排。不同场合的目的不同，项目组合也会随之变化。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "外观：颜色与清澈度",
+      "short": "外观",
+      "paragraphs": [
+        {
+          "text": "最直接的一步是看颜色和清澈程度。尿液的颜色与喝水量关系很大：喝水多时颜色偏淡，喝水少时偏深。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "食物、饮料和某些药物也会改变尿液颜色。这种变化通常不代表身体有问题，但会让单纯凭外观判断变得不可靠。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "清澈度描述的是尿液是否混浊。混浊可能与样本放置、结晶或细胞等成分有关，单凭这一点无法确定原因。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "因此外观更像是给后续检查的一个提示：它记录样本的状态，提示是否需要进一步看化学和显微镜结果。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "试纸化学：一次初筛",
+      "short": "试纸化学",
+      "paragraphs": [
+        {
+          "text": "试纸是一根带有多个检测区的小纸条，浸入尿液后按说明时间读取颜色变化。常见检测区包括酸碱度、蛋白质、葡萄糖、潜血、酮体等。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "每个检测区回答一个问题：尿液里是否出现了通常不该大量存在的物质。例如蛋白质在正常情况下只有极微量会进入尿液。",
+          "sourceIds": [
+            "protein"
+          ]
+        },
+        {
+          "text": "试纸是初筛工具，结果以颜色深浅分级，而不是精确数值。读数受样本浓度、放置时间和判读方式影响，异常结果常需要更精确的方法确认。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "具体包含哪些检测区，取决于所用试纸和检查目的。同一份样本用不同试纸，报告的项目可能不同，比较前应先确认组合是否一致。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "显微镜：看细胞与有形成分",
+      "short": "显微镜",
+      "paragraphs": [
+        {
+          "text": "显微镜检查通常需要把尿液离心，取沉渣放在玻片上观察。它能看见细胞、结晶、管型和其他有形成分。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "管型是蛋白质在肾小管内形成的管状结构。不同类型的有形成分指向不同环节，但这需要受过训练的人员判读。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "显微镜检查不一定每份尿常规都做。是否需要加做，往往取决于外观、试纸结果和检查目的。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "有形成分也可能来自样本本身，例如采集或放置过程中混入的细胞。异常发现通常需要结合其他结果和复查来判断。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "拿到报告，先确认什么",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先确认样本类型和留取方式：是晨尿还是随机尿，是单次取样还是留取一段时间，是否要求中段尿。方式不同，结果的含义也不同。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "再看这份报告包含哪些层面：只有试纸化学，还是也做了显微镜检查。项目组合不同，能回答的问题范围也不同。",
+          "sourceIds": [
+            "urinalysis"
+          ]
+        },
+        {
+          "text": "如果同时有血液检查结果，可以放在一起看。尿液反映的是排出的一侧，血液反映的是循环中的水平，两者互补而不是互相替代。",
+          "sourceIds": [
+            "kidney",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "本文只解释尿常规的组成与各层面分工，不提供疾病判断、阈值或个人结果解释。异常结果的含义，需要医生结合症状、病史和其他检查来说明。",
+          "sourceIds": [
+            "urinalysis",
+            "lab-results"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "尿液颜色深就是有问题吗？",
+      "answer": "不一定。颜色与喝水量关系很大，喝水少时尿液偏深是常见现象；食物、饮料和某些药物也会影响颜色。持续异常或伴随其他症状时，应由医生评估。",
+      "sourceIds": [
+        "urinalysis"
+      ]
+    },
+    {
+      "question": "试纸和显微镜，哪个更重要？",
+      "answer": "两者回答的问题不同。试纸是化学初筛，显微镜观察细胞、结晶、管型等有形成分；是否需要显微镜检查取决于检查目的和其他结果，不能简单比较哪一个更重要。",
+      "sourceIds": [
+        "urinalysis"
+      ]
+    },
+    {
+      "question": "尿蛋白阳性一定是肾脏问题吗？",
+      "answer": "不能这样判断。试纸检测的是初筛结果，可能受样本浓度等因素影响；蛋白质持续增多可能与肾脏有关，但需要更精确的检查和医生评估才能确定。",
+      "sourceIds": [
+        "protein",
+        "urinalysis"
+      ]
+    },
+    {
+      "question": "为什么有的尿常规没有显微镜检查？",
+      "answer": "尿常规的项目组合因机构、检查目的和初步结果而异。是否需要显微镜检查由开具检查的机构安排，具体以报告所列项目为准。",
+      "sourceIds": [
+        "urinalysis"
+      ]
+    },
+    {
+      "question": "留尿有什么讲究？",
+      "answer": "留取方式会影响结果，例如晨尿与随机尿的浓度不同，中段尿可减少污染。具体要求以开具检查时的说明为准，取样后应尽快送检。",
+      "sourceIds": [
+        "urinalysis"
+      ]
+    }
   ]
 }

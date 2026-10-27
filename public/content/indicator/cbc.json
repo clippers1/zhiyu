@@ -22,10 +22,190 @@
     "WBC",
     "RBC",
     "PLT",
-    "HGB"
+    "HGB",
+    "血象"
   ],
   "number": "04",
+  "format": "article",
+  "featured": false,
   "desc": "血常规也叫全血细胞计数（CBC），用一组结果描述血液中不同细胞的数量和部分特征。它把红细胞、白细胞和血小板放在同一张基础检查里观察。",
+  "sections": [
+    {
+      "title": "一张血常规，数的是几类血细胞",
+      "short": "几类血细胞",
+      "paragraphs": [
+        {
+          "text": "血常规不是一项检查，而是一组：它数的是血液里不同细胞的数量，并测量其中一部分细胞的大小。最常见的组合包括红细胞、白细胞、血小板，以及血红蛋白、红细胞压积等与红细胞相关的项目。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "这些项目放在同一张报告里，是因为它们共同描述血液这个「运输系统」的状态：谁在运氧、谁在防御、谁负责在破损处止血。分开看只能得到一个侧面。",
+          "sourceIds": [
+            "cbc",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "常见的做法是先看整组结果是否协调，再去看具体某一项。单看一个数字，很难判断它在整幅图里意味着什么。",
+          "sourceIds": [
+            "cbc"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "红细胞与血红蛋白：运送氧气的那一组",
+      "short": "红细胞",
+      "paragraphs": [
+        {
+          "text": "红细胞负责把氧气从肺运到全身各处的细胞。血红蛋白是红细胞里携带氧气的蛋白质，也是让血液呈红色的原因。红细胞压积描述的则是红细胞在血液中所占的比例。",
+          "sourceIds": [
+            "cbc",
+            "hemoglobin"
+          ]
+        },
+        {
+          "text": "血红蛋白低时，血液能携带的氧气总量会减少，人可能更容易疲倦或气短；但疲倦的原因很多，不能反过来凭感觉推断血红蛋白的高低，仍要以检测结果为准。",
+          "sourceIds": [
+            "hemoglobin"
+          ]
+        },
+        {
+          "text": "这三项经常一起出现，是因为它们从不同角度描述同一件事：红细胞有多少、每个红细胞里装了多少血红蛋白、红细胞占了血液的多大体积。任何一项单独变化，都可能有多种解释。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "平均红细胞体积（MCV）描述红细胞的平均大小。它不直接说明「好不好」，而是提供一个形状上的线索，帮助医生判断变化属于哪一类。",
+          "sourceIds": [
+            "cbc"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "白细胞：免疫系统的一部分",
+      "short": "白细胞",
+      "paragraphs": [
+        {
+          "text": "白细胞参与免疫反应。血常规通常报告白细胞总数；如果加做分类，还会分别报告不同类型白细胞的比例和数量。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "白细胞总数会随很多情况变化：感染、药物、应激、剧烈运动，甚至采血时间。因此它更像一个提示，而不是一个结论。",
+          "sourceIds": [
+            "cbc",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "分类结果能提供更多信息，但它同样需要结合症状和病史。白细胞升高不等于一定存在感染，降低也不等于免疫一定有问题。",
+          "sourceIds": [
+            "cbc"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "血小板：凝血时最先到场",
+      "short": "血小板",
+      "paragraphs": [
+        {
+          "text": "血小板是血液中的细胞碎片，参与止血。血管壁出现破损时，它们会聚集在破口处，帮助形成最初的封堵。",
+          "sourceIds": [
+            "cbc",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "血常规报告的血小板计数，描述一定体积血液中的血小板数量。数量只是凝血过程的一个环节，凝血还涉及多种血浆蛋白。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "血小板计数的读数也可能受采血过程影响，例如样本放置时间过长或采集不顺利。所以异常结果常需要复核，而不是立刻下结论。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "如果血小板计数与出血表现不一致，医生可能会要求复查或用另一次采血确认，以排除样本因素造成的误差。",
+          "sourceIds": [
+            "cbc"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么不宜只盯一个箭头",
+      "short": "一个箭头",
+      "paragraphs": [
+        {
+          "text": "报告单上的箭头表示这一项落在了参考区间之外。参考区间来自特定人群，健康人偶尔落在区间外并不罕见；落在区间内也不等于一定没有问题。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "红细胞、血红蛋白、红细胞压积经常同向变化，也经常一起偏离。医生通常看的是这组结果之间的关系，而不是单项的高低。",
+          "sourceIds": [
+            "cbc"
+          ]
+        },
+        {
+          "text": "本文只解释项目名称与基本分工，不提供参考值、异常原因判断或疾病诊断。若报告出现异常，应结合症状、既往结果和其他检查，由医生解释。",
+          "sourceIds": [
+            "cbc",
+            "lab-results"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "血常规能查出贫血吗？",
+      "answer": "血常规中的血红蛋白、红细胞计数和红细胞压积是观察贫血相关信息的常用项目，但单凭一次结果不足以判断原因或类型，还需要结合其他检查和医生评估。",
+      "sourceIds": [
+        "hemoglobin",
+        "cbc"
+      ]
+    },
+    {
+      "question": "白细胞高就是有感染吗？",
+      "answer": "不一定。白细胞总数会随感染、药物、应激、运动和时间等多种因素变化。它提供线索，但是否存在感染需要结合症状、体征和其他检查综合判断。",
+      "sourceIds": [
+        "cbc"
+      ]
+    },
+    {
+      "question": "为什么报告里有的项目叫「分类」？",
+      "answer": "白细胞分类是把白细胞按类型分别计数。它比白细胞总数提供更细的信息，但不是每份血常规都包含；是否加做取决于检查目的和机构安排。",
+      "sourceIds": [
+        "cbc"
+      ]
+    },
+    {
+      "question": "抽血前需要空腹吗？",
+      "answer": "血常规本身通常不需要特殊准备，但如果同一次还要查其他项目，可能需要空腹。具体以开具检查的机构说明为准。",
+      "sourceIds": [
+        "cbc"
+      ]
+    },
+    {
+      "question": "血小板偏低还能运动吗？",
+      "answer": "本文不提供个人运动或生活建议。血小板计数异常的程度、原因和伴随情况都需要医生评估，运动安排应遵循医生的具体意见。",
+      "sourceIds": [
+        "cbc"
+      ]
+    }
+  ],
   "metrics": [
     {
       "name": "红细胞、血红蛋白与红细胞压积",
@@ -59,6 +239,22 @@
     "cbc"
   ],
   "tip": "血常规是一组结果，不宜只盯一个箭头。参考区间会因实验室、人群和检测方法不同而变化，结果需要和症状、既往结果及其他检查一起理解。",
+  "figures": [
+    {
+      "key": "components",
+      "diagram": "cbc-components",
+      "alt": "示意图：一份血液样本被分成红细胞、白细胞和血小板三组分别计数，红细胞一项还包括血红蛋白与红细胞压积。",
+      "caption": "同一份血，按三类细胞分别计数，再合起来读。",
+      "simplification": "图为分类示意，不是显微镜下的真实图像，也未按真实比例绘制。图中省略了白细胞亚型、血小板形态等细节；箭头不表示数量。",
+      "sourceIds": [
+        "cbc"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
   "organ": "血液 · 骨髓 · 免疫系统",
   "relatedOrgans": [
     {
@@ -72,9 +268,8 @@
   ],
   "kind": "indicator",
   "category": "blood",
-  "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -87,8 +282,44 @@
       "title": "Complete Blood Count (CBC)",
       "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/",
       "scope": "血常规包含的主要细胞、血红蛋白、红细胞压积和红细胞体积",
-      "locator": "What is a complete blood count (CBC)?; What does a complete blood count measure?",
-      "accessedAt": "2026-09-20",
+      "locator": "What is a complete blood count (CBC)?; What do the results mean?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hemoglobin",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Hemoglobin Test",
+      "url": "https://medlineplus.gov/lab-tests/hemoglobin-test/",
+      "scope": "血红蛋白在红细胞中的携氧作用与检查用途",
+      "locator": "What is a hemoglobin test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "blood-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Blood Tests",
+      "url": "https://www.nhlbi.nih.gov/health/blood-tests",
+      "scope": "常见血液检查的用途与各类血细胞的基本作用",
+      "locator": "Types of blood tests — Complete blood count (CBC)",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源、检测方法差异与结果解释限制",
+      "locator": "What is a reference range?",
+      "accessedAt": "2026-10-27",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null

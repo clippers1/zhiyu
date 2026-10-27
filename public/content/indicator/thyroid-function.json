@@ -61,8 +61,8 @@
   "kind": "indicator",
   "category": "endocrine",
   "featured": false,
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-10-27",
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,
@@ -80,6 +80,54 @@
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
+    },
+    {
+      "id": "tsh",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "TSH (Thyroid Stimulating Hormone) Test",
+      "url": "https://medlineplus.gov/lab-tests/tsh-thyroid-stimulating-hormone-test/",
+      "scope": "TSH 的来源、垂体的反馈调节以及甲状腺激素的作用范围",
+      "locator": "What is a TSH test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "t4",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Thyroxine (T4) Test",
+      "url": "https://medlineplus.gov/lab-tests/thyroxine-t4-test/",
+      "scope": "T4 的来源、游离与结合两种形式，以及总 T4 与游离 T4 的区别",
+      "locator": "What is a thyroxine (T4) test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "t3",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Triiodothyronine (T3) Tests",
+      "url": "https://medlineplus.gov/lab-tests/triiodothyronine-t3-tests/",
+      "scope": "T3 的两种形式以及 T3 检查的用途",
+      "locator": "What is a triiodothyronine (T3) test?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的来源与结果解释限制",
+      "locator": "What is a reference range?",
+      "accessedAt": "2026-10-27",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
     }
   ],
   "descriptionSourceIds": [
@@ -87,5 +135,228 @@
   ],
   "tipSourceIds": [
     "thyroid-tests"
+  ],
+  "format": "article",
+  "figures": [
+    {
+      "key": "axis",
+      "diagram": "thyroid-axis",
+      "alt": "示意图：脑下垂体释放 TSH 调节甲状腺，甲状腺产生 T4 和 T3 供身体使用能量；血液中的激素水平又反过来影响 TSH 的释放。",
+      "caption": "一条反馈回路：垂体发信号，甲状腺产出激素，激素水平再回头影响信号。",
+      "simplification": "图为调节关系示意，省略了激素转运蛋白、组织转化等环节，也未按真实比例绘制；箭头不表示激素数量。",
+      "sourceIds": [
+        "thyroid-tests",
+        "tsh"
+      ],
+      "attribution": {
+        "kind": "self-made",
+        "name": "知愈自制示意图"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "title": "甲状腺在哪里，做什么",
+      "short": "甲状腺",
+      "paragraphs": [
+        {
+          "text": "甲状腺是位于颈部前方的一个小腺体，形状常被形容为蝴蝶。它产生的激素随血液到达全身，参与调节身体如何使用能量。",
+          "sourceIds": [
+            "thyroid-tests",
+            "tsh"
+          ]
+        },
+        {
+          "text": "甲状腺主要产生两种激素：甲状腺素（T4）和三碘甲状腺原氨酸（T3）。名称里的数字，指的是分子中碘原子的数量。",
+          "sourceIds": [
+            "thyroid-tests",
+            "t4"
+          ]
+        },
+        {
+          "text": "这些激素影响的范围很广：呼吸、心率、体重、消化，甚至情绪都与它有关；在儿童身上还影响生长。所以它更像一个调节全身节奏的信号，而不是只作用于某一个器官。",
+          "sourceIds": [
+            "tsh"
+          ]
+        },
+        {
+          "text": "甲状腺本身并不决定「该产生多少」，它接收来自脑部的指令。理解这套指令系统，是读懂甲功报告的关键。",
+          "sourceIds": [
+            "tsh",
+            "thyroid-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "TSH：垂体发出的调节信号",
+      "short": "TSH",
+      "paragraphs": [
+        {
+          "text": "大脑底部有一个很小的腺体叫垂体。垂体释放促甲状腺激素（TSH），TSH 随血液到达甲状腺，告诉它需要制造多少激素。",
+          "sourceIds": [
+            "tsh",
+            "thyroid-tests"
+          ]
+        },
+        {
+          "text": "这是一个反馈回路：血液中的甲状腺激素偏低时，垂体增加 TSH 的释放，让甲状腺加把劲；激素水平偏高时，垂体就减少甚至停止释放 TSH。",
+          "sourceIds": [
+            "tsh"
+          ]
+        },
+        {
+          "text": "因此 TSH 和 T4、T3 的变化方向常常相反。看到 TSH 与甲状腺激素「一高一低」，未必是矛盾，可能正是反馈在起作用。",
+          "sourceIds": [
+            "tsh",
+            "t4"
+          ]
+        },
+        {
+          "text": "这也是 TSH 常被当作观察甲状腺功能起点的原因：它反映的是垂体对血液中激素水平的回应，而不是激素本身。",
+          "sourceIds": [
+            "thyroid-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "T4 与 T3：结合与游离",
+      "short": "T4 与 T3",
+      "paragraphs": [
+        {
+          "text": "T4 是甲状腺产生的主要激素。它在血液中有两种存在形式：一部分与特定蛋白质结合，另一部分游离在血液中。",
+          "sourceIds": [
+            "t4"
+          ]
+        },
+        {
+          "text": "结合的 T4 暂时不能进入组织，相当于血液里的储备；游离的 T4 可以进入身体组织发挥作用。检查可以测总 T4（结合加游离），也可以只测游离 T4。",
+          "sourceIds": [
+            "t4",
+            "thyroid-tests"
+          ]
+        },
+        {
+          "text": "血液中结合蛋白的数量会因怀孕、某些药物或疾病而变化，从而影响总 T4 的读数，而游离 T4 受影响较小。这也是不少机构更常报告游离 T4 的原因。",
+          "sourceIds": [
+            "thyroid-tests",
+            "t4"
+          ]
+        },
+        {
+          "text": "T3 同样有游离与结合两种形式，且大部分 T3 与蛋白质结合。T3 检查通常是在特定情况下加做，用来补充 T4 和 TSH 提供的信息。",
+          "sourceIds": [
+            "t3",
+            "thyroid-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么常先查 TSH",
+      "short": "为什么先查 TSH",
+      "paragraphs": [
+        {
+          "text": "甲状腺功能检查通常从 TSH 开始。如果 TSH 落在参考区间内，往往说明这套反馈回路整体在预期范围内运转。",
+          "sourceIds": [
+            "thyroid-tests"
+          ]
+        },
+        {
+          "text": "如果 TSH 不在参考区间内，通常还需要至少一项其他检查，帮助判断变化发生在哪个环节，而不是只看这一个数字。",
+          "sourceIds": [
+            "thyroid-tests"
+          ]
+        },
+        {
+          "text": "只测 TSH 也有局限：它反映的是垂体的回应，而不是激素本身的水平。垂体自身的状态也可能影响 TSH 的释放，所以单看一项不足以描述全部。",
+          "sourceIds": [
+            "thyroid-tests",
+            "tsh"
+          ]
+        },
+        {
+          "text": "T4 和 T3 提供的是另一侧的信息：血液里实际有多少激素。两边放在一起，才能看出信号与产物是否匹配。此外，医生有时还会安排甲状腺抗体或超声检查，前者观察免疫系统是否参与，后者观察腺体的形态。",
+          "sourceIds": [
+            "t4",
+            "t3",
+            "thyroid-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "拿到甲功报告，先确认什么",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先看这份报告包含哪些项目：只有 TSH，还是同时有 T4、T3；测的是总 T4 还是游离 T4。项目不同，能回答的问题也不同。",
+          "sourceIds": [
+            "thyroid-tests",
+            "t4"
+          ]
+        },
+        {
+          "text": "再看参考区间和单位。不同实验室使用的方法和参考人群可能不同，跨机构的数值不宜直接比较。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "如果正在服用含甲状腺激素的药物，或含碘的药物与补充剂，把清单一并告诉医生。某些药物和生理状态会影响激素水平与结合蛋白。",
+          "sourceIds": [
+            "thyroid-tests"
+          ]
+        },
+        {
+          "text": "本文只解释激素名称与反馈关系，不提供参考范围、疾病判断或用药建议。结果的含义，需要医生结合症状、用药史和其他检查来解释。",
+          "sourceIds": [
+            "thyroid-tests",
+            "tsh"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "TSH 偏高是不是就是甲减？",
+      "answer": "不能这样判断。TSH 偏高说明垂体在加大调节信号，通常与血液中甲状腺激素偏低有关；具体原因需要结合 T4、T3、症状和其他检查，由医生评估。",
+      "sourceIds": [
+        "tsh",
+        "thyroid-tests"
+      ]
+    },
+    {
+      "question": "为什么 T4 有「总」和「游离」两种写法？",
+      "answer": "血液中的 T4 一部分与蛋白质结合，一部分游离。总 T4 测两者之和，游离 T4 只测未结合的部分；结合蛋白发生变化时，两者的读数可能不一致，所以要先看清报告写的是哪一种。",
+      "sourceIds": [
+        "t4",
+        "thyroid-tests"
+      ]
+    },
+    {
+      "question": "TSH 正常，T4 和 T3 就一定正常吗？",
+      "answer": "不一定。TSH 反映的是垂体对激素水平的回应，多数情况下与 T4、T3 方向相反，但垂体自身状态等因素也可能影响 TSH。是否需要加做项目，由医生根据情况决定。",
+      "sourceIds": [
+        "thyroid-tests",
+        "tsh"
+      ]
+    },
+    {
+      "question": "激素检查之外，为什么还会查甲状腺抗体？",
+      "answer": "激素检查反映当前水平，抗体检查观察免疫系统是否针对甲状腺产生了反应。两者回答的问题不同，是否加做取决于医生的判断。",
+      "sourceIds": [
+        "thyroid-tests"
+      ]
+    },
+    {
+      "question": "甲状腺超声和血液检查是什么关系？",
+      "answer": "血液检查测量激素和抗体，超声观察腺体的形态、大小以及是否有结节。它们从不同角度提供信息，不能互相替代。",
+      "sourceIds": [
+        "thyroid-tests"
+      ]
+    }
   ]
 }
