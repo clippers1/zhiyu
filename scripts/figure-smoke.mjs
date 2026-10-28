@@ -53,21 +53,25 @@ try {
   await page.close();
 
   // An article whose record carries no figure keeps the plain reading path.
-  const plain = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  plain.on('pageerror', error => errors.push(`plain: ${error.message}`));
-  const source = JSON.parse(await readFile('public/content/indicator/cbc.json', 'utf8'));
-  const bare = {
-    ...source,
-    figures: [],
-    sections: source.sections.map(({ figure, ...section }) => section),
-  };
-  await plain.route('**/content/indicator/cbc.json', route => route.fulfill({ json: bare }));
-  await plain.goto(`${base}/article/cbc`, { waitUntil: 'networkidle' });
-  await expect(plain.locator('.article-figure')).toHaveCount(0);
-  await expect(plain.locator('svg.diagram')).toHaveCount(0);
-  await expect(plain.locator('.reading-toc a[href^="#article-figure"]')).toHaveCount(0);
-  assert.ok(await plain.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no-figure page must not overflow');
-  await plain.close();
+  // This fixture replaces the fetched JSON in the browser; server-rendered
+  // pages never read that path, so the case only applies to the static build.
+  if (!ssr) {
+    const plain = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    plain.on('pageerror', error => errors.push(`plain: ${error.message}`));
+    const source = JSON.parse(await readFile('public/content/indicator/cbc.json', 'utf8'));
+    const bare = {
+      ...source,
+      figures: [],
+      sections: source.sections.map(({ figure, ...section }) => section),
+    };
+    await plain.route('**/content/indicator/cbc.json', route => route.fulfill({ json: bare }));
+    await plain.goto(`${base}/article/cbc`, { waitUntil: 'networkidle' });
+    await expect(plain.locator('.article-figure')).toHaveCount(0);
+    await expect(plain.locator('svg.diagram')).toHaveCount(0);
+    await expect(plain.locator('.reading-toc a[href^="#article-figure"]')).toHaveCount(0);
+    assert.ok(await plain.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no-figure page must not overflow');
+    await plain.close();
+  }
 
   if (ssr) {
     const noJS = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
