@@ -43,7 +43,7 @@ function Arrow({ id }) {
   );
 }
 
-export function GlucoseFlow(id) {
+export function GlucoseFlow({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -81,7 +81,7 @@ export function GlucoseFlow(id) {
   );
 }
 
-export function GlucoseWindows(id) {
+export function GlucoseWindows({ id }) {
   const axisStyle = { stroke: ruleStrong, strokeWidth: 1.5 };
   const dot = { fill: accent };
   return (
@@ -121,7 +121,7 @@ export function GlucoseWindows(id) {
   );
 }
 
-export function StairsHeart(id) {
+export function StairsHeart({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -155,7 +155,7 @@ export function StairsHeart(id) {
   );
 }
 
-export function PressurePulse(id) {
+export function PressurePulse({ id }) {
   return (
     <Frame
       id={id}
@@ -176,7 +176,7 @@ export function PressurePulse(id) {
   );
 }
 
-export function LipidTransport(id) {
+export function LipidTransport({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -210,7 +210,7 @@ export function LipidTransport(id) {
   );
 }
 
-export function LabRange(id) {
+export function LabRange({ id }) {
   const arrow = `url(#${id}-arrow)`;
   const band = { fill: wash };
   return (
@@ -251,7 +251,7 @@ export function LabRange(id) {
 }
 
 // 血常规：一份样本分成三组计数，红细胞一组另含血红蛋白与压积。
-export function CbcComponents(id) {
+export function CbcComponents({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -291,7 +291,7 @@ export function CbcComponents(id) {
   );
 }
 
-export function LiverTests(id) {
+export function LiverTests({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -329,7 +329,7 @@ export function LiverTests(id) {
   );
 }
 
-export function KidneyFilter(id) {
+export function KidneyFilter({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -364,7 +364,7 @@ export function KidneyFilter(id) {
   );
 }
 
-export function UricAcidPath(id) {
+export function UricAcidPath({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -397,7 +397,7 @@ export function UricAcidPath(id) {
   );
 }
 
-export function ThyroidAxis(id) {
+export function ThyroidAxis({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
@@ -430,7 +430,7 @@ export function ThyroidAxis(id) {
   );
 }
 
-export function UrinalysisLayers(id) {
+export function UrinalysisLayers({ id }) {
   const arrow = `url(#${id}-arrow)`;
   return (
     <Frame
