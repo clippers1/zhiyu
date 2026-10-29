@@ -26,7 +26,7 @@ import "./topics.css";
 import TopicRoute from "./components/TopicRoute";
 
 const nav = [
-  { id: "map", title: "发现", short: "发现", icon: Map },
+  { id: "map", title: "读体检单", short: "读体检单", icon: Map },
   { id: "indicators", title: "体检项目", short: "体检项目", icon: BookOpen },
   { id: "organs", title: "认识身体", short: "认识身体", icon: Heart },
 ];
@@ -41,7 +41,7 @@ function ReaderApp() {
     setSearchOpen(false);
     setToolsOpen(false);
     setTour(null);
-    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "体检项目" : nav.find((n) => n.id === route.page)?.title || "发现"} · 知愈`;
+    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "体检项目" : nav.find((n) => n.id === route.page)?.title || "读体检单"} · 知愈`;
   }, [route.page, route.id, runtime.serverRendered]);
   const onOpen = (id) => navigate("article", id);
   const onOrgan = (id) => navigate("organs", id);

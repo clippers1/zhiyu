@@ -43,7 +43,6 @@ test("unreadable or absent summaries cannot create empty recommendations", () =>
   const empty = {
     feature: null,
     indexRows: [],
-    longForm: [],
     questions: [],
     stories: [],
     organs: [],
@@ -57,11 +56,11 @@ test("unreadable or absent summaries cannot create empty recommendations", () =>
   assert.deepEqual(selectDiscovery({}, {}), empty);
 });
 
-test("long-form articles and stories lead the feature, and each entry appears once", () => {
+test("the lead is always an indicator, and an editor's featured flag wins", () => {
   const indicators = [
     question("alpha", "01"),
     question("beta", "02", { format: "article" }),
-    question("gamma", "03"),
+    question("gamma", "03", { format: "article", featured: true }),
   ];
   const stories = [
     { kind: "story", id: "stairs", title: "爬楼", question: "为什么爬楼心跳快？", questionAnswer: "因为要用氧。" },
@@ -69,32 +68,33 @@ test("long-form articles and stories lead the feature, and each entry appears on
     { kind: "story", id: "broken", title: "", question: "", questionAnswer: "" },
   ];
   const result = selectDiscovery(indicators, [organ("heart")], stories);
-  assert.equal(result.feature.id, "stairs");
-  // The featured story is not repeated underneath; long-form entries fill the
-  // editorial strip first, and the index picks up whatever it cannot hold.
-  assert.deepEqual(result.longForm.map(item => item.id), ["lab", "beta"]);
-  assert.deepEqual(result.indexRows.map(item => item.id), ["alpha", "gamma"]);
+  assert.equal(result.feature.id, "gamma");
+  // Stories never take the first screen; they are a secondary strip only.
   assert.deepEqual(result.stories.map(item => item.id), ["stairs", "lab"]);
   assert.equal(result.totalStories, 2);
+  // Every indicator appears exactly once, the feature excluded from the index.
+  assert.deepEqual(result.indexRows.map(item => item.id), ["alpha", "beta"]);
   assert.equal(result.totalIndicators, 3);
 });
 
-test("a long-form entry the strip cannot hold stays reachable in the index", () => {
-  const indicators = ["01", "02", "03", "04", "05", "06"].map((number, index) =>
+test("without a featured flag the first long-form indicator leads by number", () => {
+  const indicators = [
+    question("gamma", "03", { format: "article" }),
+    question("beta", "02", { format: "article" }),
+    question("alpha", "01"),
+  ];
+  const result = selectDiscovery(indicators, []);
+  assert.equal(result.feature.id, "beta");
+  assert.deepEqual(result.indexRows.map(item => item.id), ["alpha", "gamma"]);
+});
+
+test("the index holds every remaining indicator up to eight rows", () => {
+  const indicators = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"].map((number, index) =>
     question(`long${index}`, number, { format: "article" }),
   );
   const result = selectDiscovery(indicators, []);
   assert.equal(result.feature.id, "long0");
-  // Three rows fill the strip; the rest appear once, in the index below.
-  assert.deepEqual(result.longForm.map(item => item.id), ["long1", "long2", "long3"]);
-  assert.deepEqual(result.indexRows.map(item => item.id), ["long4", "long5"]);
-});
-
-test("without stories or long-form articles the first numbered indicator leads", () => {
-  const result = selectDiscovery([question("beta", "02"), question("alpha", "01")], []);
-  assert.equal(result.feature.id, "alpha");
-  assert.deepEqual(result.indexRows.map(item => item.id), ["beta"]);
-  assert.deepEqual(result.longForm, []);
+  assert.deepEqual(result.indexRows.map(item => item.id), ["long1", "long2", "long3", "long4", "long5", "long6", "long7", "long8"]);
 });
 
 test("next entry follows catalog order and never wraps", () => {

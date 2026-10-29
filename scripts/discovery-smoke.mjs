@@ -11,8 +11,8 @@ page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
   await expect(page.locator('.home-feature')).toHaveCount(1);
-  await expect(page.locator('.home-longform .index-row')).toHaveCount(3);
-  await expect(page.locator('.home-index:not(.home-longform) .index-row')).toHaveCount(6);
+  await expect(page.locator('.home-index:not(.home-stories) .index-row')).toHaveCount(8);
+  await expect(page.locator('.home-stories .index-row')).toHaveCount(2);
   await expect(page.locator('.home-reading-path a')).toHaveCount(1);
   await expect(page.locator('#organ-topics .body-row')).toHaveCount(5);
   await page.locator('.home-search-trigger').focus();
@@ -66,6 +66,7 @@ try {
     await expect(page.locator('#organ-topics')).toHaveCount(0);
     await expect(page.locator('.home-feature')).toHaveCount(0);
     await expect(page.locator('.index-row')).toHaveCount(0);
+    await expect(page.locator('.home-stories')).toHaveCount(0);
     await expect(page.locator('.home-reading-path')).toHaveCount(0);
     await expect(page.getByText(/目前没有可阅读的问题/)).toBeVisible();
     await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });

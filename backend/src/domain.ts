@@ -197,6 +197,13 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
     number: article.number || '', tags: (article.tags || []).map((t: any) => t.text),
     category: article.category, featured: Boolean(article.featured),
     format: article.kind === 'story' ? 'article' : (article.format || 'entry'),
+    // The reader home page introduces the lead article with its opening
+    // mechanism diagram; only self-made inline diagrams are carried in a
+    // summary, because third-party PNGs need their attribution beside them.
+    ...(() => {
+      const lead = figures.find((figure: any) => figure.diagram);
+      return lead ? { leadFigure: { diagram: lead.diagram, caption: lead.caption } } : {};
+    })(),
     referenceCount: references.length, sourceLabel: references[0]?.publisher || '',
     searchText: [article.title, article.subtitle, article.question || '', article.aliases || '', article.description,
       ...(article.metrics || []).map((m: any) => `${m.name} ${m.text}`),

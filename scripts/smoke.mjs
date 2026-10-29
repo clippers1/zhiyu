@@ -45,8 +45,8 @@ try {
     waitUntil: "networkidle",
   });
   await expect(page.locator(".home-feature")).toHaveCount(1);
-  await expect(page.locator(".home-longform .index-row")).toHaveCount(3);
-  await expect(page.locator(".home-index:not(.home-longform) .index-row")).toHaveCount(6);
+  await expect(page.locator(".home-index:not(.home-stories) .index-row")).toHaveCount(8);
+  await expect(page.locator(".home-stories .index-row")).toHaveCount(2);
   await expect(page.locator(".home-reading-path a")).toHaveCount(1);
   await expect(page.locator(".home-reading-path a")).toHaveAttribute("href", "/topics");
   assert.equal(
@@ -55,9 +55,9 @@ try {
     "Home must not load full articles",
   );
   await page.screenshot({ path: "artifacts/desktop.png", fullPage: true });
-  // The first long-form entry is the rewritten glucose article; the feature is
-  // the newest story, which has its own coverage in the story smoke run.
-  await page.locator(".home-longform .index-row", { hasText: "血糖项目主要看什么" }).click();
+  // The lead is always an indicator article: the home page answers one task,
+  // reading a lab report, and stories sit in the secondary strip below.
+  await page.locator(".home-feature").click();
   await expect(
     page.getByRole("heading", { name: "血糖项目主要看什么？", exact: true }),
   ).toBeVisible();
@@ -98,7 +98,7 @@ try {
   await page.getByRole("link", { name: "肾脏", exact: true }).click();
   await expect(page.locator(".organ-information h2")).toContainText("肾脏");
   await desktopNav()
-    .getByRole("link", { name: "发现", exact: true })
+    .getByRole("link", { name: "读体检单", exact: true })
     .click();
   await page.getByRole("button", { name: "1 分钟认识身体" }).click();
   await page.getByRole("button", { name: "继续了解" }).click();
@@ -106,7 +106,7 @@ try {
   await page.getByRole("button", { name: "开始探索", exact: true }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await desktopNav()
-    .getByRole("link", { name: "发现", exact: true })
+    .getByRole("link", { name: "读体检单", exact: true })
     .click();
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(mobileNav()).toBeVisible();
@@ -153,7 +153,7 @@ try {
   await expect(mobileNav()).toBeVisible();
   for (const width of [320, 360, 390, 430, 768]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const name of ["认识身体", "发现", "体检项目"]) {
+    for (const name of ["认识身体", "读体检单", "体检项目"]) {
       await mobileNav().getByRole("link", { name, exact: true }).click();
       await expect(page.locator(".load-state")).toHaveCount(0);
       await noOverflow(`${width}/${name}`);

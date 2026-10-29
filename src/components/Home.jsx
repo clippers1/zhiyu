@@ -11,7 +11,7 @@ import {
 import { RouteLink } from "./RouteLink";
 import { contentTrust } from "../services/content-status";
 import { selectDiscovery } from "../services/discovery";
-import { indicatorArtwork } from "../services/artworks";
+import { diagramFor } from "./Diagrams";
 
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
@@ -20,20 +20,24 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
   const {
     feature,
     indexRows,
-    longForm,
+    stories,
     organs,
     guideAvailable,
     totalIndicators,
     totalOrgans,
   } = selectDiscovery(state.data?.items, organState.data?.items, storyState.data?.items);
-  const art = feature ? indicatorArtwork(feature) : null;
+  // The lead is an indicator article, so its plate is the mechanism diagram the
+  // article opens with: a body-outline illustration left readers unsure what
+  // the home page was for. The diagram carries no accessible name here because
+  // the same figure is fully labelled inside the article.
+  const LeadDiagram = diagramFor(feature?.leadFigure?.diagram);
   const trust = feature ? contentTrust(feature) : null;
 
   return (
     <div className="home-content">
       <div className="home-layout">
         <div className="home-main">
-          <RunHead><b>发现</b> / 身体与日常</RunHead>
+          <RunHead><b>读体检单</b> / 从一张单子读起</RunHead>
           <h1 className="statement home-statement">从一张体检单读起。</h1>
           <p className="lede home-lede">
             {totalIndicators > 0
@@ -49,28 +53,28 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <RouteLink
               page="article"
               id={feature.id}
-              className={`home-feature${art ? " has-plate" : ""}`}
+              className="home-feature"
               onNavigate={() => onOpen(feature.id)}
             >
               <span className="feature-kicker">
-                <span className="feature-no">
-                  {feature.kind === "story" ? "长文" : feature.number || "—"}
-                </span>
+                <span className="feature-no">{feature.number || "—"}</span>
                 {feature.english && <span className="feature-term">{feature.english}</span>}
               </span>
               <span className="feature-title">
                 {feature.question || `认识${feature.title}`}
               </span>
-              {feature.subtitle && <span className="feature-sub">{feature.subtitle}</span>}
-              {art && (
-                <span className="feature-plate" aria-hidden="true">
-                  <img
-                    src={art.src}
-                    alt=""
-                    width={art.width}
-                    height={art.height}
-                    decoding="async"
-                  />
+              {feature.questionAnswer && (
+                <span className="feature-sub">{feature.questionAnswer}</span>
+              )}
+              {LeadDiagram && (
+                <span className="feature-figure" aria-hidden="true">
+                  <LeadDiagram id="home-feature-diagram" />
+                </span>
+              )}
+              {LeadDiagram && feature.leadFigure?.caption && (
+                <span className="feature-figure-caption">
+                  {feature.leadFigure.caption}
+                  <i>知愈自制示意图</i>
                 </span>
               )}
               <span className="feature-read">
@@ -80,17 +84,6 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
           )}
           {state.data && !feature && (
             <p className="home-empty">目前没有可阅读的问题，可到体检项目目录查看已开放的内容。</p>
-          )}
-
-          {longForm.length > 0 && (
-            <section className="home-index home-longform" aria-labelledby="home-longform-title">
-              <SectionHead id="home-longform-title" title="长文" />
-              <div className="index-list">
-                {longForm.map((item) => (
-                  <IndexRow key={item.id} item={item} onOpen={onOpen} />
-                ))}
-              </div>
-            </section>
           )}
 
           <section className="home-index" aria-labelledby="home-index-title">
@@ -111,6 +104,17 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               </div>
             )}
           </section>
+
+          {stories.length > 0 && (
+            <section className="home-index home-stories" aria-labelledby="home-stories-title">
+              <SectionHead id="home-stories-title" title="身体与日常" />
+              <div className="index-list">
+                {stories.slice(0, 3).map((item) => (
+                  <IndexRow key={item.id} item={item} onOpen={onOpen} />
+                ))}
+              </div>
+            </section>
+          )}
 
           {guideAvailable && (
             <div className="home-reading-path">

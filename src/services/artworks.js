@@ -48,27 +48,8 @@ export const artworks = {
   },
 };
 
-// Catalog summaries do not carry organ relations, so the discovery plate uses a
-// fixed, reviewable illustration map. Every id below is an organ the article
-// itself names; thyroid-function has no matching illustration and falls back to
-// the typographic plate.
-const indicatorArtworkIds = {
-  glucose: "pancreas",
-  pressure: "heart",
-  lipids: "liver",
-  cbc: "heart",
-  "liver-function": "liver",
-  "kidney-function": "kidney",
-  "uric-acid": "kidney",
-  "urinalysis": "kidney",
-};
-
-// Stories have no organ of their own. Only map one when the illustration is
-// literally what the story is about; otherwise the feature stays typographic.
-const storyArtworkIds = {
-  "stairs-heart": "heart",
-};
-
+// Catalog summaries do not carry organ relations, so organ pages and body rows
+// resolve their illustration by id. The discovery page no longer uses this map:
+// its lead shows the article's mechanism diagram, because a body-outline plate
+// left readers unsure what the home page was for.
 export const artworkFor = id => artworks[id] || null;
-export const indicatorArtwork = item =>
-  artworks[indicatorArtworkIds[item?.id] || storyArtworkIds[item?.id]] || null;

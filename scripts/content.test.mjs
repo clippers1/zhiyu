@@ -62,6 +62,15 @@ test("all published demo content has valid references, related records and index
     assert.equal(entry.id, summary.id);
     assert.equal(entry.kind, summary.kind);
     assert.equal(summary.referenceCount, entry.references.length);
+    // The home page renders the lead article's own mechanism diagram. The
+    // summary must carry exactly the first self-made figure, so the card and
+    // the article cannot drift apart.
+    const lead = (entry.figures || []).find((figure) => figure.diagram);
+    assert.deepEqual(
+      summary.leadFigure,
+      lead ? { diagram: lead.diagram, caption: lead.caption } : undefined,
+      `${name}: leadFigure must mirror the first self-made figure`,
+    );
     assert.ok(entry.version > 0);
     assert.ok(entry.updatedAt);
     assert.equal(entry.reviewStatus, "pending");

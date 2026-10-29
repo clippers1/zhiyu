@@ -28,22 +28,16 @@ export function selectDiscovery(indicators = [], organs = [], stories = []) {
   // Stories carry no number; the catalog already returns them in editorial order.
   const orderedStories = publishedItems(stories, "story", readableIndicator);
   const availableOrgans = publishedItems(organs, "organ", item => Boolean(item.title?.trim()));
-  const longForm = [
-    ...orderedStories,
-    ...orderedQuestions.filter(item => item.format === "article"),
-  ];
-  // A published story or long-form article leads when there is one: discovery is
-  // an editorial surface, not a catalog. Everything still comes from published
-  // summaries; nothing is generated or reordered by popularity.
-  const feature = longForm[0] || orderedQuestions[0] || null;
-  const longFormRows = longForm.filter(item => item.id !== feature?.id).slice(0, 3);
-  // The strip above is editorial and capped; anything it cannot hold stays
-  // reachable in the index below. Nothing appears in both lists.
-  const listed = new Set([feature?.id, ...longFormRows.map(item => item.id)]);
+  // The home page answers one task: reading a lab report. So the lead is always
+  // an indicator, never a story; `featured` is the editor's only lever, and the
+  // lowest number wins among several. Nothing is reordered by popularity.
+  const articleIndicators = orderedQuestions.filter(item => item.format === "article");
+  const feature = articleIndicators.find(item => item.featured) || articleIndicators[0] || orderedQuestions[0] || null;
   return {
     feature,
-    indexRows: orderedQuestions.filter(item => !listed.has(item.id)).slice(0, 6),
-    longForm: longFormRows,
+    // Nine indicator articles are all long-form now, so a format-based split
+    // would repeat the same content under two names. One index holds them all.
+    indexRows: orderedQuestions.filter(item => item.id !== feature?.id).slice(0, 8),
     questions: orderedQuestions.slice(0, 3),
     stories: orderedStories,
     organs: availableOrgans.slice(0, 5),

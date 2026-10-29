@@ -83,7 +83,7 @@
   line-height: 1.8;
   color: var(--ink-2);
 }
-.feature-plate {
+.feature-figure {
   display: grid;
   place-items: center;
   margin-top: var(--s-4);
@@ -91,11 +91,25 @@
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
-.feature-plate img {
+.feature-figure svg {
   display: block;
   width: 100%;
-  max-width: 300px;
+  max-width: 520px;
   height: auto;
+}
+.feature-figure-caption {
+  display: block;
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.feature-figure-caption i {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: var(--t-11);
+  letter-spacing: 0.06em;
 }
 .feature-read {
   display: inline-flex;
@@ -118,6 +132,10 @@
 /* 按项目读 */
 .home-index {
   margin-top: var(--s-2);
+}
+/* Stories sit below the indicator index: same rows, quieter heading. */
+.home-stories {
+  margin-top: var(--s-8);
 }
 .home-empty {
   margin-top: var(--s-6);
@@ -224,36 +242,16 @@
   .home-feature {
     margin-top: 40px;
     padding-top: 28px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    align-items: start;
+    display: block;
   }
-  /* Only a feature with a plate splits into text/illustration columns;
-     a typographic feature keeps the full column width. */
-  .home-feature.has-plate {
-    grid-template-columns: minmax(0, 1fr) 240px;
-    grid-template-areas:
-      "kicker plate"
-      "title plate"
-      "sub plate"
-      "read plate";
-    gap: 0 var(--s-8);
+  .feature-title { font-size: var(--t-30); line-height: 1.45; }
+  .feature-sub { font-size: var(--t-17); margin-top: var(--s-2); }
+  .feature-read { margin-top: 14px; }
+  .feature-figure {
+    margin-top: var(--s-6);
   }
-  .feature-kicker { grid-area: kicker; }
-  .feature-title { grid-area: title; font-size: var(--t-30); line-height: 1.45; }
-  .feature-sub { grid-area: sub; font-size: var(--t-17); margin-top: var(--s-2); }
-  .feature-read { grid-area: read; margin-top: 14px; }
-  .feature-plate {
-    grid-area: plate;
-    border: 0;
-    margin: 0;
-    padding: 0;
-  }
-  .feature-plate img {
-    max-width: 240px;
-    max-height: 300px;
-    width: auto;
+  .feature-figure svg {
+    max-width: 560px;
   }
   .home-rail {
     border-left: 1px solid var(--rule);

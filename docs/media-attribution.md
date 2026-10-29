@@ -17,7 +17,7 @@
 
 | 内容 | 本地文件 | 页面用途 | 权利说明 |
 | --- | --- | --- | --- |
-| 血糖（`indicator/glucose`） | `public/media/pancreas-servier.png` | 发现页的胰腺外形配图（`src/services/artworks.js`）；正文机制改由自制示意图 `glucose-flow` 说明 | 同上，CC BY 4.0，页面图下署名 |
+| 血糖（`indicator/glucose`） | `public/media/pancreas-servier.png` | 器官页与身体行的胰腺插图（`src/services/artworks.js`）；首页主推与正文机制均由自制示意图 `glucose-flow` 说明，不再使用器官外形 | 同上，CC BY 4.0，页面图下署名 |
 
 ## 自制示意图
 
