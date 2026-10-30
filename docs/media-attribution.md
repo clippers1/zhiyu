@@ -21,7 +21,9 @@
 
 ## 自制示意图
 
-以下示意图由知愈自行绘制，以 React 内联 SVG 渲染（`src/components/Diagrams.jsx`），不使用任何第三方素材，因此不涉及外部授权；页面图注统一标注「知愈自制示意图」，每张图都写明简化边界并引用本文已有来源编号。
+以下示意图由知愈自行绘制，以 React 内联 SVG 渲染（`src/components/Diagrams.jsx`，手绘线条由 `src/components/Sketch.jsx` 用 rough.js 生成），不使用任何第三方素材，因此不涉及外部授权；页面图注统一标注「知愈自制示意图」，每张图都写明简化边界并引用本文已有来源编号。
+
+图内标题使用得意黑（Smiley Sans，SIL Open Font License 1.1）作为展示字体。仓库只在 `assets/fonts/` 保存原始字体文件，构建时由 `npm run fonts:build` 把页面真正用到的字符裁成约 50 KB 的 `public/fonts/smiley-sans.woff2`；正文字体不受影响。
 
 | 图解标识 | 用于 | 内容 |
 | --- | --- | --- |

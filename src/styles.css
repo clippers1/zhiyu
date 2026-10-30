@@ -16,6 +16,14 @@
   font-display: swap;
   unicode-range: U+4E00-9FFF, U+3400-4DBF, U+0020-007E, U+3000-303F, U+FF00-FFEF;
 }
+/* Figure headlines only. The subset holds just the characters the diagrams
+   draw (npm run fonts:build), so body text never pays for this face. */
+@font-face {
+  font-family: "Smiley Sans";
+  src: url("/fonts/smiley-sans.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
 
 :root {
   --paper: #f7f5ef;
@@ -30,9 +38,17 @@
   --accent-wash: #e7eee6;
   --clay: #8a4e2c;
   --clay-wash: #f3e9e1;
+  /* Figure-only tones: a warm marker and a cool slate to separate a third
+     branch without introducing a new brand colour. */
+  --marker: #f0cf72;
+  --figure-slate: #3c4a6b;
+  --figure-slate-wash: #eaeef5;
 
   --sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
   --serif: "Noto Serif SC", Georgia, serif;
+  /* Display face for figure headlines. Smiley Sans ships in public/fonts and
+     is subset per figure at build time, so it never loads for the body text. */
+  --figure-display: "Smiley Sans", "Noto Sans SC", sans-serif;
 
   --t-11: 11px;
   --t-13: 13px;

@@ -56,8 +56,11 @@ npm run preview
 读者界面使用 React 19 与 Lucide 图标；完整站点由 Next.js 16 输出公开 HTML，后台采用 Payload CMS 3 + PostgreSQL。Vite 6 保留为离线演示和独立前端开发入口，两种入口复用同一套组件。项目内 JSON 用于离线演示与初始迁移，线上正文来自发布快照，搜索和分页通过 API 完成。
 
 ```text
+assets/fonts/       得意黑原始字体（只用于生成示意图标题子集）
 src/
-  components/       页面与交互组件（Diagrams.jsx 为自制机制示意图）
+  components/       页面与交互组件
+    Diagrams.jsx    自制机制示意图（手绘线条 + 得意黑标题）
+    Sketch.jsx      示意图的手绘图形原语（rough.js 封装）
   services/         内容访问与筛选分页
   hooks.js          路由与本地阅读偏好
 public/
@@ -66,6 +69,7 @@ public/
     organ/          器官
     story/          身体与日常长文
   media/            器官插图与授权记录
+  fonts/            Noto Sans/Serif SC 与示意图标题子集
   favicon.svg       站点图标
 scripts/            内容测试与浏览器交互测试
 backend/            内容后台、API、数据库迁移与流程测试
