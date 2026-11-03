@@ -74,6 +74,22 @@ try {
       }
     }
   }
+  // The guide's report figure is not an article figure, so the loop above
+  // cannot see it; it follows the same canvas rule.
+  await page.goto(`${base}/guide`, { waitUntil: 'networkidle' });
+  await expect(page.locator('.guide-figure svg.diagram')).toHaveCount(1);
+  const guideLabels = await page.evaluate(() => [...document.querySelectorAll('.guide-figure svg.diagram text')].map(node => {
+    const svg = node.closest('svg');
+    const viewBox = svg.viewBox.baseVal;
+    const scale = svg.getBoundingClientRect().width / viewBox.width;
+    const box = node.getBBox();
+    return { text: node.textContent, px: Number((Number.parseFloat(getComputedStyle(node).fontSize) * scale).toFixed(2)), right: box.x + box.width, limit: viewBox.width };
+  }));
+  assert.ok(guideLabels.length, 'guide: expected diagram labels');
+  for (const label of guideLabels) {
+    assert.ok(label.px >= 10, `guide: label "${label.text}" renders at ${label.px}px at 320px`);
+    assert.ok(label.right <= label.limit + 1, `guide: label "${label.text}" overflows the figure canvas`);
+  }
 
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });

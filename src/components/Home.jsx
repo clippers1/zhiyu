@@ -48,6 +48,11 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <Search size={17} aria-hidden="true" />
             <span>搜索项目名称、缩写或你的问题</span>
           </a>
+          <RouteLink page="guide" className="home-report-guide" onNavigate={() => go("guide")}>
+            <b>单子怎么读</b>
+            <span>先认清报告单的四列</span>
+            <ArrowRight size={15} aria-hidden="true" />
+          </RouteLink>
 
           {feature && (
             <RouteLink

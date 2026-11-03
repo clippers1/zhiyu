@@ -49,6 +49,10 @@ try {
   await expect(page.locator(".home-stories .index-row")).toHaveCount(2);
   await expect(page.locator(".home-reading-path a")).toHaveCount(1);
   await expect(page.locator(".home-reading-path a")).toHaveAttribute("href", "/topics");
+  //「单子怎么读」 is a static entry above the lead; it does not depend on the
+  // catalog and must not be confused with the reading-route link below.
+  await expect(page.locator(".home-report-guide")).toHaveCount(1);
+  await expect(page.locator(".home-report-guide")).toHaveAttribute("href", "/guide");
   assert.equal(
     contentRequests.filter((url) => /\/indicator\/|\/organ\//.test(url)).length,
     0,

@@ -19,6 +19,8 @@
     "test:learning": "node scripts/visual-learning-smoke.mjs",
     "test:expansion": "node scripts/content-expansion-smoke.mjs",
     "test:figure": "node scripts/figure-smoke.mjs",
+    "test:report": "node scripts/report-smoke.mjs",
+    "test:report-data": "node --test scripts/report-guide.test.mjs",
     "test:ui": "node scripts/smoke.mjs",
     "fonts:build": "node scripts/build-figure-font.mjs"
   },

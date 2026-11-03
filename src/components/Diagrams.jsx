@@ -6,6 +6,7 @@ import {
   INK,
   INK_2,
   INK_3,
+  RULE,
   SLATE,
   SLATE_WASH,
   WASH,
@@ -514,6 +515,61 @@ export function UrinalysisLayers({ id }) {
   );
 }
 
+// A lab report is a table, not a flow: four columns, one row per item. The
+// figure only shows the structure — no real item name, value, unit or interval
+// — and the numbered callouts are explained in the page legend below it.
+export function ReportAnatomy({ id }) {
+  const columns = [
+    { label: "项目名", x: 20, width: 112, center: 76 },
+    { label: "结果", x: 140, width: 54, center: 167 },
+    { label: "单位", x: 204, width: 58, center: 233 },
+    { label: "参考区间", x: 272, width: 76, center: 310 },
+  ];
+  const row = (y, color) => (
+    <>
+      <Label x={20} y={y} size={14} color={color}>项目名称</Label>
+      <Label x={140} y={y} size={15} color={color}>数值</Label>
+    </>
+  );
+  return (
+    <Frame
+      id={id}
+      height={256}
+      title="检验报告单的列结构"
+      description="检验报告单的每一行通常包含项目名称、结果、单位和参考区间；结果旁的箭头提示这个数字落在所标区间之外，是排版记号，不是诊断。"
+    >
+      <Headline seed={1301} width={132}>单子上的四列</Headline>
+
+      <SketchCard x={LEFT} y={52} width={INNER} height={124} tone="var(--surface)" stroke={RULE} seed={1310} radius={10} />
+      {columns.map(column => (
+        <Label key={column.label} x={column.x} y={78} size={14} color={INK_3}>{column.label}</Label>
+      ))}
+      <SketchLine from={[LEFT + 8, 92]} to={[W - LEFT - 8, 92]} color={RULE} seed={1311} width={1.2} />
+      <SketchLine from={[131, 52]} to={[131, 176]} color={RULE} seed={1312} width={1} />
+      <SketchLine from={[196, 52]} to={[196, 176]} color={RULE} seed={1313} width={1} />
+      <SketchLine from={[264, 52]} to={[264, 176]} color={RULE} seed={1314} width={1} />
+
+      {row(126, INK)}
+      <SketchArrow from={[190, 130]} to={[190, 106]} color={CLAY} seed={1315} />
+      <Label x={204} y={126} size={14} color={INK_2}>单位</Label>
+      <Label x={272} y={126} size={14} color={INK_2}>区间</Label>
+
+      {row(162, INK_3)}
+      <Label x={204} y={162} size={14} color={INK_3}>单位</Label>
+      <Label x={272} y={162} size={14} color={INK_3}>区间</Label>
+
+      {columns.map((column, index) => (
+        <React.Fragment key={column.center}>
+          <SketchDot cx={column.center} cy={202} r={9} color={ACCENT} />
+          <Label x={column.center} y={207} size={14} color="#ffffff" anchor="middle">{index + 1}</Label>
+        </React.Fragment>
+      ))}
+
+      <Footnote y={240}>示意图只画结构，不含真实项目、数值或区间。</Footnote>
+    </Frame>
+  );
+}
+
 const registry = {
   "glucose-flow": GlucoseFlow,
   "glucose-windows": GlucoseWindows,
@@ -527,6 +583,7 @@ const registry = {
   "uric-acid-path": UricAcidPath,
   "thyroid-axis": ThyroidAxis,
   "urinalysis-layers": UrinalysisLayers,
+  "report-anatomy": ReportAnatomy,
 };
 
 export const diagramFor = key => registry[key] || null;

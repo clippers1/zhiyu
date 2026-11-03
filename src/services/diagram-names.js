@@ -14,4 +14,5 @@ export const DIAGRAM_NAMES = [
   "uric-acid-path",
   "thyroid-axis",
   "urinalysis-layers",
+  "report-anatomy",
 ];

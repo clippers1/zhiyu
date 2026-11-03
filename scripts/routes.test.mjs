@@ -20,6 +20,12 @@ test("invalid routes do not silently render the home page", () => {
   // PRD 7.6: /topics must have a readable index page instead of 404.
   assert.deepEqual(parseRoute("/topics"), { page: "topics", id: "" });
   assert.equal(routePath("topics"), "/topics");
+  // 「单子怎么读」 is a single page, never an id-scoped route.
+  assert.deepEqual(parseRoute("/guide"), { page: "guide", id: "" });
+  assert.deepEqual(parseRoute("/guide/"), { page: "guide", id: "" });
+  assert.equal(routePath("guide"), "/guide");
+  assert.equal(parseRoute("/guide/anything").page, "not-found");
+  assert.throws(() => routePath("guide", "anything"));
   assert.throws(() => routePath("article", "../private"));
   assert.throws(() => routePath("article"));
   assert.throws(() => routePath("saved", "glucose"));
@@ -29,6 +35,7 @@ test("legacy shared links upgrade while ordinary citation fragments are preserve
   assert.equal(legacyRoutePath("#/article/glucose"), "/article/glucose");
   assert.equal(legacyRoutePath("#/organs/kidney"), "/organs/kidney");
   assert.equal(legacyRoutePath("#/map"), "/");
+  assert.equal(legacyRoutePath("#/guide"), "/guide");
   assert.equal(legacyRoutePath("#article-source-tests"), null);
   assert.equal(legacyRoutePath("#/unknown"), null);
 });

@@ -8,12 +8,19 @@ const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_C
 const errors = [];
 try {
   const noJS = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
-  for (const path of ['/', '/indicators', '/article/glucose', '/organs/liver']) {
+  for (const path of ['/', '/indicators', '/guide', '/article/glucose', '/organs/liver']) {
     const response = await noJS.goto(`${base}${path}`);
     assert.equal(response.status(), 200);
     assert.match(response.headers()['cache-control'], /no-store/);
     await expect(noJS.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
     await expect(noJS.locator('link[rel="canonical"]')).toHaveAttribute('href', new URL(path, base).href);
+    if (path === '/guide') {
+      // The guide is fully static: without JavaScript it must still show the
+      // report figure, the legend and the three sources.
+      await expect(noJS.getByRole('heading', { name: '先看卡片上这一行。', exact: true })).toBeVisible();
+      await expect(noJS.locator('.guide-legend li')).toHaveCount(4);
+      await expect(noJS.locator('.source-list li')).toHaveCount(3);
+    }
     if (path.includes('glucose')) {
       await expect(noJS.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
       await expect(noJS.locator('.detail-intro')).toContainText('葡萄糖');
@@ -70,7 +77,7 @@ try {
   assert.ok((await page.evaluate(() => window.sharedURL)).includes('/article/glucose'));
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const path of ['/', '/indicators', '/organs/heart', '/article/glucose']) {
+    for (const path of ['/', '/indicators', '/guide', '/organs/heart', '/article/glucose']) {
       await page.goto(`${base}${path}`, { waitUntil: 'networkidle' });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${width}px ${path}`);
     }

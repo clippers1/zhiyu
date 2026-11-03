@@ -31,7 +31,7 @@ server {
     }
 
     # Only application routes fall back to HTML; missing data/assets stay 404.
-    location ~ ^/(map|indicators|saved|organs(/[a-z0-9-]+)?|article/[a-z0-9-]+)/?$ {
+    location ~ ^/(map|indicators|saved|guide|topics(/[a-z0-9-]+)?|organs(/[a-z0-9-]+)?|article/[a-z0-9-]+)/?$ {
         try_files /index.html =404;
         expires -1;
     }

@@ -1,0 +1,231 @@
+/* 单子怎么读 · 检验报告版面指南
+   A standalone editorial page, not an article: it borrows the global
+   .detail-body / .article-section typography but keeps its own 760px column,
+   so it needs its own large-text rules (the reading preference is scoped to
+   .article-reader). */
+
+.guide-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: var(--s-6);
+}
+.guide-page .runhead {
+  margin: 0;
+}
+.guide-title {
+  margin-top: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  font-weight: 600;
+  line-height: 1.44;
+  letter-spacing: 0.01em;
+}
+.guide-lede {
+  margin-top: var(--s-3);
+  font-size: var(--t-17);
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.guide-page .boundary-note {
+  margin-top: var(--s-6);
+}
+.guide-page .reading-toc {
+  margin-top: var(--s-8);
+}
+.guide-page .reading-toc a {
+  text-decoration: none;
+}
+
+/* ---------- report figure + legend ---------- */
+.guide-figure {
+  margin-top: var(--s-6);
+}
+.guide-legend {
+  margin-top: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+.guide-legend li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+}
+.guide-legend li > span {
+  padding-top: 1px;
+  font-family: var(--serif);
+  font-size: var(--t-13);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.guide-legend b {
+  font-size: var(--t-15);
+  font-weight: 600;
+}
+.guide-legend p {
+  margin-top: 2px;
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+/* ---------- row index ---------- */
+.guide-rows {
+  margin-top: 38px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.guide-rows h2 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-family: var(--serif);
+  font-size: var(--t-20);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.guide-rows h2 i {
+  font-style: normal;
+  font-size: var(--t-13);
+  color: var(--accent);
+}
+.guide-rows-note {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.85;
+  color: var(--ink-3);
+}
+.guide-rows ul {
+  margin-top: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+}
+.guide-rows li {
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+.guide-rows-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 56px;
+  padding: var(--s-2) 0;
+  color: var(--ink);
+}
+.guide-rows-item:hover .guide-rows-term b {
+  color: var(--accent-deep);
+}
+.guide-rows-term {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  min-width: 0;
+}
+.guide-rows-term b {
+  font-size: var(--t-15);
+  font-weight: 600;
+}
+.guide-rows-term small {
+  font-size: var(--t-13);
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.guide-rows-item svg {
+  flex-shrink: 0;
+  color: var(--ink-3);
+}
+
+/* ---------- strip inside an indicator article ---------- */
+.report-rows {
+  margin-top: var(--s-4);
+  padding: var(--s-3) 0 var(--s-2);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.report-rows h2 {
+  font-size: var(--t-13);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.report-rows ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: var(--s-2);
+}
+.report-rows li {
+  padding: 2px 9px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  list-style: none;
+  font-size: var(--t-13);
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.report-rows p {
+  margin-top: var(--s-2);
+  font-size: var(--t-13);
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+.report-rows .text-link {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+  color: var(--accent);
+}
+
+/* ---------- home entry ---------- */
+.home-report-guide {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--s-2);
+  min-height: 44px;
+  margin-top: var(--s-1);
+  color: var(--ink-2);
+  font-size: var(--t-13);
+  line-height: 1.6;
+}
+.home-report-guide b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.home-report-guide svg {
+  align-self: center;
+  color: var(--ink-3);
+}
+.home-report-guide span {
+  white-space: nowrap;
+}
+.home-report-guide:hover b {
+  color: var(--accent-deep);
+}
+.home-report-guide:hover svg {
+  color: var(--accent);
+}
+
+/* ---------- large reading preference ---------- */
+.reading-large .guide-lede,
+.reading-large .guide-body .article-section p,
+.reading-large .guide-legend p,
+.reading-large .guide-rows-note,
+.reading-large .guide-page .term-questions p,
+.reading-large .guide-page .term-questions .guide-note {
+  font-size: 18px;
+  line-height: 2;
+}
+.reading-large .guide-title {
+  font-size: 26px;
+}
+.reading-large .guide-rows-term b,
+.reading-large .report-rows h2 {
+  font-size: 16px;
+}
+.reading-large .report-rows li,
+.reading-large .report-rows p {
+  font-size: 15px;
+}

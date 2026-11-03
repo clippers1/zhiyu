@@ -22,6 +22,8 @@ Next.js 的构建上下文现在是整个仓库：使用根目录 Compose，或 
 
 读者端不再提供收藏与阅读记录入口；`/saved` 路由保留为兼容入口，直接渲染首页。后端仍保留纠错队列与来源复核待办，但当前读者界面不展示纠错入口。
 
+`/guide`（单子怎么读）是纯静态编辑页：文字、来源与报告行映射都在 `src/services/report-guide.js`，`buildPage` 不为它查询数据库，`preloaded` 为空；因此它不受内容撤回影响，但也不进入内容目录与搜索索引。它的标题、canonical 与 noindex 规则与其他公开页面一致，正式频道下会进入 sitemap。
+
 ## 索引与医学内容边界
 
 运行时 `SITE_CONTENT_CHANNEL` 只允许 `official` 或 `demo`，默认为正式集合。选择演示集合还必须显式启用 `ENABLE_DEMO_API=true`。

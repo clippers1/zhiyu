@@ -47,6 +47,16 @@ try {
     }
     assert.equal((await buildPage('/saved'))?.detail, null);
     assert.deepEqual((await buildPage('/saved'))?.preloaded, {});
+    // 「单子怎么读」 is a static editorial page: no database content, but it
+    // still needs a title, a canonical and the demo noindex rule.
+    const guide = await buildPage('/guide');
+    assert.ok(guide);
+    assert.equal(guide.detail, null);
+    assert.deepEqual(guide.preloaded, {});
+    assert.match(String(pageMetadata(guide).title), /单子怎么读/);
+    assert.equal(guide.canonical.endsWith('/guide'), true);
+    assert.equal((pageMetadata(guide).robots as any).index, false);
+    assert.equal(await buildPage('/guide/anything'), null);
     assert.equal(await buildPage('/article/not-real'), null);
     assert.equal(await buildPage('/unknown-route'), null);
     assert.ok(!(await sitemapXML()).includes('<url>'));
@@ -93,7 +103,6 @@ try {
       assert.ok(!(await request('/')).html.includes('href="/topics/glucose"'));
     }
     passed('rollback has no stale metadata; withdrawal removes HTML/API/list exposure and returns real 404');
-
     // Restore the indicator while testing removal of its related organ.
     await payload.update({ collection: 'publications', id: publication.id, req: await req(), data: { withdrawn: false, reason: 'Restore indicator for isolated topic test' } });
     const relatedPublication: any = (await payload.find({ collection: 'publications', where: { key: { equals: 'demo:organ:pancreas' } }, depth: 0, limit: 1 })).docs[0];
@@ -140,6 +149,8 @@ try {
     assert.ok(!sitemap.includes('/article/glucose'));
     assert.ok(!sitemap.includes('/saved'));
     assert.ok(!sitemap.includes('/admin'));
+    assert.ok(sitemap.includes('/guide'), 'the official sitemap advertises the static guide');
+    assert.equal((pageMetadata(await buildPage('/guide')).robots as any).index, true);
     passed('official channel does not render or index demo knowledge');
   } finally {
     await payload.update({ collection: 'articles', id: article.id, req: await req(), data: { title: previousTitle, subtitle: previousSubtitle, description: previousDescription } });

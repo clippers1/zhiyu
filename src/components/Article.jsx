@@ -24,6 +24,8 @@ import { TermQuestions } from "./ReadingGuide";
 import { contentTrust } from "../services/content-status";
 import { nextIndicator } from "../services/discovery";
 import { diagramFor } from "./Diagrams";
+import { ReportRowStrip } from "./ReportGuide";
+import { REPORT_ROWS } from "../services/report-guide";
 
 function FigureBlock({ figure, id = "article-figure" }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -127,6 +129,7 @@ function LongForm({ detail, figures }) {
 
 export default function Article({
   id,
+  go,
   onBack,
   onOrgan,
   onOpen,
@@ -138,6 +141,7 @@ export default function Article({
   const detail = state.data;
   const isOrgan = detail?.kind === "organ";
   const isStory = detail?.kind === "story";
+  const hasReportRows = detail?.kind === "indicator" && Boolean(REPORT_ROWS[id]);
   const longForm = Boolean(detail?.sections?.length);
   const guide = readingGuide(detail);
   const trust = contentTrust(detail);
@@ -225,12 +229,14 @@ export default function Article({
                 <Citation ids={detail.tipSourceIds} references={detail.references} prefix="article-source" />
               </Caveat>
             )}
+            {hasReportRows && <ReportRowStrip id={id} go={go} />}
           </header>
           {entryFigure && <FigureBlock key={detail.id} figure={entryFigure} />}
           {figures.opening && <FigureBlock key={`${detail.id}-opening`} figure={figures.opening} />}
           <nav className="reading-toc" aria-label="文章目录">
             <span>深入阅读</span>
             <a href="#article-overview">它是什么</a>
+            {hasReportRows && <a href="#article-report-rows">单子上的位置</a>}
             {figures.firstAnchor && <a href={`#${figures.firstAnchor}`}>图解</a>}
             {longForm && detail.sections.slice(1).map((section, index) => (
               <a key={section.title} href={`#article-section-${index + 2}`}>{section.short || section.title}</a>
