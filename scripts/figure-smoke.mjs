@@ -41,6 +41,40 @@ try {
     const box = await page.locator('svg.diagram').first().boundingBox();
     assert.ok(box && box.width <= width, `diagram wider than ${width}px viewport`);
   }
+
+  // Type guard: a figure is drawn on a 360-unit canvas, so at the narrowest
+  // phone every label must still render at 10px or more, and no label may run
+  // past the canvas edge. This is the regression test for the redesign that
+  // replaced the wide, landscape figures.
+  const figureArticles = [
+    'glucose', 'cbc', 'liver-function', 'kidney-function', 'lipids', 'pressure',
+    'thyroid-function', 'uric-acid', 'urinalysis', 'stairs-heart', 'lab-range',
+  ];
+  await page.setViewportSize({ width: 320, height: 900 });
+  for (const slug of figureArticles) {
+    await page.goto(`${base}/article/${slug}`, { waitUntil: 'networkidle' });
+    const report = await page.evaluate(() => [...document.querySelectorAll('svg.diagram')].map(svg => {
+      const viewBox = svg.viewBox.baseVal;
+      const scale = svg.getBoundingClientRect().width / viewBox.width;
+      return [...svg.querySelectorAll('text')].map(node => {
+        const box = node.getBBox();
+        return {
+          text: node.textContent,
+          px: Number((Number.parseFloat(getComputedStyle(node).fontSize) * scale).toFixed(2)),
+          right: box.x + box.width,
+          limit: viewBox.width,
+        };
+      });
+    }));
+    assert.ok(report.length, `${slug}: expected at least one diagram`);
+    for (const texts of report) {
+      for (const label of texts) {
+        assert.ok(label.px >= 10, `${slug}: label "${label.text}" renders at ${label.px}px at 320px, below the 10px floor`);
+        assert.ok(label.right <= label.limit + 1, `${slug}: label "${label.text}" overflows the figure canvas`);
+      }
+    }
+  }
+
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });
     await page.setViewportSize({ width: 390, height: 844 });
@@ -111,7 +145,7 @@ try {
     await broken.close();
   }
   assert.deepEqual(errors, []);
-  console.log('PASS inline mechanism diagrams with description, citations and attribution; responsive legibility; no-figure omission; ' + (ssr ? 'no-JS SSR.' : 'PNG figure and broken-image fallback.'));
+  console.log('PASS inline mechanism diagrams with description, citations and attribution; responsive legibility (320px type floor, no canvas overflow); no-figure omission; ' + (ssr ? 'no-JS SSR.' : 'PNG figure and broken-image fallback.'));
 } finally {
   await browser.close();
 }
