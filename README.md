@@ -76,6 +76,7 @@ public/
   fonts/            Noto Sans/Serif SC 与示意图标题子集
   favicon.svg       站点图标
 scripts/            内容测试与浏览器交互测试
+image-service/      内部图片生成服务（gpt-image-2.6，只绑定 127.0.0.1）
 backend/            内容后台、API、数据库迁移与流程测试
 compose.yaml        PostgreSQL 与 CMS 服务
 deploy/             通用 Nginx 配置示例
@@ -100,6 +101,7 @@ npm run test:learning
 npm run test:expansion
 npm run test:figure
 npm run test:report-data
+npm run test:image-service
 ```
 
 测试覆盖来源引用、关联内容、筛选分页、远程接口参数及失败重试，其中一万条合成摘要用于验证分页逻辑，不代表实际内容数量或线上性能保证。
@@ -130,6 +132,8 @@ node scripts/report-smoke.mjs
 完整站点：从根目录使用 Compose 构建 Next.js + CMS 服务，按 [服务端渲染说明](docs/public-rendering.md) 配置发布集合与反向代理。HTML 不缓存，保证发布、回滚和撤回在下次请求生效；只有正式集合进入 sitemap，演示集合保持 noindex。
 
 离线演示：将 `npm run build` 生成的 `dist/` 发布到静态托管即可，无需 Node.js 常驻服务，但不具备服务端正文和内容级 404。使用 [静态 Nginx 示例](deploy/nginx.conf.example) 的 History 页面回退；完整站点则使用 [SSR 代理示例](deploy/nginx-ssr.conf.example)，不能继续把公开页面回退到 `index.html`。两种方式均保留旧 Hash 链接兼容，目前按域名根路径部署。
+
+内部图片生成：`compose.yaml` 里的 `imagegen` 服务只绑定 `127.0.0.1`，用 Bearer token 鉴权，生成结果写到 `artifacts/imagegen`；它不进入反向代理，页面上也没有任何调用入口。启用方式与注意事项见 [生成图片](docs/image-generation.md)。
 
 ## 参与与后续方向
 

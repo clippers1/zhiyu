@@ -1,5 +1,16 @@
 # 版本记录
 
+## 未发布 · 内部图片生成服务
+
+- 新增 `image-service/`：零依赖 Node 服务，把 OpenAI 兼容的 `/v1/images/generations` 与 `/v1/images/edits` 包成内部接口，Bearer token 鉴权，只绑定 `127.0.0.1`。
+- 生成结果生成即落盘：PNG/JPEG/WebP 文件 + 同名 sidecar（prompt、模型、请求与回显参数、真实宽高、sha256、token 用量、参考图），并记录每日张数与字节数。
+- 尺寸以图片头为准：代理会把请求尺寸吸附到自己的档位（`1024x1024` → `1536x1024`，`1024x1280` → `1122x1402`），请求值不写进结果。
+- 失败策略：4xx 不重试（避免重复扣费）、5xx 最多重试 2 次；并发上限 + 有界队列，满了返回 429；每日上限在调用上游之前拦截。
+- 新增 `scripts/image-gen.mjs` 与 `npm run image:gen`；`scripts/image-service.test.mjs` 用假上游覆盖鉴权、参数校验、体积上限、重试、并发、每日上限、edits 分支与文件读取防穿越。
+- `compose.yaml` 新增 `imagegen` 服务，`deploy/content.env.example` 与 `scripts/init-content-env.mjs` 增加对应变量（上游密钥留空由操作者填写）。
+- 新增 `docs/image-generation.md`：尺寸/参数陷阱、不可复现、图内文字、医学边界、署名与体积成本。
+- 本轮不把生成图接入 `public/media` 或内容包，也不加页面入口。
+
 ## 未发布 · 新增「单子怎么读」层
 
 - 新增单页 `/guide`：一张检验报告单的四列结构图（项目名 / 结果 / 单位 / 参考区间）、编号图例、五个分节与五条常见问题，逐条挂在已核来源上；只讲版面怎么读，不提供任何数值、阈值或个人结果判断。

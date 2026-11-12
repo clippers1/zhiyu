@@ -22,6 +22,8 @@
     "test:report": "node scripts/report-smoke.mjs",
     "test:report-data": "node --test scripts/report-guide.test.mjs",
     "test:ui": "node scripts/smoke.mjs",
+    "test:image-service": "node --test scripts/image-service.test.mjs",
+    "image:gen": "node scripts/image-gen.mjs",
     "fonts:build": "node scripts/build-figure-font.mjs"
   },
   "dependencies": {

@@ -14,6 +14,10 @@ const environment = [
   `PAYLOAD_SECRET=${randomBytes(48).toString('hex')}`,
   `SERVER_URL=${origin}`, `COOKIE_SECURE=${origin.startsWith('https:')}`,
   'CMS_PORT=3108', 'ENABLE_DEMO_API=true',
+  // The image service needs a caller token from the start; the upstream key is
+  // filled in by the operator because it belongs to an external account.
+  'IMAGE_PORT=3120', 'IMAGE_API_BASE=', 'IMAGE_API_KEY=',
+  `IMAGE_SERVICE_TOKEN=${randomBytes(32).toString('hex')}`,
 ].join('\n') + '\n';
 await writeFile(path.join(directory, 'compose.env'), environment, { mode: 0o600, flag: 'wx' });
 await writeFile(path.join(directory, 'bootstrap.env'), `BOOTSTRAP_EMAIL=admin@zhiyu.local\nBOOTSTRAP_PASSWORD=${password}\nSEED_DEMO=true\nSEED_CONTENT_DIR=/seed-content\n`, { mode: 0o600, flag: 'wx' });

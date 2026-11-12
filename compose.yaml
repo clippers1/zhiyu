@@ -39,5 +39,29 @@ services:
       timeout: 10s
       start_period: 60s
       retries: 3
+  imagegen:
+    build:
+      context: ./image-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # Loopback only: generation takes 15–60s per image and owns an upstream key.
+    ports:
+      - "127.0.0.1:${IMAGE_PORT:-3120}:3120"
+    environment:
+      IMAGE_API_BASE: ${IMAGE_API_BASE:-}
+      IMAGE_API_KEY: ${IMAGE_API_KEY:-}
+      IMAGE_SERVICE_TOKEN: ${IMAGE_SERVICE_TOKEN:?Set IMAGE_SERVICE_TOKEN}
+      IMAGE_MODEL: ${IMAGE_MODEL:-gpt-image-2.6}
+      IMAGE_OUTPUT_DIR: /data/out
+      IMAGE_MAX_CONCURRENCY: ${IMAGE_MAX_CONCURRENCY:-2}
+      IMAGE_DAILY_LIMIT: ${IMAGE_DAILY_LIMIT:-200}
+    volumes:
+      - ./artifacts/imagegen:/data/out
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3120/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 60s
+      timeout: 10s
+      start_period: 15s
+      retries: 3
 volumes:
   content-db:
