@@ -55,7 +55,51 @@
 - 请求体上限 64 KB、prompt ≤ 4,000 字符、`count` 1–4；参考图只能是输出目录里的图片名（防路径穿越）。
 - 4xx 不重试（避免重复扣费），5xx 最多重试 2 次。
 
-## 9. 复现一次验证
+## 9. 对外给外部 agent 调用
+
+内部调用走 `http://127.0.0.1:3120`；外部 agent 走域名时：
+
+- 标准路径是 `POST /v1/images/generations`（与 `/v1/images` 等价），请求体用 OpenAI 的 `prompt / n / size / quality / background`，响应对同时返回 `data[]` 与 `images[]`。
+- 设置 `IMAGE_PUBLIC_ORIGIN=https://<域名>`，图片 URL 才会是可直接打开的绝对地址。
+- 反向代理只放行 `/v1/images`、`/v1/images/generations`、`/files/`、`/healthz`（示例见 `deploy/nginx-imagegen.conf.example`），管理页与 `/api/*` 留在本机。
+- `proxy_read_timeout` 要大于单张图的生成时间（15–60 秒），否则反向代理会先断开。
+- 只有浏览器要直接调用时才开 `IMAGE_ALLOW_BROWSER=true`；它会只对 `IMAGE_PUBLIC_ORIGIN` 返回 CORS 头。把密钥放进任何网页都会泄露，通常不建议。
+
+## 10. 怎么知道服务状态、怎么看生成图
+
+| 方式 | 内容 |
+| --- | --- |
+| `http://127.0.0.1:3120/` | 管理页：输入 `IMAGE_SERVICE_TOKEN` 后显示运行状态、当日张数/字节、并发与排队、已生成图片（缩略图、prompt、真实尺寸、token 用量），可点开原图 |
+| `GET /healthz` | 给监控用：模型、是否配置、并发、排队、当日用量、最近生成时间 |
+| `GET /api/state`（Bearer） | 管理页用的同一份数据 |
+| `GET /api/images?limit=24&before=<file>`（Bearer） | 分页列出已生成图片，最新在前 |
+| `artifacts/imagegen/` | 文件本身与 `<file>.json` sidecar；`.usage.json` 是当日计数 |
+| 容器日志 | 每行一条 JSON：`generated` / `generation_failed`，含张数、耗时、字节，不含 prompt 与密钥 |
+
+首次使用管理页时需要注意：
+
+1. 页面把 token 存在 `sessionStorage`，关闭标签页即失效，不写 cookie、不发到第三方。
+2. 管理页与 `/api/*` **不要**通过公网反向代理暴露；需要远程查看时用 SSH 隧道：`ssh -L 3120:127.0.0.1:3120 <host>`，然后打开 `http://127.0.0.1:3120/`。
+3. 页面只读取生成文件，不做删除或重命名；清理仍按 `IMAGE_DAILY_LIMIT` 与磁盘策略人工处理（生成图不进 Git）。
+
+## 11. 社区 Web UI 与自建服务的差异
+
+`tannic666/gpt-image-2-webui`（MIT，Docker 镜像约 138 MB）实测可以接同一个上游，适合**人工试 prompt**；自建服务适合**被程序调用**。两者不是替代关系：
+
+| 能力 | 自建服务 | 社区 Web UI |
+| --- | --- | --- |
+| 文生图 / 参考图编辑 | ✅ `/v1/images`、`/v1/images/generations` | ✅ 界面操作、蒙版编辑、批量 |
+| 给外部 agent 的标准协议 | ✅ OpenAI 兼容路径 | ❌ 页面 + 自己的 `/api/images`，需自建鉴权 |
+| 服务状态 / 用量 | ✅ `/healthz`、`/api/state`、管理页 | 界面内显示本次耗时与估算成本，无服务级指标 |
+| 已生成图片浏览 | ✅ 管理页 + `/api/images` | ✅ 历史列表、详情、下载（默认 3 天自动清理） |
+| 鉴权 | Bearer token（`IMAGE_SERVICE_TOKEN`） | `APP_PASSWORD`（请求体里带 sha256 密码） |
+| 并发 / 队列 / 每日上限 | ✅ 并发上限、有界队列、每日上限 | 无服务端配额，只有前端逐次调用 |
+| 参数与结果留痕 | ✅ sidecar：prompt、真实尺寸、sha256、usage | 历史在浏览器 localStorage，图片在服务端 3 天 |
+| 体积 | 326 MB 镜像、零依赖 | 138 MB 镜像（Next.js） |
+| 适合 | 被脚本、agent、其他服务调用 | 人坐下来试 prompt、挑图 |
+
+如果只是偶尔挑图，直接用社区 UI；要接入自动化流程，用本服务。两者可以同时跑，共用同一个上游 key。
+
 
 ```sh
 npm run test:image-service                     # 假上游，不花钱

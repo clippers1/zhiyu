@@ -1,8 +1,9 @@
 import { createHash, randomBytes } from "node:crypto";
 import { createServer } from "node:http";
-import { mkdir, readFile, rename, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ADMIN_HTML } from "./admin.mjs";
 
 // A small, dependency-free HTTP wrapper around an OpenAI-compatible
 // /v1/images/generations endpoint. It exists because the model takes 15–60
@@ -81,7 +82,7 @@ export function imageSize(buffer) {
   }
   if (buffer.length > 8 && buffer[0] === 0xff && buffer[1] === 0xd8) {
     let offset = 2;
-    while (offset + 8 < buffer.length) {
+    while (offset + 9 <= buffer.length) {
       if (buffer[offset] !== 0xff) { offset++; continue; }
       const marker = buffer[offset + 1];
       const length = buffer.readUInt16BE(offset + 2);
@@ -128,6 +129,50 @@ function limiter(max, maxQueue) {
   };
 }
 
+// Lists generated images newest-first straight from disk: the sidecar is the
+// source of truth, so a file copied in or deleted by hand is reflected without
+// a database. Files without a sidecar are still listed with their stat info.
+async function listImages(outputDir, { limit = 24, before = null } = {}) {
+  const names = (await readdir(outputDir)).filter(name => IMAGE_EXTENSIONS.has(path.extname(name).toLowerCase()));
+  const entries = [];
+  for (const name of names) {
+    let meta = null;
+    try { meta = JSON.parse(await readFile(path.join(outputDir, `${name}.json`), "utf8")); } catch { /* sidecar optional */ }
+    let info;
+    try { info = await stat(path.join(outputDir, name)); } catch { continue; }
+    const createdAt = meta?.createdAt || info.mtime.toISOString();
+    entries.push({ name, meta, info, createdAt, key: createdAt + "\u0000" + name });
+  }
+  // Newest first. The timestamp alone is not enough: two images in the same
+  // second share it, so the file name (which carries a random suffix) breaks
+  // the tie deterministically.
+  entries.sort((a, b) => (a.key < b.key ? 1 : a.key > b.key ? -1 : 0));
+  const start = before ? entries.findIndex(entry => entry.name === before) : -1;
+  const offset = start >= 0 ? start + 1 : 0;
+  const slice = entries.slice(offset, offset + limit + 1);
+  const items = slice.slice(0, limit).map(({ name, meta, info, createdAt }) => ({
+    file: name,
+    url: `/files/${encodeURIComponent(name)}`,
+    id: meta?.id || name.replace(/\.[a-z]+$/i, ""),
+    prompt: meta?.prompt || "",
+    width: meta?.width || null,
+    height: meta?.height || null,
+    bytes: meta?.bytes || info.size,
+    usage: meta?.usage || null,
+    reference: meta?.reference || null,
+    createdAt,
+  }));
+  const more = slice.length > limit;
+  return { items, nextCursor: more ? items[items.length - 1].file : null, total: entries.length };
+}
+
+// The service may be reachable through a reverse proxy for external agents.
+// IMAGE_PUBLIC_ORIGIN is the origin those agents will see, so absolute image
+// URLs in responses actually open. Locally it stays empty and URLs are relative.
+function publicOriginOf(configured) {
+  return String(configured || "").replace(/\/+$/, "");
+}
+
 export function createImageService(options = {}) {
   const {
     fetchImpl = fetch,
@@ -140,6 +185,8 @@ export function createImageService(options = {}) {
     maxQueue = Number(process.env.IMAGE_MAX_QUEUE || 8),
     timeoutMs = Number(process.env.IMAGE_TIMEOUT_MS || 300000),
     dailyLimit = Number(process.env.IMAGE_DAILY_LIMIT || 200),
+    publicOrigin = process.env.IMAGE_PUBLIC_ORIGIN || "",
+    allowBrowser = process.env.IMAGE_ALLOW_BROWSER === "true",
     now = () => new Date(),
     logger = () => {},
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms)),
@@ -148,6 +195,38 @@ export function createImageService(options = {}) {
   if (!outputDir) throw new Error("outputDir is required");
   if (!token) throw new Error("IMAGE_SERVICE_TOKEN is required");
   const gate = limiter(maxConcurrency, maxQueue);
+  let latest = null;
+  const lastGeneratedAt = () => latest;
+
+  const origin = publicOriginOf(publicOrigin && /^https?:\/\//.test(publicOrigin) ? publicOrigin : "");
+  const absolute = urlPath => (origin ? `${origin}${urlPath}` : urlPath);
+  // A browser calling from another origin needs CORS; it is off by default so a
+  // misconfigured deployment cannot be driven by any page on the internet.
+  const corsHeaders = request => {
+    if (!allowBrowser || !origin || header(request, "origin") !== origin) return {};
+    return {
+      "Access-Control-Allow-Origin": origin,
+      "Access-Control-Allow-Headers": "authorization, content-type",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Max-Age": "600",
+      Vary: "Origin",
+    };
+  };
+  // OpenAI-compatible clients expect `created` + `data[].b64_json|url`; our own
+  // CLI reads `images`. Returning both keeps one response usable by both.
+  const publicResult = result => ({
+    created: Math.floor(now().getTime() / 1000),
+    model: result.model,
+    images: result.images.map(item => ({ ...item, url: absolute(item.url) })),
+    data: result.images.map(item => ({ url: absolute(item.url), revised_prompt: item.prompt })),
+    usage: result.usage,
+    requested: result.requested,
+  });
+  async function quotaPreview() {
+    const current = await loadUsage();
+    const used = current.day === dayKey(now()) ? current.count : 0;
+    return { allowed: used < dailyLimit, used, day: current.day };
+  }
   const tokenDigest = digest(token);
   const usageFile = path.join(outputDir, ".usage.json");
   let usage = null;
@@ -254,6 +333,14 @@ export function createImageService(options = {}) {
 
       const stamp = timestamp(createdAt);
       const written = [];
+      // Never echo the upstream payload back: it carries every image as base64
+      // and would double the response size. Only the parameters are reported.
+      const returned = {
+        size: payload.size || null,
+        quality: payload.quality || null,
+        output_format: payload.output_format || null,
+        background: payload.background || null,
+      };
       for (const item of items) {
         // Some gateways return a URL instead of base64; both are supported so
         // the service works with either dialect.
@@ -276,12 +363,7 @@ export function createImageService(options = {}) {
           prompt: body.prompt,
           model,
           requested,
-          returned: {
-            size: payload.size || null,
-            quality: payload.quality || null,
-            output_format: payload.output_format || null,
-            background: payload.background || null,
-          },
+          returned,
           width,
           height,
           bytes: buffer.length,
@@ -291,13 +373,14 @@ export function createImageService(options = {}) {
           createdAt: createdAt.toISOString(),
         };
         await writeFile(`${target}.json`, JSON.stringify(record, null, 2));
-        written.push({ file, url: `/files/${file}`, width, height, bytes: record.bytes, sha256: record.sha256, usage: payload.usage || null });
+        written.push({ file, url: `/files/${file}`, prompt: body.prompt, width, height, bytes: record.bytes, sha256: record.sha256, usage: payload.usage || null });
       }
       if (!written.length) throw Object.assign(new Error("upstream_empty"), { status: 502 });
       const images = written.length;
       const bytes = written.reduce((sum, item) => sum + item.bytes, 0);
+      latest = createdAt.toISOString();
       await recordUsage({ images, bytes });
-      return { model, images: written, usage: payload.usage || null, requested, returned: written.length ? payload : null };
+      return { model, images: written, usage: payload.usage || null, requested, returned };
     }
   }
 
@@ -308,13 +391,20 @@ export function createImageService(options = {}) {
     if (route === "/healthz") {
       if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
       const current = await loadUsage();
-      return json({ status: "ok", service: "zhiyu-image", model, configured: Boolean(apiBase && apiKey),
-        active: gate.active, queue: gate.waiting, usageToday: current.day === dayKey(now()) ? current.count : 0 });
+      const last = lastGeneratedAt();
+      return json({ status: "ok", service: "zhiyu-image", model, configured: Boolean(apiBase && apiKey), outputDir,
+        active: gate.active, queue: gate.waiting, usageToday: current.day === dayKey(now()) ? current.count : 0,
+        ...(last ? { lastGeneratedAt: last } : {}) });
     }
 
     if (route.startsWith("/files/")) {
       if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
-      const name = decodeURIComponent(route.slice("/files/".length));
+      let name;
+      try {
+        name = decodeURIComponent(route.slice("/files/".length));
+      } catch {
+        return json({ error: "not_found" }, 404);
+      }
       // Only bare image filenames inside the output directory are servable.
       if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(name) || name.includes("..") || !IMAGE_EXTENSIONS.has(path.extname(name).toLowerCase())) {
         return json({ error: "not_found" }, 404);
@@ -330,17 +420,73 @@ export function createImageService(options = {}) {
       }
     }
 
+    if (route === "/favicon.ico") {
+      // Inline empty icon: the page sets no favicon, and a 404 in the console
+      // makes a healthy service look broken.
+      return new Response(Buffer.alloc(0), { status: 204 });
+    }
+
+    if (route === "/" || route === "/admin") {
+      if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
+      return new Response(ADMIN_HTML, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; img-src 'self' data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; form-action 'none'; base-uri 'none'" } });
+    }
+
+    if (route === "/api/state") {
+      if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
+      if (!authorized(request)) return json({ error: "unauthorized" }, 401);
+      const current = await loadUsage();
+      const names = (await readdir(outputDir)).filter(name => IMAGE_EXTENSIONS.has(path.extname(name).toLowerCase()));
+      // After a restart the in-memory timestamp is empty; fall back to the
+      // newest sidecar so the page still shows when the last image was made.
+      let last = lastGeneratedAt();
+      if (!last) {
+        const newest = names.slice().sort().reverse().find(name => name.endsWith(".png"));
+        if (newest) {
+          try { last = JSON.parse(await readFile(path.join(outputDir, `${newest}.json`), "utf8")).createdAt || null; } catch { /* optional */ }
+        }
+      }
+      return json({
+        health: { status: "ok", model, configured: Boolean(apiBase && apiKey), outputDir,
+          active: gate.active, queue: gate.waiting, ...(last ? { lastGeneratedAt: last } : {}) },
+        usage: { ...current, limit: dailyLimit, day: current.day === dayKey(now()) ? current.day : dayKey(now()) },
+        stored: names.length,
+      });
+    }
+
+    if (route === "/api/images") {
+      if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
+      if (!authorized(request)) return json({ error: "unauthorized" }, 401);
+      const params = url.searchParams;
+      const rawLimit = params.get("limit") || "24";
+      if (!/^\d+$/.test(rawLimit)) return json({ error: "invalid_limit" }, 400);
+      const limit = Math.min(100, Math.max(1, Number(rawLimit)));
+      const before = params.get("before");
+      if (before !== null && !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(before)) return json({ error: "invalid_cursor" }, 400);
+      const page = await listImages(outputDir, { limit, before });
+      return json({ ...page, items: page.items.map(item => ({ ...item, url: absolute(item.url) })) });
+    }
+
     if (route === "/usage") {
       if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { Allow: "GET" });
       if (!authorized(request)) return json({ error: "unauthorized" }, 401);
       const current = await loadUsage();
-      return json({ ...current, limit: dailyLimit });
+      return json({ ...current, limit: dailyLimit, publicOrigin: origin || null, browserCors: Boolean(allowBrowser && origin) });
     }
 
-    if (route !== "/v1/images") return json({ error: "not_found" }, 404);
+    // Two spellings of the same operation: the compact one our CLI uses, and
+    // the OpenAI-standard path other agents and SDKs already know.
+    if (route !== "/v1/images" && route !== "/v1/images/generations") return json({ error: "not_found" }, 404);
+    if (request.method === "OPTIONS" && allowBrowser) {
+      return new Response(null, { status: 204, headers: { ...corsHeaders(request), "Access-Control-Max-Age": "600" } });
+    }
     if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405, { Allow: "POST" });
     if (!authorized(request)) return json({ error: "unauthorized" }, 401);
     if (!apiBase || !apiKey) return json({ error: "not_configured" }, 503);
+    {
+      const quote = await quotaPreview();
+      if (!quote.allowed) return json({ error: "daily_limit_reached", limit: dailyLimit }, 429);
+    }
 
     let body;
     try {
@@ -381,11 +527,11 @@ export function createImageService(options = {}) {
       const result = await generate({ ...body, count }, reference);
       logger({ event: "generated", images: result.images.length, ms: Date.now() - started,
         bytes: result.images.reduce((sum, item) => sum + item.bytes, 0) });
-      return json(result);
+      return json(publicResult(result), 200, corsHeaders(request));
     } catch (error) {
       logger({ event: "generation_failed", error: error.message, ms: Date.now() - started });
       return json({ error: error.message, ...(error.detail ? { detail: error.detail } : {}),
-        ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}) }, error.status || 500);
+        ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}) }, error.status || 500, corsHeaders(request));
     } finally {
       release();
     }
@@ -403,7 +549,7 @@ export function createImageService(options = {}) {
     });
   });
 
-  return { server, handle, generate, loadUsage, usageFile };
+  return { server, handle, generate, loadUsage, usageFile, listImages: opts => listImages(outputDir, opts) };
 }
 
 async function start() {

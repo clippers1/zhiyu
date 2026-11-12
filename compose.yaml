@@ -50,11 +50,17 @@ services:
     environment:
       IMAGE_API_BASE: ${IMAGE_API_BASE:-}
       IMAGE_API_KEY: ${IMAGE_API_KEY:-}
-      IMAGE_SERVICE_TOKEN: ${IMAGE_SERVICE_TOKEN:?Set IMAGE_SERVICE_TOKEN}
+      # Not required here: the service itself refuses to start without a token,
+      # so an existing deployment that only runs `cms` is never blocked by this.
+      IMAGE_SERVICE_TOKEN: ${IMAGE_SERVICE_TOKEN:-}
       IMAGE_MODEL: ${IMAGE_MODEL:-gpt-image-2.6}
       IMAGE_OUTPUT_DIR: /data/out
       IMAGE_MAX_CONCURRENCY: ${IMAGE_MAX_CONCURRENCY:-2}
       IMAGE_DAILY_LIMIT: ${IMAGE_DAILY_LIMIT:-200}
+      # Set for an externally reachable deployment (e.g. https://img.example.com);
+      # image URLs become absolute and OPTIONS preflight is answered.
+      IMAGE_PUBLIC_ORIGIN: ${IMAGE_PUBLIC_ORIGIN:-}
+      IMAGE_ALLOW_BROWSER: ${IMAGE_ALLOW_BROWSER:-false}
     volumes:
       - ./artifacts/imagegen:/data/out
     healthcheck:

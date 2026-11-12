@@ -60,9 +60,11 @@ test("auth, content type, size limits and routing fail closed", async () => {
   const wrongType = new Request("http://localhost/v1/images", { method: "POST", headers: { Authorization: `Bearer ${TOKEN}` }, body: "prompt=x" });
   assert.equal((await service.handle(wrongType)).status, 415);
 
+  // No Content-Length header here: fetch treats it as a forbidden request
+  // header, and the service counts bytes while reading anyway.
   const big = new Request("http://localhost/v1/images", {
     method: "POST",
-    headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json", "Content-Length": String(200_000) },
+    headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify({ prompt: "x".repeat(200_000) }),
   });
   assert.equal((await service.handle(big)).status, 413);
@@ -184,4 +186,93 @@ test("imageSize reads PNG, JPEG and WebP headers", () => {
   webp.writeUIntLE(799, 27, 3);
   assert.deepEqual(imageSize(webp), { format: "webp", width: 1200, height: 800 });
   assert.deepEqual(imageSize(Buffer.from("not an image")), { format: null, width: null, height: null });
+});
+
+test("the admin page and its read endpoints are gated, and the gallery lists newest first", async () => {
+  const { service, outputDir } = await setup({ fetchImpl: async () => upstreamOk() });
+  await service.generate({ prompt: "第一张", count: 1 }, null);
+  await new Promise(resolve => setTimeout(resolve, 5));
+  await service.generate({ prompt: "第二张", count: 1 }, null);
+
+  const page = await service.handle(new Request("http://localhost/"));
+  assert.equal(page.status, 200);
+  assert.match(page.headers.get("content-type"), /text\/html/);
+  assert.match(await page.text(), /IMAGE_SERVICE_TOKEN/);
+
+  assert.equal((await service.handle(new Request("http://localhost/api/state"))).status, 401);
+  const state = await (await service.handle(new Request("http://localhost/api/state", { headers: { Authorization: `Bearer ${TOKEN}` } }))).json();
+  assert.equal(state.stored, 2);
+  assert.equal(state.usage.count, 2);
+  assert.ok(state.health.lastGeneratedAt);
+
+  const list = await (await service.handle(new Request("http://localhost/api/images?limit=1", { headers: { Authorization: `Bearer ${TOKEN}` } }))).json();
+  assert.equal(list.items.length, 1);
+  assert.equal(list.items[0].prompt, "第二张", "newest first");
+  assert.ok(list.nextCursor);
+  const older = await (await service.handle(new Request(`http://localhost/api/images?limit=1&before=${encodeURIComponent(list.nextCursor)}`, { headers: { Authorization: `Bearer ${TOKEN}` } }))).json();
+  assert.equal(older.items[0].prompt, "第一张");
+  assert.equal(older.nextCursor, null);
+
+  const badLimit = await service.handle(new Request("http://localhost/api/images?limit=abc", { headers: { Authorization: `Bearer ${TOKEN}` } }));
+  assert.equal(badLimit.status, 400);
+  const badCursor = await service.handle(new Request("http://localhost/api/images?before=../x", { headers: { Authorization: `Bearer ${TOKEN}` } }));
+  assert.equal(badCursor.status, 400);
+  assert.deepEqual((await readdir(outputDir)).filter(name => name.startsWith("..")), []);
+});
+
+test("the OpenAI-standard path returns the same images in the standard shape", async () => {
+  const { service } = await setup({ fetchImpl: async () => upstreamOk() });
+  const response = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` },
+    body: JSON.stringify({ prompt: "兼容路径", n: 1 }),
+  }));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(Number.isInteger(body.created));
+  assert.equal(body.data.length, 1);
+  assert.match(body.data[0].url, /^\/files\/.+\.(png|jpg|webp)$/);
+  assert.equal(body.images.length, 1);
+  assert.equal(body.model, "gpt-image-2.6");
+});
+
+test("a public origin makes image URLs absolute, and browser CORS stays opt-in", async () => {
+  const { service } = await setup({
+    publicOrigin: "https://img.example.com",
+    allowBrowser: true,
+    fetchImpl: async () => upstreamOk(),
+  });
+  const preflight = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "OPTIONS",
+    headers: { Origin: "https://img.example.com", "Access-Control-Request-Method": "POST" },
+  }));
+  assert.equal(preflight.status, 204);
+  assert.equal(preflight.headers.get("access-control-allow-origin"), "https://img.example.com");
+
+  const foreign = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "OPTIONS",
+    headers: { Origin: "https://evil.example.com" },
+  }));
+  assert.equal(foreign.status, 204);
+  assert.equal(foreign.headers.get("access-control-allow-origin"), null, "only the configured origin is allowed");
+
+  const generated = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}`, Origin: "https://img.example.com" },
+    body: JSON.stringify({ prompt: "跨域调用" }),
+  }));
+  const body = await generated.json();
+  assert.match(body.images[0].url, /^https:\/\/img\.example\.com\/files\//);
+  assert.equal(generated.headers.get("access-control-allow-origin"), "https://img.example.com");
+});
+
+test("browser CORS is off unless explicitly enabled", async () => {
+  const { service } = await setup({ fetchImpl: async () => upstreamOk() });
+  const preflight = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "OPTIONS",
+    headers: { Origin: "https://img.example.com" },
+  }));
+  // Without opt-in there is no CORS response: the request is simply not a POST.
+  assert.equal(preflight.status, 405);
+  assert.equal(preflight.headers.get("access-control-allow-origin"), null);
 });

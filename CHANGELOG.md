@@ -8,7 +8,10 @@
 - 失败策略：4xx 不重试（避免重复扣费）、5xx 最多重试 2 次；并发上限 + 有界队列，满了返回 429；每日上限在调用上游之前拦截。
 - 新增 `scripts/image-gen.mjs` 与 `npm run image:gen`；`scripts/image-service.test.mjs` 用假上游覆盖鉴权、参数校验、体积上限、重试、并发、每日上限、edits 分支与文件读取防穿越。
 - `compose.yaml` 新增 `imagegen` 服务，`deploy/content.env.example` 与 `scripts/init-content-env.mjs` 增加对应变量（上游密钥留空由操作者填写）。
-- 新增 `docs/image-generation.md`：尺寸/参数陷阱、不可复现、图内文字、医学边界、署名与体积成本。
+- 新增 OpenAI 标准路径 `POST /v1/images/generations`（与 `/v1/images` 等价），响应同时给出 `data[]` 与 `images[]`；`IMAGE_PUBLIC_ORIGIN` 设置后图片 URL 变为绝对地址，`IMAGE_ALLOW_BROWSER=true` 才对该 origin 开放 CORS。
+- 新增管理页（`GET /`）与只读接口 `/api/state`、`/api/images`：查看运行状态、当日用量、已生成图片（缩略图、prompt、真实尺寸、token 用量）与预览；token 只存在 `sessionStorage`。
+- 新增 `deploy/nginx-imagegen.conf.example`：只放行生成接口、图片与健康检查，管理页与 `/api/*` 保持本机访问。
+- 新增 `docs/image-generation.md`：尺寸/参数陷阱、不可复现、图内文字、医学边界、署名、体积成本、对外暴露与状态查看，以及社区 Web UI 与自建服务的差异。
 - 本轮不把生成图接入 `public/media` 或内容包，也不加页面入口。
 
 ## 未发布 · 新增「单子怎么读」层

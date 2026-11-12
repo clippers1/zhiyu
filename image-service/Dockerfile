@@ -6,7 +6,7 @@ WORKDIR /app
 # No dependencies: the service only uses Node built-ins (node:http, fetch,
 # node:crypto, node:fs). That keeps the image small and removes any install
 # step that could fail during a deploy.
-COPY server.mjs ./
+COPY server.mjs admin.mjs ./
 
 RUN mkdir -p /data/out && chown -R node:node /data/out
 USER node
