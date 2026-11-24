@@ -50,9 +50,10 @@ server {
     proxy_send_timeout 330s;
     proxy_cache off;
 
-    # A blunter limit than the service's own concurrency gate: this is only a
-    # ceiling against accidental loops, not the real quota.
-    limit_req zone=imggpt_api burst=20 nodelay;
+    # Optional coarse ceiling against accidental loops. The real quota is the
+    # service's own concurrency/queue/daily limit. Uncomment after defining the
+    # zone below, otherwise nginx refuses to start.
+    # limit_req zone=imggpt_api burst=20 nodelay;
 
     location = /v1/images {
         proxy_pass http://127.0.0.1:3120;
@@ -74,8 +75,8 @@ server {
     }
 }
 
-# Add to the http{} block (or /etc/nginx/conf.d/limits.conf) — 30 requests per
-# minute per IP for generation calls:
+# To enable the rate limit, add to the http{} block (or a new file in
+# /etc/nginx/conf.d/), then uncomment the limit_req directive above:
 #
 #   limit_req_zone $binary_remote_addr zone=imggpt_api:10m rate=30r/m;
 #
