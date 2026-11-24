@@ -257,7 +257,6 @@
   "figures": [
     {
       "key": "path",
-      "diagram": "uric-acid-path",
       "alt": "示意图：嘌呤分解形成尿酸进入血液，经肾脏过滤后随尿液排出；生成过多或排出不足都可能让血尿酸升高。",
       "caption": "尿酸的两端：生成与排出。",
       "simplification": "图为路径示意，省略了肠道等其他排出途径与多种影响因素，也未按真实比例绘制。",
@@ -265,9 +264,24 @@
         "uric-acid"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "1bd62a050bbb1ad0387a1a61cd8f6fda5b2d598c6da13876addd802ee3aa5001"
+      },
+      "src": "/media/fig-uric-acid-path.webp",
+      "width": 960,
+      "height": 960,
+      "legend": [
+        {
+          "title": "体内生成与饮食来源",
+          "text": "嘌呤代谢产生尿酸，其中大部分来自人体自身细胞更新。"
+        },
+        {
+          "title": "肾脏与肠道排出",
+          "text": "尿酸主要经肾脏随尿液排出，生成与排出共同决定血尿酸水平。"
+        }
+      ]
     }
   ],
   "organ": "肾脏 · 血液 · 尿液",

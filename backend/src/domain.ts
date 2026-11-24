@@ -59,17 +59,22 @@ function figureBlock(value: any, sourceKeys: Set<string>, fallbackKey = 'legacy'
   const diagram = typeof value.diagram === 'string' ? value.diagram : null;
   if (diagram) {
     if (!/^[a-z0-9-]+$/.test(diagram)) fail('自制示意图的标识只能使用英文小写、数字和连字符。');
-  } else if (typeof value.src !== 'string' || !/^\/media\/[a-z0-9-]+\.png$/.test(value.src)) {
-    fail('图解图片路径不正确，仅允许站内 /media/ 下的 PNG 或已登记的站内示意图标识。');
+  } else if (typeof value.src !== 'string' || !/^\/media\/[a-z0-9-]+\.(png|webp)$/.test(value.src)) {
+    fail('图解图片路径不正确，仅允许站内 /media/ 下的 PNG/WebP 或已登记的站内示意图标识。');
   }
   const sourceIds = Array.isArray(value.sourceIds) && value.sourceIds.length && value.sourceIds.every((key: any) => typeof key === 'string' && sourceKeys.has(key))
     ? [...new Set(value.sourceIds)] : null;
   if (!sourceIds) fail('图解引用了不存在的来源编号。');
   const attribution = value.attribution;
   if (!attribution || typeof attribution !== 'object' || Array.isArray(attribution)) fail('图解缺少素材权利说明。');
-  const selfMade = attribution.kind === 'self-made';
-  const attributionOut: any = { kind: selfMade ? 'self-made' : 'third-party', name: text(attribution.name, '素材名称', 120) };
-  if (!selfMade) {
+  const kind = attribution.kind === 'self-made' ? 'self-made' : attribution.kind === 'ai-generated' ? 'ai-generated' : 'third-party';
+  const attributionOut: any = { kind, name: text(attribution.name, '素材名称', 120) };
+  if (kind === 'ai-generated') {
+    attributionOut.model = text(attribution.model, '生成模型', 80);
+    if (typeof attribution.assetSha256 === 'string' && /^[a-f0-9]{12,64}$/.test(attribution.assetSha256)) {
+      attributionOut.assetSha256 = attribution.assetSha256;
+    }
+  } else if (kind === 'third-party') {
     attributionOut.url = text(attribution.url, '素材来源链接', 300);
     attributionOut.license = text(attribution.license, '授权名称', 60);
     attributionOut.licenseUrl = text(attribution.licenseUrl, '授权链接', 300);
@@ -77,6 +82,12 @@ function figureBlock(value: any, sourceKeys: Set<string>, fallbackKey = 'legacy'
       if (!/^https:\/\//.test(attributionOut[key])) fail(`图解的${key === 'url' ? '素材来源链接' : '授权链接'}必须使用 HTTPS。`);
     }
   }
+  const legend = Array.isArray(value.legend) && value.legend.length
+    ? value.legend.slice(0, 6).map((item: any) => ({
+      title: text(item?.title, '图例标题', 60),
+      text: text(item?.text, '图例说明', 240),
+    }))
+    : undefined;
   return {
     key: typeof value.key === 'string' && /^[a-z0-9-]+$/.test(value.key) ? value.key : fallbackKey,
     ...(diagram ? { diagram } : {
@@ -85,6 +96,7 @@ function figureBlock(value: any, sourceKeys: Set<string>, fallbackKey = 'legacy'
     }),
     alt: text(value.alt, '替代文本', 200), caption: text(value.caption, '图注', 300),
     simplification: text(value.simplification, '简化说明', 600), sourceIds, attribution: attributionOut,
+    ...(legend ? { legend } : {}),
   };
 }
 
@@ -197,12 +209,27 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
     number: article.number || '', tags: (article.tags || []).map((t: any) => t.text),
     category: article.category, featured: Boolean(article.featured),
     format: article.kind === 'story' ? 'article' : (article.format || 'entry'),
-    // The reader home page introduces the lead article with its opening
-    // mechanism diagram; only self-made inline diagrams are carried in a
-    // summary, because third-party PNGs need their attribution beside them.
+    // The reader home page introduces the lead article with its opening visual.
+    // Self-made diagrams and AI-generated editorial illustrations travel in the
+    // summary; third-party assets keep their full attribution on the article page.
     ...(() => {
-      const lead = figures.find((figure: any) => figure.diagram);
-      return lead ? { leadFigure: { diagram: lead.diagram, caption: lead.caption } } : {};
+      const lead = figures.find((figure: any) => figure.diagram || (figure.src && figure.attribution?.kind !== 'third-party'));
+      if (!lead) return {};
+      if (lead.diagram) return { leadFigure: { diagram: lead.diagram, caption: lead.caption } };
+      return {
+        leadFigure: {
+          src: lead.src,
+          alt: lead.alt,
+          caption: lead.caption,
+          ...(lead.width ? { width: lead.width } : {}),
+          ...(lead.height ? { height: lead.height } : {}),
+          attribution: {
+            kind: lead.attribution.kind,
+            name: lead.attribution.name,
+            ...(lead.attribution.model ? { model: lead.attribution.model } : {}),
+          },
+        },
+      };
     })(),
     referenceCount: references.length, sourceLabel: references[0]?.publisher || '',
     searchText: [article.title, article.subtitle, article.question || '', article.aliases || '', article.description,

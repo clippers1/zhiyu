@@ -216,7 +216,6 @@
   "figures": [
     {
       "key": "chain",
-      "diagram": "stairs-heart",
       "alt": "示意图：爬楼时腿部肌肉需要更多氧气，心脏加快跳动把含氧血液送到肌肉，呼吸同时加快以在肺里完成气体交换。",
       "caption": "爬楼时，肌肉、心脏和肺在同一条链路上一起被调动。",
       "simplification": "图为简化示意，不是解剖图，也未按真实比例绘制。图中省略了神经与激素调节、血管舒缩等环节；箭头不表示血流速度或方向细节。",
@@ -225,9 +224,24 @@
         "flow"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "cc7f44faf255abe933704a554b7262cbda91284739b7edad479fda86934770f7"
+      },
+      "src": "/media/fig-stairs-heart.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "肌肉需氧增加",
+          "text": "爬楼时下肢大肌群做功加大，消耗的氧气与能量迅速上升。"
+        },
+        {
+          "title": "心率与呼吸协同提速",
+          "text": "心脏加快泵血、肺部加深呼吸，共同把更多含氧血送到肌肉。"
+        }
+      ]
     }
   ],
   "relatedOrgans": [

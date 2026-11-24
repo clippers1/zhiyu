@@ -254,10 +254,28 @@
         "digestion"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "8dddfde449708f3602aa4f4b71c04f9d1f4eee526efa9a58e1c3cca7477a0383"
       },
-      "diagram": "glucose-flow"
+      "src": "/media/fig-glucose-flow.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "进入血液",
+          "text": "食物中的碳水化合物经消化形成葡萄糖，随血液流向全身。"
+        },
+        {
+          "title": "胰岛素信号",
+          "text": "胰腺分泌胰岛素，向细胞发出摄取和利用葡萄糖的信号。"
+        },
+        {
+          "title": "细胞利用与肝脏储存",
+          "text": "肌肉和脂肪等细胞摄取供能，多余部分暂存进肝脏调节供应。"
+        }
+      ]
     },
     {
       "key": "windows",
@@ -269,10 +287,28 @@
         "a1c"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "3248ec9153a6e82392aa78204808efc80591211a9d53ee08587fd2a177a2a30e"
       },
-      "diagram": "glucose-windows"
+      "src": "/media/fig-glucose-windows.webp",
+      "width": 960,
+      "height": 410,
+      "legend": [
+        {
+          "title": "空腹血糖",
+          "text": "至少 8 小时未摄入热量时的瞬时快照，观察安静状态下的基线。"
+        },
+        {
+          "title": "餐后 / 糖耐量",
+          "text": "进食或饮用葡萄糖溶液后，观察身体处理这一批糖的动态过程。"
+        },
+        {
+          "title": "糖化血红蛋白（HbA1c）",
+          "text": "随红细胞存留记录过去约 2–3 个月的平均血糖水平。"
+        }
+      ]
     }
   ],
   "organ": "胰腺 · 肝脏",

@@ -2,32 +2,46 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { BoundaryNote, Citation, RunHead, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
-import { diagramFor } from "./Diagrams";
 import { REPORT_ROWS, GUIDE_CONTENT, GUIDE_FAQ, GUIDE_SECTIONS } from "../services/report-guide";
 
 const PREFIX = "guide-source";
 
-// Numbered legend for the report figure. Kept in HTML rather than inside the
-// SVG: the diagram is a picture of a layout, the legend is prose, and prose in
-// HTML can wrap and be read by a screen reader at any size.
+// Numbered legend for the report figure. Kept in HTML rather than inside an
+// image so every explanation wraps cleanly and is readable by screen readers.
 const LEGEND = [
-  { title: "项目名", text: "这一行查的是什么。可能是中文全称、缩写，或两者并列。" },
-  { title: "结果", text: "这次样本测出的数字；旁边的箭头只是提示它落在所标区间之外。" },
-  { title: "单位", text: "数字按什么尺度记录。不同项目、不同实验室可能不同。" },
-  { title: "参考区间", text: "这套方法下健康人群的常见范围，不是个人的合格线。" },
+  { title: "项目名", short: "查的是哪一项", tone: "", text: "这一行查的是什么。可能是中文全称、缩写，或两者并列。" },
+  { title: "结果", short: "本次测出的数字", tone: "accent", text: "这次样本测出的数字；旁边的箭头只是提示它落在所标区间之外。" },
+  { title: "单位", short: "测量的尺度", tone: "", text: "数字按什么尺度记录。不同项目、不同实验室可能不同。" },
+  { title: "参考区间", short: "健康人群常见范围", tone: "caution", text: "这套方法下健康人群的常见范围，不是个人的合格线。" },
 ];
 
 function GuideFigure() {
-  const Diagram = diagramFor("report-anatomy");
-  if (!Diagram) return null;
   return (
     <figure className="article-figure guide-figure">
       <div className="article-figure-stage">
-        <Diagram id="guide-report-diagram" />
+        <img
+          src="/media/fig-report-guide.webp"
+          alt="示意图：极简医学检验报告单的四列栏目抽象构图与放大镜，不含真实项目名、数值与区间"
+          width={960}
+          height={640}
+          decoding="async"
+        />
+      </div>
+      <div className="report-anatomy-card" role="img" aria-label="化验单四列结构示意：项目名、结果、单位与参考区间">
+        <div className="report-anatomy-head">化验单一行的四个常见栏目</div>
+        <div className="report-anatomy-grid">
+          {LEGEND.map((item, index) => (
+            <div className={`report-anatomy-col${item.tone ? ` ${item.tone}` : ""}`} key={item.title}>
+              <span className="report-anatomy-badge" aria-hidden="true">{index + 1}</span>
+              <b>{item.title}</b>
+              <span>{item.short}</span>
+            </div>
+          ))}
+        </div>
       </div>
       <figcaption>
-        <span>化验单的一行由项目名、结果、单位和参考区间组成。</span>
-        <small className="article-figure-attribution">插图：知愈自制示意图</small>
+        <span>化验单的一行通常由项目名、结果、单位和参考区间四列组成。</span>
+        <small className="article-figure-attribution">插图：AI 生成插图 · 模型 gpt-image-2.6</small>
       </figcaption>
       <ol className="guide-legend">
         {LEGEND.map((item, index) => (
@@ -42,7 +56,7 @@ function GuideFigure() {
       </ol>
       <p className="article-figure-note">
         <b>图示边界：</b>
-        图为报告单版面示意，不含真实项目名称、数值、单位或参考区间，也未按任何一份真实报告绘制；不同机构的栏目名称与排列可能不同。
+        图为报告单版面概念示意，不含真实项目名称、数值、单位或参考区间，也未按任何一份真实报告绘制；不同机构的栏目名称与排列可能不同。
       </p>
     </figure>
   );

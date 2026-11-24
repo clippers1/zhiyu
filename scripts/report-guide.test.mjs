@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import { DIAGRAM_NAMES } from "../src/services/diagram-names.js";
+import { access, readFile } from "node:fs/promises";
 import {
   GUIDE_CONTENT,
   GUIDE_FAQ,
@@ -127,9 +126,9 @@ test("the guide never prints a threshold, a value or an arrow as a judgement", (
   }
 });
 
-test("the report diagram is registered for both the renderer and the content tests", async () => {
-  assert.ok(DIAGRAM_NAMES.includes("report-anatomy"));
-  const source = await readFile("src/components/Diagrams.jsx", "utf8");
-  assert.match(source, /export function ReportAnatomy/);
-  assert.match(source, /"report-anatomy": ReportAnatomy/);
+test("the report guide ships an AI-generated editorial image and structured HTML anatomy", async () => {
+  await access("public/media/fig-report-guide.webp");
+  const source = await readFile("src/components/ReportGuide.jsx", "utf8");
+  assert.match(source, /\/media\/fig-report-guide\.webp/);
+  assert.match(source, /report-anatomy-card/);
 });

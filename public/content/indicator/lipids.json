@@ -258,7 +258,6 @@
   "figures": [
     {
       "key": "transport",
-      "diagram": "lipid-transport",
       "alt": "示意图：脂蛋白把胆固醇和甘油三酯运出肝脏，LDL 把胆固醇送往组织，HDL 参与把胆固醇运回肝脏，甘油三酯作为能量储存形式。",
       "caption": "同一批脂类，由不同运输车按不同方向运送。",
       "simplification": "图为运输方向示意，省略了多种脂蛋白亚类、酶和受体环节，也未按真实比例绘制；箭头不表示数量或速度。",
@@ -266,9 +265,24 @@
         "chol"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "19bf574fe3221e4eb85d35c24c92ce9adcef69ac2aff7bc89fcf71a8fda3d239"
+      },
+      "src": "/media/fig-lipids-carriers.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "载脂蛋白运输车",
+          "text": "脂肪与胆固醇不溶于水，必须装进脂蛋白颗粒中随血液运输。"
+        },
+        {
+          "title": "向外输送与回收分工",
+          "text": "不同密度的脂蛋白方向各异，血脂报告需要合起来对照看。"
+        }
+      ]
     }
   ],
   "organ": "肝脏 · 血管",

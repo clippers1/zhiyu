@@ -11,7 +11,6 @@ import {
 import { RouteLink } from "./RouteLink";
 import { contentTrust } from "../services/content-status";
 import { selectDiscovery } from "../services/discovery";
-import { diagramFor } from "./Diagrams";
 
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
@@ -26,11 +25,6 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
     totalIndicators,
     totalOrgans,
   } = selectDiscovery(state.data?.items, organState.data?.items, storyState.data?.items);
-  // The lead is an indicator article, so its plate is the mechanism diagram the
-  // article opens with: a body-outline illustration left readers unsure what
-  // the home page was for. The diagram carries no accessible name here because
-  // the same figure is fully labelled inside the article.
-  const LeadDiagram = diagramFor(feature?.leadFigure?.diagram);
   const trust = feature ? contentTrust(feature) : null;
 
   return (
@@ -71,15 +65,25 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
               {feature.questionAnswer && (
                 <span className="feature-sub">{feature.questionAnswer}</span>
               )}
-              {LeadDiagram && (
-                <span className="feature-figure" aria-hidden="true">
-                  <LeadDiagram id="home-feature-diagram" />
+              {feature.leadFigure?.src && (
+                <span className="feature-figure">
+                  <img
+                    src={feature.leadFigure.src}
+                    alt={feature.leadFigure.alt || feature.leadFigure.caption || feature.title}
+                    width={feature.leadFigure.width || undefined}
+                    height={feature.leadFigure.height || undefined}
+                    decoding="async"
+                  />
                 </span>
               )}
-              {LeadDiagram && feature.leadFigure?.caption && (
+              {feature.leadFigure?.src && feature.leadFigure?.caption && (
                 <span className="feature-figure-caption">
                   {feature.leadFigure.caption}
-                  <i>知愈自制示意图</i>
+                  <i>
+                    {feature.leadFigure.attribution?.kind === "ai-generated"
+                      ? `${feature.leadFigure.attribution.name}${feature.leadFigure.attribution.model ? ` · ${feature.leadFigure.attribution.model}` : ""}`
+                      : "知愈自制示意图"}
+                  </i>
                 </span>
               )}
               <span className="feature-read">

@@ -220,20 +220,36 @@ test("the admin page and its read endpoints are gated, and the gallery lists new
   assert.deepEqual((await readdir(outputDir)).filter(name => name.startsWith("..")), []);
 });
 
-test("the OpenAI-standard path returns the same images in the standard shape", async () => {
-  const { service } = await setup({ fetchImpl: async () => upstreamOk() });
+test("the OpenAI-standard path returns the same images in the standard shape and honours n", async () => {
+  let upstreamPayload = null;
+  const { service } = await setup({
+    dailyLimit: 2,
+    fetchImpl: async (_url, init) => {
+      upstreamPayload = JSON.parse(init.body);
+      return upstreamOk({
+        data: [{ b64_json: png().toString("base64") }, { b64_json: png().toString("base64") }],
+        size: "1024x1024",
+        usage: { input_tokens: 10, output_tokens: 40, total_tokens: 50 },
+      });
+    },
+  });
   const response = await service.handle(new Request("http://localhost/v1/images/generations", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` },
-    body: JSON.stringify({ prompt: "兼容路径", n: 1 }),
+    body: JSON.stringify({ prompt: "兼容路径", n: 2 }),
   }));
   assert.equal(response.status, 200);
+  assert.equal(upstreamPayload.n, 2, "OpenAI n must be forwarded to upstream");
   const body = await response.json();
   assert.ok(Number.isInteger(body.created));
-  assert.equal(body.data.length, 1);
+  assert.equal(body.data.length, 2);
   assert.match(body.data[0].url, /^\/files\/.+\.(png|jpg|webp)$/);
-  assert.equal(body.images.length, 1);
+  assert.equal(body.images.length, 2);
   assert.equal(body.model, "gpt-image-2.6");
+  // Two images consumed the dailyLimit of 2 images.
+  const limited = await service.handle(post({ prompt: "third" }));
+  assert.equal(limited.status, 429);
+  assert.equal((await limited.json()).error, "daily_limit_reached");
 });
 
 test("a public origin makes image URLs absolute, and browser CORS stays opt-in", async () => {
@@ -278,7 +294,6 @@ test("browser CORS is off unless explicitly enabled", async () => {
 });
 
 test("accepts OpenAI's n and can answer with b64_json", async () => {
-  // The fake upstream honours n the way a real provider does.
   const { service } = await setup({
     fetchImpl: async (_url, init) => {
       const n = Number(JSON.parse(init.body).n) || 1;

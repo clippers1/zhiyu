@@ -14,7 +14,7 @@ try {
   const learning = page.locator('.visual-learning');
   await expect(learning).toContainText('跟着血液走一圈');
   await expect.poll(() => page.evaluate(async () => (await fetch('/media/heart-servier.png')).status)).toBe(200);
-  await expect(page.locator('.organ-artwork-heart img')).toHaveAttribute('src', '/media/heart-servier.png');
+  await expect(page.locator('.organ-artwork-heart img')).toHaveAttribute('src', '/media/organ-heart.webp');
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });
     await learning.screenshot({ path: `${screenshotDir}/heart-mobile.png` });
@@ -65,14 +65,14 @@ try {
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `lung visual learning overflows at ${width}px`);
   }
   for (const [id, asset] of [
-    ['liver', 'liver-servier.png'],
-    ['kidney', 'kidney-servier.png'],
-    ['pancreas', 'pancreas-servier.png'],
+    ['liver', 'organ-liver.webp'],
+    ['kidney', 'organ-kidney.webp'],
+    ['pancreas', 'organ-pancreas.webp'],
   ]) {
     await page.goto(`${base}/organs/${id}`, { waitUntil: 'networkidle' });
     const artwork = page.locator(`.organ-artwork-${id}`);
     await expect(artwork.locator('img')).toHaveAttribute('src', `/media/${asset}`);
-    await expect(artwork).toContainText('Servier Medical Art by Servier');
+    await expect(artwork).toContainText('AI 生成插图');
     await expect.poll(() => page.evaluate(async src => (await fetch(src)).status, `/media/${asset}`)).toBe(200);
     if (screenshotDir) {
       await page.setViewportSize({ width: 390, height: 844 });

@@ -5,7 +5,6 @@ import {
   createContentRepository,
   selectPage,
 } from "../src/services/content.js";
-import { DIAGRAM_NAMES } from "../src/services/diagram-names.js";
 
 const KIND_DIRS = ["indicator", "organ", "story"];
 const chineseChars = value => (String(value || "").match(/[一-鿿]/g) || []).length;
@@ -62,14 +61,31 @@ test("all published demo content has valid references, related records and index
     assert.equal(entry.id, summary.id);
     assert.equal(entry.kind, summary.kind);
     assert.equal(summary.referenceCount, entry.references.length);
-    // The home page renders the lead article's own mechanism diagram. The
-    // summary must carry exactly the first self-made figure, so the card and
-    // the article cannot drift apart.
-    const lead = (entry.figures || []).find((figure) => figure.diagram);
+    // The home page renders the lead article's opening visual (diagram or
+    // AI-generated illustration). The summary must mirror it verbatim.
+    const lead = (entry.figures || []).find(
+      (figure) => figure.diagram || (figure.src && figure.attribution?.kind !== "third-party"),
+    );
+    const expectedLead = !lead
+      ? undefined
+      : lead.diagram
+        ? { diagram: lead.diagram, caption: lead.caption }
+        : {
+            src: lead.src,
+            alt: lead.alt,
+            caption: lead.caption,
+            ...(lead.width ? { width: lead.width } : {}),
+            ...(lead.height ? { height: lead.height } : {}),
+            attribution: {
+              kind: lead.attribution.kind,
+              name: lead.attribution.name,
+              ...(lead.attribution.model ? { model: lead.attribution.model } : {}),
+            },
+          };
     assert.deepEqual(
       summary.leadFigure,
-      lead ? { diagram: lead.diagram, caption: lead.caption } : undefined,
-      `${name}: leadFigure must mirror the first self-made figure`,
+      expectedLead,
+      `${name}: leadFigure must mirror the opening self-made or AI figure`,
     );
     assert.ok(entry.version > 0);
     assert.ok(entry.updatedAt);
@@ -104,21 +120,20 @@ test("all published demo content has valid references, related records and index
     const figures = [...(entry.figure ? [{...entry.figure, key: "legacy"}] : []), ...(entry.figures || [])];
     for (const figure of figures) {
       assert.ok(entry.kind !== "organ", "figures are not used on organ pages");
-      // A figure is either a registered inline diagram (no asset to licence) or
-      // a static PNG under /media/ with a full attribution record.
-      if (figure.diagram) {
-        assert.match(figure.diagram, /^[a-z0-9-]+$/);
-        assert.ok(DIAGRAM_NAMES.includes(figure.diagram), `${entry.id}: unknown diagram ${figure.diagram}`);
-        assert.equal(figure.src, undefined, `${entry.id}: diagram figures carry no file path`);
-      } else {
-        assert.match(figure.src, /^\/media\/[a-z0-9-]+\.png$/);
-      }
+      // Every published figure must resolve to a static PNG/WebP under /media/
+      // with a verified attribution record (no hardcoded JSX diagram coupling).
+      assert.equal(figure.diagram, undefined, `${entry.id}: legacy JSX diagrams are removed; use /media/*.webp`);
+      assert.match(figure.src, /^\/media\/[a-z0-9-]+\.(png|webp)$/);
+      await fs.access(`public${figure.src}`);
       for (const id of figure.sourceIds)
         assert.ok(sourceIds.has(id), `${entry.id}: figure missing reference ${id}`);
       assert.ok(figure.alt && figure.caption && figure.simplification);
       assert.ok(figure.attribution?.name);
       if (figure.attribution.kind === "self-made") {
         assert.equal(figure.attribution.licenseUrl, undefined, "self-made figures carry no third-party licence");
+      } else if (figure.attribution.kind === "ai-generated") {
+        assert.ok(figure.attribution.model, `${entry.id}: ai-generated figure requires model name`);
+        assert.equal(figure.attribution.licenseUrl, undefined, "ai-generated figures carry no third-party licence");
       } else {
         assert.ok(figure.attribution.license);
         assert.equal(new URL(figure.attribution.url).protocol, "https:");

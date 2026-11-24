@@ -228,7 +228,6 @@
   "figures": [
     {
       "key": "range",
-      "diagram": "lab-range",
       "alt": "示意图：同一份样本在不同实验室使用不同方法和仪器，得到略有差异的数值，并各自对照各自的参考区间。",
       "caption": "同一份样本，两套测量体系，两条参考区间。",
       "simplification": "图为流程示意，省略了样本处理、校准和质量控制等环节；数值与区间仅用于说明位置关系，不代表任何具体项目或真实结果。",
@@ -236,9 +235,24 @@
         "lab-results"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "5ffc1981466e85fde32adbba53e681f6182f3a50bacdae5332adff9755c3f906"
+      },
+      "src": "/media/fig-lab-range.webp",
+      "width": 960,
+      "height": 492,
+      "legend": [
+        {
+          "title": "不同参考人群与方法",
+          "text": "参考区间来自特定健康人群统计，受试剂、仪器与检测方法影响。"
+        },
+        {
+          "title": "以本张报告单为准",
+          "text": "同一个数字在两家医院落点不同很常见，对照必须使用同一张单子上的区间。"
+        }
+      ]
     }
   ],
   "relatedOrgans": [],

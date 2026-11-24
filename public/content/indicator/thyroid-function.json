@@ -140,7 +140,6 @@
   "figures": [
     {
       "key": "axis",
-      "diagram": "thyroid-axis",
       "alt": "示意图：脑下垂体释放 TSH 调节甲状腺，甲状腺产生 T4 和 T3 供身体使用能量；血液中的激素水平又反过来影响 TSH 的释放。",
       "caption": "一条反馈回路：垂体发信号，甲状腺产出激素，激素水平再回头影响信号。",
       "simplification": "图为调节关系示意，省略了激素转运蛋白、组织转化等环节，也未按真实比例绘制；箭头不表示激素数量。",
@@ -149,9 +148,28 @@
         "tsh"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "0909c70b6dc2ec3217eed9b794259a053fd086e1c8f411377ae5548a63455278"
+      },
+      "src": "/media/fig-thyroid-axis.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "垂体发出 TSH 信号",
+          "text": "垂体分泌促甲状腺激素（TSH），像油门一样调节甲状腺工作节奏。"
+        },
+        {
+          "title": "甲状腺产出激素",
+          "text": "甲状腺分泌 T4 与 T3，参与调节全身能量代谢。"
+        },
+        {
+          "title": "负反馈回路",
+          "text": "血液中的甲状腺激素水平会反过来告诉垂体调高或调低信号。"
+        }
+      ]
     }
   ],
   "sections": [

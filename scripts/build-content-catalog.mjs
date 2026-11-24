@@ -43,10 +43,28 @@ function summary(kind, body) {
     body.organ || body.connection,
     ...learningText,
   ]).join(" ");
-  // The home page introduces the lead article with its opening mechanism
-  // diagram. Only self-made inline diagrams travel in the summary; third-party
-  // PNG figures keep their attribution on the article page.
-  const firstFigure = (body.figures || []).find(figure => figure.diagram);
+  // The home page introduces the lead article with its opening visual.
+  // Self-made diagrams and AI-generated editorial illustrations travel in the
+  // summary; third-party assets keep their full attribution on the article page.
+  const firstFigure = (body.figures || []).find(
+    figure => figure.diagram || (figure.src && figure.attribution?.kind !== "third-party"),
+  );
+  const leadFigure = !firstFigure
+    ? null
+    : firstFigure.diagram
+      ? { diagram: firstFigure.diagram, caption: clean(firstFigure.caption) }
+      : {
+          src: firstFigure.src,
+          alt: clean(firstFigure.alt),
+          caption: clean(firstFigure.caption),
+          ...(firstFigure.width ? { width: firstFigure.width } : {}),
+          ...(firstFigure.height ? { height: firstFigure.height } : {}),
+          attribution: {
+            kind: firstFigure.attribution.kind,
+            name: clean(firstFigure.attribution.name),
+            ...(firstFigure.attribution.model ? { model: clean(firstFigure.attribution.model) } : {}),
+          },
+        };
   return {
     id: body.id,
     kind,
@@ -62,7 +80,7 @@ function summary(kind, body) {
     category: body.category,
     format: body.format || (kind === "story" ? "article" : "entry"),
     featured: Boolean(body.featured),
-    ...(firstFigure ? { leadFigure: { diagram: firstFigure.diagram, caption: clean(firstFigure.caption) } } : {}),
+    ...(leadFigure ? { leadFigure } : {}),
     searchText,
     sourceLabel: body.references?.[0]?.publisher || "",
     referenceCount: body.references?.length || 0,

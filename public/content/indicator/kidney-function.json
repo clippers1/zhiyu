@@ -258,7 +258,6 @@
   "figures": [
     {
       "key": "filter",
-      "diagram": "kidney-filter",
       "alt": "示意图：血液流经肾小球被过滤，血肌酐用于估算 eGFR；尿白蛋白肌酐比从尿液一侧补充过滤情况的信息。",
       "caption": "血液和尿液两侧的项目，描述的是同一套过滤过程的不同侧面。",
       "simplification": "图为过滤过程示意，省略了肾小管重吸收等环节，也未按真实比例绘制；箭头不表示过滤速度或数量。",
@@ -267,9 +266,24 @@
         "creatinine"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "716c9d1470ef21bd8bfed7966d2a7961db09c801d7f4b8214280597aa358df2e"
+      },
+      "src": "/media/fig-kidney-filter.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "血液进入肾小球滤网",
+          "text": "血液持续流经肾脏微滤结构，大分子蛋白与血细胞被留在血里。"
+        },
+        {
+          "title": "代谢废物排出",
+          "text": "肌酐、尿素等小分子废物滤入尿液排出体外，血尿两侧互相印证。"
+        }
+      ]
     }
   ],
   "organ": "肾脏 · 血液过滤 · 尿液",

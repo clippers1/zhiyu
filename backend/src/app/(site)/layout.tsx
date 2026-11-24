@@ -3,7 +3,7 @@ import '../../../reader/styles.css';
 import '../../../reader/mobile.css';
 
 export const metadata: Metadata = { icons: { icon: { url: '/favicon.svg', type: 'image/svg+xml' } } };
-export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#f7f5ef' };
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#ffffff' };
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return <html lang="zh-CN"><body>

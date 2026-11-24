@@ -248,7 +248,6 @@
   "figures": [
     {
       "key": "pulse",
-      "diagram": "pressure-pulse",
       "alt": "示意图：心脏收缩时动脉内压力升高到收缩压，舒张时压力回落到舒张压，两次搏动之间压力不会降到零。",
       "caption": "收缩压和舒张压是同一个搏动周期里的高点与低点。",
       "simplification": "图为压力变化示意，曲线形状经过简化，不按真实时间或数值比例绘制，也不表示任何血压分级标准。实际读数以规范测量和报告单为准。",
@@ -256,9 +255,24 @@
         "bp"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "75132b26740e0a49e9134dbe7d6453a865c6af1d7d5763d03a2b32b45d4daf0f"
+      },
+      "src": "/media/fig-pressure-flow.webp",
+      "width": 960,
+      "height": 480,
+      "legend": [
+        {
+          "title": "收缩压（高压）",
+          "text": "心脏收缩将血液泵出时，动脉血管壁承受的峰值压力。"
+        },
+        {
+          "title": "舒张压（低压）",
+          "text": "两次搏动之间心脏舒张充盈时，血管内仍保持的基础压力。"
+        }
+      ]
     }
   ],
   "organ": "心脏 · 血管 · 肾脏",

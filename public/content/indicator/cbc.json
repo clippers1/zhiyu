@@ -242,7 +242,6 @@
   "figures": [
     {
       "key": "components",
-      "diagram": "cbc-components",
       "alt": "示意图：一份血液样本被分成红细胞、白细胞和血小板三组分别计数，红细胞一项还包括血红蛋白与红细胞压积。",
       "caption": "同一份血，按三类细胞分别计数，再合起来读。",
       "simplification": "图为分类示意，不是显微镜下的真实图像，也未按真实比例绘制。图中省略了白细胞亚型、血小板形态等细节；箭头不表示数量。",
@@ -250,9 +249,28 @@
         "cbc"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "7ab9ebbe8f04ad2728e44f3c5153ae99daa03e973b5ba1198532826ad54f4c8d"
+      },
+      "src": "/media/fig-cbc-components.webp",
+      "width": 960,
+      "height": 960,
+      "legend": [
+        {
+          "title": "红细胞与血红蛋白",
+          "text": "负责把氧气从肺部运送到全身组织。"
+        },
+        {
+          "title": "白细胞",
+          "text": "参与免疫防御，不同亚型应对不同情况。"
+        },
+        {
+          "title": "血小板",
+          "text": "血管受损时迅速聚集，协助止血和修复。"
+        }
+      ]
     }
   ],
   "organ": "血液 · 骨髓 · 免疫系统",

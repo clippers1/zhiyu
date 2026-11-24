@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from "node:crypto";
+import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import { mkdir, readdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -214,9 +214,6 @@ export function createImageService(options = {}) {
   };
   // OpenAI-compatible clients expect `created` + `data[].b64_json|url`; our own
   // CLI reads `images`. Returning both keeps one response usable by both.
-  // `response_format: "b64_json"` is what many OpenAI clients default to; it is
-  // honoured by reading the stored file back, so the caller does not depend on
-  // a second request (or on reaching /files from the same network).
   const publicResult = async (result, responseFormat) => {
     const base = {
       created: Math.floor(now().getTime() / 1000),
@@ -236,15 +233,19 @@ export function createImageService(options = {}) {
     }
     return { ...base, data: result.images.map(item => ({ url: absolute(item.url), revised_prompt: item.prompt })) };
   };
-  async function quotaPreview() {
+  async function quotaPreview(requestedImages = 1) {
     const current = await loadUsage();
-    const used = current.day === dayKey(now()) ? current.count : 0;
-    return { allowed: used < dailyLimit, used, day: current.day };
+    const today = dayKey(now());
+    const used = current.day === today ? current.images : 0;
+    const reserved = reservedDay === today ? reservedImages : 0;
+    return { allowed: used + reserved + requestedImages <= dailyLimit, used: used + reserved, day: today };
   }
   const tokenDigest = digest(token);
   const usageFile = path.join(outputDir, ".usage.json");
   let usage = null;
   let usageChain = Promise.resolve();
+  let reservedDay = dayKey(now());
+  let reservedImages = 0;
 
   async function loadUsage() {
     if (usage) return usage;
@@ -274,7 +275,7 @@ export function createImageService(options = {}) {
     const authHeader = String(header(request, "authorization") || "");
     const match = /^Bearer (.+)$/.exec(authHeader);
     if (!match) return false;
-    return digest(match[1]).equals(tokenDigest);
+    return timingSafeEqual(digest(match[1]), tokenDigest);
   }
 
   async function callUpstream(body, referenceFile) {
@@ -491,51 +492,61 @@ export function createImageService(options = {}) {
     // Two spellings of the same operation: the compact one our CLI uses, and
     // the OpenAI-standard path other agents and SDKs already know.
     if (route !== "/v1/images" && route !== "/v1/images/generations") return json({ error: "not_found" }, 404);
+    const cors = corsHeaders(request);
     if (request.method === "OPTIONS" && allowBrowser) {
-      return new Response(null, { status: 204, headers: { ...corsHeaders(request), "Access-Control-Max-Age": "600" } });
+      return new Response(null, { status: 204, headers: { ...cors, "Access-Control-Max-Age": "600" } });
     }
-    if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405, { Allow: "POST" });
-    if (!authorized(request)) return json({ error: "unauthorized" }, 401);
-    if (!apiBase || !apiKey) return json({ error: "not_configured" }, 503);
+    if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405, { Allow: "POST", ...cors });
+    if (!authorized(request)) return json({ error: "unauthorized" }, 401, cors);
+    if (!apiBase || !apiKey) return json({ error: "not_configured" }, 503, cors);
     {
-      const quote = await quotaPreview();
-      if (!quote.allowed) return json({ error: "daily_limit_reached", limit: dailyLimit }, 429);
+      const quote = await quotaPreview(1);
+      if (!quote.allowed) return json({ error: "daily_limit_reached", limit: dailyLimit }, 429, cors);
     }
 
     let body;
     try {
       body = await readJSON(request);
     } catch (error) {
-      return json({ error: error.message }, error.status || 400);
+      return json({ error: error.message }, error.status || 400, cors);
     }
     if (typeof body.prompt !== "string" || !body.prompt.trim() || body.prompt.length > MAX_PROMPT) {
-      return json({ error: "invalid_prompt" }, 400);
+      return json({ error: "invalid_prompt" }, 400, cors);
     }
-    const count = body.count === undefined ? Number(body.n ?? 1) : Number(body.count);
-    if (body.response_format !== undefined && !["url", "b64_json"].includes(body.response_format)) return json({ error: "invalid_response_format" }, 400);
-    if (!Number.isInteger(count) || count < 1 || count > 4) return json({ error: "invalid_count" }, 400);
-    if (body.size !== undefined && !/^\d{3,4}x\d{3,4}$/.test(String(body.size))) return json({ error: "invalid_size" }, 400);
-    if (body.quality !== undefined && !["low", "medium", "high", "auto"].includes(body.quality)) return json({ error: "invalid_quality" }, 400);
-    if (body.background !== undefined && !["opaque", "transparent", "auto"].includes(body.background)) return json({ error: "invalid_background" }, 400);
+    const rawCount = body.count !== undefined ? body.count : body.n;
+    const count = rawCount === undefined ? 1 : Number(rawCount);
+    if (body.response_format !== undefined && !["url", "b64_json"].includes(body.response_format)) return json({ error: "invalid_response_format" }, 400, cors);
+    if (!Number.isInteger(count) || count < 1 || count > 4) return json({ error: "invalid_count" }, 400, cors);
+    if (body.size !== undefined && !/^\d{3,4}x\d{3,4}$/.test(String(body.size))) return json({ error: "invalid_size" }, 400, cors);
+    if (body.quality !== undefined && !["low", "medium", "high", "auto"].includes(body.quality)) return json({ error: "invalid_quality" }, 400, cors);
+    if (body.background !== undefined && !["opaque", "transparent", "auto"].includes(body.background)) return json({ error: "invalid_background" }, 400, cors);
     let reference = null;
     if (body.reference !== undefined) {
       if (typeof body.reference !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(body.reference) || body.reference.includes("..")) {
-        return json({ error: "invalid_reference" }, 400);
+        return json({ error: "invalid_reference" }, 400, cors);
       }
       try {
         await stat(path.join(outputDir, body.reference));
         reference = body.reference;
       } catch {
-        return json({ error: "reference_not_found" }, 404);
+        return json({ error: "reference_not_found" }, 404, cors);
       }
     }
 
-    const current = await loadUsage();
-    const usedToday = current.day === dayKey(now()) ? current.count : 0;
-    if (usedToday >= dailyLimit) return json({ error: "daily_limit_reached", limit: dailyLimit }, 429);
-
     const release = await gate.acquire();
-    if (!release) return json({ error: "busy", queue: gate.waiting }, 429, { "Retry-After": "30" });
+    if (!release) return json({ error: "busy", queue: gate.waiting }, 429, { "Retry-After": "30", ...cors });
+
+    const today = dayKey(now());
+    if (reservedDay !== today) {
+      reservedDay = today;
+      reservedImages = 0;
+    }
+    const quote = await quotaPreview(count);
+    if (!quote.allowed) {
+      release();
+      return json({ error: "daily_limit_reached", limit: dailyLimit }, 429, cors);
+    }
+    reservedImages += count;
 
     const started = Date.now();
     try {
@@ -543,12 +554,13 @@ export function createImageService(options = {}) {
       logger({ event: "generated", images: result.images.length, ms: Date.now() - started,
         bytes: result.images.reduce((sum, item) => sum + item.bytes, 0) });
       const responseFormat = body.response_format === "b64_json" ? "b64_json" : "url";
-      return json(await publicResult(result, responseFormat), 200, corsHeaders(request));
+      return json(await publicResult(result, responseFormat), 200, cors);
     } catch (error) {
       logger({ event: "generation_failed", error: error.message, ms: Date.now() - started });
       return json({ error: error.message, ...(error.detail ? { detail: error.detail } : {}),
-        ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}) }, error.status || 500, corsHeaders(request));
+        ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}) }, error.status || 500, cors);
     } finally {
+      if (reservedDay === today) reservedImages = Math.max(0, reservedImages - count);
       release();
     }
   }
@@ -594,8 +606,9 @@ async function start() {
     apiKey: process.env.IMAGE_API_KEY,
     logger: event => console.log(JSON.stringify({ at: new Date().toISOString(), ...event })),
   });
-  service.server.listen(port, "0.0.0.0", () => {
-    console.log(JSON.stringify({ event: "listening", port, outputDir,
+  const host = process.env.IMAGE_HOST || "127.0.0.1";
+  service.server.listen(port, host, () => {
+    console.log(JSON.stringify({ event: "listening", host, port, outputDir,
       model: process.env.IMAGE_MODEL || "gpt-image-2.6",
       configured: Boolean(process.env.IMAGE_API_BASE && process.env.IMAGE_API_KEY) }));
   });

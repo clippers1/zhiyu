@@ -1,0 +1,159 @@
+{
+  "model": "gpt-image-2.6",
+  "styleBible": "Clean minimalist medical-tech editorial illustration, soft 3D isometric clay and frosted translucent glass aesthetic, crisp studio lighting with soft diffused shadows, pure white and ultra-light cool gray (#F6F8FA) background, refined palette of medical teal (#0F766E), soft mint (#5EEAD4), crisp white, cool slate gray (#94A3B8), and subtle warm coral (#F97316) accents only for key energy or blood-flow highlights. Calm, trustworthy, Apple Health and modern precision medicine visual quality. STRICT RULE: zero text, zero letters, zero numbers, zero Chinese characters, zero arrows with labels, zero watermarks, zero realistic medical charts or UI screenshots.",
+  "organStyleBible": "Clean minimalist medical-tech 3D anatomical icon illustration, smooth matte ceramic and softly translucent glass texture, studio softbox lighting, refined medical teal (#0F766E) and soft muted coral-rose accents, isolated single organ centered with generous margin, transparent background. Scientific yet calm, friendly and modern like Apple Health 3D illustrations, never gory or photorealistic flesh. STRICT RULE: zero text, zero letters, zero numbers, zero labels, zero background shapes.",
+  "items": [
+    {
+      "id": "fig-glucose-flow",
+      "kind": "figure",
+      "target": "public/media/fig-glucose-flow.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "anchor": true,
+      "prompt": "Minimalist 3D medical-tech concept illustration of blood glucose energy transport: glowing warm amber-coral translucent glucose spheres gently flowing through a sleek frosted-glass vessel toward a smooth translucent cellular gate unlocked by a delicate teal key-like insulin signal, with a calm layered teal-tinted storage chamber (metaphor for liver glycogen reserve) beside it. Balanced centered composition on pure light cool-gray (#F6F8FA) studio surface."
+    },
+    {
+      "id": "fig-glucose-windows",
+      "kind": "figure",
+      "target": "public/media/fig-glucose-windows.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration showing three different observation time windows: on the left a single frozen translucent droplet inside a clean glass ring (momentary fasting snapshot), in the center a gentle curved glass wave track with two glowing beads (post-meal response curve), and on the right a sleek horizontal frosted-glass capsule filled with softly glowing coral-tinted smooth red blood cell discs representing a multi-month average. Clean arranged trio on #F6F8FA surface."
+    },
+    {
+      "id": "fig-pressure-flow",
+      "kind": "figure",
+      "target": "public/media/fig-pressure-flow.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of blood pressure dynamics: a smooth translucent elastic glass-and-silicone vessel tube gently expanding with a soft coral pulse wave on one side and smoothly relaxing into a calmer teal state on the other, with subtle concentric pressure rings around the vessel wall showing systolic push and diastolic rest. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-lipids-carriers",
+      "kind": "figure",
+      "target": "public/media/fig-lipids-carriers.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of blood lipid transport carriers: sleek spherical frosted-glass lipoprotein capsules gliding along a smooth translucent vessel lane—larger warm-amber spheres moving outward delivering energy droplets, and compact polished teal spheres smoothly clearing and returning droplets back toward a calm central hub. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-cbc-components",
+      "kind": "figure",
+      "target": "public/media/fig-cbc-components.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of the three main blood cell families floating gracefully inside a clean crystal-clear circular cross-section: smooth matte coral biconcave red blood cells, luminous pearly-white spherical white blood cells with delicate teal core glow, and tiny faceted pale-amber platelets clustering softly near a tiny curved vessel edge. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-liver-tests",
+      "kind": "figure",
+      "target": "public/media/fig-liver-tests.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of liver functions as a serene modular glass laboratory: a smooth stylized teal-and-frosted-white geometric liver silhouette divided into three calm working zones—tiny glowing enzyme sparks inside intact hexagonal cells, a smooth golden-amber bile flow channel, and neatly stacked translucent protein cubes moving into circulation. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-kidney-filter",
+      "kind": "figure",
+      "target": "public/media/fig-kidney-filter.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of kidney filtration: a delicate precision frosted-glass micro-mesh funnel suspended in calm space, where larger polished white-and-teal spheres smoothly bounce back into a clean return loop while tiny pale-amber waste droplets pass gently downward through the fine sieve. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-uric-acid-path",
+      "kind": "figure",
+      "target": "public/media/fig-uric-acid-path.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of uric acid balance: a serene translucent balance-vessel sculpture where soft amber particles enter from above into a clear fluid chamber and smoothly exit downward through a clean teal filtration outlet, while a small cluster of delicate geometric translucent crystals sits gently at the bottom edge when fluid becomes saturated. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-thyroid-axis",
+      "kind": "figure",
+      "target": "public/media/fig-thyroid-axis.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of the thyroid regulatory feedback loop: a glowing cool-teal frosted glass orb at the top sending a sleek curved light-arc signal down to a stylized minimalist butterfly-shaped translucent glass thyroid sculpture in the middle, which emits gentle warm-amber energy ripples outward and sends a soft dotted feedback arc gracefully back to the top orb. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-urinalysis-layers",
+      "kind": "figure",
+      "target": "public/media/fig-urinalysis-layers.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of urinalysis three inspection layers: a sleek crystal-clear cylindrical sample vial with pale golden-tinted liquid on the left, a clean white matte reagent strip with three soft pastel color pads (mint, pale amber, soft teal) in the middle, and a circular frosted-glass microscope lens revealing tiny geometric droplets and rings on the right. Clean trio composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-lab-range",
+      "kind": "figure",
+      "target": "public/media/fig-lab-range.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration explaining why two hospitals can have slightly different reference intervals: two sleek translucent glass calibration prisms side by side, each displaying a smooth bell-shaped teal light curve with subtly shifted frosted glass bracket markers, with a single glowing coral bead floating peacefully between them. Clean calm composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-stairs-heart",
+      "kind": "figure",
+      "target": "public/media/fig-stairs-heart.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration explaining why climbing stairs speeds up the heartbeat: an elegant ascending sculptural staircase of clean matte white and frosted-glass steps rising diagonally, accompanied by a smooth floating coral-and-teal rhythmic pulse ribbon that gently tightens and brightens upward alongside tiny translucent oxygen spheres. Clean airy composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-report-guide",
+      "kind": "figure",
+      "target": "public/media/fig-report-guide.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "anchor": true,
+      "prompt": "Minimalist 3D medical-tech editorial still life of an abstract lab report sheet resting on a crisp ultra-light cool-gray desk: a sleek floating translucent glass card showing four neat blank geometric column bars in soft slate, teal, and pale mint (pure abstract horizontal blocks with zero text and zero numbers), examined from the side by a refined frosted-glass magnifying lens with a teal ring. Calm, clean, modern studio lighting."
+    },
+    {
+      "id": "organ-heart",
+      "kind": "organ",
+      "target": "public/media/organ-heart.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "anchor": true,
+      "prompt": "Minimalist 3D anatomical sculpture of a human heart with aorta and major vessels, crafted from smooth matte warm-coral ceramic and softly frosted translucent medical-teal glass chambers, gentle studio lighting, clean silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "organ-lung",
+      "kind": "organ",
+      "target": "public/media/organ-lung.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "prompt": "Minimalist 3D anatomical sculpture of human lungs and trachea with delicate branching airways visible faintly inside smooth frosted translucent mint-teal and pearly-white glass lobes, airy clean silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "organ-liver",
+      "kind": "organ",
+      "target": "public/media/organ-liver.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "prompt": "Minimalist 3D anatomical sculpture of a human liver with a tiny smooth jade-teal gallbladder tucked beneath, crafted in soft muted terracotta-coral matte ceramic with gentle frosted glass sheen, clean sculptural silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "organ-kidney",
+      "kind": "organ",
+      "target": "public/media/organ-kidney.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "prompt": "Minimalist 3D anatomical sculpture of a pair of symmetrical human kidneys connected by delicate translucent teal and soft-coral vessels, smooth matte ceramic and frosted glass finish, clean balanced silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "organ-pancreas",
+      "kind": "organ",
+      "target": "public/media/organ-pancreas.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "prompt": "Minimalist 3D anatomical sculpture of a human pancreas, horizontal elongated organic form crafted in soft warm-amber translucent frosted glass with subtle glowing teal islet accents inside, clean sleek silhouette, floating centered on transparent background."
+    }
+  ]
+}

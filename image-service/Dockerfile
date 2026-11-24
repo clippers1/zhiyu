@@ -10,6 +10,7 @@ COPY server.mjs admin.mjs ./
 
 RUN mkdir -p /data/out && chown -R node:node /data/out
 USER node
-ENV IMAGE_OUTPUT_DIR=/data/out
+ENV IMAGE_OUTPUT_DIR=/data/out \
+    IMAGE_HOST=0.0.0.0
 EXPOSE 3120
 CMD ["node", "server.mjs"]

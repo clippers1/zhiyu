@@ -1,5 +1,4 @@
-/* 发现 / 体检项目 / 认识身体
-   Paper-index composition: hairlines and numbering, no cards or shadows. */
+/* 发现 / 体检项目 / 认识身体 · 清爽极简科技医疗风 */
 
 /* ---------- 发现 · 主列 ---------- */
 .home-content {
@@ -10,132 +9,156 @@
 }
 .home-statement {
   margin-top: var(--s-2);
-  max-width: 12em;
+  max-width: 14em;
 }
 .home-lede {
-  margin-top: var(--s-3);
+  margin-top: 10px;
 }
 .home-search-trigger {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
-  max-width: 520px;
+  max-width: 540px;
   min-height: 48px;
   margin-top: var(--s-6);
-  padding: 0 14px;
+  padding: 0 16px;
   border: 1px solid var(--rule-strong);
-  border-radius: var(--r-input);
+  border-radius: 14px;
   background: var(--surface);
   color: var(--ink-3);
-  font-size: var(--t-15);
+  font-size: 15px;
   line-height: 1.5;
+  transition: border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
 }
 .home-search-trigger:hover {
-  border-color: var(--ink-3);
+  border-color: var(--accent);
+  background: var(--card);
   color: var(--ink-2);
-}
-.home-search-trigger:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  box-shadow: var(--shadow-sm);
 }
 
-/* 主推一篇 */
+/* 主推英雄卡 */
 .home-feature {
   display: block;
-  margin-top: var(--s-8);
-  padding-top: var(--s-6);
-  border-top: 1px solid var(--rule-strong);
+  margin-top: var(--s-6);
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.home-feature:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
 }
 .feature-kicker {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 }
 .feature-no {
   flex-shrink: 0;
-  white-space: nowrap;
-  font-family: var(--serif);
-  font-size: var(--t-15);
-  letter-spacing: 0.1em;
+  padding: 2px 9px;
+  border-radius: 8px;
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-border);
+  font-size: 12px;
+  font-weight: 700;
   color: var(--accent);
+  font-variant-numeric: tabular-nums;
 }
 .feature-term {
-  font-size: var(--t-13);
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   color: var(--ink-3);
   overflow-wrap: anywhere;
 }
 .feature-title {
   display: block;
-  margin-top: var(--s-2);
+  margin-top: 12px;
   text-wrap: balance;
-  font-family: var(--serif);
-  font-size: var(--t-24);
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: var(--ink);
 }
 .feature-sub {
   display: block;
-  margin-top: 6px;
-  font-size: var(--t-15);
-  line-height: 1.8;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.72;
   color: var(--ink-2);
 }
 .feature-figure {
   display: grid;
   place-items: center;
-  margin-top: var(--s-4);
-  padding: var(--s-4) 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.feature-figure img {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 .feature-figure svg {
   display: block;
   width: 100%;
-  max-width: 520px;
+  max-width: 460px;
   height: auto;
 }
 .feature-figure-caption {
   display: block;
-  margin-top: var(--s-2);
+  margin-top: 10px;
   font-size: var(--t-13);
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--ink-3);
 }
 .feature-figure-caption i {
   display: block;
   margin-top: 2px;
   font-style: normal;
-  font-size: var(--t-11);
-  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: var(--ink-3);
 }
 .feature-read {
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
+  justify-content: center;
+  gap: 8px;
   min-height: 44px;
-  margin-top: var(--s-1);
-  color: var(--accent);
-  font-size: var(--t-15);
+  margin-top: 14px;
+  padding: 0 18px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
   font-weight: 600;
+  transition: background 0.16s ease;
 }
 .home-feature:hover .feature-title {
   color: var(--accent-deep);
 }
 .home-feature:hover .feature-read {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  background: var(--accent-deep);
 }
 
-/* 按项目读 */
+/* 按项目读 & 故事 */
 .home-index {
   margin-top: var(--s-2);
 }
-/* Stories sit below the indicator index: same rows, quieter heading. */
 .home-stories {
-  margin-top: var(--s-8);
+  margin-top: var(--s-4);
 }
 .home-empty {
   margin-top: var(--s-6);
@@ -143,73 +166,78 @@
 
 /* 阅读路线入口 */
 .home-reading-path {
-  margin-top: var(--s-8);
-  border-top: 1px solid var(--rule-strong);
+  margin-top: var(--s-6);
 }
 .home-reading-path > a {
   display: flex;
   align-items: center;
   gap: var(--s-3);
-  min-height: 56px;
-  padding: var(--s-2) 0;
+  min-height: 60px;
+  padding: 14px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--surface);
   color: var(--ink);
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+.home-reading-path > a:hover {
+  border-color: var(--accent);
+  background: var(--accent-wash);
 }
 .path-label {
-  font-size: var(--t-11);
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
   white-space: nowrap;
 }
 .path-title {
   flex: 1;
   min-width: 0;
-  font-size: var(--t-15);
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .home-reading-path svg {
-  color: var(--ink-3);
-}
-.home-reading-path a:hover .path-title {
-  color: var(--accent-deep);
-}
-.home-reading-path a:hover svg {
   color: var(--accent);
 }
 
 /* 右栏 */
+.home-rail {
+  margin-top: var(--s-6);
+}
 .home-note {
-  margin-top: var(--s-8);
-  padding-top: var(--s-4);
-  border-top: 1px solid var(--rule);
+  margin-top: var(--s-6);
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--surface);
   font-size: var(--t-13);
-  line-height: 1.9;
+  line-height: 1.75;
   color: var(--ink-3);
 }
 .home-note b {
   display: block;
-  color: var(--ink-2);
-  font-weight: 600;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
 }
 .home-note p {
-  margin-top: var(--s-1);
+  margin-top: 6px;
 }
 .home-note .stamp {
-  margin-top: var(--s-3);
+  margin-top: 12px;
 }
 .home-rail .section-head {
-  padding-top: var(--s-6);
-}
-.home-rail .body-row {
-  grid-template-columns: 56px minmax(0, 1fr) auto;
-  gap: var(--s-3);
-}
-.home-rail .body-thumb {
-  width: 56px;
-  height: 46px;
+  padding-top: var(--s-4);
 }
 .home-rail .play-button {
-  margin-top: var(--s-2);
+  width: 100%;
+  margin-top: 12px;
 }
 .home-rail .load-state {
   min-height: 72px;
@@ -217,63 +245,63 @@
 
 @media (min-width: 1101px) {
   .home-content {
-    padding-top: var(--s-12);
+    padding-top: var(--s-8);
   }
   .home-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 330px;
+    grid-template-columns: minmax(0, 1fr) 340px;
     gap: 0 var(--s-12);
     align-items: start;
   }
   .home-statement {
-    font-size: var(--t-48);
-    line-height: 1.3;
-    margin-top: var(--s-3);
+    font-size: 40px;
+    line-height: 1.22;
+    margin-top: 10px;
   }
   .home-lede {
-    margin-top: 14px;
+    margin-top: 12px;
     max-width: 560px;
-    font-size: var(--t-17);
+    font-size: 16px;
   }
   .home-search-trigger {
-    max-width: 420px;
+    max-width: 480px;
     margin-top: var(--s-6);
   }
   .home-feature {
-    margin-top: 40px;
-    padding-top: 28px;
-    display: block;
+    margin-top: 28px;
+    padding: 28px;
   }
-  .feature-title { font-size: var(--t-30); line-height: 1.45; }
-  .feature-sub { font-size: var(--t-17); margin-top: var(--s-2); }
-  .feature-read { margin-top: 14px; }
+  .feature-title {
+    font-size: 26px;
+    line-height: 1.35;
+  }
+  .feature-sub {
+    font-size: 16px;
+    margin-top: 10px;
+  }
   .feature-figure {
-    margin-top: var(--s-6);
+    margin-top: 20px;
+    padding: 24px;
   }
-  .feature-figure svg {
-    max-width: 560px;
+  .feature-figure img {
+    max-width: 480px;
+    max-height: 380px;
   }
   .home-rail {
-    border-left: 1px solid var(--rule);
-    padding-left: var(--s-8);
-    margin-top: var(--s-12);
+    margin-top: 0;
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
   }
   .home-rail .section-head {
     padding-top: 0;
   }
   .home-rail .section-head h2 {
-    font-size: var(--t-11);
-    letter-spacing: 0.2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    font-family: var(--sans);
-    color: var(--ink-3);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
   }
   .home-rail .section-head a {
-    font-size: var(--t-11);
-  }
-  .home-note {
-    margin-top: var(--s-8);
+    font-size: 12px;
   }
 }
 
@@ -295,15 +323,16 @@
   align-items: center;
   gap: 10px;
   min-height: 48px;
-  padding: 0 14px;
+  padding: 0 16px;
   border: 1px solid var(--rule-strong);
-  border-radius: var(--r-input);
+  border-radius: 14px;
   background: var(--surface);
   color: var(--ink-3);
 }
 .library-search:focus-within {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  border-color: var(--accent);
+  background: var(--card);
+  box-shadow: 0 0 0 3px var(--accent-border);
 }
 .library-search input {
   flex: 1;
@@ -312,7 +341,7 @@
   border: 0;
   outline: 0;
   background: none;
-  font-size: var(--t-15);
+  font-size: 15px;
   color: var(--ink);
 }
 .library-search input::placeholder {
@@ -331,26 +360,30 @@
 }
 .category-filters button {
   flex: none;
-  min-height: 44px;
-  padding: 0 var(--s-4);
-  border: 1px solid var(--rule-strong);
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--rule);
   border-radius: var(--r-pill);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink-2);
   font-size: var(--t-13);
+  font-weight: 500;
+  transition: all 0.16s ease;
 }
 .category-filters button:hover {
-  border-color: var(--ink-3);
+  border-color: var(--rule-strong);
+  color: var(--ink);
 }
 .category-filters button.active {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+  font-weight: 600;
 }
 .library-help {
   margin-top: var(--s-3);
   font-size: var(--t-13);
-  line-height: 1.85;
+  line-height: 1.7;
   color: var(--ink-3);
 }
 .result-count {
@@ -358,40 +391,56 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--s-3);
-  margin: var(--s-6) 0 var(--s-1);
+  margin: var(--s-6) 0 var(--s-3);
   font-size: var(--t-13);
+  font-weight: 600;
   color: var(--ink-2);
 }
 .result-count > span {
-  font-size: var(--t-11);
+  font-size: 12px;
+  font-weight: 400;
   color: var(--ink-3);
 }
 .question-list {
-  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: 12px;
   margin-bottom: var(--s-4);
 }
 .question-row {
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr) auto;
-  gap: var(--s-3);
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 14px;
   align-items: start;
-  padding: var(--s-4) 0;
-  border-top: 1px solid var(--rule);
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--card);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.question-row:hover {
+  border-color: var(--rule-strong);
+  box-shadow: var(--shadow-sm);
 }
 .question-number {
-  padding-top: 3px;
-  font-family: var(--serif);
-  font-size: var(--t-15);
-  color: var(--ink-3);
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
 .question-row-main {
   min-width: 0;
 }
 .question-row-main h3 {
-  font-size: var(--t-17);
-  font-weight: 600;
-  line-height: 1.55;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--ink);
   overflow-wrap: anywhere;
 }
 .question-row-term {
@@ -399,34 +448,34 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 10px;
-  margin-top: 3px;
+  margin-top: 4px;
   font-size: var(--t-13);
   color: var(--ink-3);
 }
 .question-row-term b {
   font-size: var(--t-13);
-  font-weight: 400;
-  color: var(--ink-3);
+  font-weight: 600;
+  color: var(--accent);
 }
 .question-row-term small {
-  font-size: var(--t-11);
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   overflow-wrap: anywhere;
 }
 .question-row-main > p {
-  margin-top: 3px;
-  font-size: var(--t-13);
-  line-height: 1.8;
-  color: var(--ink-3);
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
 }
 .question-row-meta {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 6px;
+  gap: 8px;
   padding-top: 2px;
-  font-size: var(--t-11);
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 1.5;
   color: var(--ink-3);
   white-space: nowrap;
   text-align: right;
@@ -447,32 +496,12 @@
 .search-hint {
   margin-top: var(--s-3);
 }
-.term-suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s-2);
-  margin: 0 0 var(--s-4);
-  font-size: var(--t-13);
-  color: var(--ink-3);
-}
-.term-suggestions button {
-  min-height: 44px;
-  padding: 0 var(--s-3);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-pill);
-  background: var(--surface);
-  color: var(--accent);
-  font-size: var(--t-13);
-}
-.term-suggestions button:hover {
-  border-color: var(--accent);
-}
 
 @media (max-width: 600px) {
   .question-row {
-    grid-template-columns: 24px minmax(0, 1fr);
-    gap: var(--s-2) var(--s-3);
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: var(--s-2) 12px;
+    padding: 14px;
   }
   .question-row-meta {
     grid-column: 2;
@@ -495,7 +524,7 @@
   margin-top: var(--s-2);
 }
 .organ-page-heading p {
-  margin-top: var(--s-3);
+  margin-top: 10px;
 }
 .organ-tabs {
   display: flex;
@@ -512,22 +541,26 @@
   flex: none;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--rule-strong);
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--rule);
   border-radius: var(--r-pill);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink-2);
   font-size: var(--t-13);
+  font-weight: 500;
   white-space: nowrap;
+  transition: all 0.16s ease;
 }
 .organ-tabs a:hover {
-  border-color: var(--ink-3);
+  border-color: var(--rule-strong);
+  color: var(--ink);
 }
 .organ-tabs a.active {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+  font-weight: 600;
 }
 .mobile-organ-tabs {
   display: flex;
@@ -551,53 +584,52 @@
 }
 .organ-information h2 {
   margin-top: var(--s-2);
-  font-size: var(--t-24);
-  line-height: 1.4;
+  font-size: 26px;
+  line-height: 1.35;
 }
 .organ-information h2 > span {
   display: block;
-  margin-top: 4px;
-  font-family: var(--sans);
-  font-size: var(--t-13);
-  font-weight: 400;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--ink-3);
-  line-height: 1.8;
+  line-height: 1.65;
 }
 .organ-description {
   margin-top: var(--s-4);
-  font-size: var(--t-17);
-  line-height: 1.9;
+  font-size: 16px;
+  line-height: 1.85;
   color: var(--ink-2);
 }
 .organ-related {
-  margin-top: var(--s-8);
-  padding-top: var(--s-4);
-  border-top: 1px solid var(--rule);
+  margin-top: var(--s-6);
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--surface);
 }
 .organ-related > span {
-  font-size: var(--t-11);
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
   text-transform: uppercase;
 }
 .organ-related h3 {
-  margin-top: var(--s-2);
-  font-family: var(--serif);
-  font-size: var(--t-17);
-  font-weight: 600;
-  line-height: 1.6;
+  margin-top: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 .organ-related p {
-  margin-top: var(--s-1);
+  margin-top: 4px;
   font-size: var(--t-13);
-  line-height: 1.85;
+  line-height: 1.7;
   color: var(--ink-3);
 }
 .organ-related .text-link {
   margin-top: var(--s-1);
-}
-.organ-related .coming-note {
-  margin-top: var(--s-2);
+  margin-right: var(--s-3);
 }
 .organ-bookmark {
   margin-top: var(--s-4);
@@ -605,7 +637,7 @@
 .coming-note {
   margin-top: var(--s-2);
   font-size: var(--t-13);
-  line-height: 1.85;
+  line-height: 1.75;
   color: var(--ink-3);
 }
 .organ-artwork {
@@ -615,52 +647,59 @@
   position: relative;
   display: grid;
   place-items: center;
-  padding: var(--s-8) var(--s-4) var(--s-6);
+  padding: 40px 24px 36px;
   border: 1px solid var(--rule);
-  border-radius: var(--r-input);
-  background: var(--surface);
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 45%, #ffffff 0%, #f1f5f9 100%);
+  box-shadow: var(--shadow-sm);
 }
 .organ-artwork-stage img {
   display: block;
   width: auto;
   max-width: 100%;
-  height: 230px;
+  height: 250px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 24px rgba(15, 23, 42, 0.1));
 }
 .organ-artwork-stage img.portrait {
   height: 280px;
 }
 .organ-artwork-stage img.landscape {
-  height: 190px;
+  height: 220px;
 }
 .organ-artwork-kicker {
   position: absolute;
-  top: var(--s-3);
-  left: var(--s-4);
-  font-size: var(--t-11);
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
+  top: 14px;
+  left: 16px;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--rule);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
 }
 .organ-artwork-detail {
   position: absolute;
-  right: var(--s-4);
-  bottom: var(--s-3);
-  font-size: var(--t-11);
+  right: 16px;
+  bottom: 12px;
+  font-size: 12px;
   color: var(--ink-3);
 }
 .organ-artwork figcaption {
-  margin-top: var(--s-2);
+  margin-top: 10px;
   font-size: var(--t-13);
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--ink-3);
 }
 .organ-artwork figcaption small {
   display: block;
-  font-size: var(--t-11);
+  font-size: 12px;
   margin-top: 2px;
 }
 .organ-artwork figcaption a {
   color: var(--accent);
-  border-bottom: 1px solid var(--rule-strong);
 }
 .organ-information .load-state {
   min-height: 200px;
@@ -689,22 +728,22 @@
     margin-top: 0;
   }
   .organ-artwork-stage img {
-    height: 280px;
+    height: 300px;
   }
   .organ-artwork-stage img.portrait {
     height: 330px;
   }
   .organ-artwork-stage img.landscape {
-    height: 220px;
+    height: 250px;
   }
 }
 
 @media (min-width: 1101px) {
   .organ-page {
-    padding-top: var(--s-12);
+    padding-top: var(--s-8);
   }
   .organ-explorer {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--s-16);
+    gap: var(--s-12);
   }
 }

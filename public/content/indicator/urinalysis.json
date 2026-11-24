@@ -146,7 +146,6 @@
   "figures": [
     {
       "key": "layers",
-      "diagram": "urinalysis-layers",
       "alt": "示意图：同一份尿液样本分别进行外观观察、试纸化学检测和显微镜检查，三个层面提供不同信息。",
       "caption": "一份样本，三个观察层面。",
       "simplification": "图为检查流程示意，未按真实比例绘制；各层面包含的项目因机构和试纸不同而有差异，图中仅列出常见类别。",
@@ -154,9 +153,28 @@
         "urinalysis"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "ce59c58ce7c3760135322d6fab061e062bac990de338be78b69a719e45ea2a24"
+      },
+      "src": "/media/fig-urinalysis-layers.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "外观与比重",
+          "text": "观察颜色、清晰度与浓缩程度，受饮水与采样时段影响明显。"
+        },
+        {
+          "title": "化学试纸筛查",
+          "text": "快速筛查酸碱度、尿蛋白、尿糖、酮体等化学线索。"
+        },
+        {
+          "title": "显微镜沉渣观察",
+          "text": "查看尿液中是否存在红细胞、白细胞或管型等有形成分。"
+        }
+      ]
     }
   ],
   "sections": [

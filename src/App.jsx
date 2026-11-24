@@ -133,6 +133,7 @@ function ReaderApp() {
             id={route.id}
             go={navigate}
             onBack={back}
+            onOpen={onOpen}
             onOrgan={onOrgan}
             onTools={() => setToolsOpen(true)}
           />

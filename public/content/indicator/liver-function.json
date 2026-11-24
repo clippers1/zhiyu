@@ -257,7 +257,6 @@
   "figures": [
     {
       "key": "tests",
-      "diagram": "liver-tests",
       "alt": "示意图：一份血液样本分别测量蛋白质、酶和胆红素三类物质，它们分别对应肝脏的合成、细胞状态和胆汁处理等不同侧面。",
       "caption": "肝功能不是一项检查，而是几类物质放在一起看。",
       "simplification": "图为项目分类示意，未按真实比例绘制，也省略了其他肝功能项目；分组仅用于说明不同侧面，不代表诊断分类。",
@@ -265,9 +264,28 @@
         "liver-tests"
       ],
       "attribution": {
-        "kind": "self-made",
-        "name": "知愈自制示意图"
-      }
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "01c900083eb4a75b9d2e421ec7f67d1c5c56f3172d00fb6be170418f8bbf31b5"
+      },
+      "src": "/media/fig-liver-tests.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "肝细胞内的酶",
+          "text": "如 ALT、AST，平时主要待在细胞里，细胞受损时释放入血。"
+        },
+        {
+          "title": "胆红素与胆汁通路",
+          "text": "反映肝脏处理代谢产物和排泄胆汁的顺畅程度。"
+        },
+        {
+          "title": "白蛋白等合成产物",
+          "text": "反映肝脏持续合成重要蛋白质的能力。"
+        }
+      ]
     }
   ],
   "organ": "肝脏 · 胆汁 · 血液蛋白",

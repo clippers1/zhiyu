@@ -23,7 +23,6 @@ import { readingGuide } from "../services/reading-guide";
 import { TermQuestions } from "./ReadingGuide";
 import { contentTrust } from "../services/content-status";
 import { nextIndicator } from "../services/discovery";
-import { diagramFor } from "./Diagrams";
 import { ReportRowStrip } from "./ReportGuide";
 import { REPORT_ROWS } from "../services/report-guide";
 
@@ -31,7 +30,6 @@ function FigureBlock({ figure, id = "article-figure" }) {
   const [imageFailed, setImageFailed] = useState(false);
   const imageRef = useRef(null);
   const refs = figure?.sourceIds || [];
-  const Diagram = diagramFor(figure?.diagram);
   // 服务端先输出 <img>，请求可能在 hydration 前就失败，React 收不到那次
   // error 事件；挂载后补查一次解码结果，避免一直停在坏图上。
   useEffect(() => setImageFailed(false), [figure?.src]);
@@ -39,14 +37,13 @@ function FigureBlock({ figure, id = "article-figure" }) {
     const node = imageRef.current;
     if (node?.complete && node.naturalWidth === 0) setImageFailed(true);
   }, [figure?.src]);
-  if (!figure || !refs.length) return null;
+  if (!figure || !refs.length || !figure.src) return null;
   const selfMade = figure.attribution.kind === "self-made";
+  const aiGenerated = figure.attribution.kind === "ai-generated";
   return (
     <figure className="article-figure" id={id}>
       <div className="article-figure-stage">
-        {Diagram ? (
-          <Diagram id={`${id}-diagram`} />
-        ) : imageFailed ? <p role="status">图片暂时无法显示，可继续阅读下方的文字解释与来源。</p> : <img
+        {imageFailed ? <p role="status">图片暂时无法显示，可继续阅读下方的文字解释与来源。</p> : <img
           ref={imageRef}
           src={figure.src}
           alt={figure.alt}
@@ -64,6 +61,8 @@ function FigureBlock({ figure, id = "article-figure" }) {
           插图：
           {selfMade ? (
             <span>{figure.attribution.name}</span>
+          ) : aiGenerated ? (
+            <span>{figure.attribution.name}{figure.attribution.model ? ` · 模型 ${figure.attribution.model}` : ""}</span>
           ) : (
             <>
               <a href={figure.attribution.url} target="_blank" rel="noreferrer">
@@ -77,6 +76,19 @@ function FigureBlock({ figure, id = "article-figure" }) {
           )}
         </small>
       </figcaption>
+      {Array.isArray(figure.legend) && figure.legend.length > 0 && (
+        <ol className="figure-legend">
+          {figure.legend.map((item, index) => (
+            <li key={item.title}>
+              <span aria-hidden="true">{index + 1}</span>
+              <div>
+                <b>{item.title}</b>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
       <p className="article-figure-note">
         <b>图示边界：</b>
         {figure.simplification}

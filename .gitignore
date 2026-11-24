@@ -15,3 +15,4 @@ backend/src/app/(payload)/admin/importMap.js
 backups/
 backend/reader/
 backend/public/
+.DS_Store
