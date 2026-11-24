@@ -1,10 +1,16 @@
-# The public face of the internal image service: imggpt.anron.fun
+# Public face of the internal image service: imggpt.anron.fun
 #
-# Install as /etc/nginx/sites-available/imggpt.anron.fun.conf and symlink into
-# sites-enabled. Certificates come from certbot (see the bottom of this file).
+# What is exposed: the generation API, the generated files, and /healthz.
+# What stays loopback-only: the admin page (/), /api/state, /api/images, /usage.
 #
-# Only the generation API, its images and the health probe are exposed. The
-# admin page (/) and /api/* stay on 127.0.0.1 and are reached over SSH.
+# Install (this host):
+#   sudo install -m 644 deploy/nginx-imggpt.conf.example /etc/nginx/sites-available/imggpt.anron.fun.conf
+#   sudo ln -sf /etc/nginx/sites-available/imggpt.anron.fun.conf /etc/nginx/sites-enabled/imggpt.anron.fun
+#   sudo certbot certonly --webroot -w /var/www/letsencrypt -d imggpt.anron.fun
+#   sudo nginx -t && sudo systemctl reload nginx
+#
+# IMAGE_PUBLIC_ORIGIN must be https://imggpt.anron.fun so image URLs in JSON
+# responses are absolute and open from anywhere.
 
 server {
     listen 80;
@@ -22,8 +28,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl;
+    listen [::]:443 ssl;
     server_name imggpt.anron.fun;
 
     ssl_certificate /etc/letsencrypt/live/imggpt.anron.fun/fullchain.pem;
@@ -37,6 +43,9 @@ server {
 
     add_header X-Content-Type-Options nosniff always;
     add_header Referrer-Policy no-referrer always;
+
+    # The service rejects anything over 64 KB itself; this is the edge copy.
+    client_max_body_size 64k;
 
     # One image takes 15–60s upstream; the client timeout must exceed it.
     proxy_http_version 1.1;
@@ -68,17 +77,12 @@ server {
         proxy_pass http://127.0.0.1:3120;
     }
 
-    # Everything else — admin page, /api/state, /api/images, /usage — is
-    # loopback-only on purpose.
     location / {
         return 404;
     }
 }
 
-# To enable the rate limit, add to the http{} block (or a new file in
+# To enable the rate limit, add to the http{} block (or a file in
 # /etc/nginx/conf.d/), then uncomment the limit_req directive above:
 #
 #   limit_req_zone $binary_remote_addr zone=imggpt_api:10m rate=30r/m;
-#
-# Certificate:
-#   sudo certbot --nginx -d imggpt.anron.fun
