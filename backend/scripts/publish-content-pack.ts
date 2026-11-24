@@ -54,6 +54,11 @@ function validatePack({ kind, body }: Pack) {
   const groups = [body.descriptionSourceIds, ...(body.metrics || []).map((item: any) => item.sourceIds)];
   if (kind === 'indicator') groups.push(body.chainSourceIds, body.tipSourceIds);
   if (kind === 'story') groups.push(body.tipSourceIds);
+  if (kind === 'organ' && Array.isArray(body.sections)) {
+    for (const section of body.sections) {
+      groups.push(...(section.paragraphs || []).map((paragraph: any) => paragraph.sourceIds));
+    }
+  }
   const longForm = kind === 'story' || body.format === 'article';
   if (longForm) {
     // Same minimums as scripts/content.test.mjs: a page that only restates its

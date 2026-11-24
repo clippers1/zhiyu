@@ -40,7 +40,7 @@ export function selectDiscovery(indicators = [], organs = [], stories = []) {
     indexRows: orderedQuestions.filter(item => item.id !== feature?.id).slice(0, 8),
     questions: orderedQuestions.slice(0, 3),
     stories: orderedStories,
-    organs: availableOrgans.slice(0, 5),
+    organs: availableOrgans.slice(0, 6),
     organPreview: availableOrgans[0] || null,
     guideAvailable: orderedQuestions.length >= 2,
     totalIndicators: orderedQuestions.length,

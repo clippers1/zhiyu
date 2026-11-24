@@ -1,0 +1,281 @@
+{
+  "id": "fatty-liver",
+  "catalogOrder": 10,
+  "title": "脂肪肝",
+  "english": "STEATOTIC LIVER",
+  "subtitle": "B 超写着「轻度脂肪肝」，在说什么？",
+  "question": "体检 B 超提示脂肪肝，意味着什么？",
+  "questionAnswer": "脂肪肝表示肝细胞内堆积了过多脂肪，常见于超声报告；它涵盖从单纯脂肪堆积到伴随炎症的不同阶段，需要结合肝功能、代谢指标与饮酒史整体理解。",
+  "icon": "layers",
+  "color": "orange",
+  "tags": [
+    "脂肪肝",
+    "腹部超声",
+    "MASLD / NAFLD"
+  ],
+  "searchAliases": [
+    "轻度脂肪肝",
+    "中度脂肪肝",
+    "重度脂肪肝",
+    "脂肪肝浸润",
+    "肝实质回声增强",
+    "非酒精性脂肪肝",
+    "代谢相关脂肪性肝病",
+    "NAFLD",
+    "MASLD",
+    "脂肪变性",
+    "fatty liver"
+  ],
+  "number": "10",
+  "format": "article",
+  "featured": false,
+  "desc": "脂肪肝（医学上常称脂肪性肝病）指多余脂肪在肝细胞内积聚。日常体检多在腹部超声中发现，但单靠超声无法判断是否存在肝细胞炎症或纤维化。",
+  "sections": [
+    {
+      "title": "肝细胞里堆了脂肪，为什么超声能看见",
+      "short": "超声为什么能看见",
+      "paragraphs": [
+        {
+          "text": "健康的肝脏本身含有少量脂肪。当进入肝脏的脂类过多、或代谢与输出速度跟不上时，脂肪微滴会在肝细胞内逐渐堆积，这就是体检报告里常见的「脂肪肝」或「肝脂肪变性」。",
+          "sourceIds": ["niddk-def", "medline-steatotic"]
+        },
+        {
+          "text": "腹部超声利用高频声波在组织里的反射成像。当肝细胞内脂肪增多时，声波反射增强、深部信号衰减，屏幕上肝脏看起来比平时更「亮」，于是超声报告常写出「肝实质回声增强」「近场增强、远场衰减」或提示轻、中、重度脂肪肝。",
+          "sourceIds": ["niddk-diag", "sonogram"]
+        },
+        {
+          "text": "需要知道的是，常规超声对较明显的脂肪堆积更敏感，且不同设备、操作者以及体型因素都会影响图像清晰度。超声看见的是脂肪堆积的影像表现，而不是直接看见细胞有没有发炎。",
+          "sourceIds": ["niddk-diag", "sonogram"]
+        }
+      ]
+    },
+    {
+      "title": "同样叫脂肪肝，不同阶段的差别很大",
+      "short": "不同阶段的差别",
+      "paragraphs": [
+        {
+          "text": "脂肪肝并不是单一状态，而是一段连续谱系。医学上会先区分是否与长期大量饮酒有关：与代谢因素密切相关、并非由重度饮酒引起的，既往多称非酒精性脂肪性肝病（NAFLD），近年来也常被称为代谢相关脂肪性肝病（MASLD）。",
+          "sourceIds": ["niddk-def", "medline-steatotic"]
+        },
+        {
+          "text": "在这类脂肪肝中，一部分人属于单纯性脂肪肝，肝脏里主要是脂肪积聚，几乎没有明显炎症或细胞损伤；另一部分人则会伴随肝细胞炎症和损伤（称作脂肪性肝炎，NASH 或 MASH），长期持续可能逐渐形成瘢痕组织，也就是肝纤维化。",
+          "sourceIds": ["niddk-def", "medline-steatotic"]
+        },
+        {
+          "text": "正因为大多数脂肪肝在早期没有明显疼痛或不适感，很多人是在常规体检做 B 超时才第一次知道。看到报告上的「脂肪肝」三个字时，真正重要的是弄清它目前处在哪一步，而不是把所有脂肪肝混为一谈。",
+          "sourceIds": ["niddk-def", "niddk-diag"]
+        }
+      ]
+    },
+    {
+      "title": "为什么要和肝功、血糖、血脂对照着看",
+      "short": "为什么要对照看",
+      "paragraphs": [
+        {
+          "text": "脂肪肝常常不是肝脏孤立发生的问题，而是与全身代谢状态紧密相连。超重或腹型肥胖、胰岛素抵抗、血糖偏高、甘油三酯升高以及血压偏高，都与肝内脂肪堆积高度相关。",
+          "sourceIds": ["niddk-def", "medline-steatotic"]
+        },
+        {
+          "text": "因此医生看到超声提示脂肪肝后，通常会翻回血液化验单，把 ALT、AST 等肝酶、空腹血糖、糖化血红蛋白和血脂组合放在一起看。肝酶升高提示可能存在肝细胞受累，但肝酶落在参考区间内，也并不自动排除脂肪肝或潜在炎症。",
+          "sourceIds": ["niddk-diag", "liver-tests"]
+        },
+        {
+          "text": "此外，医生还会询问饮酒量、近期体重变化、常用药物和既往病毒性肝炎史，用来排除酒精、药物或其他肝病导致的相似表现。只盯着超声报告里的一行字，信息其实并不完整。",
+          "sourceIds": ["niddk-diag"]
+        }
+      ]
+    },
+    {
+      "title": "常见检查手段各自回答什么问题",
+      "short": "不同检查的分工",
+      "paragraphs": [
+        {
+          "text": "普通腹部超声无创、方便，适合作为日常体检初筛；但当需要进一步评估肝脏有没有变硬（纤维化程度）或更精确量化脂肪含量时，医生有时会建议做肝脏瞬时弹性成像（常称肝脏弹性超声）或磁共振等专门检查。",
+          "sourceIds": ["niddk-diag", "sonogram"]
+        },
+        {
+          "text": "肝功能抽血和代谢指标用来追踪细胞损伤线索与背后的代谢风险；只有在极少数需要明确区分脂肪性肝炎与纤维化分期、且无创手段不足以回答问题时，临床才会考虑肝穿刺活检。",
+          "sourceIds": ["niddk-diag", "liver-tests"]
+        },
+        {
+          "text": "每一种检查都有各自的盲区：超声看形态和脂肪回声、抽血看酶和代谢、弹性检测看硬度。把它们按需组合，比反复做同一种基础检查更能回答关键问题。",
+          "sourceIds": ["niddk-diag"]
+        }
+      ]
+    },
+    {
+      "title": "拿到脂肪肝报告，先确认这几件事",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先看同一次体检的肝功能（ALT、AST、GGT）、血糖、血脂和腰围体重，了解这是孤立发现，还是同时伴随多项代谢指标波动。如果报告注明「肝内脂肪分布不均」或同时提到其他结节、囊肿，应把完整影像描述留好供医生核对。",
+          "sourceIds": ["niddk-diag", "liver-tests"]
+        },
+        {
+          "text": "其次回想自己的饮酒频率与正在服用的处方药、非处方药或保健品，并在复查或就诊时如实告诉医生。是否需要进一步做弹性检查、多久复查一次超声和肝功，以及适合个人的体重与饮食管理节奏，应由医生结合整体代谢状况确定。",
+          "sourceIds": ["niddk-diag", "medline-steatotic"]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "不喝酒、身材也不算胖，为什么体检也会查出脂肪肝？",
+      "answer": "脂肪肝不仅与饮酒或外表体重有关。部分体重指数看似正常的人也可能存在内脏脂肪偏多、胰岛素抵抗、血脂异常、快速减重、某些药物影响或遗传因素，这些都会促使脂肪在肝细胞内积聚。",
+      "sourceIds": ["niddk-def", "medline-steatotic"]
+    },
+    {
+      "question": "B 超提示脂肪肝，但肝功能 ALT 正常，是不是就完全没事？",
+      "answer": "不能简单画等号。部分存在脂肪堆积甚至已有肝细胞炎症的人，某一次抽血的 ALT 和 AST 仍可能落在参考区间内；是否需要进一步评估纤维化或代谢风险，需由医生结合多项指标和病史判断。",
+      "sourceIds": ["niddk-diag", "liver-tests"]
+    },
+    {
+      "question": "报告上写的轻度、中度、重度，能直接代表肝损伤有多严重吗？",
+      "answer": "超声上的轻中重度主要反映的是声波回声和衰减所提示的脂肪堆积程度，而不是肝细胞发炎或纤维化的分级。评估肝脏长期健康时，医生同样高度关注是否存在炎症和肝硬度变化。",
+      "sourceIds": ["niddk-def", "niddk-diag"]
+    },
+    {
+      "question": "脂肪肝会有明显症状吗？右上腹不舒服一定和它有关吗？",
+      "answer": "绝大多数脂肪肝早期没有任何症状，少数人可能感到乏力或右上腹轻微闷胀；但右上腹不适也可能来自胆囊、胃十二指肠或肌肉骨骼等其他原因，有持续不适仍应线下就诊排查。",
+      "sourceIds": ["niddk-def", "medline-steatotic"]
+    },
+    {
+      "question": "发现脂肪肝后需要立刻吃所谓「保肝药」吗？",
+      "answer": "本文不提供用药建议。不同原因引起的脂肪肝处理重点不同，自行服用未经医生评估的护肝保健品或草药反而可能增加肝脏代谢负担，具体方案应咨询消化科、肝病科或全科医生。",
+      "sourceIds": ["niddk-diag", "medline-steatotic"]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "腹部超声（肝实质回声）",
+      "text": "体检最常用的无创初筛方式，通过声波反射亮度变化提示肝内是否存在明显脂肪堆积。",
+      "sourceIds": ["niddk-diag", "sonogram"]
+    },
+    {
+      "name": "肝功能酶学（ALT / AST / GGT）",
+      "text": "侧面观察肝细胞是否受到牵连的血液线索，需与超声和其他代谢指标一起看。",
+      "sourceIds": ["niddk-diag", "liver-tests"]
+    },
+    {
+      "name": "肝脏弹性成像（硬度评估）",
+      "text": "专门的无创检查手段，帮助评估肝脏脂肪含量与是否存在纤维化变硬。",
+      "sourceIds": ["niddk-diag"]
+    },
+    {
+      "name": "代谢关联组合（血糖 / 血脂 / 体重）",
+      "text": "反映脂肪肝背后的代谢环境，帮助医生判断整体心血管与代谢风险。",
+      "sourceIds": ["niddk-def", "medline-steatotic"]
+    }
+  ],
+  "chain": [
+    "代谢或饮酒等因素使肝内脂类增多",
+    "脂肪微滴在肝细胞内积聚",
+    "超声显示肝实质回声增强",
+    "结合肝功与代谢指标评估是否伴随炎症或纤维化"
+  ],
+  "chainSourceIds": ["niddk-def", "niddk-diag"],
+  "tip": "超声上的「轻/中/重度脂肪肝」主要反映脂肪堆积程度，不能直接等同于肝细胞炎症或纤维化分级；请结合肝功能、血糖血脂和饮酒史一起交给医生评估。",
+  "figures": [
+    {
+      "key": "steatosis",
+      "src": "/media/fig-fatty-liver.webp",
+      "width": 960,
+      "height": 640,
+      "alt": "3D概念示意图：半透明肝脏轮廓左侧为正常六边形肝细胞，右侧肝细胞内堆积琥珀色脂肪微滴，上方超声探头发出声波弧线进行扫查。",
+      "caption": "超声通过声波反射观察肝内脂肪堆积，而是否伴随炎症或纤维化还需结合抽血与进一步评估。",
+      "simplification": "图为概念示意，未按真实细胞大小或肝脏解剖比例绘制；超声回声与肝内脂肪分布仅作直观比喻，不用于替代真实超声影像或个人分级。",
+      "sourceIds": ["niddk-def", "niddk-diag", "sonogram"],
+      "legend": [
+        { "title": "正常肝细胞与脂肪堆积对比", "text": "当脂类在肝细胞内过多积聚时，形成脂肪肝；早期往往没有明显自觉症状。" },
+        { "title": "超声声波回声变化", "text": "脂肪增多会改变声波反射和衰减特点，因此常规腹部超声常作为体检初筛工具。" },
+        { "title": "影像之外还看血液与硬度", "text": "超声无法直接判断细胞炎症，常需对照 ALT 等肝酶、血糖血脂或在医生建议下做弹性评估。" }
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "2d2d65f2a615569238028a46af7e163a0fbf9759043d2d25e79c3c2c63c9b47f"
+      }
+    }
+  ],
+  "organ": "肝脏 · 代谢系统",
+  "relatedOrgans": [
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
+  "kind": "indicator",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在体检超声中看到「脂肪肝」或「肝实质回声增强」、想弄懂概念与后续检查分工的一般成年读者。",
+  "limitations": "不提供脂肪肝分期诊断、纤维化评分、饮食运动处方或药物治疗建议。",
+  "references": [
+    {
+      "id": "niddk-def",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Definition & Facts of NAFLD & NASH",
+      "url": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/definition-facts",
+      "scope": "脂肪性肝病的定义、单纯脂肪肝与脂肪性肝炎的区别、代谢危险因素及早期无症状特点",
+      "locator": "What is NAFLD?; What are the types of NAFLD?; Who is more likely to develop NAFLD?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "niddk-diag",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Diagnosis of NAFLD & NASH",
+      "url": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/diagnosis",
+      "scope": "病史、血液肝酶、超声、弹性成像与活检在评估脂肪肝中的分工与局限",
+      "locator": "How do doctors diagnose NAFLD?; Blood tests; Imaging tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "medline-steatotic",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Steatotic Liver Disease",
+      "url": "https://medlineplus.gov/steatoticliverdisease.html",
+      "scope": "脂肪性肝病（MASLD/酒精性）的总体分类与常见代谢背景",
+      "locator": "Summary",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "liver-tests",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Liver Function Tests",
+      "url": "https://medlineplus.gov/lab-tests/liver-function-tests/",
+      "scope": "肝功能抽血指标含义与需结合影像及其他检查的说明",
+      "locator": "What are liver function tests?; What do the results mean?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "sonogram",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Ultrasound",
+      "url": "https://medlineplus.gov/lab-tests/sonogram/",
+      "scope": "医学超声成像的原理、无创特点与应用范围",
+      "locator": "What is an ultrasound?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["niddk-def", "niddk-diag"],
+  "tipSourceIds": ["niddk-diag", "liver-tests"]
+}

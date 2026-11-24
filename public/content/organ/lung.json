@@ -5,13 +5,47 @@
   "en": "LUNGS",
   "headline": "身体与空气的交换站",
   "text": "吸入的空气沿气道到达肺泡，氧气穿过肺泡薄壁进入周围毛细血管；与此同时，二氧化碳从血液进入肺泡，并随呼气排出。",
-  "connection": "心脏 · 血液循环",
-  "related": [],
+  "connection": "肺结节 · 血常规（氧运输）",
+  "related": ["lung-nodule", "cbc"],
+  "sections": [
+    {
+      "title": "气体交换发生在最末端",
+      "paragraphs": [
+        {
+          "text": "空气经鼻腔或口腔进入气管，再经过层层分支的支气管，最终抵达像成串微小气囊一样的肺泡。真正的气体交换发生在肺泡壁与周围极其细密的毛细血管之间。",
+          "sourceIds": ["lung", "breathing"]
+        }
+      ]
+    },
+    {
+      "title": "体检里常见的肺部检查",
+      "paragraphs": [
+        {
+          "text": "日常体检常用胸部 X 线或低剂量胸部 CT 观察肺组织的形态结构，有时会偶然发现肺结节或陈旧疤痕；肺功能测试则用来观察气道通畅度与肺活量。",
+          "sourceIds": ["lung-tests"]
+        }
+      ]
+    },
+    {
+      "title": "肺与血液、心脏紧密配合",
+      "paragraphs": [
+        {
+          "text": "肺把氧气交给红细胞中的血红蛋白，再由心脏泵向全身肌肉和器官。爬楼或快走时心跳和呼吸同时加快，正是这条供氧链协同提速的表现。",
+          "sourceIds": ["breathing"]
+        }
+      ]
+    }
+  ],
   "kind": "organ",
   "category": "respiration",
-  "version": 1,
-  "updatedAt": "2026-09-20",
+  "version": 2,
+  "updatedAt": "2026-11-24",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解肺部气体交换机制及常见体检检查方式的一般成年读者。",
+  "limitations": "不提供肺部影像诊断、结节良恶性判断或呼吸系统疾病治疗建议。",
+  "descriptionSourceIds": ["lung", "breathing"],
   "references": [
     {
       "id": "lung",
@@ -20,7 +54,7 @@
       "url": "https://www.nhlbi.nih.gov/health/lungs",
       "scope": "肺的气体交换与氧气、二氧化碳",
       "locator": "What do the lungs do?",
-      "accessedAt": "2026-09-19",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -32,13 +66,24 @@
       "url": "https://www.nhlbi.nih.gov/health/lungs/breathing-benefits",
       "scope": "空气经鼻或口、气管和支气管到达肺泡，以及氧气和二氧化碳在肺泡与毛细血管之间交换并呼出的过程",
       "locator": "Breathing in; Gas exchange; Breathing out",
-      "accessedAt": "2026-09-19",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lung-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Tests for Lung Disease",
+      "url": "https://www.nhlbi.nih.gov/health/lung-tests",
+      "scope": "肺功能检查与胸部影像检查的基本分工",
+      "locator": "Imaging tests; Lung function tests",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
   ],
-  "contentRisk": "foundational",
   "learning": {
     "type": "lung-gas-exchange-v1",
     "title": "跟着一口气到肺泡",

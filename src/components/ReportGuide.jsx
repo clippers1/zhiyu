@@ -66,7 +66,7 @@ function GuideSection({ section, index }) {
   return (
     <section className="article-section" key={section.title}>
       <h2 id={`guide-section-${index + 1}`}>
-        <i>{["一", "二", "三", "四", "五"][index] || index + 1}</i>
+        <i>{["一", "二", "三", "四", "五", "六"][index] || index + 1}</i>
         {section.title}
       </h2>
       {section.paragraphs.map((paragraph, paragraphIndex) => (
@@ -185,7 +185,13 @@ export default function ReportGuide({ go }) {
 
         <section className="topic-followup" aria-label="继续阅读">
           <h2>继续读</h2>
-          <p>想弄懂参考区间为什么因医院而异，可以看这篇长文；想换一个项目，可以从项目索引里选。</p>
+          <p>想弄懂抽血前怎么准备、哪些因素会引起短暂波动，或参考区间为何因医院而异，可以接着读这几篇；想查具体某一项，可以从项目索引里选。</p>
+          <RouteLink page="article" id="fasting-test" className="text-link" onNavigate={() => go && go("article", "fasting-test")}>
+            抽血前要求空腹，到底能不能喝水和吃药？ <ArrowRight size={15} />
+          </RouteLink>
+          <RouteLink page="article" id="pre-test-factors" className="text-link" onNavigate={() => go && go("article", "pre-test-factors")}>
+            熬夜、喝酒、感冒或剧烈运动，为什么会让体检单出现短暂波动？ <ArrowRight size={15} />
+          </RouteLink>
           <RouteLink page="article" id="lab-range" className="text-link" onNavigate={() => go && go("article", "lab-range")}>
             同一份血，两家医院的参考区间为什么不一样？ <ArrowRight size={15} />
           </RouteLink>

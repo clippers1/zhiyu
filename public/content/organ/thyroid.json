@@ -1,0 +1,99 @@
+{
+  "id": "thyroid",
+  "catalogOrder": 106,
+  "name": "甲状腺",
+  "en": "THYROID GLAND",
+  "headline": "全身代谢节奏的调速器",
+  "text": "甲状腺位于颈部前方、形似蝴蝶，紧贴气管两侧。它分泌的甲状腺激素随血液抵达全身，参与调节能量消耗、体温、心率与神经系统活跃度。",
+  "connection": "甲状腺功能 · 甲状腺结节",
+  "related": ["thyroid-function", "thyroid-nodule"],
+  "sections": [
+    {
+      "title": "像节拍器一样影响全身代谢",
+      "paragraphs": [
+        {
+          "text": "甲状腺利用饮食中摄取的碘制造 T4 与 T3 两种激素。它们影响身体利用能量的快慢，从心跳速度、怕冷还是怕热，到肠道蠕动和精力状态，都与甲状腺激素水平有关。",
+          "sourceIds": ["thyroid-diseases", "thyroid-tests"]
+        }
+      ]
+    },
+    {
+      "title": "听从垂体的负反馈指挥",
+      "paragraphs": [
+        {
+          "text": "甲状腺并不独自决定分泌多少激素，而是听从脑部垂体发出的促甲状腺激素（TSH）指令。当血液中甲状腺激素偏低时，垂体会调高 TSH；偏高时则减少 TSH，形成动态平衡。",
+          "sourceIds": ["thyroid-tests", "tsh"]
+        }
+      ]
+    },
+    {
+      "title": "体检里「功能」和「形态」分开查",
+      "paragraphs": [
+        {
+          "text": "抽血查甲功（TSH、T4、T3）看的是它干活快不快；颈部超声看的是它长什么样，有没有结节或肿大。不少人超声发现结节但抽血功能完全正常，两份结果需要分开理解、合起来评估。",
+          "sourceIds": ["thyroid-tests", "nodule-ency"]
+        }
+      ]
+    }
+  ],
+  "kind": "organ",
+  "category": "endocrine",
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解甲状腺位置、激素反馈机制及抽血/超声检查区别的一般成年读者。",
+  "limitations": "不提供甲亢、甲减、甲状腺结节良恶性诊断或碘摄入/用药建议。",
+  "descriptionSourceIds": ["thyroid-diseases", "thyroid-tests"],
+  "references": [
+    {
+      "id": "thyroid-diseases",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Thyroid Diseases",
+      "url": "https://medlineplus.gov/thyroiddiseases.html",
+      "scope": "甲状腺的位置、激素对代谢的影响及常见检查类型",
+      "locator": "Summary",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "thyroid-tests",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Thyroid Tests",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/thyroid",
+      "scope": "TSH、T4、T3 血液检查与甲状腺影像学检查的区别",
+      "locator": "What are thyroid tests?; Imaging tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "tsh",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "TSH (Thyroid Stimulating Hormone) Test",
+      "url": "https://medlineplus.gov/lab-tests/tsh-thyroid-stimulating-hormone-test/",
+      "scope": "垂体分泌 TSH 与甲状腺激素之间的负反馈机制",
+      "locator": "What is a TSH test?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "nodule-ency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Thyroid nodule",
+      "url": "https://medlineplus.gov/ency/article/007265.htm",
+      "scope": "甲状腺结节的常见形态检查与功能独立性",
+      "locator": "Exams and Tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ]
+}

@@ -4,14 +4,52 @@
   "name": "心脏",
   "en": "HEART",
   "headline": "不停歇的生命泵",
-  "text": "心脏的四个腔室依次接力：右侧把来自全身的血液送往肺，左侧再把来自肺的血液泵向全身。",
-  "connection": "血压 · 血脂",
-  "related": ["pressure", "lipids"],
+  "text": "心脏的四个腔室依次接力：右侧把来自全身的血液送往肺，左侧再把来自肺的血液泵向全身。电信号协调每一次收缩节律，把含氧血液持续输送到各器官。",
+  "connection": "心电图 · 血压 · 血脂",
+  "related": ["ecg", "pressure", "lipids"],
+  "sections": [
+    {
+      "title": "左右两半如何接力",
+      "paragraphs": [
+        {
+          "text": "心脏被中间的间隔分成左右两侧，各有一个心房和一个心室。右心负责接收来自全身的低氧血并泵往肺部换气，左心则把在肺部重新充满氧气的血液泵入主动脉送往全身。",
+          "sourceIds": ["heart", "anatomy"]
+        },
+        {
+          "text": "心房与心室之间、心室与大血管之间都有瓣膜把关，像单向门一样让血液沿着固定方向前进，减少倒流。",
+          "sourceIds": ["anatomy"]
+        }
+      ]
+    },
+    {
+      "title": "体检单上从哪些角度看它",
+      "paragraphs": [
+        {
+          "text": "心电图记录心肌收缩前的电信号节律，帮助观察心跳是否规整；血压反映心脏泵血与动脉血管阻力共同形成的压力；血脂与血糖则从长期血管环境的角度提供线索。",
+          "sourceIds": ["heart", "heart-tests"]
+        }
+      ]
+    },
+    {
+      "title": "单次波动不等于心脏病",
+      "paragraphs": [
+        {
+          "text": "运动、紧张、咖啡因、熬夜或发烧都会让心率和血压在短时间内明显变化。如果反复出现胸痛、胸闷、晕厥或明显心悸，应及时由医生评估。",
+          "sourceIds": ["heart-tests"]
+        }
+      ]
+    }
+  ],
   "kind": "organ",
   "category": "circulation",
-  "version": 2,
-  "updatedAt": "2026-09-20",
+  "version": 3,
+  "updatedAt": "2026-11-24",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解心脏基本结构、血液循环顺序及常见体检关联项的一般成年读者。",
+  "limitations": "不提供心血管疾病诊断、心电图个体判读或用药建议。",
+  "descriptionSourceIds": ["heart", "anatomy"],
   "references": [
     {
       "id": "heart",
@@ -20,7 +58,7 @@
       "url": "https://www.nhlbi.nih.gov/health/heart/blood-flow",
       "scope": "血液从全身进入右心、前往肺、返回左心并经主动脉流向全身的顺序",
       "locator": "How does blood flow through the heart?",
-      "accessedAt": "2026-09-19",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
@@ -30,15 +68,26 @@
       "publisher": "美国国立心肺血液研究所（NHLBI）",
       "title": "What the Heart Looks Like",
       "url": "https://www.nhlbi.nih.gov/health/heart/anatomy",
-      "scope": "心脏四个腔室及其左右分布",
+      "scope": "心脏四个腔室、瓣膜及其左右分布",
       "locator": "What are the parts of the heart?",
-      "accessedAt": "2026-09-19",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "heart-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Heart Tests",
+      "url": "https://www.nhlbi.nih.gov/health/heart-tests",
+      "scope": "常见心脏相关检查（心电图、血液检查、影像）的基本用途",
+      "locator": "Common heart tests",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     }
   ],
-  "contentRisk": "foundational",
   "learning": {
     "type": "heart-flow-v1",
     "title": "跟着血液走一圈",

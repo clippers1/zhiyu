@@ -138,9 +138,8 @@ export const Articles: CollectionConfig = {
     { name: 'tip', label: '阅读提示', type: 'textarea', admin: { condition: (_: any, sibling: any) => sibling.kind !== 'organ' } },
     { ...text('tipSourceKeys', '阅读提示来源编号（逗号分隔）'), admin: { condition: (_: any, sibling: any) => sibling.kind !== 'organ' } } as Field,
     text('organLabel', '关联说明'),
-    { name: 'sections', label: '长文正文分节', type: 'array', admin: {
-      condition: (_: any, sibling: any) => sibling.kind !== 'organ',
-      description: '每节包含小标题和至少两段带来源编号的正文；可指定本页的一张图解跟在节后。',
+    { name: 'sections', label: '分节正文', type: 'array', admin: {
+      description: '长文每节包含小标题和至少两段带来源编号的正文（可指定图解）；器官页也可用分节补充功能与体检视角。',
     }, fields: [
       text('title', '小标题', true),
       text('short', '目录短标签（可选，不超过 14 字）'),

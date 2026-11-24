@@ -68,11 +68,13 @@ try {
     ['liver', 'organ-liver.webp'],
     ['kidney', 'organ-kidney.webp'],
     ['pancreas', 'organ-pancreas.webp'],
+    ['thyroid', 'organ-thyroid.webp'],
   ]) {
     await page.goto(`${base}/organs/${id}`, { waitUntil: 'networkidle' });
     const artwork = page.locator(`.organ-artwork-${id}`);
     await expect(artwork.locator('img')).toHaveAttribute('src', `/media/${asset}`);
     await expect(artwork).toContainText('AI 生成插图');
+    await expect(page.locator('.organ-section-card')).toHaveCount(3);
     await expect.poll(() => page.evaluate(async src => (await fetch(src)).status, `/media/${asset}`)).toBe(200);
     if (screenshotDir) {
       await page.setViewportSize({ width: 390, height: 844 });

@@ -11,10 +11,11 @@ page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
   await expect(page.locator('.home-feature')).toHaveCount(1);
+  await expect(page.locator('.home-quick-pill')).toHaveCount(8);
   await expect(page.locator('.home-index:not(.home-stories) .index-row')).toHaveCount(8);
-  await expect(page.locator('.home-stories .index-row')).toHaveCount(2);
+  await expect(page.locator('.home-stories .index-row')).toHaveCount(4);
   await expect(page.locator('.home-reading-path a')).toHaveCount(1);
-  await expect(page.locator('#organ-topics .body-row')).toHaveCount(5);
+  await expect(page.locator('#organ-topics .body-row')).toHaveCount(6);
   await page.locator('.home-search-trigger').focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/indicators#indicator-search$/);
@@ -59,12 +60,13 @@ try {
     let fail = false;
     await page.route('**/content/index.json', route => fail ? route.abort() : route.fulfill({ json: fixture }));
     await page.goto(base, { waitUntil: 'networkidle' });
-    await expect(page.locator('#organ-topics .body-row')).toHaveCount(4);
+    await expect(page.locator('#organ-topics .body-row')).toHaveCount(5);
     await expect(page.locator('#organ-topics a[href="/organs/heart"]')).toHaveCount(0);
     fixture = { ...catalog, items: [] };
     await page.reload({ waitUntil: 'networkidle' });
     await expect(page.locator('#organ-topics')).toHaveCount(0);
     await expect(page.locator('.home-feature')).toHaveCount(0);
+    await expect(page.locator('.home-quick-pill')).toHaveCount(0);
     await expect(page.locator('.index-row')).toHaveCount(0);
     await expect(page.locator('.home-stories')).toHaveCount(0);
     await expect(page.locator('.home-reading-path')).toHaveCount(0);
@@ -78,7 +80,7 @@ try {
     fail = false;
     fixture = catalog;
     await page.locator('#organ-topics').getByRole('button', { name: '重新加载' }).click();
-    await expect(page.locator('#organ-topics .body-row')).toHaveCount(5);
+    await expect(page.locator('#organ-topics .body-row')).toHaveCount(6);
     await page.unroute('**/content/index.json');
   }
   await page.setViewportSize({ width: 390, height: 844 });

@@ -1,0 +1,312 @@
+{
+  "id": "fasting-test",
+  "catalogOrder": 203,
+  "title": "抽血前要求空腹，到底能不能喝水和吃药？",
+  "english": "FASTING BEFORE A BLOOD TEST",
+  "subtitle": "空腹是为了减少食物吸收带来的短暂波动，但不等于滴水不沾，更不等于自行停药。",
+  "question": "抽血前要求空腹，到底能不能喝水和吃药？",
+  "questionAnswer": "空腹主要是为了避免食物和含热量饮品短时间改变血糖、血脂等读数；一般可以少量喝白开水，日常处方药通常不要自行停用，具体以开单医生和检查机构的准备说明为准。",
+  "icon": "droplet",
+  "color": "blue",
+  "tags": [
+    "空腹抽血",
+    "体检准备",
+    "喝水吃药"
+  ],
+  "searchAliases": [
+    "空腹",
+    "抽血空腹",
+    "空腹能喝水吗",
+    "空腹能吃药吗",
+    "降压药",
+    "白开水",
+    "黑咖啡",
+    "体检前准备",
+    "fasting blood test"
+  ],
+  "number": "",
+  "format": "article",
+  "featured": false,
+  "kind": "story",
+  "category": "blood",
+  "desc": "体检通知单上常写着「空腹采血」。很多人早上起床后纠结能不能喝一口水、平时吃的药要不要停。弄清为什么要求空腹，这些常见顾虑就能逐一理清。",
+  "sections": [
+    {
+      "title": "为什么要空腹：食物会短暂改变血液成分",
+      "short": "为什么空腹",
+      "paragraphs": [
+        {
+          "text": "吃进去的食物和喝下去的含热量饮品，经胃肠道消化吸收后会进入血液。血液中的葡萄糖、甘油三酯以及部分酶和营养素浓度会在进食后随之升高，并在接下来数小时内逐渐回落。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        },
+        {
+          "text": "如果在这个吸收高峰期抽血，化验单测出来的往往是「刚吃过那顿饭的瞬时反应」，而不是身体在平稳基础状态下的水平。参考区间通常也是按统一采样条件建立的，条件不一致就很难准确对照。",
+          "sourceIds": [
+            "fasting",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "因此，要求空腹并不是为了考验耐饿能力，而是为了让血糖、血脂等对饮食高度敏感的项目尽量站在同一条起跑线上，减少餐后波动带来的误判。具体需要提前多久停止进食，以开单医生或体检机构的书面通知为准。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "白开水通常允许，但咖啡、茶和饮料不算水",
+      "short": "能不能喝水",
+      "paragraphs": [
+        {
+          "text": "很多人把空腹理解成「一口水都不能喝」，结果早上口干舌燥，采血时血管也因为轻度缺水而更难找。实际上，对于绝大多数常规空腹抽血，适量饮用不加任何添加剂的白开水是被允许的，而且有助于保持血管充盈、让采血更顺利。",
+          "sourceIds": [
+            "fasting"
+          ]
+        },
+        {
+          "text": "真正需要避开的是白开水以外的饮品：咖啡（哪怕不加糖和奶）、茶、牛奶、豆浆、果汁、碳酸饮料和含酒精饮品。它们含有的咖啡因、糖分、脂肪或其它活性成分，都可能刺激消化与代谢反应，进而干扰检验结果。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        },
+        {
+          "text": "除了饮食和饮品，抽血前的嚼口香糖、吸烟以及剧烈运动同样可能影响部分空腹检测项目的稳定性。体检当天早上尽量保持作息平稳、避免奔跑赶路，比纠结多喝了两口白开水更关键。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "日常吃的药，体检当天要不要自己停？",
+      "short": "能不能吃药",
+      "paragraphs": [
+        {
+          "text": "正在长期服用处方药的人，最容易在体检前陷入两难：怕吃药影响化验单，又怕停药导致血压或病情波动。一般原则是，除非开具检查的医生明确告知需要暂停或推迟服药，否则不要自行停用日常处方药。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        },
+        {
+          "text": "另一方面，确实有一些处方药、非处方药、维生素和膳食补充剂会影响特定化验项目的读数，或者需要和食物一起服用。在预约体检或开立化验单时，把正在吃的药物和保健品清单提前告知医生，问清当天早上该照常吃还是采血后再吃，是最稳妥的做法。",
+          "sourceIds": [
+            "prepare",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "如果某些药物（例如部分降糖药）需要配合进餐服用，更不能在空腹状态下盲目照常吞服或擅自调整，而应提前与医生确认当天的服药与采血时间安排。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "并不是所有抽血项目都必须空腹",
+      "short": "哪些要空腹",
+      "paragraphs": [
+        {
+          "text": "在常见体检项目里，空腹血糖、血脂组合（尤其是甘油三酯）以及部分肝功能或特殊代谢指标，对近期进食较为敏感，通常会要求空腹采血。",
+          "sourceIds": [
+            "fasting",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "相对地，血常规、糖化血红蛋白（HbA1c）、多数甲状腺功能项目等，在单独检查时通常不受一顿早饭的明显影响。平时去门诊只查这类项目，医生往往不会要求空腹。",
+          "sourceIds": [
+            "blood-tests",
+            "prepare"
+          ]
+        },
+        {
+          "text": "综合体检之所以常常统一通知「空腹」，是因为一次采血会同时分装好几管，覆盖血糖、血脂、肝肾功能等打包项目，只要其中包含一项需要空腹的检查，整体采样准备就需要按最严格的那一项执行；如果同时安排了腹部超声，也可能另有空腹要求。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "不小心吃了东西，千万别瞒着直接抽",
+      "short": "破功怎么办",
+      "paragraphs": [
+        {
+          "text": "如果早上迷迷糊糊喝了牛奶、吃了几口早餐，或者没注意到某项特殊准备要求，切忌抱有侥幸心理照常抽血却什么都不说。这样拿到的异常数字既可能让你白白紧张，也会让后续看报告的医生误判原因。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        },
+        {
+          "text": "最实用的做法是在采血前如实告诉护士或开单医生你吃了什么、大概过去了多久。对方会根据本次检查的具体项目判断是否需要改期空腹重采，或者可以在报告备注非空腹状态后照常进行。",
+          "sourceIds": [
+            "fasting",
+            "prepare"
+          ]
+        },
+        {
+          "text": "本文只说明空腹检查的一般原理和常见注意事项，不替代具体医院的采样须知，也不提供个体停药或用药调整建议。涉及慢性病日常用药或特殊检查时，务必以主治医生和检查机构的说明为准。",
+          "sourceIds": [
+            "prepare",
+            "lab-results"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "空腹抽血前喝了几口白开水，算不算没空腹？",
+      "answer": "一般不算。白开水不含热量和脂肪，通常不会干扰常规空腹血液指标；相反，适当补水能避免血液过于浓缩，采血也更容易。但不要一次性猛灌大量水，具体限制仍以检查机构提示为准。",
+      "sourceIds": [
+        "fasting"
+      ]
+    },
+    {
+      "question": "早上喝一杯不加糖、不加奶的黑咖啡或清茶可以吗？",
+      "answer": "不建议。即便不加糖和奶，咖啡和茶中的咖啡因及其他成分仍可能影响消化反应、水分代谢或部分血液读数。空腹期间的饮品最好只留白开水。",
+      "sourceIds": [
+        "fasting",
+        "prepare"
+      ]
+    },
+    {
+      "question": "平时每天早上吃的降压药，抽血前要不要停？",
+      "answer": "不要自行停药。擅自停用降压药或其他长期处方药可能带来不必要的波动。体检前应提前询问开单医生或体检中心，确认哪些药物可以按时用少量白开水送服、哪些需要采血后再服。",
+      "sourceIds": [
+        "fasting",
+        "prepare"
+      ]
+    },
+    {
+      "question": "前一天晚上嚼口香糖、抽烟或跑步，会影响第二天的空腹结果吗？",
+      "answer": "可能产生影响。嚼口香糖（哪怕是无糖型）、吸烟以及抽血前的剧烈运动，都可能刺激消化道或引起短暂的生理波动。检查前按机构提示保持平稳作息，结果会更具参考价值。",
+      "sourceIds": [
+        "fasting",
+        "prepare"
+      ]
+    },
+    {
+      "question": "怎么判断我这次要查的项目到底需不需要空腹？",
+      "answer": "不要靠经验猜测，最可靠的方式是直接查看体检预约须知或化验申请单上的准备提示；如果同时查多项且拿不准，提前向检查机构或开单医生核实即可。",
+      "sourceIds": [
+        "prepare",
+        "blood-tests"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "key": "fasting",
+      "alt": "示意图：空腹抽血前的准备对照，包含白开水、采血管、食物与饮品以及日常药片等抽象符号，体现不同准备项的区别。",
+      "caption": "空腹的核心是避开食物与含味饮品的短期吸收，白开水与日常处方药需区别对待。",
+      "simplification": "图为采血前准备概念示意，不列出具体空腹小时数、饮水量或任何具体药物的停服规则；个人准备步骤请严格遵循开单医生与检查机构说明。",
+      "sourceIds": [
+        "fasting",
+        "prepare"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "73222be1812a0bd5348729e9def49819fab447e05f39685808c2ddd71bb3773f"
+      },
+      "src": "/media/fig-fasting-test.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "白开水通常允许",
+          "text": "少量饮用白开水一般不影响常规空腹检验，还有助于避免脱水。"
+        },
+        {
+          "title": "食物与含味饮品暂停",
+          "text": "固体食物、咖啡、茶、牛奶、果汁、酒精与口香糖都可能干扰基础读数。"
+        },
+        {
+          "title": "处方药勿自行停用",
+          "text": "长期用药和补充剂是否照常服用，应提前向医生或体检机构确认。"
+        }
+      ]
+    }
+  ],
+  "relatedOrgans": [],
+  "organ": "",
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向即将进行空腹抽血或常规体检、想了解空腹原理及喝水服药注意事项的一般成年读者。",
+  "limitations": "不规定个人空腹时长，不提供具体药物停服或调整方案；妊娠期、糖尿病等特殊人群的空腹准备必须由主治医生个别指导。",
+  "references": [
+    {
+      "id": "fasting",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Fasting for a Blood Test",
+      "url": "https://medlineplus.gov/lab-tests/fasting-for-a-blood-test/",
+      "scope": "空腹抽血原因、白开水与咖啡/口香糖/吸烟/运动的区别、日常用药及误食后的处理",
+      "locator": "What is fasting?; Can I drink water while fasting?; Can I still take my medicines while fasting?; What if I make a mistake and eat or drink something?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "prepare",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Prepare for a Lab Test",
+      "url": "https://medlineplus.gov/lab-tests/how-to-prepare-for-a-lab-test/",
+      "scope": "检验前的准备要求、药物与补充剂告知、未按要求准备时应主动说明",
+      "locator": "How do I prepare for a lab test?; Will I need to take other steps to prepare for my lab test?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "饮食、药物和准备条件如何成为结果解读背景的一部分",
+      "locator": "What can affect my results?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "blood-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Blood Tests",
+      "url": "https://www.nhlbi.nih.gov/health/blood-tests",
+      "scope": "不同血液检查项目的用途及是否需要空腹的差异",
+      "locator": "Types of blood tests; What to expect",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "fasting",
+    "prepare"
+  ],
+  "tipSourceIds": [
+    "fasting",
+    "prepare"
+  ]
+}

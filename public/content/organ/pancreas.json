@@ -3,15 +3,49 @@
   "catalogOrder": 104,
   "name": "胰腺",
   "en": "PANCREAS",
-  "headline": "血糖平衡的重要调节者",
-  "text": "分泌胰岛素，参与血糖调节；也分泌消化酶，帮助分解食物中的碳水化合物、脂肪和蛋白质。",
+  "headline": "血糖平衡与消化的双面手",
+  "text": "胰腺藏在胃的后方，同时承担两套分工：外分泌部分产生消化酶排入小肠分解食物，内分泌部分的胰岛细胞分泌胰岛素等激素进入血液，维持血糖平稳。",
   "connection": "血糖 · 糖化血红蛋白",
   "related": ["glucose"],
+  "sections": [
+    {
+      "title": "外分泌：把大块营养拆成小分子",
+      "paragraphs": [
+        {
+          "text": "进食后，胰腺经胰管向十二指肠释放含有多种消化酶的胰液，协助分解食物里的碳水化合物、脂肪和蛋白质，使营养能够被小肠顺利吸收。",
+          "sourceIds": ["digestion"]
+        }
+      ]
+    },
+    {
+      "title": "内分泌：用胰岛素调度血液里的糖",
+      "paragraphs": [
+        {
+          "text": "散落在胰腺内的胰岛细胞直接向血液释放激素，其中胰岛素负责提醒肌肉、脂肪和肝脏细胞摄取血液中的葡萄糖，避免餐后血糖持续居高不下。",
+          "sourceIds": ["diabetes", "insulin"]
+        }
+      ]
+    },
+    {
+      "title": "常规体检怎样间接了解它",
+      "paragraphs": [
+        {
+          "text": "常规抽血很少直接测胰腺本身，更多通过空腹血糖和糖化血红蛋白（HbA1c）观察血糖调节的整体结果；腹部超声有时也会顺带扫查胰腺外形，但容易受胃肠道气体遮挡。",
+          "sourceIds": ["diabetes", "insulin"]
+        }
+      ]
+    }
+  ],
   "kind": "organ",
   "category": "metabolism",
-  "version": 1,
-  "updatedAt": "2026-09-18",
+  "version": 2,
+  "updatedAt": "2026-11-24",
   "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望了解胰腺消化与血糖调节分工的一般成年读者。",
+  "limitations": "不提供糖尿病、胰腺炎或胰腺占位性病变的诊断与治疗建议。",
+  "descriptionSourceIds": ["digestion", "diabetes"],
   "references": [
     {
       "id": "diabetes",
@@ -19,18 +53,32 @@
       "title": "What Is Diabetes?",
       "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
       "scope": "葡萄糖、胰岛素与细胞供能",
-      "accessedAt": "2026-09-18",
+      "locator": "What is diabetes?",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null
     },
     {
       "id": "digestion",
-      "publisher": "NIDDK",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
       "title": "Your Digestive System & How it Works",
       "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
-      "scope": "营养吸收、肝脏胆汁及胰腺消化酶",
-      "accessedAt": "2026-09-18",
+      "scope": "胰腺消化酶分解碳水化合物、脂肪与蛋白质",
+      "locator": "How does my digestive system work?",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "insulin",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Insulin Resistance & Prediabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/prediabetes-insulin-resistance",
+      "scope": "胰岛素信号及细胞对胰岛素的响应",
+      "locator": "What is insulin resistance?",
+      "accessedAt": "2026-11-24",
       "language": "en",
       "type": "机构健康科普",
       "publicationDate": null

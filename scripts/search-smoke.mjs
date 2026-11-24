@@ -35,9 +35,10 @@ try {
   const dialog = page.getByRole('dialog');
   const search = dialog.getByRole('textbox');
   await search.fill('liver');
-  await expect(dialog.locator('.search-results > a')).toHaveCount(2);
-  await expect(dialog.locator('.search-results > a').filter({ hasText: '肝脏' })).toHaveCount(1);
-  await expect(dialog.locator('.search-results > a').filter({ hasText: '肝功能' })).toHaveCount(1);
+  await expect(dialog.locator('.search-results > a')).toHaveCount(3);
+  await expect(dialog.locator('.search-results > a[href="/organs/liver"]')).toContainText('肝脏');
+  await expect(dialog.locator('.search-results > a[href="/article/liver-function"]')).toContainText('肝功能');
+  await expect(dialog.locator('.search-results > a[href="/article/fatty-liver"]')).toContainText('脂肪肝');
   await search.dispatchEvent('compositionstart');
   await search.fill('血');
   await page.waitForTimeout(350);

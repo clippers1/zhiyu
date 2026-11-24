@@ -38,6 +38,43 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* 首页高频缩写与常见发现速查 */
+.home-quick-links {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  max-width: 560px;
+}
+.home-quick-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.home-quick-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.home-quick-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+.home-quick-pill:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+}
+
 /* 主推英雄卡 */
 .home-feature {
   display: block;
@@ -703,6 +740,50 @@
 }
 .organ-information .load-state {
   min-height: 200px;
+}
+.organ-sections {
+  margin-top: var(--s-8);
+  display: grid;
+  gap: 14px;
+}
+.organ-section-card {
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--card);
+}
+.organ-section-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.organ-section-card h3 i {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-border);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.organ-section-card p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+@media (min-width: 900px) {
+  .organ-sections {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 769px) {

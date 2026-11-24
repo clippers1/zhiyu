@@ -57,7 +57,12 @@
   ],
   "tip": "TSH、T4、T3 需要结合起来看。检查项目还可能包括甲状腺抗体或影像；这里仅解释常见激素名称，不根据组合结果判断疾病。",
   "organ": "甲状腺 · 脑下垂体 · 激素反馈",
-  "relatedOrgans": [],
+  "relatedOrgans": [
+    {
+      "id": "thyroid",
+      "title": "甲状腺"
+    }
+  ],
   "kind": "indicator",
   "category": "endocrine",
   "featured": false,

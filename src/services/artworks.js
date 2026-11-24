@@ -40,6 +40,13 @@ export const artworks = {
     "className": "landscape",
     "width": 720,
     "height": 360
+  },
+  "thyroid": {
+    "name": "甲状腺",
+    "src": "/media/organ-thyroid.webp",
+    "detail": "甲状腺与气管",
+    "width": 720,
+    "height": 658
   }
 };
 

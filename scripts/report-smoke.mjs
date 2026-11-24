@@ -22,18 +22,14 @@ try {
   await expect(page).toHaveURL(/\/guide$/);
   if (!ssr) await expect(page).toHaveTitle(/单子怎么读 · 知愈/);
   await expect(page.getByRole('heading', { name: '先看卡片上这一行。', exact: true })).toBeVisible();
-  await expect(page.locator('.guide-figure img')).toBeVisible();
-  const guideImg = await page.locator('.guide-figure img').evaluate(node => ({
-    src: node.getAttribute('src'),
-    complete: node.complete,
-    naturalWidth: node.naturalWidth,
-  }));
-  assert.equal(guideImg.src, '/media/fig-report-guide.webp');
-  assert.ok(guideImg.complete && guideImg.naturalWidth > 0, 'guide image must load');
+  const guideImg = page.locator('.guide-figure img');
+  await expect(guideImg).toBeVisible();
+  await expect(guideImg).toHaveAttribute('src', '/media/fig-report-guide.webp');
+  await expect.poll(() => guideImg.evaluate(node => node.complete && node.naturalWidth > 0), { timeout: 10000 }).toBe(true);
   await expect(page.locator('.report-anatomy-col')).toHaveCount(4);
   await expect(page.locator('.guide-legend li')).toHaveCount(4);
-  await expect(page.locator('.article-section')).toHaveCount(5);
-  await expect(page.locator('.guide-rows-item')).toHaveCount(9);
+  await expect(page.locator('.article-section')).toHaveCount(6);
+  await expect(page.locator('.guide-rows-item')).toHaveCount(14);
   await expect(page.locator('.source-list li')).toHaveCount(3);
   await expect(page.locator('#guide-source-panel')).toContainText('How to Understand Your Lab Results');
   await expect(page.locator('.load-state')).toHaveCount(0);

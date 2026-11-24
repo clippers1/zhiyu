@@ -12,6 +12,17 @@ import { RouteLink } from "./RouteLink";
 import { contentTrust } from "../services/content-status";
 import { selectDiscovery } from "../services/discovery";
 
+const QUICK_TOPICS = [
+  { id: "liver-function", label: "ALT · 肝功" },
+  { id: "glucose", label: "HbA1c · 血糖" },
+  { id: "thyroid-function", label: "TSH · 甲功" },
+  { id: "fatty-liver", label: "脂肪肝" },
+  { id: "thyroid-nodule", label: "甲状腺结节" },
+  { id: "lung-nodule", label: "肺结节" },
+  { id: "ecg", label: "心电图" },
+  { id: "tumor-markers", label: "肿瘤标志物" },
+];
+
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
   const organState = useContent("list", [{ kind: "organ", limit: 24 }]);
@@ -26,6 +37,8 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
     totalOrgans,
   } = selectDiscovery(state.data?.items, organState.data?.items, storyState.data?.items);
   const trust = feature ? contentTrust(feature) : null;
+  const availableIds = new Set((state.data?.items || []).map((item) => item.id));
+  const quickLinks = QUICK_TOPICS.filter((item) => availableIds.has(item.id));
 
   return (
     <div className="home-content">
@@ -47,6 +60,24 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <span>先认清报告单的四列</span>
             <ArrowRight size={15} aria-hidden="true" />
           </RouteLink>
+          {quickLinks.length > 0 && (
+            <nav className="home-quick-links" aria-label="高频报告速查">
+              <span className="home-quick-label">常见缩写与高频发现</span>
+              <div className="home-quick-pills">
+                {quickLinks.map((item) => (
+                  <RouteLink
+                    key={item.id}
+                    page="article"
+                    id={item.id}
+                    className="home-quick-pill"
+                    onNavigate={() => onOpen(item.id)}
+                  >
+                    {item.label}
+                  </RouteLink>
+                ))}
+              </div>
+            </nav>
+          )}
 
           {feature && (
             <RouteLink
@@ -118,7 +149,7 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
             <section className="home-index home-stories" aria-labelledby="home-stories-title">
               <SectionHead id="home-stories-title" title="身体与日常" />
               <div className="index-list">
-                {stories.slice(0, 3).map((item) => (
+                {stories.slice(0, 4).map((item) => (
                   <IndexRow key={item.id} item={item} onOpen={onOpen} />
                 ))}
               </div>

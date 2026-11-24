@@ -199,6 +199,7 @@ export async function snapshotArticle(req: PayloadRequest, articleID: number) {
     text: article.description, connection: article.organLabel || '',
     related: (article.relatedIndicators || []).map((r: any) => r.slug),
     relatedItems: (article.relatedIndicators || []).map((r: any) => ({ id: r.slug, title: r.title })),
+    ...(long.sections ? { sections: long.sections } : {}),
     learning: visualLearning(article.learning, new Set(references.map((reference: any) => reference.id))),
   };
   const summary = {
@@ -258,7 +259,9 @@ export function validateForReview(snapshot: Awaited<ReturnType<typeof snapshotAr
     splitKeys(article.tipSourceKeys), splitKeys(article.chainSourceKeys),
   );
   if (article.kind === 'story') groups.push(splitKeys(article.tipSourceKeys));
-  if (article.sections?.length || article.faq?.length) {
+  if (article.kind === 'organ' && article.sections?.length) {
+    groups.push(...(article.sections || []).flatMap((section: any) => section.paragraphs.map((paragraph: any) => splitKeys(paragraph.sourceKeys))));
+  } else if (article.sections?.length || article.faq?.length) {
     if (!article.sections?.length || !article.faq?.length) fail('图文长文需要同时提供分节正文和常见问题。');
     groups.push(...(article.sections || []).flatMap((section: any) => section.paragraphs.map((paragraph: any) => splitKeys(paragraph.sourceKeys))));
     groups.push(...(article.faq || []).map((item: any) => splitKeys(item.sourceKeys)));

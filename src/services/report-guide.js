@@ -118,6 +118,19 @@ export const GUIDE_SECTIONS = [
       },
     ],
   },
+  {
+    title: "整本多页报告，先看总览再看单项",
+    paragraphs: [
+      {
+        text: "拿到厚厚一本综合体检报告时，可以先看前面的汇总结论与建议栏，分清哪些提示需要尽快去门诊核查，哪些属于定期随访观察，再回头翻具体检验页和影像描述，避免一页页焦虑。",
+        sourceIds: ["lab-results", "blood-tests"],
+      },
+      {
+        text: "去门诊找医生解读之前，建议带上整份完整报告和往年旧单方便对照变化趋势，并顺手记下近期的不适症状、抽血前的作息饮食情况，以及正在服用的药物或保健品，帮助医生结合完整背景给出判断。",
+        sourceIds: ["prepare", "lab-results"],
+      },
+    ],
+  },
 ];
 
 export const GUIDE_FAQ = [
@@ -145,6 +158,11 @@ export const GUIDE_FAQ = [
     question: "结果在区间内，还需要给医生看吗？",
     answer: "区间内不等于一定没有问题。有些人有健康问题，结果仍可能落在参考区间内；如果存在症状，或者医生原本就在监测某个情况，仍应按安排复诊。是否需要额外检查，由了解你情况的医生决定。",
     sourceIds: ["lab-results"],
+  },
+  {
+    question: "多页体检报告去门诊复核前，需要准备什么？",
+    answer: "尽量把整本报告、历年旧报告和影像胶片或电子片一起带上，而不是只拍某一行的局部照片；同时记下近期身体不适以及正在使用的药物与补充剂，方便医生整体评估。",
+    sourceIds: ["prepare", "lab-results"],
   },
 ];
 
@@ -189,6 +207,26 @@ export const REPORT_ROWS = {
   urinalysis: {
     title: "尿常规",
     rows: ["尿蛋白", "尿糖", "尿潜血", "尿沉渣镜检"],
+  },
+  "fatty-liver": {
+    title: "脂肪肝",
+    rows: ["腹部超声", "肝实质回声增强", "非酒精性脂肪肝（NAFLD）", "代谢相关脂肪性肝病（MASLD）"],
+  },
+  "thyroid-nodule": {
+    title: "甲状腺结节",
+    rows: ["甲状腺超声（TI-RADS）", "低回声结节", "甲状腺囊肿", "细针穿刺（FNA）"],
+  },
+  "lung-nodule": {
+    title: "肺结节",
+    rows: ["磨玻璃结节（GGO / GGN）", "实性结节", "微小结节", "低剂量CT（LDCT）"],
+  },
+  ecg: {
+    title: "心电图",
+    rows: ["窦性心律", "期前收缩", "ST-T改变", "动态心电图（Holter）"],
+  },
+  "tumor-markers": {
+    title: "肿瘤标志物",
+    rows: ["癌胚抗原（CEA）", "甲胎蛋白（AFP）", "肿瘤指标（CA125 / CA199 / PSA）"],
   },
 };
 

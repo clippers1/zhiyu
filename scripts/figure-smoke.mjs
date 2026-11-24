@@ -31,7 +31,9 @@ try {
 
   const figureArticles = [
     'glucose', 'cbc', 'liver-function', 'kidney-function', 'lipids', 'pressure',
-    'thyroid-function', 'uric-acid', 'urinalysis', 'stairs-heart', 'lab-range',
+    'thyroid-function', 'uric-acid', 'urinalysis',
+    'fatty-liver', 'thyroid-nodule', 'lung-nodule', 'ecg', 'tumor-markers',
+    'stairs-heart', 'lab-range', 'fasting-test', 'pre-test-factors',
   ];
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 900 });

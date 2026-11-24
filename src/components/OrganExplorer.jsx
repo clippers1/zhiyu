@@ -86,6 +86,24 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
           <OrganArtwork id={id} />
         </div>}
       </section>
+      {selected?.sections?.length > 0 && (
+        <section className="organ-sections" aria-label="器官功能与常见检查">
+          {selected.sections.map((section, index) => (
+            <div className="organ-section-card" key={section.title}>
+              <h3>
+                <i>0{index + 1}</i>
+                {section.title}
+              </h3>
+              {section.paragraphs.map((paragraph, pIdx) => (
+                <p key={pIdx}>
+                  {paragraph.text}
+                  <Citation ids={paragraph.sourceIds} references={selected.references} prefix="organ-source" />
+                </p>
+              ))}
+            </div>
+          ))}
+        </section>
+      )}
       {selected && <VisualLearning content={selected} />}
       {selected && (
         <SourceReferences content={selected} prefix="organ-source" />

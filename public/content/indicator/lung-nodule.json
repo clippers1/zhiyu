@@ -1,0 +1,265 @@
+{
+  "id": "lung-nodule",
+  "catalogOrder": 12,
+  "title": "肺结节",
+  "english": "PULMONARY NODULE",
+  "subtitle": "CT 报告写着「肺结节」，磨玻璃和实性有什么区别？",
+  "question": "胸部 CT 查出肺结节，报告里的词在说什么？",
+  "questionAnswer": "肺结节是胸部影像上看到的一个圆形或类圆形小阴影，常见原因包括既往感染留下的疤痕、良性肉芽肿或炎症，也有少数需要排除肿瘤；医生重点看它的密度、形态以及随访期间是否发生变化。",
+  "icon": "layers",
+  "color": "blue",
+  "tags": [
+    "肺结节",
+    "胸部 CT",
+    "磨玻璃 / 实性"
+  ],
+  "searchAliases": [
+    "肺部结节",
+    "孤立性肺结节",
+    "微小结节",
+    "磨玻璃结节",
+    "纯磨玻璃",
+    "混合磨玻璃",
+    "实性结节",
+    "GGO",
+    "GGN",
+    "低剂量CT",
+    "LDCT",
+    "pulmonary nodule"
+  ],
+  "number": "12",
+  "format": "article",
+  "featured": false,
+  "desc": "肺结节是胸部 CT 或 X 线报告中的影像学描述，指肺组织内出现的一个局限性小圆点状阴影。它不是具体病名，成因涵盖良性疤痕、炎症与少数肿瘤性病变。",
+  "sections": [
+    {
+      "title": "肺结节不是病名，而是 CT 看到的「小圆点」",
+      "short": "影像上的小圆点",
+      "paragraphs": [
+        {
+          "text": "肺组织正常情况下充满空气，在胸部 CT 图像上呈现较深的背景色。如果在肺里看到一个边界相对清楚的小圆形或椭圆形浅色斑点，影像科医生就会在报告中记录为「肺结节」。",
+          "sourceIds": ["spn-ency", "ctscans"]
+        },
+        {
+          "text": "近年来体检检出肺结节的人明显变多，很大一部分原因是低剂量薄层胸部 CT 变得普及——过去普通胸片根本看不清的几毫米微小斑点，如今在高清断层扫描下都能被精准拍到。",
+          "sourceIds": ["lung-tests", "lung-screening"]
+        },
+        {
+          "text": "发现肺结节并不等于得了肺癌。事实上，许多偶然查出的小结节来自以前得过的一次肺部感染、陈旧性瘢痕、肺内小淋巴结或良性增生，它们常常长期稳定、对健康没有妨碍。",
+          "sourceIds": ["spn-ency", "lung-screening"]
+        }
+      ]
+    },
+    {
+      "title": "实性、磨玻璃、部分实性：在描述「透不透光」",
+      "short": "密度词在说什么",
+      "paragraphs": [
+        {
+          "text": "阅读肺结节 CT 报告时，最让人困惑的词往往是「实性」「磨玻璃（GGO/GGN）」和「部分实性（混合磨玻璃）」。它们其实都在形容结节在 CT 图像上的密度和遮挡程度。",
+          "sourceIds": ["ctscans", "lung-tests"]
+        },
+        {
+          "text": "实性结节密度较高，会完全遮住背后的肺血管和细支气管纹理；纯磨玻璃结节像一层薄薄的半透明雾纱，透过这层云雾影依然能看见原本的血管走形；部分实性结节则是外圈像磨玻璃、中心夹杂着致密的实性成分。",
+          "sourceIds": ["ctscans", "spn-ency"]
+        },
+        {
+          "text": "此外，报告还会描述边缘是否光滑、有没有钙化、有没有分叶或毛刺以及具体位置。光滑且带有特定钙化模式的结节往往更倾向陈旧良性改变，但任何单一特征都不能脱离全局孤立判断。",
+          "sourceIds": ["spn-ency"]
+        }
+      ]
+    },
+    {
+      "title": "为什么医生常建议「过几个月再复查 CT」",
+      "short": "为什么要定期随访",
+      "paragraphs": [
+        {
+          "text": "拿到肺结节报告后，不少人听到医生说「先不用处理，过几个月复查 CT」会既焦虑又疑惑：为什么不立刻切掉或马上下结论？原因在于，静态拍一张 CT 就像看一张单帧照片，很多微小结节肉眼无法一次性定性。",
+          "sourceIds": ["spn-ency", "lung-screening"]
+        },
+        {
+          "text": "定期复查 CT（动态随访）能提供最关键的「时间维度」：如果结节是一次轻微炎症引起的，复查时可能会缩小甚至完全吸收消失；如果是陈旧良性疤痕，连续观察往往纹丝不动；只有持续存在、逐渐增大或实性成分增多的结节，才需要医生进一步干预或取样。",
+          "sourceIds": ["spn-ency", "lung-tests"]
+        },
+        {
+          "text": "同时，不必要的过早穿刺或手术本身带有创伤和风险，而过度频繁照 CT 也会增加无谓的辐射暴露。按医生评估的节奏随访，本质上是在安全与精准之间寻找平衡。",
+          "sourceIds": ["ctscans", "lung-screening"]
+        }
+      ]
+    },
+    {
+      "title": "除 CT 图像外，医生还会看哪些背景信息",
+      "short": "还要看哪些背景",
+      "paragraphs": [
+        {
+          "text": "同样大小和外观的肺结节，放在不同人的背景里，医生给出的随访策略可能完全不同。年龄、吸烟史（包括既往长期吸烟或二手烟暴露）、职业粉尘接触史、既往肿瘤病史和家族史，都会纳入整体风险评估。",
+          "sourceIds": ["spn-ency", "lung-screening"]
+        },
+        {
+          "text": "如果身边正好留着一年前或两年前的旧胸部 CT 胶片或电子影像，务必一起带给医生。能与更早时期的原图直接逐层对比，往往能立刻省去很多猜测和等待。",
+          "sourceIds": ["spn-ency", "ctscans"]
+        },
+        {
+          "text": "对于少数体格较大或形态高度可疑的结节，医生可能会结合增强 CT、PET-CT、支气管镜或活检等进一步检查来明确性质，而不会单凭体检报告的一句话做决定。",
+          "sourceIds": ["spn-ency", "lung-tests"]
+        }
+      ]
+    },
+    {
+      "title": "拿到肺结节报告，实用应对顺序",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先保留原始电子影像（DICOM 图像或云胶片二维码），不要只留一张纸质文字结论。不同医院医生亲自翻看薄层图像，比单读几行打印描述能获得多得多的细节。",
+          "sourceIds": ["ctscans", "lung-tests"]
+        },
+        {
+          "text": "复查时尽量选择具备同等薄层扫描条件的医院，以便前后精确对比同一位置结节的变化。不要因为恐惧而擅自缩短到几周就反复拍 CT，也不要因为没有咳嗽胸痛就彻底忘记医生交代的复查日期。",
+          "sourceIds": ["spn-ency", "lung-screening"]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "没有任何咳嗽、胸痛，为什么肺里也会长结节？",
+      "answer": "绝大多数体积较小的肺结节不会刺激气道或胸膜，因此完全没有症状。它们通常是体检做胸部 CT 时偶然发现的，没有症状本身既不能证明它是良性，也不能证明它有危险。",
+      "sourceIds": ["spn-ency"]
+    },
+    {
+      "question": "磨玻璃结节一定比实性结节更不好吗？",
+      "answer": "不能一概而论。磨玻璃影既可能来自一过性的肺部炎症或局部出血（复查可能消散），也可能对应某些生长缓慢的局部病变；医生会结合结节大小、是否含实性成分以及复查后的动态变化综合评估。",
+      "sourceIds": ["spn-ency", "lung-tests"]
+    },
+    {
+      "question": "体检报告上的「钙化灶」和「肺结节」是一回事吗？",
+      "answer": "钙化灶通常是肺部既往炎症或感染愈合后局部钙盐沉积留下的陈旧印记，在 CT 上显得非常致密明亮；它有时会被归类为钙化性结节，多数属于稳定的良性旧迹，具体仍以医生读片为准。",
+      "sourceIds": ["spn-ency"]
+    },
+    {
+      "question": "吃消炎药或保健品能把肺结节「消掉」吗？",
+      "answer": "不要自行买抗生素或保健品尝试消结节。只有医生高度怀疑属于急性细菌性炎症时才可能短期抗感染后复查；对陈旧疤痕或非感染性结节，盲目吃消炎药不仅无效，还可能带来药物副作用。",
+      "sourceIds": ["spn-ency", "lung-tests"]
+    },
+    {
+      "question": "低剂量胸部 CT 复查，辐射量会不会很大？",
+      "answer": "低剂量胸部 CT 的辐射剂量显著低于常规诊断性胸部 CT，专门设计用于在保证肺部结节清晰度的同时控制辐射暴露；只要按医生建议的合理间隔复查，避免无指征频繁扫描，通常是权衡获益与风险后的常规选择。",
+      "sourceIds": ["ctscans", "lung-screening"]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "结节密度（实性 / 磨玻璃 / 部分实性）",
+      "text": "反映结节在 CT 上对背后肺血管和气道纹理的遮挡程度，是分类随访的重要依据。",
+      "sourceIds": ["ctscans", "spn-ency"]
+    },
+    {
+      "name": "尺寸与边缘特征（光滑 / 钙化 / 毛刺）",
+      "text": "记录结节毫米级直径与外形轮廓，需多项特征合并由专科医生读片评估。",
+      "sourceIds": ["spn-ency"]
+    },
+    {
+      "name": "动态随访对比（新旧薄层 CT）",
+      "text": "通过不同时间点的同一薄层影像对比，观察结节是吸收消失、长期稳定还是持续增长。",
+      "sourceIds": ["spn-ency", "lung-screening"]
+    }
+  ],
+  "chain": [
+    "高清薄层胸部 CT 发现局限小阴影",
+    "评估密度、大小、边缘与吸烟等个人背景",
+    "对照既往旧片或按医嘱间隔复查",
+    "依据动态变化决定继续观察或进一步检查"
+  ],
+  "chainSourceIds": ["spn-ency", "lung-screening"],
+  "tip": "肺结节是影像描述而非癌症诊断，很多偶然发现的小结节为良性陈旧灶或一过性炎症；复查时请带齐电子薄层影像，按医生建议的周期对比变化。",
+  "figures": [
+    {
+      "key": "ct-followup",
+      "src": "/media/fig-lung-nodule.webp",
+      "width": 960,
+      "height": 640,
+      "alt": "3D概念示意图：半透明磨砂青绿色肺叶与细微支气管旁有一颗微小圆点，外围环绕两道轻盈的透明扫描圆环象征定期胸部CT随访观察。",
+      "caption": "静态一张 CT 往往难以一次性定性微小结节，按医嘱前后对比「变不变」是关键思路。",
+      "simplification": "图为概念示意，未按真实肺叶与结节毫米比例绘制；不代表任何结节类型、良恶性判断或复查时间标准。",
+      "sourceIds": ["spn-ency", "ctscans", "lung-screening"],
+      "legend": [
+        { "title": "影像发现的局限阴影", "text": "高清胸部 CT 容易检出几毫米的微小斑点，成因多为陈旧疤痕、炎症或良性增生。" },
+        { "title": "看密度与边缘特征", "text": "报告通过实性、磨玻璃等描述透光程度，结合边缘与钙化特征辅助医生分类。" },
+        { "title": "时间维度决定下一步", "text": "保留薄层电子原片并按医生节奏对比复查，观察结节是消散、稳定还是增长。" }
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "bb177a3d6a1efb39ee36d46f2f714e49d8fff4685dbdc64ff033210c037456b9"
+      }
+    }
+  ],
+  "organ": "肺 · 呼吸系统",
+  "relatedOrgans": [
+    {
+      "id": "lung",
+      "title": "肺"
+    }
+  ],
+  "kind": "indicator",
+  "category": "respiration",
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在体检胸部 CT 报告中看到「肺结节」「磨玻璃影」或「实性结节」、希望理解术语含义与随访逻辑的一般成年读者。",
+  "limitations": "不提供肺结节良恶性概率计算、毫米随访周期阈值、抗感染用药或手术切除建议。",
+  "references": [
+    {
+      "id": "spn-ency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Solitary pulmonary nodule",
+      "url": "https://medlineplus.gov/ency/article/000071.htm",
+      "scope": "孤立性肺结节的定义、常见良性病因、影响评估的因素及随访与进一步检查方式",
+      "locator": "Causes; Exams and Tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ctscans",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "CT Scans",
+      "url": "https://medlineplus.gov/ctscans.html",
+      "scope": "CT 断层扫描的原理、清晰度优势与辐射控制说明",
+      "locator": "Summary",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lung-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Tests for Lung Disease",
+      "url": "https://www.nhlbi.nih.gov/health/lung-tests",
+      "scope": "胸部影像学检查与其他肺部诊断工具的分工",
+      "locator": "Imaging tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "lung-screening",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Lung Cancer Screening",
+      "url": "https://www.cancer.gov/types/lung/patient/lung-screening-pdq",
+      "scope": "低剂量胸部 CT 的筛查特点、假阳性常见性与随访权衡",
+      "locator": "Screening Tests; Risks of Lung Cancer Screening",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["spn-ency", "ctscans"],
+  "tipSourceIds": ["spn-ency", "lung-screening"]
+}

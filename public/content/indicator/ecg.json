@@ -1,0 +1,272 @@
+{
+  "id": "ecg",
+  "catalogOrder": 13,
+  "title": "心电图",
+  "english": "ELECTROCARDIOGRAM (ECG)",
+  "subtitle": "「窦性心律」「窦性心律不齐」「早搏」都在说什么？",
+  "question": "心电图写着「窦性心律不齐」或「早搏」，是什么意思？",
+  "questionAnswer": "心电图记录的是心脏跳动前发出的电信号轨迹；「窦性心律」其实代表心跳由正常的起搏点发起，很多体检报告上的轻度节律描述或偶发早搏在健康人中也可能出现，需结合症状与完整波形判断。",
+  "icon": "heart",
+  "color": "purple",
+  "tags": [
+    "窦性心律",
+    "早搏",
+    "心电图 / ECG"
+  ],
+  "searchAliases": [
+    "心电图",
+    "ECG",
+    "EKG",
+    "窦性心律",
+    "窦性心律不齐",
+    "窦性心动过缓",
+    "窦性心动过速",
+    "早搏",
+    "期前收缩",
+    "室性早搏",
+    "房性早搏",
+    "ST-T改变",
+    "动态心电图",
+    "Holter"
+  ],
+  "number": "13",
+  "format": "article",
+  "featured": false,
+  "desc": "心电图（ECG/EKG）是一项快捷无创的检查，通过体表电极记录心脏每一次搏动产生的电信号，用来观察心率快慢、节律是否整齐以及电传导过程。",
+  "sections": [
+    {
+      "title": "「窦性心律」不是病，恰恰是正常的起点",
+      "short": "窦性心律是正常的",
+      "paragraphs": [
+        {
+          "text": "心脏每次跳动前，都需要先由一小群特化的心肌细胞发出微弱电脉冲，指令心房和心室按顺序收缩。这处天然总开关位于右心房上部，叫「窦房结」。",
+          "sourceIds": ["ecg-ency", "arrhythmias"]
+        },
+        {
+          "text": "因此，报告上写着「窦性心律」，意思就是你的心跳由正常的窦房结主导发起——它不仅不是异常，反而是医生最希望看到的基础节律。很多人误把「窦性」当成某种病名，其实完全是读反了意思。",
+          "sourceIds": ["ecg-ency", "arrhythmias"]
+        },
+        {
+          "text": "至于「窦性心律不齐」，指的也是电信号仍从正常窦房结发出，只是相邻两次心跳之间的间隔略有长短变化。在年轻人和儿童中，它常常只是跟着呼吸自然起伏（吸气时稍快、呼气时稍慢）的生理现象。",
+          "sourceIds": ["arrhythmias", "ecg-ency"]
+        }
+      ]
+    },
+    {
+      "title": "快一点、慢一点，或者「抢拍」的早搏",
+      "short": "快慢与早搏",
+      "paragraphs": [
+        {
+          "text": "「窦性心动过速」或「窦性心动过缓」，说明起搏点正常，只是采集心电图那十几秒里跳得偏快或偏慢。刚爬完楼、紧张、喝了浓茶咖啡可能让心率偏快；长期坚持耐力运动的人，安静时心率则常常偏慢。",
+          "sourceIds": ["arrhythmias", "heart-tests"]
+        },
+        {
+          "text": "「早搏」（医学全称期前收缩）是指窦房结还没到下一次发令时间，心房或心室里的某处提前抢着发了一次电信号，随后往往跟着一小段停顿。很多人对此毫无察觉，也有人会感觉胸口「咯噔」漏跳一拍。",
+          "sourceIds": ["arrhythmias"]
+        },
+        {
+          "text": "偶发早搏在熬夜、压力大、饮酒、摄入咖啡因或疲惫时并不少见；但如果频繁发作、或者伴随头晕、胸闷、眼前发黑，就需要医生进一步评估早搏的来源、频次与心脏本身的结构状况。",
+          "sourceIds": ["arrhythmias", "arrhythmias-diag"]
+        }
+      ]
+    },
+    {
+      "title": "纸上的「ST-T 改变」为什么不能单看一行结论",
+      "short": "ST-T 改变怎么看",
+      "paragraphs": [
+        {
+          "text": "心电图曲线由 P 波、QRS 波群和 T 波等区段组成，分别对应心房激动、心室除极以及心室心肌恢复静息的电活动过程。ST 段和 T 波反映的是心室恢复期的电信号形态。",
+          "sourceIds": ["ecg-ency"]
+        },
+        {
+          "text": "体检心电图机常自带自动打印结论，一旦波形出现轻微平坦或偏移，机器就会打出「非特异性 ST-T 改变」等字样。这类字样既可能与心肌供血变化有关，也可能受电解质波动、心率偏快、体型导联位置甚至情绪紧张影响。",
+          "sourceIds": ["ecg-ency", "heart-tests"]
+        },
+        {
+          "text": "因此，机器自动印出的参考结论绝不能等同于最终诊断。医生看心电图时一定会亲自核对原始波形，并重点询问你平时有没有活动后胸痛、胸闷或气短，必要时再与既往心电图对比。",
+          "sourceIds": ["ecg-ency", "arrhythmias-diag"]
+        }
+      ]
+    },
+    {
+      "title": "常规 10 秒心电图和 24 小时动态心电图的分工",
+      "short": "静态与动态心电图",
+      "paragraphs": [
+        {
+          "text": "体检时平躺几十秒做完的常规 12 导联心电图，记录的只是当下大约十秒钟的心脏电活动，像一张「瞬时快照」。如果某种心律波动刚好没在这十秒内出现，常规心电图就可能拍不到。",
+          "sourceIds": ["ecg-ency", "arrhythmias-diag"]
+        },
+        {
+          "text": "当需要了解一天当中早搏到底多不多、或者平时一阵阵心慌时到底发生了什么，医生常会安排 24 小时或更长时间的便携式动态心电图（Holter），让你带着设备照常工作睡眠，把整天的电信号连续录下来。",
+          "sourceIds": ["arrhythmias-diag", "heart-tests"]
+        },
+        {
+          "text": "如果还需要观察心脏瓣膜、心腔大小和泵血收缩功能，医生则会配合心脏超声（超声心动图）一起看——心电图看「电路」，心脏超声看「结构与水泵」，两者互不替代。",
+          "sourceIds": ["heart-tests"]
+        }
+      ]
+    },
+    {
+      "title": "拿到心电图报告，先确认这几件事",
+      "short": "先确认什么",
+      "paragraphs": [
+        {
+          "text": "先回忆做心电图当下的状态：是不是刚快走赶到、非常紧张、没睡好或刚喝完咖啡？同时留好完整的波形图纸，而不要只拍打印在角落的几行机器文字结论。",
+          "sourceIds": ["ecg-ency", "arrhythmias-diag"]
+        },
+        {
+          "text": "如果平时有反复胸痛、胸闷、呼吸困难、明显心慌或晕厥史，哪怕体检常规心电图看起来没写大问题，也应尽快线下就诊；反之，没有任何症状、仅见单纯窦性心律不齐或轻微非特异性提示，可在医生指导下结合既往图纸理性评估。",
+          "sourceIds": ["arrhythmias", "arrhythmias-diag"]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "报告写了「窦性心律」，是不是说明心脏有炎症或病变？",
+      "answer": "不是。「窦性」指心跳由心脏正常的起搏点窦房结发出，属于健康人的标准起搏来源；只有后面跟着具体节律或传导异常描述时，才需要进一步看是生理波动还是需要关注的异常。",
+      "sourceIds": ["ecg-ency", "arrhythmias"]
+    },
+    {
+      "question": "做心电图时特别紧张，心跳很快，会影响结果吗？",
+      "answer": "会的。紧张会促使交感神经兴奋、心率加快，可能让报告出现「窦性心动过速」或轻微波形形态变化；做检查前安静平躺片刻、平稳呼吸有助于获得更贴近静息状态的记录。",
+      "sourceIds": ["ecg-ency", "heart-tests"]
+    },
+    {
+      "question": "体检心电图显示正常，是不是就能彻底排除心脏病？",
+      "answer": "不能这样推断。常规心电图只捕捉安静平躺十几秒内的电信号，阵发性心律失常或仅在活动负荷下出现的供血不足，在静息快照里可能完全看不出来，有症状仍需由医生进一步评估。",
+      "sourceIds": ["arrhythmias-diag", "heart-tests"]
+    },
+    {
+      "question": "智能手表测出的心电图，能直接替代医院的 12 导联心电图吗？",
+      "answer": "不能替代。消费级穿戴设备通常只记录单导联信号，适合在感到心慌时顺手捕捉线索供医生参考；医院的 12 导联心电图从多个方向立体观察心脏电活动，信息完整度要高得多。",
+      "sourceIds": ["ecg-ency", "arrhythmias-diag"]
+    },
+    {
+      "question": "心电图检查对身体有辐射或电流伤害吗？",
+      "answer": "没有辐射，也不会向身体通电。心电图贴片只是被动接收心脏自身跳动时产生的微弱生物电信号并放大画在纸上，是非常安全的常规无创检查。",
+      "sourceIds": ["ecg-ency"]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "窦性心律与心率（窦速 / 窦缓 / 不齐）",
+      "text": "反映心跳是否由正常的窦房结起搏，以及安静采样瞬间的快慢和规整度。",
+      "sourceIds": ["ecg-ency", "arrhythmias"]
+    },
+    {
+      "name": "期前收缩（房性 / 室性早搏）",
+      "text": "记录心肌某处提前发出的电信号，需要结合症状、频次和必要时的动态心电图评估。",
+      "sourceIds": ["arrhythmias", "arrhythmias-diag"]
+    },
+    {
+      "name": "波形区段（P-QRS-T 与 ST-T）",
+      "text": "展示心房心室电传导与恢复过程，机器自动提示必须由医生结合原图和症状复核。",
+      "sourceIds": ["ecg-ency", "heart-tests"]
+    },
+    {
+      "name": "动态心电图（Holter）",
+      "text": "连续 24 小时或更久记录日常活动与睡眠时的心电节律，弥补静态十秒快照的盲区。",
+      "sourceIds": ["arrhythmias-diag", "heart-tests"]
+    }
+  ],
+  "chain": [
+    "窦房结发出规则电信号",
+    "电信号沿心房传导至心室驱动收缩",
+    "体表电极记录 P-QRS-T 波形曲线",
+    "医生结合症状、原图与必要时的动态监测综合判断"
+  ],
+  "chainSourceIds": ["ecg-ency", "arrhythmias"],
+  "tip": "「窦性心律」是正常的起搏来源，而非病名；心电图机自动打印的提示不能替代医生读图，请保留完整波形图纸并结合有无胸痛、心慌、晕厥等症状一起评估。",
+  "figures": [
+    {
+      "key": "rhythm",
+      "src": "/media/fig-ecg-rhythm.webp",
+      "width": 960,
+      "height": 480,
+      "alt": "3D概念示意图：左侧青绿色起搏光球向右延伸出平滑规整的心电波形丝带，中段出现一个暖珊瑚色提前搏动波峰，象征窦性节律与偶发早搏。",
+      "caption": "心电图把心脏的「电路节律」画成连续波形：规整起搏、快慢起伏和提前抢拍都能留下轨迹。",
+      "simplification": "图为节律概念示意，不按真实心电图电压毫伏或时间毫秒网格绘制，也不用于对照任何个人波形诊断。",
+      "sourceIds": ["ecg-ency", "arrhythmias"],
+      "legend": [
+        { "title": "正常起搏点（窦房结）", "text": "电信号从右心房窦房结规则发出，形成报告上常见的「窦性心律」。" },
+        { "title": "规整波形与节律波动", "text": "呼吸、情绪与运动会让心跳间距或快慢自然变化，静态十秒记录只是一个快照。" },
+        { "title": "提前抢拍（早搏）", "text": "某次电信号提前到来会打破节律，单次偶发与频繁伴症状的意义大不相同，需医生结合原图评估。" }
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "0d9360a75c8d6fdcfef6752d3364bc712b3fc059f3098900a52f6769ee8a277c"
+      }
+    }
+  ],
+  "organ": "心脏 · 电传导系统",
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    }
+  ],
+  "kind": "indicator",
+  "category": "circulation",
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在体检心电图报告中看到「窦性心律」「窦性心律不齐」「早搏」或「ST-T改变」、想理解术语含义的一般成年读者。",
+  "limitations": "不提供心律失常诊断、心肌缺血判断、心率安全阈值或抗心律失常用药建议；如正在出现胸痛、气短或晕厥请立即就医。",
+  "references": [
+    {
+      "id": "ecg-ency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Electrocardiogram",
+      "url": "https://medlineplus.gov/ency/article/003868.htm",
+      "scope": "心电图原理、无创安全性、记录的心电波形及影响结果的常见因素",
+      "locator": "How the Test is Performed; Why the Test is Performed; What Abnormal Results Mean",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "arrhythmias",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "What Is an Arrhythmia?",
+      "url": "https://www.nhlbi.nih.gov/health/arrhythmias",
+      "scope": "心脏电信号起搏与心律失常（过快、过慢、不规整与早搏）的基础概念",
+      "locator": "What is an arrhythmia?; Types",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "arrhythmias-diag",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Arrhythmias - Diagnosis",
+      "url": "https://www.nhlbi.nih.gov/health/arrhythmias/diagnosis",
+      "scope": "静态心电图、动态心电图（Holter）与病史症状结合评估的逻辑",
+      "locator": "Tests and procedures",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "heart-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Heart Tests",
+      "url": "https://www.nhlbi.nih.gov/health/heart-tests",
+      "scope": "心电图与心脏超声等不同心脏检查的分工关系",
+      "locator": "Common heart tests",
+      "accessedAt": "2026-11-24",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": ["ecg-ency", "arrhythmias"],
+  "tipSourceIds": ["ecg-ency", "arrhythmias-diag"]
+}

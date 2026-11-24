@@ -46,7 +46,7 @@ try {
   });
   await expect(page.locator(".home-feature")).toHaveCount(1);
   await expect(page.locator(".home-index:not(.home-stories) .index-row")).toHaveCount(8);
-  await expect(page.locator(".home-stories .index-row")).toHaveCount(2);
+  await expect(page.locator(".home-stories .index-row")).toHaveCount(4);
   await expect(page.locator(".home-reading-path a")).toHaveCount(1);
   await expect(page.locator(".home-reading-path a")).toHaveAttribute("href", "/topics");
   //「单子怎么读」 is a static entry above the lead; it does not depend on the

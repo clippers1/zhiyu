@@ -154,6 +154,71 @@
       "background": "transparent",
       "maxWidth": 720,
       "prompt": "Minimalist 3D anatomical sculpture of a human pancreas, horizontal elongated organic form crafted in soft warm-amber translucent frosted glass with subtle glowing teal islet accents inside, clean sleek silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "organ-thyroid",
+      "kind": "organ",
+      "target": "public/media/organ-thyroid.webp",
+      "size": "1024x1024",
+      "background": "transparent",
+      "maxWidth": 720,
+      "prompt": "Minimalist 3D anatomical sculpture of a human thyroid gland wrapping gently around a short stylized pearly-white trachea segment, butterfly-shaped lobes crafted in smooth translucent warm-coral ceramic and frosted medical-teal glass highlights, clean symmetrical silhouette, floating centered on transparent background."
+    },
+    {
+      "id": "fig-fatty-liver",
+      "kind": "figure",
+      "target": "public/media/fig-fatty-liver.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of hepatic steatosis (fatty liver): a sleek translucent frosted-glass stylized liver silhouette showing a calm contrast between clean hexagonal mint-teal liver cells on one side and gentle clusters of smooth translucent golden-amber lipid droplets accumulating inside cells on the other side, illuminated by a soft curved ultrasound light arc from above. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-thyroid-nodule",
+      "kind": "figure",
+      "target": "public/media/fig-thyroid-nodule.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of thyroid nodule ultrasound assessment: a graceful translucent frosted-glass butterfly-shaped thyroid sculpture containing one small smooth pearly-coral round nodule inside one lobe, gently scanned by delicate concentric frosted-teal ultrasound wave arcs from a sleek minimalist white probe resting beside it. Calm centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-lung-nodule",
+      "kind": "figure",
+      "target": "public/media/fig-lung-nodule.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of a pulmonary nodule seen on chest CT follow-up: a sleek translucent frosted mint-teal glass lung lobe with fine delicate airway branches and one tiny softly glowing coral-tinted micro-sphere resting calmly inside, surrounded by two thin floating concentric frosted-glass CT scan rings representing quiet periodic observation. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-ecg-rhythm",
+      "kind": "figure",
+      "target": "public/media/fig-ecg-rhythm.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of cardiac electrical rhythm: a sleek floating translucent teal-glass three-dimensional heartbeat waveform ribbon flowing gracefully from left to right above a clean matte white plane, beginning from a glowing soft-teal pacemaker orb on the left with regular smooth peaks and one subtly elevated warm-coral early beat highlight, representing sinus rhythm and occasional premature beat. Zero grid numbers, zero text, clean studio lighting on #F6F8FA surface."
+    },
+    {
+      "id": "fig-tumor-markers",
+      "kind": "figure",
+      "target": "public/media/fig-tumor-markers.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of blood tumor markers requiring holistic context: tiny softly glowing amber and teal signal spheres floating inside a crystal-clear cylindrical sample tube in the center, observed together through two flanking translucent frosted-glass lenses and geometric prism layers representing multi-angle verification rather than a single-point conclusion. Clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-fasting-test",
+      "kind": "figure",
+      "target": "public/media/fig-fasting-test.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial still life for fasting blood test preparation: an elegant frosted-glass hourglass with soft glowing teal sand particles on the left, a pure crystal-clear glass of clean plain water in the center, and a sleek sealed blank medical sample vial with a matte teal cap on the right, arranged neatly on a serene ultra-light cool-gray studio surface (#F6F8FA). Zero text, zero labels."
+    },
+    {
+      "id": "fig-pre-test-factors",
+      "kind": "figure",
+      "target": "public/media/fig-pre-test-factors.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration of everyday factors that temporarily shift lab results: a serene translucent blank sample vial in the center gently orbited by four minimalist frosted-glass and matte-ceramic symbolic icons—a soft pale crescent moon (late night), a sleek teal motion wave ring (vigorous exercise), a tiny warm coral thermometer-like droplet (mild cold), and a clean miniature glass silhouette (evening meal/drink). Balanced airy composition on #F6F8FA surface."
     }
   ]
 }
