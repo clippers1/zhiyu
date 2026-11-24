@@ -93,7 +93,7 @@ curl -s 127.0.0.1:3120/healthz
 
 ## 对外提供服务（可选）
 
-内部调用继续用 `http://127.0.0.1:3120`。如果要让外部 agent 通过一个域名调用：
+内部调用继续用 `http://127.0.0.1:3120`；外部 agent 用 `https://imggpt.anron.fun`（vhost 见 `deploy/nginx-imggpt.conf.example`）。如果要让外部 agent 通过另一个域名调用：
 
 1. 设置 `IMAGE_PUBLIC_ORIGIN=https://img.example.com`，响应里的图片 URL 会变成绝对地址。
 2. 只有还需要浏览器直接调用时才设置 `IMAGE_ALLOW_BROWSER=true`；此时只对该 origin 发 CORS 头，`OPTIONS` 预检返回 204，其他来源拿不到 `Access-Control-Allow-Origin`。
