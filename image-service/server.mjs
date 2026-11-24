@@ -214,14 +214,28 @@ export function createImageService(options = {}) {
   };
   // OpenAI-compatible clients expect `created` + `data[].b64_json|url`; our own
   // CLI reads `images`. Returning both keeps one response usable by both.
-  const publicResult = result => ({
-    created: Math.floor(now().getTime() / 1000),
-    model: result.model,
-    images: result.images.map(item => ({ ...item, url: absolute(item.url) })),
-    data: result.images.map(item => ({ url: absolute(item.url), revised_prompt: item.prompt })),
-    usage: result.usage,
-    requested: result.requested,
-  });
+  // `response_format: "b64_json"` is what many OpenAI clients default to; it is
+  // honoured by reading the stored file back, so the caller does not depend on
+  // a second request (or on reaching /files from the same network).
+  const publicResult = async (result, responseFormat) => {
+    const base = {
+      created: Math.floor(now().getTime() / 1000),
+      model: result.model,
+      images: result.images.map(item => ({ ...item, url: absolute(item.url) })),
+      usage: result.usage,
+      requested: result.requested,
+    };
+    if (responseFormat === "b64_json") {
+      return {
+        ...base,
+        data: await Promise.all(result.images.map(async item => ({
+          b64_json: (await readFile(path.join(outputDir, item.file))).toString("base64"),
+          revised_prompt: item.prompt,
+        }))),
+      };
+    }
+    return { ...base, data: result.images.map(item => ({ url: absolute(item.url), revised_prompt: item.prompt })) };
+  };
   async function quotaPreview() {
     const current = await loadUsage();
     const used = current.day === dayKey(now()) ? current.count : 0;
@@ -497,7 +511,8 @@ export function createImageService(options = {}) {
     if (typeof body.prompt !== "string" || !body.prompt.trim() || body.prompt.length > MAX_PROMPT) {
       return json({ error: "invalid_prompt" }, 400);
     }
-    const count = body.count === undefined ? 1 : Number(body.count);
+    const count = body.count === undefined ? Number(body.n ?? 1) : Number(body.count);
+    if (body.response_format !== undefined && !["url", "b64_json"].includes(body.response_format)) return json({ error: "invalid_response_format" }, 400);
     if (!Number.isInteger(count) || count < 1 || count > 4) return json({ error: "invalid_count" }, 400);
     if (body.size !== undefined && !/^\d{3,4}x\d{3,4}$/.test(String(body.size))) return json({ error: "invalid_size" }, 400);
     if (body.quality !== undefined && !["low", "medium", "high", "auto"].includes(body.quality)) return json({ error: "invalid_quality" }, 400);
@@ -527,7 +542,8 @@ export function createImageService(options = {}) {
       const result = await generate({ ...body, count }, reference);
       logger({ event: "generated", images: result.images.length, ms: Date.now() - started,
         bytes: result.images.reduce((sum, item) => sum + item.bytes, 0) });
-      return json(publicResult(result), 200, corsHeaders(request));
+      const responseFormat = body.response_format === "b64_json" ? "b64_json" : "url";
+      return json(await publicResult(result, responseFormat), 200, corsHeaders(request));
     } catch (error) {
       logger({ event: "generation_failed", error: error.message, ms: Date.now() - started });
       return json({ error: error.message, ...(error.detail ? { detail: error.detail } : {}),

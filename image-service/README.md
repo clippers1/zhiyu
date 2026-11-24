@@ -73,7 +73,7 @@ curl -s 127.0.0.1:3120/healthz
 }
 ```
 
-`/v1/images/generations` 接受 OpenAI 的 `n` 字段（等同本服务的 `count`），并忽略本服务不支持的字段。
+`/v1/images/generations` 接受 OpenAI 的 `n`（等同本服务的 `count`）与 `response_format`（`url` 或 `b64_json`），并忽略本服务不支持的字段。
 
 每张图旁边写一个 `<file>.json` sidecar：prompt、model、请求参数、上游回显参数、真实宽高、字节数、sha256、token 用量、创建时间、参考图（如有）。
 

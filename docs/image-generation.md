@@ -59,7 +59,7 @@
 
 内部调用走 `http://127.0.0.1:3120`；外部 agent 走域名时：
 
-- 标准路径是 `POST /v1/images/generations`（与 `/v1/images` 等价），请求体用 OpenAI 的 `prompt / n / size / quality / background`，响应对同时返回 `data[]` 与 `images[]`。
+- 标准路径是 `POST /v1/images/generations`（与 `/v1/images` 等价），请求体用 OpenAI 的 `prompt / n / size / quality / background`，需要 base64 时加 `response_format: "b64_json"`；响应对同时返回 `data[]` 与 `images[]`。
 - 设置 `IMAGE_PUBLIC_ORIGIN=https://<域名>`，图片 URL 才会是可直接打开的绝对地址。
 - 反向代理只放行 `/v1/images`、`/v1/images/generations`、`/files/`、`/healthz`（示例见 `deploy/nginx-imagegen.conf.example`），管理页与 `/api/*` 留在本机。
 - `proxy_read_timeout` 要大于单张图的生成时间（15–60 秒），否则反向代理会先断开。

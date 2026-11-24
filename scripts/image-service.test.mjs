@@ -276,3 +276,31 @@ test("browser CORS is off unless explicitly enabled", async () => {
   assert.equal(preflight.status, 405);
   assert.equal(preflight.headers.get("access-control-allow-origin"), null);
 });
+
+test("accepts OpenAI's n and can answer with b64_json", async () => {
+  // The fake upstream honours n the way a real provider does.
+  const { service } = await setup({
+    fetchImpl: async (_url, init) => {
+      const n = Number(JSON.parse(init.body).n) || 1;
+      return upstreamOk({ data: Array.from({ length: n }, () => ({ b64_json: png().toString("base64") })), size: "1122x1402", usage: { total_tokens: 10 } });
+    },
+  });
+  const response = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` },
+    body: JSON.stringify({ prompt: "n 别名", n: 2, response_format: "b64_json" }),
+  }));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.data.length, 2);
+  assert.ok(body.data.every(item => typeof item.b64_json === "string" && item.b64_json.length > 10));
+  assert.ok(body.data.every(item => item.url === undefined));
+  assert.ok(body.images.every(item => item.url.endsWith(".png")));
+
+  const bad = await service.handle(new Request("http://localhost/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` },
+    body: JSON.stringify({ prompt: "x", response_format: "pdf" }),
+  }));
+  assert.equal(bad.status, 400);
+});

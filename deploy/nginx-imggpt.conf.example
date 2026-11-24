@@ -1,0 +1,83 @@
+# The public face of the internal image service: imggpt.anron.fun
+#
+# Install as /etc/nginx/sites-available/imggpt.anron.fun.conf and symlink into
+# sites-enabled. Certificates come from certbot (see the bottom of this file).
+#
+# Only the generation API, its images and the health probe are exposed. The
+# admin page (/) and /api/* stay on 127.0.0.1 and are reached over SSH.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name imggpt.anron.fun;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/letsencrypt;
+        default_type text/plain;
+    }
+
+    location / {
+        return 301 https://imggpt.anron.fun$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name imggpt.anron.fun;
+
+    ssl_certificate /etc/letsencrypt/live/imggpt.anron.fun/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/imggpt.anron.fun/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    server_tokens off;
+    access_log /var/log/nginx/imggpt.access.log;
+    error_log /var/log/nginx/imggpt.error.log;
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy no-referrer always;
+
+    # One image takes 15–60s upstream; the client timeout must exceed it.
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization $http_authorization;
+    proxy_connect_timeout 5s;
+    proxy_read_timeout 330s;
+    proxy_send_timeout 330s;
+    proxy_cache off;
+
+    # A blunter limit than the service's own concurrency gate: this is only a
+    # ceiling against accidental loops, not the real quota.
+    limit_req zone=imggpt_api burst=20 nodelay;
+
+    location = /v1/images {
+        proxy_pass http://127.0.0.1:3120;
+    }
+    location = /v1/images/generations {
+        proxy_pass http://127.0.0.1:3120;
+    }
+    location ^~ /files/ {
+        proxy_pass http://127.0.0.1:3120;
+    }
+    location = /healthz {
+        proxy_pass http://127.0.0.1:3120;
+    }
+
+    # Everything else — admin page, /api/state, /api/images, /usage — is
+    # loopback-only on purpose.
+    location / {
+        return 404;
+    }
+}
+
+# Add to the http{} block (or /etc/nginx/conf.d/limits.conf) — 30 requests per
+# minute per IP for generation calls:
+#
+#   limit_req_zone $binary_remote_addr zone=imggpt_api:10m rate=30r/m;
+#
+# Certificate:
+#   sudo certbot --nginx -d imggpt.anron.fun
