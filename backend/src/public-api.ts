@@ -62,19 +62,24 @@ export async function publicContent(request: Request, channel: 'demo' | 'officia
     ]);
     return json({ ...search, categories, channel });
   }
-  const [result, categories] = await Promise.all([
-    ids?.length === 0 ? Promise.resolve({ docs: [], totalDocs: 0, hasNextPage: false }) : payload.find({
-      collection: 'publications', overrideAccess: true, depth: 0, limit, page: offset / limit + 1,
+  const numericOrder = (summary: any) => /^\d+$/.test(String(summary?.number ?? '')) ? Number(summary.number) : Number.MAX_SAFE_INTEGER;
+  const [allMatching, categories] = await Promise.all([
+    ids?.length === 0 ? Promise.resolve({ docs: [] as any[] }) : payload.find({
+      collection: 'publications', overrideAccess: true, depth: 0, pagination: false,
       sort: 'id', where: { and: filters }, select: { summary: true },
     }),
     // Available categories are based on kind, not on the current query or saved IDs.
     availableCategories(),
   ]);
-  return json({ items: result.docs.map((d: any) => {
+  const ordered = [...allMatching.docs].sort(
+    (left: any, right: any) => numericOrder(left.summary) - numericOrder(right.summary) || (Number(left.id) - Number(right.id)),
+  );
+  const pageDocs = ordered.slice(offset, offset + limit);
+  return json({ items: pageDocs.map((d: any) => {
     const { searchText, ...summary } = d.summary;
     return summary;
-  }), total: result.totalDocs,
-    nextCursor: result.hasNextPage ? String(offset + limit) : null,
+  }), total: ordered.length,
+    nextCursor: offset + limit < ordered.length ? String(offset + limit) : null,
     categories, channel,
   });
 }
