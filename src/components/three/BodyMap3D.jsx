@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import ThreeStage from "./ThreeStage";
 import { makeCeramic, makeGlass, makeGlow, PALETTE, tagPickable } from "./materials";
@@ -274,26 +274,31 @@ function createBodyScene({ THREE, scene, studio }) {
 }
 
 export default function BodyMap3D({
-  activeId: controlledId,
+  activeId: initialId,
   onSelect,
   availableIds = null,
   compact = false,
 }) {
-  const [internalId, setInternalId] = useState(controlledId || "heart");
-  const activeId = controlledId && ORGANS_META.some(o => o.id === controlledId) ? controlledId : internalId;
+  const [selectedId, setSelectedId] = useState(
+    initialId && ORGANS_META.some(o => o.id === initialId) ? initialId : "heart",
+  );
+  useEffect(() => {
+    if (initialId && ORGANS_META.some(o => o.id === initialId)) {
+      setSelectedId(initialId);
+    }
+  }, [initialId]);
   const items = useMemo(
     () => (availableIds ? ORGANS_META.filter(o => availableIds.includes(o.id)) : ORGANS_META),
     [availableIds],
   );
-  const current = items.find(o => o.id === activeId) || items[0] || ORGANS_META[0];
+  const current = items.find(o => o.id === selectedId) || items[0] || ORGANS_META[0];
   const [autoFocus, setAutoFocus] = useState(false);
 
   const buildScene = useCallback((ctx) => createBodyScene(ctx), []);
 
   const choose = (id) => {
-    setInternalId(id);
+    setSelectedId(id);
     setAutoFocus(true);
-    onSelect?.(id);
   };
 
   if (compact) {
