@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Activity,
   ArrowRight,
   BookOpen,
+  Box,
   Droplet,
   Heart,
   HeartPulse,
@@ -11,7 +12,10 @@ import {
   Sprout,
   TrendingUp,
 } from "lucide-react";
+import BodyMap3D from "./three/BodyMap3D";
+
 export default function Tour({ tour, setTour, go }) {
+  const [show3D, setShow3D] = useState(false);
   return (
     <>
       <span className="overline">ONE MINUTE, A LITTLE CLOSER</span>
@@ -24,33 +28,48 @@ export default function Tour({ tour, setTour, go }) {
           ][tour]
         }
       </h2>
-      <div className="tour-art">
-        {tour === 0 ? (
-          <>
-            <HeartPulse />
-            <span className="tour-dash" />
-            <Activity />
-            <span className="tour-dash" />
-            <Sprout />
-          </>
-        ) : tour === 1 ? (
-          <>
-            <Droplet />
-            <span className="tour-dash" />
-            <TrendingUp />
-            <span className="tour-dash" />
-            <Heart />
-          </>
-        ) : (
-          <>
-            <BookOpen />
-            <span className="tour-dash" />
-            <Layers3 />
-            <span className="tour-dash" />
-            <ShieldCheck />
-          </>
-        )}
-      </div>
+      {tour === 0 && show3D ? (
+        <BodyMap3D compact />
+      ) : (
+        <div className="tour-art">
+          {tour === 0 ? (
+            <>
+              <HeartPulse />
+              <span className="tour-dash" />
+              <Activity />
+              <span className="tour-dash" />
+              <Sprout />
+            </>
+          ) : tour === 1 ? (
+            <>
+              <Droplet />
+              <span className="tour-dash" />
+              <TrendingUp />
+              <span className="tour-dash" />
+              <Heart />
+            </>
+          ) : (
+            <>
+              <BookOpen />
+              <span className="tour-dash" />
+              <Layers3 />
+              <span className="tour-dash" />
+              <ShieldCheck />
+            </>
+          )}
+        </div>
+      )}
+      {tour === 0 && (
+        <button
+          type="button"
+          className="body-map-toggle"
+          style={{ marginBottom: 12 }}
+          onClick={() => setShow3D(v => !v)}
+        >
+          <Box size={15} aria-hidden="true" />
+          {show3D ? "切回简洁图标" : "打开 3D 透明人体示意"}
+        </button>
+      )}
       <p>
         {
           [

@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from "lucide-react";
+import { Box, ChevronLeft, ChevronRight, Layers, Pause, Play, RotateCcw } from "lucide-react";
 import { Citation } from "./ContentUI";
+import OrganScene3D, { hasOrgan3D } from "./three/OrganScene3D";
 import "./visual-learning.css";
 
 const diagrams = {
@@ -301,8 +302,17 @@ export default function VisualLearning({ content }) {
   const [step, setStep] = useState(0);
   const [part, setPart] = useState(null);
   const [playing, setPlaying] = useState(false);
+  const [viewMode, setViewMode] = useState("2d");
+  const [threeUnavailable, setThreeUnavailable] = useState(false);
+  const can3D = hasOrgan3D(learning?.type) && !threeUnavailable;
   const active = learning?.steps?.[step];
   const selectedPart = useMemo(() => learning?.parts?.find(item => item.id === part), [learning, part]);
+  useEffect(() => {
+    setStep(0);
+    setPart(null);
+    setPlaying(false);
+    setViewMode("2d");
+  }, [learning?.type]);
   useEffect(() => {
     if (!playing || reduced || !learning?.steps?.length) return;
     const timer = window.setTimeout(() => setStep(current => {
@@ -316,13 +326,41 @@ export default function VisualLearning({ content }) {
   const move = next => { setPlaying(false); setPart(null); setStep(Math.max(0, Math.min(learning.steps.length - 1, next))); };
   return <section className="visual-learning" id="organ-learning" aria-labelledby="organ-learning-title">
     <header><span>互动图解 · 基础生理</span><h2 id="organ-learning-title">{learning.title}</h2><p>{learning.intro}</p></header>
+    {can3D && (
+      <div className="learning-mode-bar">
+        <div className="view-segmented" role="group" aria-label="切换图解维度">
+          <button type="button" className={viewMode === "2d" ? "active" : ""} aria-pressed={viewMode === "2d"} onClick={() => setViewMode("2d")}>
+            <Layers size={15} aria-hidden="true" /> 2D 原理图
+          </button>
+          <button type="button" className={viewMode === "3d" ? "active" : ""} aria-pressed={viewMode === "3d"} onClick={() => setViewMode("3d")}>
+            <Box size={15} aria-hidden="true" /> 3D 互动沙盘
+          </button>
+        </div>
+      </div>
+    )}
     <div className="learning-layout">
       <div>
-        <LearningDiagram learning={learning} activePart={part} activeStep={step} onPart={id => { setPlaying(false); setPart(id); }} />
+        {viewMode === "3d" && can3D ? (
+          <OrganScene3D
+            learning={learning}
+            activePart={part}
+            activeStep={step}
+            onPart={id => { setPlaying(false); setPart(id); }}
+            onFallback={() => { setThreeUnavailable(true); setViewMode("2d"); }}
+          />
+        ) : (
+          <LearningDiagram learning={learning} activePart={part} activeStep={step} onPart={id => { setPlaying(false); setPart(id); }} />
+        )}
         <p className="learning-legend">{diagram.legend.map(item => <React.Fragment key={item.label}><i className={item.className} /> {item.label}</React.Fragment>)}；颜色只是辅助，箭头和文字会同时说明方向。</p>
-        {diagram.attribution && <p className="learning-attribution">医学底图：<a href={diagram.attribution.url} target="_blank" rel="noreferrer">{diagram.attribution.name}</a>，<a href={diagram.attribution.licenseUrl} target="_blank" rel="noreferrer">{diagram.attribution.license}</a>。</p>}
-        {diagram.attributions && <p className="learning-attribution">医学底图：Servier Medical Art by Servier（{diagram.attributions.map((item, index) => <React.Fragment key={item.url}>{index > 0 && "、"}<a href={item.url} target="_blank" rel="noreferrer">{item.name}</a></React.Fragment>)}），<a href={diagram.licenseUrl} target="_blank" rel="noreferrer">{diagram.license}</a>。</p>}
-        {diagram.selfMadeNote && <p className="learning-attribution">示意图来源：{diagram.selfMadeNote}。</p>}
+        {viewMode === "3d" && can3D ? (
+          <p className="learning-attribution">示意图来源：知愈 Three.js 程序化磨砂玻璃三维互动沙盘（无第三方底图依赖）。</p>
+        ) : (
+          <>
+            {diagram.attribution && <p className="learning-attribution">医学底图：<a href={diagram.attribution.url} target="_blank" rel="noreferrer">{diagram.attribution.name}</a>，<a href={diagram.attribution.licenseUrl} target="_blank" rel="noreferrer">{diagram.attribution.license}</a>。</p>}
+            {diagram.attributions && <p className="learning-attribution">医学底图：Servier Medical Art by Servier（{diagram.attributions.map((item, index) => <React.Fragment key={item.url}>{index > 0 && "、"}<a href={item.url} target="_blank" rel="noreferrer">{item.name}</a></React.Fragment>)}），<a href={diagram.licenseUrl} target="_blank" rel="noreferrer">{diagram.license}</a>。</p>}
+            {diagram.selfMadeNote && <p className="learning-attribution">示意图来源：{diagram.selfMadeNote}。</p>}
+          </>
+        )}
         <div className="learning-route" style={{ gridTemplateColumns: `repeat(${learning.steps.length}, 1fr)` }} aria-label="选择讲解步骤">
           {learning.steps.map((item, index) => <button key={item.id} type="button" className={step === index && !part ? "active" : ""}
             aria-current={step === index && !part ? "step" : undefined} onClick={() => move(index)}>{index + 1}</button>)}

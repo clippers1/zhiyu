@@ -22,20 +22,22 @@
     "test:report": "node scripts/report-smoke.mjs",
     "test:report-data": "node --test scripts/report-guide.test.mjs",
     "test:ui": "node scripts/smoke.mjs",
+    "test:3d": "node scripts/three-smoke.mjs",
     "test:image-service": "node --test scripts/image-service.test.mjs",
     "image:gen": "node scripts/image-gen.mjs",
     "media:gen": "node scripts/generate-media.mjs"
   },
   "dependencies": {
-    "qrcode-generator": "1.4.4",
     "lucide-react": "^0.468.0",
+    "qrcode-generator": "1.4.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.187.0"
   },
   "devDependencies": {
-    "jsqr": "1.4.0",
+    "@playwright/test": "^1.51.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.0.5",
-    "@playwright/test": "^1.51.0"
+    "jsqr": "1.4.0",
+    "vite": "^6.0.5"
   }
 }

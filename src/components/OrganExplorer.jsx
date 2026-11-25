@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowRight, Box } from "lucide-react";
 import OrganArtwork from "./OrganArtwork";
 import { useContent } from "../hooks";
 import { Citation, LoadState, RunHead, SourceReferences } from "./ContentUI";
@@ -8,8 +8,10 @@ import { TopicReturn } from "./TopicRoute";
 import ShareCardButton from "./ShareCard";
 import VisualLearning from "./VisualLearning";
 import FeedbackBox from "./FeedbackBox";
+import BodyMap3D from "./three/BodyMap3D";
 
 export default function OrganExplorer({ id, onSelect, onOpen }) {
+  const [showBodyMap, setShowBodyMap] = useState(false);
   const state = useContent("get", ["organ", id]);
   const catalog = useContent("list", [{ kind: "organ", limit: 24 }]);
   const selected = state.data;
@@ -106,6 +108,32 @@ export default function OrganExplorer({ id, onSelect, onOpen }) {
         </section>
       )}
       {selected && <VisualLearning content={selected} />}
+      {selected && organs.length > 0 && (
+        <section className="body-map-section" id="organ-body-map" aria-labelledby="organ-body-map-title">
+          <div className="body-map-head">
+            <div>
+              <h2 id="organ-body-map-title">3D 人体位置透视</h2>
+              <p>旋转透明躯干，一眼看清 {selected.name} 与其他常见器官的相对方位与体检对应项。</p>
+            </div>
+            <button
+              type="button"
+              className="body-map-toggle"
+              aria-expanded={showBodyMap}
+              onClick={() => setShowBodyMap(v => !v)}
+            >
+              <Box size={15} aria-hidden="true" />
+              {showBodyMap ? "收起 3D 透视" : "展开 3D 人体位置图"}
+            </button>
+          </div>
+          {showBodyMap && (
+            <BodyMap3D
+              activeId={id}
+              availableIds={organs.map(o => o.id)}
+              onSelect={onSelect}
+            />
+          )}
+        </section>
+      )}
       {selected && (
         <SourceReferences content={selected} prefix="organ-source" />
       )}

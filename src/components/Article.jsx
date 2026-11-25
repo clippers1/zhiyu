@@ -26,6 +26,7 @@ import { nextIndicator } from "../services/discovery";
 import { ReportRowStrip } from "./ReportGuide";
 import { REPORT_ROWS } from "../services/report-guide";
 import FeedbackBox from "./FeedbackBox";
+import ConceptSlice3D from "./three/ConceptSlice3D";
 
 function FigureBlock({ figure, id = "article-figure" }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -248,6 +249,7 @@ export default function Article({
           </header>
           {entryFigure && <FigureBlock key={detail.id} figure={entryFigure} />}
           {figures.opening && <FigureBlock key={`${detail.id}-opening`} figure={figures.opening} />}
+          {!isStory && <ConceptSlice3D id={id} />}
           <nav className="reading-toc" aria-label="文章目录">
             <span>深入阅读</span>
             <a href="#article-overview">它是什么</a>
