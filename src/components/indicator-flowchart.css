@@ -1,0 +1,311 @@
+/* 体检项目可视化流程图（体内原理 & 看单四步路径） */
+
+.indicator-flowchart {
+  margin-top: var(--s-6);
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.flowchart-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.flowchart-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.flowchart-header h2 {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.flowchart-tabs {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  gap: 2px;
+}
+
+.flowchart-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 13px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.flowchart-tabs button.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.flowchart-tabs button:not(.active):hover {
+  color: var(--ink);
+}
+
+.flowchart-panel {
+  margin-top: 16px;
+}
+
+.flowchart-rail-svg {
+  display: none;
+  width: 100%;
+  height: 32px;
+  margin-bottom: 6px;
+}
+
+.flowchart-rail-animated {
+  animation: fc-flow-dash 18s linear infinite;
+}
+
+@keyframes fc-flow-dash {
+  to {
+    stroke-dashoffset: -280;
+  }
+}
+
+.flowchart-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.flowchart-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.flowchart-node-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 13px 14px;
+  border: 1.5px solid var(--rule);
+  border-radius: 14px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.flowchart-node-btn:hover {
+  border-color: var(--accent);
+}
+
+.flowchart-node.active .flowchart-node-btn {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+  box-shadow: 0 6px 18px rgba(15, 118, 110, 0.1);
+}
+
+.flowchart-node-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+}
+
+.flowchart-num {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface);
+  color: var(--accent-deep);
+  border: 1px solid var(--accent-border);
+  flex-shrink: 0;
+}
+
+.flowchart-node.tone-blue .flowchart-num {
+  color: #295c84;
+  border-color: rgba(59, 118, 163, 0.32);
+  background: rgba(59, 118, 163, 0.08);
+}
+
+.flowchart-node.tone-amber .flowchart-num {
+  color: #9e5d19;
+  border-color: rgba(207, 127, 50, 0.34);
+  background: rgba(207, 127, 50, 0.09);
+}
+
+.flowchart-node.tone-coral .flowchart-num {
+  color: #a63d36;
+  border-color: rgba(207, 86, 78, 0.34);
+  background: rgba(207, 86, 78, 0.09);
+}
+
+.flowchart-node.active .flowchart-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.flowchart-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.flowchart-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.flowchart-mobile-arrow {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  color: var(--accent);
+  opacity: 0.65;
+  transform: rotate(90deg);
+}
+
+.flowchart-detail {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--accent-border);
+  background: #ffffff;
+}
+
+.flowchart-detail-step {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.flowchart-detail p {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+.flowchart-detail p b {
+  color: var(--ink);
+}
+
+.flowchart-detail-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.flowchart-links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.flowchart-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-wash);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.flowchart-chip:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.flowchart-boundary {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  line-height: 1.68;
+  color: var(--ink-3);
+}
+
+.flowchart-boundary b {
+  color: var(--ink-2);
+}
+
+/* Report Guide 4-step reading flowchart card */
+.guide-flowchart {
+  margin-top: var(--s-6);
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbfc 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-flowchart h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.guide-flowchart-sub {
+  margin-top: 4px;
+  font-size: var(--t-13);
+  color: var(--ink-3);
+}
+
+@media (min-width: 780px) {
+  .flowchart-rail-svg {
+    display: block;
+  }
+  .flowchart-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .flowchart-mobile-arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowchart-rail-animated {
+    animation: none;
+  }
+}

@@ -1,8 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { BoundaryNote, Citation, RunHead, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { REPORT_ROWS, GUIDE_CONTENT, GUIDE_FAQ, GUIDE_SECTIONS } from "../services/report-guide";
+import "./indicator-flowchart.css";
+
+const GUIDE_FLOW_STEPS = [
+  {
+    num: "01",
+    tag: "看清前提",
+    tone: "teal",
+    title: "核对采样与准备条件",
+    detail: "先看报告抬头与采样时间：是否按要求空腹、近期是否熬夜、饮酒、剧烈运动或感冒服药，这些都会让单次数字出现短暂波动。",
+  },
+  {
+    num: "02",
+    tag: "拆解一行",
+    tone: "blue",
+    title: "对应项目名、结果与区间",
+    detail: "逐行对照「项目名 → 结果 → 单位 → 参考区间」。旁边的 ↑↓ 箭头只说明数字落在参考范围之外，不等于自动确诊疾病。",
+  },
+  {
+    num: "03",
+    tag: "组合来看",
+    tone: "amber",
+    title: "同一系统项目横向对照",
+    detail: "把相关指标放在一起看更有意义：例如空腹血糖配糖化血红蛋白，肝酶配肝脏 B 超，肌酐配尿常规，不孤立盯着某一个箭头。",
+  },
+  {
+    num: "04",
+    tag: "纵向复盘",
+    tone: "coral",
+    title: "对比往年旧单并问医生",
+    detail: "找出近 1–3 年旧体检报告看变化趋势，把不理解的项目、近期不适与用药清单记下来，携带完整原件向医生咨询。",
+  },
+];
+
+function GuideReadingFlowchart() {
+  const [active, setActive] = useState(0);
+  const current = GUIDE_FLOW_STEPS[active];
+  return (
+    <section className="guide-flowchart" id="guide-flowchart" aria-labelledby="guide-flowchart-title">
+      <span className="flowchart-kicker">可视化阅读流程图</span>
+      <h2 id="guide-flowchart-title">拿到一份体检报告，建议按这四步看</h2>
+      <p className="guide-flowchart-sub">点击每一步查看要点；这套顺序适用于大多数血检、尿检与常见影像报告。</p>
+      <div className="flowchart-panel">
+        <svg className="flowchart-rail-svg" viewBox="0 0 800 36" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="90" y1="18" x2="710" y2="18" stroke="#d5e4e8" strokeWidth="3" strokeLinecap="round" />
+          <line x1="90" y1="18" x2="710" y2="18" stroke="#0f766e" strokeWidth="3" strokeDasharray="8 6" strokeLinecap="round" className="flowchart-rail-animated" />
+          {[90, 297, 503, 710].map((cx, i) => (
+            <g key={cx}>
+              <circle cx={cx} cy="18" r={active === i ? 9 : 6} fill={active === i ? "#0f766e" : "#ffffff"} stroke="#0f766e" strokeWidth="2.5" />
+              {i < 3 && <path d={`M${cx + 94} 13 L${cx + 105} 18 L${cx + 94} 23`} fill="none" stroke="#0f766e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />}
+            </g>
+          ))}
+        </svg>
+        <ol className="flowchart-grid">
+          {GUIDE_FLOW_STEPS.map((step, i) => (
+            <li key={step.num} className={`flowchart-node tone-${step.tone}${active === i ? " active" : ""}`}>
+              <button type="button" className="flowchart-node-btn" aria-pressed={active === i} onClick={() => setActive(i)}>
+                <span className="flowchart-node-head">
+                  <span className="flowchart-num">{step.num}</span>
+                  <span className="flowchart-tag">{step.tag}</span>
+                </span>
+                <span className="flowchart-text">{step.title}</span>
+              </button>
+              {i < GUIDE_FLOW_STEPS.length - 1 && (
+                <span className="flowchart-mobile-arrow" aria-hidden="true"><ArrowRight size={15} /></span>
+              )}
+            </li>
+          ))}
+        </ol>
+        <div className="flowchart-detail" aria-live="polite">
+          <span className="flowchart-detail-step">第 {current.num} 步 · {current.title}</span>
+          <p>{current.detail}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const PREFIX = "guide-source";
 
@@ -149,9 +225,11 @@ export default function ReportGuide({ go }) {
       </BoundaryNote>
 
       <GuideFigure />
+      <GuideReadingFlowchart />
 
       <nav className="reading-toc" aria-label="页面目录">
         <span>本页内容</span>
+        <a href="#guide-flowchart">四步阅读流程</a>
         {GUIDE_SECTIONS.map((section, index) => (
           <a key={section.title} href={`#guide-section-${index + 1}`}>{section.title}</a>
         ))}

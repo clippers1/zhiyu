@@ -1,73 +1,165 @@
 import React, { useCallback } from "react";
 import ThreeStage from "./ThreeStage";
-import { createCurveFlow, makeCeramic, makeGlass, makeGlow, PALETTE, tagPickable } from "./materials";
+import {
+  createCurveFlow,
+  makeCeramic,
+  makeFresnelShell,
+  makeGlass,
+  makeGlow,
+  makeOrganMaterial,
+  PALETTE,
+  tagPickable,
+} from "./materials";
+import {
+  createOrganicThyroid,
+  HUBMAP_ATTRIBUTION,
+  loadAnatomicalGLB,
+  normalizeModelToUnit,
+} from "./modelLoader";
 
-function buildHeartScene({ THREE, scene }) {
+const PART_LABELS = {
+  // Heart
+  "right-atrium": { title: "右心房", tone: "venous" },
+  "right-ventricle": { title: "右心室", tone: "venous" },
+  "left-atrium": { title: "左心房", tone: "arterial" },
+  "left-ventricle": { title: "左心室", tone: "arterial" },
+  lungs: { title: "肺循环（肺部换气）", tone: "teal" },
+  body: { title: "体循环（全身供氧）", tone: "arterial" },
+  // Lung
+  "nose-mouth": { title: "鼻腔与口腔", tone: "teal" },
+  trachea: { title: "气管", tone: "teal" },
+  bronchi: { title: "各级支气管树", tone: "teal" },
+  alveoli: { title: "肺泡囊簇（放大）", tone: "amber" },
+  capillaries: { title: "肺泡毛细血管网", tone: "arterial" },
+  // Kidney
+  "renal-artery": { title: "肾动脉入球血流", tone: "arterial" },
+  glomerulus: { title: "肾小球滤过网", tone: "teal" },
+  tubule: { title: "肾小管重吸收", tone: "amber" },
+  "blood-return": { title: "洁净回流血液", tone: "venous" },
+  "urine-out": { title: "终尿排出", tone: "amber" },
+  // Thyroid
+  pituitary: { title: "脑垂体", tone: "venous" },
+  "tsh-signal": { title: "TSH 调控信号", tone: "teal" },
+  "thyroid-gland": { title: "甲状腺", tone: "arterial" },
+  "hormone-level": { title: "血中 T4 / T3 水平", tone: "amber" },
+};
+
+async function buildHeartScene({ THREE, scene, studio }) {
   const root = new THREE.Group();
   scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -2.35;
 
-  // Subtle translucent outer heart envelope
-  const shellGeo = new THREE.SphereGeometry(1.78, 32, 24);
-  const shellMat = makeGlass(THREE, PALETTE.glassShell, {
-    opacity: 0.15,
-    transmission: 0.65,
-    roughness: 0.3,
-    depthWrite: false,
-  });
-  const shell = new THREE.Mesh(shellGeo, shellMat);
-  shell.scale.set(1.06, 1.15, 0.85);
-  shell.position.set(0, -0.05, 0);
-  root.add(shell);
+  const heartGlb = await loadAnatomicalGLB("/media/models/heart.glb");
+  const { wrapper: heartWrap } = normalizeModelToUnit(THREE, heartGlb, 2.75);
+  root.add(heartWrap);
 
-  // Central translucent septum divider
-  const septum = new THREE.Mesh(
-    new THREE.BoxGeometry(0.08, 2.2, 1.1),
-    makeCeramic(THREE, 0xe2ecef, { transparent: true, opacity: 0.35 }),
-  );
-  septum.position.set(0, -0.05, 0);
-  root.add(septum);
+  const chamberColors = {
+    "right-atrium": PALETTE.venous,
+    "right-ventricle": PALETTE.venousBright,
+    "left-atrium": PALETTE.coral,
+    "left-ventricle": PALETTE.arterial,
+  };
 
   const partMap = new Map();
-  const addNode = (id, geo, color, pos, scale = [1, 1, 1], opts = {}) => {
-    const mat = makeGlass(THREE, color, { opacity: opts.opacity ?? 0.88, roughness: 0.2 });
+  const pinAnchors = new Map();
+
+  heartGlb.traverse((child) => {
+    if (!child.isMesh) return;
+    const id = child.name;
+    if (!chamberColors[id]) return;
+    const mat = makeOrganMaterial(THREE, chamberColors[id], {
+      roughness: 0.26,
+      clearcoat: 0.78,
+      opacity: 0.9,
+    });
+    child.material = mat;
+    tagPickable(child, id);
+    partMap.set(id, { mesh: child, mat, baseScale: child.scale.clone(), isChamber: true });
+
+    // Compute world center of each real NIH heart chamber for accurate pin & flow routing
+    heartWrap.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(child);
+    const center = new THREE.Vector3();
+    box.getCenter(center);
+    pinAnchors.set(id, center);
+  });
+
+  // Translucent pulmonary loop ring (top) & systemic circulation ring (bottom)
+  const addLoopNode = (id, geo, color, pos, scale) => {
+    const mat = makeGlass(THREE, color, { opacity: 0.78, roughness: 0.24 });
     const mesh = new THREE.Mesh(geo, mat);
     mesh.position.set(...pos);
     mesh.scale.set(...scale);
     tagPickable(mesh, id);
     root.add(mesh);
     partMap.set(id, { mesh, mat, baseScale: new THREE.Vector3(...scale) });
-    return mesh;
+    pinAnchors.set(id, new THREE.Vector3(...pos));
   };
 
-  // Anatomical right on viewer-left (-x), anatomical left on viewer-right (+x)
-  addNode("right-atrium", new THREE.SphereGeometry(0.56, 26, 20), PALETTE.venous, [-0.66, 0.52, 0.1], [0.95, 0.92, 0.85]);
-  addNode("right-ventricle", new THREE.SphereGeometry(0.66, 26, 20), PALETTE.venous, [-0.56, -0.66, 0.14], [0.92, 1.12, 0.86]);
-  addNode("left-atrium", new THREE.SphereGeometry(0.56, 26, 20), PALETTE.arterial, [0.66, 0.52, 0.1], [0.95, 0.92, 0.85]);
-  addNode("left-ventricle", new THREE.SphereGeometry(0.7, 26, 20), PALETTE.arterial, [0.58, -0.66, 0.14], [0.96, 1.18, 0.9]);
-  addNode("lungs", new THREE.TorusGeometry(0.46, 0.16, 16, 32), PALETTE.tealLight, [0, 2.02, -0.15], [1.45, 0.65, 0.72]);
-  addNode("body", new THREE.TorusGeometry(0.62, 0.13, 16, 36), PALETTE.slate, [0, -2.02, -0.05], [1.55, 0.58, 0.72]);
+  addLoopNode("lungs", new THREE.TorusGeometry(0.55, 0.12, 18, 40), PALETTE.tealLight, [0.0, 2.02, -0.05], [1.45, 0.56, 0.65]);
+  addLoopNode("body", new THREE.TorusGeometry(0.68, 0.11, 18, 40), PALETTE.slate, [0.0, -2.02, 0.0], [1.55, 0.52, 0.65]);
+
+  const pRA = pinAnchors.get("right-atrium") || new THREE.Vector3(-0.78, 0.15, 0);
+  const pRV = pinAnchors.get("right-ventricle") || new THREE.Vector3(-0.05, -0.1, 0.45);
+  const pLA = pinAnchors.get("left-atrium") || new THREE.Vector3(-0.28, 0.36, -0.58);
+  const pLV = pinAnchors.get("left-ventricle") || new THREE.Vector3(0.55, -0.25, 0.15);
 
   const flows = {
-    "body-ra": createCurveFlow(THREE, [[-0.9, -1.9, 0], [-1.75, -0.6, 0.15], [-1.45, 0.6, 0.2], [-0.82, 0.55, 0.15]], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0 }),
-    "ra-rv": createCurveFlow(THREE, [[-0.66, 0.42, 0.28], [-0.66, -0.05, 0.38], [-0.56, -0.62, 0.3]], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0, particleCount: 7 }),
-    "rv-lungs": createCurveFlow(THREE, [[-0.5, -0.58, 0.3], [-0.25, 0.5, 0.52], [-0.28, 1.48, 0.25], [-0.2, 1.98, -0.05]], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0 }),
-    "lungs-la": createCurveFlow(THREE, [[0.32, 1.96, -0.05], [0.85, 1.38, 0.12], [0.76, 0.68, 0.18]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
-    "la-lv": createCurveFlow(THREE, [[0.66, 0.42, 0.28], [0.66, -0.05, 0.38], [0.58, -0.62, 0.3]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e, particleCount: 7 }),
-    "lv-body": createCurveFlow(THREE, [[0.52, -0.6, 0.32], [1.55, 0.25, 0.25], [1.82, -0.8, 0.1], [0.95, -1.9, 0]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
+    "body-ra": createCurveFlow(THREE, [
+      [-0.95, -1.9, 0.05],
+      [-1.78, -0.7, 0.15],
+      [-1.55, 0.38, 0.22],
+      [pRA.x - 0.18, pRA.y + 0.1, pRA.z + 0.15],
+    ], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0 }),
+    "ra-rv": createCurveFlow(THREE, [
+      [pRA.x, pRA.y, pRA.z + 0.32],
+      [(pRA.x + pRV.x) / 2 - 0.15, (pRA.y + pRV.y) / 2 - 0.12, Math.max(pRA.z, pRV.z) + 0.56],
+      [pRV.x, pRV.y, pRV.z + 0.38],
+    ], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0, particleCount: 7 }),
+    "rv-lungs": createCurveFlow(THREE, [
+      [pRV.x, pRV.y + 0.1, pRV.z + 0.38],
+      [-0.25, 0.92, 0.55],
+      [-0.36, 1.62, 0.18],
+      [-0.32, 1.98, -0.02],
+    ], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0 }),
+    "lungs-la": createCurveFlow(THREE, [
+      [0.36, 1.98, -0.04],
+      [0.95, 1.42, -0.22],
+      [pLA.x + 0.45, pLA.y + 0.35, pLA.z - 0.2],
+      [pLA.x + 0.18, pLA.y, pLA.z - 0.18],
+    ], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
+    "la-lv": createCurveFlow(THREE, [
+      [pLA.x + 0.25, pLA.y, pLA.z - 0.15],
+      [0.92, 0.28, -0.15],
+      [pLV.x + 0.34, pLV.y + 0.08, pLV.z + 0.22],
+    ], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e, particleCount: 7 }),
+    "lv-body": createCurveFlow(THREE, [
+      [pLV.x + 0.28, pLV.y + 0.1, pLV.z + 0.24],
+      [1.62, 0.42, 0.28],
+      [1.82, -0.78, 0.1],
+      [0.98, -1.9, 0.02],
+    ], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
   };
-  Object.values(flows).forEach(f => root.add(f.group));
+  Object.values(flows).forEach((f) => root.add(f.group));
 
   const views = {
-    "body-ra": [[-2.8, 0.15, 6.8], [-0.5, 0.0, 0]],
-    "ra-rv": [[-2.4, -0.1, 6.4], [-0.4, -0.1, 0.1]],
-    "rv-lungs": [[-1.5, 1.1, 6.9], [-0.2, 0.45, 0.1]],
-    "lungs-la": [[2.0, 1.15, 6.8], [0.4, 0.65, 0]],
-    "la-lv": [[2.4, -0.1, 6.4], [0.4, -0.1, 0.1]],
-    "lv-body": [[2.8, -0.45, 7.0], [0.5, -0.45, 0]],
+    "body-ra": [[-2.6, 0.15, 6.4], [-0.35, 0.0, 0]],
+    "ra-rv": [[-1.6, 0.0, 6.2], [-0.2, -0.05, 0.15]],
+    "rv-lungs": [[-1.2, 1.15, 6.6], [-0.15, 0.45, 0.1]],
+    "lungs-la": [[2.2, 1.15, -5.8], [0.1, 0.55, -0.1]],
+    "la-lv": [[2.8, 0.15, 5.8], [0.25, 0.0, 0]],
+    "lv-body": [[2.8, -0.35, 6.6], [0.45, -0.35, 0]],
   };
 
   let lastKey = "";
   return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
     update(state, dt, elapsed, reducedMotion, glideTo) {
       const stepId = state?.stepId;
       const activePart = state?.activePart;
@@ -82,97 +174,168 @@ function buildHeartScene({ THREE, scene }) {
         flow.setActive(id === stepId);
         flow.tick(dt, reducedMotion);
       }
-      for (const [id, { mesh, mat, baseScale }] of partMap.entries()) {
+      // Physiological cardiac lub-dub pulse on entire real heart wrapper
+      const phase = (elapsed * 1.15) % 1;
+      const beat = reducedMotion
+        ? 1
+        : 1 + (Math.exp(-Math.pow((phase - 0.12) / 0.055, 2)) + 0.4 * Math.exp(-Math.pow((phase - 0.26) / 0.05, 2))) * 0.032;
+      heartWrap.scale.setScalar(beat);
+
+      for (const [id, { mesh, mat, baseScale, isChamber }] of partMap.entries()) {
         const focused = activePart === id || (!activePart && (activeFrom === id || activeTo === id));
-        mat.emissiveIntensity = focused ? 0.52 : 0.06;
-        mat.opacity = focused ? 0.96 : 0.62;
-        const pulse = !reducedMotion && focused ? 1 + Math.sin(elapsed * 4) * 0.04 : 1;
-        const factor = (focused ? 1.08 : 0.97) * pulse;
-        mesh.scale.set(baseScale.x * factor, baseScale.y * factor, baseScale.z * factor);
+        mat.emissiveIntensity += ((focused ? 0.42 : 0.06) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? 0.96 : isChamber ? 0.52 : 0.42) - mat.opacity) * 0.14;
+        if (!isChamber) {
+          const factor = focused ? 1.07 : 0.96;
+          mesh.scale.set(baseScale.x * factor, baseScale.y * factor, baseScale.z * factor);
+        }
       }
     },
   };
 }
 
-function buildLungScene({ THREE, scene }) {
+async function buildLungScene({ THREE, scene, studio }) {
   const root = new THREE.Group();
   scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -1.92;
+
+  const [lungGlb, tracheaGlb] = await Promise.all([
+    loadAnatomicalGLB("/media/models/lung.glb"),
+    loadAnatomicalGLB("/media/models/trachea.glb"),
+  ]);
+
+  // Keep lung & trachea in their shared anatomical frame, normalize together on the left
+  const airwayBundle = new THREE.Group();
+  airwayBundle.add(lungGlb, tracheaGlb);
+  const { wrapper: lungWrap } = normalizeModelToUnit(THREE, airwayBundle, 3.05);
+  lungWrap.position.set(-1.12, -0.05, 0);
+  root.add(lungWrap);
 
   const partMap = new Map();
-  const register = (id, obj, mat) => {
-    tagPickable(obj, id);
-    root.add(obj);
-    partMap.set(id, { mesh: obj, mat, baseScale: obj.scale.clone() });
-  };
+  const pinAnchors = new Map();
 
-  // Nose/Mouth intake capsule
-  const intakeMat = makeGlass(THREE, PALETTE.mint, { opacity: 0.88 });
-  const intake = new THREE.Mesh(new THREE.CapsuleGeometry(0.28, 0.36, 12, 20), intakeMat);
+  // Outer frosted translucent NIH lung lobes (silky medical glass so inner bronchi tree glows cleanly)
+  const lobeMat = makeOrganMaterial(THREE, PALETTE.tealLight, {
+    roughness: 0.24,
+    clearcoat: 0.78,
+    opacity: 0.3,
+    depthWrite: false,
+  });
+  const bronchiMat = makeOrganMaterial(THREE, PALETTE.teal, {
+    roughness: 0.28,
+    clearcoat: 0.72,
+    opacity: 0.9,
+  });
+  const tracheaMat = makeOrganMaterial(THREE, PALETTE.tealLight, {
+    roughness: 0.3,
+    clearcoat: 0.7,
+    opacity: 0.9,
+  });
+
+  lungGlb.traverse((child) => {
+    if (!child.isMesh) return;
+    if (/bronchi/i.test(child.name)) {
+      child.material = bronchiMat;
+      tagPickable(child, "bronchi");
+      partMap.set("bronchi", { mesh: child, mat: bronchiMat, keepScale: true });
+    } else {
+      child.material = lobeMat;
+      child.renderOrder = 4;
+      tagPickable(child, "bronchi");
+    }
+  });
+
+  tracheaGlb.traverse((child) => {
+    if (!child.isMesh) return;
+    child.material = tracheaMat;
+    tagPickable(child, "trachea");
+  });
+  partMap.set("trachea", { mesh: tracheaGlb, mat: tracheaMat, keepScale: true });
+
+  // Nose/Mouth intake capsule above upper larynx
+  const intakeMat = makeOrganMaterial(THREE, PALETTE.mint, { opacity: 0.9 });
+  const intake = new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.34, 14, 24), intakeMat);
   intake.rotation.z = Math.PI / 2;
-  intake.position.set(-1.72, 1.24, 0);
-  register("nose-mouth", intake, intakeMat);
+  intake.position.set(-1.72, 1.56, 0.14);
+  tagPickable(intake, "nose-mouth");
+  root.add(intake);
+  partMap.set("nose-mouth", { mesh: intake, mat: intakeMat, baseScale: intake.scale.clone() });
 
-  // Trachea vertical ringed tube
-  const tracheaGroup = new THREE.Group();
-  const tracheaMat = makeGlass(THREE, PALETTE.tealLight, { opacity: 0.82 });
-  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 1.3, 22), tracheaMat);
-  tracheaGroup.add(tube);
-  for (const y of [-0.42, -0.14, 0.14, 0.42]) {
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.028, 10, 24), makeCeramic(THREE, 0xe8f3f1));
-    ring.rotation.x = Math.PI / 2;
-    ring.position.y = y;
-    tracheaGroup.add(ring);
-  }
-  tracheaGroup.position.set(-0.95, 0.85, 0);
-  register("trachea", tracheaGroup, tracheaMat);
-
-  // Bronchi Y-branch
-  const bronchiGroup = new THREE.Group();
-  const bronchiMat = makeGlass(THREE, PALETTE.teal, { opacity: 0.8 });
-  const leftBr = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 1.1, 16), bronchiMat);
-  leftBr.position.set(-0.42, -0.35, 0);
-  leftBr.rotation.z = -0.68;
-  const rightBr = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 1.3, 16), bronchiMat);
-  rightBr.position.set(0.45, -0.22, 0);
-  rightBr.rotation.z = 1.05;
-  bronchiGroup.add(leftBr, rightBr);
-  bronchiGroup.position.set(-0.95, 0.1, 0);
-  register("bronchi", bronchiGroup, bronchiMat);
-
-  // Alveoli grape cluster
+  // Magnified Alveolar Acinus Cluster (right side, rich organic translucent sacs)
   const alveoliGroup = new THREE.Group();
-  const alveoliMat = makeGlass(THREE, 0xf2dac8, { opacity: 0.86, roughness: 0.22 });
-  const sacGeo = new THREE.SphereGeometry(0.32, 22, 18);
-  const offsets = [
-    [0, 0.28, 0], [0.34, 0.08, 0.18], [-0.3, 0.05, 0.2],
-    [0.12, -0.22, 0.26], [-0.22, -0.24, -0.16], [0.28, -0.12, -0.24], [0, 0.1, -0.28],
+  const alveoliMat = makeOrganMaterial(THREE, 0xe8bba0, {
+    roughness: 0.26,
+    clearcoat: 0.78,
+    opacity: 0.88,
+  });
+  const sacGeo = new THREE.SphereGeometry(0.32, 26, 20);
+  const sacOffsets = [
+    [0, 0.3, 0, 1.0],
+    [0.36, 0.08, 0.18, 0.95],
+    [-0.32, 0.06, 0.2, 0.92],
+    [0.14, -0.24, 0.26, 0.96],
+    [-0.24, -0.22, -0.18, 0.9],
+    [0.3, -0.12, -0.24, 0.94],
+    [0, 0.12, -0.3, 0.92],
+    [-0.08, 0.46, 0.16, 0.78],
   ];
-  for (const [x, y, z] of offsets) {
+  for (const [x, y, z, s] of sacOffsets) {
     const m = new THREE.Mesh(sacGeo, alveoliMat);
     m.position.set(x, y, z);
+    m.scale.setScalar(s);
     alveoliGroup.add(m);
   }
-  alveoliGroup.position.set(1.15, 0.3, 0);
-  register("alveoli", alveoliGroup, alveoliMat);
+  // Subtle translucent magnifying lens ring framing alveoli
+  const zoomRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.95, 0.018, 12, 48),
+    makeGlow(THREE, PALETTE.tealLight, 0.38),
+  );
+  alveoliGroup.add(zoomRing);
+  alveoliGroup.position.set(1.52, 0.26, 0.08);
+  tagPickable(alveoliGroup, "alveoli");
+  root.add(alveoliGroup);
+  partMap.set("alveoli", { mesh: alveoliGroup, mat: alveoliMat, baseScale: alveoliGroup.scale.clone() });
 
-  // Capillaries wrapping ring below alveoli
-  const capMat = makeGlass(THREE, PALETTE.arterial, { opacity: 0.88, roughness: 0.2 });
-  const cap = new THREE.Mesh(new THREE.TorusGeometry(0.74, 0.13, 16, 36), capMat);
-  cap.rotation.x = Math.PI / 2.6;
-  cap.position.set(1.25, -0.92, 0.15);
-  register("capillaries", cap, capMat);
+  // Capillaries wrapping gracefully underneath alveoli (venous-to-arterial gradient look)
+  const capGroup = new THREE.Group();
+  const capMat = makeOrganMaterial(THREE, PALETTE.arterial, { opacity: 0.92, roughness: 0.24 });
+  const capCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.75, -0.92, 0.15),
+    new THREE.Vector3(1.18, -0.78, 0.52),
+    new THREE.Vector3(1.62, -0.82, 0.42),
+    new THREE.Vector3(2.12, -0.92, 0.08),
+    new THREE.Vector3(1.65, -1.04, -0.35),
+    new THREE.Vector3(1.08, -1.02, -0.26),
+  ], true);
+  capGroup.add(new THREE.Mesh(new THREE.TubeGeometry(capCurve, 56, 0.12, 16, true), capMat));
+  tagPickable(capGroup, "capillaries");
+  root.add(capGroup);
+  partMap.set("capillaries", { mesh: capGroup, mat: capMat, baseScale: capGroup.scale.clone() });
+
+  pinAnchors.set("nose-mouth", new THREE.Vector3(-1.72, 1.56, 0.14));
+  pinAnchors.set("trachea", new THREE.Vector3(-1.14, 0.92, 0.18));
+  pinAnchors.set("bronchi", new THREE.Vector3(-1.05, -0.15, 0.15));
+  pinAnchors.set("alveoli", new THREE.Vector3(1.52, 0.42, 0.25));
+  pinAnchors.set("capillaries", new THREE.Vector3(1.55, -0.92, 0.3));
 
   const flows = {
-    "air-trachea": createCurveFlow(THREE, [[-1.8, 1.48, 0.1], [-1.2, 1.42, 0.1], [-0.95, 1.05, 0.1]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 7 }),
-    "trachea-bronchi": createCurveFlow(THREE, [[-0.95, 1.0, 0.14], [-0.95, 0.25, 0.14], [-0.75, -0.1, 0.14]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 7 }),
-    "bronchi-alveoli": createCurveFlow(THREE, [[-0.72, -0.08, 0.12], [0.18, 0.08, 0.18], [0.92, 0.28, 0.15]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight }),
-    "alveoli-capillaries": createCurveFlow(THREE, [[1.0, 0.12, 0.26], [1.02, -0.4, 0.36], [1.18, -0.88, 0.32]], { tubeColor: PALETTE.venous, particleColor: 0x73c2fb, particleCount: 8 }),
-    "capillaries-alveoli": createCurveFlow(THREE, [[1.48, -0.86, 0.24], [1.56, -0.35, 0.26], [1.34, 0.16, 0.22]], { tubeColor: PALETTE.amber, particleColor: 0xf4b668, particleCount: 8 }),
-    "alveoli-air": createCurveFlow(THREE, [[0.92, 0.56, 0.12], [-0.15, 1.35, 0.22], [-1.78, 1.56, 0.14]], { tubeColor: PALETTE.amber, particleColor: 0xf4b668 }),
+    "air-trachea": createCurveFlow(THREE, [[-1.78, 1.56, 0.18], [-1.32, 1.48, 0.2], [-1.14, 1.05, 0.2]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 7 }),
+    "trachea-bronchi": createCurveFlow(THREE, [[-1.14, 1.0, 0.22], [-1.12, 0.35, 0.2], [-0.88, -0.1, 0.18]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 7 }),
+    "bronchi-alveoli": createCurveFlow(THREE, [[-0.65, -0.12, 0.18], [0.35, 0.08, 0.25], [1.22, 0.25, 0.22]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight }),
+    "alveoli-capillaries": createCurveFlow(THREE, [[1.32, 0.08, 0.32], [1.3, -0.42, 0.44], [1.45, -0.84, 0.42]], { tubeColor: PALETTE.venous, particleColor: 0x73c2fb, particleCount: 8 }),
+    "capillaries-alveoli": createCurveFlow(THREE, [[1.82, -0.84, 0.36], [1.92, -0.35, 0.32], [1.7, 0.14, 0.28]], { tubeColor: PALETTE.amber, particleColor: 0xf4b668, particleCount: 8 }),
+    "alveoli-air": createCurveFlow(THREE, [[1.28, 0.56, 0.2], [0.05, 1.38, 0.26], [-1.72, 1.66, 0.2]], { tubeColor: PALETTE.amber, particleColor: 0xf4b668 }),
   };
-  Object.values(flows).forEach(f => root.add(f.group));
+  Object.values(flows).forEach((f) => root.add(f.group));
 
   return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
     update(state, dt, elapsed, reducedMotion) {
       const stepId = state?.stepId;
       const activePart = state?.activePart;
@@ -180,91 +343,129 @@ function buildLungScene({ THREE, scene }) {
         flow.setActive(id === stepId);
         flow.tick(dt, reducedMotion);
       }
-      for (const [id, { mesh, mat, baseScale }] of partMap.entries()) {
+      // Subtle physiological lung expansion
+      if (!reducedMotion) {
+        const lungBreath = 1 + Math.sin(elapsed * 1.9) * 0.022;
+        lungWrap.scale.setScalar(lungBreath);
+      }
+      for (const [id, { mesh, mat, baseScale, keepScale }] of partMap.entries()) {
         const focused = activePart === id || (!activePart && (state?.from === id || state?.to === id));
-        mat.emissiveIntensity = focused ? 0.5 : 0.06;
-        mat.opacity = focused ? 0.96 : 0.62;
-        const breathe = !reducedMotion && id === "alveoli" ? 1 + Math.sin(elapsed * 2.2) * 0.045 : 1;
-        const f = (focused ? 1.08 : 0.97) * breathe;
-        mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
+        mat.emissiveIntensity += ((focused ? 0.44 : 0.07) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? 0.96 : 0.58) - mat.opacity) * 0.14;
+        if (!keepScale && baseScale) {
+          const breathe = !reducedMotion && id === "alveoli" ? 1 + Math.sin(elapsed * 2.0) * 0.04 : 1;
+          const f = (focused ? 1.08 : 0.97) * breathe;
+          mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
+        }
       }
     },
   };
 }
 
-function buildKidneyScene({ THREE, scene }) {
+async function buildKidneyScene({ THREE, scene, studio }) {
   const root = new THREE.Group();
   scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -1.75;
+
+  // Real NIH left kidney context anchored on the left side
+  const kidneysGlb = await loadAnatomicalGLB("/media/models/kidneys.glb");
+  let leftKidney = null;
+  kidneysGlb.traverse((child) => {
+    if (child.isMesh && /left/i.test(child.name)) leftKidney = child.clone();
+  });
+  if (leftKidney) {
+    leftKidney.material = makeOrganMaterial(THREE, PALETTE.venous, {
+      roughness: 0.28,
+      clearcoat: 0.72,
+      opacity: 0.42,
+      depthWrite: false,
+    });
+    const { wrapper: kidneyContext } = normalizeModelToUnit(THREE, leftKidney, 2.2);
+    kidneyContext.position.set(-2.15, 0.08, -0.25);
+    kidneyContext.rotation.y = 0.35;
+    root.add(kidneyContext);
+  }
 
   const partMap = new Map();
-  const register = (id, obj, mat) => {
+  const pinAnchors = new Map();
+  const register = (id, obj, mat, pinPos) => {
     tagPickable(obj, id);
     root.add(obj);
     partMap.set(id, { mesh: obj, mat, baseScale: obj.scale.clone() });
+    pinAnchors.set(id, new THREE.Vector3(...pinPos));
   };
 
-  // Renal artery inlet
-  const artMat = makeGlass(THREE, PALETTE.arterial, { opacity: 0.9 });
-  const artery = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 1.15, 20), artMat);
-  artery.rotation.z = Math.PI / 2;
-  artery.position.set(-2.05, 0.25, 0);
-  register("renal-artery", artery, artMat);
+  // Renal artery entering from real kidney hilum toward magnified glomerulus
+  const artMat = makeOrganMaterial(THREE, PALETTE.arterial, { opacity: 0.92 });
+  const artCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-2.05, 0.22, 0.12),
+    new THREE.Vector3(-1.45, 0.26, 0.16),
+    new THREE.Vector3(-0.98, 0.25, 0.08),
+  ]);
+  const artery = new THREE.Mesh(new THREE.TubeGeometry(artCurve, 24, 0.15, 16, false), artMat);
+  register("renal-artery", artery, artMat, [-1.55, 0.45, 0.18]);
 
-  // Glomerulus: outer glass Bowman's capsule + inner coiled knot filter
+  // Magnified Glomerulus: Fresnel Bowman's capsule + coiled capillary tuft + retained albumin pearls
   const glomGroup = new THREE.Group();
-  const glomMat = makeGlass(THREE, PALETTE.tealLight, { opacity: 0.56, transmission: 0.65 });
-  const capsule = new THREE.Mesh(new THREE.SphereGeometry(0.76, 28, 22), glomMat);
+  const glomMat = makeGlass(THREE, PALETTE.tealLight, { opacity: 0.46, transmission: 0.55 });
+  const capsule = new THREE.Mesh(new THREE.SphereGeometry(0.74, 32, 24), glomMat);
   const knot = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(0.38, 0.085, 64, 12, 2, 3),
-    makeCeramic(THREE, PALETTE.arterial, { roughness: 0.25 }),
+    new THREE.TorusKnotGeometry(0.36, 0.085, 72, 14, 2, 3),
+    makeOrganMaterial(THREE, PALETTE.arterial, { roughness: 0.24, clearcoat: 0.8 }),
   );
-  // Large pearl albumin spheres retained inside glomerulus
-  const proteinGeo = new THREE.SphereGeometry(0.085, 14, 12);
-  const proteinMat = makeCeramic(THREE, 0xffffff, { roughness: 0.15, clearcoat: 1 });
-  for (const pos of [[-0.22, 0.28, 0.28], [0.18, -0.25, 0.3], [-0.1, -0.1, -0.34]]) {
+  const proteinGeo = new THREE.SphereGeometry(0.08, 16, 14);
+  const proteinMat = makeCeramic(THREE, 0xffffff, { roughness: 0.14, clearcoat: 1 });
+  for (const pos of [[-0.22, 0.28, 0.28], [0.18, -0.25, 0.3], [-0.1, -0.1, -0.34], [0.28, 0.2, -0.18]]) {
     const p = new THREE.Mesh(proteinGeo, proteinMat);
     p.position.set(...pos);
     glomGroup.add(p);
   }
   glomGroup.add(capsule, knot);
-  glomGroup.position.set(-0.75, 0.25, 0);
-  register("glomerulus", glomGroup, glomMat);
+  glomGroup.position.set(-0.42, 0.25, 0);
+  register("glomerulus", glomGroup, glomMat, [-0.42, 1.05, 0.1]);
 
-  // Tubule winding loop
+  // Winding renal tubule (proximal -> Henle loop -> distal)
   const tubuleCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-0.02, 0.25, 0),
-    new THREE.Vector3(0.42, 0.68, 0.18),
-    new THREE.Vector3(0.76, -0.38, -0.12),
-    new THREE.Vector3(1.12, 0.45, 0.14),
-    new THREE.Vector3(1.38, -0.05, 0),
+    new THREE.Vector3(0.3, 0.25, 0),
+    new THREE.Vector3(0.68, 0.68, 0.18),
+    new THREE.Vector3(0.98, -0.45, -0.12),
+    new THREE.Vector3(1.32, 0.48, 0.14),
+    new THREE.Vector3(1.62, -0.04, 0),
   ]);
-  const tubuleMat = makeGlass(THREE, PALETTE.gold, { opacity: 0.86, roughness: 0.22 });
-  const tubule = new THREE.Mesh(new THREE.TubeGeometry(tubuleCurve, 56, 0.14, 16, false), tubuleMat);
-  register("tubule", tubule, tubuleMat);
+  const tubuleMat = makeOrganMaterial(THREE, PALETTE.gold, { opacity: 0.9, roughness: 0.24 });
+  const tubule = new THREE.Mesh(new THREE.TubeGeometry(tubuleCurve, 64, 0.13, 18, false), tubuleMat);
+  register("tubule", tubule, tubuleMat, [1.0, 0.65, 0.18]);
 
-  // Blood return (reabsorbed clean water/nutrients)
-  const retMat = makeGlass(THREE, PALETTE.venous, { opacity: 0.9 });
-  const ret = new THREE.Mesh(new THREE.CapsuleGeometry(0.24, 0.72, 14, 22), retMat);
+  // Reabsorbed clean blood return (upper right)
+  const retMat = makeOrganMaterial(THREE, PALETTE.venous, { opacity: 0.92 });
+  const ret = new THREE.Mesh(new THREE.CapsuleGeometry(0.22, 0.66, 14, 24), retMat);
   ret.rotation.z = Math.PI / 2;
-  ret.position.set(2.1, 1.05, 0.08);
-  register("blood-return", ret, retMat);
+  ret.position.set(2.26, 1.02, 0.08);
+  register("blood-return", ret, retMat, [2.26, 1.25, 0.1]);
 
-  // Final urine outlet
-  const urineMat = makeGlass(THREE, PALETTE.amber, { opacity: 0.9 });
-  const urine = new THREE.Mesh(new THREE.CapsuleGeometry(0.24, 0.72, 14, 22), urineMat);
+  // Final urine collecting duct (lower right)
+  const urineMat = makeOrganMaterial(THREE, PALETTE.amber, { opacity: 0.92 });
+  const urine = new THREE.Mesh(new THREE.CapsuleGeometry(0.22, 0.66, 14, 24), urineMat);
   urine.rotation.z = Math.PI / 2;
-  urine.position.set(2.1, -1.02, 0.08);
-  register("urine-out", urine, urineMat);
+  urine.position.set(2.26, -0.98, 0.08);
+  register("urine-out", urine, urineMat, [2.26, -0.75, 0.1]);
 
   const flows = {
-    "blood-in": createCurveFlow(THREE, [[-2.55, 0.25, 0.12], [-1.6, 0.25, 0.12], [-0.95, 0.25, 0.12]], { tubeColor: PALETTE.arterial, particleColor: 0xff9f96, particleCount: 7 }),
-    "filter-mesh": createCurveFlow(THREE, [[-0.65, 0.25, 0.2], [0.05, 0.35, 0.22], [0.65, 0.1, 0.2]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 8 }),
-    "reabsorb-back": createCurveFlow(THREE, [[0.85, 0.45, 0.18], [1.35, 0.95, 0.18], [2.2, 1.05, 0.18]], { tubeColor: PALETTE.venous, particleColor: 0x7bc5f7, particleCount: 8 }),
-    "waste-urine": createCurveFlow(THREE, [[1.15, -0.1, 0.15], [1.45, -0.82, 0.16], [2.25, -1.02, 0.16]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c, particleCount: 8 }),
+    "blood-in": createCurveFlow(THREE, [[-2.15, 0.22, 0.22], [-1.42, 0.26, 0.22], [-0.72, 0.25, 0.2]], { tubeColor: PALETTE.arterial, particleColor: 0xff9f96, particleCount: 7 }),
+    "filter-mesh": createCurveFlow(THREE, [[-0.35, 0.25, 0.22], [0.35, 0.35, 0.24], [0.95, 0.08, 0.22]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 8 }),
+    "reabsorb-back": createCurveFlow(THREE, [[1.05, 0.45, 0.18], [1.55, 0.94, 0.18], [2.32, 1.02, 0.18]], { tubeColor: PALETTE.venous, particleColor: 0x7bc5f7, particleCount: 8 }),
+    "waste-urine": createCurveFlow(THREE, [[1.35, -0.1, 0.15], [1.68, -0.82, 0.16], [2.35, -0.98, 0.16]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c, particleCount: 8 }),
   };
-  Object.values(flows).forEach(f => root.add(f.group));
+  Object.values(flows).forEach((f) => root.add(f.group));
 
   return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
     update(state, dt, elapsed, reducedMotion) {
       const stepId = state?.stepId;
       const activePart = state?.activePart;
@@ -275,77 +476,109 @@ function buildKidneyScene({ THREE, scene }) {
       }
       for (const [id, { mesh, mat, baseScale }] of partMap.entries()) {
         const focused = activePart === id || (!activePart && (state?.from === id || state?.to === id));
-        mat.emissiveIntensity = focused ? 0.5 : 0.06;
-        mat.opacity = focused ? 0.95 : 0.62;
-        const f = focused ? 1.07 : 0.97;
+        mat.emissiveIntensity += ((focused ? 0.44 : 0.06) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? 0.96 : 0.6) - mat.opacity) * 0.14;
+        const f = focused ? 1.06 : 0.97;
         mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
       }
     },
   };
 }
 
-function buildThyroidScene({ THREE, scene }) {
+async function buildThyroidScene({ THREE, scene, studio }) {
   const root = new THREE.Group();
   scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -2.1;
+
+  const tracheaGlb = await loadAnatomicalGLB("/media/models/trachea.glb");
+  const { wrapper: tracheaWrap } = normalizeModelToUnit(THREE, tracheaGlb, 1.85);
+  tracheaGlb.traverse((c) => {
+    if (c.isMesh) {
+      c.material = makeCeramic(THREE, 0xdbe7ec, { roughness: 0.38, clearcoat: 0.45 });
+    }
+  });
 
   const partMap = new Map();
-  const register = (id, obj, mat) => {
+  const pinAnchors = new Map();
+  const register = (id, obj, mat, pinPos) => {
     tagPickable(obj, id);
     root.add(obj);
     partMap.set(id, { mesh: obj, mat, baseScale: obj.scale.clone() });
+    pinAnchors.set(id, new THREE.Vector3(...pinPos));
   };
 
-  // Pituitary orb at top
-  const pitMat = makeGlass(THREE, PALETTE.venous, { opacity: 0.94, roughness: 0.16 });
-  const pit = new THREE.Mesh(new THREE.SphereGeometry(0.46, 28, 22), pitMat);
-  pit.position.set(0, 1.56, 0);
-  register("pituitary", pit, pitMat);
+  // Pituitary gland + subtle glowing hypothalamic halo at top
+  const pitGroup = new THREE.Group();
+  const pitMat = makeOrganMaterial(THREE, PALETTE.venous, { opacity: 0.95, roughness: 0.18 });
+  const pitCore = new THREE.Mesh(new THREE.SphereGeometry(0.44, 32, 24), pitMat);
+  const pitRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.64, 0.02, 12, 48),
+    makeGlow(THREE, PALETTE.venousBright, 0.45),
+  );
+  pitRing.rotation.x = Math.PI / 2.6;
+  pitGroup.add(pitCore, pitRing);
+  pitGroup.position.set(0, 1.56, 0);
+  register("pituitary", pitGroup, pitMat, [0, 2.02, 0.1]);
 
-  // TSH signal node (right)
-  const tshMat = makeGlass(THREE, PALETTE.tealLight, { opacity: 0.9 });
-  const tsh = new THREE.Mesh(new THREE.OctahedronGeometry(0.34, 2), tshMat);
-  tsh.position.set(1.78, 0.08, 0.12);
-  register("tsh-signal", tsh, tshMat);
+  // TSH messenger molecular cluster (right)
+  const tshGroup = new THREE.Group();
+  const tshMat = makeOrganMaterial(THREE, PALETTE.tealLight, { opacity: 0.94, roughness: 0.2 });
+  const tshCenter = new THREE.Mesh(new THREE.SphereGeometry(0.24, 24, 18), tshMat);
+  tshGroup.add(tshCenter);
+  for (const pos of [[0.24, 0.14, 0.08], [-0.2, 0.18, -0.1], [0.05, -0.24, 0.14], [-0.18, -0.12, -0.16]]) {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.12, 18, 14), tshMat);
+    s.position.set(...pos);
+    tshGroup.add(s);
+  }
+  tshGroup.position.set(1.82, 0.1, 0.12);
+  register("tsh-signal", tshGroup, tshMat, [1.82, 0.48, 0.12]);
 
-  // Butterfly thyroid gland wrapping white trachea rings at bottom
+  // Real NIH trachea + sculpted organic butterfly thyroid gland at bottom
   const thyGroup = new THREE.Group();
-  const thyMat = makeGlass(THREE, PALETTE.coral, { opacity: 0.92, roughness: 0.18 });
-  const trachea = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 1.25, 22), makeCeramic(THREE, 0xe8eff2));
-  const lobeGeo = new THREE.SphereGeometry(0.42, 24, 20);
-  const leftLobe = new THREE.Mesh(lobeGeo, thyMat);
-  leftLobe.position.set(-0.46, 0, 0.12);
-  leftLobe.scale.set(0.84, 1.38, 0.72);
-  const rightLobe = new THREE.Mesh(lobeGeo, thyMat);
-  rightLobe.position.set(0.46, 0, 0.12);
-  rightLobe.scale.set(0.84, 1.38, 0.72);
-  const isthmus = new THREE.Mesh(new THREE.CapsuleGeometry(0.14, 0.5, 10, 16), thyMat);
-  isthmus.rotation.z = Math.PI / 2;
-  isthmus.position.set(0, -0.05, 0.22);
-  thyGroup.add(trachea, leftLobe, rightLobe, isthmus);
-  thyGroup.position.set(0, -1.32, 0);
-  register("thyroid-gland", thyGroup, thyMat);
+  const thyMat = makeOrganMaterial(THREE, PALETTE.coral, { opacity: 0.95, roughness: 0.22, clearcoat: 0.8 });
+  const thyroid = createOrganicThyroid(THREE, thyMat);
+  thyroid.scale.setScalar(2.9);
+  thyroid.position.set(0, -0.05, 0.28);
+  thyGroup.add(tracheaWrap, thyroid);
+  thyGroup.position.set(0, -1.18, 0);
+  register("thyroid-gland", thyGroup, thyMat, [0, -0.58, 0.45]);
 
-  // Blood T4/T3 node (left)
-  const hormMat = makeGlass(THREE, PALETTE.amber, { opacity: 0.9 });
-  const horm = new THREE.Mesh(new THREE.IcosahedronGeometry(0.36, 1), hormMat);
-  horm.position.set(-1.78, 0.08, 0.12);
-  register("hormone-level", horm, hormMat);
+  // T4 / T3 active hormone cluster (left)
+  const hormGroup = new THREE.Group();
+  const hormMat = makeOrganMaterial(THREE, PALETTE.amber, { opacity: 0.94, roughness: 0.22 });
+  const hormCenter = new THREE.Mesh(new THREE.SphereGeometry(0.25, 24, 18), hormMat);
+  hormGroup.add(hormCenter);
+  for (const pos of [[-0.25, 0.16, 0.08], [0.22, 0.16, -0.08], [0, -0.25, 0.12]]) {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.13, 18, 14), hormMat);
+    s.position.set(...pos);
+    hormGroup.add(s);
+  }
+  hormGroup.position.set(-1.82, 0.1, 0.12);
+  register("hormone-level", hormGroup, hormMat, [-1.82, 0.48, 0.12]);
 
   const flows = {
-    "pituitary-send": createCurveFlow(THREE, [[0.38, 1.48, 0.08], [1.45, 1.15, 0.24], [1.78, 0.34, 0.15]], { tubeColor: PALETTE.venous, particleColor: 0x7bc5f7 }),
-    "tsh-drive": createCurveFlow(THREE, [[1.74, -0.22, 0.15], [1.45, -1.12, 0.24], [0.68, -1.32, 0.16]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight }),
-    "hormone-work": createCurveFlow(THREE, [[-0.68, -1.32, 0.16], [-1.45, -1.12, 0.24], [-1.74, -0.22, 0.15]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
-    "negative-feedback": createCurveFlow(THREE, [[-1.78, 0.34, 0.15], [-1.45, 1.15, 0.24], [-0.38, 1.48, 0.08]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c }),
+    "pituitary-send": createCurveFlow(THREE, [[0.42, 1.48, 0.08], [1.48, 1.15, 0.24], [1.82, 0.36, 0.15]], { tubeColor: PALETTE.venous, particleColor: 0x7bc5f7 }),
+    "tsh-drive": createCurveFlow(THREE, [[1.78, -0.2, 0.15], [1.48, -1.08, 0.26], [0.72, -1.24, 0.26]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight }),
+    "hormone-work": createCurveFlow(THREE, [[-0.72, -1.24, 0.26], [-1.48, -1.08, 0.26], [-1.78, -0.2, 0.15]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e }),
+    "negative-feedback": createCurveFlow(THREE, [[-1.82, 0.36, 0.15], [-1.48, 1.15, 0.24], [-0.42, 1.48, 0.08]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c }),
   };
-  Object.values(flows).forEach(f => root.add(f.group));
+  Object.values(flows).forEach((f) => root.add(f.group));
 
   return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
     update(state, dt, elapsed, reducedMotion) {
       const stepId = state?.stepId;
       const activePart = state?.activePart;
       if (!reducedMotion) {
-        tsh.rotation.y += dt * 0.6;
-        horm.rotation.y -= dt * 0.5;
+        tshGroup.rotation.y += dt * 0.55;
+        hormGroup.rotation.y -= dt * 0.48;
+        pitRing.rotation.z += dt * 0.35;
       }
       for (const [id, flow] of Object.entries(flows)) {
         flow.setActive(id === stepId);
@@ -353,9 +586,9 @@ function buildThyroidScene({ THREE, scene }) {
       }
       for (const [id, { mesh, mat, baseScale }] of partMap.entries()) {
         const focused = activePart === id || (!activePart && (state?.from === id || state?.to === id));
-        mat.emissiveIntensity = focused ? 0.52 : 0.06;
-        mat.opacity = focused ? 0.96 : 0.64;
-        const f = focused ? 1.1 : 0.97;
+        mat.emissiveIntensity += ((focused ? 0.46 : 0.06) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? 0.98 : 0.62) - mat.opacity) * 0.14;
+        const f = focused ? 1.08 : 0.97;
         mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
       }
     },
@@ -363,10 +596,10 @@ function buildThyroidScene({ THREE, scene }) {
 }
 
 const BUILDERS = {
-  "heart-flow-v1": { build: buildHeartScene, camera: [0, 0.2, 7.6], label: "心脏血液双循环 3D 互动沙盘" },
-  "lung-gas-exchange-v1": { build: buildLungScene, camera: [0, 0.25, 6.8], label: "肺与肺泡气体交换 3D 互动沙盘" },
-  "kidney-filtration-v1": { build: buildKidneyScene, camera: [0, 0.25, 6.4], label: "肾单位滤过与重吸收 3D 互动沙盘" },
-  "thyroid-feedback-v1": { build: buildThyroidScene, camera: [0, 0.15, 6.2], label: "垂体与甲状腺负反馈 3D 互动沙盘" },
+  "heart-flow-v1": { build: buildHeartScene, camera: [0.35, 0.25, 7.2], label: "心脏血液双循环 3D 真实解剖沙盘" },
+  "lung-gas-exchange-v1": { build: buildLungScene, camera: [0, 0.2, 6.7], label: "肺与肺泡气体交换 3D 真实解剖沙盘" },
+  "kidney-filtration-v1": { build: buildKidneyScene, camera: [0.1, 0.25, 6.7], label: "肾单位滤过与重吸收 3D 互动沙盘" },
+  "thyroid-feedback-v1": { build: buildThyroidScene, camera: [0, 0.15, 6.4], label: "垂体与甲状腺负反馈 3D 互动沙盘" },
 };
 
 export function hasOrgan3D(type) {
@@ -383,8 +616,9 @@ export default function OrganScene3D({ learning, activePart, activeStep, onPart,
   return (
     <ThreeStage
       ariaLabel={spec.label}
-      badge="3D 互动沙盘 · 磨砂玻璃"
-      hint="拖拽 360° 旋转 · 滚轮/双指缩放 · 点击任意结构查看解释"
+      badge="3D 解剖互动沙盘 · NIH HRA"
+      hint="拖拽 360° 旋转 · 滚轮/双指缩放 · 点击真实解剖结构查看对应解释"
+      attribution={HUBMAP_ATTRIBUTION}
       cameraPosition={spec.camera}
       cameraTarget={[0, 0, 0]}
       buildScene={buildScene}

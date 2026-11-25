@@ -42,3 +42,19 @@
 | `report-anatomy` | 单子怎么读 | 检验报告单的列结构：项目名 / 结果 / 单位 / 参考区间，四列编号对应页面图例 |
 
 自制示意图不是按真实比例绘制的解剖图，也不替代医学影像或检验结果；修改图形时仍需重新核对事实与简化说明。第三方图片与自制示意图的判断标准一致：未核对权利或与当前发布版本不一致的素材不会进入发布快照，无图时页面保持纯文字，不占位。
+
+## 3D 解剖网格模型（Three.js 互动视图）
+
+3D 透明人体位置透视（`BodyMap3D`）及心脏、肺、肾脏、甲状腺 3D 互动沙盘（`OrganScene3D`）使用的真实成人参考解剖三维网格来自美国国立卫生研究院 [NIH HuBMAP Human Reference Atlas (HRA)](https://humanatlas.io/)，依据 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 使用。原始科研 `.glb` 资产通过 `scripts/prepare-3d-models.mjs` 进行网格合并、减面、平滑法线重建及 Meshopt 几何压缩后存于 `public/media/models/`，页面在 3D 视口下方直接展示来源与授权链接。
+
+| 本地文件 | 解剖内容 | 官方来源（NIH HuBMAP HRA） |
+| --- | --- | --- |
+| `public/media/models/torso.glb` | 上半身躯干透明轮廓（裁自标准成人皮肤外壳） | [skin-male v1.4](https://cdn.humanatlas.io/digital-objects/ref-organ/skin-male/v1.4/assets/3d-vh-m-skin.glb) |
+| `public/media/models/heart.glb` | 心脏四腔室（右心房、右心室、左心房、左心室） | [heart-male v1.3](https://cdn.humanatlas.io/digital-objects/ref-organ/heart-male/v1.3/assets/3d-vh-m-heart.glb) |
+| `public/media/models/lung.glb` | 双肺外叶与内部支气管树 | [lung-male v1.4](https://cdn.humanatlas.io/digital-objects/ref-organ/lung-male/v1.4/assets/3d-vh-m-lung.glb) |
+| `public/media/models/liver.glb` | 肝脏左右叶 | [liver-male v1.2](https://cdn.humanatlas.io/digital-objects/ref-organ/liver-male/v1.2/assets/3d-vh-m-liver.glb) |
+| `public/media/models/pancreas.glb` | 胰腺头、体、尾部 | [pancreas-male v1.3](https://cdn.humanatlas.io/digital-objects/ref-organ/pancreas-male/v1.3/assets/3d-vh-m-pancreas.glb) |
+| `public/media/models/kidneys.glb` | 腹膜后双侧肾脏 | [kidney-male-left v1.3](https://cdn.humanatlas.io/digital-objects/ref-organ/kidney-male-left/v1.3/assets/3d-vh-m-kidney-l.glb) · [kidney-male-right v1.3](https://cdn.humanatlas.io/digital-objects/ref-organ/kidney-male-right/v1.3/assets/3d-vh-m-kidney-r.glb) |
+| `public/media/models/trachea.glb` | 气管与喉软骨（甲状腺与气道位置锚点） | [trachea-male v1.1](https://cdn.humanatlas.io/digital-objects/ref-organ/trachea-male/v1.1/assets/3d-vh-m-trachea.glb) · [larynx-male v1.1](https://cdn.humanatlas.io/digital-objects/ref-organ/larynx-male/v1.1/assets/3d-vh-m-larynx.glb) |
+
+注：甲状腺腺体及文章内概念微结构切片（肺结节磨玻璃密度、骨小梁微结构、颈动脉管壁剖面）为知愈基于 Three.js 自行构建的程序化科普三维模型，不涉及第三方版权素材。

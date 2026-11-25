@@ -26,6 +26,7 @@ import { nextIndicator } from "../services/discovery";
 import { ReportRowStrip } from "./ReportGuide";
 import { REPORT_ROWS } from "../services/report-guide";
 import FeedbackBox from "./FeedbackBox";
+import IndicatorFlowchart from "./IndicatorFlowchart";
 import ConceptSlice3D from "./three/ConceptSlice3D";
 
 function FigureBlock({ figure, id = "article-figure" }) {
@@ -249,12 +250,21 @@ export default function Article({
           </header>
           {entryFigure && <FigureBlock key={detail.id} figure={entryFigure} />}
           {figures.opening && <FigureBlock key={`${detail.id}-opening`} figure={figures.opening} />}
+          {!isStory && (
+            <IndicatorFlowchart
+              detail={detail}
+              relatedIndicators={relatedIndicators}
+              go={go}
+              onOpen={onOpen}
+            />
+          )}
           {!isStory && <ConceptSlice3D id={id} />}
           <nav className="reading-toc" aria-label="文章目录">
             <span>深入阅读</span>
             <a href="#article-overview">它是什么</a>
             {hasReportRows && <a href="#article-report-rows">单子上的位置</a>}
             {figures.firstAnchor && <a href={`#${figures.firstAnchor}`}>图解</a>}
+            {!isStory && detail.chain?.length >= 3 && <a href="#article-flowchart">可视化流程图</a>}
             {longForm && detail.sections.slice(1).map((section, index) => (
               <a key={section.title} href={`#article-section-${index + 2}`}>{section.short || section.title}</a>
             ))}

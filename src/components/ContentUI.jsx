@@ -112,9 +112,10 @@ export function NextEntry({ item, onOpen }) {
 }
 
 export function QuestionRow({ item, onOpen }) {
+  const thumb = item.leadFigure?.src;
   return (
     <RouteLink page="article" id={item.id}
-      className="question-row"
+      className={`question-row${thumb ? " has-thumb" : ""}`}
       onNavigate={() => onOpen(item.id)}
     >
       <span className="question-number" aria-hidden="true">{item.number || "—"}</span>
@@ -125,8 +126,15 @@ export function QuestionRow({ item, onOpen }) {
         {item.match && <span className="search-match">匹配：{item.match}</span>}
       </span>
       <span className="question-row-meta">
-        {contentTrust(item).short} · {item.referenceCount} 份来源
-        <ArrowRight size={16} aria-hidden="true" />
+        {thumb && (
+          <span className="question-row-thumb" aria-hidden="true">
+            <img src={thumb} alt="" width={item.leadFigure.width || 960} height={item.leadFigure.height || 640} loading="lazy" decoding="async" />
+          </span>
+        )}
+        <span className="question-row-meta-line">
+          {contentTrust(item).short} · {item.referenceCount} 份来源
+          <ArrowRight size={16} aria-hidden="true" />
+        </span>
       </span>
     </RouteLink>
   );

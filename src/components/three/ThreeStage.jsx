@@ -21,9 +21,10 @@ export default function ThreeStage({
   ariaLabel = "3D 互动示意图",
   badge = "3D 互动沙盘",
   hint = "拖拽旋转 · 滚轮/双指缩放 · 点击高亮结构",
+  attribution = null,
   cameraPosition = [0, 0.5, 6.2],
   cameraTarget = [0, 0, 0],
-  fov = 38,
+  fov = 36,
   buildScene,
   sceneState,
   onPick,
@@ -32,6 +33,7 @@ export default function ThreeStage({
   controlsExtra = null,
 }) {
   const mountRef = useRef(null);
+  const pinsRef = useRef(null);
   const stateRef = useRef(sceneState);
   const pickRef = useRef(onPick);
   const fallbackRef = useRef(onFallback);
@@ -67,7 +69,9 @@ export default function ThreeStage({
     );
 
     const mediaQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    const onMotionChange = (e) => { reducedMotion = e.matches; };
+    const onMotionChange = (e) => {
+      reducedMotion = e.matches;
+    };
     mediaQuery?.addEventListener?.("change", onMotionChange);
 
     async function init() {
@@ -88,7 +92,7 @@ export default function ThreeStage({
 
         renderer = new THREE.WebGLRenderer({
           antialias: true,
-          alpha: false,
+          alpha: true,
           powerPreference: "high-performance",
         });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -105,7 +109,7 @@ export default function ThreeStage({
         controls.enableDamping = true;
         controls.dampingFactor = 0.08;
         controls.enablePan = false;
-        controls.minDistance = 2.6;
+        controls.minDistance = 2.4;
         controls.maxDistance = 11.5;
         controls.maxPolarAngle = Math.PI * 0.88;
         controls.minPolarAngle = Math.PI * 0.12;
@@ -130,16 +134,90 @@ export default function ThreeStage({
           glideTo(cameraPosition, cameraTarget);
         };
 
-        const built = buildScene({
-          THREE,
-          scene,
-          camera,
-          controls,
-          studio,
-          glideTo,
-          initialState: stateRef.current,
-        }) || {};
+        // Support both sync and async buildScene (e.g. awaiting compressed GLB loads)
+        const built =
+          (await buildScene({
+            THREE,
+            scene,
+            camera,
+            controls,
+            studio,
+            glideTo,
+            initialState: stateRef.current,
+          })) || {};
+        if (cancelled) {
+          built.dispose?.();
+          return;
+        }
         customDispose = built.dispose;
+
+        // Projected 3D-to-2D HTML callout pins (DOM-driven for 60 FPS with zero React churn)
+        const pinNodes = new Map();
+        const projVec = new THREE.Vector3();
+        const updatePins = () => {
+          const pinHost = pinsRef.current;
+          if (!pinHost || typeof built.getPins !== "function") return;
+          const items = built.getPins(stateRef.current) || [];
+          const activeIds = new Set();
+          const w = container.clientWidth || width;
+          const h = container.clientHeight || height;
+
+          for (const item of items) {
+            activeIds.add(item.id);
+            let el = pinNodes.get(item.id);
+            if (!el) {
+              el = document.createElement("div");
+              el.className = "three-pin";
+              const dot = document.createElement("span");
+              dot.className = "three-pin-dot";
+              const card = document.createElement("span");
+              card.className = "three-pin-card";
+              const title = document.createElement("b");
+              const sub = document.createElement("small");
+              card.append(title, sub);
+              el.append(dot, card);
+              pinHost.appendChild(el);
+              pinNodes.set(item.id, el);
+            }
+            const titleEl = el.querySelector("b");
+            const subEl = el.querySelector("small");
+            if (titleEl && titleEl.textContent !== item.title) titleEl.textContent = item.title;
+            const subText = item.subtitle || "";
+            if (subEl && subEl.textContent !== subText) subEl.textContent = subText;
+            if (subEl) subEl.style.display = subText ? "" : "none";
+            el.dataset.active = item.active ? "true" : "false";
+            if (item.tone) el.dataset.tone = item.tone;
+
+            if (item.worldObject) {
+              item.worldObject.getWorldPosition(projVec);
+              if (item.offset) projVec.add(item.offset);
+            } else if (Array.isArray(item.pos)) {
+              projVec.set(item.pos[0], item.pos[1], item.pos[2]);
+            }
+            projVec.project(camera);
+            if (projVec.z > 1) {
+              el.style.opacity = "0";
+              continue;
+            }
+            const sx = (projVec.x * 0.5 + 0.5) * w;
+            const sy = (-projVec.y * 0.5 + 0.5) * h;
+            const padX = 16;
+            const padY = 44;
+            const clampedX = Math.max(padX, Math.min(w - padX, sx));
+            const clampedY = Math.max(padY, Math.min(h - 24, sy));
+            // Flip label left when pin is on the right half so it never clips off the edge
+            el.dataset.side = clampedX > w * 0.58 ? "left" : "right";
+            el.style.opacity = "1";
+            el.style.left = `${clampedX.toFixed(1)}px`;
+            el.style.top = `${clampedY.toFixed(1)}px`;
+          }
+          for (const [id, el] of pinNodes.entries()) {
+            if (!activeIds.has(id)) {
+              el.remove();
+              pinNodes.delete(id);
+            }
+          }
+        };
 
         // Pointer click picking vs orbit drag
         const raycaster = new THREE.Raycaster();
@@ -160,7 +238,7 @@ export default function ThreeStage({
           pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
           raycaster.setFromCamera(pointer, camera);
           const hits = raycaster.intersectObjects(scene.children, true);
-          const hit = hits.find(item => item.object?.userData?.partId);
+          const hit = hits.find((item) => item.object?.userData?.partId);
           if (hit) {
             pickRef.current(hit.object.userData.partId);
           }
@@ -173,7 +251,7 @@ export default function ThreeStage({
           pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
           raycaster.setFromCamera(pointer, camera);
           const hits = raycaster.intersectObjects(scene.children, true);
-          const hit = hits.find(item => item.object?.userData?.partId);
+          const hit = hits.find((item) => item.object?.userData?.partId);
           renderer.domElement.style.cursor = hit ? "pointer" : "grab";
         };
 
@@ -195,6 +273,7 @@ export default function ThreeStage({
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
           renderer.setSize(w, h, false);
+          updatePins();
         });
         resizeObserver.observe(container);
 
@@ -235,13 +314,14 @@ export default function ThreeStage({
           built.update?.(stateRef.current, dt, elapsed, reducedMotion, glideTo);
           controls.update();
           renderer.render(scene, camera);
+          updatePins();
         };
 
         setStatus("ready");
-        // Render first frame immediately so screenshots and reduced-motion see a crisp scene
         built.update?.(stateRef.current, 0.016, 0, reducedMotion, glideTo);
         controls.update();
         renderer.render(scene, camera);
+        updatePins();
         rafId = window.requestAnimationFrame(loop);
       } catch {
         if (!cancelled) {
@@ -259,6 +339,7 @@ export default function ThreeStage({
       if (rafId) window.cancelAnimationFrame(rafId);
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();
+      if (pinsRef.current) pinsRef.current.innerHTML = "";
       customDispose?.();
       controls?.dispose();
       studio?.dispose();
@@ -272,10 +353,12 @@ export default function ThreeStage({
   }, [buildScene, ariaLabel, fov]);
 
   if (status === "unavailable") {
-    return fallback || (
-      <div className="three-stage-fallback" role="status">
-        当前设备暂不支持 WebGL 3D 视图，已保留静态图文解释。
-      </div>
+    return (
+      fallback || (
+        <div className="three-stage-fallback" role="status">
+          当前设备暂不支持 WebGL 3D 视图，已保留静态图文解释。
+        </div>
+      )
     );
   }
 
@@ -283,10 +366,11 @@ export default function ThreeStage({
     <div className={`three-stage ${className}`.trim()}>
       <div className="three-stage-viewport">
         <div className="three-stage-host" ref={mountRef} />
+        <div className="three-stage-pins" ref={pinsRef} aria-hidden="true" />
         {status === "loading" && (
           <div className="three-stage-loading" role="status">
             <span className="three-stage-spinner" aria-hidden="true" />
-            <span>正在加载 3D 互动舞台…</span>
+            <span>正在加载真实 3D 解剖模型…</span>
           </div>
         )}
       </div>
@@ -302,6 +386,18 @@ export default function ThreeStage({
       </button>
       {controlsExtra && <div className="three-stage-extra">{controlsExtra}</div>}
       {hint && <p className="three-stage-hint">{hint}</p>}
+      {attribution && (
+        <p className="three-stage-attribution">
+          3D 解剖模型：
+          <a href={attribution.url} target="_blank" rel="noreferrer">
+            {attribution.name}
+          </a>
+          {" · "}
+          <a href={attribution.licenseUrl} target="_blank" rel="noreferrer">
+            {attribution.license}
+          </a>
+        </p>
+      )}
     </div>
   );
 }

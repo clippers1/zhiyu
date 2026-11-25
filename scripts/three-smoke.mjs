@@ -12,9 +12,15 @@ const errors = [];
 try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const loadedScripts = [];
+  const failedModels = [];
   page.on("pageerror", error => errors.push(error.message));
   page.on("request", req => {
     if (req.resourceType() === "script") loadedScripts.push(req.url());
+  });
+  page.on("response", res => {
+    if (/\/media\/models\/.+\.glb/i.test(res.url()) && res.status() >= 400) {
+      failedModels.push(`${res.status()} ${res.url()}`);
+    }
   });
 
   // 1. Homepage must NOT load Three.js on initial paint.
@@ -37,52 +43,85 @@ try {
     await learning.getByRole("button", { name: /3D 互动沙盘/ }).click();
     const canvas = learning.locator(".three-stage-canvas");
     await expect(canvas).toBeVisible({ timeout: 15000 });
+    await expect(learning.locator(".three-stage-loading")).toHaveCount(0, { timeout: 15000 });
+    await expect(learning.locator(".three-stage-attribution")).toContainText("NIH HuBMAP");
     const box = await canvas.boundingBox();
     assert.ok(box && box.width >= 240 && box.height >= 240, `${slug}: 3D canvas has invalid size`);
     await learning.getByRole("button", { name: "下一步" }).click();
     await learning.getByRole("button", { name: "重置 3D 视角" }).click();
     if (screenshotDir) {
       await mkdir(screenshotDir, { recursive: true });
-      await page.waitForTimeout(350);
+      await page.waitForTimeout(550);
       await learning.screenshot({ path: `${screenshotDir}/${shotName}` });
     }
     await learning.getByRole("button", { name: /2D 原理图/ }).click();
     await expect(learning.locator(".three-stage-canvas")).toHaveCount(0);
   }
 
-  // 3. 3D Body Map on organ page
+  // 3. 3D Body Map on organ page (real NIH HuBMAP torso + 6 organs + callout pin)
   await page.goto(`${base}/organs/thyroid`, { waitUntil: "networkidle" });
   const bodyMap = page.locator("#organ-body-map");
   await bodyMap.scrollIntoViewIfNeeded();
   await bodyMap.getByRole("button", { name: /展开 3D 人体位置图/ }).click();
   await expect(bodyMap.locator(".three-stage-canvas")).toBeVisible({ timeout: 15000 });
+  await expect(bodyMap.locator(".three-stage-loading")).toHaveCount(0, { timeout: 15000 });
+  await expect(bodyMap.locator(".three-stage-attribution")).toContainText("NIH HuBMAP");
+  await expect(bodyMap.locator(".three-pin")).toBeVisible({ timeout: 10000 });
+  if (screenshotDir) {
+    await page.waitForTimeout(600);
+    await bodyMap.screenshot({ path: `${screenshotDir}/three-body-map-overview.png` });
+  }
   await bodyMap.getByRole("button", { name: "肝脏", exact: true }).click();
   await expect(bodyMap.locator(".body-map-info h3")).toHaveText("肝脏");
   if (screenshotDir) {
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(750);
     await bodyMap.screenshot({ path: `${screenshotDir}/three-body-map.png` });
   }
 
-  // 4. Three high-spatial concept slices inside articles
+  // 4. Three high-spatial concept slices + interactive indicator flowchart on articles
   for (const [slug, secondMode, shotName] of [
     ["lung-nodule", "部分实性（混合型）", "three-lung-nodule.png"],
     ["bone-density", "稀疏多孔支架", "three-bone-density.png"],
     ["carotid-ultrasound", "局部斑块隆起", "three-carotid-plaque.png"],
   ]) {
     await page.goto(`${base}/article/${slug}`, { waitUntil: "networkidle" });
+    const flowchart = page.locator("#article-flowchart");
+    await expect(flowchart).toBeVisible();
+    await flowchart.getByRole("tab", { name: /看单四步路径/ }).click();
+    await expect(flowchart.locator(".flowchart-detail")).toContainText("看单第 01 步");
+    await flowchart.getByRole("tab", { name: /原理与检测流程/ }).click();
+
     const box = page.locator("#article-concept-3d");
     await box.scrollIntoViewIfNeeded();
     await expect(box.locator(".three-stage-canvas")).toHaveCount(0);
     await box.getByRole("button", { name: /打开 3D 观察/ }).click();
     await expect(box.locator(".three-stage-canvas")).toBeVisible({ timeout: 15000 });
+    await expect(box.locator(".three-stage-loading")).toHaveCount(0, { timeout: 15000 });
     await box.getByRole("button", { name: secondMode, exact: true }).click();
     if (screenshotDir) {
-      await page.waitForTimeout(350);
+      await page.waitForTimeout(550);
       await box.screenshot({ path: `${screenshotDir}/${shotName}` });
     }
   }
 
-  // 5. Mobile 320px/390px overflow safety check with 3D open
+  // 5. Capture indicator flowchart & directory thumbnails & report guide flowchart
+  if (screenshotDir) {
+    await page.goto(`${base}/article/glucose`, { waitUntil: "networkidle" });
+    const fc = page.locator("#article-flowchart");
+    await fc.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+    await fc.screenshot({ path: `${screenshotDir}/indicator-flowchart-glucose.png` });
+    await fc.getByRole("tab", { name: /看单四步路径/ }).click();
+    await page.waitForTimeout(200);
+    await fc.screenshot({ path: `${screenshotDir}/indicator-flowchart-reading.png` });
+
+    await page.goto(`${base}/indicators`, { waitUntil: "networkidle" });
+    await expect(page.locator(".question-row-thumb img").first()).toBeVisible();
+    await page.waitForTimeout(250);
+    await page.screenshot({ path: `${screenshotDir}/indicators-thumbs.png`, fullPage: false });
+  }
+
+  // 6. Mobile 320px/390px overflow safety check with 3D + flowchart open
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto(`${base}/article/lung-nodule`, { waitUntil: "networkidle" });
@@ -90,12 +129,13 @@ try {
     await expect(page.locator("#article-concept-3d .three-stage-canvas")).toBeVisible({ timeout: 15000 });
     assert.ok(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-      `3D slice overflow at ${width}px`,
+      `3D slice + flowchart overflow at ${width}px`,
     );
   }
 
+  assert.deepEqual(failedModels, [], `Failed GLB model requests: ${failedModels.join(", ")}`);
   assert.deepEqual(errors, []);
-  console.log("PASS Three.js lazy loading (zero homepage chunk), 4 organ 3D sandboxes, 3D body map, 3 article concept slices and 320px responsive layout.");
+  console.log("PASS NIH HuBMAP GLB models, lazy loading, 4 organ 3D sandboxes, 3D body map, 3 article concept slices, indicator flowcharts and 320px responsive layout.");
 } finally {
   await browser.close();
 }

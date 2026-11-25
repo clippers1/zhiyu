@@ -352,9 +352,7 @@ export default function VisualLearning({ content }) {
           <LearningDiagram learning={learning} activePart={part} activeStep={step} onPart={id => { setPlaying(false); setPart(id); }} />
         )}
         <p className="learning-legend">{diagram.legend.map(item => <React.Fragment key={item.label}><i className={item.className} /> {item.label}</React.Fragment>)}；颜色只是辅助，箭头和文字会同时说明方向。</p>
-        {viewMode === "3d" && can3D ? (
-          <p className="learning-attribution">示意图来源：知愈 Three.js 程序化磨砂玻璃三维互动沙盘（无第三方底图依赖）。</p>
-        ) : (
+        {viewMode === "3d" && can3D ? null : (
           <>
             {diagram.attribution && <p className="learning-attribution">医学底图：<a href={diagram.attribution.url} target="_blank" rel="noreferrer">{diagram.attribution.name}</a>，<a href={diagram.attribution.licenseUrl} target="_blank" rel="noreferrer">{diagram.attribution.license}</a>。</p>}
             {diagram.attributions && <p className="learning-attribution">医学底图：Servier Medical Art by Servier（{diagram.attributions.map((item, index) => <React.Fragment key={item.url}>{index > 0 && "、"}<a href={item.url} target="_blank" rel="noreferrer">{item.name}</a></React.Fragment>)}），<a href={diagram.licenseUrl} target="_blank" rel="noreferrer">{diagram.license}</a>。</p>}
