@@ -1,0 +1,312 @@
+{
+  "id": "white-coat-bp",
+  "catalogOrder": 205,
+  "title": "在家测血压挺正常，为什么一去医院或体检中心就偏高？",
+  "english": "WHITE COAT EFFECT & HOME BLOOD PRESSURE",
+  "subtitle": "血压每分钟都在随情绪、姿势和环境波动，一次诊室读数往往不能代表你的全天状态。",
+  "question": "在家测血压挺正常，为什么一去医院或体检中心就偏高？",
+  "questionAnswer": "在医院或体检中心面对陌生环境、赶路排队或下意识紧张时，交感神经兴奋会让血压短暂升高，这就是常见的「白大衣效应」；规范的家庭连续自测或动态血压监测，能帮医生看清你平时真实的基础水平。",
+  "icon": "heart-pulse",
+  "color": "purple",
+  "tags": [
+    "白大衣血压",
+    "家庭自测血压",
+    "血压测量"
+  ],
+  "searchAliases": [
+    "白大衣效应",
+    "白大衣高血压",
+    "体检血压高",
+    "在家血压正常",
+    "电子血压计",
+    "量血压姿势",
+    "动态血压",
+    "white coat hypertension",
+    "home blood pressure"
+  ],
+  "number": "",
+  "format": "article",
+  "featured": false,
+  "kind": "story",
+  "category": "circulation",
+  "desc": "很多人都有过这样的困惑：平时在家里量血压一直挺稳，偏偏到了体检中心或医院诊室，袖带一充气数字就往上蹿。弄清环境、姿势和紧张情绪如何推高读数，能帮你测出更有参考价值的记录。",
+  "sections": [
+    {
+      "title": "什么叫「白大衣效应」？不是血压计坏了",
+      "short": "白大衣效应",
+      "paragraphs": [
+        {
+          "text": "血压并不是一个全天钉死的静态数字，而是会随着心跳、呼吸、情绪和体位实时调整。走进医院诊室或体检中心时，即便自己嘴上觉得并不害怕，陌生环境、等待叫号或担心结果不好的潜意识紧张，都可能促使交感神经轻微兴奋。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-info"
+          ]
+        },
+        {
+          "text": "交感神经一活跃，心跳会稍微加快、外周小血管轻度收缩，收缩压和舒张压在几分钟内就会暂时往上走。这种「在医疗场所测量偏高、回到熟悉居家环境恢复平稳」的现象，常被称为白大衣效应。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-nhlbi"
+          ]
+        },
+        {
+          "text": "反过来，还有一部分人正好相反：在医院里测看着还行，平时在家或工作压力大时反而偏高。这也是为什么单靠体检当天的一两次读数，往往很难完整还原一个人真实的血压面貌。",
+          "sourceIds": [
+            "bp-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "体检现场最容易被忽略的几个「推高读数」动作",
+      "short": "测量细节",
+      "paragraphs": [
+        {
+          "text": "除了紧张本身，体检流程里的很多细节也会悄悄把读数推高：刚快步赶到体检大厅还没坐稳就立刻伸手测量、早上为了做腹部超声憋着尿、测量前刚喝了浓茶或咖啡，或者在袖带充气时一边和护士聊天、一边跷着二郎腿。",
+          "sourceIds": [
+            "bp-meas",
+            "bp-diag"
+          ]
+        },
+        {
+          "text": "姿势和袖带尺寸同样会直接影响结果。如果手臂垂在下面没垫平、背部悬空没靠实、双脚没有平放地面，或者隔着厚毛衣套袖带、袖带尺寸过紧过松，测出来的数字都可能比真实静息血压偏高不少。",
+          "sourceIds": [
+            "bp-meas"
+          ]
+        },
+        {
+          "text": "规范的做法是在安静环境下先静坐休息片刻，排空膀胱，背部靠稳椅背、双脚自然平放不交叉，把绑着袖带的上臂放在桌面与心脏大致齐平的高度，整个充气放气过程保持安静不说话。",
+          "sourceIds": [
+            "bp-meas",
+            "bp-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么医生越来越看重「家庭自测记录」和动态血压？",
+      "short": "家庭与动态监测",
+      "paragraphs": [
+        {
+          "text": "既然诊室里的单次读数容易受环境和现场情绪干扰，医生在评估血压时，常常会建议受检者在熟悉、放松的家里，用经验证合格的上臂式电子血压计连续记录几天早晚的测量值，把记录本带去复诊。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-meas"
+          ]
+        },
+        {
+          "text": "如果诊室读数与家庭记录差距很大，或者怀疑存在夜间血压波动，医生还可能安排佩戴动态血压监测仪，在日常生活和睡眠过程中自动定时记录，从而更客观地看到白天的活动水平和夜间睡眠时的血压变化。",
+          "sourceIds": [
+            "bp-diag"
+          ]
+        },
+        {
+          "text": "把家庭记录带给医生时，写明测量时间（例如晨起排尿后、睡前）、是否静坐以及当时有没有服药或不适，比只口头说一句「我在家量都很低」要有用得多。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-meas"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "电子血压计到底准不准？怎么选怎么测更靠谱？",
+      "short": "家用测量要点",
+      "paragraphs": [
+        {
+          "text": "很多人仍以为只有老式水银柱血压计才准确。其实经过专业机构验证合格的上臂式自动电子血压计，只要袖带尺寸匹配、测量姿势规范，准确度完全可以满足日常家庭监测需要，而且避免了个人听诊误差和汞污染风险。",
+          "sourceIds": [
+            "bp-meas",
+            "bp-diag"
+          ]
+        },
+        {
+          "text": "一般更优先选择绑在上臂的袖带式设备，而不是容易受手腕高度和血管位置影响的腕式或指夹式设备。袖带应贴合裸露上臂或仅隔极薄单层衣物，避免把厚袖子卷起来勒住上臂。",
+          "sourceIds": [
+            "bp-meas"
+          ]
+        },
+        {
+          "text": "如果不确定家里的血压计准不准，下次去门诊或社区医院时可以顺手带过去，在医护人员指导下与诊室设备做一次同臂比对，顺便核对自己的绑法与姿势是否正确。",
+          "sourceIds": [
+            "bp-meas"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "遇到「体检偏高、在家正常」，也不能掉以轻心",
+      "short": "理性对待边界",
+      "paragraphs": [
+        {
+          "text": "知道白大衣效应的存在，是为了避免被一次紧张测出的高读数吓慌，而不是把所有体检高读数都当成「没事」。临床观察发现，反复出现白大衣血压升高的人，未来真正发展为持续性高血压的概率也往往高于诊室与家庭均平稳的人群。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-info"
+          ]
+        },
+        {
+          "text": "因此，最稳妥的处理方式是既不因为体检一次偏高就自己找降压药吃，也不彻底不管：在家按规范姿势连续记录几天早晚读数，把记录与整份体检报告一起交给医生，由对方决定是继续观察、做动态血压，还是需要调整生活方式与干预。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-nhlbi"
+          ]
+        },
+        {
+          "text": "本文只解释白大衣效应与规范测量的基本原理，不给出高血压诊断数值线，也不提供降压用药或停药建议。",
+          "sourceIds": [
+            "bp-diag",
+            "bp-info"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "量血压应该量左手还是右手？两边数字不一样正常吗？",
+      "answer": "左右上臂测出的血压存在轻微差别是常见现象。初次自测时可以先分别测量双臂，若两边存在固定差异，日后通常选择读数相对偏高的那一侧手臂作为常规监测侧；如果两臂差值持续很大，应告知医生评估。",
+      "sourceIds": [
+        "bp-meas"
+      ]
+    },
+    {
+      "question": "体检时第一次量偏高，坐一会儿再量一次低下来了，算哪一次？",
+      "answer": "初次充气时因为刚走路坐下或有些紧张，读数往往偏高；安静休息几分钟后再次测量通常更接近静息状态。连续测两三次时，把几次结果都如实记录下来交给医生看，比只挑最低或最高的那一次更客观。",
+      "sourceIds": [
+        "bp-meas",
+        "bp-diag"
+      ]
+    },
+    {
+      "question": "家里买的手腕式血压计，为什么测出来经常和医院差很多？",
+      "answer": "腕式血压计对测量姿势要求极高，手腕稍微低于或高于心脏水平、手腕弯曲，都会明显改变读数。对大多数成年人来说，经过认证的上臂袖带式电子血压计稳定性更好。",
+      "sourceIds": [
+        "bp-meas"
+      ]
+    },
+    {
+      "question": "刚吃完饭或喝完咖啡，马上量血压会有影响吗？",
+      "answer": "会有影响。咖啡因、吸烟、剧烈活动和刚排尿前的憋尿状态，都可能在短时间内让血压出现波动。测量前保持半小时左右不喝咖啡不吸烟、先排尿再静坐，测出来的数字更有可比性。",
+      "sourceIds": [
+        "bp-meas",
+        "bp-diag"
+      ]
+    },
+    {
+      "question": "平时没有任何头晕头痛，是不是就说明血压一定没问题？",
+      "answer": "不是。高血压在早期乃至长期阶段常常没有任何明显症状，所以才被称为「沉默的健康风险」。不能靠有没有头晕来猜测血压高低，规律规范测量才是了解自己血压的可靠途径。",
+      "sourceIds": [
+        "bp-nhlbi",
+        "bp-info"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "key": "white-coat",
+      "alt": "示意图：同一枚血压袖带在安静居家放松环境与陌生诊室紧张环境下呈现不同的血压波动节奏，不含真实数值和显示屏数字。",
+      "caption": "环境情绪、憋尿赶路与测量姿势，都会在几分钟内真实改变血压读数。",
+      "simplification": "图为白大衣效应与测量环境差异的概念示意，不列出高血压具体诊断阈值，也不能替代规范血压测量与医生评估。",
+      "sourceIds": [
+        "bp-diag",
+        "bp-meas"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "ab70be01470699cbff8d98f9e06efb377bc5d8d1de49e90766794f04d1b1a249"
+      },
+      "src": "/media/fig-white-coat-bp.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "居家静息基线",
+          "text": "熟悉环境中先排尿、静坐靠背、上臂与心脏齐平，更能反映平时真实基础水平。"
+        },
+        {
+          "title": "诊室短暂升高",
+          "text": "排队赶路、陌生环境与紧张情绪会让交感神经兴奋，推高现场单次读数。"
+        },
+        {
+          "title": "连续记录更有用",
+          "text": "将多日规范家庭记录或动态血压交给医生，比纠结单次体检高读数更可靠。"
+        }
+      ]
+    }
+  ],
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    }
+  ],
+  "organ": "心脏 · 动脉血管",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在医院或体检中心测出血压偏高、想了解白大衣效应和家庭规范测量方法的一般成年读者。",
+  "limitations": "不提供高血压诊断或分级数值线，不指导个人启动、停用或调整降压药物。",
+  "references": [
+    {
+      "id": "bp-diag",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "High Blood Pressure - Diagnosis",
+      "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/diagnosis",
+      "scope": "诊室测量、白大衣效应、家庭自测与动态血压监测的互补作用及测量前准备",
+      "locator": "How is high blood pressure diagnosed?; Blood pressure tests",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bp-meas",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Blood pressure measurement",
+      "url": "https://medlineplus.gov/ency/article/007490.htm",
+      "scope": "规范测血压的坐姿、袖带尺寸、上臂位置、静坐休息及咖啡因/运动等干扰因素",
+      "locator": "How to Prepare for the Test; How the Test is Performed",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bp-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "High Blood Pressure",
+      "url": "https://medlineplus.gov/highbloodpressure.html",
+      "scope": "高血压早期常无症状的特点及需要规律测量的原因",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bp-nhlbi",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "High Blood Pressure - What Is High Blood Pressure?",
+      "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure",
+      "scope": "血压随活动与情绪自然起伏的生理特点及长期监测意义",
+      "locator": "What is high blood pressure?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "bp-diag",
+    "bp-meas"
+  ],
+  "tipSourceIds": [
+    "bp-diag",
+    "bp-meas"
+  ]
+}

@@ -11,8 +11,12 @@ page.on('pageerror', error => errors.push(error.message));
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
   await expect(page.locator('.home-feature')).toHaveCount(1);
-  await expect(page.locator('.home-quick-pill')).toHaveCount(8);
+  await expect(page.locator('.home-quick-pill')).toHaveCount(10);
   await expect(page.locator('.home-index:not(.home-stories) .index-row')).toHaveCount(8);
+  await expect(page.locator('.home-stories .index-row')).toHaveCount(4);
+  await page.locator('.stories-toggle').click();
+  await expect(page.locator('.home-stories .index-row')).toHaveCount(7);
+  await page.locator('.stories-toggle').click();
   await expect(page.locator('.home-stories .index-row')).toHaveCount(4);
   await expect(page.locator('.home-reading-path a')).toHaveCount(1);
   await expect(page.locator('#organ-topics .body-row')).toHaveCount(6);
@@ -21,8 +25,7 @@ try {
   await expect(page).toHaveURL(/\/indicators#indicator-search$/);
   await expect(page.locator('#indicator-search')).toBeInViewport();
   await page.getByRole('textbox', { name: '筛选体检项目' }).fill('LDL');
-  await expect(page.locator('.question-row')).toHaveCount(1);
-  await expect(page.locator('.question-row')).toContainText('血脂');
+  await expect(page.locator('.question-row').first()).toContainText('血脂');
   await page.getByRole('textbox', { name: '筛选体检项目' }).fill('');
   await page.getByRole('link', { name: /血糖项目主要看什么/ }).first().click();
   await expect(page.getByRole('heading', { name: '血糖项目主要看什么？' })).toBeVisible();

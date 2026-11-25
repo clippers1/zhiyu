@@ -23,7 +23,12 @@
     "低回声结节",
     "细针穿刺",
     "FNA",
-    "thyroid nodule"
+    "thyroid nodule",
+    "甲状腺3类",
+    "甲状腺4类",
+    "实性结节",
+    "钙化灶",
+    "甲状腺穿刺"
   ],
   "number": "11",
   "format": "article",
@@ -36,15 +41,24 @@
       "paragraphs": [
         {
           "text": "体检报告上写着「甲状腺结节」，说的只是超声在甲状腺里看到了一个或多个与周围组织边界可分辨的小团块。它可能是充满液体的小囊肿、良性增生，也可能是需要进一步确认性质的实性结节。",
-          "sourceIds": ["nodule-ency", "thyroid-diseases"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-diseases"
+          ]
         },
         {
           "text": "甲状腺结节在普通成年人中非常常见，尤其是随着年龄增长和超声设备分辨率提高，几毫米的微小结构也能被清晰扫出来。绝大多数偶然发现的甲状腺结节都是良性的，且不会引起疼痛或明显不适。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         },
         {
           "text": "所以看到「结节」二字不必先等同于恶性肿瘤。超声报告真正要帮你和医生做的，是把它的外形特征记录清楚，判断下一步是安心定期复查，还是需要做更细致的检查。",
-          "sourceIds": ["nodule-ency", "sonogram"]
+          "sourceIds": [
+            "nodule-ency",
+            "sonogram"
+          ]
         }
       ]
     },
@@ -54,15 +68,23 @@
       "paragraphs": [
         {
           "text": "翻开甲状腺超声单，常见「实性/囊性」「低回声/高回声」「边界清楚/不清」「纵横比」「钙化」等术语。超声医生并不是只凭大小下判断，而是综合观察结节的成分、内部回声、边缘形态和钙化特征。",
-          "sourceIds": ["sonogram", "nodule-ency"]
+          "sourceIds": [
+            "sonogram",
+            "nodule-ency"
+          ]
         },
         {
           "text": "简单理解，成分描述的是里面是液体（囊性）、实体组织（实性）还是两者混合；回声强弱是与周围正常甲状腺组织对比的明暗表现；边界和形态则描述它的轮廓是否规整。",
-          "sourceIds": ["sonogram", "nodule-ency"]
+          "sourceIds": [
+            "sonogram",
+            "nodule-ency"
+          ]
         },
         {
           "text": "这些特征单独拿出来某一条往往不足以定性，需要组合评估。不同医院或不同医师在文字措辞上略有差异，这也是为什么要引入标准化分级系统。",
-          "sourceIds": ["nodule-ency"]
+          "sourceIds": [
+            "nodule-ency"
+          ]
         }
       ]
     },
@@ -72,15 +94,24 @@
       "paragraphs": [
         {
           "text": "很多报告末尾会写出类似「TI-RADS 2 类 / 3 类 / 4 类」或「C-TIRADS」的分类。它是一套把上述超声特征汇总成标准化风险分层的语言，方便不同医院、不同科室的医生用统一口径沟通「可疑特征多不多」以及「下一步建议怎么处理」。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         },
         {
           "text": "需要牢记的是，任何影像学分级都属于无创风险评估，而不是最终病理诊断。数字高一些并不等于已经确诊恶性，只是提示医生结合结节大小和个人情况，评估是否需要缩短复查间隔或安排穿刺检查。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         },
         {
           "text": "当影像特征与大小达到一定指征时，临床常用的明确性质方式是超声引导下细针穿刺活检（FNA）：用很细的针取出少量细胞在显微镜下观察，这比单看超声图像能提供更直接的细胞学证据。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         }
       ]
     },
@@ -90,15 +121,23 @@
       "paragraphs": [
         {
           "text": "颈部超声看的是甲状腺「长什么样」（形态），而抽血查 TSH、T4、T3 看的是甲状腺「干活快不快」（功能）。两者回答的是两个独立的问题。",
-          "sourceIds": ["thyroid-tests", "thyroid-diseases"]
+          "sourceIds": [
+            "thyroid-tests",
+            "thyroid-diseases"
+          ]
         },
         {
           "text": "绝大多数长了结节的人，血液里的甲状腺激素水平依然完全正常；也有少数结节会自主分泌过多激素，使 TSH 偏低。因此查出结节后，医生常会同步参考抽血甲功，确认功能有没有受影响。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         },
         {
           "text": "如果结节体积较大，还可能对旁边的气管或食管产生机械压迫，引起吞咽异物感、声音变化或颈前隆起。有没有这些局部症状，也是线下就诊时医生会重点询问的内容。",
-          "sourceIds": ["nodule-ency"]
+          "sourceIds": [
+            "nodule-ency"
+          ]
         }
       ]
     },
@@ -108,11 +147,17 @@
       "paragraphs": [
         {
           "text": "把这次的完整超声报告（包括结节所在侧叶、三径大小、形态描述和分级）妥善保存。甲状腺结节随访非常看重「前后对比」：同一颗结节几年里大小和形态有没有明显变化，往往比单次孤立测量更有参考价值。",
-          "sourceIds": ["nodule-ency", "thyroid-tests"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-tests"
+          ]
         },
         {
           "text": "同时带上最近一次甲功抽血结果，如有家族甲状腺疾病史或既往颈部放射线暴露史也一并告知医生。复查间隔是半年、一年还是需要进一步穿刺，请由内分泌科或甲状腺外科医生结合完整信息确定。",
-          "sourceIds": ["nodule-ency", "thyroid-diseases"]
+          "sourceIds": [
+            "nodule-ency",
+            "thyroid-diseases"
+          ]
         }
       ]
     }
@@ -121,44 +166,65 @@
     {
       "question": "甲状腺结节长大了，是不是就说明变坏了？",
       "answer": "不一定。不少良性结节或囊肿也可能随时间缓慢增大或因内部少量出血而变大；大小变化是医生决定是否复查或穿刺的参考因素之一，但性质仍需结合超声形态特征及必要时的细胞学检查判断。",
-      "sourceIds": ["nodule-ency"]
+      "sourceIds": [
+        "nodule-ency"
+      ]
     },
     {
       "question": "查出结节后，是不是以后绝对不能吃加碘盐和海鲜了？",
       "answer": "是否需要调整碘摄入取决于甲状腺功能状态（例如是否合并甲亢或特定甲状腺疾病），而不是一看到结节就一律严格忌碘。日常饮食和碘摄入调整应结合甲功抽血结果向医生确认。",
-      "sourceIds": ["thyroid-diseases", "thyroid-tests"]
+      "sourceIds": [
+        "thyroid-diseases",
+        "thyroid-tests"
+      ]
     },
     {
       "question": "多发结节是不是比单发结节更危险？",
       "answer": "数量多少本身不直接决定良恶性。医生在看多发结节时，通常会对每一颗有特点的结节分别评估形态特征和分级，而不是只因为「多发」就下更重的结论。",
-      "sourceIds": ["nodule-ency"]
+      "sourceIds": [
+        "nodule-ency"
+      ]
     },
     {
       "question": "细针穿刺（FNA）是不是像手术一样创伤很大？",
       "answer": "细针穿刺不是开放手术，而是在超声实时引导下用很细的针抽取微量细胞样本的门诊检查，用于协助判断结节性质；是否需要做穿刺有明确的影像和大小评估标准，并非所有结节都需要穿刺。",
-      "sourceIds": ["nodule-ency", "thyroid-tests"]
+      "sourceIds": [
+        "nodule-ency",
+        "thyroid-tests"
+      ]
     },
     {
       "question": "两次在不同医院做的超声，量出来的毫米数差了一两毫米，算长大了么？",
       "answer": "超声测量会受切面角度、探头压迫和仪器差异影响，一两毫米的细微波动在日常检查中很常见。追踪变化时，建议携带历次报告，尽量参考同一套标准由医生对比走势。",
-      "sourceIds": ["sonogram", "nodule-ency"]
+      "sourceIds": [
+        "sonogram",
+        "nodule-ency"
+      ]
     }
   ],
   "metrics": [
     {
       "name": "颈部甲状腺超声（形态与 TI-RADS 分级）",
       "text": "无创评估结节数量、大小、囊实性成分、边界、回声与风险分层的基础工具。",
-      "sourceIds": ["sonogram", "nodule-ency"]
+      "sourceIds": [
+        "sonogram",
+        "nodule-ency"
+      ]
     },
     {
       "name": "甲状腺功能抽血（TSH / T4 / T3）",
       "text": "观察结节是否伴随甲状腺激素分泌过多或不足，回答功能侧的问题。",
-      "sourceIds": ["thyroid-tests"]
+      "sourceIds": [
+        "thyroid-tests"
+      ]
     },
     {
       "name": "超声引导细针穿刺（FNA）",
       "text": "对符合评估指征的结节获取少量细胞进行显微镜检查，用于进一步明确性质。",
-      "sourceIds": ["nodule-ency", "thyroid-tests"]
+      "sourceIds": [
+        "nodule-ency",
+        "thyroid-tests"
+      ]
     }
   ],
   "chain": [
@@ -167,7 +233,10 @@
     "对照甲功抽血评估激素状态",
     "由医生决定定期随访或进一步穿刺"
   ],
-  "chainSourceIds": ["nodule-ency", "thyroid-tests"],
+  "chainSourceIds": [
+    "nodule-ency",
+    "thyroid-tests"
+  ],
   "tip": "绝大多数体检发现的甲状腺结节为良性。超声分级用于辅助沟通风险和随访计划，不是最终病理诊断；复查时保留历次报告便于前后对照。",
   "figures": [
     {
@@ -178,11 +247,24 @@
       "alt": "3D概念示意图：透明蝴蝶状甲状腺内可见一颗光滑柔和的小圆珠状结节，右侧超声探头发出柔和青绿色声波弧线进行扫查。",
       "caption": "颈部超声通过多维形态特征对结节做风险分层，功能状态则需通过抽血甲功另行确认。",
       "simplification": "图为概念示意，未按真实解剖比例绘制，不代表特定分级、良恶性或穿刺指征。",
-      "sourceIds": ["nodule-ency", "sonogram", "thyroid-tests"],
+      "sourceIds": [
+        "nodule-ency",
+        "sonogram",
+        "thyroid-tests"
+      ],
       "legend": [
-        { "title": "形态检查（超声）", "text": "观察结节的囊实性、回声、边界与大小，汇总为标准化分级供随访参考。" },
-        { "title": "功能检查（抽血）", "text": "通过 TSH 等指标确认激素分泌是否平稳，很多结节并不影响甲状腺功能。" },
-        { "title": "动态对比与进一步确认", "text": "保留历次报告观察变化，仅在医生评估有指征时通过细针穿刺获取细胞证据。" }
+        {
+          "title": "形态检查（超声）",
+          "text": "观察结节的囊实性、回声、边界与大小，汇总为标准化分级供随访参考。"
+        },
+        {
+          "title": "功能检查（抽血）",
+          "text": "通过 TSH 等指标确认激素分泌是否平稳，很多结节并不影响甲状腺功能。"
+        },
+        {
+          "title": "动态对比与进一步确认",
+          "text": "保留历次报告观察变化，仅在医生评估有指征时通过细针穿刺获取细胞证据。"
+        }
       ],
       "attribution": {
         "kind": "ai-generated",
@@ -258,6 +340,16 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["nodule-ency", "thyroid-diseases"],
-  "tipSourceIds": ["nodule-ency", "thyroid-tests"]
+  "descriptionSourceIds": [
+    "nodule-ency",
+    "thyroid-diseases"
+  ],
+  "tipSourceIds": [
+    "nodule-ency",
+    "thyroid-tests"
+  ],
+  "related": [
+    "thyroid-function",
+    "breast-ultrasound"
+  ]
 }

@@ -24,7 +24,11 @@
     "OGTT",
     "口服葡萄糖耐量试验",
     "FPG",
-    "blood glucose"
+    "blood glucose",
+    "糖尿病",
+    "血糖高",
+    "空腹血糖偏高",
+    "控糖"
   ],
   "number": "01",
   "format": "article",
@@ -424,5 +428,10 @@
   "tipSourceIds": [
     "tests",
     "a1c"
+  ],
+  "related": [
+    "lipids",
+    "fatty-liver",
+    "uric-acid"
   ]
 }

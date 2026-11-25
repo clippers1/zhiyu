@@ -13,9 +13,8 @@ try {
   await expect(input).toHaveAttribute('maxlength', '200');
   for (const [query, title] of [['ＬＤＬ－Ｃ', '血脂'], ['l d l c', '血脂'], ['ＨｂＡ１ｃ', '血糖'], ['blood glucose', '血糖'], ['高压', '血压'], ['CBC', '血常规'], ['eGFR', '肾功能'], ['FT4', '甲状腺功能'], ['尿检', '尿常规']]) {
     await input.fill(query);
-    await expect(page.locator('.question-row')).toHaveCount(1);
-    await expect(page.locator('.question-row .question-row-term b')).toHaveText(title);
-    await expect(page.locator('.question-row .search-match')).toBeVisible();
+    await expect(page.locator('.question-row').first().locator('.question-row-term b')).toHaveText(title);
+    await expect(page.locator('.question-row').first().locator('.search-match')).toBeVisible();
   }
   await input.fill('glcuose');
   await expect(page.locator('.question-row')).toHaveCount(0);

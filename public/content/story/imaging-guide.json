@@ -1,0 +1,326 @@
+{
+  "id": "imaging-guide",
+  "catalogOrder": 206,
+  "title": "B 超、CT、核磁共振（MRI）和 X 光，体检里为什么不能互相替代？",
+  "english": "ULTRASOUND, CT, MRI & X-RAY COMPARED",
+  "subtitle": "不是越贵越全能，四种影像用的是完全不同的物理原理，各自有最擅长看清的部位。",
+  "question": "B 超、CT、核磁共振（MRI）和 X 光，体检里为什么不能互相替代？",
+  "questionAnswer": "超声用声波，最擅长无辐射看甲状腺、乳腺、肝胆肾和血管；X 光与 CT 用 X 射线，擅长看肺部和骨骼并做薄层断层；MRI 用磁场和射频波，对大脑、脊髓和关节软组织分辨精细。它们观察角度不同，不是简单的升级替代关系。",
+  "icon": "layers",
+  "color": "blue",
+  "tags": [
+    "影像检查",
+    "B超 / CT / MRI",
+    "检查分工"
+  ],
+  "searchAliases": [
+    "B超",
+    "彩超",
+    "超声",
+    "CT",
+    "低剂量CT",
+    "核磁共振",
+    "磁共振",
+    "MRI",
+    "X光",
+    "胸片",
+    "拍片",
+    "辐射",
+    "diagnostic imaging"
+  ],
+  "number": "",
+  "format": "article",
+  "featured": false,
+  "kind": "story",
+  "category": "respiration",
+  "desc": "拿到体检套餐或医生开出的影像申请单，很多人会纳闷：已经做了最贵的核磁，为什么还要拍 CT？或者为什么查肝胆用 B 超、查肺却要 CT？其实这四种检查就像四台镜头完全不同的相机。",
+  "sections": [
+    {
+      "title": "先记住一个底层常识：成像原理不同，擅长看的东西就不同",
+      "short": "四种物理原理",
+      "paragraphs": [
+        {
+          "text": "医院和体检中心常见的 B 超、X 光、CT 和核磁共振（MRI），并不是「普通版、进阶版、顶配版」的等级关系，而是分别利用声波、X 射线和强磁场这几种完全不同的物理信号去探测人体内部。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        },
+        {
+          "text": "人体不同组织的物理特性差别很大：骨骼致密含钙、肺里充满空气、肝脏和肌肉是实质软组织、血管和胆囊里流动着液体。某种信号穿过软组织很清楚，遇到空气或厚骨头却可能被挡住，因此没有任何一种机器能在所有器官上都做到第一。",
+          "sourceIds": [
+            "diag-img",
+            "ultrasound"
+          ]
+        },
+        {
+          "text": "理解它们各自「怕什么」和「擅长什么」，既能看懂体检套餐为什么要搭配不同项目，也能减少「是不是越贵越清楚」或者「能不能全换成没辐射的检查」的困惑。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "超声（B 超 / 彩超）：无辐射的实时窗口，但怕气体和厚骨头",
+      "short": "超声（B超）",
+      "paragraphs": [
+        {
+          "text": "超声利用高频声波遇到不同组织界面反射回来的回声成像，不产生电离辐射，还能实时看到器官搏动和血流方向（即常说的彩色多普勒超声）。",
+          "sourceIds": [
+            "ultrasound"
+          ]
+        },
+        {
+          "text": "它非常适合检查位置较表浅或实质均匀、含液体的部位，例如甲状腺、乳腺、肝脏、胆囊、肾脏、子宫附件以及颈动脉血管，能清晰分辨结节是充满液体的囊肿还是实性组织。",
+          "sourceIds": [
+            "ultrasound"
+          ]
+        },
+        {
+          "text": "超声的天然短板是声波很难穿透空气和致密骨骼。因此肺部（充满空气）和被颅骨包裹的大脑通常不靠普通超声筛查；做腹部超声时，胃肠道气体过多有时也会遮挡位于胃后方的胰腺。",
+          "sourceIds": [
+            "ultrasound",
+            "diag-img"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "X 光与 CT：看肺部和骨骼的高手，平面与断层的区别",
+      "short": "X光与CT",
+      "paragraphs": [
+        {
+          "text": "普通 X 光（如胸片、牙片、骨折拍片）就像把立体的身体压缩拍成一张平面剪影，速度快、辐射剂量极低，适合快速了解骨骼骨折或较明显的肺部大片改变；但由于前后组织重叠，很小的肺结节在胸片上容易被肋骨或心脏影子遮住。",
+          "sourceIds": [
+            "xrays",
+            "ctscans"
+          ]
+        },
+        {
+          "text": "CT 同样使用 X 射线，但机器围绕身体旋转扫描，把人体像切吐司一样切成一层层薄片并在电脑里重建图像，彻底解决了组织重叠问题。因此，观察含气的肺部细微结节、排查急性出血或看清复杂骨折与钙化时，CT 有着极高清晰度。",
+          "sourceIds": [
+            "ctscans"
+          ]
+        },
+        {
+          "text": "用于健康人群肺部筛查的常是「低剂量胸部 CT」，通过优化参数在保持肺结节分辨力的同时大幅降低辐射剂量。不过 X 光与 CT 毕竟属于电离辐射检查，都应按适应证合理安排，孕妇如无紧急医学指征通常需要提前告知医生避开。",
+          "sourceIds": [
+            "ctscans",
+            "xrays"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "核磁共振（MRI）：无电离辐射的软组织放大镜，但耗时长、忌金属",
+      "short": "核磁共振 MRI",
+      "paragraphs": [
+        {
+          "text": "MRI 不用 X 射线，而是借助强磁场和无线电射频脉冲激发体内氢原子产生信号并重建图像，因此没有电离辐射。它对大脑、脊髓、椎间盘、肌肉韧带、关节软骨以及肝脏、盆腔等软组织的细节对比度非常高。",
+          "sourceIds": [
+            "mriscans"
+          ]
+        },
+        {
+          "text": "为什么不能把所有体检都换成 MRI？首先，肺部充满空气、氢质子密度低且随呼吸不断起伏，MRI 看常规肺小结节远不如胸部 CT 清楚；其次，MRI 扫描时间明显长于 CT，机器运行声音大、空间相对封闭，容易让怕黑怕窄的人感到紧张。",
+          "sourceIds": [
+            "mriscans",
+            "ctscans"
+          ]
+        },
+        {
+          "text": "安全方面，由于强磁场会产生极大吸引力，体内装有心脏起搏器、某些金属植入物、动脉瘤夹或金属异物的人，在进入 MRI 检查室前必须由医生和技师严格核查材质与兼容性。",
+          "sourceIds": [
+            "mriscans"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么医生有时会让你「先做 B 超，再补一个 CT 或 MRI」？",
+      "short": "联合与互补",
+      "paragraphs": [
+        {
+          "text": "在体检或门诊中，经常遇到超声发现一个模糊影子、医生又建议补做 CT 或增强 MRI 的情况。这并不是前面白查了，而是不同成像原理在接力：超声便捷无创、适合大范围初筛，遇到深部结构或性质拿不准的占位时，需要借助 CT 或 MRI 的断层与组织对比度进一步看清全貌。",
+          "sourceIds": [
+            "diag-img",
+            "ultrasound",
+            "mriscans"
+          ]
+        },
+        {
+          "text": "同样，有时候需要注射对比剂（造影剂）做「增强 CT」或「增强 MRI」，目的是观察病灶内部的血流供应特点，提供平扫看不到的额外信息。",
+          "sourceIds": [
+            "ctscans",
+            "mriscans"
+          ]
+        },
+        {
+          "text": "本文只介绍四种常见影像检查的物理分工和基本特点，不替代医生为个人选择检查方案，也不评估个体辐射承受或造影剂禁忌。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "做一次低剂量胸部 CT，辐射会对身体造成明显伤害吗？",
+      "answer": "单次规范的低剂量胸部 CT 辐射剂量经过了专门优化，远低于常规诊断增强 CT，对符合检查指征的成年人来说风险极低。但任何电离辐射检查都遵循「有需要再做、避免无指征频繁重复」的原则，具体频次听从医生建议。",
+      "sourceIds": [
+        "ctscans",
+        "xrays"
+      ]
+    },
+    {
+      "question": "既然核磁共振（MRI）没有辐射，为什么查肺结节不直接做核磁？",
+      "answer": "因为肺里主要是空气，MRI 依赖水分子中氢原子的磁信号，在含气组织里的清晰度远不如 CT；加上呼吸心跳运动干扰，目前发现和随访肺部微小结节的首选依然是胸部 CT。",
+      "sourceIds": [
+        "mriscans",
+        "ctscans"
+      ]
+    },
+    {
+      "question": "彩超和 B 超有什么区别？彩超画面都是彩色的吗？",
+      "answer": "彩超并不是把整张画面变成彩色照片。它的基础解剖画面依然是黑白灰阶，只是叠加了彩色多普勒功能，用红蓝等颜色标示血管里的血流方向和速度，从而帮助医生同时看清组织形态与血供情况。",
+      "sourceIds": [
+        "ultrasound"
+      ]
+    },
+    {
+      "question": "身上有假牙、节育环或骨科钢钉，还能做核磁共振吗？",
+      "answer": "取决于具体材质。现代很多钛合金植入物和部分新款器械在特定磁场下是兼容的，但某些含铁磁性金属或老式电子植入物（如部分起搏器）存在风险。做 MRI 前务必把所有体内植入物和手术史如实告知技师核对。",
+      "sourceIds": [
+        "mriscans"
+      ]
+    },
+    {
+      "question": "为什么医生开单时常强调「把以前的片子带上」，光带纸质报告不行吗？",
+      "answer": "纸质报告只是当时医师对图像的文字摘要，很多细微密度变化或同一切面的前后对比需要直接看原始图像（胶片或电子影像云）才能精确比较，特别是随访肺结节、肝占位或关节脊柱病变时更有价值。",
+      "sourceIds": [
+        "diag-img",
+        "ctscans"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "key": "imaging-modalities",
+      "alt": "示意图：围绕同一个透明核心分别排列声波弧线（超声）、环形断层扫描（CT）、同心磁场环（MRI）与平行光线（X光）的抽象概念图，不含文字与数字。",
+      "caption": "超声、X 光、CT 与核磁共振用四种不同物理信号观察人体，各有所长、互为补充。",
+      "simplification": "图为四种医学影像物理机制的抽象概念示意，不代表具体辐射剂量、成像参数或临床检查指征。",
+      "sourceIds": [
+        "diag-img",
+        "ultrasound",
+        "ctscans",
+        "mriscans",
+        "xrays"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "def5aaad72d0bcc0902be6a6101271de32f394eec112d708a5785d6418a00ded"
+      },
+      "src": "/media/fig-imaging-guide.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "超声（声波 · 无辐射）",
+          "text": "实时看清甲状腺、乳腺、肝胆肾和血管血流，怕气体和骨骼遮挡。"
+        },
+        {
+          "title": "X 光与 CT（X 射线 · 断层）",
+          "text": "穿透含气肺部与致密骨骼，CT 以薄层切面清晰展示细微肺结节与出血。"
+        },
+        {
+          "title": "核磁共振（强磁场 · 无电离辐射）",
+          "text": "大脑、脊柱与关节软组织分辨细腻，但耗时长且需严格核查金属植入物。"
+        }
+      ]
+    }
+  ],
+  "relatedOrgans": [],
+  "organ": "",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向面对体检影像套餐或复查申请单、希望了解 B 超/CT/MRI/X 光区别的一般成年读者。",
+  "limitations": "不替个人选择具体影像检查项目，不提供辐射剂量计算或造影剂、植入物禁忌判断。",
+  "references": [
+    {
+      "id": "diag-img",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Diagnostic Imaging",
+      "url": "https://medlineplus.gov/diagnosticimaging.html",
+      "scope": "各类医学影像检查的总体分工及按部位选择不同成像方式的原则",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ultrasound",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Ultrasound",
+      "url": "https://medlineplus.gov/ultrasound.html",
+      "scope": "声波成像无辐射特点、多普勒血流观察及软组织/含液结构优势",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ctscans",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "CT Scans",
+      "url": "https://medlineplus.gov/ctscans.html",
+      "scope": "CT 断层成像原理、肺部与内脏检查优势及辐射注意事项",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "mriscans",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "MRI Scans",
+      "url": "https://medlineplus.gov/mriscans.html",
+      "scope": "磁共振无电离辐射、软组织对比优势以及金属植入物安全核查",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "xrays",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "X-Rays",
+      "url": "https://medlineplus.gov/xrays.html",
+      "scope": "X 光平面成像原理、常见适用部位及与辐射安全相关提示",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "diag-img",
+    "ultrasound",
+    "ctscans",
+    "mriscans",
+    "xrays"
+  ],
+  "tipSourceIds": [
+    "diag-img"
+  ]
+}

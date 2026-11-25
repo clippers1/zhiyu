@@ -1,0 +1,359 @@
+{
+  "id": "h-pylori",
+  "catalogOrder": 15,
+  "title": "幽门螺杆菌",
+  "english": "H. PYLORI TESTS",
+  "subtitle": "吹一口气就能查的胃部细菌，阳性意味着什么？",
+  "question": "体检吹气查出幽门螺杆菌阳性，一定会得胃癌吗？",
+  "questionAnswer": "不会。幽门螺杆菌是一种常见的胃部定植细菌，大多数感染者长期没有症状也不会发展为胃癌；但它与慢性胃炎和消化性溃疡相关，是否需要检查或根除应由医生结合年龄、症状和家族史综合评估。",
+  "icon": "droplet",
+  "color": "orange",
+  "tags": [
+    "幽门螺杆菌",
+    "呼气试验",
+    "C13 / C14"
+  ],
+  "searchAliases": [
+    "Hp",
+    "H. pylori",
+    "碳13",
+    "碳14",
+    "C13",
+    "C14",
+    "尿素呼气试验",
+    "吹气检查",
+    "胃幽门螺杆菌",
+    "幽门螺旋杆菌",
+    "胃部细菌",
+    "helicobacter pylori"
+  ],
+  "number": "15",
+  "format": "article",
+  "featured": false,
+  "desc": "幽门螺杆菌检查用于判断胃黏膜是否存在该细菌感染，体检中最常用的是无创的尿素呼气试验（C13 或 C14），此外还有粪便抗原、血液抗体和胃镜活检等不同方法。",
+  "sections": [
+    {
+      "title": "吹一口气，怎么就能知道胃里有没有细菌？",
+      "short": "呼气原理",
+      "paragraphs": [
+        {
+          "text": "幽门螺杆菌（Helicobacter pylori）是一种能耐受胃酸、定植在胃黏膜表面的螺旋形细菌。体检里最常见的尿素呼气试验，就是利用这种细菌能分泌大量尿素酶的特点设计的。",
+          "sourceIds": [
+            "hp-info",
+            "hp-tests"
+          ]
+        },
+        {
+          "text": "检查时受检者先吹一次呼气样本，再吞服一颗含有安全标记尿素的胶囊或溶液，静候片刻后再吹一次气。如果胃里存在活跃的幽门螺杆菌，细菌会把标记尿素分解产生二氧化碳，经血液进入肺部并随呼气排出，仪器通过对比两次呼气就能判断是否存在现症感染。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        },
+        {
+          "text": "报告单上常见的 C13 和 C14 指的是尿素里所使用的不同碳同位素标记方式，两者都属于无创、操作简便的呼气筛查手段，具体选用哪一种以及特殊人群（如孕妇、儿童）的适用性，应由检查机构和医生说明。",
+          "sourceIds": [
+            "hp-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "阳性不等于胃癌，但为什么医生依然重视它？",
+      "short": "阳性含义",
+      "paragraphs": [
+        {
+          "text": "幽门螺杆菌感染在全球成年人群中相当普遍。绝大多数感染者平时没有任何胃部不适，也并不会因此发展成消化性溃疡或胃癌；把阳性直接等同于严重胃病，会造成不必要的恐慌。",
+          "sourceIds": [
+            "hp-info",
+            "ulcer-causes"
+          ]
+        },
+        {
+          "text": "不过，这种细菌会削弱胃和十二指肠表面的保护性黏液层，使胃酸更容易刺激黏膜组织。它是引起胃溃疡和十二指肠溃疡的常见原因之一，长期持续感染也会增加部分胃部病变的风险。",
+          "sourceIds": [
+            "hp-info",
+            "ulcer-causes"
+          ]
+        },
+        {
+          "text": "因此，体检发现阳性后，核心不是立刻恐慌，也不是自行买药吃，而是带着结果去消化内科，由医生结合你是否有反酸、上腹痛、黑便、胃病家族史以及年龄等因素，判断是否需要进一步检查或规范处理。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "呼气、查便、抽血和胃镜，四种查法有什么区别？",
+      "short": "方法区别",
+      "paragraphs": [
+        {
+          "text": "尿素呼气试验和粪便抗原检查测的都是「现在胃里有没有活细菌」，因此既适合初次筛查，也常用于确认治疗后细菌是否已经清除。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        },
+        {
+          "text": "血液抗体检查测的是免疫系统针对该细菌产生的抗体。由于细菌被清除后抗体仍可能在血液里停留较长时间，抽血阳性有时只能说明「曾经感染过」，难以区分现在是否仍然带菌。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        },
+        {
+          "text": "如果本身因为上腹不适、年龄或高危因素需要做胃镜，医生还可以顺便在胃镜下取极少量胃黏膜组织做快速检测或病理观察，既能看清胃黏膜本身有没有炎症或溃疡，也能同时确认细菌情况。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "检查前吃过胃药或抗生素，为什么容易出现「假阴性」？",
+      "short": "假阴性因素",
+      "paragraphs": [
+        {
+          "text": "尿素呼气试验和粪便抗原检查都依赖细菌当前的活跃程度。如果检查前近期服用过抗生素、铋剂或抑制胃酸分泌的质子泵抑制剂（PPI），细菌活性可能被暂时压低，导致原本存在感染的人测出假阴性结果。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        },
+        {
+          "text": "此外，呼气试验通常还要求检查前保持一段时间的空腹，避免食物影响试剂与胃黏膜的接触。具体需要提前多久停用相关药物或禁食，应按检查机构的准备通知执行，正在服药者不要擅自停掉基础疾病处方药，应提前与医生沟通。",
+          "sourceIds": [
+            "hp-tests"
+          ]
+        },
+        {
+          "text": "如果你明明在检查前几天刚吃过消炎药或胃药，拿到阴性结果时也不要默认万事大吉，应把近期用药情况告诉医生，确认这份阴性结果是否可靠。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "家里查出阳性后，一起吃饭要注意什么？",
+      "short": "传播与边界",
+      "paragraphs": [
+        {
+          "text": "幽门螺杆菌主要通过口口或粪口途径传播，例如密切生活接触、不洁饮食或共用餐具。养成饭前便后洗手、使用公筷公勺、食物充分清洗煮熟等卫生习惯，有助于降低家庭内交叉传播机会。",
+          "sourceIds": [
+            "hp-info",
+            "ulcer-causes"
+          ]
+        },
+        {
+          "text": "是否需要让全家人都立刻去查，以及孩子有没有必要筛查，不同年龄与健康状况的考虑并不一样，应先向消化科医生咨询，而不是自行决定全员吃药。",
+          "sourceIds": [
+            "hp-info",
+            "hp-tests"
+          ]
+        },
+        {
+          "text": "本文只解释幽门螺杆菌检测原理、不同方法分工和常见影响因素，不提供根除治疗方案、抗生素组合或个人停药建议；具体处理请遵消化内科医生指导。",
+          "sourceIds": [
+            "hp-tests",
+            "ulcer-diag"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "呼气试验的数值越高，说明胃病越严重吗？",
+      "answer": "不能直接画等号。呼气读数主要反映测试当时细菌分解标记尿素的活跃程度，与胃里到底有没有溃疡、糜烂或病变程度并不是简单的线性对应关系。胃黏膜的真实状况需要结合症状及医生判断是否行胃镜评估。",
+      "sourceIds": [
+        "hp-tests",
+        "ulcer-diag"
+      ]
+    },
+    {
+      "question": "为什么有人抽血查出幽门螺杆菌抗体阳性，吹气却是阴性？",
+      "answer": "抽血测的是免疫系统留下的抗体，即使细菌以前已经被清除，抗体仍可能长时间维持阳性；而吹气试验查的是当前胃里有没有活跃细菌。两者结果不一致时，通常以呼气或粪便抗原等现症检测并结合用药史由医生判断。",
+      "sourceIds": [
+        "hp-tests",
+        "ulcer-diag"
+      ]
+    },
+    {
+      "question": "平时胃一点都不疼，还需要管幽门螺杆菌阳性吗？",
+      "answer": "大多数感染者确实没有明显症状，但是否需要干预取决于年龄、既往胃病史、家族史和合并用药等多种因素。建议把体检报告带给消化内科医生评估，而不是仅凭「没症状」就完全忽略，也不必自行购药。",
+      "sourceIds": [
+        "hp-info",
+        "ulcer-causes"
+      ]
+    },
+    {
+      "question": "做 C13 或 C14 呼气试验前，刚吃了胃药会有影响吗？",
+      "answer": "很可能有影响。抑酸药、铋剂和抗生素会暂时抑制幽门螺杆菌活性，容易让呼气试验出现假阴性。如果你近期用过这些药物，预约或检测前应主动告诉医生或检查人员。",
+      "sourceIds": [
+        "hp-tests"
+      ]
+    },
+    {
+      "question": "呼气试验测的是不是就能顺便替代胃镜？",
+      "answer": "不能替代。呼气试验只能回答「胃里有没有幽门螺杆菌感染」，无法直接看到胃黏膜有没有充血、息肉、溃疡或其他结构变化。是否需要做胃镜应由医生结合年龄与症状决定。",
+      "sourceIds": [
+        "ulcer-diag"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "尿素呼气试验（C13 / C14）",
+      "text": "无创检测当前胃内是否存在活跃的幽门螺杆菌，是体检中最常见的现症筛查和复查手段。",
+      "sourceIds": [
+        "hp-tests"
+      ]
+    },
+    {
+      "name": "粪便抗原检测",
+      "text": "通过粪便样本直接寻找细菌相关蛋白抗原，同样反映当前感染状态，不涉及吞服试剂。",
+      "sourceIds": [
+        "hp-tests",
+        "ulcer-diag"
+      ]
+    },
+    {
+      "name": "血清抗体检测",
+      "text": "检测血液中针对该细菌的抗体，但无法可靠区分当前感染与既往已清除的感染。",
+      "sourceIds": [
+        "hp-tests"
+      ]
+    },
+    {
+      "name": "胃镜下黏膜活检",
+      "text": "在做上消化道内镜时顺带取微量胃黏膜组织检测，既能直接观察黏膜病变，又能确认细菌。",
+      "sourceIds": [
+        "ulcer-diag"
+      ]
+    }
+  ],
+  "chain": [
+    "吞服安全标记尿素试剂",
+    "活跃细菌分解尿素产生气体",
+    "气体经血液与肺随呼气排出",
+    "对比服药前后呼气判断现症感染"
+  ],
+  "chainSourceIds": [
+    "hp-tests",
+    "ulcer-diag"
+  ],
+  "tip": "呼气试验阳性说明当前存在幽门螺杆菌感染，不等于胃溃疡或胃癌；近期服用抑酸药或抗生素则可能造成假阴性，读结果时要结合用药史和消化科医生意见。",
+  "figures": [
+    {
+      "key": "breath-test",
+      "alt": "示意图：胃内幽门螺杆菌分解标记尿素后释放气体并收集到呼气袋中的抽象概念图，不含真实检测数值。",
+      "caption": "尿素呼气试验通过捕捉标记气体变化，无创判断胃内是否存在活跃细菌。",
+      "simplification": "图为检测原理概念示意，省略了具体同位素物理过程、服药剂量与阳性判定截断值；具体检测准备以检查机构说明为准。",
+      "sourceIds": [
+        "hp-tests",
+        "ulcer-diag"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "a0e9d351bc6850ed63ce1e3653923f0732273b8a195b399265d4f3e8312fbb4b"
+      },
+      "src": "/media/fig-h-pylori.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "标记尿素进入胃内",
+          "text": "受检者口服含标记尿素的试剂，作为测试细菌活性的探针。"
+        },
+        {
+          "title": "细菌尿素酶分解",
+          "text": "若存在活跃幽门螺杆菌，其分泌的尿素酶会分解尿素并释放标记二氧化碳。"
+        },
+        {
+          "title": "呼气对比判读",
+          "text": "气体经肺部呼出被收集分析；近期使用抗生素或抑酸药会暂时压低信号。"
+        }
+      ]
+    }
+  ],
+  "organ": "胃 · 上消化道",
+  "relatedOrgans": [],
+  "related": [
+    "stool-fobt",
+    "cbc"
+  ],
+  "kind": "indicator",
+  "category": "digestive",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在体检中接受呼气试验或其他幽门螺杆菌筛查、希望理解检测原理与结果边界的一般成年读者。",
+  "limitations": "不提供阳性截断值、根除药物组合、停药方案或特殊人群（孕妇、儿童）的检测与用药决策。",
+  "references": [
+    {
+      "id": "hp-tests",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Helicobacter pylori (H. pylori) Tests",
+      "url": "https://medlineplus.gov/lab-tests/helicobacter-pylori-h-pylori-tests/",
+      "scope": "尿素呼气试验、粪便抗原、血液抗体与胃镜活检的分工，以及抑酸药和抗生素对结果的影响",
+      "locator": "What are H. pylori tests?; How do I prepare?; What do the results mean?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hp-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Helicobacter pylori Infections",
+      "url": "https://medlineplus.gov/helicobacterpyloriinfections.html",
+      "scope": "幽门螺杆菌的基本特性、多数无症状感染者的比例与传播途径",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ulcer-diag",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Diagnosis of Peptic Ulcers (Stomach or Duodenal Ulcers)",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/diagnosis",
+      "scope": "幽门螺杆菌检测与上消化道内镜在诊断中的互补关系",
+      "locator": "How do doctors diagnose peptic ulcers?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ulcer-causes",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Symptoms & Causes of Peptic Ulcers (Stomach or Duodenal Ulcers)",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/symptoms-causes",
+      "scope": "幽门螺杆菌损伤胃黏膜保护层与消化性溃疡的关系",
+      "locator": "What causes peptic ulcers?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "hp-tests",
+    "ulcer-diag"
+  ],
+  "tipSourceIds": [
+    "hp-tests",
+    "hp-info"
+  ]
+}

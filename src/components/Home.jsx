@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowRight, Play, Search } from "lucide-react";
 import { useContent } from "../hooks";
 import {
@@ -21,9 +21,12 @@ const QUICK_TOPICS = [
   { id: "lung-nodule", label: "肺结节" },
   { id: "ecg", label: "心电图" },
   { id: "tumor-markers", label: "肿瘤标志物" },
+  { id: "h-pylori", label: "幽门螺杆菌" },
+  { id: "carotid-ultrasound", label: "颈动脉斑块" },
 ];
 
 export default function Home({ go, onOpen, onOrgan, setTour }) {
+  const [showAllStories, setShowAllStories] = useState(false);
   const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
   const organState = useContent("list", [{ kind: "organ", limit: 24 }]);
   const storyState = useContent("list", [{ kind: "story", limit: 24 }]);
@@ -147,9 +150,21 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
 
           {stories.length > 0 && (
             <section className="home-index home-stories" aria-labelledby="home-stories-title">
-              <SectionHead id="home-stories-title" title="身体与日常" />
+              <SectionHead
+                id="home-stories-title"
+                title="身体与日常"
+                action={stories.length > 4 && (
+                  <button
+                    type="button"
+                    className="stories-toggle"
+                    onClick={() => setShowAllStories(v => !v)}
+                  >
+                    {showAllStories ? "收起部分" : `全部 ${stories.length} 篇`}
+                  </button>
+                )}
+              />
               <div className="index-list">
-                {stories.slice(0, 4).map((item) => (
+                {(showAllStories ? stories : stories.slice(0, 4)).map((item) => (
                   <IndexRow key={item.id} item={item} onOpen={onOpen} />
                 ))}
               </div>

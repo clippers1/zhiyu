@@ -12,10 +12,11 @@ try {
   await page.goto(base, { waitUntil: 'networkidle' });
   await page.locator('.home-reading-path a[href="/topics"]').click();
   await expect(page.locator('.topic-cards a')).toHaveCount(3);
+  await expect(page.locator('.bundle-card')).toHaveCount(4);
   await page.locator('.topic-cards a[href="/topics/glucose"]').click();
   await expect(page.getByRole('heading', { name: '认识血糖的阅读路线' })).toBeVisible();
   await expect(page.locator('.topic-steps li')).toHaveCount(4);
-  await expect(page.locator('.topic-steps')).toContainText('来源与表达待完整核对');
+  await expect(page.locator('.topic-steps')).toContainText(ssr ? /依据具体来源整理|来源与表达待完整核对/ : '来源与表达待完整核对');
   await page.locator('.topic-steps a').first().click();
   await expect(page.getByRole('heading', { name: '血糖项目主要看什么？', exact: true })).toBeVisible();
   await page.locator('.detail-related a[href="/organs/pancreas"]').click();

@@ -33,7 +33,9 @@ try {
     'glucose', 'cbc', 'liver-function', 'kidney-function', 'lipids', 'pressure',
     'thyroid-function', 'uric-acid', 'urinalysis',
     'fatty-liver', 'thyroid-nodule', 'lung-nodule', 'ecg', 'tumor-markers',
+    'h-pylori', 'carotid-ultrasound', 'gallbladder', 'breast-ultrasound', 'stool-fobt', 'bone-density',
     'stairs-heart', 'lab-range', 'fasting-test', 'pre-test-factors',
+    'white-coat-bp', 'imaging-guide', 'report-history',
   ];
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 900 });

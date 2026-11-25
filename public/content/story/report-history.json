@@ -1,0 +1,305 @@
+{
+  "id": "report-history",
+  "catalogOrder": 207,
+  "title": "为什么每次看报告，医生总问「去年的旧体检单带了吗」？",
+  "english": "WHY YOUR PAST CHECKUP REPORTS MATTER",
+  "subtitle": "参考区间是「一群人的范围」，而你过去几年的旧单子，才是属于你自己的个人基线。",
+  "question": "为什么每次看报告，医生总问「去年的旧体检单带了吗」？",
+  "questionAnswer": "不同人的生理基线差异很大，仅凭今年一张孤立的报告，往往难以分辨一项结果是「天生一直如此」还是「近期突然发生的新变化」；把历年报告与影像放在一起看趋势，是医生判断稳不稳定、要不要进一步检查的重要依据。",
+  "icon": "layers",
+  "color": "green",
+  "tags": [
+    "历年对比",
+    "个人基线",
+    "体检档案"
+  ],
+  "searchAliases": [
+    "旧体检报告",
+    "往年报告",
+    "体检对比",
+    "个人基线",
+    "动态趋势",
+    "长期随访",
+    "健康档案",
+    "lab result trends"
+  ],
+  "number": "",
+  "format": "article",
+  "featured": false,
+  "kind": "story",
+  "category": "blood",
+  "desc": "很多人每年体检完翻两页没大事，就把报告塞进抽屉或者直接弄丢了。可真遇到某个指标飘红、或者 B 超和 CT 写着结节息肉去挂号时，医生开口第一句往往是：「有前几年的报告吗？」",
+  "sections": [
+    {
+      "title": "「别人家的参考区间」不如「去年的你自己」灵敏",
+      "short": "个人基线",
+      "paragraphs": [
+        {
+          "text": "化验单上的参考区间来自成千上万健康人的统计分布，宽度往往比单个人的日常波动大得多。有些人天生血小板、白细胞或胆红素常年踩在区间边缘，身体却一直很稳定。",
+          "sourceIds": [
+            "lab-results",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "反过来，如果某个指标虽然今年还落在参考区间里面，但对照过去三年却呈现出持续单向攀升或一路下滑的趋势，这种「还在区间内、但偏离了自己原有基线」的信号，往往比孤零零看今年一个数字更有提示价值。",
+          "sourceIds": [
+            "lab-results",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "因此，往年体检单就像标尺：它帮医生分清眼前这个结果是「你一贯如此的个体特征」，还是「最近这一两年才冒出来的新动向」。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "对结节、息肉和斑块来说，对比旧影像几乎是「定心丸」",
+      "short": "影像前后对比",
+      "paragraphs": [
+        {
+          "text": "在肺结节、甲状腺结节、乳腺结节、胆囊息肉和颈动脉斑块这类影像学发现上，单个时间点的「静态照片」信息有限，医生最看重的是「时间维度的动态表现」。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        },
+        {
+          "text": "如果一个微小结节或胆囊小息肉在三年前的旧报告里就已经一模一样地待在原地，形态大小毫无进展，往往能大大增强良性稳定倾向的判断依据，避免不少不必要的反复折腾甚至过度有创检查。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        },
+        {
+          "text": "反之，如果是去年还没有、今年新长出来，或者形态与大小在复查中发生明显改变，旧报告也能帮医生立刻识别出来并及时安排进一步评估。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "对比两年报告时，先核对「是不是在同一把尺子下测的」",
+      "short": "同尺子对比",
+      "paragraphs": [
+        {
+          "text": "把两年的报告摊在一起看趋势时，有两件事必须先确认：第一是单位和参考区间有没有变化（不同医院、不同仪器和检测试剂的读数基线可能不同）；第二是两次采样条件是不是接近。",
+          "sourceIds": [
+            "lab-results",
+            "prepare"
+          ]
+        },
+        {
+          "text": "比如去年体检前饮食清淡、作息规律，今年体检前刚连续加班聚餐或处于感冒恢复期，两次指标相差一小截，未必代表器官功能真的下滑。把每次的采样背景也顺手记在边上，能让趋势线更真实。",
+          "sourceIds": [
+            "lab-results",
+            "prepare"
+          ]
+        },
+        {
+          "text": "对于需要定期随访的重点项目（如肺结节薄层 CT、甲状腺超声、骨密度 DXA 或某项关键血检），条件允许时尽量固定在同一家医院复查，最容易直接调出同一套系统下的历史图像做精确比对。",
+          "sourceIds": [
+            "lab-results",
+            "diag-img"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "怎么低成本整理自己和父母的「年度体检档案」？",
+      "short": "建档小方法",
+      "paragraphs": [
+        {
+          "text": "不需要复杂的专业软件，只要养成一个小习惯就能省去未来很多麻烦：每年体检拿到完整 PDF 电子报告后，按「年份-姓名-医院」命名存进手机或网盘固定文件夹；纸质报告里最重要的总检结论页、化验明细页和超声/CT 报告页拍照归档，或者装进同一个风琴袋。",
+          "sourceIds": [
+            "prepare",
+            "lab-results"
+          ]
+        },
+        {
+          "text": "如果做过胸部 CT、核磁共振等影像检查，别忘了留意医院提供的电子云胶片二维码或下载期限，及时保存原始影像信息，因为不少机构的云胶片有访问时效。",
+          "sourceIds": [
+            "diag-img"
+          ]
+        },
+        {
+          "text": "帮家里长辈整理档案时，顺便在首页贴一张便签，写清目前长期在吃的处方药名称、过敏史和既往做过的大手术，以后无论去哪家医院复诊都能大幅提升与医生沟通的效率。",
+          "sourceIds": [
+            "prepare"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "看趋势也要留好边界：由医生决定哪些变化值得追查",
+      "short": "趋势与边界",
+      "paragraphs": [
+        {
+          "text": "自己翻看历年报告时，不必对小数点后微小的上下起伏草木皆兵。实验室检测本身存在正常的分析变异，人体生理也有自然波动，一两成的轻微来回晃动在很多项目里并不代表疾病进展。",
+          "sourceIds": [
+            "lab-results",
+            "blood-tests"
+          ]
+        },
+        {
+          "text": "相反，如果发现多项指标出现持续多年的同方向变化，或者报告明确标注了需要专科复核的随访提示，带上按年份排好的完整旧单去门诊，就是对医生最好的协助。",
+          "sourceIds": [
+            "lab-results"
+          ]
+        },
+        {
+          "text": "本文只说明保留和对照历年体检报告的一般思路，不判断任何具体数值波动是否正常，也不提供个人复查频率或诊疗建议。",
+          "sourceIds": [
+            "lab-results",
+            "prepare"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "往年体检报告全都正常，还有必要留着吗？",
+      "answer": "很有必要。全部正常的旧报告恰恰是你最宝贵的「健康基线档案」——以后万一某年出现指标偏离或新发现，把过去正常的旧单翻出来一对照，医生就能一眼确认这是新出现的变化。",
+      "sourceIds": [
+        "lab-results",
+        "blood-tests"
+      ]
+    },
+    {
+      "question": "去门诊复诊，是把体检总结页拍给医生看，还是整本都带？",
+      "answer": "尽量带整本完整报告或完整电子 PDF。只拍一两行标红的数字或只带总结页，往往缺少参考区间、单位、采样日期以及同一天其他关联项目的数据，容易影响医生综合判断。",
+      "sourceIds": [
+        "lab-results",
+        "prepare"
+      ]
+    },
+    {
+      "question": "两家不同医院的化验数字略有差别，能直接画折线看趋势吗？",
+      "answer": "不太建议直接把不同实验室的数字硬连成一条线。不同机构的仪器、试剂盒和单位可能不一样，对比前要先核对两张单子的参考区间与检测方法；真正需要盯趋势时，尽量在同一机构随访更准确。",
+      "sourceIds": [
+        "lab-results"
+      ]
+    },
+    {
+      "question": "家里老人每年都在不同地方免费或单位体检，档案怎么管最省心？",
+      "answer": "最省心的方式是用一个透明文件袋按年份倒序放好纸质完整报告，同时由子女在手机相册或云端单独建一个「父母体检」文件夹保存电子 PDF，每次陪同看病直接打开即可。",
+      "sourceIds": [
+        "prepare",
+        "diag-img"
+      ]
+    },
+    {
+      "question": "同一个指标连续三年都在参考区间内，但每年涨一点点，需要问医生吗？",
+      "answer": "值得在常规体检解读或复诊时顺便向医生提一句。有时这只是轻微自然波动，有时则可能提示早期趋势（例如代谢或血压的缓慢走高），让医生结合你的年龄与生活习惯判断是否需要提早关注最稳妥。",
+      "sourceIds": [
+        "lab-results",
+        "blood-tests"
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "key": "report-history",
+      "alt": "示意图：按时间排列的三份抽象体检卡片被一条平滑的连续趋势线串联起来，体现多年纵比个人基线的概念，不含文字和数字。",
+      "caption": "单张报告只是瞬间切片，把历年报告连成一条线，才能看清属于你自己的长期基线。",
+      "simplification": "图为历年纵比概念示意，不代表任何具体医学指标的变化幅度，也不构成个人复查周期建议。",
+      "sourceIds": [
+        "lab-results",
+        "diag-img"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "5090dfa9e879fc7037b26ec1682ad5f87cb96b7b0d915e033ee5f9322b5b430e"
+      },
+      "src": "/media/fig-report-history.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "区分「一贯如此」与「新变化」",
+          "text": "个人天生基线各不相同，对照旧单能避免把多年不变的特点误当新病。"
+        },
+        {
+          "title": "影像随访看动态稳定",
+          "text": "结节、息肉与斑块往往需要保留旧报告和原始影像，才能准确评估变化。"
+        },
+        {
+          "title": "同机构同条件更可比",
+          "text": "纵比时留意检测方法、参考区间与采样条件是否一致，带整本给医生看。"
+        }
+      ]
+    }
+  ],
+  "relatedOrgans": [],
+  "organ": "",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向希望学会整理和利用历年体检报告与医生高效沟通的一般成年读者及为父母管理健康档案的家庭成员。",
+  "limitations": "不提供个人化复查周期、指标波动安全阈值或临床诊断建议。",
+  "references": [
+    {
+      "id": "lab-results",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Understand Your Lab Results",
+      "url": "https://medlineplus.gov/lab-tests/how-to-understand-your-lab-results/",
+      "scope": "参考区间的人群属性、个体基线差异、实验室方法差异及历次结果对比的重要性",
+      "locator": "What is a reference range?; What do my results mean?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "prepare",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "How to Prepare for a Lab Test",
+      "url": "https://medlineplus.gov/lab-tests/how-to-prepare-for-a-lab-test/",
+      "scope": "采样准备条件、用药清单与检验前背景记录对解读的帮助",
+      "locator": "How do I prepare for a lab test?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "blood-tests",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Blood Tests",
+      "url": "https://www.nhlbi.nih.gov/health/blood-tests",
+      "scope": "血液检查用于长期监测身体状态变化与结合既往记录综合评估的原则",
+      "locator": "What do blood test results show?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "diag-img",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Diagnostic Imaging",
+      "url": "https://medlineplus.gov/diagnosticimaging.html",
+      "scope": "不同医学影像检查在动态随访观察中的记录与对比作用",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "lab-results",
+    "blood-tests"
+  ],
+  "tipSourceIds": [
+    "lab-results",
+    "prepare"
+  ]
+}

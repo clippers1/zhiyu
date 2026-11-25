@@ -1,0 +1,354 @@
+{
+  "id": "stool-fobt",
+  "catalogOrder": 19,
+  "title": "便常规与便潜血",
+  "english": "FECAL OCCULT BLOOD TEST (FOBT)",
+  "subtitle": "肉眼看不见的微量出血线索，阳性只代表肠道肿瘤吗？",
+  "question": "体检大便潜血阳性，是不是得了肠癌？",
+  "questionAnswer": "不是。便潜血阳性只说明样本中检出了肉眼不可见的微量血液痕迹，痔疮、肛裂、消化道炎症、息肉甚至部分饮食或药物干扰都可能导致阳性；它提示需要进一步查找出血来源，不能直接诊断为肿瘤。",
+  "icon": "droplet",
+  "color": "orange",
+  "tags": [
+    "便潜血",
+    "大便常规",
+    "FOBT / FIT"
+  ],
+  "searchAliases": [
+    "大便潜血",
+    "粪便隐血",
+    "便隐血",
+    "OB",
+    "FOBT",
+    "FIT",
+    "大便检查",
+    "粪便常规",
+    "肠癌筛查",
+    "fecal occult blood"
+  ],
+  "number": "19",
+  "format": "article",
+  "featured": false,
+  "desc": "大便常规与便潜血检查（FOBT / FIT）用于寻找肉眼看不见的消化道微量出血线索，是体检中简便、无创的肠道初筛手段之一，但阳性结果需要进一步核查出血原因。",
+  "sections": [
+    {
+      "title": "什么叫「潜血」？为什么很多人直接跳过了这一项？",
+      "short": "什么是潜血",
+      "paragraphs": [
+        {
+          "text": "「潜血」（也称隐血）指的是混在粪便里、含量极微少、靠肉眼完全看不出红色的血液成分。消化道黏膜如果存在轻微渗血，大便外表看起来往往完全正常，只有通过化验才能捕捉到这些痕迹。",
+          "sourceIds": [
+            "fobt",
+            "guaiac"
+          ]
+        },
+        {
+          "text": "因为留样过程略显麻烦，大便常规和便潜血是体检套餐里最容易被大家随手放弃的项目。但实际上，这项检查完全无痛、无辐射，是国际公认的结直肠健康初筛工具之一，用来帮助发现早期可能渗血的肠道息肉或其他病变线索。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        },
+        {
+          "text": "除了便潜血，常规大便检验还会观察颜色、性状，并在显微镜下查看有没有异常增多的白细胞、红细胞或寄生虫卵等，辅助判断是否存在消化道感染或炎症。",
+          "sourceIds": [
+            "fobt"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "阳性不等于肠癌：常见出血来源有很多种",
+      "short": "阳性的多种可能",
+      "paragraphs": [
+        {
+          "text": "便潜血检查回答的问题非常具体：它只说「这份样本里检测到了血液信号」，既不能告诉你血是从胃、小肠、大肠还是肛门流出来的，也不能区分背后是良性原因还是恶性病变。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        },
+        {
+          "text": "在现实生活中，痔疮、肛裂、胃或十二指肠溃疡、胃肠黏膜炎症、良性肠道息肉，乃至女性留样时混入经血或用力排便擦破局部黏膜，都可能让便潜血呈现阳性。",
+          "sourceIds": [
+            "fobt",
+            "guaiac"
+          ]
+        },
+        {
+          "text": "反过来说，即使平时知道自己有痔疮，看到便潜血阳性也不建议未经医生评估就直接归咎于痔疮而置之不理。医生通常会结合年龄、家族史、排便习惯变化、血常规（看有无缺铁性贫血）决定是否需要做肠镜查明真相。",
+          "sourceIds": [
+            "crc-screen",
+            "crc-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "化学法和免疫法（FIT），为什么有的要忌口、有的不用？",
+      "short": "化学法 vs 免疫法",
+      "paragraphs": [
+        {
+          "text": "体检中常用的便潜血检测主要有两大类：传统化学法（如愈创木脂法 gFOBT）和免疫化学法（FIT）。两者的检测目标略有不同，采前准备要求也不一样。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        },
+        {
+          "text": "传统化学法对血红素里的铁成分发生化学显色反应，因此容易受到红肉、动物血、动物肝脏、某些富含过氧化物酶的蔬菜，以及高剂量维生素 C 或部分药物的干扰，检查前常会提示连续几天清淡忌口。",
+          "sourceIds": [
+            "guaiac",
+            "fobt"
+          ]
+        },
+        {
+          "text": "免疫法（FIT）则专门识别人类血红蛋白里的特定蛋白结构，不受食物里的动物血干扰，且更侧重反映下消化道出血线索。由于各家体检中心采用的方法不同，准备时以本机构通知单为准最稳妥。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "便潜血阴性，是不是就代表肠道完全没问题？",
+      "short": "阴性的局限",
+      "paragraphs": [
+        {
+          "text": "不能这样简单推断。很多肠道息肉或早期病变并不是每天持续出血的，如果留取样本的那一天刚好没有渗血，单次便潜血结果就可能是阴性。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        },
+        {
+          "text": "这也是为什么指南通常强调作为初筛时要按周期规律重复检测，而不是查过一次阴性就一劳永逸；同时，如果已经出现肉眼可见的便血、黑便、持续腹痛、排便习惯明显改变或不明原因体重下降，不应等待便潜血结果，应直接去消化科就诊。",
+          "sourceIds": [
+            "crc-screen",
+            "crc-info"
+          ]
+        },
+        {
+          "text": "在确诊与干预方面，结肠镜检查可以直接观察整段大肠黏膜，并在发现息肉时顺便取样或处理，这是便潜血等粪便初筛无法替代的优势。",
+          "sourceIds": [
+            "crc-screen"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "留取样本的实用细节与阅读边界",
+      "short": "留样与边界",
+      "paragraphs": [
+        {
+          "text": "留取大便样本时，尽量避开月经期和明显的痔疮出血发作期，不要让样本混入马桶里的水或尿液，用采样盒自带的小勺挑取表面或多处不同部位的少量样本即可，装好后按要求尽快送检。",
+          "sourceIds": [
+            "fobt",
+            "guaiac"
+          ]
+        },
+        {
+          "text": "如果你正在服用阿司匹林或其他抗凝药、非甾体止痛药，或近期补铁，看报告时记得告诉医生，不要为了查大便而自行停掉心血管等基础疾病的处方药。",
+          "sourceIds": [
+            "guaiac",
+            "fobt"
+          ]
+        },
+        {
+          "text": "本文只解释便常规与便潜血的检测分工、常见阳性原因和局限，不判断个人出血来源，也不提供肠镜筛查起始年龄或停药处方；具体评估请咨询消化内科医生。",
+          "sourceIds": [
+            "fobt",
+            "crc-screen"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "体检前一天吃了鸭血、猪肝或牛排，会导致便潜血阳性吗？",
+      "answer": "取决于采用的方法。如果体检机构使用的是传统化学法（gFOBT），红肉和动物血确实可能带来假阳性；如果是专门识别人类血红蛋白的免疫法（FIT），通常不受动物血影响。如果不确定方法，留样前说明饮食情况最稳妥。",
+      "sourceIds": [
+        "fobt",
+        "guaiac"
+      ]
+    },
+    {
+      "question": "我有老痔疮，便潜血阳性是不是就可以直接忽略？",
+      "answer": "不建议直接忽略。痔疮确实是便潜血阳性的常见原因，但有痔疮的人同样可能并存肠道息肉或其他问题。是否需要进一步复查或做肠镜确认，应由医生结合年龄和病史决定。",
+      "sourceIds": [
+        "fobt",
+        "crc-screen"
+      ]
+    },
+    {
+      "question": "便潜血阳性后，可以直接再复查一次大便看转阴没吗？",
+      "answer": "因为消化道息肉或病变常常呈间歇性出血，即使复查一次变成阴性，也不一定代表上次阳性就是误报。遇到阳性结果时，更稳妥的是请消化科医生评估是否需要进一步检查（如肠镜）。",
+      "sourceIds": [
+        "fobt",
+        "crc-screen"
+      ]
+    },
+    {
+      "question": "做了便潜血筛查，以后是不是就不需要做肠镜了？",
+      "answer": "两者定位不同。便潜血是无创、便捷的初筛工具，适合按周期定期检查；一旦便潜血阳性，或本人属于高危人群、已有消化道警示症状，仍需要依靠结肠镜直观观察并明确诊断。",
+      "sourceIds": [
+        "crc-screen"
+      ]
+    },
+    {
+      "question": "大便颜色发黑，一定是消化道出血吗？",
+      "answer": "不一定。食用较多动物血、补铁剂或含铋胃药（如部分治胃病的药物）都可能让大便发黑；不过，真正的上消化道出血常表现为柏油样发亮黑便。如果无法排除或伴有头晕乏力，应及时就医核实。",
+      "sourceIds": [
+        "guaiac",
+        "crc-info"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "免疫化学法便潜血（FIT）",
+      "text": "特异性识别人血红蛋白，一般不受动物血与常规饮食干扰，常用于下消化道出血初筛。",
+      "sourceIds": [
+        "fobt",
+        "crc-screen"
+      ]
+    },
+    {
+      "name": "化学法便潜血（gFOBT）",
+      "text": "利用化学显色捕捉血红素痕迹，可能受红肉、动物血、维生素 C 及部分药物影响。",
+      "sourceIds": [
+        "guaiac",
+        "fobt"
+      ]
+    },
+    {
+      "name": "镜检细胞与性状观察",
+      "text": "检查样本外观以及红细胞、白细胞等镜下表现，辅助识别炎症、感染或其他异常。",
+      "sourceIds": [
+        "fobt"
+      ]
+    }
+  ],
+  "chain": [
+    "规范避开经期与干扰留取少量样本",
+    "检测肉眼不可见的微量出血信号",
+    "区分饮食药物干扰与消化道渗血",
+    "必要时由医生安排肠镜查明来源"
+  ],
+  "chainSourceIds": [
+    "fobt",
+    "crc-screen",
+    "guaiac"
+  ],
+  "tip": "便潜血阳性只说明存在微量出血线索，痔疮、炎症、息肉、饮食干扰和肿瘤都有可能；既不必直接恐慌，也不要在未咨询医生的情况下简单归咎于痔疮。",
+  "figures": [
+    {
+      "key": "fobt",
+      "alt": "示意图：透明实验室检测卡与光学放大镜捕捉微通道内极少量红色信号痕迹的抽象概念图，不含真实检验数值。",
+      "caption": "便潜血检测在样本中放大肉眼不可见的微量血液信号，作为无创初筛线索。",
+      "simplification": "图为实验室检测试剂盒的抽象原理示意，省略具体化学显色与免疫层析条带细节，不用于判断个人检测结果。",
+      "sourceIds": [
+        "fobt",
+        "crc-screen"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "ed5219b61f284653b88391a14b545c5eebac846208956c15968b61c54e3f320d"
+      },
+      "src": "/media/fig-stool-fobt.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "捕捉肉眼看不见的痕迹",
+          "text": "即使外观正常，微量渗血也能被免疫法或化学法检出。"
+        },
+        {
+          "title": "只提示信号、不定性病因",
+          "text": "阳性可能来自痔疮、炎症、息肉或肿瘤，无法单凭此项区分来源。"
+        },
+        {
+          "title": "初筛与肠镜互补",
+          "text": "异常线索需结合病史，由医生评估是否进一步行结肠镜检查。"
+        }
+      ]
+    }
+  ],
+  "organ": "肠道 · 消化道",
+  "relatedOrgans": [],
+  "related": [
+    "cbc",
+    "h-pylori",
+    "tumor-markers"
+  ],
+  "kind": "indicator",
+  "category": "digestive",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到大便常规与便潜血报告、希望理解阳性可能原因及化学法与免疫法区别的一般成年读者。",
+  "limitations": "不提供个人出血原因判断、肠镜筛查起始年龄规定或抗凝药停药建议。",
+  "references": [
+    {
+      "id": "fobt",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Fecal Occult Blood Test (FOBT)",
+      "url": "https://medlineplus.gov/lab-tests/fecal-occult-blood-test-fobt/",
+      "scope": "便潜血检测的用途、FIT 与 gFOBT 区别、阳性常见原因与留样准备",
+      "locator": "What is a fecal occult blood test (FOBT)?; What do the results mean?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "guaiac",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Stool guaiac test",
+      "url": "https://medlineplus.gov/ency/article/003393.htm",
+      "scope": "传统化学法潜血检测的饮食与药物干扰因素及良性阳性原因",
+      "locator": "How to Prepare for the Test; What Abnormal Results Mean",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "crc-screen",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Screening Tests to Detect Colorectal Cancer and Polyps",
+      "url": "https://www.cancer.gov/types/colorectal/screening-fact-sheet",
+      "scope": "粪便隐血初筛与结肠镜检查的互补关系、间歇性出血局限与随访原则",
+      "locator": "Stool tests; Colonoscopy",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "crc-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Colorectal Cancer",
+      "url": "https://medlineplus.gov/colorectalcancer.html",
+      "scope": "需要主动就医评估的常见下消化道警示症状",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "fobt",
+    "crc-screen"
+  ],
+  "tipSourceIds": [
+    "fobt",
+    "guaiac"
+  ]
+}

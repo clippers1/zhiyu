@@ -10,14 +10,17 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });
-  await expect(page.locator('.result-count')).toContainText('找到 14 个项目专题');
+  await expect(page.locator('.result-count')).toContainText('找到 20 个项目专题');
   await expect(page.locator('.question-row')).toHaveCount(6);
   await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('.question-row')).toHaveCount(6);
   await expect(page.locator('.question-row .question-row-term b')).toHaveText(['尿酸', '甲状腺功能', '尿常规', '脂肪肝', '甲状腺结节', '肺结节']);
   await page.getByRole('button', { name: '下一页', exact: true }).click();
+  await expect(page.locator('.question-row')).toHaveCount(6);
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['心电图', '肿瘤标志物', '幽门螺杆菌', '颈动脉超声', '胆囊超声', '乳腺超声']);
+  await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('.question-row')).toHaveCount(2);
-  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['心电图', '肿瘤标志物']);
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['便常规与便潜血', '骨密度检查']);
   await page.getByRole('button', { name: '返回首页', exact: true }).click();
 
   const input = page.getByRole('textbox', { name: '筛选体检项目', exact: true });
@@ -33,11 +36,20 @@ try {
     ['GGO', '肺结节'],
     ['Holter', '心电图'],
     ['CEA', '肿瘤标志物'],
+    ['C13', '幽门螺杆菌'],
+    ['IMT', '颈动脉超声'],
+    ['胆囊壁毛糙', '胆囊超声'],
+    ['BI-RADS', '乳腺超声'],
+    ['gFOBT', '便常规与便潜血'],
+    ['DXA', '骨密度检查'],
   ]) {
     await input.fill(query);
     await expect(page.locator('.question-row')).toHaveCount(1);
     await expect(page.locator('.question-row .question-row-term b')).toHaveText(title);
   }
+  await input.fill('白大衣');
+  await expect(page.locator('.library-stories .index-row')).toHaveCount(1);
+  await expect(page.locator('.library-stories')).toContainText('在家测血压挺正常');
   await input.fill('ALT');
   await expect(page.locator('.question-row')).toHaveCount(2);
   await expect(page.locator('.question-row .question-row-term b')).toHaveText(['肝功能', '脂肪肝']);
@@ -48,6 +60,7 @@ try {
   await expect(page.locator('.source-list li')).toHaveCount(4);
   await expect(page.getByText(/^不覆盖：不提供分期阈值/)).toBeVisible();
   await expect(page.getByRole('link', { name: /继续了解肾脏|探索肾脏/ })).toBeVisible();
+  await expect(page.locator('.related-indicator-card')).toHaveCount(3);
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'mobile content expansion must not overflow');
   if (screenshotDir) {
     await mkdir(screenshotDir, { recursive: true });

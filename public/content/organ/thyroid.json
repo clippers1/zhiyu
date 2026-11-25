@@ -95,5 +95,23 @@
       "type": "机构健康科普",
       "publicationDate": null
     }
-  ]
+  ],
+  "learning": {
+    "type": "thyroid-feedback-v1",
+    "title": "垂体与甲状腺的负反馈对话",
+    "intro": "甲功化验单上最常让人迷糊的，就是为什么促甲状腺激素（TSH）常常和 T4、T3 反向变动。跟着这四步，就能看懂脑垂体和甲状腺如何像恒温器一样彼此配合。",
+    "simplification": "本图将下丘脑—垂体—甲状腺轴简化为垂体与甲状腺之间的双向反馈环，省略了游离/结合蛋白转换与外周组织 T4 转 T3 等细节。",
+    "parts": [
+      { "id": "pituitary", "label": "脑垂体", "summary": "位于大脑底部的内分泌指挥中心，时刻感知血液中甲状腺激素的浓度高低。", "sourceIds": ["thyroid-tests", "tsh"] },
+      { "id": "tsh-signal", "label": "TSH 指令", "summary": "垂体分泌的促甲状腺激素（TSH），像油门踏板一样通知甲状腺加快或放缓工作。", "sourceIds": ["tsh", "thyroid-tests"] },
+      { "id": "thyroid-gland", "label": "甲状腺", "summary": "颈部前方的蝴蝶状腺体，接收 TSH 指令并利用碘合成释放 T4 与 T3 激素。", "sourceIds": ["thyroid-diseases", "thyroid-tests"] },
+      { "id": "hormone-level", "label": "血液 T4 / T3", "summary": "随血液抵达全身调节能量代谢与心率，同时把当前浓度反馈给脑垂体。", "sourceIds": ["thyroid-diseases", "tsh"] }
+    ],
+    "steps": [
+      { "id": "pituitary-send", "title": "垂体发出 TSH 信号", "text": "脑垂体根据血液中激素水平分泌促甲状腺激素（TSH），向颈部的甲状腺下达工作指令。", "from": "pituitary", "to": "tsh-signal", "sourceIds": ["tsh"] },
+      { "id": "tsh-drive", "title": "TSH 推动甲状腺生产", "text": "TSH 抵达甲状腺后，促使甲状腺摄取碘并合成、释放甲状腺素（T4）和三碘甲状腺原氨酸（T3）。", "from": "tsh-signal", "to": "thyroid-gland", "sourceIds": ["thyroid-tests", "tsh"] },
+      { "id": "hormone-work", "title": "T4 / T3 随血液调节全身", "text": "释放入血的 T4 与 T3 参与调控心跳节奏、体温、能量消耗和精力状态。", "from": "thyroid-gland", "to": "hormone-level", "sourceIds": ["thyroid-diseases", "thyroid-tests"] },
+      { "id": "negative-feedback", "title": "负反馈让 TSH 与 T4/T3 反向变动", "text": "血液中 T4/T3 充足偏高时，垂体会减少 TSH 分泌；若 T4/T3 偏低，垂体就调高 TSH 催促甲状腺加紧工作——这就是两项指标常呈反向变化的原因。", "from": "hormone-level", "to": "pituitary", "sourceIds": ["tsh", "thyroid-tests"] }
+    ]
+  }
 }

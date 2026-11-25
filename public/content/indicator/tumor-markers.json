@@ -23,7 +23,12 @@
     "PSA",
     "肿瘤指标",
     "肿标",
-    "tumor marker"
+    "tumor marker",
+    "癌胚抗原高",
+    "甲胎蛋白高",
+    "CA19-9",
+    "CA-125",
+    "肿瘤筛查"
   ],
   "number": "14",
   "format": "article",
@@ -36,15 +41,23 @@
       "paragraphs": [
         {
           "text": "肿瘤标志物（常简称为「肿标」）通常指血液、尿液或组织中可以检测到的一类蛋白质或其他生物分子。当体内出现某些肿瘤时，这些物质的浓度可能升高，因此得名。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         },
         {
           "text": "但容易引发误解的地方在于：绝大多数传统抽血肿瘤标志物并不是肿瘤细胞「独家专利」。人体的正常细胞在面对炎症、组织修复或某些良性增生时，也会产生同样的物质。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         },
         {
           "text": "所以把「肿标升高」直接理解成「得了癌症」，就像把「屋里响起烟雾报警」直接当成「房子一定着火」一样——它只是一个提醒你进一步核查的信号，而不是已经定性的判决书。",
-          "sourceIds": ["nci-markers"]
+          "sourceIds": [
+            "nci-markers"
+          ]
         }
       ]
     },
@@ -54,15 +67,24 @@
       "paragraphs": [
         {
           "text": "以体检套餐里最常出现的癌胚抗原（CEA）为例，除了与部分消化道、肺部等肿瘤的监测有关，长期吸烟、胃肠道炎症、肺部慢性炎症或肝脏良性状况，都可能让血液里的 CEA 高于参考区间。",
-          "sourceIds": ["cea", "medline-markers"]
+          "sourceIds": [
+            "cea",
+            "medline-markers"
+          ]
         },
         {
           "text": "再看甲胎蛋白（AFP），它本身就是胎儿发育期大量产生的蛋白质，因此孕期女性水平自然升高；在非孕期成年人中，慢性肝炎活动期、肝硬化后的肝细胞再生，也可能引起 AFP 波动。",
-          "sourceIds": ["afp", "medline-markers"]
+          "sourceIds": [
+            "afp",
+            "medline-markers"
+          ]
         },
         {
           "text": "正因为影响因素众多，普通健康人成组筛查一堆肿瘤标志物时，偶尔撞上一两项轻度超出区间（假阳性）并不少见。反过来，也有一部分确有肿瘤的患者，某些标志物始终落在参考区间内。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         }
       ]
     },
@@ -72,15 +94,25 @@
       "paragraphs": [
         {
           "text": "既然既可能假阳性、又可能漏检，为什么临床依然重视肿瘤标志物？因为它们真正拿手的场景，是在「已经明确诊断或高风险人群」中进行动态监测，而不是单独给普通人一锤定音。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         },
         {
           "text": "例如在治疗过程中，医生可以通过连续多次测量同一指标的变化曲线，侧面观察治疗是否有效，或在治疗结束后协助监测复发线索；对特定高风险人群（如慢性肝病患者定期联合超声查 AFP），它们也能作为综合筛查拼图的一部分。",
-          "sourceIds": ["nci-markers", "afp", "cea"]
+          "sourceIds": [
+            "nci-markers",
+            "afp",
+            "cea"
+          ]
         },
         {
           "text": "但无论在哪种场景下，确诊肿瘤的金标准始终离不开影像学定位与组织病理检查（活检），抽血肿瘤标志物本身不能替代胃肠镜、低剂量 CT、乳腺或肝胆超声等针对性检查。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         }
       ]
     },
@@ -90,15 +122,23 @@
       "paragraphs": [
         {
           "text": "面对一项超出参考区间的肿瘤标志物，医生最关注的通常有两个维度：一是高出区间的幅度有多明显，二是隔一段时间在同一家实验室复查，数字是回落、持平，还是成倍持续走高。",
-          "sourceIds": ["medline-markers", "cea"]
+          "sourceIds": [
+            "medline-markers",
+            "cea"
+          ]
         },
         {
           "text": "轻微的、一次性的波动，如果对应部位的影像检查和专科体检未见异常，往往需要排查吸烟、近期感染炎症或采样方法差异，并遵医嘱复查趋势；而明显大幅升高或持续攀升，则会促使医生安排更细致的针对性影像或内镜排查。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         },
         {
           "text": "跨实验室比较肿瘤标志物尤其容易踩坑：不同厂家试剂盒检测同一标志物时，抗体结合位点和参考区间可能完全不同，复查趋势时尽量固定同一检测体系更有意义。",
-          "sourceIds": ["medline-markers"]
+          "sourceIds": [
+            "medline-markers"
+          ]
         }
       ]
     },
@@ -108,11 +148,18 @@
       "paragraphs": [
         {
           "text": "先确认升高的具体是哪一项、高出本张报告单参考区间多少，并回想近期有没有吸烟、感冒发炎、慢性肝病或妇科良性问题，同时翻看同一次体检的超声、CT 等影像结果。",
-          "sourceIds": ["medline-markers", "cea", "afp"]
+          "sourceIds": [
+            "medline-markers",
+            "cea",
+            "afp"
+          ]
         },
         {
           "text": "不要自己上网把某一个指标名称直接对号入座成绝症，也不要在没问医生的情况下一周内跑三家不同医院反复抽血。带上完整体检报告到内科、肿瘤科或相应专科，由医生决定是短期复查趋势还是配合影像/内镜排查。",
-          "sourceIds": ["nci-markers", "medline-markers"]
+          "sourceIds": [
+            "nci-markers",
+            "medline-markers"
+          ]
         }
       ]
     }
@@ -121,44 +168,65 @@
     {
       "question": "体检套餐里肿瘤标志物全部正常，是不是就一定没有癌症？",
       "answer": "不能这样判断。并非每种肿瘤都会分泌明显的血液标志物，早期病变或某些类型肿瘤患者的肿标完全可能落在参考区间内；常规防癌仍应按年龄与风险遵循规范的影像或内镜筛查，不能只靠抽血安心。",
-      "sourceIds": ["nci-markers", "medline-markers"]
+      "sourceIds": [
+        "nci-markers",
+        "medline-markers"
+      ]
     },
     {
       "question": "抽烟的人体检经常看到 CEA 略高，需要管吗？",
       "answer": "吸烟确实是导致 CEA 轻度高于常规参考区间的常见非肿瘤因素之一，但仅凭抽烟史也不能直接放任不管。仍建议交给医生结合升高幅度、年龄和胃肠镜/胸部 CT 等综合评估，并考虑戒烟后随访变化。",
-      "sourceIds": ["cea"]
+      "sourceIds": [
+        "cea"
+      ]
     },
     {
       "question": "为什么有的体检套餐一次打包查十几项肿瘤标志物？越多越好吗？",
       "answer": "不是越多越好。对没有症状、无特定高危因素的普通人来说，同时检测过多缺乏筛查证据的标志物，更容易遇到良性波动带来的假阳性，引发不必要的焦虑和过度检查；检查组合宜按年龄、性别和家族史有针对性地选择。",
-      "sourceIds": ["nci-markers", "medline-markers"]
+      "sourceIds": [
+        "nci-markers",
+        "medline-markers"
+      ]
     },
     {
       "question": "刚发现某项指标轻度偏高，隔两天立刻换家医院重抽靠谱吗？",
       "answer": "不建议盲目在几天内换不同医院重抽。不同实验室试剂和区间不同，跨院数值难以直接对比；更稳妥的做法是先咨询医生，确认是否需要先排查近期炎症或按合适时间间隔在同一体系复查趋势。",
-      "sourceIds": ["medline-markers"]
+      "sourceIds": [
+        "medline-markers"
+      ]
     },
     {
       "question": "AFP 升高是不是只和肝脏有关？",
       "answer": "AFP 常与肝脏评估一起被提及，但不仅限于肝脏问题。妊娠期会生理性升高，慢性肝炎活动与肝细胞再生也会引起波动，此外部分生殖细胞来源病变也可能涉及 AFP，具体必须由医生结合性别、孕期和影像排查。",
-      "sourceIds": ["afp"]
+      "sourceIds": [
+        "afp"
+      ]
     }
   ],
   "metrics": [
     {
       "name": "癌胚抗原（CEA）",
       "text": "临床常用于部分肿瘤的疗效与复发监测，吸烟和消化道/肺部良性炎症也常导致轻度升高。",
-      "sourceIds": ["cea", "nci-markers"]
+      "sourceIds": [
+        "cea",
+        "nci-markers"
+      ]
     },
     {
       "name": "甲胎蛋白（AFP）",
       "text": "与肝细胞再生、孕期生理状态及特定高危人群肝脏监测有关，单次升高不能直接确诊肿瘤。",
-      "sourceIds": ["afp", "medline-markers"]
+      "sourceIds": [
+        "afp",
+        "medline-markers"
+      ]
     },
     {
       "name": "影像学与病理活检（对照手段）",
       "text": "超声、CT、内镜及组织病理才是定位和明确病变性质的核心依据，血液肿标不能替代它们。",
-      "sourceIds": ["nci-markers", "medline-markers"]
+      "sourceIds": [
+        "nci-markers",
+        "medline-markers"
+      ]
     }
   ],
   "chain": [
@@ -167,7 +235,10 @@
     "排查吸烟、炎症、良性疾病与检测体系差异",
     "在医生指导下追踪趋势并结合影像或内镜核实"
   ],
-  "chainSourceIds": ["nci-markers", "medline-markers"],
+  "chainSourceIds": [
+    "nci-markers",
+    "medline-markers"
+  ],
   "tip": "肿瘤标志物升高不等于确诊癌症，指标正常也不能保证排除癌症；它们主要用于配合影像与病史辅助评估及动态监测，看到箭头请带上完整报告线下咨询医生。",
   "figures": [
     {
@@ -178,11 +249,23 @@
       "alt": "3D概念示意图：居中透明血液管内悬浮若干微光信号微粒，左右两侧配以磨砂玻璃透镜与多层棱镜，象征抽血信号需要结合影像与多维背景综合核验。",
       "caption": "血液里的肿瘤标志物只是一条线索，必须放进趋势、病史与影像检查的多维视角里解读。",
       "simplification": "图为信息核验概念示意，不代表任何具体蛋白分子结构、检测阈值或癌症筛查结论。",
-      "sourceIds": ["nci-markers", "medline-markers"],
+      "sourceIds": [
+        "nci-markers",
+        "medline-markers"
+      ],
       "legend": [
-        { "title": "血液中的信号分子", "text": "CEA、AFP 等标志物在肿瘤与良性炎症、吸烟、生理状态下都可能出现升高。" },
-        { "title": "多角度交叉核验", "text": "单靠一次抽血无法确诊或排除肿瘤，需要结合超声、CT、内镜和病史共同判断。" },
-        { "title": "重视同体系趋势", "text": "相比跨院单次对比，在同一检测体系下观察数值是回落还是持续走高更有参考价值。" }
+        {
+          "title": "血液中的信号分子",
+          "text": "CEA、AFP 等标志物在肿瘤与良性炎症、吸烟、生理状态下都可能出现升高。"
+        },
+        {
+          "title": "多角度交叉核验",
+          "text": "单靠一次抽血无法确诊或排除肿瘤，需要结合超声、CT、内镜和病史共同判断。"
+        },
+        {
+          "title": "重视同体系趋势",
+          "text": "相比跨院单次对比，在同一检测体系下观察数值是回落还是持续走高更有参考价值。"
+        }
       ],
       "attribution": {
         "kind": "ai-generated",
@@ -258,6 +341,17 @@
       "publicationDate": null
     }
   ],
-  "descriptionSourceIds": ["nci-markers", "medline-markers"],
-  "tipSourceIds": ["nci-markers", "medline-markers"]
+  "descriptionSourceIds": [
+    "nci-markers",
+    "medline-markers"
+  ],
+  "tipSourceIds": [
+    "nci-markers",
+    "medline-markers"
+  ],
+  "related": [
+    "stool-fobt",
+    "lung-nodule",
+    "liver-function"
+  ]
 }

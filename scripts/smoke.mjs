@@ -117,7 +117,7 @@ try {
   await page.screenshot({ path: "artifacts/mobile.png", fullPage: false });
   await mobileNav().getByRole("link", { name: "体检项目" }).click();
   await page.getByRole("textbox", { name: "筛选体检项目" }).fill("LDL");
-  await expect(page.locator(".question-row")).toHaveCount(1);
+  await expect(page.locator(".question-row").first()).toContainText("血脂");
   await page.getByRole("textbox", { name: "筛选体检项目" }).fill("");
   await expect(page.locator(".question-row")).toHaveCount(6);
   await page.screenshot({

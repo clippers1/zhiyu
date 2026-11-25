@@ -5,19 +5,29 @@
   "en": "HEART",
   "headline": "不停歇的生命泵",
   "text": "心脏的四个腔室依次接力：右侧把来自全身的血液送往肺，左侧再把来自肺的血液泵向全身。电信号协调每一次收缩节律，把含氧血液持续输送到各器官。",
-  "connection": "心电图 · 血压 · 血脂",
-  "related": ["ecg", "pressure", "lipids"],
+  "connection": "心电图 · 血压 · 血脂 · 颈动脉超声",
+  "related": [
+    "ecg",
+    "pressure",
+    "lipids",
+    "carotid-ultrasound"
+  ],
   "sections": [
     {
       "title": "左右两半如何接力",
       "paragraphs": [
         {
           "text": "心脏被中间的间隔分成左右两侧，各有一个心房和一个心室。右心负责接收来自全身的低氧血并泵往肺部换气，左心则把在肺部重新充满氧气的血液泵入主动脉送往全身。",
-          "sourceIds": ["heart", "anatomy"]
+          "sourceIds": [
+            "heart",
+            "anatomy"
+          ]
         },
         {
           "text": "心房与心室之间、心室与大血管之间都有瓣膜把关，像单向门一样让血液沿着固定方向前进，减少倒流。",
-          "sourceIds": ["anatomy"]
+          "sourceIds": [
+            "anatomy"
+          ]
         }
       ]
     },
@@ -26,7 +36,10 @@
       "paragraphs": [
         {
           "text": "心电图记录心肌收缩前的电信号节律，帮助观察心跳是否规整；血压反映心脏泵血与动脉血管阻力共同形成的压力；血脂与血糖则从长期血管环境的角度提供线索。",
-          "sourceIds": ["heart", "heart-tests"]
+          "sourceIds": [
+            "heart",
+            "heart-tests"
+          ]
         }
       ]
     },
@@ -35,7 +48,9 @@
       "paragraphs": [
         {
           "text": "运动、紧张、咖啡因、熬夜或发烧都会让心率和血压在短时间内明显变化。如果反复出现胸痛、胸闷、晕厥或明显心悸，应及时由医生评估。",
-          "sourceIds": ["heart-tests"]
+          "sourceIds": [
+            "heart-tests"
+          ]
         }
       ]
     }
@@ -49,7 +64,10 @@
   "publicationReady": true,
   "applicability": "面向希望了解心脏基本结构、血液循环顺序及常见体检关联项的一般成年读者。",
   "limitations": "不提供心血管疾病诊断、心电图个体判读或用药建议。",
-  "descriptionSourceIds": ["heart", "anatomy"],
+  "descriptionSourceIds": [
+    "heart",
+    "anatomy"
+  ],
   "references": [
     {
       "id": "heart",
@@ -94,20 +112,120 @@
     "intro": "从全身回到心脏的血液，先经过右心前往肺，再回到左心并被泵向全身。你可以点选图中的心腔，或逐步观察这条路径。",
     "simplification": "底图展示心脏剖面结构；高亮、颜色和动画仅用于说明主要流动方向，没有完整呈现所有血管、瓣膜和分支，也不代表真实血液颜色、流速或心率。",
     "parts": [
-      { "id": "body", "label": "全身", "summary": "血液完成全身循环后，经大静脉回到心脏右侧。", "sourceIds": ["heart"] },
-      { "id": "right-atrium", "label": "右心房", "summary": "接收从全身回到心脏的血液。", "sourceIds": ["heart", "anatomy"] },
-      { "id": "right-ventricle", "label": "右心室", "summary": "把血液经肺动脉泵向肺。", "sourceIds": ["heart", "anatomy"] },
-      { "id": "lungs", "label": "肺", "summary": "血液在肺获得氧，再经肺静脉返回心脏。", "sourceIds": ["heart"] },
-      { "id": "left-atrium", "label": "左心房", "summary": "接收从肺回到心脏的血液。", "sourceIds": ["heart", "anatomy"] },
-      { "id": "left-ventricle", "label": "左心室", "summary": "产生将血液经主动脉泵向全身所需的压力。", "sourceIds": ["heart", "anatomy"] }
+      {
+        "id": "body",
+        "label": "全身",
+        "summary": "血液完成全身循环后，经大静脉回到心脏右侧。",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "right-atrium",
+        "label": "右心房",
+        "summary": "接收从全身回到心脏的血液。",
+        "sourceIds": [
+          "heart",
+          "anatomy"
+        ]
+      },
+      {
+        "id": "right-ventricle",
+        "label": "右心室",
+        "summary": "把血液经肺动脉泵向肺。",
+        "sourceIds": [
+          "heart",
+          "anatomy"
+        ]
+      },
+      {
+        "id": "lungs",
+        "label": "肺",
+        "summary": "血液在肺获得氧，再经肺静脉返回心脏。",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "left-atrium",
+        "label": "左心房",
+        "summary": "接收从肺回到心脏的血液。",
+        "sourceIds": [
+          "heart",
+          "anatomy"
+        ]
+      },
+      {
+        "id": "left-ventricle",
+        "label": "左心室",
+        "summary": "产生将血液经主动脉泵向全身所需的压力。",
+        "sourceIds": [
+          "heart",
+          "anatomy"
+        ]
+      }
     ],
     "steps": [
-      { "id": "body-ra", "title": "从全身回到右心房", "text": "来自全身的血液经上、下腔静脉进入右心房。", "from": "body", "to": "right-atrium", "sourceIds": ["heart"] },
-      { "id": "ra-rv", "title": "右心房到右心室", "text": "血液从右心房进入右心室，准备被泵向肺。", "from": "right-atrium", "to": "right-ventricle", "sourceIds": ["heart"] },
-      { "id": "rv-lungs", "title": "右心室把血液送往肺", "text": "右心室将血液泵入肺动脉，血液由此到达肺。", "from": "right-ventricle", "to": "lungs", "sourceIds": ["heart"] },
-      { "id": "lungs-la", "title": "从肺返回左心房", "text": "血液在肺获得氧后，经肺静脉回到左心房。", "from": "lungs", "to": "left-atrium", "sourceIds": ["heart"] },
-      { "id": "la-lv", "title": "左心房到左心室", "text": "血液从左心房进入左心室，准备再次流向全身。", "from": "left-atrium", "to": "left-ventricle", "sourceIds": ["heart"] },
-      { "id": "lv-body", "title": "左心室把血液送向全身", "text": "左心室将血液泵入主动脉，血液由此进入全身循环。", "from": "left-ventricle", "to": "body", "sourceIds": ["heart"] }
+      {
+        "id": "body-ra",
+        "title": "从全身回到右心房",
+        "text": "来自全身的血液经上、下腔静脉进入右心房。",
+        "from": "body",
+        "to": "right-atrium",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "ra-rv",
+        "title": "右心房到右心室",
+        "text": "血液从右心房进入右心室，准备被泵向肺。",
+        "from": "right-atrium",
+        "to": "right-ventricle",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "rv-lungs",
+        "title": "右心室把血液送往肺",
+        "text": "右心室将血液泵入肺动脉，血液由此到达肺。",
+        "from": "right-ventricle",
+        "to": "lungs",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "lungs-la",
+        "title": "从肺返回左心房",
+        "text": "血液在肺获得氧后，经肺静脉回到左心房。",
+        "from": "lungs",
+        "to": "left-atrium",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "la-lv",
+        "title": "左心房到左心室",
+        "text": "血液从左心房进入左心室，准备再次流向全身。",
+        "from": "left-atrium",
+        "to": "left-ventricle",
+        "sourceIds": [
+          "heart"
+        ]
+      },
+      {
+        "id": "lv-body",
+        "title": "左心室把血液送向全身",
+        "text": "左心室将血液泵入主动脉，血液由此进入全身循环。",
+        "from": "left-ventricle",
+        "to": "body",
+        "sourceIds": [
+          "heart"
+        ]
+      }
     ]
   }
 }

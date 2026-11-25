@@ -1,0 +1,359 @@
+{
+  "id": "gallbladder",
+  "catalogOrder": 17,
+  "title": "胆囊超声",
+  "english": "GALLBLADDER ULTRASOUND",
+  "subtitle": "胆囊息肉、胆结石和胆囊壁毛糙，分别在描述什么？",
+  "question": "腹部 B 超提示胆囊息肉或胆结石，平时不疼需要立刻手术吗？",
+  "questionAnswer": "多数体检偶然发现、没有腹痛症状的小胆囊息肉或静止性胆结石并不意味着必须立刻手术；医生会重点观察息肉形态大小变化、结石是否引发症状或炎症，多数情况下先规范定期超声随访即可。",
+  "icon": "layers",
+  "color": "green",
+  "tags": [
+    "胆囊息肉",
+    "胆结石",
+    "胆囊壁毛糙"
+  ],
+  "searchAliases": [
+    "胆囊彩超",
+    "肝胆超声",
+    "胆囊息肉样病变",
+    "胆固醇息肉",
+    "胆囊结石",
+    "泥沙样结石",
+    "胆囊壁增厚",
+    "胆囊炎",
+    "腹部B超",
+    "gallbladder ultrasound",
+    "gallstones"
+  ],
+  "number": "17",
+  "format": "article",
+  "featured": false,
+  "desc": "腹部超声是观察胆囊外形、囊壁光滑度以及内部是否存在结石或息肉样隆起的首选无创检查；因为进食后胆囊会收缩变小，通常要求空腹检查才能看清细节。",
+  "sections": [
+    {
+      "title": "胆囊平时做什么？为什么查它必须空腹？",
+      "short": "为什么空腹",
+      "paragraphs": [
+        {
+          "text": "胆囊是一个梨形的小囊袋，紧贴在肝脏下方。它自己并不制造胆汁，而是负责把肝脏源源不断分泌出来的胆汁浓缩储存起来；等到我们吃进含有脂肪的食物时，胆囊就会收缩，把胆汁排入小肠帮助消化脂肪。",
+          "sourceIds": [
+            "gallstones",
+            "gallbladder-info"
+          ]
+        },
+        {
+          "text": "这也直接解释了为什么腹部超声要求空腹：空腹状态下胆囊充满胆汁、像个饱满的水球，囊壁舒展平整，超声探头很容易看清囊壁上有没有微小息肉、里面有没有漂浮或沉积的结石。",
+          "sourceIds": [
+            "abd-us",
+            "gallstones-diag"
+          ]
+        },
+        {
+          "text": "如果检查前吃了早饭，哪怕只喝了一杯牛奶或豆浆，胆囊都会立刻排空收缩，囊壁皱在一起，不仅容易漏掉里面的小病灶，还可能被误看成「胆囊壁增厚或毛糙」。",
+          "sourceIds": [
+            "abd-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "胆囊结石和胆囊息肉，超声上怎么区分？",
+      "short": "结石与息肉",
+      "paragraphs": [
+        {
+          "text": "胆结石是胆汁中的胆固醇、胆红素等成分比例失衡后在胆囊里结晶形成的「小石子」或泥沙样沉积。在超声画面里，结石通常会产生明显的强回声和后方声影，而且当受检者侧身翻动体位时，结石往往会顺着重力一起滚动。",
+          "sourceIds": [
+            "gallstones",
+            "gallstones-diag"
+          ]
+        },
+        {
+          "text": "胆囊息肉（常写为「胆囊息肉样病变」）则是附着在胆囊内壁上、向腔内凸起的小隆起，改变体位时它不会跟着移动，后方通常也不带明显声影。体检中最常见的一类其实是胆固醇结晶附着在黏膜上形成的胆固醇性息肉，并非真正的肿瘤。",
+          "sourceIds": [
+            "gallbladder-info",
+            "abd-us"
+          ]
+        },
+        {
+          "text": "有时候，紧贴胆囊壁的小结石和息肉在普通超声上外观非常相似，可能需要复查或由经验丰富的超声医师多切面观察来进一步辨别。",
+          "sourceIds": [
+            "gallstones-diag",
+            "abd-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "报告上常出现的「胆囊壁毛糙」意味着什么？",
+      "short": "胆囊壁毛糙",
+      "paragraphs": [
+        {
+          "text": "不少体检报告会在没有任何结石和息肉的情况下写一句「胆囊壁毛糙」。这并不是一个正式的疾病诊断，而是超声医师对囊壁内缘看起来不如理想状态光滑的形态描述。",
+          "sourceIds": [
+            "abd-us",
+            "gallbladder-info"
+          ]
+        },
+        {
+          "text": "有时它与既往轻微慢性炎症或胆汁淤积有关，但也可能只是检查时空腹不够充分、胆囊轻微收缩、或者局部脂肪和气体干扰带来的影像表现。如果平时完全没有右上腹疼痛、饱胀或发热，单凭「壁毛糙」几个字通常不必过度紧张。",
+          "sourceIds": [
+            "abd-us",
+            "gallbladder-info"
+          ]
+        },
+        {
+          "text": "相比之下，如果胆囊壁明显增厚并伴随进食油腻后右上腹剧痛、右肩背放射痛、恶心发热或皮肤眼睛发黄，就需要尽快去医院评估是否存在急性胆囊炎或胆道梗阻。",
+          "sourceIds": [
+            "gallstones",
+            "gallbladder-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "没有症状的结石和息肉，医生重点关注什么？",
+      "short": "关注重点",
+      "paragraphs": [
+        {
+          "text": "很多人在体检之前根本不知道自己有胆结石或胆囊息肉。对于无症状的静止性胆结石，医学上往往称之为「无症状胆结石」，多数人可以长期平稳带石生活，医生会结合结石特征、胆囊壁状况和个人情况决定随访还是干预。",
+          "sourceIds": [
+            "gallstones",
+            "gallstones-diag"
+          ]
+        },
+        {
+          "text": "对于胆囊息肉，由于超声本身只能看外形不能直接做病理化验，医生在复查时最在意的是它的大小趋势、单发还是多发、基底宽窄以及是否合并胆结石或胆囊壁局灶增厚。因此，把历年超声报告留好做前后对比非常有价值。",
+          "sourceIds": [
+            "gallbladder-info",
+            "abd-us"
+          ]
+        },
+        {
+          "text": "同时，因为胆囊与肝脏、血脂和代谢状态关系紧密，查出胆囊问题时顺手看看肝功能里的胆红素、GGT、ALP 以及血脂结果，有助于更完整地了解胆道排泄是否顺畅。",
+          "sourceIds": [
+            "gallstones-diag",
+            "gallstones"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "日常饮食误区与阅读边界",
+      "short": "生活与边界",
+      "paragraphs": [
+        {
+          "text": "关于胆囊健康，常见的一个误区是为了「防结石」长期完全不吃早饭或极端零脂肪节食。事实上，长时间不进食会让胆汁长时间滞留在胆囊里过度浓缩，反而增加胆固醇析出结晶的机会；规律三餐、均衡少油、控制体重波动更利于胆汁定期排空。",
+          "sourceIds": [
+            "gallstones"
+          ]
+        },
+        {
+          "text": "如果已经反复发作过胆绞痛（尤其是油腻大餐后右上腹绞痛），或超声提示息肉持续增大、形态异常，应及时前往肝胆外科或消化内科听取专业建议，而不是轻信偏方「排石」。",
+          "sourceIds": [
+            "gallstones",
+            "gallbladder-info"
+          ]
+        },
+        {
+          "text": "本文只解释胆囊超声常见术语、结石与息肉的区别及空腹原因，不提供息肉或结石的手术尺寸界限、溶石药物或个体饮食处方。",
+          "sourceIds": [
+            "gallstones-diag",
+            "abd-us"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "胆囊息肉会自己消失吗？为什么今年查有、明年又没写？",
+      "answer": "部分极小的胆固醇结晶附壁假性息肉可能随胆汁冲刷脱落而不再显示，也可能是两次超声切面、空腹充盈度或探头分辨率差异导致显示不清。连续保留几年的报告对照，比单看某一年更可靠。",
+      "sourceIds": [
+        "abd-us",
+        "gallbladder-info"
+      ]
+    },
+    {
+      "question": "胆结石平时一点不痛，可以吃「排石药」把它排出来吗？",
+      "answer": "不要自行尝试偏方或所谓排石疗法。盲目促使结石移动，反而可能让结石卡在细小的胆管里引起剧痛、急性胆囊炎、黄疸甚至胰腺炎。是否需要药物或手术处理，应由肝胆外科或消化科医生评估。",
+      "sourceIds": [
+        "gallstones",
+        "gallbladder-info"
+      ]
+    },
+    {
+      "question": "做腹部 B 超前喝了两口白开水，会影响看胆囊吗？",
+      "answer": "一般少量白开水不会引起胆囊明显收缩，但大量饮水或喝含奶、含糖饮品、咖啡则可能刺激胆囊排空或带入胃肠气体遮挡视野。最稳妥的做法是严格按体检机构的空腹和饮水提示准备。",
+      "sourceIds": [
+        "abd-us"
+      ]
+    },
+    {
+      "question": "胆囊壁毛糙等于慢性胆囊炎吗？",
+      "answer": "不能直接画等号。毛糙只是超声图像对胆囊内壁边缘的视觉描述，未充分空腹、胆囊轻度收缩或其他非炎症状态都可能呈现类似表现。有没有胆囊炎要结合症状、囊壁厚度、有无结石及医生判断。",
+      "sourceIds": [
+        "abd-us",
+        "gallbladder-info"
+      ]
+    },
+    {
+      "question": "体检做超声已经查了胆囊，为什么有时医生还会让查肝功能？",
+      "answer": "超声主要看胆囊和胆管的「形态结构」，而肝功能里的胆红素、碱性磷酸酶（ALP）等血液指标反映的是胆汁排泄和肝胆细胞的「生化状态」。两者从不同侧面互相补充。",
+      "sourceIds": [
+        "gallstones-diag"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "胆囊息肉样病变",
+      "text": "附着于胆囊内壁、不随体位移动的小隆起，体检中多数为胆固醇性沉积，随访重点看大小与形态趋势。",
+      "sourceIds": [
+        "gallbladder-info",
+        "abd-us"
+      ]
+    },
+    {
+      "name": "胆囊结石（强回声伴声影）",
+      "text": "胆汁成分结晶形成的固体颗粒，常随体位滚动，需结合是否引发胆绞痛、炎症及胆道通畅情况评估。",
+      "sourceIds": [
+        "gallstones",
+        "gallstones-diag"
+      ]
+    },
+    {
+      "name": "胆囊壁形态（光滑 / 毛糙 / 增厚）",
+      "text": "描述胆囊壁的平整度与厚度，容易受是否空腹影响，需结合症状和其他发现综合解读。",
+      "sourceIds": [
+        "abd-us"
+      ]
+    }
+  ],
+  "chain": [
+    "空腹使胆囊充满胆汁充分舒展",
+    "超声观察囊壁平整度与隆起物",
+    "借助体位移动区分结石与附壁息肉",
+    "结合症状与肝功能评估随访或就医"
+  ],
+  "chainSourceIds": [
+    "abd-us",
+    "gallstones-diag",
+    "gallbladder-info"
+  ],
+  "tip": "胆囊超声必须在充分空腹下检查才准确；无症状的小息肉或静止结石多数以规范随访为主，切忌轻信偏方盲目排石，出现油腻餐后右上腹绞痛或发热黄疸应及时就医。",
+  "figures": [
+    {
+      "key": "gallbladder",
+      "alt": "示意图：超声声波扫查肝脏下方的胆囊，示意内壁附着的息肉样小隆起与底部沉积的结石在形态位置上的区别，不含真实尺寸。",
+      "caption": "超声通过形态、回声和是否随体位移动，区分胆囊壁息肉与腔内结石。",
+      "simplification": "图为胆囊超声结构概念示意，省略了肝内胆管与十二指肠连接细节，也不表示任何手术或随访的毫米界值。",
+      "sourceIds": [
+        "gallstones-diag",
+        "abd-us"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "f9b73c84d8bee93d58950d88da33119454bb6dc9f4da9a55cafdba4bffd2aa02"
+      },
+      "src": "/media/fig-gallbladder.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "空腹充盈是前提",
+          "text": "未进食时胆囊舒展饱满，囊壁与内部细微结构才容易被超声看清。"
+        },
+        {
+          "title": "附壁小隆起（息肉概念）",
+          "text": "生长或附着在胆囊内壁上，翻身改变体位时位置固定不动。"
+        },
+        {
+          "title": "腔内沉积（结石概念）",
+          "text": "胆汁结晶聚集于囊腔底部，超声下常有声影并可随体位滚动。"
+        }
+      ]
+    }
+  ],
+  "organ": "胆囊 · 肝脏与胆道系统",
+  "relatedOrgans": [
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
+  "related": [
+    "liver-function",
+    "fatty-liver",
+    "lipids"
+  ],
+  "kind": "indicator",
+  "category": "digestive",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在腹部体检超声中看到胆囊息肉、胆结石或胆囊壁毛糙表述的一般成年读者。",
+  "limitations": "不提供息肉或结石的手术尺寸阈值、复查间隔规定、溶石药或手术方案建议。",
+  "references": [
+    {
+      "id": "gallstones",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Definition & Facts for Gallstones",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gallstones/definition-facts",
+      "scope": "胆囊储胆功能、无症状胆结石的普遍性及常见影响因素",
+      "locator": "What are gallstones?; How common are gallstones?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "gallstones-diag",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Diagnosis of Gallstones",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gallstones/diagnosis",
+      "scope": "腹部超声与肝胆血液检查在评估胆囊和胆道中的配合",
+      "locator": "How do doctors diagnose gallstones?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "gallbladder-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Gallbladder Disease",
+      "url": "https://medlineplus.gov/gallbladderdiseases.html",
+      "scope": "胆囊炎症、结石、息肉等常见病变类型与就医警示信号",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "abd-us",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Abdominal ultrasound",
+      "url": "https://medlineplus.gov/ency/article/003777.htm",
+      "scope": "腹部超声检查胆囊的空腹准备要求及影像观察内容",
+      "locator": "How to Prepare for the Test; Why the Test is Performed",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "abd-us",
+    "gallstones-diag"
+  ],
+  "tipSourceIds": [
+    "gallstones",
+    "abd-us"
+  ]
+}

@@ -4,5 +4,6 @@
   { "id": "blood", "name": "血液与免疫" },
   { "id": "endocrine", "name": "内分泌" },
   { "id": "respiration", "name": "呼吸系统" },
-  { "id": "urinary", "name": "泌尿系统" }
+  { "id": "urinary", "name": "泌尿系统" },
+  { "id": "digestive", "name": "消化系统" }
 ]

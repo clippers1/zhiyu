@@ -25,6 +25,7 @@ import { contentTrust } from "../services/content-status";
 import { nextIndicator } from "../services/discovery";
 import { ReportRowStrip } from "./ReportGuide";
 import { REPORT_ROWS } from "../services/report-guide";
+import FeedbackBox from "./FeedbackBox";
 
 function FigureBlock({ figure, id = "article-figure" }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -159,6 +160,7 @@ export default function Article({
   const trust = contentTrust(detail);
   const catalog = useContent("list", [{ kind: isStory ? "story" : "indicator", limit: 24 }]);
   const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
+  const relatedIndicatorsState = useContent("list", [{ kind: "indicator", ids: detail?.related || [], limit: 24 }]);
   const next = nextIndicator(catalog.data?.items, id, isStory ? "story" : "indicator");
   const figures = attachFigures(detail);
   const questions = longForm && detail?.faq?.length ? detail.faq : guide?.questions || [];
@@ -169,6 +171,7 @@ export default function Article({
     references: detail.references,
   } : null;
   const relatedOrgans = relatedState.data?.items || [];
+  const relatedIndicators = (relatedIndicatorsState.data?.items || []).filter(item => item.id !== detail?.id);
   useEffect(() => {
     if (detail && window.location.hash === "#article-source-panel") {
       document.getElementById("article-source-panel")?.scrollIntoView();
@@ -342,7 +345,23 @@ export default function Article({
                 {index === 0 ? "探索器官" : `了解${organ.title}`} <ArrowUpRight size={14} />
               </RouteLink>)}
             </div>
+            {relatedIndicators.length > 0 && (
+              <section className="related-indicators" aria-labelledby="related-indicators-title">
+                <h2 id="related-indicators-title"><i>联</i>报告单上常一起对照看</h2>
+                <p className="related-indicators-note">以下项目常与本文一起出现在同一份体检报告中，横向对照有助于了解整体背景，不用于推断个人病因。</p>
+                <div className="related-indicators-grid">
+                  {relatedIndicators.map(item => (
+                    <RouteLink key={item.id} page="article" id={item.id} className="related-indicator-card" onNavigate={() => onOpen(item.id)}>
+                      <span className="related-indicator-meta">{item.number ? `${item.number} · ` : ""}{item.title}</span>
+                      <b>{item.question || `认识${item.title}`}</b>
+                      <span className="related-indicator-go">查看解释 <ArrowRight size={14} aria-hidden="true" /></span>
+                    </RouteLink>
+                  ))}
+                </div>
+              </section>
+            )}
             <SourceReferences content={detail} prefix="article-source" />
+            <FeedbackBox content={detail} />
             <BoundaryNote trust={trust}>
               {isStory
                 ? "本文用于认识身体与日常现象，不解释个人检查结果，也不构成诊断或治疗建议。"

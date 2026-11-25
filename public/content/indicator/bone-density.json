@@ -1,0 +1,364 @@
+{
+  "id": "bone-density",
+  "catalogOrder": 20,
+  "title": "骨密度检查",
+  "english": "BONE MINERAL DENSITY (BMD)",
+  "subtitle": "报告单上的 T 值、Z 值和「骨量减少」，分别在跟谁比？",
+  "question": "体检报告上的骨密度 T 值和 Z 值有什么区别？",
+  "questionAnswer": "T 值是把你的骨密度与健康年轻成年人的平均峰值骨量相比，常用于评估绝经后女性和年长男性的骨质疏松风险；Z 值则是与同年龄、同性别的人群相比，两者参照对象不同，具体使用哪一项以及不同设备的适用性需要由医生解读。",
+  "icon": "layers",
+  "color": "blue",
+  "tags": [
+    "骨密度",
+    "T值 / Z值",
+    "双能X线 DXA"
+  ],
+  "searchAliases": [
+    "BMD",
+    "DXA",
+    "DEXA",
+    "骨量减少",
+    "骨质疏松",
+    "T值",
+    "Z值",
+    "超声骨密度",
+    "跟骨超声",
+    "双能X线",
+    "bone density",
+    "osteoporosis"
+  ],
+  "number": "20",
+  "format": "article",
+  "featured": false,
+  "desc": "骨密度（BMD）检查用于评估骨骼中钙和其他矿物质的致密程度，帮助了解骨骼强度与骨折风险。临床金标准是双能 X 线吸收法（DXA），而普通体检中常见超声跟骨测量作为初筛。",
+  "sections": [
+    {
+      "title": "骨密度查的是什么？骨骼不是一成不变的石头",
+      "short": "骨骼与骨量",
+      "paragraphs": [
+        {
+          "text": "骨骼表面看起来坚硬静止，实际上内部一直在进行缓慢的新陈代谢：旧骨不断被吸收，新骨不断生成。年轻时骨量会达到一生的高峰，随着年龄增长、激素变化（如女性绝经后雌激素下降）或长期缺乏负重活动，骨吸收可能逐渐快过新骨生成。",
+          "sourceIds": [
+            "bmd-info",
+            "osteo"
+          ]
+        },
+        {
+          "text": "骨密度检查测的就是单位骨骼里矿物质的致密程度。骨密度越低，骨骼内部微细的骨小梁结构越容易变得稀疏脆弱，跌倒甚至日常轻微外力下发生骨折的风险也就随之上升。",
+          "sourceIds": [
+            "bmd-scan",
+            "osteo"
+          ]
+        },
+        {
+          "text": "因为骨量缓慢流失在早期通常没有任何疼痛或不适，不少人直到发生轻微跌倒后骨折才发现骨质疏松；这也是针对中高风险人群定期做骨密度评估的意义所在。",
+          "sourceIds": [
+            "bmd-info",
+            "osteo"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "T 值和 Z 值：两个数字，对照的不是同一群人",
+      "short": "T值与Z值",
+      "paragraphs": [
+        {
+          "text": "拿到双能 X 线骨密度报告时，最让人困惑的就是同时印着 T 值（T-score）和 Z 值（Z-score）两列带正负号的数字。它们都不是绝对骨重量，而是统计学上的「相对位置」。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "T 值是拿你的骨密度，去和健康年轻成年人处于骨骼巅峰期时的平均水平做比较。正因为人到中老年骨量会自然比年轻时低，T 值常用来衡量绝经后女性和较年长男性骨骼总体还剩多少「家底」，以及是否存在骨量减少或骨质疏松。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "Z 值则是拿你的骨密度，去和同年龄、同性别（有时还考虑体型族群）的同龄人平均水平做比较。它常用于评估尚未绝经的年轻女性、较年轻男性或儿童青少年的骨骼状态；如果 Z 值明显低于同龄人，医生会进一步排查是否存在影响骨骼代谢的潜在原因。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "体检里「脚后跟超声」和医院「双能 X 线（DXA）」不一样",
+      "short": "超声 vs DXA",
+      "paragraphs": [
+        {
+          "text": "很多常规体检套餐里的骨密度检查，是让你把脚放进一台小仪器里测跟骨（脚后跟）或手腕的超声骨密度。这类外周筛查操作快捷、没有辐射，但更容易受到局部部位和设备差异的影响，适合做初步风险提示，一般不能直接作为确诊骨质疏松的唯一依据。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "目前医学上用于诊断和随访的常用标准方法是中心部位双能 X 线吸收法（DXA / DEXA），主要扫描腰椎和髋部这两处最容易发生严重脆性骨折的核心部位。它的辐射剂量非常低，过程无痛且耗时很短。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "如果体检里的跟骨或前臂超声提示骨量偏低，规范的做法通常是去医院由医生评估是否需要补做一次腰椎和髋部的 DXA 扫描，而不是直接买一堆钙片或自行开始抗骨质疏松药物治疗。",
+          "sourceIds": [
+            "bmd-scan",
+            "osteo"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "读懂骨折风险，不能只看骨密度一张纸",
+      "short": "综合评估",
+      "paragraphs": [
+        {
+          "text": "骨密度数值是预测骨折风险的重要依据，但不是唯一依据。年龄、既往是否发生过轻微外力骨折、父母髋部骨折史、体重过轻、长期使用糖皮质激素、吸烟过量饮酒以及跌倒倾向，都会显著影响真实骨折概率。",
+          "sourceIds": [
+            "osteo",
+            "bmd-info"
+          ]
+        },
+        {
+          "text": "另外，腰椎如果存在明显骨质增生或血管钙化，有时会让腰椎 DXA 读数看起来「偏高」而掩盖真实骨量流失；所以医生常常同时观察腰椎和髋部等多个部位的数据，综合判断。",
+          "sourceIds": [
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "同时，甲状腺功能亢进、慢性肾脏问题或维生素 D 缺乏等内分泌与代谢因素也可能加速骨量丢失，因此内分泌科或骨科医生在评估明显骨量偏低时，往往会配合血液检查一起寻找背后原因。",
+          "sourceIds": [
+            "osteo",
+            "bmd-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "检查准备小贴士与阅读边界",
+      "short": "准备与边界",
+      "paragraphs": [
+        {
+          "text": "做双能 X 线骨密度（DXA）检查时通常不需要空腹，建议穿着没有金属拉链、金属扣件的宽松衣物；部分机构会提示检查当天早上暂停服用钙补充剂，并在近期做过钡餐或含造影剂 CT 检查时提前告知技师，以免干扰扫描读数。",
+          "sourceIds": [
+            "bmd-scan",
+            "bmd-ency"
+          ]
+        },
+        {
+          "text": "如果未来需要复查对比骨量变化趋势，尽量使用同一台 DXA 设备并测量相同部位，因为不同品牌和型号仪器之间的基准算法存在细微差异。",
+          "sourceIds": [
+            "bmd-scan"
+          ]
+        },
+        {
+          "text": "本文只解释骨密度检查的方法分工以及 T 值、Z 值的参照概念，不列出具体诊断数值分界、补钙剂量或抗骨质疏松药物处方；个人骨健康管理请遵内分泌科或骨科医生指导。",
+          "sourceIds": [
+            "bmd-scan",
+            "osteo"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "体检脚后跟超声说「骨质疏松」，就一定确诊了吗？",
+      "answer": "不一定。跟骨或手腕超声属于外周初筛设备，便于大批量体检快速提示风险，但准确度不如腰椎和髋部的双能 X 线（DXA）扫描。外周初筛异常时，通常需要由医生判断是否补做中心 DXA 确认。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "question": "年轻人拿到骨密度报告，应该看 T 值还是 Z 值？",
+      "answer": "未绝经的年轻女性和较年轻男性一般更侧重参考 Z 值，因为 Z 值比较的是同年龄同性别人群；而 T 值主要用于评估绝经后女性和年长男性的骨质疏松风险。具体解读应以出具报告的医院和临床医生为准。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "question": "血钙化验正常，为什么骨密度还是偏低？",
+      "answer": "血液里的钙浓度受到严格调节以维持心脏和神经正常工作；当钙摄入不足或骨代谢失衡时，身体会从骨骼这个「钙仓库」里调出钙来维持血钙平稳。因此血钙正常并不代表骨量充足。",
+      "sourceIds": [
+        "bmd-info",
+        "osteo"
+      ]
+    },
+    {
+      "question": "双能 X 线（DXA）听起来有 X 线，辐射会不会很大？",
+      "answer": "DXA 使用的是极低剂量的 X 射线，其辐射量远低于常规胸部 CT，甚至通常比普通胸片还要低得多。不过孕妇原则上仍应避免非必要的 X 线检查，检查前如有怀孕可能务必告知医护人员。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "question": "查出「骨量减少」，只靠喝骨头汤能补回来吗？",
+      "answer": "骨头汤中真正溶出的钙含量其实很低，靠喝骨头汤很难满足骨骼营养需求。科学的骨骼养护涉及均衡的钙与维生素 D 摄入、规律的负重抗阻锻炼、戒烟限酒及防跌倒，是否需要药物干预应由医生评估。",
+      "sourceIds": [
+        "osteo",
+        "bmd-info"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "双能 X 线吸收法（DXA / DEXA）",
+      "text": "扫描腰椎和髋部骨密度的临床常用标准方法，辐射剂量极低，用于规范评估与随访。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "name": "T 值（与健康年轻人峰值相比）",
+      "text": "反映当前骨密度偏离年轻成人巅峰骨量的程度，常用于绝经后女性及年长人群评估。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "name": "Z 值（与同龄同性别人群相比）",
+      "text": "反映骨密度在同龄人中的相对位置，常用于较年轻人群评估或提示排查继发原因。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-ency"
+      ]
+    },
+    {
+      "name": "外周超声骨密度（跟骨 / 手腕）",
+      "text": "体检常见的无辐射初筛工具，提示偏低时通常需结合中心部位 DXA 进一步核实。",
+      "sourceIds": [
+        "bmd-scan"
+      ]
+    }
+  ],
+  "chain": [
+    "骨骼内部持续进行吸收与重建",
+    "扫描评估腰椎髋部矿物质致密程度",
+    "按人群对照 T 值或 Z 值看相对位置",
+    "结合年龄病史与跌倒风险综合评估"
+  ],
+  "chainSourceIds": [
+    "bmd-scan",
+    "bmd-info",
+    "osteo"
+  ],
+  "tip": "T 值对照健康年轻人峰值，Z 值对照同龄人；体检里的脚后跟超声属于初筛，发现骨量偏低时建议带上报告由医生评估是否补做中心 DXA 与综合骨折风险。",
+  "figures": [
+    {
+      "key": "bmd",
+      "alt": "示意图：骨骼横截面内部致密与稀疏骨小梁结构的柔和对比，上方有双束低能量扫描光束，不含真实数值和诊断分界。",
+      "caption": "骨密度检查衡量骨小梁结构的矿物质致密程度，并以统计学位置与参照人群对比。",
+      "simplification": "图为骨小梁疏密变化与双能扫描的概念示意，不代表真实解剖比例，也不展示任何 T 值或 Z 值的数值分界线。",
+      "sourceIds": [
+        "bmd-scan",
+        "bmd-info"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "d62e3e35450f2ef6aca7ce4fd88d03f8fa0b7039ee40facfa1cfca58bf0aa89a"
+      },
+      "src": "/media/fig-bone-density.webp",
+      "width": 960,
+      "height": 492,
+      "legend": [
+        {
+          "title": "致密骨小梁结构",
+          "text": "骨骼内部像蜂窝一样的立体支架越致密，承重与抗骨折能力越强。"
+        },
+        {
+          "title": "骨量流失变稀疏",
+          "text": "随年龄、激素或代谢变化，支架孔隙增大但早期常无明显痛感。"
+        },
+        {
+          "title": "双能扫描与参照对比",
+          "text": "DXA 扫描腰椎与髋部，并通过 T 值 / Z 值对照不同参照人群。"
+        }
+      ]
+    }
+  ],
+  "organ": "骨骼 · 运动与内分泌代谢系统",
+  "relatedOrgans": [],
+  "related": [
+    "thyroid-function",
+    "kidney-function"
+  ],
+  "kind": "indicator",
+  "category": "endocrine",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到骨密度报告、希望弄懂 T 值/Z 值以及超声初筛与 DXA 区别的一般成年读者。",
+  "limitations": "不提供骨质疏松具体数值诊断界值、骨折风险计算评分、补钙剂量或抗骨质疏松药物处方。",
+  "references": [
+    {
+      "id": "bmd-scan",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Bone Density Scan",
+      "url": "https://medlineplus.gov/lab-tests/bone-density-scan/",
+      "scope": "DXA 与外周骨密度检测的区别、T 值与 Z 值含义及检查前准备注意事项",
+      "locator": "What is a bone density scan?; How do I prepare?; What do the results mean?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bmd-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Bone Density",
+      "url": "https://medlineplus.gov/bonedensity.html",
+      "scope": "骨矿物质密度、无症状骨流失与骨折风险的基本概念",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bmd-ency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Bone mineral density test",
+      "url": "https://medlineplus.gov/ency/article/007197.htm",
+      "scope": "中心 DXA 测量腰椎与髋部、T/Z 值适用人群及低剂量辐射特点",
+      "locator": "How the Test is Performed; What Abnormal Results Mean",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "osteo",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Osteoporosis",
+      "url": "https://medlineplus.gov/osteoporosis.html",
+      "scope": "骨质疏松的多因素风险背景与综合预防评估维度",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "bmd-scan",
+    "bmd-info"
+  ],
+  "tipSourceIds": [
+    "bmd-scan",
+    "bmd-ency"
+  ]
+}

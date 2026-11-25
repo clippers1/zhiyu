@@ -23,7 +23,14 @@
     "RBC",
     "PLT",
     "HGB",
-    "血象"
+    "血象",
+    "贫血",
+    "白细胞高",
+    "白细胞低",
+    "血小板低",
+    "中性粒细胞",
+    "淋巴细胞",
+    "感染"
   ],
   "number": "04",
   "format": "article",
@@ -348,5 +355,10 @@
   ],
   "tipSourceIds": [
     "cbc"
+  ],
+  "related": [
+    "stool-fobt",
+    "urinalysis",
+    "tumor-markers"
   ]
 }

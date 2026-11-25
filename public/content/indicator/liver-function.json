@@ -24,7 +24,13 @@
     "TBIL",
     "ALB",
     "肝脏检查",
-    "liver panel"
+    "liver panel",
+    "转氨酶高",
+    "谷丙转氨酶高",
+    "谷草转氨酶高",
+    "黄疸",
+    "胆红素偏高",
+    "保肝"
   ],
   "number": "05",
   "format": "article",
@@ -359,5 +365,10 @@
   ],
   "tipSourceIds": [
     "liver-tests"
+  ],
+  "related": [
+    "fatty-liver",
+    "gallbladder",
+    "lipids"
   ]
 }

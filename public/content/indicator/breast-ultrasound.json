@@ -1,0 +1,355 @@
+{
+  "id": "breast-ultrasound",
+  "catalogOrder": 18,
+  "title": "乳腺超声",
+  "english": "BREAST ULTRASOUND & BI-RADS",
+  "subtitle": "乳腺增生、结节和 BI-RADS 分级，分别代表什么？",
+  "question": "体检单写着乳腺结节或 BI-RADS 分级，是不是很严重？",
+  "questionAnswer": "大多数体检超声发现的乳腺增生、囊肿和低级别结节都属于良性改变；BI-RADS 是国际通用的标准化影像描述语言，用来把超声看到的外观归类并提示下一步该定期观察还是进一步核查，而不是疾病分期或癌症确诊。",
+  "icon": "layers",
+  "color": "purple",
+  "tags": [
+    "乳腺结节",
+    "BI-RADS",
+    "乳腺增生"
+  ],
+  "searchAliases": [
+    "乳腺彩超",
+    "乳房超声",
+    "BIRADS",
+    "BI-RADS分级",
+    "乳腺囊肿",
+    "纤维腺瘤",
+    "低回声结节",
+    "乳腺钼靶",
+    "乳房肿块",
+    "breast ultrasound",
+    "BI-RADS"
+  ],
+  "number": "18",
+  "format": "article",
+  "featured": false,
+  "desc": "乳腺超声利用高频声波无创观察乳腺腺体和局部结构，尤其适合分辨囊性（含液体）还是实性结节；报告末尾的 BI-RADS 分类用于统一表达影像风险倾向与随访建议。",
+  "sections": [
+    {
+      "title": "乳腺超声看什么？它和钼靶为什么各有分工？",
+      "short": "超声与钼靶",
+      "paragraphs": [
+        {
+          "text": "乳腺超声通过高频探头在皮肤表面扫查腺体层次，没有电离辐射、不压迫疼痛，最擅长区分一个摸到或看到的结节是充满液体的「囊肿」，还是由细胞组织构成的「实性结节」。",
+          "sourceIds": [
+            "breast-us",
+            "breast-info"
+          ]
+        },
+        {
+          "text": "在致密型乳腺（常见于较年轻女性和不少亚洲女性）中，腺体组织在 X 线钼靶片上本身偏白，容易与部分病灶重叠；超声在这种结构里往往能更清楚地分辨软组织结节。",
+          "sourceIds": [
+            "breast-us",
+            "mammograms"
+          ]
+        },
+        {
+          "text": "反过来，乳腺 X 线摄影（钼靶）对细微钙化灶非常敏感，是适龄女性重要的筛查手段。两者不是谁取代谁的关系，医生会根据年龄、乳腺致密程度和检查目的决定单用还是联合使用。",
+          "sourceIds": [
+            "mammograms",
+            "breast-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "乳腺增生、囊肿和纤维腺瘤，常见良性词怎么读？",
+      "short": "常见良性词",
+      "paragraphs": [
+        {
+          "text": "乳腺组织对雌激素和孕激素的周期性波动非常敏感。报告里高频出现的「乳腺增生」或「囊性增生改变」，大多数反映的是腺体在激素影响下的常见生理性或良性结构起伏，很多女性在经前胀痛时更为明显。",
+          "sourceIds": [
+            "breast-changes",
+            "breast-info"
+          ]
+        },
+        {
+          "text": "单纯性乳腺囊肿就像腺体里积聚了一小包清亮液体，边界通常清晰光滑；乳腺纤维腺瘤则是年轻女性常见的良性实性结节，多呈规整的椭圆形且边界清楚。它们与恶性肿瘤在组织学上完全不同。",
+          "sourceIds": [
+            "breast-changes",
+            "breast-us"
+          ]
+        },
+        {
+          "text": "因此，在报告上看到「结节」两个字时，可以先记住它只是一个中性形态词，表示「影像上看到一小团与周围密度略有不同的结构」，并不直接指向良性还是恶性。",
+          "sourceIds": [
+            "breast-changes",
+            "breast-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "读懂 BI-RADS：它是「行动分类」，不是「癌症分期」",
+      "short": "BI-RADS 逻辑",
+      "paragraphs": [
+        {
+          "text": "几乎所有规范的乳腺超声和钼靶报告最后都会给出一个 BI-RADS 分类。这套体系由放射学界制定，目的是让不同医院、不同医生用同一套标准语言概括「影像像不像良性」以及「下一步该怎么跟进」。",
+          "sourceIds": [
+            "mammograms",
+            "breast-us"
+          ]
+        },
+        {
+          "text": "低级别分类通常代表未见异常、明确良性（如单纯囊肿）或大概率良性只需按期复查；当结节呈现出形态不规则、边界不清、纵横比异常或伴有可疑微钙化等特征时，分类级别会相应上调，用来提示医生考虑进一步影像检查或穿刺活检。",
+          "sourceIds": [
+            "mammograms",
+            "breast-us"
+          ]
+        },
+        {
+          "text": "一定要避免把 BI-RADS 分类误读成「肿瘤第几期」。哪怕是提示需要进一步活检的较高级别，也只是「需要取少量组织在显微镜下核实」，最终性质判断只能由病理检查完成，不能单靠超声定性。",
+          "sourceIds": [
+            "breast-changes",
+            "mammograms"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么每次复查尺寸差一两毫米，或者分类偶有微调？",
+      "short": "复查波动",
+      "paragraphs": [
+        {
+          "text": "乳腺组织柔软且有弹性，超声检查时探头按压的轻重、扫查切面的角度以及操作者测量落点的微小差别，都可能让同一个结节在两次报告里出现几毫米内的数字浮动。",
+          "sourceIds": [
+            "breast-us"
+          ]
+        },
+        {
+          "text": "此外，月经周期不同阶段的激素水平也会让乳腺腺体充血程度和部分囊肿大小略有变化。常规乳腺体检通常建议避开经前明显胀痛期，在月经干净后的一段平稳时间复查，影像背景会更清晰。",
+          "sourceIds": [
+            "breast-changes",
+            "breast-us"
+          ]
+        },
+        {
+          "text": "因此，判断结节有没有真正变化，不能只拿两张纸上的数字相减，而应把前后几年的完整报告和影像图一并带给乳腺外科医生对照评估。",
+          "sourceIds": [
+            "breast-us",
+            "mammograms"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "常规随访与需要主动就诊的变化",
+      "short": "随访与边界",
+      "paragraphs": [
+        {
+          "text": "对于经医生确认属于良性或只需定期随访的发现，保持规律复查、记录既往报告、避免盲目进行无医学依据的「乳房按摩推散结节」非常重要——外力过度揉按既不能消除实性结节，还可能损伤正常腺体或延误规范评估。",
+          "sourceIds": [
+            "breast-changes",
+            "breast-info"
+          ]
+        },
+        {
+          "text": "如果在两次体检间隔期间，发现乳房出现新发无痛硬块、皮肤凹陷或橘皮样改变、乳头新近内陷或单侧血性溢液，应主动前往乳腺专科就诊，不要等到下一次年度体检。",
+          "sourceIds": [
+            "breast-info",
+            "breast-changes"
+          ]
+        },
+        {
+          "text": "本文只解释乳腺超声与 BI-RADS 报告的阅读逻辑和常见良性术语，不提供具体分级的穿刺门槛、复查月份表、药物或手术建议。",
+          "sourceIds": [
+            "mammograms",
+            "breast-us"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "查出「乳腺增生」需要吃药调理吗？",
+      "answer": "乳腺增生多是受体内激素周期影响的常见良性改变，如果平时没有影响生活的明显疼痛，通常不需要专门用药，也不等同于癌前病变。若疼痛频繁或伴有明显肿块，应先由乳腺专科医生明确原因后再决定如何处理。",
+      "sourceIds": [
+        "breast-changes",
+        "breast-info"
+      ]
+    },
+    {
+      "question": "乳腺囊肿和实性结节有什么区别？",
+      "answer": "囊肿内部主要是液体，就像一个小水泡，绝大多数单纯性囊肿属于良性；实性结节内部是细胞组织，绝大多数同样是良性（如纤维腺瘤），但需要通过形态特征和必要时的随访或检查进一步确认性质。",
+      "sourceIds": [
+        "breast-us",
+        "breast-changes"
+      ]
+    },
+    {
+      "question": "做了乳腺超声，还需要再做乳腺钼靶吗？",
+      "answer": "两者观察角度互补：超声无辐射且擅长分辨囊实性及致密腺体内的结节，钼靶则对微小钙化更敏感。是否需要两者联合以及从多大年龄开始做钼靶筛查，应由医生结合年龄、家族史和乳腺类型建议。",
+      "sourceIds": [
+        "mammograms",
+        "breast-us"
+      ]
+    },
+    {
+      "question": "BI-RADS 分类数字越大，就一定是得了乳腺癌吗？",
+      "answer": "不是。BI-RADS 是影像风险倾向与后续处理建议的分类工具，较高级别提示医生需要尽快通过穿刺活检等病理手段核实，而非已经确诊癌症；最终确诊必须依靠病理组织学检查。",
+      "sourceIds": [
+        "mammograms",
+        "breast-changes"
+      ]
+    },
+    {
+      "question": "体检发现低级别乳腺结节，平时吃豆浆、喝咖啡有关系吗？",
+      "answer": "日常适量饮用普通豆浆或咖啡并不是导致乳腺结节癌变的明确原因，比起过度忌口单一食物，保持规律作息、控制体重、减少酒精摄入并按医生建议定期复查更有实际意义。",
+      "sourceIds": [
+        "breast-info",
+        "breast-changes"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "结节性质（囊性 / 实性 / 混合性）",
+      "text": "高频超声的核心优势，先分辨病灶内部是单纯液体还是实体组织。",
+      "sourceIds": [
+        "breast-us"
+      ]
+    },
+    {
+      "name": "形态、边界与回声描述",
+      "text": "通过形状是否规整、边界是否清晰、有无钙化及血流信号等综合评估影像特征。",
+      "sourceIds": [
+        "breast-us",
+        "mammograms"
+      ]
+    },
+    {
+      "name": "BI-RADS 标准化分类",
+      "text": "统一归纳本次影像的良恶性倾向及下一步随访或活检核查方向，不等于临床分期。",
+      "sourceIds": [
+        "mammograms"
+      ]
+    }
+  ],
+  "chain": [
+    "高频超声无创分层扫查乳腺",
+    "先区分囊性液体还是实性结节",
+    "结合形态边界给出 BI-RADS 分类",
+    "按风险倾向决定定期随访或联合检查"
+  ],
+  "chainSourceIds": [
+    "breast-us",
+    "mammograms",
+    "breast-changes"
+  ],
+  "tip": "乳腺增生、单纯囊肿和多数结节属于良性常见发现；BI-RADS 分类用于提示随访或进一步核查的方向，不是诊断结论，更不要尝试用力揉按消除结节。",
+  "figures": [
+    {
+      "key": "breast-us",
+      "alt": "示意图：高频声波分层扫查软组织结构，分辨含液囊泡与光滑实性椭圆形结节的抽象概念图，不含真实测量数值与分级数字。",
+      "caption": "乳腺超声先分辨囊性与实性，再结合形态边界以标准化分类提示后续观察或核查。",
+      "simplification": "图为软组织超声成像原理抽象示意，不展示具体解剖结构，也不列出任何 BI-RADS 具体数字与穿刺门槛。",
+      "sourceIds": [
+        "breast-us",
+        "mammograms"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "61b6fd5608a34d974fa940dd37acc78567830dc68b4651c6665cb98e5e7bf6b9"
+      },
+      "src": "/media/fig-breast-ultrasound.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "无辐射分层扫查",
+          "text": "高频声波适合致密腺体背景下的软组织成像，与钼靶互为补充。"
+        },
+        {
+          "title": "囊性与实性辨别",
+          "text": "超声可直观分辨充满液体的单纯囊肿与由组织构成的实性结节。"
+        },
+        {
+          "title": "标准化风险分层",
+          "text": "BI-RADS 统一报告语言，指导常规随访或进一步穿刺病理核实。"
+        }
+      ]
+    }
+  ],
+  "organ": "乳腺 · 内分泌与激素靶器官",
+  "relatedOrgans": [],
+  "related": [
+    "thyroid-nodule",
+    "tumor-markers"
+  ],
+  "kind": "indicator",
+  "category": "endocrine",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到乳腺超声报告、希望理解增生、结节与 BI-RADS 分类含义的一般成年读者。",
+  "limitations": "不提供具体 BI-RADS 分级的穿刺阈值、随访时间表、手术指征或筛查年龄处方；个体决策请咨询乳腺专科医生。",
+  "references": [
+    {
+      "id": "breast-us",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Breast ultrasound",
+      "url": "https://medlineplus.gov/ency/article/003379.htm",
+      "scope": "乳腺超声分辨囊性与实性结节的作用、无辐射特点及与钼靶的互补关系",
+      "locator": "Why the Test is Performed; What Abnormal Results Mean",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "breast-changes",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Benign & Precancerous Breast Conditions",
+      "url": "https://www.cancer.gov/types/breast/breast-changes",
+      "scope": "常见良性乳腺改变（囊肿、纤维腺瘤、增生）的特点与活检定性原则",
+      "locator": "Common Benign Breast Conditions",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "mammograms",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Mammograms",
+      "url": "https://www.cancer.gov/types/breast/mammograms-fact-sheet",
+      "scope": "BI-RADS 标准化报告体系的用途以及致密型乳腺与不同影像手段的分工",
+      "locator": "What is BI-RADS?; What are the benefits and harms of screening mammograms?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "breast-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Breast Diseases",
+      "url": "https://medlineplus.gov/breastdiseases.html",
+      "scope": "常见良性乳腺问题及需要主动就诊的新发体征",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "breast-us",
+    "mammograms"
+  ],
+  "tipSourceIds": [
+    "breast-changes",
+    "mammograms"
+  ]
+}

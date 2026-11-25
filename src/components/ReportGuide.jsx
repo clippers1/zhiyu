@@ -195,6 +195,12 @@ export default function ReportGuide({ go }) {
           <RouteLink page="article" id="lab-range" className="text-link" onNavigate={() => go && go("article", "lab-range")}>
             同一份血，两家医院的参考区间为什么不一样？ <ArrowRight size={15} />
           </RouteLink>
+          <RouteLink page="article" id="imaging-guide" className="text-link" onNavigate={() => go && go("article", "imaging-guide")}>
+            B 超、CT、核磁共振（MRI）和 X 光，体检里为什么不能互相替代？ <ArrowRight size={15} />
+          </RouteLink>
+          <RouteLink page="article" id="report-history" className="text-link" onNavigate={() => go && go("article", "report-history")}>
+            为什么每次看报告，医生总问「去年的旧体检单带了吗」？ <ArrowRight size={15} />
+          </RouteLink>
           <RouteLink page="indicators" className="text-link" onNavigate={() => go && go("indicators")}>
             浏览已开放的体检项目 <ArrowRight size={15} />
           </RouteLink>

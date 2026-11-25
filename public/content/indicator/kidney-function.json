@@ -24,7 +24,12 @@
     "UACR",
     "ACR",
     "肾功能检查",
-    "kidney function"
+    "kidney function",
+    "肌酐偏高",
+    "肾损伤",
+    "尿素氮",
+    "BUN",
+    "蛋白尿"
   ],
   "number": "06",
   "format": "article",
@@ -361,5 +366,10 @@
     "creatinine",
     "gfr",
     "uacr"
+  ],
+  "related": [
+    "urinalysis",
+    "uric-acid",
+    "pressure"
   ]
 }

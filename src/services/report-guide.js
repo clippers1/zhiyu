@@ -228,6 +228,30 @@ export const REPORT_ROWS = {
     title: "肿瘤标志物",
     rows: ["癌胚抗原（CEA）", "甲胎蛋白（AFP）", "肿瘤指标（CA125 / CA199 / PSA）"],
   },
+  "h-pylori": {
+    title: "幽门螺杆菌",
+    rows: ["尿素呼气试验（C13 / C14）", "粪便抗原检测", "血清抗体检测"],
+  },
+  "carotid-ultrasound": {
+    title: "颈动脉超声",
+    rows: ["内中膜厚度（IMT）", "颈动脉斑块", "多普勒超声"],
+  },
+  gallbladder: {
+    title: "胆囊超声",
+    rows: ["胆囊息肉样病变", "胆囊结石", "胆囊壁毛糙"],
+  },
+  "breast-ultrasound": {
+    title: "乳腺超声",
+    rows: ["乳腺结节", "乳腺增生", "乳腺囊肿", "乳腺超声（BI-RADS）"],
+  },
+  "stool-fobt": {
+    title: "便常规与便潜血",
+    rows: ["免疫化学法便潜血（FIT）", "化学法便潜血（gFOBT）", "大便常规"],
+  },
+  "bone-density": {
+    title: "骨密度检查",
+    rows: ["双能 X 线吸收法（DXA / DEXA）", "骨密度（BMD）", "T 值", "Z 值"],
+  },
 };
 
 // The object SourceReferences expects: references plus the version fields it

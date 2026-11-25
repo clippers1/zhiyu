@@ -20,7 +20,9 @@
     "uric acid test",
     "purine",
     "嘌呤",
-    "高尿酸"
+    "高尿酸",
+    "尿酸高",
+    "痛风"
   ],
   "number": "07",
   "format": "article",
@@ -343,5 +345,11 @@
   ],
   "tipSourceIds": [
     "uric-acid"
+  ],
+  "related": [
+    "kidney-function",
+    "fatty-liver",
+    "lipids",
+    "glucose"
   ]
 }

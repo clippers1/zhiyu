@@ -6,7 +6,7 @@ import config from './payload.config';
 const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
 const json = (body: unknown, status = 200, extra = {}) => Response.json(body, { status, headers: { ...headers, ...extra } });
 const hashReceipt = (token: string) => createHash('sha256').update(token).digest('hex');
-const kinds = ['indicator', 'organ'];
+const kinds = ['indicator', 'organ', 'story'];
 const categories = ['accuracy', 'source', 'clarity', 'experience'];
 const maxBytes = 8192;
 

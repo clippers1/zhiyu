@@ -23,7 +23,13 @@
     "HDL",
     "TG",
     "TC",
-    "cholesterol"
+    "cholesterol",
+    "高血脂",
+    "血液黏稠",
+    "血稠",
+    "甘油三酯高",
+    "胆固醇高",
+    "坏胆固醇"
   ],
   "number": "03",
   "format": "article",
@@ -345,5 +351,11 @@
   ],
   "tipSourceIds": [
     "chol"
+  ],
+  "related": [
+    "carotid-ultrasound",
+    "fatty-liver",
+    "glucose",
+    "pressure"
   ]
 }

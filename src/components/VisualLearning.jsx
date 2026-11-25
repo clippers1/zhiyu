@@ -34,6 +34,40 @@ const diagrams = {
     license: "CC BY 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
   },
+  "kidney-filtration-v1": {
+    title: "肾单位滤过与重吸收机制示意",
+    description: "以简化结构图展示血液进入肾小球滤网、肾小管重吸收有用物质以及代谢废物形成终尿排出的过程。",
+    paths: {
+      "blood-in": ["M132 182 C164 182 184 182 214 182", "flow-red"],
+      "filter-mesh": ["M318 182 C350 182 366 182 396 182", "flow-air"],
+      "reabsorb-back": ["M460 140 C460 100 500 84 548 84", "flow-blue"],
+      "waste-urine": ["M460 226 C460 274 500 296 548 296", "flow-carbon"],
+    },
+    legend: [
+      { className: "legend-red", label: "含代谢废物血流进入" },
+      { className: "legend-air", label: "肾小球滤出原尿" },
+      { className: "legend-blue", label: "水分与营养重吸收回血" },
+      { className: "legend-carbon", label: "肌酐、尿酸随终尿排出" },
+    ],
+    selfMadeNote: "知愈结构化矢量原理图（无第三方底图依赖）",
+  },
+  "thyroid-feedback-v1": {
+    title: "垂体 TSH 与甲状腺 T4/T3 负反馈环示意",
+    description: "展示脑垂体分泌促甲状腺激素（TSH）调控甲状腺合成 T4 与 T3，血液激素浓度再反向调节垂体分泌的负反馈闭环。",
+    paths: {
+      "pituitary-send": ["M412 88 C504 88 564 120 578 166", "flow-blue"],
+      "tsh-drive": ["M578 232 C564 282 504 312 418 312", "flow-air"],
+      "hormone-work": ["M282 312 C196 312 136 282 122 232", "flow-red"],
+      "negative-feedback": ["M122 166 C136 120 196 88 288 88", "flow-carbon"],
+    },
+    legend: [
+      { className: "legend-blue", label: "垂体发出 TSH" },
+      { className: "legend-air", label: "推动甲状腺分泌" },
+      { className: "legend-red", label: "T4 / T3 调节全身" },
+      { className: "legend-carbon", label: "负反馈回传垂体" },
+    ],
+    selfMadeNote: "知愈结构化矢量原理图（无第三方底图依赖）",
+  },
 };
 
 const heartFlowVisuals = {
@@ -183,12 +217,82 @@ function LungMedicalArtwork({ learning, activePart, activeStep, onPart, diagram 
   </svg>;
 }
 
+const schematicLayouts = {
+  "kidney-filtration-v1": {
+    viewBox: "0 0 700 380",
+    nodes: [
+      { id: "renal-artery", x: 24, y: 144, w: 108, h: 76, tone: "tone-arterial", sub: "入球小动脉" },
+      { id: "glomerulus", x: 214, y: 132, w: 104, h: 100, tone: "tone-air", sub: "截留蛋白血细胞" },
+      { id: "tubule", x: 396, y: 140, w: 128, h: 86, tone: "tone-alveoli", sub: "精细筛选回收" },
+      { id: "blood-return", x: 548, y: 48, w: 128, h: 72, tone: "tone-venous", sub: "水盐与蛋白回血" },
+      { id: "urine-out", x: 548, y: 260, w: 128, h: 72, tone: "tone-body", sub: "尿常规 / UACR 出口" },
+    ],
+    bgPaths: [
+      "M132 182 L214 182",
+      "M318 182 L396 182",
+      "M460 140 C460 100 500 84 548 84",
+      "M460 226 C460 274 500 296 548 296",
+    ],
+    caption: "血肌酐 / eGFR 观察滤网效率 · 尿白蛋白观察滤网是否漏出",
+  },
+  "thyroid-feedback-v1": {
+    viewBox: "0 0 700 390",
+    nodes: [
+      { id: "pituitary", x: 288, y: 48, w: 124, h: 78, tone: "tone-venous", sub: "中枢感应器" },
+      { id: "tsh-signal", x: 512, y: 166, w: 134, h: 66, tone: "tone-air", sub: "向下传递指令" },
+      { id: "thyroid-gland", x: 282, y: 274, w: 136, h: 78, tone: "tone-arterial", sub: "合成释放激素" },
+      { id: "hormone-level", x: 54, y: 166, w: 136, h: 66, tone: "tone-alveoli", sub: "调节代谢并回传" },
+    ],
+    bgPaths: [
+      "M412 88 C504 88 564 120 578 166",
+      "M578 232 C564 282 504 312 418 312",
+      "M282 312 C196 312 136 282 122 232",
+      "M122 166 C136 120 196 88 288 88",
+    ],
+    caption: "T4 / T3 偏高 → 抑制 TSH 下降 · T4 / T3 偏低 → 促使 TSH 升高",
+  },
+};
+
+function SchematicArtwork({ learning, activePart, activeStep, onPart, diagram }) {
+  const layout = schematicLayouts[learning.type];
+  const parts = Object.fromEntries(learning.parts.map(part => [part.id, part]));
+  const active = learning.steps[activeStep];
+  const selected = id => activePart === id || active?.from === id || active?.to === id;
+  return <svg className="learning-diagram schematic-diagram" viewBox={layout.viewBox} role="img" aria-labelledby="schematic-title schematic-desc">
+    <title id="schematic-title">{diagram.title}</title>
+    <desc id="schematic-desc">{diagram.description}</desc>
+    <DiagramDefs />
+    <rect className="lung-medical-paper" width="700" height="390" />
+    {layout.bgPaths.map((d, i) => <path key={i} className="diagram-orbit" d={d} aria-hidden="true" />)}
+    <FlowPaths learning={learning} activeStep={activeStep} diagram={diagram} />
+    {layout.nodes.map(node => {
+      const part = parts[node.id];
+      if (!part) return null;
+      return <g key={node.id} role="button" tabIndex="0"
+        aria-label={`${part.label}：${part.summary}`}
+        aria-pressed={activePart === node.id}
+        className={`learning-part ${node.tone}${selected(node.id) ? " active" : ""}`}
+        onClick={() => onPart(node.id)}
+        onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onPart(node.id); } }}>
+        <rect className="part-surface" x={node.x} y={node.y} width={node.w} height={node.h} rx="14" />
+        <text className="part-label" x={node.x + node.w / 2} y={node.y + node.h / 2 - 4} textAnchor="middle">{part.label}</text>
+        <text className="diagram-caption" x={node.x + node.w / 2} y={node.y + node.h / 2 + 16} textAnchor="middle">{node.sub}</text>
+      </g>;
+    })}
+    <text className="diagram-side" x="350" y="370" textAnchor="middle">{layout.caption}</text>
+    <text className="heart-stage-number" x="674" y="42" textAnchor="end">{String(activeStep + 1).padStart(2, "0")}</text>
+  </svg>;
+}
+
 function LearningDiagram({ learning, activePart, activeStep, onPart }) {
   const diagram = diagrams[learning.type];
   if (learning.type === "heart-flow-v1") {
     return <HeartMedicalArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />;
   }
-  return <LungMedicalArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />;
+  if (learning.type === "lung-gas-exchange-v1") {
+    return <LungMedicalArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />;
+  }
+  return <SchematicArtwork learning={learning} activePart={activePart} activeStep={activeStep} onPart={onPart} diagram={diagram} />;
 }
 
 export default function VisualLearning({ content }) {
@@ -218,7 +322,8 @@ export default function VisualLearning({ content }) {
         <p className="learning-legend">{diagram.legend.map(item => <React.Fragment key={item.label}><i className={item.className} /> {item.label}</React.Fragment>)}；颜色只是辅助，箭头和文字会同时说明方向。</p>
         {diagram.attribution && <p className="learning-attribution">医学底图：<a href={diagram.attribution.url} target="_blank" rel="noreferrer">{diagram.attribution.name}</a>，<a href={diagram.attribution.licenseUrl} target="_blank" rel="noreferrer">{diagram.attribution.license}</a>。</p>}
         {diagram.attributions && <p className="learning-attribution">医学底图：Servier Medical Art by Servier（{diagram.attributions.map((item, index) => <React.Fragment key={item.url}>{index > 0 && "、"}<a href={item.url} target="_blank" rel="noreferrer">{item.name}</a></React.Fragment>)}），<a href={diagram.licenseUrl} target="_blank" rel="noreferrer">{diagram.license}</a>。</p>}
-        <div className="learning-route" aria-label="选择讲解步骤">
+        {diagram.selfMadeNote && <p className="learning-attribution">示意图来源：{diagram.selfMadeNote}。</p>}
+        <div className="learning-route" style={{ gridTemplateColumns: `repeat(${learning.steps.length}, 1fr)` }} aria-label="选择讲解步骤">
           {learning.steps.map((item, index) => <button key={item.id} type="button" className={step === index && !part ? "active" : ""}
             aria-current={step === index && !part ? "step" : undefined} onClick={() => move(index)}>{index + 1}</button>)}
         </div>

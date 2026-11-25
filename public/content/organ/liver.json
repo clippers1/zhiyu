@@ -5,19 +5,30 @@
   "en": "LIVER",
   "headline": "营养与代谢的中转站",
   "text": "肝脏位于右上腹，是身体最繁忙的化学工厂：接收消化道吸收的营养，调度血糖储存与释放，参与脂类代谢、白蛋白合成，并制造胆汁帮助消化脂肪。",
-  "connection": "肝功能 · 脂肪肝 · 血糖 · 血脂",
-  "related": ["liver-function", "fatty-liver", "glucose", "lipids"],
+  "connection": "肝功能 · 脂肪肝 · 胆囊超声 · 血糖 · 血脂",
+  "related": [
+    "liver-function",
+    "fatty-liver",
+    "gallbladder",
+    "glucose",
+    "lipids"
+  ],
   "sections": [
     {
       "title": "同时承担代谢、合成与分泌",
       "paragraphs": [
         {
           "text": "小肠吸收的葡萄糖、氨基酸和脂类先经血管送入肝脏，由肝脏决定立刻供能、加工成蛋白质还是存成糖原备用；同时，肝脏合成胆汁并由胆囊暂存，进食后排入肠道帮助乳化脂肪。",
-          "sourceIds": ["digestion", "insulin"]
+          "sourceIds": [
+            "digestion",
+            "insulin"
+          ]
         },
         {
           "text": "红细胞衰老分解产生的胆红素，以及进入体内的多种药物和代谢副产物，也需要经过肝脏加工转化后再排出体外。",
-          "sourceIds": ["liver-tests"]
+          "sourceIds": [
+            "liver-tests"
+          ]
         }
       ]
     },
@@ -26,7 +37,10 @@
       "paragraphs": [
         {
           "text": "血液中的肝功能组合从酶（如 ALT、AST）、胆红素和白蛋白三个侧面观察肝细胞状态与合成能力；腹部超声则直接看肝脏质地和脂肪沉积情况，例如提示脂肪肝。",
-          "sourceIds": ["liver-tests", "steatotic"]
+          "sourceIds": [
+            "liver-tests",
+            "steatotic"
+          ]
         }
       ]
     },
@@ -35,7 +49,11 @@
       "paragraphs": [
         {
           "text": "肝脏既是储存葡萄糖的仓库，也参与胆固醇和甘油三酯的装配运输。长期能量过剩或胰岛素响应减弱时，多余脂肪容易在肝细胞内堆积，因此肝功、血脂、血糖与腹部超声常需要对照着看。",
-          "sourceIds": ["insulin", "lipids", "steatotic"]
+          "sourceIds": [
+            "insulin",
+            "lipids",
+            "steatotic"
+          ]
         }
       ]
     }
@@ -49,7 +67,11 @@
   "publicationReady": true,
   "applicability": "面向希望了解肝脏主要生理职责及常见体检项目对应关系的一般成年读者。",
   "limitations": "不提供肝病诊断、脂肪肝分期或保肝用药建议。",
-  "descriptionSourceIds": ["digestion", "insulin", "lipids"],
+  "descriptionSourceIds": [
+    "digestion",
+    "insulin",
+    "lipids"
+  ],
   "references": [
     {
       "id": "digestion",

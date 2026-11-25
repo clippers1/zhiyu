@@ -71,5 +71,24 @@
       "type": "机构健康科普",
       "publicationDate": null
     }
-  ]
+  ],
+  "learning": {
+    "type": "kidney-filtration-v1",
+    "title": "跟着一滴血走过肾单位",
+    "intro": "血液进入肾脏后先经过肾小球滤网，再由肾小管把水分和有用物质回收回血液，代谢废物则留在终尿里排出。点选结构或逐步查看这条路径，就能理解为什么肾功能要血尿对照看。",
+    "simplification": "本图将上百万个肾单位合并为一条简化滤过示意路径，省略了集合管、激素调节与各段肾小管细分结构，不按真实解剖比例绘制。",
+    "parts": [
+      { "id": "renal-artery", "label": "入球血流", "summary": "携带着代谢废物（如肌酐、尿酸）以及有用水分、蛋白和血细胞的血液进入肾脏。", "sourceIds": ["kidney"] },
+      { "id": "glomerulus", "label": "肾小球滤网", "summary": "细密毛细血管滤网让水分和小分子废物通过，同时把血细胞和大分子白蛋白留在血管内。", "sourceIds": ["kidney", "kidney-tests"] },
+      { "id": "tubule", "label": "肾小管重吸收", "summary": "原尿流经肾小管时，身体仍需要的大部分水分、葡萄糖和电解质被精准回收。", "sourceIds": ["kidney"] },
+      { "id": "blood-return", "label": "净化血回流", "summary": "回收的水分、营养与被留住的血细胞和白蛋白随静脉返回全身循环。", "sourceIds": ["kidney"] },
+      { "id": "urine-out", "label": "终尿排出", "summary": "未被重吸收的多余水分与肌酐、尿酸等废物形成终尿排出体外，尿常规与尿白蛋白在此观察出口状态。", "sourceIds": ["kidney", "kidney-tests"] }
+    ],
+    "steps": [
+      { "id": "blood-in", "title": "血液带着废物进入肾单位", "text": "心脏泵出的血液经肾动脉进入肾单位，里面混有代谢产生的肌酐、尿酸以及需要保留的蛋白与细胞。", "from": "renal-artery", "to": "glomerulus", "sourceIds": ["kidney"] },
+      { "id": "filter-mesh", "title": "肾小球完成第一道筛选", "text": "血液流经肾小球滤网：水分和肌酐、尿酸等小分子滤出；血细胞和绝大部分白蛋白被挡在血管里。", "from": "glomerulus", "to": "tubule", "sourceIds": ["kidney", "kidney-tests"] },
+      { "id": "reabsorb-back", "title": "肾小管回收有用物质", "text": "滤出液经过肾小管时，大部分水分、有用营养与电解质被重新吸收送回血液循环，避免流失。", "from": "tubule", "to": "blood-return", "sourceIds": ["kidney"] },
+      { "id": "waste-urine", "title": "代谢废物进入终尿排出", "text": "留下的多余水分与代谢废物汇集成终尿排出；血肌酐/eGFR 观察滤过效率，尿常规与尿白蛋白观察滤网有没有漏。", "from": "tubule", "to": "urine-out", "sourceIds": ["kidney", "kidney-tests"] }
+    ]
+  }
 }

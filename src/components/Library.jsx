@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { useContent } from "../hooks";
-import { LoadState, Pagination, QuestionRow, RunHead } from "./ContentUI";
+import { IndexRow, LoadState, Pagination, QuestionRow, RunHead } from "./ContentUI";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
 // 体检项目：搜索置顶，分类胶囊横向滚动，列表按问题索引组织。
-// 只显示当前已发布内容，项目名/缩写/别名仍可搜索。
+// 只显示当前已发布内容，项目名/缩写/别名仍可搜索；输入关键词时同步匹配体检准备与日常长文。
 export default function Library({ onOpen }) {
   const { query, setQuery, effective, pending, inputProps } = useSearchInput();
   const [category, setCategory] = useState("");
@@ -20,7 +20,14 @@ export default function Library({ onOpen }) {
       limit: 6,
     },
   ]);
+  const crossStorySearch = Boolean(effective.trim() && !category);
+  const storyState = useContent("list", [
+    crossStorySearch
+      ? { kind: "story", query: effective, limit: 6 }
+      : { kind: "story", ids: [], limit: 6 },
+  ]);
   const data = pending ? null : state.data;
+  const matchedStories = !pending && crossStorySearch ? (storyState.data?.items || []) : [];
   function filter(setter, value) {
     setter(value);
     setCursor("0");
@@ -80,7 +87,19 @@ export default function Library({ onOpen }) {
             nextCursor={data.nextCursor}
             onChange={setCursor}
           />
-          {data.total === 0 && (
+          {matchedStories.length > 0 && (
+            <section className="library-stories" aria-labelledby="library-stories-title">
+              <div className="result-count">
+                <span id="library-stories-title">相关的体检准备与日常长文（{matchedStories.length} 篇）</span>
+              </div>
+              <div className="index-list">
+                {matchedStories.map((item) => (
+                  <IndexRow key={item.id} item={item} onOpen={onOpen} />
+                ))}
+              </div>
+            </section>
+          )}
+          {data.total === 0 && matchedStories.length === 0 && (
             <div className="empty-state">
               <Search size={28} />
               <h2>没有匹配的项目</h2>

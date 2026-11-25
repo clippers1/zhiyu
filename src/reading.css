@@ -542,3 +542,197 @@
     margin-top: var(--s-6);
   }
 }
+
+/* ---------- horizontal related indicators ---------- */
+.related-indicators {
+  margin-top: var(--s-6);
+}
+.related-indicators-note {
+  margin-top: 8px;
+  font-size: var(--t-13);
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.related-indicators-grid {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+.related-indicator-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--card);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.related-indicator-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+.related-indicator-meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.related-indicator-card b {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.related-indicator-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.related-indicator-card:hover .related-indicator-go {
+  color: var(--accent-deep);
+}
+@media (min-width: 640px) {
+  .related-indicators-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- anonymous reader feedback ---------- */
+.feedback-box {
+  margin-top: var(--s-6);
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.feedback-box-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.feedback-box-head b {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.feedback-box-head p {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+.feedback-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+.feedback-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+.feedback-form {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 12px;
+}
+.feedback-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.feedback-categories label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.feedback-categories label.active {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.feedback-categories input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.feedback-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--card);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  resize: vertical;
+}
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-border);
+}
+.feedback-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.feedback-consent input {
+  margin-top: 3px;
+  accent-color: var(--accent);
+}
+.feedback-error {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--clay);
+}
+.feedback-receipt {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: var(--r-input);
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-border);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.feedback-receipt code {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  font-size: 12px;
+  word-break: break-all;
+}

@@ -219,6 +219,78 @@
       "size": "1024x1024",
       "maxWidth": 960,
       "prompt": "Minimalist 3D medical-tech editorial illustration of everyday factors that temporarily shift lab results: a serene translucent blank sample vial in the center gently orbited by four minimalist frosted-glass and matte-ceramic symbolic icons—a soft pale crescent moon (late night), a sleek teal motion wave ring (vigorous exercise), a tiny warm coral thermometer-like droplet (mild cold), and a clean miniature glass silhouette (evening meal/drink). Balanced airy composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-h-pylori",
+      "kind": "figure",
+      "target": "public/media/fig-h-pylori.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of a non-invasive stomach urea breath test for H. pylori: a serene translucent frosted-glass stylized stomach silhouette on the left gently releasing soft glowing mint-teal micro-bubbles upward through a smooth glass curve into a clean sleek frosted white breath collection pouch on the right. Purely abstract calm geometry, zero text, zero numbers, clean studio lighting on #F6F8FA surface."
+    },
+    {
+      "id": "fig-carotid-ultrasound",
+      "kind": "figure",
+      "target": "public/media/fig-carotid-ultrasound.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of carotid artery Doppler ultrasound: a smooth horizontal translucent frosted-glass cylindrical blood vessel cut cleanly in cross-section, carrying gentle glowing coral-tinted flow spheres inside, with a subtle smooth pale-amber crescent thickening along one inner wall, illuminated from above by delicate concentric frosted-teal ultrasound wave arcs emitted by a sleek minimalist matte-white probe. Zero text, zero numbers, airy composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-gallbladder",
+      "kind": "figure",
+      "target": "public/media/fig-gallbladder.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of gallbladder ultrasound assessment: a graceful translucent frosted mint-teal pear-shaped gallbladder nestled softly beneath a subtle stylized frosted-glass liver curve, showing one tiny smooth pearly-coral droplet resting on the inner wall (polyp concept) and two small smooth translucent golden-amber pebbles resting calmly at the base (gallstone concept), gently scanned by fine teal ultrasound wave arcs. Zero text, zero numbers, clean centered composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-breast-ultrasound",
+      "kind": "figure",
+      "target": "public/media/fig-breast-ultrasound.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech abstract concept illustration of high-frequency soft-tissue ultrasound screening (BI-RADS structured assessment): smooth layered translucent frosted-ivory and pale-mint architectural glass domes arranged horizontally, enclosing one calm translucent pearl-white fluid sphere and one small frosted-coral oval lens inside, softly scanned from above by crisp concentric medical-teal sound wave arcs from a sleek minimalist white ultrasound transducer. Pure abstract geometric medical aesthetic, zero text, zero numbers, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-stool-fobt",
+      "kind": "figure",
+      "target": "public/media/fig-stool-fobt.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration of fecal occult blood laboratory screening (FOBT/FIT): a sleek matte-white and crystal-clear diagnostic screening cassette resting diagonally on a clean #F6F8FA plane, observed through a hovering circular frosted-teal optical magnifying lens revealing tiny softly glowing coral micro-droplet signals inside a transparent micro-channel. Completely clean abstract laboratory aesthetic, zero text, zero numbers, zero unpleasant imagery."
+    },
+    {
+      "id": "fig-bone-density",
+      "kind": "figure",
+      "target": "public/media/fig-bone-density.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of bone mineral density DXA scan: a sculpted translucent matte-ivory bone cross-section revealing delicate geometric trabecular honeycomb lattice transitioning gracefully from dense fine lattice on the left to more open airy lattice on the right, gently illuminated by two thin parallel glowing medical-teal low-energy light scanning beams from above. Zero text, zero numbers, clean studio lighting on #F6F8FA surface."
+    },
+    {
+      "id": "fig-white-coat-bp",
+      "kind": "figure",
+      "target": "public/media/fig-white-coat-bp.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration comparing home resting blood pressure and clinic white-coat elevation: a sleek matte-white minimalist cuff ring resting calmly in the center, flanked on the left by a quiet translucent frosted-mint glass arch with a smooth gentle low teal pulse ribbon (calm home rest), and on the right by a bright frosted-glass prism with a taller warm-amber pulse ripple (temporary clinic tension). Zero text, zero screens, zero digits, balanced airy composition on #F6F8FA surface."
+    },
+    {
+      "id": "fig-imaging-guide",
+      "kind": "figure",
+      "target": "public/media/fig-imaging-guide.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration comparing four complementary medical imaging modalities around one serene translucent glass sphere in the center: delicate curved teal sound-wave arcs (ultrasound), a sleek thin rotating frosted-glass ring gantry (CT), softly glowing nested concentric pearl-teal magnetic field rings (MRI), and crisp fine parallel silver-white light rays (X-ray). Harmonious balanced museum-grade 3D medical sculpture, zero text, zero letters, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-report-history",
+      "kind": "figure",
+      "target": "public/media/fig-report-history.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration of comparing annual checkup reports over time: three sleek blank translucent frosted-glass vertical cards arranged cleanly from left to right in gentle perspective depth, connected by a continuous smooth glowing medical-teal glass trend ribbon passing through three calm pearlescent nodes across the cards, symbolizing personal longitudinal baseline rather than a single isolated snapshot. Zero text, zero numbers, clean studio lighting on #F6F8FA surface."
     }
   ]
 }

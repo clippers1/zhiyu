@@ -1,0 +1,376 @@
+{
+  "id": "carotid-ultrasound",
+  "catalogOrder": 16,
+  "title": "颈动脉超声",
+  "english": "CAROTID ULTRASOUND",
+  "subtitle": "内中膜增厚和颈动脉斑块，是不是快要中风了？",
+  "question": "体检发现颈动脉斑块或内中膜增厚，是不是马上会堵血管？",
+  "questionAnswer": "不是。随着年龄增长，颈动脉壁出现轻度增厚或小斑块在中老年人中并不少见，多数并不造成明显血流受阻；它是观察全身动脉硬化趋势的一扇无创窗口，应结合斑块特征、管腔狭窄程度以及血脂、血压、血糖整体评估。",
+  "icon": "heart-pulse",
+  "color": "purple",
+  "tags": [
+    "颈动脉斑块",
+    "内中膜增厚",
+    "血管超声"
+  ],
+  "searchAliases": [
+    "颈动脉彩超",
+    "颈部血管超声",
+    "IMT",
+    "颈动脉内中膜增厚",
+    "颈动脉粥样硬化",
+    "动脉硬化斑块",
+    "低回声斑块",
+    "强回声斑块",
+    "血管狭窄",
+    "多普勒超声",
+    "carotid ultrasound",
+    "carotid plaque"
+  ],
+  "number": "16",
+  "format": "article",
+  "featured": false,
+  "desc": "颈动脉多普勒超声利用声波无创观察颈部大动脉的管壁厚度、是否存在粥样硬化斑块以及血流速度，常用来侧面了解全身动脉血管的老化与硬化趋势。",
+  "sections": [
+    {
+      "title": "为什么体检偏偏爱用超声查「脖子上的血管」？",
+      "short": "为什么查颈动脉",
+      "paragraphs": [
+        {
+          "text": "颈动脉位于脖子两侧、位置表浅，负责把心脏泵出的含氧血液送往大脑。正因为表浅且路径相对笔直，医生只需把超声探头轻轻贴在颈部皮肤表面，无需辐射、无需扎针，就能清楚地看到血管壁的层次和管腔里的血流。",
+          "sourceIds": [
+            "doppler",
+            "carotid-ency"
+          ]
+        },
+        {
+          "text": "动脉粥样硬化往往是全身血管共同经历的缓慢过程。颈动脉就像一扇容易推开的「观察窗」：看清了这里的管壁有没有增厚或形成斑块，往往也能帮助医生推测全身其他动脉（如心脏冠状动脉、下肢动脉）所承受的长期负荷。",
+          "sourceIds": [
+            "athero",
+            "athero-diag"
+          ]
+        },
+        {
+          "text": "彩色多普勒技术还能在显示管壁结构的同时测量血液流过时的速度与方向。如果血管某处明显变窄，血流穿过狭窄段时速度就会发生变化，这为评估管腔是否通畅提供了直接线索。",
+          "sourceIds": [
+            "doppler",
+            "carotid"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "内中膜增厚和「斑块」，在报告上分别指什么？",
+      "short": "增厚与斑块",
+      "paragraphs": [
+        {
+          "text": "动脉管壁由内膜、中膜和外膜构成。报告上常见的「内中膜增厚（IMT 增厚）」，描述的是血管内层和中层整体比年轻光滑时略厚一些，多与年龄增长、血压、血脂或吸烟等长期因素相关，通常属于更早期的管壁变化。",
+          "sourceIds": [
+            "athero",
+            "athero-diag"
+          ]
+        },
+        {
+          "text": "当脂质、钙质和纤维组织在管壁局部进一步沉积并向管腔隆起时，超声报告就会写到「颈动脉斑块」。很多人一看到「斑块」就想象成血管快要被彻底塞住，其实绝大多数体检偶然发现的小斑块并没有引起明显的管腔狭窄或血流受阻。",
+          "sourceIds": [
+            "athero",
+            "carotid"
+          ]
+        },
+        {
+          "text": "超声报告里有时还会描写斑块的回声特点（例如强回声、等回声、低回声或混合回声）以及表面是否光滑。这些用语帮助医生评估斑块的组成质地和稳定性，而不仅仅只看斑块有多长、多厚。",
+          "sourceIds": [
+            "doppler",
+            "carotid-ency"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "看这份报告，不能只盯「有没有斑块」",
+      "short": "看懂重点",
+      "paragraphs": [
+        {
+          "text": "在医生眼里，颈动脉超声报告通常需要拆成三层来看：第一是管腔有没有明显狭窄以及血流速度是否正常；第二是斑块的位置、大小与形态特征；第三是受检者本人的整体心血管风险背景。",
+          "sourceIds": [
+            "carotid",
+            "carotid-ency"
+          ]
+        },
+        {
+          "text": "同样一个尺寸不大的斑块，放在血压、血脂、血糖都很平稳且不吸烟的人身上，与放在长期高血压、高 LDL-C、糖尿病或有既往卒中史的人身上，临床管理重点完全不同。",
+          "sourceIds": [
+            "athero",
+            "carotid"
+          ]
+        },
+        {
+          "text": "如果超声提示可能存在明显狭窄，医生有时会建议进一步做颈部血管 CT 血管造影（CTA）或磁共振血管成像（MRA）来更精确地测量狭窄比例，因为单一超声检查会受到操作角度和斑块钙化遮挡的影响。",
+          "sourceIds": [
+            "carotid-ency",
+            "athero-diag"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "它和血压、血脂、血糖怎么串起来看？",
+      "short": "关联指标",
+      "paragraphs": [
+        {
+          "text": "动脉斑块不是一朝一夕长出来的。血液里的低密度脂蛋白胆固醇（LDL-C）容易进入受损的动脉内膜并逐步沉积；长期偏高的血压会反复冲刷血管内皮；血糖波动和吸烟也会加速这一进程。",
+          "sourceIds": [
+            "athero",
+            "carotid"
+          ]
+        },
+        {
+          "text": "因此，看到颈动脉斑块时，很有价值的动作是顺手翻开同一本体检报告里的血压、血脂（重点看 LDL-C）、血糖（空腹血糖与 HbA1c）和心电图记录，把它们带给医生一起看，而不是只盯着超声那一页发愁。",
+          "sourceIds": [
+            "athero",
+            "athero-diag"
+          ]
+        },
+        {
+          "text": "不少中老年读者还会听说「吃保健品把斑块化掉」或「按压脖子把斑块揉散」。事实上，随意用力按压颈动脉既无法消除斑块，还存在机械刺激风险；科学的血管风险管理应以医生评估后的生活方式调整及必要时的规范方案为准。",
+          "sourceIds": [
+            "carotid",
+            "carotid-ency"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "日常随访与需要警惕的就医信号",
+      "short": "随访与边界",
+      "paragraphs": [
+        {
+          "text": "对于没有明显狭窄且无症状的轻度改变，医生通常会根据综合风险建议定期复查颈动脉超声并管理血压、血脂、体重与戒烟；复查时保留往年报告，有助于观察斑块是否长期保持稳定。",
+          "sourceIds": [
+            "athero",
+            "carotid-ency"
+          ]
+        },
+        {
+          "text": "无论体检单上有没有斑块，如果突然出现一侧面部或肢体麻木无力、说话含糊、单眼短暂视物不清或突发剧烈眩晕，都属于需要立刻紧急就医的警示信号，不能等定期体检复查。",
+          "sourceIds": [
+            "carotid",
+            "carotid-ency"
+          ]
+        },
+        {
+          "text": "本文只解释颈动脉超声的基本原理和常见报告用语，不提供狭窄分级阈值、降脂/抗血小板用药指征或手术标准；个体处理方案请咨询心血管内科或神经内科医生。",
+          "sourceIds": [
+            "carotid",
+            "athero-diag"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "查出颈动脉斑块，是不是很快就会发展成脑梗？",
+      "answer": "不是必然关系。很多中老年人都有轻度、稳定的颈动脉斑块，只要管腔没有明显狭窄、血压血脂血糖控制平稳，可以长期相安无事。斑块提示的是需要更认真地关注心血管风险因素，而不是倒计时。",
+      "sourceIds": [
+        "carotid",
+        "athero"
+      ]
+    },
+    {
+      "question": "报告写的「强回声斑块」和「低回声斑块」有什么区别？",
+      "answer": "回声强弱反映斑块内部组织对声波的反射特点。一般来说，含钙质较多的硬斑块常呈强回声，含脂质较多的软斑块常呈低回声，医生会结合表面是否光滑和管腔狭窄程度综合判断稳定性，单凭一个词不能自行下结论。",
+      "sourceIds": [
+        "doppler",
+        "carotid-ency"
+      ]
+    },
+    {
+      "question": "颈动脉超声需要空腹吗？做起来有辐射吗？",
+      "answer": "单纯做颈动脉超声通常不需要空腹，也不涉及电离辐射。检查只需暴露颈部，涂抹温和的耦合剂后由探头轻扫即可，过程无创无痛；建议检查当天穿领口宽松的衣服。",
+      "sourceIds": [
+        "doppler"
+      ]
+    },
+    {
+      "question": "血脂化验单都在参考区间内，为什么还是长了颈动脉斑块？",
+      "answer": "动脉硬化是多因素长期共同作用的结果，除了血脂，年龄增长、高血压、血糖异常、吸烟以及遗传倾向都会参与；此外，每个人的心血管风险水平不同，参考区间不等于适合所有人的理想水平，需要医生整体评估。",
+      "sourceIds": [
+        "athero",
+        "carotid"
+      ]
+    },
+    {
+      "question": "去年说有斑块，今年换家医院查尺寸略有出入，是斑块变大了吗？",
+      "answer": "不一定。超声测量受探头切面角度、仪器分辨率和不同医师测量习惯影响，几毫米以内的细小差异很常见。判断真实变化趋势时，尽量在同一机构按相近条件随访，并由医生结合血流情况综合对照。",
+      "sourceIds": [
+        "doppler",
+        "carotid-ency"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "内中膜厚度（IMT）",
+      "text": "测量颈动脉管壁内膜与中层的整体厚度，用于观察早期血管壁增厚趋势。",
+      "sourceIds": [
+        "athero-diag",
+        "doppler"
+      ]
+    },
+    {
+      "name": "斑块位置、大小与回声特征",
+      "text": "描述管壁局部脂质或钙质沉积的位置、形态及质地线索，帮助医生评估斑块稳定性。",
+      "sourceIds": [
+        "carotid-ency",
+        "athero"
+      ]
+    },
+    {
+      "name": "彩色多普勒血流与管腔狭窄评估",
+      "text": "通过血流速度与管腔对比判断血管是否通畅，比单纯看斑块有无更具临床意义。",
+      "sourceIds": [
+        "doppler",
+        "carotid"
+      ]
+    }
+  ],
+  "chain": [
+    "超声探头无创扫描颈部浅表动脉",
+    "同时成像管壁层次与斑块形态",
+    "多普勒测量管腔血流速度变化",
+    "结合血压血脂血糖评估全身血管风险"
+  ],
+  "chainSourceIds": [
+    "doppler",
+    "carotid",
+    "athero"
+  ],
+  "tip": "颈动脉斑块在中老年体检中较常见，关键要看管腔是否狭窄、斑块特征以及血压、血脂、血糖等全身风险，不要因「斑块」二字盲目恐慌，也切忌用力按摩颈部。",
+  "figures": [
+    {
+      "key": "carotid",
+      "alt": "示意图：超声探头无创扫描颈动脉纵切面，展示光滑血流通道与管壁一侧轻微隆起的斑块概念，不含真实尺寸与狭窄百分比。",
+      "caption": "颈动脉多普勒超声同时观察管壁厚薄、局部斑块与血流通过情况。",
+      "simplification": "图为血管横纵剖面概念示意，未按真实管径或血流速度比例绘制，不代表任何狭窄分级阈值。",
+      "sourceIds": [
+        "doppler",
+        "carotid"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "f117284f14026d7fcddbb02cd58350c1aa4e22b361d6fb0872b82696704b0a47"
+      },
+      "src": "/media/fig-carotid-ultrasound.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "无创超声探查",
+          "text": "颈动脉位置表浅，用声波即可清晰观察管壁结构与血流，无需辐射。"
+        },
+        {
+          "title": "管壁增厚与局部斑块",
+          "text": "长期血压、血脂与年龄因素可能在管壁局部形成沉积，多数小斑块不阻塞血流。"
+        },
+        {
+          "title": "血流是否通畅更关键",
+          "text": "医生会结合多普勒流速、斑块回声和血脂血压背景，而非只看斑块二字。"
+        }
+      ]
+    }
+  ],
+  "organ": "颈动脉 · 心血管系统",
+  "relatedOrgans": [
+    {
+      "id": "heart",
+      "title": "心脏"
+    }
+  ],
+  "related": [
+    "lipids",
+    "pressure",
+    "glucose"
+  ],
+  "kind": "indicator",
+  "category": "circulation",
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向在体检中接受颈动脉超声检查、希望读懂内中膜增厚和斑块常见表述的一般成年读者。",
+  "limitations": "不提供管腔狭窄比例阈值、他汀/阿司匹林用药指征或颈动脉手术标准；个人心血管风险分层请由医生评估。",
+  "references": [
+    {
+      "id": "doppler",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Doppler Ultrasound",
+      "url": "https://medlineplus.gov/lab-tests/doppler-ultrasound/",
+      "scope": "多普勒超声无创检测血管狭窄、斑块和血流速度的原理及准备事项",
+      "locator": "What is a Doppler ultrasound?; What is it used for?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "carotid",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Carotid Artery Disease",
+      "url": "https://medlineplus.gov/carotidarterydisease.html",
+      "scope": "颈动脉斑块形成背景、与中风风险及常见警示症状的关系",
+      "locator": "Summary",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "carotid-ency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Carotid artery disease",
+      "url": "https://medlineplus.gov/ency/article/007427.htm",
+      "scope": "颈动脉超声与其他血管影像（CTA/MRA）的互补定位及评估维度",
+      "locator": "Exams and Tests",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "athero",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Atherosclerosis - What Is Atherosclerosis?",
+      "url": "https://www.nhlbi.nih.gov/health/atherosclerosis",
+      "scope": "动脉粥样硬化斑块的组成、长期演化与多因素背景",
+      "locator": "What is atherosclerosis?",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "athero-diag",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Atherosclerosis - Diagnosis",
+      "url": "https://www.nhlbi.nih.gov/health/atherosclerosis/diagnosis",
+      "scope": "通过血液风险指标与无创影像联合评估动脉硬化状况",
+      "locator": "Tests for atherosclerosis",
+      "accessedAt": "2026-11-25",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "doppler",
+    "carotid"
+  ],
+  "tipSourceIds": [
+    "carotid",
+    "athero"
+  ]
+}

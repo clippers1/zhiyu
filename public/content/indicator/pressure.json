@@ -21,7 +21,13 @@
     "舒张压",
     "家庭血压",
     "动态血压",
-    "blood pressure"
+    "blood pressure",
+    "高血压",
+    "低血压",
+    "血压高",
+    "降压",
+    "高压高",
+    "低压高"
   ],
   "number": "02",
   "format": "article",
@@ -352,5 +358,11 @@
   ],
   "tipSourceIds": [
     "bp"
+  ],
+  "related": [
+    "ecg",
+    "carotid-ultrasound",
+    "lipids",
+    "kidney-function"
   ]
 }

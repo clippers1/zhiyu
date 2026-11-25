@@ -2,6 +2,48 @@
   "schemaVersion": 1,
   "model": "gpt-image-2.6",
   "items": {
+    "fig-bone-density": {
+      "id": "fig-bone-density",
+      "kind": "figure",
+      "src": "/media/fig-bone-density.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 492,
+      "bytes": 30784,
+      "sha256": "d62e3e35450f2ef6aca7ce4fd88d03f8fa0b7039ee40facfa1cfca58bf0aa89a",
+      "rawSha256": "236f6c0c93b0a6b4548ed0bda1b3661ff8d2f5dd5198085687cd901a515e6c76",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of bone mineral density DXA scan: a sculpted translucent matte-ivory bone cross-section revealing delicate geometric trabecular honeycomb lattice transitioning gracefully from dense fine lattice on the left to more open airy lattice on the right, gently illuminated by two thin parallel glowing medical-teal low-energy light scanning beams from above. Zero text, zero numbers, clean studio lighting on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:29:58.539Z"
+    },
+    "fig-breast-ultrasound": {
+      "id": "fig-breast-ultrasound",
+      "kind": "figure",
+      "src": "/media/fig-breast-ultrasound.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 20034,
+      "sha256": "61b6fd5608a34d974fa940dd37acc78567830dc68b4651c6665cb98e5e7bf6b9",
+      "rawSha256": "70fd5898209e40906a98098f1c7f4d40b4c142bb44fdb0d4c8b0e3f16d2e5afa",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech abstract concept illustration of high-frequency soft-tissue ultrasound screening (BI-RADS structured assessment): smooth layered translucent frosted-ivory and pale-mint architectural glass domes arranged horizontally, enclosing one calm translucent pearl-white fluid sphere and one small frosted-coral oval lens inside, softly scanned from above by crisp concentric medical-teal sound wave arcs from a sleek minimalist white ultrasound transducer. Pure abstract geometric medical aesthetic, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:29:29.979Z"
+    },
+    "fig-carotid-ultrasound": {
+      "id": "fig-carotid-ultrasound",
+      "kind": "figure",
+      "src": "/media/fig-carotid-ultrasound.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 17074,
+      "sha256": "f117284f14026d7fcddbb02cd58350c1aa4e22b361d6fb0872b82696704b0a47",
+      "rawSha256": "556bc9fc67f96a7f5b4d516e6ea2cced7bdb27f78b5f476cbc371519f73863f6",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of carotid artery Doppler ultrasound: a smooth horizontal translucent frosted-glass cylindrical blood vessel cut cleanly in cross-section, carrying gentle glowing coral-tinted flow spheres inside, with a subtle smooth pale-amber crescent thickening along one inner wall, illuminated from above by delicate concentric frosted-teal ultrasound wave arcs emitted by a sleek minimalist matte-white probe. Zero text, zero numbers, airy composition on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:28:53.620Z"
+    },
     "fig-cbc-components": {
       "id": "fig-cbc-components",
       "kind": "figure",
@@ -58,6 +100,20 @@
       "prompt": "Minimalist 3D medical-tech concept illustration of hepatic steatosis (fatty liver): a sleek translucent frosted-glass stylized liver silhouette showing a calm contrast between clean hexagonal mint-teal liver cells on one side and gentle clusters of smooth translucent golden-amber lipid droplets accumulating inside cells on the other side, illuminated by a soft curved ultrasound light arc from above. Clean centered composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T13:48:19.255Z"
     },
+    "fig-gallbladder": {
+      "id": "fig-gallbladder",
+      "kind": "figure",
+      "src": "/media/fig-gallbladder.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 19656,
+      "sha256": "f9b73c84d8bee93d58950d88da33119454bb6dc9f4da9a55cafdba4bffd2aa02",
+      "rawSha256": "e817210607b82e601b22e747f68176e375163cccf4bf01abe78da1a848a24afd",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of gallbladder ultrasound assessment: a graceful translucent frosted mint-teal pear-shaped gallbladder nestled softly beneath a subtle stylized frosted-glass liver curve, showing one tiny smooth pearly-coral droplet resting on the inner wall (polyp concept) and two small smooth translucent golden-amber pebbles resting calmly at the base (gallstone concept), gently scanned by fine teal ultrasound wave arcs. Zero text, zero numbers, clean centered composition on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:29:29.274Z"
+    },
     "fig-glucose-flow": {
       "id": "fig-glucose-flow",
       "kind": "figure",
@@ -85,6 +141,34 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech concept illustration showing three different observation time windows: on the left a single frozen translucent droplet inside a clean glass ring (momentary fasting snapshot), in the center a gentle curved glass wave track with two glowing beads (post-meal response curve), and on the right a sleek horizontal frosted-glass capsule filled with softly glowing coral-tinted smooth red blood cell discs representing a multi-month average. Clean arranged trio on #F6F8FA surface.",
       "generatedAt": "2026-11-24T10:54:31.811Z"
+    },
+    "fig-h-pylori": {
+      "id": "fig-h-pylori",
+      "kind": "figure",
+      "src": "/media/fig-h-pylori.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 24644,
+      "sha256": "a0e9d351bc6850ed63ce1e3653923f0732273b8a195b399265d4f3e8312fbb4b",
+      "rawSha256": "521e758a4498193b0f45bb614054ad264cbd3c03bd553af7e52440cb80b0205c",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of a non-invasive stomach urea breath test for H. pylori: a serene translucent frosted-glass stylized stomach silhouette on the left gently releasing soft glowing mint-teal micro-bubbles upward through a smooth glass curve into a clean sleek frosted white breath collection pouch on the right. Purely abstract calm geometry, zero text, zero numbers, clean studio lighting on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:29:00.293Z"
+    },
+    "fig-imaging-guide": {
+      "id": "fig-imaging-guide",
+      "kind": "figure",
+      "src": "/media/fig-imaging-guide.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 45660,
+      "sha256": "def5aaad72d0bcc0902be6a6101271de32f394eec112d708a5785d6418a00ded",
+      "rawSha256": "ada25228fa57f7b83a306e498f277b77916587a427931565c4500afad14325c1",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech editorial illustration comparing four complementary medical imaging modalities around one serene translucent glass sphere in the center: delicate curved teal sound-wave arcs (ultrasound), a sleek thin rotating frosted-glass ring gantry (CT), softly glowing nested concentric pearl-teal magnetic field rings (MRI), and crisp fine parallel silver-white light rays (X-ray). Harmonious balanced museum-grade 3D medical sculpture, zero text, zero letters, on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:30:25.652Z"
     },
     "fig-kidney-filter": {
       "id": "fig-kidney-filter",
@@ -198,6 +282,20 @@
       "prompt": "Minimalist 3D medical-tech editorial still life of an abstract lab report sheet resting on a crisp ultra-light cool-gray desk: a sleek floating translucent glass card showing four neat blank geometric column bars in soft slate, teal, and pale mint (pure abstract horizontal blocks with zero text and zero numbers), examined from the side by a refined frosted-glass magnifying lens with a teal ring. Calm, clean, modern studio lighting.",
       "generatedAt": "2026-11-24T10:49:15.351Z"
     },
+    "fig-report-history": {
+      "id": "fig-report-history",
+      "kind": "figure",
+      "src": "/media/fig-report-history.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 152478,
+      "sha256": "5090dfa9e879fc7037b26ec1682ad5f87cb96b7b0d915e033ee5f9322b5b430e",
+      "rawSha256": "359571c6b18c6a5781155cbee9efb90347e99d32a442ef7c65c4896763496fc0",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech editorial illustration of comparing annual checkup reports over time: three sleek blank translucent frosted-glass vertical cards arranged cleanly from left to right in gentle perspective depth, connected by a continuous smooth glowing medical-teal glass trend ribbon passing through three calm pearlescent nodes across the cards, symbolizing personal longitudinal baseline rather than a single isolated snapshot. Zero text, zero numbers, clean studio lighting on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:31:11.201Z"
+    },
     "fig-stairs-heart": {
       "id": "fig-stairs-heart",
       "kind": "figure",
@@ -211,6 +309,20 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech editorial illustration explaining why climbing stairs speeds up the heartbeat: an elegant ascending sculptural staircase of clean matte white and frosted-glass steps rising diagonally, accompanied by a smooth floating coral-and-teal rhythmic pulse ribbon that gently tightens and brightens upward alongside tiny translucent oxygen spheres. Clean airy composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T11:32:49.331Z"
+    },
+    "fig-stool-fobt": {
+      "id": "fig-stool-fobt",
+      "kind": "figure",
+      "src": "/media/fig-stool-fobt.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 26444,
+      "sha256": "ed5219b61f284653b88391a14b545c5eebac846208956c15968b61c54e3f320d",
+      "rawSha256": "8486820d35b0772cb6aabbf763b2342133592055ff4ee4094f2226f231c25715",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech editorial illustration of fecal occult blood laboratory screening (FOBT/FIT): a sleek matte-white and crystal-clear diagnostic screening cassette resting diagonally on a clean #F6F8FA plane, observed through a hovering circular frosted-teal optical magnifying lens revealing tiny softly glowing coral micro-droplet signals inside a transparent micro-channel. Completely clean abstract laboratory aesthetic, zero text, zero numbers, zero unpleasant imagery.",
+      "generatedAt": "2026-11-25T02:29:52.966Z"
     },
     "fig-thyroid-axis": {
       "id": "fig-thyroid-axis",
@@ -281,6 +393,20 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech concept illustration of urinalysis three inspection layers: a sleek crystal-clear cylindrical sample vial with pale golden-tinted liquid on the left, a clean white matte reagent strip with three soft pastel color pads (mint, pale amber, soft teal) in the middle, and a circular frosted-glass microscope lens revealing tiny geometric droplets and rings on the right. Clean trio composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T11:32:15.211Z"
+    },
+    "fig-white-coat-bp": {
+      "id": "fig-white-coat-bp",
+      "kind": "figure",
+      "src": "/media/fig-white-coat-bp.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 19754,
+      "sha256": "ab70be01470699cbff8d98f9e06efb377bc5d8d1de49e90766794f04d1b1a249",
+      "rawSha256": "f635e82433769473067f38f81658e293ff9cdd504fe01874f7ca7f7c1a5b68bf",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech editorial illustration comparing home resting blood pressure and clinic white-coat elevation: a sleek matte-white minimalist cuff ring resting calmly in the center, flanked on the left by a quiet translucent frosted-mint glass arch with a smooth gentle low teal pulse ribbon (calm home rest), and on the right by a bright frosted-glass prism with a taller warm-amber pulse ripple (temporary clinic tension). Zero text, zero screens, zero digits, balanced airy composition on #F6F8FA surface.",
+      "generatedAt": "2026-11-25T02:30:20.801Z"
     },
     "organ-heart": {
       "id": "organ-heart",

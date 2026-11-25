@@ -83,6 +83,15 @@ try {
       await artwork.screenshot({ path: `${screenshotDir}/${id}-artwork-desktop.png` });
     }
   }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${base}/organs/kidney`, { waitUntil: 'networkidle' });
+  await expect(page.locator('.visual-learning')).toContainText('跟着一滴血走过肾单位');
+  await page.locator('.visual-learning').getByRole('button', { name: /肾小球滤网：/ }).click();
+  await expect(page.locator('.learning-current')).toContainText('细密毛细血管滤网');
+  await page.goto(`${base}/organs/thyroid`, { waitUntil: 'networkidle' });
+  await expect(page.locator('.visual-learning')).toContainText('垂体与甲状腺的负反馈对话');
+  await page.locator('.visual-learning').getByRole('button', { name: /脑垂体：/ }).click();
+  await expect(page.locator('.learning-current')).toContainText('位于大脑底部的内分泌指挥中心');
   const reduced = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   await reduced.goto(`${base}/organs/heart`, { waitUntil: 'networkidle' });
   await expect(reduced.getByRole('button', { name: '已减少动态' })).toBeDisabled();
