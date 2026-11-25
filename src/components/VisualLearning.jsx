@@ -69,6 +69,40 @@ const diagrams = {
     ],
     selfMadeNote: "知愈结构化矢量原理图（无第三方底图依赖）",
   },
+  "liver-metabolism-v1": {
+    title: "肝脏营养调度、蛋白合成与胆汁排泄示意",
+    description: "展示肠道吸收的营养经血管汇入肝细胞工厂后，分别向全身血液输出蛋白糖脂、向胆道排出胆汁，以及能量过剩时的脂质沉积线索。",
+    paths: {
+      "nutrient-in": ["M148 184 L268 184", "flow-blue"],
+      "metabolic-sort": ["M406 144 C456 96 492 84 536 84", "flow-red"],
+      "bile-secretion": ["M406 184 L536 184", "flow-air"],
+      "fat-storage": ["M406 226 C456 274 492 292 536 292", "flow-carbon"],
+    },
+    legend: [
+      { className: "legend-blue", label: "消化道营养入肝" },
+      { className: "legend-red", label: "蛋白与糖脂输出全身" },
+      { className: "legend-air", label: "胆汁与胆红素经胆道排出" },
+      { className: "legend-carbon", label: "糖脂失衡引发肝内沉积" },
+    ],
+    selfMadeNote: "知愈结构化矢量原理图（无第三方底图依赖）",
+  },
+  "pancreas-dual-role-v1": {
+    title: "胰腺外分泌消化与内分泌胰岛素调节双通道示意",
+    description: "展示胰腺外分泌腺泡经胰管排入小肠分解食物，同时内分泌胰岛分泌胰岛素调节血液葡萄糖被肌肉、脂肪与肝脏利用的双重协作。",
+    paths: {
+      "enzyme-make": ["M186 112 L500 112", "flow-air"],
+      "nutrient-rise": ["M568 152 C568 206 490 258 418 272", "flow-carbon"],
+      "insulin-signal": ["M282 272 C214 272 162 248 134 218", "flow-blue"],
+      "glucose-uptake": ["M186 248 C240 296 310 318 350 318", "flow-red"],
+    },
+    legend: [
+      { className: "legend-air", label: "外分泌消化酶入肠" },
+      { className: "legend-carbon", label: "吸收葡萄糖入血" },
+      { className: "legend-blue", label: "胰岛释放胰岛素" },
+      { className: "legend-red", label: "细胞摄取稳血糖" },
+    ],
+    selfMadeNote: "知愈结构化矢量原理图（无第三方底图依赖）",
+  },
 };
 
 const heartFlowVisuals = {
@@ -251,6 +285,39 @@ const schematicLayouts = {
       "M122 166 C136 120 196 88 288 88",
     ],
     caption: "T4 / T3 偏高 → 抑制 TSH 下降 · T4 / T3 偏低 → 促使 TSH 升高",
+  },
+  "liver-metabolism-v1": {
+    viewBox: "0 0 700 390",
+    nodes: [
+      { id: "portal-vein", x: 24, y: 146, w: 124, h: 78, tone: "tone-venous", sub: "门静脉汇入营养" },
+      { id: "hepatocytes", x: 268, y: 136, w: 138, h: 98, tone: "tone-arterial", sub: "ALT/AST · 合成加工" },
+      { id: "blood-export", x: 536, y: 48, w: 140, h: 72, tone: "tone-arterial", sub: "白蛋白 / 血糖 / 血脂" },
+      { id: "bile-duct", x: 536, y: 148, w: 140, h: 72, tone: "tone-air", sub: "胆红素与胆囊超声" },
+      { id: "fat-balance", x: 536, y: 256, w: 140, h: 72, tone: "tone-alveoli", sub: "脂肪肝超声线索" },
+    ],
+    bgPaths: [
+      "M148 184 L268 184",
+      "M406 144 C456 96 492 84 536 84",
+      "M406 184 L536 184",
+      "M406 226 C456 274 492 292 536 292",
+    ],
+    caption: "肝功能抽血看酶/胆红素/白蛋白 · 腹部超声看肝实质脂肪与胆囊",
+  },
+  "pancreas-dual-role-v1": {
+    viewBox: "0 0 700 390",
+    nodes: [
+      { id: "exocrine-acini", x: 46, y: 74, w: 140, h: 76, tone: "tone-air", sub: "合成多种消化酶" },
+      { id: "pancreatic-duct", x: 500, y: 74, w: 146, h: 78, tone: "tone-alveoli", sub: "拆解糖、脂肪、蛋白" },
+      { id: "islet-cells", x: 282, y: 236, w: 136, h: 78, tone: "tone-venous", sub: "感知血糖释放胰岛素" },
+      { id: "target-cells", x: 46, y: 204, w: 140, h: 78, tone: "tone-arterial", sub: "摄取利用或储存糖原" },
+    ],
+    bgPaths: [
+      "M186 112 L500 112",
+      "M568 152 C568 206 490 258 418 272",
+      "M282 272 C214 272 162 248 134 218",
+      "M186 248 C240 296 310 318 350 318",
+    ],
+    caption: "外分泌助消化进肠道 · 内分泌胰岛素入血液调节血糖平稳",
   },
 };
 

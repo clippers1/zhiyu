@@ -38,8 +38,74 @@
   ],
   "kind": "organ",
   "category": "metabolism",
-  "version": 2,
-  "updatedAt": "2026-11-24",
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "learning": {
+    "type": "pancreas-dual-role-v1",
+    "title": "胰腺如何同时管消化与稳血糖",
+    "intro": "胰腺把外分泌消化酶送进小肠，同时把内分泌胰岛素送入血液。跟着这四步，就能明白胰腺与血糖体检项目的联动关系。",
+    "simplification": "本图将胰腺的外分泌腺泡与内分泌胰岛简化为两条并行路径，省略了胰高血糖素及其他消化激素细节，不按真实显微比例绘制。",
+    "parts": [
+      {
+        "id": "exocrine-acini",
+        "label": "外分泌腺泡",
+        "summary": "合成含有多种消化酶的胰液，准备拆解食物中的碳水化合物、脂肪和蛋白质。",
+        "sourceIds": ["digestion"]
+      },
+      {
+        "id": "pancreatic-duct",
+        "label": "胰管与小肠",
+        "summary": "进食后胰液沿胰管排入十二指肠，把大块营养分解成小分子葡萄糖、脂肪酸和氨基酸以便吸收。",
+        "sourceIds": ["digestion"]
+      },
+      {
+        "id": "islet-cells",
+        "label": "内分泌胰岛",
+        "summary": "散落在胰腺中的胰岛细胞感知血液葡萄糖上升，直接向血管释放胰岛素信号。",
+        "sourceIds": ["diabetes", "insulin"]
+      },
+      {
+        "id": "target-cells",
+        "label": "肌肉、脂肪与肝脏",
+        "summary": "收到胰岛素信号后摄取血液里的葡萄糖供能或储存，维持血糖平稳回落。",
+        "sourceIds": ["insulin", "diabetes"]
+      }
+    ],
+    "steps": [
+      {
+        "id": "enzyme-make",
+        "title": "外分泌：胰液经胰管排入小肠",
+        "text": "进食后，胰腺外分泌部分通过胰管向小肠释放消化酶，协助拆解食物中的碳水化合物、脂肪和蛋白质。",
+        "from": "exocrine-acini",
+        "to": "pancreatic-duct",
+        "sourceIds": ["digestion"]
+      },
+      {
+        "id": "nutrient-rise",
+        "title": "葡萄糖入血提醒胰岛响应",
+        "text": "碳水化合物被分解吸收为葡萄糖进入血液，餐后血糖自然升高，向胰腺内的胰岛细胞发出信号。",
+        "from": "pancreatic-duct",
+        "to": "islet-cells",
+        "sourceIds": ["digestion", "diabetes"]
+      },
+      {
+        "id": "insulin-signal",
+        "title": "内分泌：胰岛分泌胰岛素入血",
+        "text": "胰岛细胞直接向血液释放胰岛素，像钥匙一样提醒肌肉、脂肪和肝脏细胞开始摄取葡萄糖。",
+        "from": "islet-cells",
+        "to": "target-cells",
+        "sourceIds": ["insulin", "diabetes"]
+      },
+      {
+        "id": "glucose-uptake",
+        "title": "细胞利用与储存，血糖回稳",
+        "text": "外周细胞利用葡萄糖供能、肝脏暂存多余糖原，血糖平稳回落；空腹血糖与糖化血红蛋白正是从不同时间窗观察这套调节结果。",
+        "from": "target-cells",
+        "to": "islet-cells",
+        "sourceIds": ["diabetes", "insulin"]
+      }
+    ]
+  },
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,

@@ -1,0 +1,342 @@
+/* 专项交互式体检图解（心电图 / 血压 / 血脂 / 肝功 / 血糖 / 超声分级） */
+
+.indicator-vlab {
+  margin-top: var(--s-6);
+  padding: 20px;
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f6fbfb 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.vlab-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vlab-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.vlab-head h2 {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.vlab-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-wash);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.vlab-body {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vlab-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.vlab-canvas-card {
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.vlab-subhead {
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.vlab-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.vlab-svg-label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: #4f6b70;
+}
+
+.vlab-svg-label.clickable {
+  cursor: pointer;
+}
+
+.vlab-svg-label.active {
+  fill: #0f766e;
+  font-weight: 700;
+}
+
+.vlab-box-title {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #1b2d33;
+}
+
+.vlab-mini-tag {
+  font-size: 11.5px;
+  font-weight: 600;
+  fill: #5a7379;
+}
+
+.vlab-mini-tag.active {
+  fill: #0f766e;
+  font-weight: 700;
+}
+
+.vlab-mini-tag.warn {
+  fill: #c1453e;
+  font-weight: 700;
+}
+
+/* ECG clickable segments */
+.ecg-seg {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.ecg-seg.active {
+  stroke: #0f766e;
+  stroke-width: 4.4;
+}
+
+/* Clickable SVG cards */
+.vlab-click-group {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Animated transport dashes */
+.vlab-dash-right {
+  animation: vlab-move-right 14s linear infinite;
+}
+
+.vlab-dash-left {
+  animation: vlab-move-left 14s linear infinite;
+}
+
+@keyframes vlab-move-right {
+  to { stroke-dashoffset: -280; }
+}
+
+@keyframes vlab-move-left {
+  to { stroke-dashoffset: 280; }
+}
+
+/* Selector pills */
+.vlab-pills {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vlab-pills button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.vlab-pills button b {
+  font-weight: 700;
+  color: inherit;
+}
+
+.vlab-pills button span {
+  font-size: 11.5px;
+  opacity: 0.78;
+}
+
+.vlab-pills button:hover {
+  border-color: var(--accent);
+}
+
+.vlab-pills button.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Explanation callout */
+.vlab-explain {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--accent-border);
+  background: #ffffff;
+}
+
+.vlab-explain-kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.vlab-explain p {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.78;
+  color: var(--ink-2);
+}
+
+/* ECG Rhythm Strip Box */
+.vlab-strip-box {
+  padding: 14px;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.vlab-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.vlab-mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vlab-mode-tabs button {
+  min-height: 32px;
+  padding: 0 11px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.vlab-mode-tabs button.active {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+}
+
+.vlab-strip-note {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* Ultrasound Tier List */
+.us-tier-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.us-tier-list li {
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.us-tier-list li.active {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+.us-tier-list b {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.us-tier-list span {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.vlab-boundary {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  line-height: 1.68;
+  color: var(--ink-3);
+}
+
+.vlab-boundary b {
+  color: var(--ink-2);
+}
+
+@media (min-width: 760px) {
+  .ecg-split {
+    grid-template-columns: minmax(0, 1.85fr) minmax(200px, 1fr);
+    align-items: stretch;
+  }
+  .us-split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vlab-dash-right,
+  .vlab-dash-left {
+    animation: none;
+  }
+}

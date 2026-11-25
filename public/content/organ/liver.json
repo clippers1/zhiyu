@@ -60,8 +60,80 @@
   ],
   "kind": "organ",
   "category": "metabolism",
-  "version": 2,
-  "updatedAt": "2026-11-24",
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "learning": {
+    "type": "liver-metabolism-v1",
+    "title": "看懂肝脏的三条繁忙通道",
+    "intro": "肝脏同时负责营养调度、蛋白合成与胆汁排泄。点选结构或逐步查看这四步，就能明白肝功能、脂肪肝与胆囊超声为何总一起看。",
+    "simplification": "本图将肝脏复杂的代谢与胆道网络简化为四条主要流向，省略了肝小叶微观结构与具体生化反应，不按真实解剖比例绘制。",
+    "parts": [
+      {
+        "id": "portal-vein",
+        "label": "消化道来血",
+        "summary": "小肠吸收的葡萄糖、氨基酸和脂类先经血管汇入肝脏，由肝脏统一分拣调度。",
+        "sourceIds": ["digestion"]
+      },
+      {
+        "id": "hepatocytes",
+        "label": "肝细胞工厂",
+        "summary": "执行糖原储放、脂蛋白装配、白蛋白合成与胆红素加工，也是肝功能抽血中 ALT/AST 等酶的所在位置。",
+        "sourceIds": ["liver-tests", "insulin"]
+      },
+      {
+        "id": "blood-export",
+        "label": "全身血液输出",
+        "summary": "肝脏把调节平稳的血糖、脂蛋白和白蛋白持续送回体循环，供应全身组织使用。",
+        "sourceIds": ["lipids", "liver-tests"]
+      },
+      {
+        "id": "bile-duct",
+        "label": "胆道与胆囊",
+        "summary": "肝脏生成的胆汁与加工后的胆红素经胆管暂存于胆囊，进食后排入肠道帮助消化脂肪。",
+        "sourceIds": ["digestion", "liver-tests"]
+      },
+      {
+        "id": "fat-balance",
+        "label": "糖脂储备平衡",
+        "summary": "当长期能量过剩或胰岛素响应减弱时，多余脂类容易在肝细胞内沉积，超声常提示脂肪肝线索。",
+        "sourceIds": ["steatotic", "insulin"]
+      }
+    ],
+    "steps": [
+      {
+        "id": "nutrient-in",
+        "title": "营养先汇聚进肝脏",
+        "text": "餐后从肠道吸收的葡萄糖、脂类和氨基酸先随血流进入肝脏，而不是直接无序冲进全身血管。",
+        "from": "portal-vein",
+        "to": "hepatocytes",
+        "sourceIds": ["digestion"]
+      },
+      {
+        "id": "metabolic-sort",
+        "title": "合成蛋白并调度糖脂输出",
+        "text": "肝细胞合成白蛋白、按需释放或储存葡萄糖，并把脂类装进脂蛋白送往全身循环。",
+        "from": "hepatocytes",
+        "to": "blood-export",
+        "sourceIds": ["liver-tests", "lipids", "insulin"]
+      },
+      {
+        "id": "bile-secretion",
+        "title": "制造胆汁并排出胆红素",
+        "text": "红细胞分解产生的胆红素在肝脏加工后，与胆汁一同沿胆道进入胆囊和肠道排出。",
+        "from": "hepatocytes",
+        "to": "bile-duct",
+        "sourceIds": ["digestion", "liver-tests"]
+      },
+      {
+        "id": "fat-storage",
+        "title": "能量过剩时脂肪在肝内堆积",
+        "text": "如果长期能量摄入超出消耗或胰岛素响应变弱，多余脂肪会在肝细胞内积聚，因此脂肪肝常需结合血糖、血脂与肝功一起看。",
+        "from": "hepatocytes",
+        "to": "fat-balance",
+        "sourceIds": ["steatotic", "insulin", "lipids"]
+      }
+    ]
+  },
   "reviewStatus": "pending",
   "contentRisk": "foundational",
   "publicationReady": true,

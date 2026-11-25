@@ -107,7 +107,7 @@ test("all published demo content has valid references, related records and index
     ])
       assert.ok(sourceIds.has(id), `${entry.id}: missing reference ${id}`);
     if (entry.learning) {
-      assert.ok(["heart-flow-v1", "lung-gas-exchange-v1", "kidney-filtration-v1", "thyroid-feedback-v1"].includes(entry.learning.type));
+      assert.ok(["heart-flow-v1", "lung-gas-exchange-v1", "kidney-filtration-v1", "thyroid-feedback-v1", "liver-metabolism-v1", "pancreas-dual-role-v1"].includes(entry.learning.type));
       assert.ok(entry.learning.parts.length >= 4 && entry.learning.steps.length >= 2);
       const partIds = new Set(entry.learning.parts.map((part) => part.id));
       assert.equal(partIds.size, entry.learning.parts.length);

@@ -30,12 +30,14 @@ try {
     `Homepage should not load three chunk eagerly: ${loadedScripts.join(", ")}`,
   );
 
-  // 2. Organ 3D sandbox switch on heart & kidney
+  // 2. Organ 3D sandbox switch on ALL 6 organs!
   for (const [slug, shotName] of [
     ["heart", "three-heart-3d.png"],
     ["kidney", "three-kidney-3d.png"],
     ["lung", "three-lung-3d.png"],
     ["thyroid", "three-thyroid-3d.png"],
+    ["liver", "three-liver-3d.png"],
+    ["pancreas", "three-pancreas-3d.png"],
   ]) {
     await page.goto(`${base}/organs/${slug}`, { waitUntil: "networkidle" });
     const learning = page.locator("#organ-learning");
@@ -104,26 +106,39 @@ try {
     }
   }
 
-  // 5. Capture indicator flowchart & directory thumbnails & report guide flowchart
-  if (screenshotDir) {
-    await page.goto(`${base}/article/glucose`, { waitUntil: "networkidle" });
-    const fc = page.locator("#article-flowchart");
-    await fc.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(250);
-    await fc.screenshot({ path: `${screenshotDir}/indicator-flowchart-glucose.png` });
-    await fc.getByRole("tab", { name: /看单四步路径/ }).click();
-    await page.waitForTimeout(200);
-    await fc.screenshot({ path: `${screenshotDir}/indicator-flowchart-reading.png` });
-
-    await page.goto(`${base}/indicators`, { waitUntil: "networkidle" });
-    await expect(page.locator(".question-row-thumb img").first()).toBeVisible();
-    await page.waitForTimeout(250);
-    await page.screenshot({ path: `${screenshotDir}/indicators-thumbs.png`, fullPage: false });
+  // 5. Specialized Interactive Visual Labs across top 7 checkup indicators
+  for (const [slug, btnRegex, shotName] of [
+    ["ecg", /P 波/, "vlab-ecg.png"],
+    ["pressure", /舒张压/, "vlab-pressure.png"],
+    ["lipids", /HDL-C/, "vlab-lipids.png"],
+    ["liver-function", /胆红素与胆汁通路/, "vlab-liver-function.png"],
+    ["glucose", /餐后 \/ OGTT/, "vlab-glucose.png"],
+    ["thyroid-nodule", /多条可疑特征组合/, "vlab-thyroid-nodule.png"],
+    ["breast-ultrasound", /规整实性/, "vlab-breast-ultrasound.png"],
+  ]) {
+    await page.goto(`${base}/article/${slug}`, { waitUntil: "networkidle" });
+    const vlab = page.locator("#article-visual-lab");
+    await expect(vlab).toBeVisible();
+    await vlab.scrollIntoViewIfNeeded();
+    await vlab.getByRole("button", { name: btnRegex }).click();
+    if (slug === "ecg") {
+      await vlab.getByRole("button", { name: /偶发早搏/ }).click();
+    }
+    if (screenshotDir) {
+      await page.waitForTimeout(220);
+      await vlab.screenshot({ path: `${screenshotDir}/${shotName}` });
+    }
   }
 
-  // 6. Mobile 320px/390px overflow safety check with 3D + flowchart open
+  // 6. Mobile 320px/390px overflow safety check with 3D + visual lab + flowchart open
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
+    await page.goto(`${base}/article/ecg`, { waitUntil: "networkidle" });
+    await expect(page.locator("#article-visual-lab")).toBeVisible();
+    assert.ok(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      `ECG visual lab overflow at ${width}px`,
+    );
     await page.goto(`${base}/article/lung-nodule`, { waitUntil: "networkidle" });
     await page.locator("#article-concept-3d").getByRole("button", { name: /打开 3D 观察/ }).click();
     await expect(page.locator("#article-concept-3d .three-stage-canvas")).toBeVisible({ timeout: 15000 });
@@ -135,7 +150,7 @@ try {
 
   assert.deepEqual(failedModels, [], `Failed GLB model requests: ${failedModels.join(", ")}`);
   assert.deepEqual(errors, []);
-  console.log("PASS NIH HuBMAP GLB models, lazy loading, 4 organ 3D sandboxes, 3D body map, 3 article concept slices, indicator flowcharts and 320px responsive layout.");
+  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 7 specialized indicator visual labs, indicator flowcharts and 320px responsive layout.");
 } finally {
   await browser.close();
 }

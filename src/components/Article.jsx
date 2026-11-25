@@ -27,6 +27,7 @@ import { ReportRowStrip } from "./ReportGuide";
 import { REPORT_ROWS } from "../services/report-guide";
 import FeedbackBox from "./FeedbackBox";
 import IndicatorFlowchart from "./IndicatorFlowchart";
+import IndicatorVisualLab, { hasIndicatorVisualLab } from "./IndicatorVisualLab";
 import ConceptSlice3D from "./three/ConceptSlice3D";
 
 function FigureBlock({ figure, id = "article-figure" }) {
@@ -250,6 +251,7 @@ export default function Article({
           </header>
           {entryFigure && <FigureBlock key={detail.id} figure={entryFigure} />}
           {figures.opening && <FigureBlock key={`${detail.id}-opening`} figure={figures.opening} />}
+          {!isStory && <IndicatorVisualLab detail={detail} />}
           {!isStory && (
             <IndicatorFlowchart
               detail={detail}
@@ -264,6 +266,7 @@ export default function Article({
             <a href="#article-overview">它是什么</a>
             {hasReportRows && <a href="#article-report-rows">单子上的位置</a>}
             {figures.firstAnchor && <a href={`#${figures.firstAnchor}`}>图解</a>}
+            {!isStory && hasIndicatorVisualLab(id) && <a href="#article-visual-lab">专项交互图解</a>}
             {!isStory && detail.chain?.length >= 3 && <a href="#article-flowchart">可视化流程图</a>}
             {longForm && detail.sections.slice(1).map((section, index) => (
               <a key={section.title} href={`#article-section-${index + 2}`}>{section.short || section.title}</a>

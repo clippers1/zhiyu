@@ -42,6 +42,17 @@ const PART_LABELS = {
   "tsh-signal": { title: "TSH 调控信号", tone: "teal" },
   "thyroid-gland": { title: "甲状腺", tone: "arterial" },
   "hormone-level": { title: "血中 T4 / T3 水平", tone: "amber" },
+  // Liver
+  "portal-vein": { title: "消化道门静脉来血", tone: "venous" },
+  hepatocytes: { title: "肝细胞代谢工厂", tone: "amber" },
+  "blood-export": { title: "白蛋白 / 血糖 / 脂蛋白输出", tone: "arterial" },
+  "bile-duct": { title: "胆道与胆囊排泄", tone: "teal" },
+  "fat-balance": { title: "肝内糖脂储备平衡", tone: "amber" },
+  // Pancreas
+  "exocrine-acini": { title: "外分泌腺泡", tone: "teal" },
+  "pancreatic-duct": { title: "胰管排入小肠", tone: "amber" },
+  "islet-cells": { title: "内分泌胰岛", tone: "venous" },
+  "target-cells": { title: "肌肉、脂肪与肝脏细胞", tone: "arterial" },
 };
 
 async function buildHeartScene({ THREE, scene, studio }) {
@@ -595,11 +606,249 @@ async function buildThyroidScene({ THREE, scene, studio }) {
   };
 }
 
+async function buildLiverScene({ THREE, scene, studio }) {
+  const root = new THREE.Group();
+  scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -1.92;
+
+  const liverGlb = await loadAnatomicalGLB("/media/models/liver.glb");
+  const liverMat = makeOrganMaterial(THREE, PALETTE.liver, {
+    roughness: 0.28,
+    clearcoat: 0.72,
+    opacity: 0.68,
+    depthWrite: false,
+  });
+  liverGlb.traverse((c) => {
+    if (c.isMesh) {
+      c.material = liverMat;
+      c.renderOrder = 4;
+    }
+  });
+  const { wrapper: liverWrap } = normalizeModelToUnit(THREE, liverGlb, 3.0);
+  liverWrap.position.set(-0.25, 0.05, 0);
+  root.add(liverWrap);
+
+  const partMap = new Map();
+  const pinAnchors = new Map();
+  const register = (id, obj, mat, pinPos, keepScale = false) => {
+    tagPickable(obj, id);
+    if (obj.parent !== root) root.add(obj);
+    partMap.set(id, { mesh: obj, mat, baseScale: obj.scale.clone(), keepScale });
+    pinAnchors.set(id, new THREE.Vector3(...pinPos));
+  };
+
+  register("hepatocytes", liverWrap, liverMat, [-0.25, 0.2, 0.45], true);
+
+  // Portal vein inflow from below-left
+  const portalMat = makeOrganMaterial(THREE, PALETTE.venous, { opacity: 0.92 });
+  const portalCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-2.15, -0.78, 0.25),
+    new THREE.Vector3(-1.32, -0.45, 0.22),
+    new THREE.Vector3(-0.62, -0.1, 0.16),
+  ]);
+  const portal = new THREE.Mesh(new THREE.TubeGeometry(portalCurve, 28, 0.14, 16, false), portalMat);
+  register("portal-vein", portal, portalMat, [-1.7, -0.52, 0.25]);
+
+  // Systemic hepatic outflow (upper right)
+  const outMat = makeOrganMaterial(THREE, PALETTE.arterial, { opacity: 0.92 });
+  const outNode = new THREE.Mesh(new THREE.CapsuleGeometry(0.2, 0.68, 14, 24), outMat);
+  outNode.rotation.z = Math.PI / 2;
+  outNode.position.set(2.05, 0.98, 0.1);
+  register("blood-export", outNode, outMat, [2.05, 1.24, 0.1]);
+
+  // Gallbladder & biliary duct (emerald-teal pouch tucked below liver)
+  const bileGroup = new THREE.Group();
+  const bileMat = makeOrganMaterial(THREE, PALETTE.teal, { opacity: 0.92, roughness: 0.22 });
+  const gb = new THREE.Mesh(new THREE.SphereGeometry(0.28, 24, 18), bileMat);
+  gb.scale.set(0.85, 1.35, 0.85);
+  gb.rotation.z = -0.35;
+  gb.position.set(1.92, -0.1, 0.24);
+  const duct = new THREE.Mesh(
+    new THREE.TubeGeometry(
+      new THREE.CatmullRomCurve3([
+        new THREE.Vector3(0.42, -0.22, 0.22),
+        new THREE.Vector3(1.18, -0.14, 0.28),
+        new THREE.Vector3(1.85, -0.1, 0.24),
+      ]),
+      24,
+      0.075,
+      14,
+      false,
+    ),
+    bileMat,
+  );
+  bileGroup.add(gb, duct);
+  register("bile-duct", bileGroup, bileMat, [1.92, 0.25, 0.28]);
+
+  // Fat droplet balance cluster (lower right)
+  const fatGroup = new THREE.Group();
+  const fatMat = makeOrganMaterial(THREE, PALETTE.gold, { opacity: 0.94, roughness: 0.22 });
+  for (const [x, y, z, r] of [[0, 0, 0, 0.24], [0.24, -0.12, 0.14, 0.16], [-0.22, 0.14, 0.12, 0.15], [0.1, 0.22, -0.12, 0.14]]) {
+    const d = new THREE.Mesh(new THREE.SphereGeometry(r, 20, 16), fatMat);
+    d.position.set(x, y, z);
+    fatGroup.add(d);
+  }
+  fatGroup.position.set(1.95, -1.08, 0.12);
+  register("fat-balance", fatGroup, fatMat, [1.95, -0.82, 0.18]);
+
+  const flows = {
+    "nutrient-in": createCurveFlow(THREE, [[-2.15, -0.78, 0.3], [-1.25, -0.38, 0.28], [-0.45, 0.0, 0.22]], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0, particleCount: 8 }),
+    "metabolic-sort": createCurveFlow(THREE, [[0.15, 0.28, 0.2], [1.05, 0.84, 0.22], [2.05, 0.98, 0.16]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e, particleCount: 8 }),
+    "bile-secretion": createCurveFlow(THREE, [[0.2, -0.18, 0.26], [1.1, -0.12, 0.34], [1.92, -0.1, 0.28]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 8 }),
+    "fat-storage": createCurveFlow(THREE, [[0.12, -0.32, 0.22], [1.02, -0.86, 0.22], [1.92, -1.08, 0.18]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c, particleCount: 8 }),
+  };
+  Object.values(flows).forEach((f) => root.add(f.group));
+
+  return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
+    update(state, dt, elapsed, reducedMotion) {
+      const stepId = state?.stepId;
+      const activePart = state?.activePart;
+      if (!reducedMotion) fatGroup.rotation.y += dt * 0.4;
+      for (const [id, flow] of Object.entries(flows)) {
+        flow.setActive(id === stepId);
+        flow.tick(dt, reducedMotion);
+      }
+      for (const [id, { mesh, mat, baseScale, keepScale }] of partMap.entries()) {
+        const focused = activePart === id || (!activePart && (state?.from === id || state?.to === id));
+        mat.emissiveIntensity += ((focused ? 0.42 : 0.06) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? (keepScale ? 0.88 : 0.96) : (keepScale ? 0.56 : 0.58)) - mat.opacity) * 0.14;
+        if (!keepScale) {
+          const f = focused ? 1.07 : 0.97;
+          mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
+        }
+      }
+    },
+  };
+}
+
+async function buildPancreasScene({ THREE, scene, studio }) {
+  const root = new THREE.Group();
+  scene.add(root);
+  if (studio?.pedestal) studio.pedestal.position.y = -1.86;
+
+  const pancreasGlb = await loadAnatomicalGLB("/media/models/pancreas.glb");
+  const pancreasMat = makeOrganMaterial(THREE, PALETTE.gold, {
+    roughness: 0.28,
+    clearcoat: 0.7,
+    opacity: 0.62,
+    depthWrite: false,
+  });
+  pancreasGlb.traverse((c) => {
+    if (c.isMesh) {
+      c.material = pancreasMat;
+      c.renderOrder = 4;
+    }
+  });
+  const { wrapper: panWrap } = normalizeModelToUnit(THREE, pancreasGlb, 3.0);
+  panWrap.position.set(-0.2, 0.35, 0);
+  root.add(panWrap);
+
+  const partMap = new Map();
+  const pinAnchors = new Map();
+  const register = (id, obj, mat, pinPos, keepScale = false) => {
+    tagPickable(obj, id);
+    if (obj.parent !== root) root.add(obj);
+    partMap.set(id, { mesh: obj, mat, baseScale: obj.scale.clone(), keepScale });
+    pinAnchors.set(id, new THREE.Vector3(...pinPos));
+  };
+
+  register("exocrine-acini", panWrap, pancreasMat, [-0.55, 0.72, 0.35], true);
+
+  // Pancreatic duct emptying into duodenum C-loop (right side)
+  const ductMat = makeOrganMaterial(THREE, PALETTE.tealLight, { opacity: 0.9 });
+  const duodenum = new THREE.Mesh(
+    new THREE.TorusGeometry(0.68, 0.18, 16, 36, Math.PI * 1.15),
+    makeOrganMaterial(THREE, 0xe8b594, { opacity: 0.86, roughness: 0.3 }),
+  );
+  duodenum.rotation.z = -Math.PI * 0.58;
+  duodenum.position.set(1.75, 0.3, 0.05);
+  const mainDuct = new THREE.Mesh(
+    new THREE.TubeGeometry(
+      new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-1.1, 0.55, 0.14),
+        new THREE.Vector3(-0.15, 0.32, 0.16),
+        new THREE.Vector3(0.85, 0.25, 0.12),
+        new THREE.Vector3(1.52, 0.25, 0.08),
+      ]),
+      32,
+      0.068,
+      14,
+      false,
+    ),
+    ductMat,
+  );
+  const ductGroup = new THREE.Group();
+  ductGroup.add(duodenum, mainDuct);
+  register("pancreatic-duct", ductGroup, ductMat, [1.75, 0.78, 0.15]);
+
+  // Endocrine Islet of Langerhans glowing cluster (lower center)
+  const isletGroup = new THREE.Group();
+  const isletMat = makeOrganMaterial(THREE, PALETTE.venous, { opacity: 0.95, roughness: 0.2 });
+  for (const [x, y, z, r] of [[0, 0, 0, 0.26], [0.28, 0.14, 0.12, 0.15], [-0.26, 0.12, -0.1, 0.15], [0.1, -0.24, 0.14, 0.14], [-0.18, -0.18, 0.16, 0.13]]) {
+    const m = new THREE.Mesh(new THREE.SphereGeometry(r, 20, 16), isletMat);
+    m.position.set(x, y, z);
+    isletGroup.add(m);
+  }
+  isletGroup.position.set(0.32, -0.95, 0.2);
+  register("islet-cells", isletGroup, isletMat, [0.32, -0.62, 0.3]);
+
+  // Target muscle / liver uptake cell orb (lower left)
+  const targetMat = makeOrganMaterial(THREE, PALETTE.arterial, { opacity: 0.92, roughness: 0.22 });
+  const targetOrb = new THREE.Mesh(new THREE.SphereGeometry(0.48, 28, 22), targetMat);
+  targetOrb.position.set(-1.75, -0.82, 0.14);
+  register("target-cells", targetOrb, targetMat, [-1.75, -0.35, 0.2]);
+
+  const flows = {
+    "enzyme-make": createCurveFlow(THREE, [[-1.08, 0.55, 0.22], [0.05, 0.34, 0.26], [1.45, 0.26, 0.18]], { tubeColor: PALETTE.teal, particleColor: PALETTE.tealLight, particleCount: 9 }),
+    "nutrient-rise": createCurveFlow(THREE, [[1.78, -0.12, 0.18], [1.38, -0.78, 0.24], [0.58, -0.95, 0.24]], { tubeColor: PALETTE.amber, particleColor: 0xf7bd6c, particleCount: 8 }),
+    "insulin-signal": createCurveFlow(THREE, [[0.02, -0.88, 0.26], [-0.72, -0.68, 0.34], [-1.42, -0.8, 0.24]], { tubeColor: PALETTE.venous, particleColor: 0x7ac3f0, particleCount: 8 }),
+    "glucose-uptake": createCurveFlow(THREE, [[-1.45, -1.04, 0.2], [-0.65, -1.32, 0.22], [0.15, -1.16, 0.22]], { tubeColor: PALETTE.arterial, particleColor: 0xffa69e, particleCount: 8 }),
+  };
+  Object.values(flows).forEach((f) => root.add(f.group));
+
+  return {
+    getPins(state) {
+      const targetId = state?.activePart || state?.to || state?.from;
+      const anchor = pinAnchors.get(targetId);
+      const info = PART_LABELS[targetId];
+      if (!anchor || !info) return [];
+      return [{ id: "part-pin", pos: [anchor.x, anchor.y, anchor.z], title: info.title, tone: info.tone, active: true }];
+    },
+    update(state, dt, elapsed, reducedMotion) {
+      const stepId = state?.stepId;
+      const activePart = state?.activePart;
+      if (!reducedMotion) isletGroup.rotation.y += dt * 0.45;
+      for (const [id, flow] of Object.entries(flows)) {
+        flow.setActive(id === stepId);
+        flow.tick(dt, reducedMotion);
+      }
+      for (const [id, { mesh, mat, baseScale, keepScale }] of partMap.entries()) {
+        const focused = activePart === id || (!activePart && (state?.from === id || state?.to === id));
+        mat.emissiveIntensity += ((focused ? 0.44 : 0.06) - mat.emissiveIntensity) * 0.14;
+        mat.opacity += ((focused ? (keepScale ? 0.85 : 0.96) : (keepScale ? 0.5 : 0.58)) - mat.opacity) * 0.14;
+        if (!keepScale) {
+          const f = focused ? 1.07 : 0.97;
+          mesh.scale.set(baseScale.x * f, baseScale.y * f, baseScale.z * f);
+        }
+      }
+    },
+  };
+}
+
 const BUILDERS = {
   "heart-flow-v1": { build: buildHeartScene, camera: [0.35, 0.25, 7.2], label: "心脏血液双循环 3D 真实解剖沙盘" },
   "lung-gas-exchange-v1": { build: buildLungScene, camera: [0, 0.2, 6.7], label: "肺与肺泡气体交换 3D 真实解剖沙盘" },
   "kidney-filtration-v1": { build: buildKidneyScene, camera: [0.1, 0.25, 6.7], label: "肾单位滤过与重吸收 3D 互动沙盘" },
   "thyroid-feedback-v1": { build: buildThyroidScene, camera: [0, 0.15, 6.4], label: "垂体与甲状腺负反馈 3D 互动沙盘" },
+  "liver-metabolism-v1": { build: buildLiverScene, camera: [0.1, 0.2, 6.6], label: "肝脏营养调度与胆汁排泄 3D 互动沙盘" },
+  "pancreas-dual-role-v1": { build: buildPancreasScene, camera: [0, 0.2, 6.6], label: "胰腺外分泌与内分泌双通道 3D 互动沙盘" },
 };
 
 export function hasOrgan3D(type) {
