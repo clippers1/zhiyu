@@ -26,6 +26,13 @@
   align-items: center;
   gap: var(--s-1);
 }
+.reading-bar-left {
+  min-width: 0;
+  overflow: hidden;
+}
+.reading-bar-tools {
+  flex-shrink: 0;
+}
 .reading-bar button {
   display: inline-flex;
   align-items: center;
@@ -38,6 +45,7 @@
   color: var(--ink-2);
   font-size: var(--t-13);
   font-weight: 500;
+  flex-shrink: 0;
 }
 .reading-bar button:hover {
   background: var(--surface);
@@ -47,6 +55,8 @@
   font-size: var(--t-13);
   color: var(--ink-3);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .share-message:empty {
   display: none;

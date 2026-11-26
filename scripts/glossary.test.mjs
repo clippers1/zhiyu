@@ -1,7 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { filterGlossary, GLOSSARY_GROUPS, GLOSSARY_ITEMS, GLOSSARY_LETTERS } from "../src/services/glossary.js";
+import {
+  filterGlossary,
+  GLOSSARY_GROUPS,
+  GLOSSARY_ITEMS,
+  GLOSSARY_LETTERS,
+  tokenizeGlossaryText,
+} from "../src/services/glossary.js";
 import { parseRoute, routePath } from "../src/services/routes.js";
 
 test("glossary entries are unique, valid, threshold-free, and link only to published indicators", async () => {
@@ -41,4 +47,21 @@ test("glossary route resolves cleanly in shared router", () => {
   assert.deepEqual(parseRoute("/glossary"), { page: "glossary", id: "" });
   assert.equal(routePath("glossary"), "/glossary");
   assert.deepEqual(parseRoute("/glossary/extra"), { page: "not-found", id: "" });
+});
+
+test("inline glossary tokenizer matches medical codes safely and deduplicates per section", () => {
+  const seen = new Set();
+  const tokens = tokenizeGlossaryText("空腹查 HbA1c、eGFR 和 gFOBT，下次再提 HbA1c 不重复标。", seen);
+  const matched = tokens.filter((t) => typeof t === "object").map((t) => `${t.term}:${t.item.articleId}`);
+  assert.deepEqual(matched, [
+    "HbA1c:glucose",
+    "eGFR:kidney-function",
+    "gFOBT:stool-fobt",
+  ]);
+  // Short 2-char codes must not false-match lowercase English words or inside longer Latin words
+  const safe = tokenizeGlossaryText("The word create or crab or html should never match Cr or Hb.");
+  assert.deepEqual(
+    safe.filter((t) => typeof t === "object").map((t) => t.term),
+    ["Cr", "Hb"],
+  );
 });

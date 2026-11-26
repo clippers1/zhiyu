@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { Activity, Layers, SlidersHorizontal } from "lucide-react";
 import { Citation } from "./ContentUI";
+import { KidneyFilterLab, ThyroidAxisLab, StoolFobtLab } from "./ExtraVisualLabs";
+import {
+  ImagingGuideLab,
+  LabRangeLab,
+  PreTestFactorsLab,
+  FastingTestLab,
+  ReportHistoryLab,
+  StairsHeartLab,
+  WhiteCoatBpLab,
+} from "./StoryVisualLabs";
 import "./indicator-visual-lab.css";
 
 /* -------------------------------------------------------------------------- */
@@ -1841,6 +1851,66 @@ const LABS = {
     boundary: "本图仅解释肿瘤标志物的多种非肿瘤来源与临床核实路径，不提供任何标志物数值解读、肿瘤排除承诺或筛查处方。",
     render: (detail) => <TumorMarkersFunnelLab detail={detail} />,
   },
+  "kidney-function": {
+    kicker: "专项交互图解 · 肾功能",
+    title: "看懂肾功「铁三角」：血肌酐、eGFR 与尿白蛋白各有分工",
+    boundary: "本图仅演示肾小球滤过概念与血、尿三项指标的互补关系，不含肌酐或 eGFR 分期数值门槛。",
+    render: (detail) => <KidneyFilterLab detail={detail} />,
+  },
+  "thyroid-function": {
+    kicker: "专项交互图解 · 甲状腺功能",
+    title: "为什么「激素偏低」反而是 TSH 升高？看懂垂体—甲状腺跷跷板",
+    boundary: "本图仅示意垂体 TSH 与甲状腺激素之间的负反馈调节方向，不含甲功数值切点或临床诊断结论。",
+    render: (detail) => <ThyroidAxisLab detail={detail} />,
+  },
+  "stool-fobt": {
+    kicker: "专项交互图解 · 便常规与便潜血",
+    title: "化学法 vs 免疫法（FIT）：为什么有的怕吃肉，阳性又为何不等于肠癌？",
+    boundary: "本图仅演示便潜血两类常见检测原理的抗干扰差异与常见出血排查方向，不替代规范筛查流程或肠镜评估。",
+    render: (detail) => <StoolFobtLab detail={detail} />,
+  },
+  "imaging-guide": {
+    kicker: "互动原理图解 · 影像检查分工",
+    title: "B 超、X 光、CT 与核磁共振（MRI）怎么分工？",
+    boundary: "本图仅概括四类常见影像检查的成像原理与适用侧重，具体检查选择须由医生结合个人症状与禁忌证决定。",
+    render: (detail) => <ImagingGuideLab detail={detail} />,
+  },
+  "lab-range": {
+    kicker: "互动原理图解 · 参考区间",
+    title: "为什么两家医院区间不一样？看清「约 95% 健康人群分布」",
+    boundary: "本图为统计学分布与方法偏移概念示意，不含真实检验数值或临床判定阈值。",
+    render: (detail) => <LabRangeLab detail={detail} />,
+  },
+  "pre-test-factors": {
+    kicker: "互动原理图解 · 体检前干扰因素",
+    title: "体检前 72 小时干扰时间轴：哪些日常行为容易让指标短暂波动？",
+    boundary: "本图仅说明常见生活因素对部分检验结果的短期影响，不替代医生对持续异常结果的排查。",
+    render: (detail) => <PreTestFactorsLab detail={detail} />,
+  },
+  "fasting-test": {
+    kicker: "互动原理图解 · 空腹准备",
+    title: "空腹抽血红绿灯速查：水、饮料与日常处方药怎么处理？",
+    boundary: "本图仅作常规空腹抽血科普提示，具体禁食禁水与用药安排须以开单医生及检查机构通知为准，切勿自行擅停处方药。",
+    render: (detail) => <FastingTestLab detail={detail} />,
+  },
+  "report-history": {
+    kicker: "互动原理图解 · 历年体检建档",
+    title: "只看今年 vs 串联近三年：为什么医生总问旧体检单？",
+    boundary: "本图仅示意纵向趋势与个人基线的观察价值，不含真实数值刻度或干预切点。",
+    render: (detail) => <ReportHistoryLab detail={detail} />,
+  },
+  "stairs-heart": {
+    kicker: "互动原理图解 · 运动与心跳",
+    title: "爬几层楼为什么心跳加快？看懂「供氧需求 × 心肺联动」",
+    boundary: "本图仅解释健康状态下的正常运动心肺生理反应，若活动后伴胸闷胸痛、头晕黑矇或久不恢复应及时就医。",
+    render: (detail) => <StairsHeartLab detail={detail} />,
+  },
+  "white-coat-bp": {
+    kicker: "互动原理图解 · 诊室与家庭测压",
+    title: "诊室一测就偏高？对比「白大衣脉冲」与「居家安静基线」",
+    boundary: "本图仅说明环境紧张对单次血压读数的短期影响与规范家庭自测要点，不含高血压诊断或用药标准。",
+    render: (detail) => <WhiteCoatBpLab detail={detail} />,
+  },
 };
 
 export function hasIndicatorVisualLab(id) {
@@ -1848,7 +1918,10 @@ export function hasIndicatorVisualLab(id) {
 }
 
 export default function IndicatorVisualLab({ detail }) {
-  const spec = detail?.kind === "indicator" ? LABS[detail.id] : null;
+  const spec =
+    detail?.kind === "indicator" || detail?.kind === "story"
+      ? LABS[detail.id]
+      : null;
   if (!spec) return null;
 
   return (

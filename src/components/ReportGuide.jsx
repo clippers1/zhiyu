@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ZoomIn } from "lucide-react";
 import { BoundaryNote, Citation, RunHead, SourceReferences } from "./ContentUI";
 import { RouteLink } from "./RouteLink";
 import { REPORT_ROWS, GUIDE_CONTENT, GUIDE_FAQ, GUIDE_SECTIONS } from "../services/report-guide";
+import FigureLightbox from "./FigureLightbox";
 import "./indicator-flowchart.css";
 
 const GUIDE_FLOW_STEPS = [
@@ -92,49 +93,76 @@ const LEGEND = [
 ];
 
 function GuideFigure() {
+  const [zoomed, setZoomed] = useState(false);
   return (
-    <figure className="article-figure guide-figure">
-      <div className="article-figure-stage">
-        <img
-          src="/media/fig-report-guide.webp"
-          alt="示意图：极简医学检验报告单的四列栏目抽象构图与放大镜，不含真实项目名、数值与区间"
-          width={960}
-          height={640}
-          decoding="async"
-        />
-      </div>
-      <div className="report-anatomy-card" role="img" aria-label="化验单四列结构示意：项目名、结果、单位与参考区间">
-        <div className="report-anatomy-head">化验单一行的四个常见栏目</div>
-        <div className="report-anatomy-grid">
-          {LEGEND.map((item, index) => (
-            <div className={`report-anatomy-col${item.tone ? ` ${item.tone}` : ""}`} key={item.title}>
-              <span className="report-anatomy-badge" aria-hidden="true">{index + 1}</span>
-              <b>{item.title}</b>
-              <span>{item.short}</span>
-            </div>
-          ))}
+    <>
+      <figure className="article-figure guide-figure">
+        <div className="article-figure-stage">
+          <button
+            type="button"
+            className="figure-zoom-trigger"
+            aria-label="放大查看化验单结构示意图"
+            onClick={() => setZoomed(true)}
+          >
+            <img
+              src="/media/fig-report-guide.webp"
+              alt="示意图：极简医学检验报告单的四列栏目抽象构图与放大镜，不含真实项目名、数值与区间"
+              width={960}
+              height={640}
+              decoding="async"
+            />
+            <span className="figure-zoom-badge" aria-hidden="true">
+              <ZoomIn size={13} />
+              放大
+            </span>
+          </button>
         </div>
-      </div>
-      <figcaption>
-        <span>化验单的一行通常由项目名、结果、单位和参考区间四列组成。</span>
-        <small className="article-figure-attribution">插图：AI 生成插图 · 模型 gpt-image-2.6</small>
-      </figcaption>
-      <ol className="guide-legend">
-        {LEGEND.map((item, index) => (
-          <li key={item.title}>
-            <span aria-hidden="true">{index + 1}</span>
-            <div>
-              <b>{item.title}</b>
-              <p>{item.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p className="article-figure-note">
-        <b>图示边界：</b>
-        图为报告单版面概念示意，不含真实项目名称、数值、单位或参考区间，也未按任何一份真实报告绘制；不同机构的栏目名称与排列可能不同。
-      </p>
-    </figure>
+        <div className="report-anatomy-card" role="img" aria-label="化验单四列结构示意：项目名、结果、单位与参考区间">
+          <div className="report-anatomy-head">化验单一行的四个常见栏目</div>
+          <div className="report-anatomy-grid">
+            {LEGEND.map((item, index) => (
+              <div className={`report-anatomy-col${item.tone ? ` ${item.tone}` : ""}`} key={item.title}>
+                <span className="report-anatomy-badge" aria-hidden="true">{index + 1}</span>
+                <b>{item.title}</b>
+                <span>{item.short}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <figcaption>
+          <span>化验单的一行通常由项目名、结果、单位和参考区间四列组成。</span>
+          <small className="article-figure-attribution">插图：AI 生成插图 · 模型 gpt-image-2.6</small>
+        </figcaption>
+        <ol className="guide-legend">
+          {LEGEND.map((item, index) => (
+            <li key={item.title}>
+              <span aria-hidden="true">{index + 1}</span>
+              <div>
+                <b>{item.title}</b>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="article-figure-note">
+          <b>图示边界：</b>
+          图为报告单版面概念示意，不含真实项目名称、数值、单位或参考区间，也未按任何一份真实报告绘制；不同机构的栏目名称与排列可能不同。
+        </p>
+      </figure>
+      <FigureLightbox
+        figure={
+          zoomed
+            ? {
+                src: "/media/fig-report-guide.webp",
+                alt: "示意图：极简医学检验报告单的四列栏目抽象构图与放大镜，不含真实项目名、数值与区间",
+                caption: "化验单的一行通常由项目名、结果、单位和参考区间四列组成。",
+                credit: "插图：AI 生成插图 · 模型 gpt-image-2.6",
+              }
+            : null
+        }
+        onClose={() => setZoomed(false)}
+      />
+    </>
   );
 }
 

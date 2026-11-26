@@ -196,6 +196,19 @@
   .question-row-main > p {
     display: none;
   }
+  .reading-bar {
+    gap: 4px;
+  }
+  .reading-bar-context {
+    display: none;
+  }
+  .reading-bar-tools {
+    gap: 0;
+  }
+  .reading-bar button {
+    min-width: 40px;
+    padding: 0 8px;
+  }
   .reading-toc a {
     padding: 0 10px;
   }

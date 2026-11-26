@@ -106,7 +106,7 @@ try {
     }
   }
 
-  // 5. Specialized Interactive Visual Labs across all 14 featured checkup indicators
+  // 5. Specialized Interactive Visual Labs across ALL 17 indicator labs + ALL 7 story labs (24 total!)
   for (const [slug, btnRegex, shotName] of [
     ["ecg", /P 波/, "vlab-ecg.png"],
     ["pressure", /舒张压/, "vlab-pressure.png"],
@@ -122,6 +122,16 @@ try {
     ["fatty-liver", /超声之外还要看什么/, "vlab-fatty-liver.png"],
     ["gallbladder", /胆囊结石/, "vlab-gallbladder.png"],
     ["tumor-markers", /动态趋势比单次值更关键/, "vlab-tumor-markers.png"],
+    ["kidney-function", /肌肉量大/, "vlab-kidney-function.png"],
+    ["thyroid-function", /激素偏低/, "vlab-thyroid-function.png"],
+    ["stool-fobt", /化学法/, "vlab-stool-fobt.png"],
+    ["imaging-guide", /核磁共振/, "vlab-story-imaging.png"],
+    ["lab-range", /两家医院仪器/, "vlab-story-lab-range.png"],
+    ["pre-test-factors", /剧烈运动/, "vlab-story-pre-test.png"],
+    ["fasting-test", /降压药/, "vlab-story-fasting.png"],
+    ["report-history", /串联近三年/, "vlab-story-history.png"],
+    ["stairs-heart", /连爬几层楼梯/, "vlab-story-stairs.png"],
+    ["white-coat-bp", /居家安静/, "vlab-story-white-coat.png"],
   ]) {
     await page.goto(`${base}/article/${slug}`, { waitUntil: "networkidle" });
     const vlab = page.locator("#article-visual-lab");
@@ -139,6 +149,33 @@ try {
       await vlab.screenshot({ path: `${screenshotDir}/${shotName}` });
     }
   }
+
+  // 5a. Reading UX Enhancements: inline glossary popover, figure lightbox zoom, and quick chapter jump drawer
+  await page.goto(`${base}/article/kidney-function`, { waitUntil: "networkidle" });
+  const glossaryTrigger = page.locator(".glossary-inline-trigger").first();
+  await glossaryTrigger.scrollIntoViewIfNeeded();
+  await glossaryTrigger.click();
+  await expect(page.locator(".glossary-inline-popover")).toBeVisible();
+  if (screenshotDir) {
+    await page.waitForTimeout(150);
+    await page.screenshot({ path: `${screenshotDir}/ux-inline-glossary.png` });
+  }
+  await page.keyboard.press("Escape");
+  await expect(page.locator(".glossary-inline-popover")).toHaveCount(0);
+
+  await page.locator("#article-figure .figure-zoom-trigger").click();
+  await expect(page.locator(".figure-lightbox")).toBeVisible();
+  if (screenshotDir) {
+    await page.waitForTimeout(150);
+    await page.screenshot({ path: `${screenshotDir}/ux-figure-lightbox.png` });
+  }
+  await page.keyboard.press("Escape");
+  await expect(page.locator(".figure-lightbox")).toHaveCount(0);
+
+  await page.getByRole("button", { name: "章节目录" }).click();
+  await expect(page.locator("#article-toc-drawer")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#article-toc-drawer")).toHaveCount(0);
 
   // 5b. A-Z Checkup Abbreviation Glossary (/glossary)
   await page.goto(`${base}/glossary`, { waitUntil: "networkidle" });
@@ -169,6 +206,20 @@ try {
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
       `Gallbladder visual lab overflow at ${width}px`,
     );
+    await page.goto(`${base}/article/imaging-guide`, { waitUntil: "networkidle" });
+    await expect(page.locator("#article-visual-lab")).toBeVisible();
+    assert.ok(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      `Story visual lab overflow at ${width}px`,
+    );
+    await page.goto(`${base}/article/kidney-function`, { waitUntil: "networkidle" });
+    await page.locator(".glossary-inline-trigger").first().click();
+    await expect(page.locator(".glossary-inline-popover")).toBeVisible();
+    assert.ok(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      `Inline glossary popover overflow at ${width}px`,
+    );
+    await page.keyboard.press("Escape");
     await page.goto(`${base}/article/lung-nodule`, { waitUntil: "networkidle" });
     await page.locator("#article-concept-3d").getByRole("button", { name: /打开 3D 观察/ }).click();
     await expect(page.locator("#article-concept-3d .three-stage-canvas")).toBeVisible({ timeout: 15000 });
@@ -180,7 +231,7 @@ try {
 
   assert.deepEqual(failedModels, [], `Failed GLB model requests: ${failedModels.join(", ")}`);
   assert.deepEqual(errors, []);
-  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 14 specialized indicator visual labs, A-Z glossary, indicator flowcharts and 320px responsive layout.");
+  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 17 indicator + 7 story visual labs, inline glossary popover, figure lightbox, chapter drawer, A-Z glossary, indicator flowcharts and 320px responsive layout.");
 } finally {
   await browser.close();
 }

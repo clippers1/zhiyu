@@ -215,6 +215,26 @@
   color: var(--accent);
 }
 
+.vlab-explain-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.vlab-explain-head b {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.vlab-explain-head span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
 .vlab-explain p {
   margin-top: 6px;
   font-size: 14px;

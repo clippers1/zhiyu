@@ -580,3 +580,71 @@ export function filterGlossary({ query = "", letter = "", group = "all" } = {}) 
   };
   return matched.sort((a, b) => score(a) - score(b));
 }
+
+// Inline prose abbreviation matcher used by InlineGlossaryText.
+// Longest tokens match first; 2-char codes require exact casing so ordinary prose never false-matches.
+const INLINE_TOKEN_MAP = new Map();
+const CASE_SENSITIVE_SHORT = new Set();
+
+for (const item of GLOSSARY_ITEMS) {
+  const rawTokens = item.code.split("/").map((t) => t.trim()).filter(Boolean);
+  for (const token of rawTokens) {
+    if (!/^[A-Za-z][A-Za-z0-9-]{1,}$/.test(token)) continue;
+    const key = token.length <= 2 ? token : token.toLowerCase();
+    if (!INLINE_TOKEN_MAP.has(key)) {
+      INLINE_TOKEN_MAP.set(key, item);
+      if (token.length <= 2) CASE_SENSITIVE_SHORT.add(token);
+    }
+  }
+}
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const ALL_INLINE_TOKENS = Array.from(
+  new Set(
+    GLOSSARY_ITEMS.flatMap((item) =>
+      item.code
+        .split("/")
+        .map((t) => t.trim())
+        .filter((t) => /^[A-Za-z][A-Za-z0-9-]{1,}$/.test(t)),
+    ),
+  ),
+).sort((a, b) => b.length - a.length);
+
+const INLINE_TOKEN_REGEX = new RegExp(
+  `(?<![A-Za-z0-9-])(${ALL_INLINE_TOKENS.map(escapeRegex).join("|")})(?![A-Za-z0-9-])`,
+  "g",
+);
+
+export function tokenizeGlossaryText(text, seen = null) {
+  if (!text || typeof text !== "string") return [text];
+  const segments = [];
+  let lastIndex = 0;
+  INLINE_TOKEN_REGEX.lastIndex = 0;
+  let match;
+
+  while ((match = INLINE_TOKEN_REGEX.exec(text)) !== null) {
+    const raw = match[1];
+    const start = match.index;
+    const end = start + raw.length;
+    const item =
+      raw.length <= 2
+        ? CASE_SENSITIVE_SHORT.has(raw)
+          ? INLINE_TOKEN_MAP.get(raw)
+          : null
+        : INLINE_TOKEN_MAP.get(raw.toLowerCase());
+
+    if (!item || (seen && seen.has(item.code))) continue;
+
+    if (start > lastIndex) segments.push(text.slice(lastIndex, start));
+    if (seen) seen.add(item.code);
+    segments.push({ term: raw, item });
+    lastIndex = end;
+  }
+
+  if (lastIndex === 0) return [text];
+  if (lastIndex < text.length) segments.push(text.slice(lastIndex));
+  return segments;
+}
