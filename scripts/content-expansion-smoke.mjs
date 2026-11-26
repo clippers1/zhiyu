@@ -10,7 +10,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`${base}/indicators`, { waitUntil: 'networkidle' });
-  await expect(page.locator('.result-count')).toContainText('找到 20 个项目专题');
+  await expect(page.locator('.result-count')).toContainText('找到 26 个项目专题');
   await expect(page.locator('.question-row')).toHaveCount(6);
   await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('.question-row')).toHaveCount(6);
@@ -19,8 +19,11 @@ try {
   await expect(page.locator('.question-row')).toHaveCount(6);
   await expect(page.locator('.question-row .question-row-term b')).toHaveText(['心电图', '肿瘤标志物', '幽门螺杆菌', '颈动脉超声', '胆囊超声', '乳腺超声']);
   await page.getByRole('button', { name: '下一页', exact: true }).click();
+  await expect(page.locator('.question-row')).toHaveCount(6);
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['便常规与便潜血', '骨密度检查', '乙肝两对半', '胃肠镜检查', '宫颈筛查', '妇科超声']);
+  await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('.question-row')).toHaveCount(2);
-  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['便常规与便潜血', '骨密度检查']);
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['前列腺超声与 PSA', '维生素 D 与铁蛋白']);
   await page.getByRole('button', { name: '返回首页', exact: true }).click();
 
   const input = page.getByRole('textbox', { name: '筛选体检项目', exact: true });
@@ -41,7 +44,13 @@ try {
     ['胆囊壁毛糙', '胆囊超声'],
     ['BI-RADS', '乳腺超声'],
     ['gFOBT', '便常规与便潜血'],
-    ['DXA', '骨密度检查'],
+    ['DEXA', '骨密度检查'],
+    ['HBsAg', '乙肝两对半'],
+    ['无痛胃肠镜', '胃肠镜检查'],
+    ['ASC-US', '宫颈筛查'],
+    ['子宫肌瘤', '妇科超声'],
+    ['tPSA', '前列腺超声与 PSA'],
+    ['Ferritin', '维生素 D 与铁蛋白'],
   ]) {
     await input.fill(query);
     await expect(page.locator('.question-row')).toHaveCount(1);
@@ -51,8 +60,8 @@ try {
   await expect(page.locator('.library-stories .index-row')).toHaveCount(1);
   await expect(page.locator('.library-stories')).toContainText('在家测血压挺正常');
   await input.fill('ALT');
-  await expect(page.locator('.question-row')).toHaveCount(2);
-  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['肝功能', '脂肪肝']);
+  await expect(page.locator('.question-row')).toHaveCount(3);
+  await expect(page.locator('.question-row .question-row-term b')).toHaveText(['肝功能', '脂肪肝', '乙肝两对半']);
 
   await input.fill('eGFR');
   await page.locator('.question-row').click();

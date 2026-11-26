@@ -34,6 +34,7 @@ try {
     'thyroid-function', 'uric-acid', 'urinalysis',
     'fatty-liver', 'thyroid-nodule', 'lung-nodule', 'ecg', 'tumor-markers',
     'h-pylori', 'carotid-ultrasound', 'gallbladder', 'breast-ultrasound', 'stool-fobt', 'bone-density',
+    'hepatitis-b', 'gi-endoscopy', 'cervical-screening', 'gynecologic-ultrasound', 'prostate-check', 'vitamin-d-ferritin',
     'stairs-heart', 'lab-range', 'fasting-test', 'pre-test-factors',
     'white-coat-bp', 'imaging-guide', 'report-history',
   ];

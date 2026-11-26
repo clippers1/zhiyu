@@ -1,0 +1,377 @@
+{
+  "id": "gynecologic-ultrasound",
+  "catalogOrder": 24,
+  "title": "妇科超声",
+  "english": "PELVIC & TRANSVAGINAL ULTRASOUND",
+  "subtitle": "卵巢囊肿、子宫肌瘤和少量盆腔积液，哪些常是良性或生理现象？",
+  "question": "妇科 B 超查出卵巢囊肿、子宫肌瘤或盆腔积液，需要紧张吗？",
+  "questionAnswer": "育龄期女性妇科超声中常见的单纯性小卵巢囊肿、无症状子宫肌瘤和少量盆腔积液，大多数属于良性结构改变或随月经周期起伏的生理现象；判断它们是否需要进一步处理，通常要结合月经周期时间、有无腹痛或经量异常以及复查动态变化。",
+  "icon": "layers",
+  "color": "purple",
+  "tags": [
+    "妇科超声",
+    "卵巢囊肿",
+    "子宫肌瘤"
+  ],
+  "searchAliases": [
+    "妇科B超",
+    "妇科彩超",
+    "盆腔超声",
+    "阴超",
+    "经阴道超声",
+    "经腹超声",
+    "卵巢囊肿",
+    "子宫肌瘤",
+    "盆腔积液",
+    "子宫内膜",
+    "附件区囊肿",
+    "黄体囊肿",
+    "pelvic ultrasound",
+    "transvaginal ultrasound"
+  ],
+  "number": "24",
+  "format": "article",
+  "featured": false,
+  "desc": "妇科超声（含经腹超声与经阴道超声）利用无辐射高频声波观察子宫形态、内膜厚度、双侧卵巢及盆腔环境，是排查子宫肌瘤、卵巢囊肿和盆腔液性暗区的常规基础影像手段。",
+  "sections": [
+    {
+      "title": "经腹（憋尿）和经阴道超声，为什么做法不一样？",
+      "short": "经腹与经阴",
+      "paragraphs": [
+        {
+          "text": "妇科超声最常见有两种路径：隔着下腹皮肤扫查的「经腹超声」，以及使用细长无菌套探头贴近观察的「经阴道超声」。两者都靠声波成像，完全没有电离辐射，只是观察窗口离目标的距离不同。",
+          "sourceIds": [
+            "pelvic-us",
+            "tv-us"
+          ]
+        },
+        {
+          "text": "做经腹超声前之所以常常要喝水憋尿，是因为子宫和卵巢藏在骨盆深处且前方常有肠气挡道；适度充盈的膀胱像一扇清澈的「水窗」，能把肠道推开，让声波顺畅穿透看清后方结构。未有性生活史或需要观察较大范围病灶时，常规优先选经腹路径。",
+          "sourceIds": [
+            "pelvic-us",
+            "sonogram"
+          ]
+        },
+        {
+          "text": "经阴道超声则不需要憋尿，反而需要先排空膀胱。因为探头离宫颈、子宫内膜和卵巢非常近，少了腹壁脂肪和肠气的遮挡，图像分辨率往往更清晰，特别适合细看内膜厚度、小肌瘤或卵巢细节。",
+          "sourceIds": [
+            "tv-us",
+            "pelvic-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "卵巢囊肿：很多只是随排卵周期来去的「小水泡」",
+      "short": "生理性囊肿",
+      "paragraphs": [
+        {
+          "text": "卵巢每个月都会发育卵泡并排卵，因此报告上出现「卵巢囊肿」或「附件区无回声暗区」在育龄女性中非常普遍。相当大一部分属于功能性（生理性）囊肿，比如排卵前后形成的卵泡囊肿或黄体囊肿，本质上只是随着激素节律暂时积了一小团清亮液体。",
+          "sourceIds": [
+            "ovarian-cysts",
+            "tv-us"
+          ]
+        },
+        {
+          "text": "这类单纯性生理囊肿边界光滑、内部透声好，绝大多数不需要吃药也不需要开刀，通常在经历一到三个月经周期后会自行缩小甚至完全吸收消失。因此医生经常建议在「下一次月经刚干净后」复查一次超声，先确认它到底是不是过客。",
+          "sourceIds": [
+            "ovarian-cysts",
+            "pelvic-us"
+          ]
+        },
+        {
+          "text": "只有当囊肿在多次复查后依然持续存在、持续长大、内部回声较复杂（如含实性乳头或分隔），或出现在绝经以后，以及突发剧烈下腹痛时，才需要妇科医生结合肿瘤标志物或磁共振进一步细查性质。",
+          "sourceIds": [
+            "ovarian-cysts",
+            "tv-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "查出「子宫肌瘤」，为什么不是每个人都要切？",
+      "short": "看懂子宫肌瘤",
+      "paragraphs": [
+        {
+          "text": "子宫肌瘤是育龄期女性极为常见的良性实性肿瘤，由子宫壁平滑肌细胞增生形成。虽然名字里带着「瘤」字，但绝大多数子宫肌瘤始终保持良性，绝经后随着体内雌激素下降，许多肌瘤甚至还会逐渐萎缩变小。",
+          "sourceIds": [
+            "fibroids"
+          ]
+        },
+        {
+          "text": "医生评估一颗子宫肌瘤要不要处理，不仅看它的大小，更看重它的「生长位置」和「有没有带来症状」：长在肌壁间或向外凸向浆膜下的小肌瘤，往往多年安安静静没有任何影响；而凸向宫腔内的黏膜下肌瘤，即使体积不大，也可能引起经量明显增多、经期延长甚至缺铁性贫血。",
+          "sourceIds": [
+            "fibroids",
+            "pelvic-us"
+          ]
+        },
+        {
+          "text": "因此，体检偶然发现、平时月经规律也没有尿频压迫感或备孕困扰的无症状小肌瘤，通常遵医嘱定期超声随访观察即可，无需一听到「瘤」就焦虑急着手术。",
+          "sourceIds": [
+            "fibroids"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "「少量盆腔积液」和「内膜厚薄」，怎么结合周期看？",
+      "short": "积液与内膜",
+      "paragraphs": [
+        {
+          "text": "妇科超声报告末尾常出现「盆腔少量积液」或「子宫直肠陷凹见液性暗区」。人体盆腹腔内原本就有少量润滑腹膜的液体，女性在排卵后卵泡液排出、或经期前后少量生理渗出时，超声就很容易在盆腔最低点拍到这点液体。",
+          "sourceIds": [
+            "pelvic-us",
+            "ovarian-cysts"
+          ]
+        },
+        {
+          "text": "所以如果平时完全没有下腹坠痛、发热或异常分泌物，孤立的「少量盆腔积液」绝大多数是正常生理现象，不是所谓的「盆腔炎」，更不需要轻信过度推销去做输液或灌洗理疗。",
+          "sourceIds": [
+            "pelvic-us"
+          ]
+        },
+        {
+          "text": "同样，子宫内膜的厚度也会跟着月经周期像潮汐一样规律起伏：刚干净时最薄，排卵后到下次来潮前自然增厚。因此看内膜描述一定要对照检查当天处于月经第几天，绝经后若出现异常阴道出血或内膜增厚则应主动就诊。",
+          "sourceIds": [
+            "tv-us",
+            "pelvic-us"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "什么时候去复查最清楚？以及需要主动就医的信号",
+      "short": "复查时机与边界",
+      "paragraphs": [
+        {
+          "text": "常规妇科超声体检和复查卵巢囊肿、子宫内膜时，较理想的时间窗通常是月经完全干净后的头几天——此时内膜较薄、功能性黄体或优势卵泡干扰最少，能更清晰地分辨哪些结构是真正持续存在的。",
+          "sourceIds": [
+            "tv-us",
+            "ovarian-cysts"
+          ]
+        },
+        {
+          "text": "如果在两次体检间隔内出现突发单侧剧烈下腹痛（需排查囊肿蒂扭转或黄体破裂等急症）、经量持续大到影响生活甚至头晕乏力、非经期或绝经后异常出血，应及时到妇科门诊评估，不要干等下一次年度体检。",
+          "sourceIds": [
+            "ovarian-cysts",
+            "fibroids"
+          ]
+        },
+        {
+          "text": "本文只解释妇科超声路径差异与常见良性报告术语，不提供囊肿或肌瘤手术毫米门槛、内膜厚薄绝对标准或妇科用药处方。",
+          "sourceIds": [
+            "pelvic-us",
+            "fibroids"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "没谈过恋爱或没有性生活史，能做经阴道超声吗？",
+      "answer": "一般不安排经阴道超声，而是采用憋尿后的经腹超声；如经腹视野受限且临床确有必要细查，医生有时会沟通是否采用经直肠超声替代，检查前如实告知即可。",
+      "sourceIds": [
+        "tv-us",
+        "pelvic-us"
+      ]
+    },
+    {
+      "question": "体检发现卵巢囊肿，吃中药或消炎药能把它「消掉」吗？",
+      "answer": "如果是生理性囊肿，不吃药也会在 1–3 个月经周期后自然消退；如果是持续存在的器质性囊肿，普通消炎药通常也无法消除。先在月经干净后复查确认性质，再由妇科医生决定方案更可靠。",
+      "sourceIds": [
+        "ovarian-cysts"
+      ]
+    },
+    {
+      "question": "子宫肌瘤会不会癌变？",
+      "answer": "绝大多数子宫肌瘤都是良性增生，恶变（子宫肉瘤）的概率极低。日常只需按医生建议定期复查对比大小与血流形态，尤其在绝经后若肌瘤反常快速增大时及时请专科评估。",
+      "sourceIds": [
+        "fibroids"
+      ]
+    },
+    {
+      "question": "「盆腔少量积液」需要吃消炎药治盆腔炎吗？",
+      "answer": "单纯超声提示少量盆腔积液且没有任何下腹痛、发热或分泌物异常时，多为排卵液或正常腹膜润滑液，属于生理现象，通常不需要专门使用抗生素或理疗。",
+      "sourceIds": [
+        "pelvic-us"
+      ]
+    },
+    {
+      "question": "经腹超声憋尿要憋到什么程度才合适？",
+      "answer": "达到有明显尿意但尚不至于难忍胀痛的适度充盈即可；过度憋尿反而可能把子宫推挤变形，如果进诊室前不确定，可先请超声医生扫一眼确认够不够。",
+      "sourceIds": [
+        "pelvic-us",
+        "sonogram"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "子宫形态与肌层回声",
+      "text": "观察子宫大小、肌层是否均匀，以及是否存在子宫肌瘤等良性实性占位与具体位置。",
+      "sourceIds": [
+        "fibroids",
+        "pelvic-us"
+      ]
+    },
+    {
+      "name": "子宫内膜厚度与形态",
+      "text": "结合月经周期阶段评估内膜回声是否均匀，绝经后则重点关注有无异常增厚或回声团。",
+      "sourceIds": [
+        "tv-us",
+        "pelvic-us"
+      ]
+    },
+    {
+      "name": "双侧卵巢与附件区",
+      "text": "分辨单纯液性囊肿与复杂结构，借助月经周期后复查区分生理波动和持续性囊肿。",
+      "sourceIds": [
+        "ovarian-cysts",
+        "tv-us"
+      ]
+    },
+    {
+      "name": "盆腔液性暗区（积液）",
+      "text": "评估子宫直肠陷凹有无积液及量多少，结合有无腹痛发热区分生理润滑与病理情况。",
+      "sourceIds": [
+        "pelvic-us"
+      ]
+    }
+  ],
+  "chain": [
+    "按检查路径完成适度憋尿（经腹）或排空膀胱（经阴）",
+    "无辐射高频声波分层扫查子宫、内膜与双侧卵巢",
+    "结合月经周期区分生理性囊肿/积液与持续性结构",
+    "按症状与动态复查变化决定常规随访或专科处理"
+  ],
+  "chainSourceIds": [
+    "pelvic-us",
+    "tv-us",
+    "ovarian-cysts",
+    "fibroids"
+  ],
+  "tip": "育龄期女性妇科 B 超里的单纯小囊肿、无症状小肌瘤和少量盆腔积液，大多数属于良性或周期性生理现象；复查尽量选在月经刚干净后，不要轻信无依据的过度理疗。",
+  "figures": [
+    {
+      "key": "gyn-ultrasound",
+      "alt": "示意图：极简白色超声探头自上方发出青绿色声波弧线扫查半透明磨砂盆腔抽象轮廓，清晰区分清透水滴状液性囊泡与柔和暖珊瑚色实性椭圆结节，不含文字与数字。",
+      "caption": "妇科超声用无辐射声波分辨含液囊肿与实性肌瘤，结果解读离不开月经周期背景与动态复查。",
+      "simplification": "图为软组织盆腔超声成像原理抽象概念示意，不按真实解剖比例绘制，也不包含任何大小毫米切点或手术标准。",
+      "sourceIds": [
+        "pelvic-us",
+        "ovarian-cysts",
+        "fibroids"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "db4dea8bb2f75e22566f6f4e5ff6d60437944ea2c670a3c92583ed327098e666"
+      },
+      "src": "/media/fig-gynecologic-ultrasound.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "无辐射声波扫查",
+          "text": "经腹（适度憋尿）与经阴（排空膀胱）互补观察盆腔软组织层次。"
+        },
+        {
+          "title": "分辨囊性与实性",
+          "text": "清楚区分清亮含液的单纯囊肿（常见生理波动）与实性子宫肌瘤。"
+        },
+        {
+          "title": "结合经期看变化",
+          "text": "内膜厚薄与功能性囊肿都会随周期起伏，经后复查更有参考价值。"
+        }
+      ]
+    }
+  ],
+  "organ": "子宫 · 卵巢 · 盆腔",
+  "relatedOrgans": [],
+  "related": [
+    "cervical-screening",
+    "breast-ultrasound",
+    "urinalysis"
+  ],
+  "kind": "indicator",
+  "category": "endocrine",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到妇科或盆腔超声报告、希望理解经腹/经阴区别及卵巢囊肿、子宫肌瘤、少量积液含义的一般成年女性读者。",
+  "limitations": "不提供囊肿或肌瘤手术毫米门槛、子宫内膜厚薄绝对切点、妊娠超声解读或妇科处方建议；请结合症状咨询妇科医生。",
+  "references": [
+    {
+      "id": "pelvic-us",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Ultrasound (Pelvic & Abdominal Overview)",
+      "url": "https://medlineplus.gov/ency/article/003336.htm",
+      "scope": "无辐射超声成像机制、经腹盆腔检查的膀胱声窗准备及软组织观察原理",
+      "locator": "How the Test is Performed; How to Prepare for the Test",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "tv-us",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Transvaginal Ultrasound",
+      "url": "https://medlineplus.gov/ency/article/003779.htm",
+      "scope": "经阴道超声的准备方式、近距离高分辨成像优势及观察子宫内膜与卵巢的用途",
+      "locator": "How the Test is Performed; Why the Test is Performed",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ovarian-cysts",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Ovarian Cysts",
+      "url": "https://medlineplus.gov/ovariancysts.html",
+      "scope": "功能性（生理性）卵巢囊肿常见且可自行消退的特点，以及持续或急症信号",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "fibroids",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Uterine Fibroids",
+      "url": "https://medlineplus.gov/uterinefibroids.html",
+      "scope": "子宫肌瘤的良性本质、症状与位置关系及无症状观察策略",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "sonogram",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Sonogram (Ultrasound)",
+      "url": "https://medlineplus.gov/lab-tests/sonogram/",
+      "scope": "超声检查无电离辐射特点与一般准备工作",
+      "locator": "What is a sonogram?; Will I need to do anything to prepare for the test?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "pelvic-us",
+    "tv-us"
+  ],
+  "tipSourceIds": [
+    "ovarian-cysts",
+    "fibroids"
+  ]
+}

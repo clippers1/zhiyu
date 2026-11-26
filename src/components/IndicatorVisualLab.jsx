@@ -3,6 +3,14 @@ import { Activity, Layers, SlidersHorizontal } from "lucide-react";
 import { Citation } from "./ContentUI";
 import { KidneyFilterLab, ThyroidAxisLab, StoolFobtLab } from "./ExtraVisualLabs";
 import {
+  HepatitisBPanelLab,
+  GiEndoscopyLab,
+  CervicalScreeningLab,
+  GynecologicUltrasoundLab,
+  ProstateCheckLab,
+  VitaminDFerritinLab,
+} from "./ExpandedVisualLabs";
+import {
   ImagingGuideLab,
   LabRangeLab,
   PreTestFactorsLab,
@@ -1868,6 +1876,42 @@ const LABS = {
     title: "化学法 vs 免疫法（FIT）：为什么有的怕吃肉，阳性又为何不等于肠癌？",
     boundary: "本图仅演示便潜血两类常见检测原理的抗干扰差异与常见出血排查方向，不替代规范筛查流程或肠镜评估。",
     render: (detail) => <StoolFobtLab detail={detail} />,
+  },
+  "hepatitis-b": {
+    kicker: "专项交互图解 · 乙肝两对半",
+    title: "点选五项常见组合：分清「疫苗抗体」「大三阳」「小三阳」与既往恢复",
+    boundary: "本图仅演示乙肝血清学五项（两对半）的常见组合概念，不含病毒载量门槛、抗病毒指征或接种剂量方案。",
+    render: (detail) => <HepatitisBPanelLab detail={detail} />,
+  },
+  "gi-endoscopy": {
+    kicker: "专项交互图解 · 胃肠镜检查",
+    title: "读懂胃肠镜高频词：浅表性胃炎、萎缩、息肉与「取活检待病理」",
+    boundary: "本图仅解释胃肠镜报告常见形态词与活检流程概念，不替代消化科医生结合病理切片给出的个体化随访间隔。",
+    render: (detail) => <GiEndoscopyLab detail={detail} />,
+  },
+  "cervical-screening": {
+    kicker: "专项交互图解 · 宫颈筛查",
+    title: "TCT 看细胞 + HPV 查病毒：为什么检出 HPV 阳性不等于宫颈癌？",
+    boundary: "本图仅说明 TCT 与 HPV 联合筛查的互补原理与一过性感染概念，不含筛查起始年龄处方或阴道镜处理标准。",
+    render: (detail) => <CervicalScreeningLab detail={detail} />,
+  },
+  "gynecologic-ultrasound": {
+    kicker: "专项交互图解 · 妇科超声",
+    title: "看清常见良性词：经腹/经阴对比、生理性囊肿、肌瘤与少量盆腔积液",
+    boundary: "本图仅解释妇科超声检查路径及高频良性发现概念，不含囊肿或肌瘤手术毫米门槛及妇科用药建议。",
+    render: (detail) => <GynecologicUltrasoundLab detail={detail} />,
+  },
+  "prostate-check": {
+    kicker: "专项交互图解 · 前列腺超声与 PSA",
+    title: "超声增生钙化 & 单次 PSA 升高：为什么不能直接画上等号？",
+    boundary: "本图仅说明前列腺超声与 PSA 血检的互补视角及常见良性干扰因素，不含 PSA 数值切点或穿刺指征。",
+    render: (detail) => <ProstateCheckLab detail={detail} />,
+  },
+  "vitamin-d-ferritin": {
+    kicker: "专项交互图解 · 维生素 D 与铁蛋白",
+    title: "为什么血红蛋白正常也可能缺铁？看清「铁仓库」与「维生素 D 钙吸收」",
+    boundary: "本图仅演示铁蛋白储备与维生素 D 生理协作概念，不含缺乏数值切点或补充剂剂量处方。",
+    render: (detail) => <VitaminDFerritinLab detail={detail} />,
   },
   "imaging-guide": {
     kicker: "互动原理图解 · 影像检查分工",

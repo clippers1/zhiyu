@@ -196,9 +196,9 @@ export default function Article({
   const longForm = Boolean(detail?.sections?.length);
   const guide = readingGuide(detail);
   const trust = contentTrust(detail);
-  const catalog = useContent("list", [{ kind: isStory ? "story" : "indicator", limit: 24 }]);
-  const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 24 }]);
-  const relatedIndicatorsState = useContent("list", [{ kind: "indicator", ids: detail?.related || [], limit: 24 }]);
+  const catalog = useContent("list", [{ kind: isStory ? "story" : "indicator", limit: 48 }]);
+  const relatedState = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map((item) => item.id), limit: 48 }]);
+  const relatedIndicatorsState = useContent("list", [{ kind: "indicator", ids: detail?.related || [], limit: 48 }]);
   const next = nextIndicator(catalog.data?.items, id, isStory ? "story" : "indicator");
   const figures = attachFigures(detail);
   const questions = longForm && detail?.faq?.length ? detail.faq : guide?.questions || [];

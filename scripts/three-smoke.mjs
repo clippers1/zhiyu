@@ -125,6 +125,12 @@ try {
     ["kidney-function", /肌肉量大/, "vlab-kidney-function.png"],
     ["thyroid-function", /激素偏低/, "vlab-thyroid-function.png"],
     ["stool-fobt", /化学法/, "vlab-stool-fobt.png"],
+    ["hepatitis-b", /大三阳/, "vlab-hepatitis-b.png"],
+    ["gi-endoscopy", /增生性息肉/, "vlab-gi-endoscopy.png"],
+    ["cervical-screening", /HPV 阳性/, "vlab-cervical-screening.png"],
+    ["gynecologic-ultrasound", /子宫肌瘤/, "vlab-gynecologic-ultrasound.png"],
+    ["prostate-check", /前列腺增生/, "vlab-prostate-check.png"],
+    ["vitamin-d-ferritin", /维生素 D/, "vlab-vitamin-d-ferritin.png"],
     ["imaging-guide", /核磁共振/, "vlab-story-imaging.png"],
     ["lab-range", /两家医院仪器/, "vlab-story-lab-range.png"],
     ["pre-test-factors", /剧烈运动/, "vlab-story-pre-test.png"],
@@ -231,7 +237,7 @@ try {
 
   assert.deepEqual(failedModels, [], `Failed GLB model requests: ${failedModels.join(", ")}`);
   assert.deepEqual(errors, []);
-  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 17 indicator + 7 story visual labs, inline glossary popover, figure lightbox, chapter drawer, A-Z glossary, indicator flowcharts and 320px responsive layout.");
+  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 23 indicator + 7 story visual labs, inline glossary popover, figure lightbox, chapter drawer, A-Z glossary, indicator flowcharts and 320px responsive layout.");
 } finally {
   await browser.close();
 }

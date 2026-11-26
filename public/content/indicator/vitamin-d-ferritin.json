@@ -1,0 +1,370 @@
+{
+  "id": "vitamin-d-ferritin",
+  "catalogOrder": 26,
+  "title": "维生素 D 与铁蛋白",
+  "english": "VITAMIN D (25-OH) & FERRITIN",
+  "subtitle": "为什么血红蛋白正常也可能缺铁？25-羟维生素 D 查的又是什么？",
+  "question": "体检加查的 25-羟维生素 D 和血清铁蛋白，分别看身体哪两项储备？",
+  "questionAnswer": "25-羟维生素 D（25(OH)D）反映体内维生素 D 的总体储备，它帮助肠道吸收钙并维持骨骼健康；血清铁蛋白则是反映身体「铁储备仓库」满不满的灵敏指标，常比血常规里的血红蛋白更早发现隐性缺铁，但同时也会在发炎、感染或脂肪肝时被动升高。",
+  "icon": "droplet",
+  "color": "orange",
+  "tags": [
+    "25-羟维生素 D",
+    "铁蛋白",
+    "隐性缺铁"
+  ],
+  "searchAliases": [
+    "维生素D",
+    "维D",
+    "25-羟维生素D",
+    "25(OH)D",
+    "25-OH-D",
+    "铁蛋白",
+    "血清铁蛋白",
+    "SF",
+    "Ferritin",
+    "隐性缺铁",
+    "缺铁",
+    "缺铁性贫血",
+    "维生素D缺乏",
+    "vitamin d",
+    "ferritin"
+  ],
+  "number": "26",
+  "format": "article",
+  "featured": false,
+  "desc": "25-羟维生素 D 与血清铁蛋白是近年来体检里常见的营养储备专项检查：前者衡量骨骼与钙吸收所需的维生素 D 存量，后者衡量全身储存铁的「仓库余额」，可与血常规、骨密度互补阅读。",
+  "sections": [
+    {
+      "title": "血清铁蛋白：比血常规更早看见「隐性缺铁」的仓库表",
+      "short": "铁储备仓库",
+      "paragraphs": [
+        {
+          "text": "铁是制造血红蛋白、帮红细胞把氧气送到全身的关键原料。如果把血常规里的血红蛋白（HGB）比作平时揣在口袋里流通的「现金」，那么血清铁蛋白（Ferritin）就相当于身体存在肝脏和骨髓里的「铁储备仓库」。",
+          "sourceIds": [
+            "ferritin-test",
+            "iron-anemia"
+          ]
+        },
+        {
+          "text": "当因为经血偏多、饮食摄入不足或吸收不良出现铁入不敷出时，身体会优先动用仓库里的铁来保证血红蛋白不掉队。因此，在早期阶段，血常规的血红蛋白看起来还完全正常，但血清铁蛋白却已经明显偏低——这就是常说的「隐性缺铁」或铁储备不足。",
+          "sourceIds": [
+            "ferritin-test",
+            "iron-anemia"
+          ]
+        },
+        {
+          "text": "这也是为什么不少育龄女性、素食者或长期感到莫名疲惫、注意力下降、运动耐力变差的人，在血常规没有明显贫血箭头的情况下，医生有时会建议加测铁蛋白来把缺铁的早期苗头查清楚。",
+          "sourceIds": [
+            "iron-anemia",
+            "ferritin-test"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "铁蛋白偏高，为什么不一定等于「体内铁太多」？",
+      "short": "铁蛋白升高原因",
+      "paragraphs": [
+        {
+          "text": "看到化验单上铁蛋白画着向上箭头，很多人第一反应是「是不是补铁补过头或者铁中毒了」。其实铁蛋白除了负责存铁，还有一个容易被忽略的兼职身份——它是人体的「急性期反应蛋白」。",
+          "sourceIds": [
+            "ferritin-test"
+          ]
+        },
+        {
+          "text": "只要身体里正在发生感染发烧、慢性炎症、脂肪肝、经常饮酒或肝细胞轻微受损，肝脏和免疫细胞就会释放更多铁蛋白入血，导致单次血铁蛋白读数明显走高，而体内真正的总铁量未必超标。",
+          "sourceIds": [
+            "ferritin-test"
+          ]
+        },
+        {
+          "text": "正因为如此，铁蛋白升高时既不能自己盲目放血或极端忌口，也不能在存在炎症时单凭「铁蛋白正常」就完全排除缺铁；医生通常会结合血常规、肝功能、转铁蛋白饱和度及炎症指标一起核对。",
+          "sourceIds": [
+            "ferritin-test",
+            "iron-anemia"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "维生素 D 为什么查 25-羟维生素 D？它在身体里做什么？",
+      "short": "25(OH)D 作用",
+      "paragraphs": [
+        {
+          "text": "维生素 D 虽然叫「维生素」，在体内经肝脏和肾脏两步活化后，发挥的作用其实非常像一种调节钙磷平衡的激素。它最核心的本领之一，是帮助小肠更顺畅地把吃进去的钙吸收到血液里，支持骨骼矿化和肌肉功能。",
+          "sourceIds": [
+            "vitd-info",
+            "vitd-test"
+          ]
+        },
+        {
+          "text": "体检抽血单上通常不直接写「活性维生素 D」，而是写「25-羟维生素 D」（缩写 25(OH)D）。原因是这种形式在血液里停留时间长、浓度稳定，最能客观代表过去一段时间内皮肤晒太阳和饮食共同攒下来的总储备。",
+          "sourceIds": [
+            "vitd-test"
+          ]
+        },
+        {
+          "text": "天然食物中富含维生素 D 的种类相对有限，人体大部分来源依靠皮肤在温和紫外线照射下自主合成。常年室内通勤办公、全年严密防晒、高纬度冬季日照短或老年人皮肤合成效率下降，都让维生素 D 储备不足在现代体检里非常常见。",
+          "sourceIds": [
+            "vitd-info",
+            "vitd-deficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "和血常规、骨密度放一起看，更能读出全貌",
+      "short": "横向对照阅读",
+      "paragraphs": [
+        {
+          "text": "营养储备指标很少孤立发挥价值。看铁蛋白时，把它和血常规里的血红蛋白（HGB）以及平均红细胞体积（MCV）放在一起，就能清楚分辨当前是「仓库还满」「仓库告急但还没贫血」还是「已经进入缺铁性贫血阶段」。",
+          "sourceIds": [
+            "ferritin-test",
+            "iron-anemia"
+          ]
+        },
+        {
+          "text": "如果成年男性或绝经后女性查出不明原因的铁蛋白明显偏低，单靠「多吃红肉」是不够的——医生往往还会进一步排查有没有消化道慢性隐匿失血（例如结合便潜血或胃肠镜检查），找到源头比单纯补铁更重要。",
+          "sourceIds": [
+            "iron-anemia"
+          ]
+        },
+        {
+          "text": "看 25-羟维生素 D 时，则常与血钙、甲状旁腺激素或骨密度检查（DXA）联合参考：长期严重的维生素 D 缺乏会影响钙吸收并加重骨量流失，而提前识别储备不足有助于配合日常生活方式改善。",
+          "sourceIds": [
+            "vitd-deficiency",
+            "vitd-test"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "储备偏低就自己大把买补剂？小心补过头的风险",
+      "short": "补充边界提醒",
+      "paragraphs": [
+        {
+          "text": "无论铁还是维生素 D，都不是「补得越多越健康」。维生素 D 属于脂溶性维生素，多余部分不易像水溶性维生素那样快速随尿排出，长期盲目服用超大剂量补充剂反而可能引起高血钙及肾脏负担。",
+          "sourceIds": [
+            "vitd-info",
+            "vitd-test"
+          ]
+        },
+        {
+          "text": "同样，在没有明确缺铁依据的情况下自行长期吃铁剂，不仅容易刺激胃肠道引起黑便或便秘，还可能对本身存在铁过载倾向或肝脏问题的人造成额外负担。",
+          "sourceIds": [
+            "ferritin-test",
+            "iron-anemia"
+          ]
+        },
+        {
+          "text": "本文只解释 25-羟维生素 D 与血清铁蛋白的检测原理、储备概念及常见干扰因素，不提供缺乏判定切点、具体补充剂国际单位（IU）或毫克剂量方案，如需补充请携检验单咨询医生。",
+          "sourceIds": [
+            "vitd-test",
+            "ferritin-test"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "血常规一切正常，为什么体检加查的铁蛋白却偏低？",
+      "answer": "铁蛋白反映的是铁储备仓库，血红蛋白反映的是外周血液的供氧水平。缺铁初期身体会先消耗仓库库存来维持血红蛋白正常，因此铁蛋白偏低往往比血常规异常出现得更早。",
+      "sourceIds": [
+        "ferritin-test",
+        "iron-anemia"
+      ]
+    },
+    {
+      "question": "查出维生素 D 偏低，只靠隔着玻璃晒太阳有用吗？",
+      "answer": "普通玻璃会阻挡合成维生素 D 所需的大部分中波紫外线（UVB），因此隔着窗玻璃晒太阳几乎无法有效合成维生素 D；日常可在避开烈日晒伤的前提下适度户外活动，或遵医嘱配合膳食与补充剂。",
+      "sourceIds": [
+        "vitd-info",
+        "vitd-deficiency"
+      ]
+    },
+    {
+      "question": "铁蛋白高了，是不是以后一点红肉和猪肝都不能吃了？",
+      "answer": "先不要急着极端忌口。体检中铁蛋白升高很多时候是由脂肪肝、饮酒、感冒或慢性炎症引起的反应性升高，而不是真正的铁过载；建议先结合肝功能与医生评估真正原因。",
+      "sourceIds": [
+        "ferritin-test"
+      ]
+    },
+    {
+      "question": "没有查过血，平时可以随便吃高剂量维生素 D 保健品预防骨质疏松吗？",
+      "answer": "不建议盲目长期服用高剂量补剂。维生素 D 为脂溶性，在体内蓄积过多可能引起血钙升高等不良反应，最好结合日常日照、饮食及医生建议确定合适的补充方式。",
+      "sourceIds": [
+        "vitd-info",
+        "vitd-test"
+      ]
+    },
+    {
+      "question": "查铁蛋白和维生素 D 必须严格空腹吗？",
+      "answer": "单独查 25-羟维生素 D 通常不严格要求空腹，但若铁蛋白与血清铁、转铁蛋白饱和度或常规生化一起抽血，检查机构往往会建议空腹以减少近期饮食波动干扰，具体以抽血须知为准。",
+      "sourceIds": [
+        "ferritin-test",
+        "vitd-test"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "25-羟维生素 D（25(OH)D）",
+      "text": "反映体内维生素 D 总储备最稳定的血液指标，关联肠道钙吸收与骨骼健康。",
+      "sourceIds": [
+        "vitd-test",
+        "vitd-info"
+      ]
+    },
+    {
+      "name": "血清铁蛋白（SF / Ferritin）",
+      "text": "评估全身储存铁「仓库余额」的灵敏指标，也能在炎症或脂肪肝时被动升高。",
+      "sourceIds": [
+        "ferritin-test"
+      ]
+    },
+    {
+      "name": "配套参照项（血红蛋白 / MCV / 肝功能）",
+      "text": "与血常规、肝功能和骨密度联合阅读，区分隐性缺铁、缺铁性贫血或炎症干扰。",
+      "sourceIds": [
+        "iron-anemia",
+        "ferritin-test"
+      ]
+    }
+  ],
+  "chain": [
+    "日照与饮食提供原料，体内形成维生素 D 与铁储备",
+    "抽血测 25(OH)D 存量与血清铁蛋白仓库余额",
+    "结合血常规、肝功能排查隐性缺铁或炎症干扰",
+    "对照骨密度与医生建议合理调整生活方式或补充"
+  ],
+  "chainSourceIds": [
+    "vitd-test",
+    "ferritin-test",
+    "iron-anemia"
+  ],
+  "tip": "铁蛋白能比血常规更早发现缺铁苗头，但也常被炎症和脂肪肝推高；维生素 D 与铁剂均不宜在无依据的情况下长期盲目超大剂量自补。",
+  "figures": [
+    {
+      "key": "vitd-ferritin",
+      "alt": "示意图：左侧温暖琥珀色磨砂太阳球投射柔和光线照亮象牙白多孔骨小梁结构，右侧透明磨砂圆柱储备仓存放珊瑚琥珀色铁球并平稳输送进青绿循环通道，象征维生素 D 助钙骨矿化与铁蛋白储备，不含文字与数字。",
+      "caption": "维生素 D 帮助钙吸收守护骨骼，铁蛋白记录身体铁仓库存量，两项都是比常规症状更早发出线索的储备窗口。",
+      "simplification": "图为营养储备生理分工的抽象概念示意，不展示代谢生化全路径，也不包含缺乏切点或补充剂量标准。",
+      "sourceIds": [
+        "vitd-info",
+        "ferritin-test",
+        "iron-anemia"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "eb500374d912c1cfeb14f47bb77abff84fd487546bf4b8ff989bf89222cf934f"
+      },
+      "src": "/media/fig-vitamin-d-ferritin.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "维生素 D 与骨骼",
+          "text": "25(OH)D 反映日照与膳食共同积累的维生素 D 存量，支持肠道钙吸收与骨矿化。"
+        },
+        {
+          "title": "铁蛋白储备仓库",
+          "text": "比血红蛋白更早提示隐性缺铁，但在发炎、感染或脂肪肝时也会反应性升高。"
+        },
+        {
+          "title": "科学补充不盲补",
+          "text": "需结合血常规、肝功能与医生评估制定方案，避免长期盲目大剂量补充。"
+        }
+      ]
+    }
+  ],
+  "organ": "骨骼 · 血液 · 肝脏储备",
+  "relatedOrgans": [],
+  "related": [
+    "cbc",
+    "bone-density",
+    "liver-function"
+  ],
+  "kind": "indicator",
+  "category": "metabolism",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向体检加查 25-羟维生素 D 或血清铁蛋白，希望理解营养储备概念、隐性缺铁与炎症干扰的一般成年读者。",
+  "limitations": "不提供维生素 D 或铁蛋白缺乏具体数值阈值、补剂剂量（IU / mg）处方或贫血病因治疗方案；具体补充与排查请咨询医生。",
+  "references": [
+    {
+      "id": "vitd-test",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Vitamin D Test",
+      "url": "https://medlineplus.gov/lab-tests/vitamin-d-test/",
+      "scope": "25-羟维生素 D 检测的用途、储备评估意义及过量补充风险提示",
+      "locator": "What is a vitamin D test?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "ferritin-test",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Ferritin Blood Test",
+      "url": "https://medlineplus.gov/lab-tests/ferritin-blood-test/",
+      "scope": "血清铁蛋白衡量铁储备的作用、早期缺铁线索及炎症肝病致升高的干扰解释",
+      "locator": "What is a ferritin blood test?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "vitd-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Vitamin D",
+      "url": "https://medlineplus.gov/vitamind.html",
+      "scope": "维生素 D 促进钙吸收和骨骼健康的功能、日照合成途径与过量蓄积风险",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "vitd-deficiency",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Vitamin D Deficiency",
+      "url": "https://medlineplus.gov/vitaminddeficiency.html",
+      "scope": "维生素 D 储备不足的常见原因及与骨骼健康的关联",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "iron-anemia",
+      "publisher": "美国国立心肺血液研究所（NHLBI）",
+      "title": "Iron-Deficiency Anemia",
+      "url": "https://www.nhlbi.nih.gov/health/anemia/iron-deficiency-anemia",
+      "scope": "铁储备耗竭至缺铁性贫血的递进过程、常见诱因与查明失血来源的重要性",
+      "locator": "Causes; Diagnosis",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "vitd-test",
+    "ferritin-test"
+  ],
+  "tipSourceIds": [
+    "ferritin-test",
+    "vitd-info"
+  ]
+}

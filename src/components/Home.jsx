@@ -27,9 +27,9 @@ const QUICK_TOPICS = [
 
 export default function Home({ go, onOpen, onOrgan, setTour }) {
   const [showAllStories, setShowAllStories] = useState(false);
-  const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
-  const organState = useContent("list", [{ kind: "organ", limit: 24 }]);
-  const storyState = useContent("list", [{ kind: "story", limit: 24 }]);
+  const state = useContent("list", [{ kind: "indicator", limit: 48 }]);
+  const organState = useContent("list", [{ kind: "organ", limit: 48 }]);
+  const storyState = useContent("list", [{ kind: "story", limit: 48 }]);
   const {
     feature,
     indexRows,

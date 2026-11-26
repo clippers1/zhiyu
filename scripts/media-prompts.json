@@ -291,6 +291,54 @@
       "size": "1024x1024",
       "maxWidth": 960,
       "prompt": "Minimalist 3D medical-tech editorial illustration of comparing annual checkup reports over time: three sleek blank translucent frosted-glass vertical cards arranged cleanly from left to right in gentle perspective depth, connected by a continuous smooth glowing medical-teal glass trend ribbon passing through three calm pearlescent nodes across the cards, symbolizing personal longitudinal baseline rather than a single isolated snapshot. Zero text, zero numbers, clean studio lighting on #F6F8FA surface."
+    },
+    {
+      "id": "fig-hepatitis-b",
+      "kind": "figure",
+      "target": "public/media/fig-hepatitis-b.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of a five-marker hepatitis B blood serology panel: five sleek translucent frosted-glass assay rings arranged cleanly in a calm horizontal arc above a smooth stylized frosted-teal glass liver contour, showing luminous mint-teal protective shield orbs (antibody immunity concept) cleanly contrasted with tiny faceted warm-amber signal beads (antigen marker concept). Pure abstract diagnostic clarity, zero text, zero numbers, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-gi-endoscopy",
+      "kind": "figure",
+      "target": "public/media/fig-gi-endoscopy.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of digestive endoscopy examination: a graceful sleek matte-white and brushed-silver miniature optical tube curving gently inside a serene translucent frosted-glass abstract tunnel contour, casting a soft luminous medical-teal inspection light cone onto a smooth glass inner surface where one tiny polished pearly-coral dome rests softly for close-up inspection. Completely clean abstract geometric medical aesthetic, zero text, zero numbers, zero gory tissue, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-cervical-screening",
+      "kind": "figure",
+      "target": "public/media/fig-cervical-screening.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech editorial illustration of dual-track cervical screening (cell morphology plus molecular viral test): on the left a crystal-clear frosted-glass microscope lens hovering over neatly arranged smooth pearly-white and mint-teal circular cell discs, and on the right a sleek translucent glass molecular helix prism with softly glowing pale-amber signal nodes gently swept by a calm protective teal ring. Pure abstract laboratory precision, zero text, zero numbers, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-gynecologic-ultrasound",
+      "kind": "figure",
+      "target": "public/media/fig-gynecologic-ultrasound.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech abstract concept illustration of pelvic soft-tissue ultrasound screening: smooth layered translucent frosted-ivory and pale-mint architectural glass forms gently scanned from above by crisp concentric medical-teal sound wave arcs emitted by a sleek minimalist white probe, cleanly differentiating one crystal-clear pearly fluid bubble (simple cyst concept) and one smooth matte pale-coral rounded oval stone (fibroid concept). Pure calm geometric abstraction, zero text, zero numbers, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-prostate-check",
+      "kind": "figure",
+      "target": "public/media/fig-prostate-check.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of complementary prostate ultrasound and PSA blood marker assessment: on the left a smooth translucent frosted-teal symmetric geometric rounded shell scanned gently by delicate concentric white-and-teal sound wave arcs, paired on the right with a sleek crystal-clear vertical glass laboratory vial holding softly suspended glowing pale-amber protein micro-spheres encircled by calm teal rings. Pure abstract precision medicine aesthetic, zero text, zero numbers, on #F6F8FA surface."
+    },
+    {
+      "id": "fig-vitamin-d-ferritin",
+      "kind": "figure",
+      "target": "public/media/fig-vitamin-d-ferritin.webp",
+      "size": "1024x1024",
+      "maxWidth": 960,
+      "prompt": "Minimalist 3D medical-tech concept illustration of vitamin D and ferritin nutritional reserves side by side: on the left a warm glowing frosted-amber glass sun sphere casting soft golden-mint light rays onto a sculpted matte-ivory geometric honeycomb bone lattice, and on the right a crystal-clear frosted cylindrical reserve vault neatly holding stacked polished coral-amber iron spheres feeding into a slender translucent teal circulation channel. Clean balanced studio composition, zero text, zero numbers, on #F6F8FA surface."
     }
   ]
 }

@@ -43,8 +43,8 @@ export function TopicReturn({ id, title }) {
 }
 
 function TopicIndex() {
-  const state = useContent("list", [{ kind: "indicator", limit: 24 }]);
-  const storyState = useContent("list", [{ kind: "story", limit: 24 }]);
+  const state = useContent("list", [{ kind: "indicator", limit: 48 }]);
+  const storyState = useContent("list", [{ kind: "story", limit: 48 }]);
   const { questions } = selectDiscovery(state.data?.items);
   const byId = new Map([
     ...(state.data?.items || []).map(item => [item.id, item]),
@@ -100,8 +100,8 @@ export default function TopicRoute({ id }) {
   if (!id) return <TopicIndex />;
   const state = useContent("get", ["indicator", id]);
   const detail = state.data;
-  const related = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map(item => item.id), limit: 24 }]);
-  const relatedIndicators = useContent("list", [{ kind: "indicator", ids: detail?.related || [], limit: 24 }]);
+  const related = useContent("list", [{ kind: "organ", ids: (detail?.relatedOrgans || []).map(item => item.id), limit: 48 }]);
+  const relatedIndicators = useContent("list", [{ kind: "indicator", ids: detail?.related || [], limit: 48 }]);
   const steps = readingRoute(detail, related.data?.items || []);
   const siblingItems = (relatedIndicators.data?.items || []).filter(item => item.id !== detail?.id);
   return <div className="topic-reader">

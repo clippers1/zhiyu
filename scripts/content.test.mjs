@@ -213,7 +213,7 @@ test("10,000 summary records paginate without duplicates and combine filters", (
   assert.equal(seen.size, 5000);
   assert.equal(selectPage(catalog, { ids: [] }).total, 0);
   assert.equal(selectPage(catalog, { query: "没有这个关键词" }).total, 0);
-  assert.equal(selectPage(catalog, { limit: 100000 }).items.length, 24);
+  assert.equal(selectPage(catalog, { limit: 100000 }).items.length, 48);
 });
 test("remote adapter passes paging, filters and cancellation to a real HTTP-shaped contract", async () => {
   const calls = [];

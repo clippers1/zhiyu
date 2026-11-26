@@ -1,0 +1,366 @@
+{
+  "id": "prostate-check",
+  "catalogOrder": 25,
+  "title": "前列腺超声与 PSA",
+  "english": "PROSTATE ULTRASOUND & PSA",
+  "subtitle": "前列腺增生、钙化灶和单次 PSA 偏高，为什么不能直接等同于肿瘤？",
+  "question": "体检发现前列腺增生、钙化灶或血 PSA 偏高，是不是得了前列腺癌？",
+  "questionAnswer": "不是。前列腺超声里高频出现的前列腺增生和钙化灶大多是随年龄增长或既往轻微炎症留下的良性改变；血 PSA 是前列腺组织分泌的蛋白，增生、前列腺炎、排尿不畅、近期骑车或检查操作都可能把它推高。单次 PSA 升高需要排除干扰后复查，并由泌尿外科结合超声、核磁或趋势综合评估。",
+  "icon": "layers",
+  "color": "blue",
+  "tags": [
+    "前列腺超声",
+    "PSA",
+    "前列腺增生 / 钙化"
+  ],
+  "searchAliases": [
+    "前列腺B超",
+    "前列腺彩超",
+    "前列腺增生",
+    "前列腺肥大",
+    "BPH",
+    "前列腺钙化",
+    "前列腺钙化灶",
+    "PSA",
+    "tPSA",
+    "fPSA",
+    "总PSA",
+    "游离PSA",
+    "前列腺特异性抗原",
+    "prostate ultrasound",
+    "psa test"
+  ],
+  "number": "25",
+  "format": "article",
+  "featured": false,
+  "desc": "男性常规体检常将前列腺超声与血前列腺特异性抗原（PSA）组合观察：超声从形态上看腺体大小、增生、钙化及残余尿，抽血 PSA 则提供前列腺组织活跃或受刺激的蛋白线索。",
+  "sections": [
+    {
+      "title": "前列腺超声和抽血 PSA，为什么常常成对出现？",
+      "short": "形态与抽血",
+      "paragraphs": [
+        {
+          "text": "前列腺位于膀胱下方、包绕着尿道起始段，体积大约像一颗栗子。体检中的前列腺超声（常规多经下腹憋尿扫查）能无创测量腺体三径大小、形态是否对称、内部有没有钙化点，以及排尿后膀胱里还剩多少残余尿。",
+          "sourceIds": [
+            "bph",
+            "prostate-info"
+          ]
+        },
+        {
+          "text": "但超声对前列腺内部早期细微细胞变化并不算敏感，因此中老年男性体检常会配一项抽血检查——前列腺特异性抗原（PSA）。PSA 是由前列腺上皮细胞产生的一种蛋白质，平时大部分留在精液里，只有极少量进入血液。",
+          "sourceIds": [
+            "psa-test",
+            "nci-psa"
+          ]
+        },
+        {
+          "text": "两者分工明确：超声看的是「房子大小、结构有没有挤压尿道」，抽血 PSA 看的是「腺体细胞有没有因为增生、发炎或其他病变向血液里多漏出蛋白」。",
+          "sourceIds": [
+            "nci-psa",
+            "bph"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "「前列腺增生」和「钙化灶」，其实是体检里的常客",
+      "short": "增生与钙化",
+      "paragraphs": [
+        {
+          "text": "随着年龄增长，男性体内激素平衡变化会促使前列腺腺体慢慢变大，这就是「良性前列腺增生」（英文简称 BPH）。它本质上属于良性老化过程，并不是前列腺癌，也不会因为增生本身直接变成癌症。",
+          "sourceIds": [
+            "bph",
+            "prostate-info"
+          ]
+        },
+        {
+          "text": "增生是否需要干预，主要取决于它有没有压迫尿道带来排尿困扰——例如夜尿频繁、尿流变细、排尿费力或尿不尽。如果只是超声提示轻度增大、平时排尿顺畅，通常保持健康作息和定期体检随访即可。",
+          "sourceIds": [
+            "bph"
+          ]
+        },
+        {
+          "text": "至于报告里常写的「前列腺钙化灶」或「强回声光斑」，多数是前列腺腺管内分泌物浓缩或过去轻微炎症愈合后留下的钙盐沉积，就像皮肤擦伤愈合后留下的小印记，没有症状时一般不需要专门吃药「化掉」。",
+          "sourceIds": [
+            "prostate-info",
+            "bph"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PSA 是「前列腺特有」，但不是「癌症特有」",
+      "short": "PSA 非肿瘤原因",
+      "paragraphs": [
+        {
+          "text": "拿到体检单发现 PSA 后面跟着向上箭头，是许多中老年男性和家属最焦虑的时刻。首先需要记住一个核心事实：PSA 的全称是前列腺特异性抗原——它特异于「前列腺这个器官」，而不是特异于「癌症」。",
+          "sourceIds": [
+            "nci-psa",
+            "psa-test"
+          ]
+        },
+        {
+          "text": "凡是让前列腺腺体体积变大、发炎充血或受到机械挤压的情况，都可能把更多 PSA 挤进血液里。最常见的良性推高原因包括良性前列腺增生本身、急慢性前列腺炎、尿路感染以及排尿困难导致的尿潴留。",
+          "sourceIds": [
+            "psa-test",
+            "nci-psa"
+          ]
+        },
+        {
+          "text": "此外，抽血前短时间内经历过较长时间骑自行车、排精、直肠指检、肠镜或导尿等会压迫刺激前列腺的活动，也可能让单次 PSA 读数出现短暂上浮。因此单次偏高绝不能直接下肿瘤结论。",
+          "sourceIds": [
+            "psa-test",
+            "nci-psa"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "总 PSA、游离 PSA 与历年趋势，医生怎么综合判断？",
+      "short": "复查与多指标",
+      "paragraphs": [
+        {
+          "text": "当体检发现 PSA 偏高时，泌尿外科医生通常不会立刻要求穿刺，而是先核对近期有没有排尿刺激、感染或骑车等干扰因素，常建议避开干扰、必要时控制炎症后再复查一次确认是否持续升高。",
+          "sourceIds": [
+            "nci-psa",
+            "psa-test"
+          ]
+        },
+        {
+          "text": "进一步检查时，化验单里常会同时出现总 PSA（tPSA）和游离 PSA（fPSA）两项：血液里的 PSA 一部分与蛋白结合，一部分呈游离态，观察游离 PSA 占总 PSA 的比值、前列腺体积大小以及近几年的上升速度，能帮医生更细致地评估风险。",
+          "sourceIds": [
+            "psa-test",
+            "nci-psa"
+          ]
+        },
+        {
+          "text": "若持续异常或伴有直肠指检可疑发现，医生还会借助无辐射的多参数前列腺核磁共振（mpMRI）精细定位，再综合年龄、预期获益与风险决定是否需要穿刺活检——只有病理切片才能最终确诊。",
+          "sourceIds": [
+            "nci-psa"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "抽血前准备提示与科学看待筛查边界",
+      "short": "准备与边界",
+      "paragraphs": [
+        {
+          "text": "如果你计划在体检中做 PSA 抽血检查，前两天尽量避免长距离骑自行车、剧烈盆底挤压运动及排精；如果体检当天同时安排了直肠指检或肠镜，也建议先把血抽完再做指检或内镜，减少人为干扰。",
+          "sourceIds": [
+            "psa-test"
+          ]
+        },
+        {
+          "text": "另外，如果已经因为前列腺增生长期服用 5α-还原酶抑制剂等处方药，务必在查 PSA 时主动告诉医生，因为这类药物会显著拉低血 PSA 读数，需要医生还原评估以免低估变化。",
+          "sourceIds": [
+            "nci-psa",
+            "bph"
+          ]
+        },
+        {
+          "text": "本文只解释前列腺超声常见良性词和 PSA 的生理与干扰背景，不提供 PSA 具体数值切点、比值门槛、筛查年龄处方或穿刺与用药建议。",
+          "sourceIds": [
+            "nci-psa",
+            "psa-test"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "超声查出「前列腺钙化灶」，需要吃药或做理疗消除吗？",
+      "answer": "绝大多数无症状的前列腺钙化灶只是既往腺管分泌物沉积或轻微炎症愈合后留下的稳定痕迹，药物通常无法使其消失，也没有必要花冤枉钱做理疗，定期随访即可。",
+      "sourceIds": [
+        "prostate-info",
+        "bph"
+      ]
+    },
+    {
+      "question": "良性前列腺增生放着不管，会慢慢变成前列腺癌吗？",
+      "answer": "不会。良性前列腺增生（BPH）与前列腺癌是两种不同的组织学变化，前者不会直接转化为后者；但中老年男性可能同时存在增生与肿瘤风险，因此仍需按医生建议规律体检。",
+      "sourceIds": [
+        "bph",
+        "nci-psa"
+      ]
+    },
+    {
+      "question": "为什么医生让我先避开骑车和排精，过几周再复查 PSA？",
+      "answer": "骑车压迫、排精、泌尿系感染或近期前列腺炎都能把正常腺体里的 PSA 短暂推入血液造成假性升高，排除干扰后复查能避免不必要的恐慌和有创检查。",
+      "sourceIds": [
+        "psa-test",
+        "nci-psa"
+      ]
+    },
+    {
+      "question": "PSA 正常，是不是就百分百排除前列腺问题了？",
+      "answer": "不是绝对的。少数前列腺病变患者的 PSA 读数也可能落在常规参考范围内，如果平时存在进行性排尿困难、血尿或骨痛等不适，即使 PSA 正常也应由泌尿外科医生面诊评估。",
+      "sourceIds": [
+        "nci-psa",
+        "prostate-info"
+      ]
+    },
+    {
+      "question": "为什么有的医生还要同时看总 PSA 和游离 PSA？",
+      "answer": "单独看总 PSA 处于灰区时较难分辨是良性增生还是可疑病变，联合游离 PSA 与总 PSA 的比值、历年趋势和多参数核磁，能帮助医生更稳妥地筛选真正需要活检的人群。",
+      "sourceIds": [
+        "psa-test",
+        "nci-psa"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "前列腺超声（大小 / 增生 / 钙化 / 残余尿）",
+      "text": "观察前列腺体积、结构回声以及排尿后膀胱排空情况，常用于评估良性增生。",
+      "sourceIds": [
+        "bph",
+        "prostate-info"
+      ]
+    },
+    {
+      "name": "总前列腺特异性抗原（tPSA）",
+      "text": "反映血液中前列腺来源蛋白的总水平，易受增生、炎症、骑车和操作干扰。",
+      "sourceIds": [
+        "psa-test",
+        "nci-psa"
+      ]
+    },
+    {
+      "name": "游离 PSA（fPSA）与 f/t 比值",
+      "text": "当总 PSA 偏高时常与总 PSA 联合观察，用于辅助区分良性增生与需要进一步核实的情况。",
+      "sourceIds": [
+        "psa-test",
+        "nci-psa"
+      ]
+    }
+  ],
+  "chain": [
+    "先抽血查 PSA（避开指检与骑车干扰），再憋尿做超声",
+    "超声观察腺体增生、钙化与残余尿，血检看 PSA 线索",
+    "单次 PSA 偏高先排查炎症、增生与操作干扰后复查",
+    "持续异常由泌尿外科结合 fPSA、核磁与趋势评估"
+  ],
+  "chainSourceIds": [
+    "psa-test",
+    "nci-psa",
+    "bph"
+  ],
+  "tip": "前列腺增生与钙化灶大多是良性常见变化，PSA 升高也不等于前列腺癌；抽血前尽量避开骑车、排精和指检干扰，持续异常请带历年结果看泌尿外科。",
+  "figures": [
+    {
+      "key": "prostate-check",
+      "alt": "示意图：左侧半透明青绿色对称几何腺体轮廓接受柔和超声声波扫查，右侧晶莹玻璃试管中悬浮淡琥珀色蛋白微球并环绕青绿标尺光环，象征前列腺超声与血 PSA 互补评估，不含文字与数字。",
+      "caption": "前列腺超声看大小与良性增生钙化，血 PSA 提供组织蛋白线索，两者互补且都需排除良性干扰。",
+      "simplification": "图为前列腺形态成像与血清蛋白检测的抽象概念示意，不展示真实解剖比例，也不包含 PSA 数值切点或穿刺门槛。",
+      "sourceIds": [
+        "psa-test",
+        "nci-psa",
+        "bph"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "2e01a4e42480b91907b796cb0cfe44b6102bfed0d52bc9e535de238202fa462e"
+      },
+      "src": "/media/fig-prostate-check.webp",
+      "width": 960,
+      "height": 640,
+      "legend": [
+        {
+          "title": "超声看形态与增生",
+          "text": "无创评估前列腺大小、良性增生、常见钙化灶及排尿后残余尿量。"
+        },
+        {
+          "title": "血检看 PSA 线索",
+          "text": "捕捉血液中前列腺来源蛋白水平，常同步参考总 PSA 与游离 PSA。"
+        },
+        {
+          "title": "先排干扰再核实",
+          "text": "炎症、增生与近期骑车操作均会推高 PSA，需复查并由专科综合评估。"
+        }
+      ]
+    }
+  ],
+  "organ": "前列腺 · 泌尿与男性生殖系统",
+  "relatedOrgans": [
+    {
+      "id": "kidney",
+      "title": "肾脏"
+    }
+  ],
+  "related": [
+    "tumor-markers",
+    "urinalysis",
+    "kidney-function"
+  ],
+  "kind": "indicator",
+  "category": "urinary",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到前列腺超声或 PSA 体检报告、希望理解增生、钙化及 PSA 干扰因素的一般成年男性及家属读者。",
+  "limitations": "不提供 PSA 具体数值切点、游离比值阈值、筛查起始年龄处方、穿刺指征或前列腺用药方案；具体评估请咨询泌尿外科医生。",
+  "references": [
+    {
+      "id": "psa-test",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Prostate-Specific Antigen (PSA) Test",
+      "url": "https://medlineplus.gov/lab-tests/prostate-specific-antigen-psa-test/",
+      "scope": "PSA 检测原理、总 PSA 与游离 PSA 概念、非肿瘤升高因素及抽血前准备注意事项",
+      "locator": "What is a prostate-specific antigen (PSA) test?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "nci-psa",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Prostate-Specific Antigen (PSA) Test",
+      "url": "https://www.cancer.gov/types/prostate/psa-fact-sheet",
+      "scope": "PSA 的器官特异性而非癌症特异性、良性增生/炎症/药物对读数的影响及后续复查核实路径",
+      "locator": "What is the PSA test?; What if a PSA test result is abnormal?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "bph",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Enlarged Prostate (Benign Prostatic Hyperplasia)",
+      "url": "https://www.niddk.nih.gov/health-information/urologic-diseases/prostate-problems/prostate-enlargement-benign-prostatic-hyperplasia",
+      "scope": "良性前列腺增生的常见性与良性本质、与排尿症状的关系及超声评估角色",
+      "locator": "What is benign prostatic hyperplasia?; Diagnosis",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "prostate-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Prostate Diseases",
+      "url": "https://medlineplus.gov/prostatediseases.html",
+      "scope": "常见良性前列腺问题（增生、炎症等）概述及需要就医的排尿信号",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "psa-test",
+    "bph"
+  ],
+  "tipSourceIds": [
+    "nci-psa",
+    "bph"
+  ]
+}

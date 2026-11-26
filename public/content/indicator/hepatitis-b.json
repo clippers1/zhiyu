@@ -1,0 +1,377 @@
+{
+  "id": "hepatitis-b",
+  "catalogOrder": 21,
+  "title": "乙肝两对半",
+  "english": "HEPATITIS B SEROLOGY PANEL",
+  "subtitle": "大三阳、小三阳和只有表面抗体阳性，分别说明什么？",
+  "question": "乙肝五项（两对半）报告上的一串加减号，到底怎么看？",
+  "questionAnswer": "乙肝五项用来观察体内有没有乙肝病毒标志、有没有保护性抗体以及免疫接触史；「抗原」代表病毒成分信号，「抗体」代表身体免疫系统的反应。仅第二项表面抗体阳性通常表示疫苗保护有效，而表面抗原阳性时还需联合肝功能、HBV-DNA 与肝脏超声综合评估。",
+  "icon": "droplet",
+  "color": "orange",
+  "tags": [
+    "乙肝两对半",
+    "表面抗体",
+    "大三阳 / 小三阳"
+  ],
+  "searchAliases": [
+    "乙肝五项",
+    "两对半",
+    "HBsAg",
+    "HBsAb",
+    "HBeAg",
+    "HBeAb",
+    "HBcAb",
+    "乙肝表面抗原",
+    "乙肝表面抗体",
+    "大三阳",
+    "小三阳",
+    "乙肝病毒",
+    "HBV",
+    "HBV-DNA",
+    "乙肝疫苗",
+    "hepatitis b panel"
+  ],
+  "number": "21",
+  "format": "article",
+  "featured": false,
+  "desc": "乙肝两对半（乙肝血清学五项）通过检测血液中两对抗原抗体（HBsAg/HBsAb、HBeAg/HBeAb）和核心抗体（HBcAb），判断当前是否存在乙肝病毒感染、病毒复制状态或是否已具备疫苗保护性免疫。",
+  "sections": [
+    {
+      "title": "为什么叫「两对半」？先分清抗原和抗体",
+      "short": "抗原与抗体",
+      "paragraphs": [
+        {
+          "text": "乙肝两对半正式名称叫「乙肝血清学五项」，之所以俗称「两对半」，是因为它包含两组成对出现的抗原和抗体——表面抗原（HBsAg）与表面抗体（HBsAb）、e 抗原（HBeAg）与 e 抗体（HBeAb）——再加上单独一项核心抗体（HBcAb），合起来一共五项。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-cdc"
+          ]
+        },
+        {
+          "text": "读懂这张单子有一个非常省力的底层口诀：名字里带「抗原（Ag）」的是病毒自身留下的成分信号，阳性说明体内能检测到病毒相关蛋白；名字里带「抗体（Ab）」的是人体免疫系统针对病毒产生的应答产物。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-info"
+          ]
+        },
+        {
+          "text": "因此，看到报告上出现「阳性（+）」千万不要立刻以为全是坏消息。最典型的例子就是第二项表面抗体（HBsAb）：它是保护性抗体，阳性反而往往说明你对乙肝病毒拥有免疫防线。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-cdc"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "只有第二项阳性，和五项全阴性，分别意味着什么？",
+      "short": "疫苗与全阴",
+      "paragraphs": [
+        {
+          "text": "如果在健康体检里看到「仅第二项表面抗体（HBsAb）阳性，其余四项阴性」，这是最理想的免疫保护状态之一。它通常来自规范接种乙肝疫苗后产生的保护性免疫，表示体内没有乙肝病毒感染，且具备抵御感染的能力。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-cdc"
+          ]
+        },
+        {
+          "text": "如果五项全部显示阴性，说明你目前既没有感染乙肝病毒，体内也没有检测到足够的保护性表面抗体。对于从未接种过疫苗或抗体早已衰减的一般成年人，可以向医生或预防接种门诊咨询是否需要按程序接种或补种乙肝疫苗。",
+          "sourceIds": [
+            "hbv-cdc",
+            "hbv-niddk"
+          ]
+        },
+        {
+          "text": "还有一种常见组合是表面抗原阴性，但表面抗体和核心抗体同时阳性（有时伴随 e 抗体阳性）。这多半提示过去曾自然接触过乙肝病毒，但依靠自身免疫系统已经把病毒清除恢复，并留下了持久的保护性抗体与接触印记。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "常听说的「大三阳」和「小三阳」，差别在哪里？",
+      "short": "大三阳与小三阳",
+      "paragraphs": [
+        {
+          "text": "只要第一项表面抗原（HBsAg）呈阳性，通常说明体内存在乙肝病毒感染。临床上常把 1、3、5 项阳性（HBsAg、HBeAg、HBcAb 阳性）俗称为「大三阳」，把 1、4、5 项阳性（HBsAg、HBeAb、HBcAb 阳性）俗称为「小三阳」。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-niddk"
+          ]
+        },
+        {
+          "text": "两者的核心区别在于第三项 e 抗原与第四项 e 抗体的转换。一般而言，e 抗原阳性时病毒复制往往较为活跃，传染性相对更强；转为 e 抗体阳性时，病毒复制活动常有所减弱。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-niddk"
+          ]
+        },
+        {
+          "text": "但必须纠正一个流传很广的误区：「大三阳不一定更严重，小三阳也不一定就完全安全」。它们只是病毒血清学模式的简称，既不能直接代表肝脏发炎有多重，也不能用来代替肝纤维化或肿瘤风险评估。",
+          "sourceIds": [
+            "hbv-niddk",
+            "hbv-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "为什么单靠两对半，无法判断肝脏受损程度？",
+      "short": "联合复查项目",
+      "paragraphs": [
+        {
+          "text": "乙肝五项就像给病毒和免疫系统拍的一张「身份牌」，它能回答「有没有病毒、是不是曾接种或接触过」，却看不见病毒在血液里具体有多少拷贝，也看不见肝细胞有没有正在发炎或变硬。",
+          "sourceIds": [
+            "hbv-niddk",
+            "hbv-panel"
+          ]
+        },
+        {
+          "text": "因此，若体检发现表面抗原阳性，肝病科或感染科医生通常会进一步结合几组检查一起看：用肝功能（ALT、AST、胆红素）看肝细胞是否受损，用乙肝病毒 DNA 定量（HBV-DNA）看病毒复制水平，用肝脏超声与甲胎蛋白等检查观察肝脏结构。",
+          "sourceIds": [
+            "hbv-niddk",
+            "hbv-cdc"
+          ]
+        },
+        {
+          "text": "即使平时没有任何乏力、黄疸或右上腹不适，慢性乙肝病毒携带者也需要遵照专科医生的安排规律随访监测，因为肝脏代偿能力很强，早期轻微炎症往往没有明显体感。",
+          "sourceIds": [
+            "hbv-niddk",
+            "hbv-info"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "日常接触会传染吗？体检后该怎么理性看待",
+      "short": "传播途径与边界",
+      "paragraphs": [
+        {
+          "text": "乙肝病毒主要通过血液、母婴垂直以及无保护性接触传播，并不通过共用餐具、握手、拥抱、咳嗽、打喷嚏或共用办公环境传播。了解清楚传播途径，既能保护自己，也能减少对感染者不必要的误解与焦虑。",
+          "sourceIds": [
+            "hbv-cdc",
+            "hbv-info"
+          ]
+        },
+        {
+          "text": "在家庭或共同生活场景中，避免共用剃须刀、牙刷等可能接触微量血液的个人用品，并确认家庭成员具备保护性乙肝表面抗体，是最直接有效的日常防护方式。",
+          "sourceIds": [
+            "hbv-cdc",
+            "hbv-niddk"
+          ]
+        },
+        {
+          "text": "本文只用于帮助理解乙肝五项各项目的含义与常见阴阳组合逻辑，不提供具体定量滴度换算、抗病毒治疗指征、用药方案或母婴阻断处方；任何阳性组合均应携完整化验单咨询专科医生。",
+          "sourceIds": [
+            "hbv-panel",
+            "hbv-niddk"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "体检报告只显示「表面抗体阳性」，还需要担心吗？",
+      "answer": "不需要担心。单纯第二项表面抗体（HBsAb）阳性代表身体拥有针对乙肝病毒的保护性免疫，常见于接种乙肝疫苗之后，说明体内没有感染且具备防护能力。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-cdc"
+      ]
+    },
+    {
+      "question": "小三阳是不是就意味着病毒不活跃、不用定期复查了？",
+      "answer": "不是。小三阳仅表示 e 抗原转为 e 抗体，部分人仍可能出现病毒变异活跃或隐匿性肝脏炎症，仍需按专科医生要求定期复查肝功能、HBV-DNA 和肝脏超声。",
+      "sourceIds": [
+        "hbv-niddk",
+        "hbv-panel"
+      ]
+    },
+    {
+      "question": "多年前打过乙肝疫苗，现在查表面抗体阴性了怎么办？",
+      "answer": "疫苗诱导产生的循环抗体水平随时间可能自然下降甚至测不到，但部分人仍保留免疫记忆。是否需要补打加强针，可咨询接种点或医生结合自身职业和暴露风险决定。",
+      "sourceIds": [
+        "hbv-cdc",
+        "hbv-panel"
+      ]
+    },
+    {
+      "question": "一起吃饭、喝水会传染乙肝吗？",
+      "answer": "不会。乙肝属于血源性、性传播和母婴传播病毒，不经消化道或呼吸道传播，日常同桌用餐、交谈和礼节性接触不会造成传染。",
+      "sourceIds": [
+        "hbv-cdc",
+        "hbv-info"
+      ]
+    },
+    {
+      "question": "核心抗体（HBcAb）单独阳性是什么意思？",
+      "answer": "单纯第五项核心抗体阳性有多种可能，包括既往感染后表面抗体已衰减、极低水平隐匿感染或检测试剂假阳性等，需由医生结合复查及 HBV-DNA 进一步确认。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-cdc"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "乙肝表面抗原（HBsAg）",
+      "text": "乙肝病毒外壳成分信号，阳性通常提示当前体内存在乙肝病毒感染。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-cdc"
+      ]
+    },
+    {
+      "name": "乙肝表面抗体（HBsAb / Anti-HBs）",
+      "text": "保护性中和抗体，阳性说明通过接种疫苗或既往恢复获得了免疫保护。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-cdc"
+      ]
+    },
+    {
+      "name": "e 抗原（HBeAg）与 e 抗体（HBeAb）",
+      "text": "辅助反映乙肝病毒复制活跃程度与免疫应答转换状态的成对指标。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-niddk"
+      ]
+    },
+    {
+      "name": "核心抗体（HBcAb / Anti-HBc）",
+      "text": "提示机体曾经或正在接触乙肝病毒的免疫印记，接种疫苗本身不会令其变阳。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-cdc"
+      ]
+    }
+  ],
+  "chain": [
+    "采集静脉血做乙肝血清学五项检测",
+    "先区分抗原（病毒信号）与抗体（免疫反应）",
+    "对照五项阴阳组合分辨疫苗保护或感染模式",
+    "表面抗原阳性者再联合肝功能、HBV-DNA 与超声评估"
+  ],
+  "chainSourceIds": [
+    "hbv-panel",
+    "hbv-niddk",
+    "hbv-cdc"
+  ],
+  "tip": "乙肝五项里的「阳性」有好有坏：表面抗体阳性代表免疫保护，而表面抗原阳性也只是感染信号，不能替代肝功能、HBV-DNA 与肝脏超声来判断肝脏健康状况。",
+  "figures": [
+    {
+      "key": "hbv-panel",
+      "alt": "示意图：五枚磨砂玻璃血清检测圆环呈弧形悬于半透明青绿色肝脏轮廓上方，暖琥珀色颗粒代表病毒抗原信号，清透薄荷绿盾牌代表保护性抗体，不含文字与数字。",
+      "caption": "乙肝五项把病毒抗原信号与人体免疫抗体分开呈现，需要配对读组合，再结合肝脏检查看全貌。",
+      "simplification": "图为血清学检测原理抽象示意，不代表真实病毒颗粒结构，也不展示具体抗体定量滴度门槛。",
+      "sourceIds": [
+        "hbv-panel",
+        "hbv-niddk"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "3b647c2508a63fe186068a672ebc68a5dfa8d3c534486f1bf0cf5f7a2ac75695"
+      },
+      "src": "/media/fig-hepatitis-b.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "五项成组解读",
+          "text": "不能孤立盯着某一个加号，需把抗原与抗体五项作为一个整体组合来看。"
+        },
+        {
+          "title": "区分保护与感染",
+          "text": "表面抗体阳性代表免疫防护盾，表面抗原阳性才提示存在病毒外壳成分。"
+        },
+        {
+          "title": "联动肝脏评估",
+          "text": "阳性感染模式需结合肝功能、HBV-DNA 与肝脏 B 超才能了解真实肝脏状态。"
+        }
+      ]
+    }
+  ],
+  "organ": "肝脏 · 免疫与血液检测",
+  "relatedOrgans": [
+    {
+      "id": "liver",
+      "title": "肝脏"
+    }
+  ],
+  "related": [
+    "liver-function",
+    "fatty-liver",
+    "cbc"
+  ],
+  "kind": "indicator",
+  "category": "blood",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到乙肝五项（两对半）检验单、希望看懂抗原抗体概念与常见阴阳组合的一般成年读者。",
+  "limitations": "不提供抗体滴度定量门槛、抗病毒治疗指征、药物选择、疫苗接种程序或母婴阻断方案；个体诊疗请咨询肝病或感染专科医生。",
+  "references": [
+    {
+      "id": "hbv-panel",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Hepatitis Testing",
+      "url": "https://medlineplus.gov/lab-tests/hepatitis-panel/",
+      "scope": "乙肝血清学面板中抗原与抗体各项的含义、组合判读逻辑及疫苗免疫与感染的区分",
+      "locator": "What is a hepatitis panel?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hbv-niddk",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Hepatitis B",
+      "url": "https://www.niddk.nih.gov/health-information/liver-disease/viral-hepatitis/hepatitis-b",
+      "scope": "急慢性乙肝的检查配合（肝功、病毒载量、影像）、隐匿表现与长期监测原则",
+      "locator": "Diagnosis; Symptoms & Causes",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hbv-cdc",
+      "publisher": "美国疾病控制与预防中心（CDC）",
+      "title": "Hepatitis B Basics",
+      "url": "https://www.cdc.gov/hepatitis-b/about/index.html",
+      "scope": "乙肝传播途径与非传播日常接触、疫苗免疫保护及常规筛查理念",
+      "locator": "How it spreads; Prevention",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hbv-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Hepatitis B",
+      "url": "https://medlineplus.gov/hepatitisb.html",
+      "scope": "乙肝病毒基础概况、既往恢复状态与日常防护常识",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "hbv-panel",
+    "hbv-cdc"
+  ],
+  "tipSourceIds": [
+    "hbv-panel",
+    "hbv-niddk"
+  ]
+}

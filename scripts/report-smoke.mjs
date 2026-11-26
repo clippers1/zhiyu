@@ -29,7 +29,7 @@ try {
   await expect(page.locator('.report-anatomy-col')).toHaveCount(4);
   await expect(page.locator('.guide-legend li')).toHaveCount(4);
   await expect(page.locator('.article-section')).toHaveCount(6);
-  await expect(page.locator('.guide-rows-item')).toHaveCount(20);
+  await expect(page.locator('.guide-rows-item')).toHaveCount(26);
   await expect(page.locator('.source-list li')).toHaveCount(3);
   await expect(page.locator('#guide-source-panel')).toContainText('How to Understand Your Lab Results');
   await expect(page.locator('.load-state')).toHaveCount(0);

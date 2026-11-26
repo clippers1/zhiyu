@@ -58,6 +58,20 @@
       "prompt": "Minimalist 3D medical-tech concept illustration of the three main blood cell families floating gracefully inside a clean crystal-clear circular cross-section: smooth matte coral biconcave red blood cells, luminous pearly-white spherical white blood cells with delicate teal core glow, and tiny faceted pale-amber platelets clustering softly near a tiny curved vessel edge. Clean centered composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T10:55:04.822Z"
     },
+    "fig-cervical-screening": {
+      "id": "fig-cervical-screening",
+      "kind": "figure",
+      "src": "/media/fig-cervical-screening.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 28154,
+      "sha256": "e4562f16378ec2c1f8bca7f91530f5d0f57d9e25554e5e3a1b49e50c5a960622",
+      "rawSha256": "916ebd0d28c6108d91975952304cf42ae5d18c7fed0c9235e4f348feef8ea117",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech editorial illustration of dual-track cervical screening (cell morphology plus molecular viral test): on the left a crystal-clear frosted-glass microscope lens hovering over neatly arranged smooth pearly-white and mint-teal circular cell discs, and on the right a sleek translucent glass molecular helix prism with softly glowing pale-amber signal nodes gently swept by a calm protective teal ring. Pure abstract laboratory precision, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:33:11.452Z"
+    },
     "fig-ecg-rhythm": {
       "id": "fig-ecg-rhythm",
       "kind": "figure",
@@ -114,6 +128,20 @@
       "prompt": "Minimalist 3D medical-tech concept illustration of gallbladder ultrasound assessment: a graceful translucent frosted mint-teal pear-shaped gallbladder nestled softly beneath a subtle stylized frosted-glass liver curve, showing one tiny smooth pearly-coral droplet resting on the inner wall (polyp concept) and two small smooth translucent golden-amber pebbles resting calmly at the base (gallstone concept), gently scanned by fine teal ultrasound wave arcs. Zero text, zero numbers, clean centered composition on #F6F8FA surface.",
       "generatedAt": "2026-11-25T02:29:29.274Z"
     },
+    "fig-gi-endoscopy": {
+      "id": "fig-gi-endoscopy",
+      "kind": "figure",
+      "src": "/media/fig-gi-endoscopy.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 18030,
+      "sha256": "917d0ec0a09cccacffa6af8ea6c1c898c23b6f032cf770740bcf1c39ccefe9b6",
+      "rawSha256": "40720d1c76346162b36d25f814d011ffac3012b743b69a7eb7227010ce8fdacc",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of digestive endoscopy examination: a graceful sleek matte-white and brushed-silver miniature optical tube curving gently inside a serene translucent frosted-glass abstract tunnel contour, casting a soft luminous medical-teal inspection light cone onto a smooth glass inner surface where one tiny polished pearly-coral dome rests softly for close-up inspection. Completely clean abstract geometric medical aesthetic, zero text, zero numbers, zero gory tissue, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:33:43.597Z"
+    },
     "fig-glucose-flow": {
       "id": "fig-glucose-flow",
       "kind": "figure",
@@ -142,6 +170,20 @@
       "prompt": "Minimalist 3D medical-tech concept illustration showing three different observation time windows: on the left a single frozen translucent droplet inside a clean glass ring (momentary fasting snapshot), in the center a gentle curved glass wave track with two glowing beads (post-meal response curve), and on the right a sleek horizontal frosted-glass capsule filled with softly glowing coral-tinted smooth red blood cell discs representing a multi-month average. Clean arranged trio on #F6F8FA surface.",
       "generatedAt": "2026-11-24T10:54:31.811Z"
     },
+    "fig-gynecologic-ultrasound": {
+      "id": "fig-gynecologic-ultrasound",
+      "kind": "figure",
+      "src": "/media/fig-gynecologic-ultrasound.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 25002,
+      "sha256": "db4dea8bb2f75e22566f6f4e5ff6d60437944ea2c670a3c92583ed327098e666",
+      "rawSha256": "abcfc7ad0a40e535ab13e3b2c7ef3b78e5f0b91c806af30056d2ee2b800c483a",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech abstract concept illustration of pelvic soft-tissue ultrasound screening: smooth layered translucent frosted-ivory and pale-mint architectural glass forms gently scanned from above by crisp concentric medical-teal sound wave arcs emitted by a sleek minimalist white probe, cleanly differentiating one crystal-clear pearly fluid bubble (simple cyst concept) and one smooth matte pale-coral rounded oval stone (fibroid concept). Pure calm geometric abstraction, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:33:55.005Z"
+    },
     "fig-h-pylori": {
       "id": "fig-h-pylori",
       "kind": "figure",
@@ -155,6 +197,20 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech concept illustration of a non-invasive stomach urea breath test for H. pylori: a serene translucent frosted-glass stylized stomach silhouette on the left gently releasing soft glowing mint-teal micro-bubbles upward through a smooth glass curve into a clean sleek frosted white breath collection pouch on the right. Purely abstract calm geometry, zero text, zero numbers, clean studio lighting on #F6F8FA surface.",
       "generatedAt": "2026-11-25T02:29:00.293Z"
+    },
+    "fig-hepatitis-b": {
+      "id": "fig-hepatitis-b",
+      "kind": "figure",
+      "src": "/media/fig-hepatitis-b.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 540,
+      "bytes": 22662,
+      "sha256": "3b647c2508a63fe186068a672ebc68a5dfa8d3c534486f1bf0cf5f7a2ac75695",
+      "rawSha256": "55d08bc2a3eb954176510f045cf5547e3e1854ff7401afceccf02bfe6a84199d",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of a five-marker hepatitis B blood serology panel: five sleek translucent frosted-glass assay rings arranged cleanly in a calm horizontal arc above a smooth stylized frosted-teal glass liver contour, showing luminous mint-teal protective shield orbs (antibody immunity concept) cleanly contrasted with tiny faceted warm-amber signal beads (antigen marker concept). Pure abstract diagnostic clarity, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:33:23.300Z"
     },
     "fig-imaging-guide": {
       "id": "fig-imaging-guide",
@@ -267,6 +323,20 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech concept illustration of blood pressure dynamics: a smooth translucent elastic glass-and-silicone vessel tube gently expanding with a soft coral pulse wave on one side and smoothly relaxing into a calmer teal state on the other, with subtle concentric pressure rings around the vessel wall showing systolic push and diastolic rest. Clean centered composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T10:54:34.124Z"
+    },
+    "fig-prostate-check": {
+      "id": "fig-prostate-check",
+      "kind": "figure",
+      "src": "/media/fig-prostate-check.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 26212,
+      "sha256": "2e01a4e42480b91907b796cb0cfe44b6102bfed0d52bc9e535de238202fa462e",
+      "rawSha256": "4129715af9d4feb5a679e8c6fca0136bd8587fbc0ab360a867f1412ef59d21dd",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of complementary prostate ultrasound and PSA blood marker assessment: on the left a smooth translucent frosted-teal symmetric geometric rounded shell scanned gently by delicate concentric white-and-teal sound wave arcs, paired on the right with a sleek crystal-clear vertical glass laboratory vial holding softly suspended glowing pale-amber protein micro-spheres encircled by calm teal rings. Pure abstract precision medicine aesthetic, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:33:54.855Z"
     },
     "fig-report-guide": {
       "id": "fig-report-guide",
@@ -393,6 +463,20 @@
       "background": "opaque",
       "prompt": "Minimalist 3D medical-tech concept illustration of urinalysis three inspection layers: a sleek crystal-clear cylindrical sample vial with pale golden-tinted liquid on the left, a clean white matte reagent strip with three soft pastel color pads (mint, pale amber, soft teal) in the middle, and a circular frosted-glass microscope lens revealing tiny geometric droplets and rings on the right. Clean trio composition on #F6F8FA surface.",
       "generatedAt": "2026-11-24T11:32:15.211Z"
+    },
+    "fig-vitamin-d-ferritin": {
+      "id": "fig-vitamin-d-ferritin",
+      "kind": "figure",
+      "src": "/media/fig-vitamin-d-ferritin.webp",
+      "model": "gpt-image-2.6",
+      "width": 960,
+      "height": 640,
+      "bytes": 29566,
+      "sha256": "eb500374d912c1cfeb14f47bb77abff84fd487546bf4b8ff989bf89222cf934f",
+      "rawSha256": "a2a22431b31e0b9d46d40657e75eb5ce768eea5c00adf76ce5d3e183c5140aab",
+      "background": "opaque",
+      "prompt": "Minimalist 3D medical-tech concept illustration of vitamin D and ferritin nutritional reserves side by side: on the left a warm glowing frosted-amber glass sun sphere casting soft golden-mint light rays onto a sculpted matte-ivory geometric honeycomb bone lattice, and on the right a crystal-clear frosted cylindrical reserve vault neatly holding stacked polished coral-amber iron spheres feeding into a slender translucent teal circulation channel. Clean balanced studio composition, zero text, zero numbers, on #F6F8FA surface.",
+      "generatedAt": "2026-11-26T06:34:27.222Z"
     },
     "fig-white-coat-bp": {
       "id": "fig-white-coat-bp",

@@ -252,6 +252,30 @@ export const REPORT_ROWS = {
     title: "骨密度检查",
     rows: ["双能 X 线吸收法（DXA / DEXA）", "骨密度（BMD）", "T 值", "Z 值"],
   },
+  "hepatitis-b": {
+    title: "乙肝两对半",
+    rows: ["乙肝表面抗原（HBsAg）", "乙肝表面抗体（HBsAb）", "e 抗原（HBeAg）", "核心抗体（HBcAb）"],
+  },
+  "gi-endoscopy": {
+    title: "胃肠镜检查",
+    rows: ["非萎缩性胃炎", "萎缩性胃炎", "肠息肉", "活检"],
+  },
+  "cervical-screening": {
+    title: "宫颈筛查",
+    rows: ["液基细胞学（TCT）", "高危型 HPV", "NILM", "ASC-US"],
+  },
+  "gynecologic-ultrasound": {
+    title: "妇科超声",
+    rows: ["经腹超声", "经阴道超声", "卵巢囊肿", "子宫肌瘤", "盆腔积液"],
+  },
+  "prostate-check": {
+    title: "前列腺超声与 PSA",
+    rows: ["前列腺增生（BPH）", "前列腺钙化灶", "总 PSA（tPSA）", "游离 PSA（fPSA）"],
+  },
+  "vitamin-d-ferritin": {
+    title: "维生素 D 与铁蛋白",
+    rows: ["25-羟维生素 D", "血清铁蛋白（SF）", "Ferritin"],
+  },
 };
 
 // The object SourceReferences expects: references plus the version fields it

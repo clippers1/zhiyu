@@ -13,9 +13,9 @@ import BodyMap3D from "./three/BodyMap3D";
 export default function OrganExplorer({ id, onSelect, onOpen }) {
   const [showBodyMap, setShowBodyMap] = useState(false);
   const state = useContent("get", ["organ", id]);
-  const catalog = useContent("list", [{ kind: "organ", limit: 24 }]);
+  const catalog = useContent("list", [{ kind: "organ", limit: 48 }]);
   const selected = state.data;
-  const related = useContent("list", [{ kind: "indicator", ids: selected?.related || [], limit: 24 }]);
+  const related = useContent("list", [{ kind: "indicator", ids: selected?.related || [], limit: 48 }]);
   const organs = catalog.data?.items || [];
   const relatedItems = related.data?.items || [];
   const tabs = (className) => (

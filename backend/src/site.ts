@@ -39,29 +39,29 @@ export async function buildPage(pathname: string) {
     detail = await load('get', [route.page === 'article' ? 'article' : 'indicator', route.id]);
     if (!detail) return null;
     await Promise.all([
-      load('list', [{ kind: 'organ', ids: (detail.relatedOrgans || []).map((item: any) => item.id), limit: 24 }]),
-      load('list', [{ kind: 'indicator', ids: detail.related || [], limit: 24 }]),
+      load('list', [{ kind: 'organ', ids: (detail.relatedOrgans || []).map((item: any) => item.id), limit: 48 }]),
+      load('list', [{ kind: 'indicator', ids: detail.related || [], limit: 48 }]),
       // The next-entry link is part of the readable page, so its catalog order
       // must be present in the server-rendered HTML as well.
-      route.page === 'article' ? load('list', [{ kind: detail.kind === 'story' ? 'story' : 'indicator', limit: 24 }]) : Promise.resolve(),
+      route.page === 'article' ? load('list', [{ kind: detail.kind === 'story' ? 'story' : 'indicator', limit: 48 }]) : Promise.resolve(),
     ]);
   } else if (route.page === 'topics') {
     await Promise.all([
-      load('list', [{ kind: 'indicator', limit: 24 }]),
-      load('list', [{ kind: 'story', limit: 24 }]),
+      load('list', [{ kind: 'indicator', limit: 48 }]),
+      load('list', [{ kind: 'story', limit: 48 }]),
     ]);
   } else if (route.page === 'organs') {
     detail = await load('get', ['organ', route.id]);
     if (!detail) return null;
     await Promise.all([
-      load('list', [{ kind: 'organ', limit: 24 }]),
-      load('list', [{ kind: 'indicator', ids: detail.related || [], limit: 24 }]),
+      load('list', [{ kind: 'organ', limit: 48 }]),
+      load('list', [{ kind: 'indicator', ids: detail.related || [], limit: 48 }]),
     ]);
   } else if (route.page === 'map') {
     await Promise.all([
-      load('list', [{ kind: 'indicator', limit: 24 }]),
-      load('list', [{ kind: 'organ', limit: 24 }]),
-      load('list', [{ kind: 'story', limit: 24 }]),
+      load('list', [{ kind: 'indicator', limit: 48 }]),
+      load('list', [{ kind: 'organ', limit: 48 }]),
+      load('list', [{ kind: 'story', limit: 48 }]),
     ]);
   } else if (route.page === 'indicators') {
     await load('list', [{ kind: 'indicator', query: '', category: '', cursor: '0', limit: 6 }]);

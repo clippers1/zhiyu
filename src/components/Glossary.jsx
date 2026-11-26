@@ -204,7 +204,7 @@ export default function Glossary({ go, onOpen }) {
           单子怎么读（四列结构与四步阅读流程） <ArrowRight size={15} />
         </RouteLink>
         <RouteLink page="indicators" className="text-link" onNavigate={() => go?.("indicators")}>
-          浏览全部 20 项体检专题 <ArrowRight size={15} />
+          浏览全部体检专题 <ArrowRight size={15} />
         </RouteLink>
       </section>
     </div>

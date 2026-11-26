@@ -1,5 +1,5 @@
 import { normalizeSearch, searchRank, searchSuggestions, matchLabels } from "./search.js";
-const PAGE_LIMIT = 24;
+const PAGE_LIMIT = 48;
 export function selectPage(
   catalog,
   {

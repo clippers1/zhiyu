@@ -1,0 +1,359 @@
+{
+  "id": "cervical-screening",
+  "catalogOrder": 23,
+  "title": "宫颈筛查",
+  "english": "CERVICAL SCREENING (TCT & HPV)",
+  "subtitle": "TCT 和 HPV 分别查什么？查出 HPV 阳性是不是得了宫颈癌？",
+  "question": "体检检出 HPV 阳性或 TCT 提示异常，是不是代表宫颈癌？",
+  "questionAnswer": "不是。HPV 阳性只说明样本里检出了人乳头瘤病毒线索，绝大多数感染是一过性的，人体自身免疫系统常可在一段时间后将其清除；TCT 则是用显微镜观察宫颈脱落细胞形态。两项筛查用于早期发现需要随访或进一步阴道镜核实的苗头，都不是最终癌症诊断。",
+  "icon": "layers",
+  "color": "purple",
+  "tags": [
+    "TCT",
+    "HPV 检测",
+    "一过性感染"
+  ],
+  "searchAliases": [
+    "TCT",
+    "HPV",
+    "宫颈癌筛查",
+    "液基细胞学",
+    "宫颈涂片",
+    "巴氏涂片",
+    "高危型HPV",
+    "HPV阳性",
+    "ASC-US",
+    "LSIL",
+    "HSIL",
+    "NILM",
+    "阴道镜",
+    "pap smear",
+    "hpv test"
+  ],
+  "number": "23",
+  "format": "article",
+  "featured": false,
+  "desc": "宫颈筛查通常包含液基细胞学检查（TCT）和人乳头瘤病毒（HPV）分子检测两项互补检查：TCT 在显微镜下看细胞形态是否出现改变，HPV 检测则查是否存在高危型病毒线索。",
+  "sections": [
+    {
+      "title": "TCT 和 HPV，为什么体检常常两项一起做？",
+      "short": "双轨互补",
+      "paragraphs": [
+        {
+          "text": "宫颈筛查的两大主力——TCT 和 HPV——其实站在不同的角度守护同一道防线。TCT（液基薄层细胞学检测，是传统宫颈涂片的升级版）刷取宫颈表面脱落细胞制成薄层玻片，由病理医生在显微镜下看细胞有没有变形或异常增生。",
+          "sourceIds": [
+            "pap-smear",
+            "nci-cervical"
+          ]
+        },
+        {
+          "text": "HPV 检测则是分子生物学检查，直接寻找样本中有没有存在与宫颈病变相关的高危型人乳头瘤病毒核酸片段。简单比喻：HPV 查的是「有没有可能导致麻烦的病毒原因」，TCT 查的是「宫颈细胞目前有没有已经发生变化的结果」。",
+          "sourceIds": [
+            "hpv-test",
+            "nci-cervical"
+          ]
+        },
+        {
+          "text": "两者联合使用能彼此查漏补缺：单做细胞学有时受取材或阅片影响，单做病毒检测又分不清细胞到底有没有受累，合起来看能让妇科医生更准确地判断下一步是常规观察还是进一步核查。",
+          "sourceIds": [
+            "nci-cervical",
+            "hpv-test"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "检出 HPV 阳性非常常见，绝大多数是「一过性感染」",
+      "short": "一过性感染",
+      "paragraphs": [
+        {
+          "text": "看到「HPV 阳性」四个字时，许多女性第一反应是恐慌和自责。事实上，HPV 病毒在人群中极其普遍，有性生活史的成年人一生中感染过某种型别 HPV 的概率非常高，它就像宫颈经历的一次「局部感冒」，并不代表私生活不检点，更不等于已经得了宫颈癌。",
+          "sourceIds": [
+            "hpv-info",
+            "hpv-test"
+          ]
+        },
+        {
+          "text": "HPV 家族有上百种型别，体检筛查重点关注的是「高危型」和「低危型」的区分。低危型主要与良性皮肤黏膜疣相关，几乎不引发宫颈癌；高危型虽然与宫颈病变有关，但绝大多数感染者在自身免疫系统作用下，往往在数月到一两年内自然把病毒清除转阴。",
+          "sourceIds": [
+            "hpv-info",
+            "nci-cervical"
+          ]
+        },
+        {
+          "text": "真正需要警惕的，不是「偶尔查到一次阳性」，而是「同一高危型 HPV 长期持续阳性」。从持续感染发展到癌前病变再进展为恶性肿瘤，通常需要相当漫长的时间窗，规范筛查的目的正是在早期把问题拦下来。",
+          "sourceIds": [
+            "nci-cervical",
+            "hpv-test"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "看懂 TCT 报告里的英文缩写，别被字母吓到",
+      "short": "TCT 缩写词",
+      "paragraphs": [
+        {
+          "text": "拿到 TCT 报告，最希望看到的结论通常是「未见上皮内病变或恶性细胞」（常缩写为 NILM），这说明本次取材的宫颈细胞形态基本正常。有时后面还会附带「轻度炎症」「反应性细胞改变」等字样，多反映宫颈局部常见的轻微生理或炎症背景，不代表癌变。",
+          "sourceIds": [
+            "pap-smear"
+          ]
+        },
+        {
+          "text": "如果出现 ASC-US（意义不明确的非典型鳞状细胞），意思是显微镜下看到少数细胞长相略微不够典型，既可能是普通炎症刺激，也可能是早期轻微病毒影响，通常需要结合 HPV 分型结果决定是定期复查还是做阴道镜。",
+          "sourceIds": [
+            "pap-smear",
+            "nci-cervical"
+          ]
+        },
+        {
+          "text": "若是 LSIL（低度鳞状上皮内病变）或 HSIL（高度鳞状上皮内病变），仍属于细胞学筛查提示，用来提醒妇科医生尽快安排阴道镜放大观察，并在可疑部位取定点活检——最终明确性质的唯一标准仍然是组织病理学检查。",
+          "sourceIds": [
+            "pap-smear",
+            "nci-cervical"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "检查前的小细节，以及「打过疫苗还要不要筛查」",
+      "short": "准备与疫苗关系",
+      "paragraphs": [
+        {
+          "text": "为了让刷取的宫颈细胞标本足够清晰，宫颈筛查通常建议避开月经期，并在检查前几天避免阴道冲洗、阴道塞药或同房，否则残留分泌物、药膏或经血可能遮挡细胞视野，导致需要重新取材。",
+          "sourceIds": [
+            "pap-smear",
+            "hpv-test"
+          ]
+        },
+        {
+          "text": "另一个高频误解是「已经打过 HPV 疫苗，以后就再也不用做 TCT 和 HPV 筛查了」。虽然疫苗能大幅降低常见高危型别带来的风险，但现有疫苗并未覆盖所有高危型 HPV，且不能清除接种前可能已经存在的持续感染，因此接种疫苗后仍应按规范定期参与筛查。",
+          "sourceIds": [
+            "nci-cervical",
+            "hpv-info"
+          ]
+        },
+        {
+          "text": "目前尚没有所谓「一吃就把 HPV 病毒直接杀光」的特效口服药。面对单纯一过性阳性，规律作息、戒烟、做好安全防护并按医生建议按时复查，比盲目购买昂贵洗液或偏方靠谱得多。",
+          "sourceIds": [
+            "hpv-info",
+            "nci-cervical"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "什么时候需要进一步做阴道镜？记住筛查的边界",
+      "short": "阴道镜与边界",
+      "paragraphs": [
+        {
+          "text": "当高危特定型别持续阳性、或者 TCT 提示需要核实的细胞异常时，妇科医生可能会建议做阴道镜检查。阴道镜就像一台放在体外的光学放大镜，借助温和醋酸等染色帮助医生看清宫颈表面细微血管变化，并在必要处定点取极小块组织做病理核实。",
+          "sourceIds": [
+            "nci-cervical",
+            "pap-smear"
+          ]
+        },
+        {
+          "text": "需要强调的是，从筛查异常到确诊之间还隔着阴道镜和组织病理检查；哪怕病理提示早期癌前病变，也有成熟规范的局部处理手段，早期发现往往预后良好。",
+          "sourceIds": [
+            "nci-cervical"
+          ]
+        },
+        {
+          "text": "本文只用于解释 TCT 与 HPV 筛查的原理、一过性感染概念及常见英文报告缩写，不提供个体筛查起始年龄处方、复查间隔表、疫苗价型选择或阴道镜手术指征。",
+          "sourceIds": [
+            "nci-cervical",
+            "hpv-test"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "查出 HPV 阳性，是不是说明伴侣一定有问题？",
+      "answer": "不能这样推断。HPV 感染后可能潜伏很长时间才被检出，无法通过一次阳性结果反推感染发生的确切时间或来源，盲目相互猜疑既没有科学依据，也不利于安心配合随访。",
+      "sourceIds": [
+        "hpv-info",
+        "hpv-test"
+      ]
+    },
+    {
+      "question": "TCT 写着「轻度炎症」，需要马上塞药治疗吗？",
+      "answer": "单纯 TCT 提示轻度炎症或反应性细胞改变十分常见，如果没有白带异味、明显瘙痒、出血等不适，不一定需要过度用药；若存在明显症状，应结合白带常规由妇科医生针对性处理。",
+      "sourceIds": [
+        "pap-smear"
+      ]
+    },
+    {
+      "question": "已经接种过九价 HPV 疫苗，体检还用做宫颈筛查吗？",
+      "answer": "仍然需要。疫苗虽能预防大部分主要高危型别，但不能覆盖全部致病型别，也不能替代定期的 TCT 或 HPV 宫颈筛查，疫苗加筛查才是完整防线。",
+      "sourceIds": [
+        "nci-cervical",
+        "hpv-info"
+      ]
+    },
+    {
+      "question": "HPV 阳性期间需要买网上推荐的「转阴凝胶」吗？",
+      "answer": "目前医学界并无公认能直接清除 HPV 病毒的特效外用凝胶，大多数一过性感染是靠自身免疫自然清除的；盲目滥用阴道洗液反而可能破坏局部正常菌群平衡，一切以正规妇科建议为准。",
+      "sourceIds": [
+        "hpv-info",
+        "nci-cervical"
+      ]
+    },
+    {
+      "question": "做 TCT 和 HPV 取样会很痛或导致流血吗？",
+      "answer": "取样使用的是柔软的小毛刷在宫颈表面轻轻扫刷脱落细胞，过程通常只有几秒钟轻微酸胀或不适，少数人检查后一两天可能出现极少量点滴褐色分泌物，一般会很快自行停止。",
+      "sourceIds": [
+        "pap-smear",
+        "hpv-test"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "液基细胞学（TCT / Pap）",
+      "text": "在显微镜下直接观察宫颈脱落细胞形态，常见正常描述为 NILM，异常缩写提示需结合进一步评估。",
+      "sourceIds": [
+        "pap-smear"
+      ]
+    },
+    {
+      "name": "高危型 HPV 核酸检测",
+      "text": "从分子层面筛查是否携带与宫颈病变相关的高危型人乳头瘤病毒，并可按需分型。",
+      "sourceIds": [
+        "hpv-test",
+        "nci-cervical"
+      ]
+    },
+    {
+      "name": "阴道镜与定点病理（必要时延伸）",
+      "text": "筛查提示持续风险或细胞异常时用于放大核实与组织病理定性的后续步骤。",
+      "sourceIds": [
+        "nci-cervical"
+      ]
+    }
+  ],
+  "chain": [
+    "避开经期用软刷轻取宫颈脱落细胞样本",
+    "TCT 显微镜看细胞形态，HPV 分子查高危病毒",
+    "分辨一过性病毒线索还是持续高危/细胞改变",
+    "按组合结果选择常规周期随访或阴道镜核实"
+  ],
+  "chainSourceIds": [
+    "pap-smear",
+    "hpv-test",
+    "nci-cervical"
+  ],
+  "tip": "查出 HPV 阳性绝不等于得了宫颈癌，绝大多数是一过性感染；TCT 里的英文缩写也只是筛查提示而非确诊结论，接种疫苗后仍应按规范定期筛查。",
+  "figures": [
+    {
+      "key": "cervical-screening",
+      "alt": "示意图：左侧磨砂玻璃光学显微镜观察排列均匀的薄荷白圆片细胞，右侧透明玻璃双螺旋分子结构外围环绕柔和青绿色保护光环，象征细胞学 TCT 与病毒 HPV 双轨筛查，不含文字与数字。",
+      "caption": "宫颈筛查由 TCT 观察细胞形态、HPV 检测病毒线索两条轨道共同协作，在极早期发现需要关注的苗头。",
+      "simplification": "图为细胞形态观察与分子核酸检测的抽象概念示意，不展示真实解剖图像，也不列具体筛查年龄表或型别处置门槛。",
+      "sourceIds": [
+        "pap-smear",
+        "hpv-test",
+        "nci-cervical"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "e4562f16378ec2c1f8bca7f91530f5d0f57d9e25554e5e3a1b49e50c5a960622"
+      },
+      "src": "/media/fig-cervical-screening.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "TCT 看细胞形态",
+          "text": "显微镜检查宫颈表面脱落细胞是否规整，直接反映当前有没有形态改变。"
+        },
+        {
+          "title": "HPV 查病毒线索",
+          "text": "分子检测识别高危型 HPV 存在与否，重点关注是否持续阳性而非单次恐慌。"
+        },
+        {
+          "title": "免疫清除与随访",
+          "text": "多数一过性感染可由自身免疫清除，必要时由妇科安排阴道镜核实定性。"
+        }
+      ]
+    }
+  ],
+  "organ": "宫颈 · 女性生殖系统",
+  "relatedOrgans": [],
+  "related": [
+    "gynecologic-ultrasound",
+    "breast-ultrasound",
+    "tumor-markers"
+  ],
+  "kind": "indicator",
+  "category": "endocrine",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向拿到 TCT 或 HPV 体检报告、希望理解双轨筛查原理、一过性感染及常见缩写的成年女性读者。",
+  "limitations": "不提供筛查起始年龄与间隔处方、具体分型阴道镜转诊规则、HPV 疫苗接种计划或宫颈病变治疗方案；具体随访请咨询妇科医生。",
+  "references": [
+    {
+      "id": "pap-smear",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Pap Smear",
+      "url": "https://medlineplus.gov/lab-tests/pap-smear/",
+      "scope": "宫颈细胞学检查的目的、采样准备要求及常见异常结果缩写的含义",
+      "locator": "What is a Pap smear?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hpv-test",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "Human Papillomavirus (HPV) Test",
+      "url": "https://medlineplus.gov/lab-tests/human-papillomavirus-hpv-test/",
+      "scope": "高危型 HPV 检测原理、阳性结果含义及与细胞学检查联合解读的方法",
+      "locator": "What is an HPV test?; What do the results mean?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "nci-cervical",
+      "publisher": "美国国家癌症研究所（NCI）",
+      "title": "Cervical Cancer Screening",
+      "url": "https://www.cancer.gov/types/cervical/screening",
+      "scope": "TCT 与 HPV 互补筛查逻辑、持续感染进程、疫苗后仍需筛查及阴道镜核实定位",
+      "locator": "Screening Tests; Follow-Up Testing",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "hpv-info",
+      "publisher": "美国国家医学图书馆（NLM）· MedlinePlus",
+      "title": "HPV (Human Papillomavirus)",
+      "url": "https://medlineplus.gov/hpv.html",
+      "scope": "HPV 感染普遍性、高危与低危型别区分及多数感染可被人体免疫清除的常识",
+      "locator": "Summary",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "pap-smear",
+    "hpv-test"
+  ],
+  "tipSourceIds": [
+    "hpv-info",
+    "nci-cervical"
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "id": "gi-endoscopy",
+  "catalogOrder": 22,
+  "title": "胃肠镜检查",
+  "english": "UPPER GI ENDOSCOPY & COLONOSCOPY",
+  "subtitle": "浅表性胃炎、萎缩、息肉和「取活检待病理」都是什么意思？",
+  "question": "胃肠镜报告写着胃炎、息肉或「取活检」，是不是很严重？",
+  "questionAnswer": "胃镜和肠镜是用带微型摄像头的细软内镜直接观察消化道黏膜表面的检查。报告里高频出现的非萎缩性胃炎、轻度糜烂和许多小息肉都属于常见良性或早期可处理发现；「取活检」是医生夹取极小块表层黏膜送显微镜核实的常规步骤，本身不等于确诊癌症。",
+  "icon": "layers",
+  "color": "green",
+  "tags": [
+    "胃镜",
+    "肠镜",
+    "息肉与活检"
+  ],
+  "searchAliases": [
+    "胃镜",
+    "肠镜",
+    "胃肠镜",
+    "无痛胃肠镜",
+    "结肠镜",
+    "上消化道内镜",
+    "非萎缩性胃炎",
+    "浅表性胃炎",
+    "萎缩性胃炎",
+    "肠化",
+    "肠息肉",
+    "胃息肉",
+    "增生性息肉",
+    "腺瘤性息肉",
+    "活检",
+    "病理报告",
+    "清肠",
+    "colonoscopy",
+    "endoscopy"
+  ],
+  "number": "22",
+  "format": "article",
+  "featured": false,
+  "desc": "胃镜（上消化道内镜）与结肠镜（肠镜）通过细软光学内镜直接观察食管、胃、十二指肠及大肠黏膜表面，能够直观发现炎症、溃疡与息肉，并在需要时同步取活检送病理定性或镜下处理部分息肉。",
+  "sections": [
+    {
+      "title": "胃肠镜到底在看什么？为什么抽血和 B 超代替不了它？",
+      "short": "内镜的独特优势",
+      "paragraphs": [
+        {
+          "text": "胃和肠道属于中空且含有气体的管腔器官，普通腹部 B 超的声波遇到气体容易被反射遮挡，抽血也只能提供间接线索；而胃肠镜是把一根细长柔软、前端装有高清微型摄像头和照明灯的内镜送入管腔，让医生像「用高清手电筒贴近墙面」一样直视黏膜每一寸纹理。",
+          "sourceIds": [
+            "upper-gi",
+            "colonoscopy"
+          ]
+        },
+        {
+          "text": "更关键的是，胃肠镜不仅能「看」，还能在检查当下「动手」。一旦医生发现可疑黏膜红斑、溃疡边缘或向管腔突出的小息肉，可以经内镜内部极细的工作通道送入微型器械，直接夹取米粒大小的组织做病理检查，或按规范同步切除合适的息肉。",
+          "sourceIds": [
+            "colonoscopy",
+            "upper-gi"
+          ]
+        },
+        {
+          "text": "如今常规胃肠镜既可以选择清醒状态下的普通检查，也可以在麻醉医生评估和监护下选择静脉镇静（俗称「无痛胃肠镜」）。两种方式在观察清晰度上并无本质差异，主要根据个人耐受度、基础疾病和麻醉评估来选。",
+          "sourceIds": [
+            "upper-gi",
+            "colonoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "胃镜报告上的「浅表性胃炎」「萎缩」「肠化」怎么分？",
+      "short": "看懂胃炎词",
+      "paragraphs": [
+        {
+          "text": "几乎绝大多数成年人的胃镜报告里都会出现「慢性非萎缩性胃炎」（旧称浅表性胃炎）。它指的是胃黏膜最表层出现轻度充血、水肿或散在红斑，但深层分泌胃液的固有腺体并没有明显变薄，很多人平时并无明显胃痛，也不等于马上会恶变。",
+          "sourceIds": [
+            "gastritis",
+            "upper-gi"
+          ]
+        },
+        {
+          "text": "如果报告写着「慢性萎缩性胃炎」或伴「肠上皮化生（简称肠化）」，并不是指整个胃袋缩小了，而是显微镜下发现局部胃黏膜原有腺体减少，并出现了类似肠道表层的替代细胞。这属于需要认真对待的慢性黏膜背景改变。",
+          "sourceIds": [
+            "gastritis",
+            "upper-gi"
+          ]
+        },
+        {
+          "text": "遇到萎缩或肠化不必直接和胃癌画等号：重点是配合消化科医生查清是否存在幽门螺杆菌感染、改善高盐腌制和吸烟饮酒等刺激习惯，并依据病理分级落实规律随访复查。",
+          "sourceIds": [
+            "gastritis"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "查出胃息肉或肠息肉，为什么医生强调「等病理」？",
+      "short": "息肉与病理",
+      "paragraphs": [
+        {
+          "text": "「息肉」只是一个描述外形的词，意思是消化道内壁黏膜上长出了一颗像小蘑菇或小丘一样凸起的小肉芽。单凭外观大小和颜色，医生有时可以做出初步倾向判断，但真正决定性质的仍然是病理切片。",
+          "sourceIds": [
+            "colon-polyps",
+            "colonoscopy"
+          ]
+        },
+        {
+          "text": "以结肠息肉为例，最常见的大致可分为非肿瘤性息肉（如炎性息肉、常见小增生性息肉，恶变倾向很低）和肿瘤性息肉（最典型的是腺瘤性息肉）。腺瘤性息肉被视为结直肠癌的重要癌前病变，通常演进过程很慢，在肠镜下及时发现并完整切除，正是肠镜预防肠癌的核心价值所在。",
+          "sourceIds": [
+            "colon-polyps",
+            "colonoscopy"
+          ]
+        },
+        {
+          "text": "因此，看到报告里写着「内镜下已钳除/切除息肉并送病理」，反而是件值得庆幸的事——它意味着潜在隐患在早期就被移除了，后续只需拿着病理单请消化科医生确定下一次复查的间隔即可。",
+          "sourceIds": [
+            "colon-polyps",
+            "colonoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "「取活检」听起来很吓人？其实它是常规核实步骤",
+      "short": "活检不是确诊",
+      "paragraphs": [
+        {
+          "text": "很多人在检查室门口拿到写有「取活检 1–2 块待病理」的初步报告时，会瞬间心跳加速，以为医生一定看到了严重病变。其实内镜活检并不等于医生怀疑癌症，它是最常规的显微镜核实手段。",
+          "sourceIds": [
+            "upper-gi",
+            "colonoscopy"
+          ]
+        },
+        {
+          "text": "无论是确认胃黏膜有没有幽门螺杆菌定植、区分普通炎症还是萎缩肠化，还是确认一颗小息肉到底是增生性还是腺瘤性，单靠肉眼看图都无法下最终定论，必须取几毫米浅表黏膜染色后放到显微镜下看细胞形态。",
+          "sourceIds": [
+            "gastritis",
+            "colon-polyps"
+          ]
+        },
+        {
+          "text": "胃肠黏膜表层缺少痛觉神经，取活检本身几乎没有明显痛感，创面也会很快自行愈合；检查后几天按医院叮嘱进食温凉软食、避开烈酒和过烫辛辣即可，耐心等待正式病理报告是更稳妥的做法。",
+          "sourceIds": [
+            "upper-gi",
+            "colonoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "清肠与空腹准备，为什么直接影响检查质量？",
+      "short": "准备与阅读边界",
+      "paragraphs": [
+        {
+          "text": "胃镜前按通知保持空腹是为了排空胃内容物，避免食物遮挡视线或在镇静时发生反流误吸；肠镜前的低渣饮食和规范服用清肠剂则更为关键——如果肠道里还留有较多粪渣和浑浊液体，细小扁平息肉就可能藏在死角里被漏掉。",
+          "sourceIds": [
+            "upper-gi",
+            "colonoscopy"
+          ]
+        },
+        {
+          "text": "如果长期服用阿司匹林、氯吡格雷等抗血小板药、抗凝药或降糖药，做胃肠镜（尤其是可能需要取活检或切息肉时）前切勿自行停药或硬撑不报，务必提前向消化科与原开药医生沟通停药或替代安排。",
+          "sourceIds": [
+            "colonoscopy",
+            "upper-gi"
+          ]
+        },
+        {
+          "text": "本文只解释胃肠镜检查的原理、准备要点及报告常见形态词，不提供肠镜筛查起始年龄处方、息肉复查年限表、麻醉评估或清肠药物剂量方案。",
+          "sourceIds": [
+            "colonoscopy",
+            "colon-polyps"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "做无痛胃肠镜打的麻醉，会不会让人变笨或伤记忆力？",
+      "answer": "无痛胃肠镜通常采用起效快、代谢也快的短效静脉镇静方案，由专业麻醉团队全程监测呼吸与循环，检查结束后药物很快代谢排出，不会对健康成年人的长期智力或记忆造成永久损伤。",
+      "sourceIds": [
+        "upper-gi",
+        "colonoscopy"
+      ]
+    },
+    {
+      "question": "报告写了「慢性非萎缩性胃炎」，需要长期吃胃药吗？",
+      "answer": "大多数成年人胃镜都会出现这一描述。如果平时没有反酸、烧心、上腹痛或合并幽门螺杆菌等问题，通常不必盲目长期服药，优先调整作息和饮食习惯，具体以医生评估为准。",
+      "sourceIds": [
+        "gastritis",
+        "upper-gi"
+      ]
+    },
+    {
+      "question": "查出肠息肉切掉以后，以后还会再长吗？",
+      "answer": "息肉切除解决的是当前看到的病灶，但肠道黏膜所处的遗传和生活环境仍在，确实存在再长新息肉的可能。因此拿到病理报告后，按消化科医生给出的周期定期复查肠镜十分重要。",
+      "sourceIds": [
+        "colon-polyps",
+        "colonoscopy"
+      ]
+    },
+    {
+      "question": "为什么医生在做完胃肠镜的初步单子上，不直接告诉我是不是良性？",
+      "answer": "内镜初步报告记录的是肉眼和电子染色下看到的表面形态，很多炎症、萎缩和不同类型息肉在外观上有重叠，只有把活检或切除组织制成切片在显微镜下观察，才能给出准确的病理定性。",
+      "sourceIds": [
+        "colon-polyps",
+        "upper-gi"
+      ]
+    },
+    {
+      "question": "大便潜血阴性，还需要做肠镜吗？",
+      "answer": "便潜血查的是有没有微量出血痕迹，而许多早期小息肉平时并不出血，因此便潜血阴性不能完全代替肠镜的直接观察。是否需要安排肠镜应结合年龄、症状和家族史与医生商议。",
+      "sourceIds": [
+        "colonoscopy",
+        "colon-polyps"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "黏膜形态描述（充血 / 糜烂 / 萎缩）",
+      "text": "记录食管、胃或肠道内壁表层的色泽、平整度与腺体透见情况，区分常见浅表炎症与慢性背景改变。",
+      "sourceIds": [
+        "gastritis",
+        "upper-gi"
+      ]
+    },
+    {
+      "name": "隆起与息肉记录（位置 / 形态 / 大小）",
+      "text": "标明息肉或隆起所在的解剖节段与表面特征，为镜下处理及后续对比留档。",
+      "sourceIds": [
+        "colon-polyps",
+        "colonoscopy"
+      ]
+    },
+    {
+      "name": "活检与病理定性结果",
+      "text": "通过显微镜细胞学观察最终区分炎性、增生性、腺瘤性或其他性质，是后续随访安排的决定性依据。",
+      "sourceIds": [
+        "colon-polyps",
+        "upper-gi"
+      ]
+    }
+  ],
+  "chain": [
+    "按医嘱完成空腹或规范肠道清洁准备",
+    "细软光学内镜进入管腔直视黏膜纹理",
+    "识别炎症、溃疡或息肉并按需微夹活检/切除",
+    "依据正式病理报告制定日常调整或复查周期"
+  ],
+  "chainSourceIds": [
+    "upper-gi",
+    "colonoscopy",
+    "colon-polyps"
+  ],
+  "tip": "「非萎缩性胃炎」和「取活检待病理」都是胃肠镜里极常见的常规记录，不等于确诊重病；真正决定息肉和黏膜性质的是正式病理报告，请务必把内镜单和病理单一起带给消化科医生。",
+  "figures": [
+    {
+      "key": "gi-endoscopy",
+      "alt": "示意图：洁白纤细的微型光学软管伸入半透明磨砂玻璃消化道轮廓，投射出柔和青绿色观察光锥照亮管壁上一枚光滑小圆球隆起，纯抽象洁净构图，不含文字与数字。",
+      "caption": "胃肠镜把微型光学镜头直接送入消化道管腔，既能直视黏膜细节，也能同步取活检或处理小息肉。",
+      "simplification": "图为内镜光学观察与黏膜隆起概念的抽象示意，不展示真实解剖结构或具体切除方式与病理分级。",
+      "sourceIds": [
+        "upper-gi",
+        "colonoscopy"
+      ],
+      "attribution": {
+        "kind": "ai-generated",
+        "name": "AI 生成插图",
+        "model": "gpt-image-2.6",
+        "assetSha256": "917d0ec0a09cccacffa6af8ea6c1c898c23b6f032cf770740bcf1c39ccefe9b6"
+      },
+      "src": "/media/fig-gi-endoscopy.webp",
+      "width": 960,
+      "height": 540,
+      "legend": [
+        {
+          "title": "高清直视黏膜",
+          "text": "突破超声怕气体的局限，直接看清食管、胃和结直肠内壁的细微色泽与纹理。"
+        },
+        {
+          "title": "发现并处理息肉",
+          "text": "发现向管腔凸起的小息肉后，医生可按规范在镜下同步钳除或切除。"
+        },
+        {
+          "title": "病理切片定性",
+          "text": "取活检是显微镜放大的常规核实步骤，最终性质以正式病理报告为准。"
+        }
+      ]
+    }
+  ],
+  "organ": "食管 · 胃 · 结直肠",
+  "relatedOrgans": [],
+  "related": [
+    "h-pylori",
+    "stool-fobt",
+    "tumor-markers"
+  ],
+  "kind": "indicator",
+  "category": "digestive",
+  "version": 1,
+  "updatedAt": "2026-11-26",
+  "reviewStatus": "pending",
+  "contentRisk": "foundational",
+  "publicationReady": true,
+  "applicability": "面向准备接受或刚拿到胃镜、肠镜初步报告，希望理解常见黏膜词、息肉与活检含义的一般成年读者。",
+  "limitations": "不提供胃肠镜筛查起始年龄处方、复查间隔年限表、清肠药剂配比或抗凝药停药指令；请严格遵从消化科与麻醉科医生指导。",
+  "references": [
+    {
+      "id": "upper-gi",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Upper GI Endoscopy",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/upper-gi-endoscopy",
+      "scope": "上消化道内镜（胃镜）的检查原理、空腹准备、镇静方式及活检取样作用",
+      "locator": "What is an upper GI endoscopy?; How do I prepare for an upper GI endoscopy?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "colonoscopy",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Colonoscopy",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/colonoscopy",
+      "scope": "结肠镜的观察优势、肠道清洁准备重要性、镜下活检与息肉切除流程",
+      "locator": "What is a colonoscopy?; How do I prepare for a colonoscopy?",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "colon-polyps",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Colon Polyps",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/colon-polyps",
+      "scope": "增生性息肉与腺瘤性息肉的区别、病理定性意义及切除后随访理念",
+      "locator": "Definition & Facts; Diagnosis",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    },
+    {
+      "id": "gastritis",
+      "publisher": "美国国立糖尿病、消化和肾脏疾病研究所（NIDDK）",
+      "title": "Gastritis & Gastropathy",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gastritis-gastropathy",
+      "scope": "胃黏膜表层炎症、萎缩性改变的含义与内镜活检确认方式",
+      "locator": "Definition & Facts; Diagnosis",
+      "accessedAt": "2026-11-26",
+      "language": "en",
+      "type": "机构健康科普",
+      "publicationDate": null
+    }
+  ],
+  "descriptionSourceIds": [
+    "upper-gi",
+    "colonoscopy"
+  ],
+  "tipSourceIds": [
+    "gastritis",
+    "colon-polyps"
+  ]
+}

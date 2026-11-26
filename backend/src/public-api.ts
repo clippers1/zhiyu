@@ -27,7 +27,7 @@ export async function publicContent(request: Request, channel: 'demo' | 'officia
   const rawLimit = params.get('limit') || '6';
   const rawCursor = params.get('cursor') || '0';
   if ((kind && !['indicator', 'organ', 'story'].includes(kind)) || !/^\d+$/.test(rawLimit) || !/^\d+$/.test(rawCursor) || query.length > 200) return json({ error: 'invalid_query' }, 400);
-  const limit = Math.min(24, Math.max(1, Number(rawLimit)));
+  const limit = Math.min(48, Math.max(1, Number(rawLimit)));
   const offset = Number(rawCursor);
   if (!Number.isSafeInteger(offset) || offset > 100000 || offset % limit !== 0) return json({ error: 'invalid_cursor' }, 400);
   const filters: Where[] = [base];
