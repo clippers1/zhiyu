@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { useContent } from "../hooks";
 import { IndexRow, LoadState, Pagination, QuestionRow, RunHead } from "./ContentUI";
+import { RouteLink } from "./RouteLink";
 import { useSearchInput } from "../useSearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
@@ -69,6 +70,14 @@ export default function Library({ onOpen }) {
           ))}
         </div>
         <p className="library-help">可用项目名、缩写或日常说法查找；这里不判断个人检查结果。</p>
+        <div className="glossary-entry-banner">
+          <p>
+            <b>报告单上只印了英文字母？</b>如 ALT、eGFR、TSH、HbA1c、TI-RADS、BI-RADS，可用 A–Z 词典 3 秒定位。
+          </p>
+          <RouteLink page="glossary">
+            A–Z 缩写速查 <ArrowRight size={14} aria-hidden="true" />
+          </RouteLink>
+        </div>
       </section>
       {pending ? <p className="search-hint" role="status">输入完成后查找…</p> : <LoadState {...state} />}
       {data && (

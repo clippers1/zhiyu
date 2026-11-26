@@ -1,0 +1,256 @@
+/* 体检英文缩写 A-Z 速查词典 */
+
+.glossary-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-top: var(--s-6);
+}
+
+.glossary-head .runhead {
+  margin: 0;
+}
+
+.glossary-head .statement {
+  margin-top: 10px;
+}
+
+.glossary-head .lede {
+  margin-top: 10px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--ink-2);
+}
+
+.glossary-controls {
+  margin-top: var(--s-5);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glossary-clear-input {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.glossary-clear-input:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.glossary-alpha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.glossary-alpha button {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 7px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.glossary-alpha button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.glossary-alpha button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.glossary-alpha button:disabled {
+  background: transparent;
+  color: var(--ink-3);
+  opacity: 0.32;
+  cursor: default;
+}
+
+.glossary-reset-btn {
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-wash);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  cursor: pointer;
+}
+
+.glossary-sections {
+  margin-top: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.glossary-letter-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.glossary-letter-heading span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.glossary-letter-heading small {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.glossary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--card);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.glossary-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.glossary-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.glossary-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-deep);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.glossary-names {
+  min-width: 0;
+}
+
+.glossary-names h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.glossary-en {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.glossary-summary {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  flex: 1;
+}
+
+.glossary-link {
+  align-self: flex-start;
+  font-size: 13px;
+}
+
+/* Inline banner on /indicators linking to /glossary */
+.glossary-entry-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--accent-border);
+  border-radius: 14px;
+  background: var(--accent-wash);
+}
+
+.glossary-entry-banner p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.glossary-entry-banner b {
+  color: var(--ink);
+}
+
+.glossary-entry-banner a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.glossary-entry-banner a:hover {
+  background: var(--accent-deep);
+}
+
+@media (min-width: 720px) {
+  .glossary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

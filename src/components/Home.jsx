@@ -78,6 +78,13 @@ export default function Home({ go, onOpen, onOrgan, setTour }) {
                     {item.label}
                   </RouteLink>
                 ))}
+                <RouteLink
+                  page="glossary"
+                  className="home-quick-pill"
+                  onNavigate={() => go("glossary")}
+                >
+                  A–Z 全部缩写 →
+                </RouteLink>
               </div>
             </nav>
           )}

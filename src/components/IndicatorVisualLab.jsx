@@ -913,7 +913,848 @@ function UltrasoundTierLab({ detail, isBreast }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Unified Dispatcher                                                         */
+/* 7. CBC Three-Lineage Blood Cell Lab (RBC / WBC / PLT)                      */
+/* -------------------------------------------------------------------------- */
+const CBC_CELLS = [
+  {
+    id: "rbc",
+    label: "红细胞与血红蛋白",
+    code: "RBC / HGB / MCV",
+    tag: "携氧运输队",
+    summary: "红细胞里的血红蛋白负责把肺部吸入的氧气送往全身组织。化验单同时还会看红细胞平均体积（MCV）与压积，用来辅助判断贫血线索或体液浓缩情况。",
+    sourceIds: ["cbc", "hemoglobin"],
+  },
+  {
+    id: "wbc",
+    label: "白细胞与分类",
+    code: "WBC",
+    tag: "免疫防御巡逻队",
+    summary: "白细胞是免疫系统应对感染与炎症的主力军，下面常细分为中性粒细胞、淋巴细胞等亚群。感冒、熬夜、情绪应激或轻度炎症都可能引起短暂起伏。",
+    sourceIds: ["cbc", "blood-tests"],
+  },
+  {
+    id: "plt",
+    label: "血小板",
+    code: "PLT",
+    tag: "血管修补止血队",
+    summary: "血小板体积很小，血管壁出现微小破损时会迅速聚集参与凝血止血。单次轻度偏高或偏低可能受采样、饮水或近期感染影响，需结合整张血常规与既往记录。",
+    sourceIds: ["cbc", "lab-results"],
+  },
+];
+
+function CbcCellsLab({ detail }) {
+  const [cellId, setCellId] = useState("rbc");
+  const cell = CBC_CELLS.find((c) => c.id === cellId) || CBC_CELLS[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="选择血细胞类型">
+        {CBC_CELLS.map((c) => (
+          <button
+            key={c.id}
+            type="button"
+            className={cellId === c.id ? "active" : ""}
+            aria-pressed={cellId === c.id}
+            onClick={() => setCellId(c.id)}
+          >
+            <b>{c.label}</b>
+            <span>{c.code}</span>
+          </button>
+        ))}
+      </div>
+
+      <svg className="vlab-svg" viewBox="0 0 640 206" role="img" aria-label="血常规红细胞、白细胞与血小板三系细胞分工示意图">
+        <rect x="0" y="0" width="640" height="206" rx="12" fill="#f7fbfb" />
+        {/* Microscopic circular blood smear viewport on left */}
+        <circle cx="148" cy="103" r="82" fill="#fff8f7" stroke="#d4e3e6" strokeWidth="2.4" />
+        <circle cx="148" cy="103" r="76" fill="none" stroke="#e8eff1" strokeWidth="1.2" strokeDasharray="4 4" />
+
+        {/* RBC biconcave discs */}
+        <g opacity={cellId === "rbc" ? 1 : 0.28}>
+          {[[108, 76], [176, 68], [116, 134], [186, 126], [150, 102]].map(([cx, cy]) => (
+            <g key={`${cx}-${cy}`}>
+              <circle cx={cx} cy={cy} r="17" fill="#dc6a61" stroke="#b94840" strokeWidth="1.5" />
+              <circle cx={cx} cy={cy} r="7.5" fill="#f3a69f" />
+            </g>
+          ))}
+        </g>
+
+        {/* WBC lobed immune cells */}
+        <g opacity={cellId === "wbc" ? 1 : 0.25}>
+          {[[148, 62], [156, 144]].map(([cx, cy]) => (
+            <g key={`${cx}-${cy}`}>
+              <circle cx={cx} cy={cy} r="20" fill="#e2eff8" stroke="#3b76a3" strokeWidth="2.2" />
+              <circle cx={cx - 5} cy={cy - 2} r="5.5" fill="#4f88b5" />
+              <circle cx={cx + 5} cy={cy + 3} r="5.5" fill="#4f88b5" />
+              <circle cx={cx + 2} cy={cy - 6} r="4.2" fill="#4f88b5" />
+            </g>
+          ))}
+        </g>
+
+        {/* PLT tiny fragments */}
+        <g opacity={cellId === "plt" ? 1 : 0.28}>
+          {[[96, 104], [126, 98], [188, 96], [128, 158], [174, 150], [124, 56]].map(([cx, cy]) => (
+            <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx="6" ry="4" fill="#d99a3e" stroke="#a66f1d" strokeWidth="1.2" />
+          ))}
+        </g>
+
+        {/* Right: 3 interactive lineage breakdown cards */}
+        {[
+          { id: "rbc", y: 20, title: "红细胞系（RBC / HGB / MCV）", sub: "数量 · 血红蛋白浓度 · 细胞大小形态", color: "#cf564e", bg: "#fdf0ee" },
+          { id: "wbc", y: 80, title: "白细胞系（WBC 及分类比例）", sub: "免疫应答线索 · 易随感冒应激波动", color: "#3b76a3", bg: "#eef5fa" },
+          { id: "plt", y: 140, title: "血小板系（PLT）", sub: "凝血止血修补 · 需结合多项整体看", color: "#cf7f32", bg: "#fcf4e6" },
+        ].map((row) => {
+          const active = cellId === row.id;
+          return (
+            <g
+              key={row.id}
+              className="vlab-click-group"
+              role="button"
+              tabIndex="0"
+              aria-pressed={active}
+              onClick={() => setCellId(row.id)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setCellId(row.id); } }}
+            >
+              <rect
+                x="262"
+                y={row.y}
+                width="354"
+                height="48"
+                rx="12"
+                fill={active ? row.bg : "#ffffff"}
+                stroke={active ? row.color : "#d4e3e6"}
+                strokeWidth={active ? "2.4" : "1.4"}
+              />
+              <circle cx="284" cy={row.y + 24} r="7" fill={row.color} />
+              <text x="302" y={row.y + 21} className="vlab-box-title" fontSize="13.5">{row.title}</text>
+              <text x="302" y={row.y + 39} className="vlab-mini-tag">{row.sub}</text>
+            </g>
+          );
+        })}
+      </svg>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{cell.label}（{cell.code}） · {cell.tag}</span>
+        <p>
+          {cell.summary}
+          <Citation ids={cell.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. Urinalysis 3-Layer Inspection Lab                                       */
+/* -------------------------------------------------------------------------- */
+const URINE_LAYERS = [
+  {
+    id: "visual",
+    label: "第一层：外观观察",
+    tag: "颜色与清澈度",
+    summary: "最直观的一层，看尿液颜色深浅和是否浑浊。喝水少、晨尿浓缩、吃特定食物或补充维生素 B 族都会让尿液明显偏黄，外观改变不一定等于肾脏生病。",
+    sourceIds: ["urinalysis", "urine-color"],
+  },
+  {
+    id: "dipstick",
+    label: "第二层：试纸化学检查",
+    tag: "尿蛋白 / 尿糖 / 尿潜血 / 酸碱度",
+    summary: "把化学试纸浸入尿样，通过色块反应快速筛查蛋白质、葡萄糖、潜血、白细胞酯酶和比重。剧烈运动、发热、留取不规范或经期污染都可能导致单次试纸出现加号。",
+    sourceIds: ["urinalysis", "protein"],
+  },
+  {
+    id: "microscope",
+    label: "第三层：显微镜沉渣检查",
+    tag: "直接辨认红白细胞与管型",
+    summary: "试纸只是初筛；显微镜检查会把尿液离心后放大观察，直接确认有没有真正的红细胞、白细胞、细菌、结晶或管型，帮助医生区分是假阳性干扰还是需要进一步评估。",
+    sourceIds: ["urinalysis", "kidney"],
+  },
+];
+
+function UrinalysisLayersLab({ detail }) {
+  const [layerId, setLayerId] = useState("dipstick");
+  const layer = URINE_LAYERS.find((l) => l.id === layerId) || URINE_LAYERS[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="选择尿常规检查层面">
+        {URINE_LAYERS.map((l) => (
+          <button
+            key={l.id}
+            type="button"
+            className={layerId === l.id ? "active" : ""}
+            aria-pressed={layerId === l.id}
+            onClick={() => setLayerId(l.id)}
+          >
+            <b>{l.label}</b>
+            <span>{l.tag}</span>
+          </button>
+        ))}
+      </div>
+
+      <svg className="vlab-svg" viewBox="0 0 640 198" role="img" aria-label="尿常规外观、试纸化学与显微镜检查三层递进图">
+        <rect x="0" y="0" width="640" height="198" rx="12" fill="#f7fbfb" />
+        {[
+          { id: "visual", x: 18, num: "01", title: "外观物理观察", sub: "颜色 · 透明度 · 浓缩度", note: "易受饮水与食物影响", stroke: "#cf7f32", fill: "#fcf4e6" },
+          { id: "dipstick", x: 232, num: "02", title: "试纸化学初筛", sub: "蛋白 · 潜血 · 尿糖 · pH", note: "色块快速筛查，可有干扰", stroke: "#0f766e", fill: "#e8f5f3" },
+          { id: "microscope", x: 446, num: "03", title: "显微镜沉渣核实", sub: "红白细胞 · 管型 · 结晶", note: "直接看清微观有形成分", stroke: "#3b76a3", fill: "#ecf4fa" },
+        ].map((step, idx) => {
+          const active = layerId === step.id;
+          return (
+            <g key={step.id}>
+              {idx < 2 && (
+                <path
+                  d={`M${step.x + 182} 98 L${step.x + 206} 98 M${step.x + 200} 92 L${step.x + 207} 98 L${step.x + 200} 104`}
+                  fill="none"
+                  stroke="#0f766e"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              )}
+              <g
+                className="vlab-click-group"
+                role="button"
+                tabIndex="0"
+                aria-pressed={active}
+                onClick={() => setLayerId(step.id)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLayerId(step.id); } }}
+              >
+                <rect
+                  x={step.x}
+                  y="24"
+                  width="176"
+                  height="146"
+                  rx="14"
+                  fill={active ? step.fill : "#ffffff"}
+                  stroke={active ? step.stroke : "#d3e2e6"}
+                  strokeWidth={active ? "2.6" : "1.5"}
+                />
+                <rect x={step.x + 14} y="38" width="32" height="22" rx="6" fill={active ? step.stroke : "#eef4f6"} />
+                <text x={step.x + 30} y="53" textAnchor="middle" fill={active ? "#ffffff" : "#4f6b70"} fontSize="11.5" fontWeight="700">{step.num}</text>
+                <text x={step.x + 88} y="88" textAnchor="middle" className="vlab-box-title">{step.title}</text>
+                <text x={step.x + 88} y="114" textAnchor="middle" className="vlab-mini-tag active">{step.sub}</text>
+                <text x={step.x + 88} y="142" textAnchor="middle" className="vlab-mini-tag">{step.note}</text>
+              </g>
+            </g>
+          );
+        })}
+      </svg>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{layer.label} · {layer.tag}</span>
+        <p>
+          {layer.summary}
+          <Citation ids={layer.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 9. Uric Acid Production vs Excretion Balance Scale Lab                     */
+/* -------------------------------------------------------------------------- */
+const UA_STATES = [
+  {
+    id: "balanced",
+    label: "生成与排出平衡",
+    tag: "血尿酸维持平稳",
+    tilt: 0,
+    summary: "尿酸是嘌呤分解后的正常代谢产物：一部分来自体内自身细胞更新，一部分来自食物嘌呤；绝大部分经肾脏随尿液排出。只要生成速度与排出能力大致匹配，血尿酸就维持在平稳区间。",
+    sourceIds: ["uric-acid", "kidney"],
+  },
+  {
+    id: "production",
+    label: "来源与生成增多",
+    tag: "内源代谢 + 饮食饮酒负荷",
+    tilt: -9,
+    summary: "除了高嘌呤食物、含糖饮料或饮酒等外源因素，身体自身细胞代谢加快、体重增加等内源因素也会让尿酸生成增多——所以并不是「绝对只靠少吃海鲜」就能解释所有波动。",
+    sourceIds: ["uric-acid"],
+  },
+  {
+    id: "excretion",
+    label: "肾脏排出减慢",
+    tag: "排水通道变窄或受药物影响",
+    tilt: 9,
+    summary: "肾脏负责排出人体大部分尿酸。当肾脏排泄效率下降、饮水过少，或受某些药物与代谢因素干扰时，即便吃得清淡，血液里的尿酸也可能蓄积升高；这也是医生常把尿酸与肾功能一起对照看的原因。",
+    sourceIds: ["uric-acid", "kidney", "lab-results"],
+  },
+];
+
+function UricAcidBalanceLab({ detail }) {
+  const [stateId, setStateId] = useState("balanced");
+  const st = UA_STATES.find((s) => s.id === stateId) || UA_STATES[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="切换尿酸平衡状态">
+        {UA_STATES.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            className={stateId === s.id ? "active" : ""}
+            aria-pressed={stateId === s.id}
+            onClick={() => setStateId(s.id)}
+          >
+            <b>{s.label}</b>
+            <span>{s.tag}</span>
+          </button>
+        ))}
+      </div>
+
+      <svg className="vlab-svg" viewBox="0 0 640 208" role="img" aria-label="尿酸生成与肾脏排出动态天平示意图">
+        <rect x="0" y="0" width="640" height="208" rx="12" fill="#f7fbfb" />
+        {/* Fulcrum base */}
+        <polygon points="320,118 294,174 346,174" fill="#d9e8eb" stroke="#0f766e" strokeWidth="2" />
+        <rect x="248" y="174" width="144" height="12" rx="6" fill="#0f766e" fillOpacity="0.2" />
+
+        {/* Tilting balance beam */}
+        <g transform={`rotate(${st.tilt} 320 116)`}>
+          <line x1="128" y1="116" x2="512" y2="116" stroke="#0f766e" strokeWidth="5" strokeLinecap="round" />
+          <circle cx="320" cy="116" r="8" fill="#0f766e" stroke="#ffffff" strokeWidth="2.5" />
+
+          {/* Left pan: Generation */}
+          <rect
+            x="60"
+            y="44"
+            width="176"
+            height="62"
+            rx="14"
+            fill={stateId === "production" ? "#fbece6" : "#ffffff"}
+            stroke={stateId === "production" ? "#cf564e" : "#c7dce0"}
+            strokeWidth={stateId === "production" ? "2.6" : "1.8"}
+          />
+          <text x="148" y="70" textAnchor="middle" className="vlab-box-title">尿酸生成端</text>
+          <text x="148" y="92" textAnchor="middle" className="vlab-mini-tag">体内嘌呤代谢 + 饮食摄入</text>
+
+          {/* Right pan: Excretion */}
+          <rect
+            x="404"
+            y="44"
+            width="176"
+            height="62"
+            rx="14"
+            fill={stateId === "excretion" ? "#eef5fa" : "#ffffff"}
+            stroke={stateId === "excretion" ? "#3b76a3" : "#c7dce0"}
+            strokeWidth={stateId === "excretion" ? "2.6" : "1.8"}
+          />
+          <text x="492" y="70" textAnchor="middle" className="vlab-box-title">肾脏排泄端</text>
+          <text x="492" y="92" textAnchor="middle" className="vlab-mini-tag">经肾过滤随尿液排出</text>
+        </g>
+
+        <text x="320" y="200" textAnchor="middle" className="vlab-mini-tag active">
+          当前示意：{st.label}（{st.tag}）
+        </text>
+      </svg>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{st.label} · {st.tag}</span>
+        <p>
+          {st.summary}
+          <Citation ids={st.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 10. H. pylori C13/C14 Breath Test & False-Negative Medication Window Lab   */
+/* -------------------------------------------------------------------------- */
+const HP_MODES = [
+  {
+    id: "breath",
+    label: "呼气试验原理（C13 / C14）",
+    tag: "查现症活跃感染",
+    summary: "吞服安全标记的尿素胶囊后，如果胃内存在活跃的幽门螺杆菌，细菌分泌的尿素酶会迅速分解尿素并释放带标记的二氧化碳，经血液和肺呼出到集气袋里，仪器对比服药前后吹气即可判断。",
+    sourceIds: ["hp-tests", "hp-info"],
+  },
+  {
+    id: "meds",
+    label: "为什么近期服药易「假阴性」",
+    tag: "抑酸药与抗生素干扰",
+    summary: "检查前如果近期服过质子泵抑制剂（拉唑类抑酸药）、铋剂或抗生素，会把胃内细菌活性暂时压低，导致吹气信号变弱而测不出——务必按检查机构说明核对停药时间窗。",
+    sourceIds: ["hp-tests", "ulcer-diag"],
+  },
+  {
+    id: "compare",
+    label: "呼气 / 粪便 / 抽血 / 胃镜分工",
+    tag: "不同查法回答不同问题",
+    summary: "呼气试验与粪便抗原反映「此刻是不是正在感染」；抽血查抗体只能提示「曾经接触过」，杀菌后抗体仍可能长期存在；胃镜活检则能在检查的同时直接观察胃黏膜有没有炎症或溃疡。",
+    sourceIds: ["hp-tests", "ulcer-diag"],
+  },
+];
+
+function HPyloriBreathLab({ detail }) {
+  const [modeId, setModeId] = useState("breath");
+  const mode = HP_MODES.find((m) => m.id === modeId) || HP_MODES[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="选择幽门螺杆菌原理视角">
+        {HP_MODES.map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            className={modeId === m.id ? "active" : ""}
+            aria-pressed={modeId === m.id}
+            onClick={() => setModeId(m.id)}
+          >
+            <b>{m.label}</b>
+            <span>{m.tag}</span>
+          </button>
+        ))}
+      </div>
+
+      <svg className="vlab-svg" viewBox="0 0 640 192" role="img" aria-label="幽门螺杆菌呼气试验原理与干扰因素示意图">
+        <rect x="0" y="0" width="640" height="192" rx="12" fill="#f7fbfb" />
+        {modeId === "compare" ? (
+          <>
+            {[
+              { x: 20, title: "C13 / C14 呼气", sub: "无创 · 查现症感染", badge: "体检常用", stroke: "#0f766e", fill: "#e8f5f3" },
+              { x: 176, title: "粪便抗原检测", sub: "无创 · 查现症感染", badge: "可替代呼气", stroke: "#3b76a3", fill: "#ecf4fa" },
+              { x: 332, title: "抽血查抗体", sub: "区分不了既往/现症", badge: "不用于复查", stroke: "#cf7f32", fill: "#fcf4e6" },
+              { x: 488, title: "胃镜下活检", sub: "同步直视胃黏膜", badge: "看有无溃疡", stroke: "#cf564e", fill: "#fdf0ee" },
+            ].map((item) => (
+              <g key={item.title}>
+                <rect x={item.x} y="28" width="136" height="136" rx="14" fill={item.fill} stroke={item.stroke} strokeWidth="2" />
+                <text x={item.x + 68} y="62" textAnchor="middle" className="vlab-box-title" fontSize="13.5">{item.title}</text>
+                <text x={item.x + 68} y="92" textAnchor="middle" className="vlab-mini-tag">{item.sub}</text>
+                <rect x={item.x + 26} y="114" width="84" height="24" rx="12" fill="#ffffff" stroke={item.stroke} strokeWidth="1.2" />
+                <text x={item.x + 68} y="130" textAnchor="middle" className="vlab-mini-tag active">{item.badge}</text>
+              </g>
+            ))}
+          </>
+        ) : (
+          <>
+            {[
+              { x: 20, title: "1. 吞服标记尿素", sub: "空腹服下安全试剂" },
+              { x: 178, title: modeId === "meds" ? "2. 细菌被药物压低" : "2. 胃内活跃菌分解", sub: modeId === "meds" ? "抑酸药 / 抗生素干扰" : "尿素酶裂解产生气体" },
+              { x: 336, title: "3. 经血与肺呼出", sub: modeId === "meds" ? "呼出标记气体偏少" : "标记 CO₂ 随呼吸排出" },
+              { x: 494, title: modeId === "meds" ? "4. 易致假阴性" : "4. 集气袋前后对照", sub: modeId === "meds" ? "请先核对停药时间" : "评估是否存在现症感染" },
+            ].map((box, idx) => (
+              <g key={box.title}>
+                {idx < 3 && (
+                  <path d={`M${box.x + 132} 96 L${box.x + 154} 96 M${box.x + 148} 90 L${box.x + 155} 96 L${box.x + 148} 102`} fill="none" stroke={modeId === "meds" ? "#cf7f32" : "#0f766e"} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                )}
+                <rect
+                  x={box.x}
+                  y="36"
+                  width="130"
+                  height="120"
+                  rx="14"
+                  fill={modeId === "meds" && (idx === 1 || idx === 3) ? "#fcf4e6" : "#ffffff"}
+                  stroke={modeId === "meds" && (idx === 1 || idx === 3) ? "#cf7f32" : "#0f766e"}
+                  strokeWidth="2"
+                />
+                <text x={box.x + 65} y="82" textAnchor="middle" className="vlab-box-title" fontSize="13">{box.title}</text>
+                <text x={box.x + 65} y="112" textAnchor="middle" className="vlab-mini-tag">{box.sub}</text>
+              </g>
+            ))}
+          </>
+        )}
+      </svg>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{mode.label} · {mode.tag}</span>
+        <p>
+          {mode.summary}
+          <Citation ids={mode.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 11. Fatty Liver Ultrasound Echo & Multi-Test Assessment Lab                */
+/* -------------------------------------------------------------------------- */
+const FL_MODES = [
+  {
+    id: "normal",
+    label: "正常肝实质",
+    tag: "回声均匀柔和",
+    summary: "健康肝细胞排列整齐、细胞内极少脂肪微滴，超声波可以顺畅穿透整个肝脏深度，回声细腻均匀、后方视野清晰。",
+    sourceIds: ["sonogram", "niddk-def"],
+  },
+  {
+    id: "steatosis",
+    label: "脂肪微滴蓄积（超声变亮）",
+    tag: "前场回声增强 · 后方衰减",
+    summary: "大量细小脂肪滴聚积在肝细胞里，会不断反射散射超声波：于是报告上常写「肝实质回声细密增强、后方回声衰减」。这反映的是脂肪多不多。",
+    sourceIds: ["niddk-def", "niddk-diag", "sonogram"],
+  },
+  {
+    id: "assess",
+    label: "超声之外还要看什么？",
+    tag: "脂肪堆积 ≠ 炎症与纤维化",
+    summary: "普通 B 超主要看「有没有脂肪堆积」，并不能单独确认是否伴随肝细胞炎症或纤维化。医生通常会结合肝功抽血（ALT/AST）、血糖血脂，必要时安排肝脏弹性成像综合评估。",
+    sourceIds: ["niddk-diag", "medline-steatotic", "liver-tests"],
+  },
+];
+
+function FattyLiverEchoLab({ detail }) {
+  const [modeId, setModeId] = useState("steatosis");
+  const mode = FL_MODES.find((m) => m.id === modeId) || FL_MODES[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="切换脂肪肝评估视角">
+        {FL_MODES.map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            className={modeId === m.id ? "active" : ""}
+            aria-pressed={modeId === m.id}
+            onClick={() => setModeId(m.id)}
+          >
+            <b>{m.label}</b>
+            <span>{m.tag}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="vlab-split us-split">
+        <div className="vlab-canvas-card">
+          <div className="vlab-subhead">
+            <span>超声穿透深度与回声变化示意</span>
+          </div>
+          <svg className="vlab-svg" viewBox="0 0 320 172" role="img" aria-label={`脂肪肝超声回声概念示意：${mode.label}`}>
+            <defs>
+              <linearGradient id="fl-normal" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#4c6470" />
+                <stop offset="100%" stopColor="#354954" />
+              </linearGradient>
+              <linearGradient id="fl-bright" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#cfdce0" />
+                <stop offset="48%" stopColor="#7a939e" />
+                <stop offset="100%" stopColor="#1b262e" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="320" height="172" rx="12" fill={modeId === "normal" ? "url(#fl-normal)" : "url(#fl-bright)"} />
+            <rect x="112" y="6" width="96" height="10" rx="5" fill="#77cfc6" />
+            {/* Microscopic fat droplets when steatosis/assess */}
+            {modeId !== "normal" && (
+              <g fill="#f7dca4" fillOpacity="0.85">
+                {[[84, 46, 5], [118, 54, 7], [156, 42, 6], [198, 52, 7.5], [232, 46, 5], [100, 78, 6], [142, 74, 7], [182, 82, 5.5], [218, 76, 6]].map(([cx, cy, r]) => (
+                  <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} />
+                ))}
+              </g>
+            )}
+            <text x="160" y="130" textAnchor="middle" fill="#e6f2f2" fontSize="12" fontWeight="700">
+              {modeId === "normal" ? "声波均匀穿透 · 深浅层次清楚" : "浅层脂滴密集反射变亮 · 深层后方衰减"}
+            </text>
+            <text x="160" y="152" textAnchor="middle" fill="#bdd6da" fontSize="11">
+              {mode.label}（概念示意，非真实超声图）
+            </text>
+          </svg>
+        </div>
+
+        <div className="vlab-canvas-card">
+          <div className="vlab-subhead">
+            <span>临床评估脂肪肝的三块拼图</span>
+          </div>
+          <ol className="us-tier-list">
+            <li className={modeId === "steatosis" ? "active" : ""}>
+              <b>1. 腹部超声（看脂肪多不多）</b>
+              <span>无创发现肝细胞内脂肪堆积线索，适合常规体检初筛。</span>
+            </li>
+            <li className={modeId === "assess" ? "active" : ""}>
+              <b>2. 肝功能 + 血糖血脂（看炎症与代谢）</b>
+              <span>ALT / AST 观察肝细胞是否受累，糖脂指标帮助排查代谢背景。</span>
+            </li>
+            <li className={modeId === "assess" ? "active" : ""}>
+              <b>3. 肝脏弹性成像（必要时看硬度）</b>
+              <span>当医生怀疑进展风险时，用来无创评估肝脏纤维化程度。</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{mode.label} · {mode.tag}</span>
+        <p>
+          {mode.summary}
+          <Citation ids={mode.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 12. Gallbladder Ultrasound Posture Lab (Stone Rolls vs Polyp Stays Fixed)  */
+/* -------------------------------------------------------------------------- */
+const GB_MODES = [
+  {
+    id: "stone",
+    label: "胆囊结石（翻身会滚落）",
+    tag: "强回声 + 后方声影 + 随体位移动",
+    summary: "结石游离在胆汁里，超声波遇到致密结石会强烈反射并在背后留下暗色「声影」。检查时医生让你侧身翻转，结石通常会顺着重力滚向低处。",
+    sourceIds: ["gallstones", "gallstones-diag"],
+  },
+  {
+    id: "polyp",
+    label: "胆囊息肉（附壁不动）",
+    tag: "附着囊壁 + 无声影 + 原地不动",
+    summary: "息肉样病变长在胆囊内壁上，改变体位时位置固定不动，后方通常也不带明显声影。体检中多数无症状小息肉以按医嘱定期超声随访为主。",
+    sourceIds: ["gallbladder-info", "abd-us"],
+  },
+  {
+    id: "fasting",
+    label: "为什么必须充分空腹？",
+    tag: "吃早饭会让胆囊收缩变小",
+    summary: "空腹时胆囊充满胆汁像一只舒展的小梨，囊壁光滑度与内部结构一目了然；进食后胆囊会收缩排胆汁，囊壁变厚褶皱，容易漏看小结石或误把皱褶当增厚。",
+    sourceIds: ["abd-us", "gallbladder-info"],
+  },
+];
+
+function GallbladderPostureLab({ detail }) {
+  const [modeId, setModeId] = useState("stone");
+  const [turned, setTurned] = useState(false);
+  const mode = GB_MODES.find((m) => m.id === modeId) || GB_MODES[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="选择胆囊超声观察项">
+        {GB_MODES.map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            className={modeId === m.id ? "active" : ""}
+            aria-pressed={modeId === m.id}
+            onClick={() => setModeId(m.id)}
+          >
+            <b>{m.label}</b>
+            <span>{m.tag.split(" + ")[0]}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="vlab-canvas-card">
+        <div className="vlab-strip-head">
+          <span>体位翻转演示（观察结石与息肉的差别）</span>
+          <div className="vlab-mode-tabs" role="group" aria-label="切换检查体位">
+            <button type="button" className={!turned ? "active" : ""} aria-pressed={!turned} onClick={() => setTurned(false)}>
+              仰卧位扫查
+            </button>
+            <button type="button" className={turned ? "active" : ""} aria-pressed={turned} onClick={() => setTurned(true)}>
+              左侧卧 / 翻身位
+            </button>
+          </div>
+        </div>
+
+        <svg className="vlab-svg" viewBox="0 0 640 192" role="img" aria-label={`胆囊超声体位翻转示意：${mode.label}`}>
+          <rect x="0" y="0" width="640" height="192" rx="12" fill="#1e2c36" />
+          <rect x="272" y="6" width="96" height="10" rx="5" fill="#77cfc6" />
+
+          {/* Gallbladder pear outline (contracted if fasting mode toggled to post-meal illustration) */}
+          <g transform={turned ? "rotate(-20 320 98)" : "rotate(0 320 98)"}>
+            <ellipse
+              cx="320"
+              cy="102"
+              rx={modeId === "fasting" && turned ? 62 : 124}
+              ry={modeId === "fasting" && turned ? 30 : 54}
+              fill="#0d171e"
+              stroke="#8adbd2"
+              strokeWidth={modeId === "fasting" && turned ? "5" : "2.6"}
+            />
+
+            {/* Wall-attached polyp: ALWAYS stays fixed on upper-right wall even when turned! */}
+            {modeId !== "fasting" && (
+              <circle cx="388" cy="64" r="10" fill="#a8c9cf" stroke="#e4f4f6" strokeWidth="1.6" opacity={modeId === "polyp" ? 1 : 0.42} />
+            )}
+          </g>
+
+          {/* Upright label for wall-attached polyp outside rotation so it never clips */}
+          {modeId !== "fasting" && (
+            <text
+              x={turned ? 428 : 422}
+              y={turned ? 44 : 58}
+              fill="#d9f0ee"
+              fontSize="11.5"
+              fontWeight="600"
+              opacity={modeId === "polyp" ? 1 : 0.55}
+            >
+              附壁息肉（原地不动）
+            </text>
+          )}
+
+          {/* Free gallstone with acoustic shadow: ROLLS to the lowest point when turned! */}
+          {modeId !== "fasting" && (
+            <g opacity={modeId === "stone" ? 1 : 0.35}>
+              {/* Dark acoustic shadow band directly behind stone */}
+              <polygon
+                points={turned ? "228,128 256,128 268,186 216,186" : "298,142 326,142 338,186 286,186"}
+                fill="#070d11"
+                fillOpacity="0.88"
+              />
+              <ellipse
+                cx={turned ? 242 : 312}
+                cy={turned ? 124 : 138}
+                rx="15"
+                ry="11"
+                fill="#ffffff"
+                stroke="#f5c678"
+                strokeWidth="2"
+              />
+              <text x={turned ? 156 : 312} y={turned ? 114 : 176} textAnchor="middle" fill="#ffe2a8" fontSize="11.5" fontWeight="700">
+                {turned ? "结石随重力滚向低处 + 声影" : "强回声结石 + 后方暗声影"}
+              </text>
+            </g>
+          )}
+
+          {modeId === "fasting" && (
+            <text x="320" y="174" textAnchor="middle" fill="#cde6e4" fontSize="12" fontWeight="600">
+              {turned ? "进食后胆囊收缩皱缩，囊壁变厚容易遮挡细节" : "充分空腹时胆囊充盈舒展，内壁与胆汁清晰可见"}
+            </text>
+          )}
+        </svg>
+      </div>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{mode.label} · {mode.tag}</span>
+        <p>
+          {mode.summary}
+          <Citation ids={mode.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* 13. Tumor Markers Multi-Cause & Verification Funnel Lab                    */
+/* -------------------------------------------------------------------------- */
+const TM_STAGES = [
+  {
+    id: "benign",
+    label: "非肿瘤原因也会升高",
+    tag: "炎症 / 吸烟 / 良性囊肿 / 生理期",
+    summary: "许多肿瘤标志物原本就是正常细胞也会分泌的蛋白质。长期吸烟可让 CEA 轻度升高，良性肝病或孕期可能影响 AFP，炎症或生理期也会干扰 CA125——单看一次箭头绝不能等同于癌症。",
+    sourceIds: ["nci-markers", "medline-markers", "cea", "afp"],
+  },
+  {
+    id: "trend",
+    label: "动态趋势比单次值更关键",
+    tag: "同院复查观察走向",
+    summary: "医生通常更关注同家医院、同一套检测方法下连续几次的变化趋势：是短暂波动后回落、长期低幅稳定，还是持续阶梯式上升。跨医院对比往往会受试剂盒差异影响。",
+    sourceIds: ["medline-markers", "nci-markers"],
+  },
+  {
+    id: "confirm",
+    label: "确诊必须靠影像与病理",
+    tag: "标志物只是线索之一",
+    summary: "肿瘤标志物不能单独用来确诊癌症，正常也不能百分百排除癌症。真正的明确评估需要由医生结合症状、高危因素，安排针对性的 CT/超声/胃肠镜，必要时以病理活检为金标准。",
+    sourceIds: ["nci-markers", "medline-markers"],
+  },
+];
+
+function TumorMarkersFunnelLab({ detail }) {
+  const [stageId, setStageId] = useState("benign");
+  const st = TM_STAGES.find((s) => s.id === stageId) || TM_STAGES[0];
+
+  return (
+    <div className="vlab-body">
+      <div className="vlab-pills" role="group" aria-label="选择肿瘤标志物阅读环节">
+        {TM_STAGES.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            className={stageId === s.id ? "active" : ""}
+            aria-pressed={stageId === s.id}
+            onClick={() => setStageId(s.id)}
+          >
+            <b>{s.label}</b>
+            <span>{s.tag}</span>
+          </button>
+        ))}
+      </div>
+
+      <svg className="vlab-svg" viewBox="0 0 640 202" role="img" aria-label="肿瘤标志物多重影响因素与分层核实路径图">
+        <rect x="0" y="0" width="640" height="202" rx="12" fill="#f7fbfb" />
+        {/* Left: Multiple inputs converging into one blood marker reading */}
+        <g opacity={stageId === "benign" ? 1 : 0.45}>
+          {[
+            { y: 24, text: "吸烟 / 熬夜 / 生理期" },
+            { y: 74, text: "良性炎症 / 息肉 / 慢性肝病" },
+            { y: 124, text: "不同医院检测体系差异" },
+          ].map((src) => (
+            <g key={src.text}>
+              <rect x="18" y={src.y} width="176" height="36" rx="10" fill="#fcf4e6" stroke="#cf7f32" strokeWidth="1.8" />
+              <text x="106" y={src.y + 22} textAnchor="middle" className="vlab-mini-tag">{src.text}</text>
+              <path d={`M194 ${src.y + 18} L228 96`} stroke="#cf7f32" strokeWidth="1.6" strokeDasharray="4 3" />
+            </g>
+          ))}
+        </g>
+
+        {/* Middle: Single blood reading -> Trend check */}
+        <g
+          className="vlab-click-group"
+          role="button"
+          tabIndex="0"
+          onClick={() => setStageId("trend")}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setStageId("trend"); } }}
+        >
+          <rect
+            x="228"
+            y="48"
+            width="172"
+            height="100"
+            rx="14"
+            fill={stageId === "trend" ? "#e8f5f3" : "#ffffff"}
+            stroke={stageId === "trend" ? "#0f766e" : "#b9d0d6"}
+            strokeWidth={stageId === "trend" ? "2.6" : "1.6"}
+          />
+          <text x="314" y="84" textAnchor="middle" className="vlab-box-title" fontSize="13.5">单次偏高 ≠ 确诊</text>
+          <text x="314" y="108" textAnchor="middle" className="vlab-mini-tag active">排查干扰 · 同院复查趋势</text>
+          <text x="314" y="128" textAnchor="middle" className="vlab-mini-tag">看是回落、平稳还是持续升</text>
+        </g>
+
+        <path d="M402 98 L434 98 M428 92 L435 98 L428 104" fill="none" stroke="#0f766e" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* Right: Imaging & Pathology confirmation */}
+        <g
+          className="vlab-click-group"
+          role="button"
+          tabIndex="0"
+          onClick={() => setStageId("confirm")}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setStageId("confirm"); } }}
+        >
+          <rect
+            x="438"
+            y="48"
+            width="184"
+            height="100"
+            rx="14"
+            fill={stageId === "confirm" ? "#ecf4fa" : "#ffffff"}
+            stroke={stageId === "confirm" ? "#3b76a3" : "#b9d0d6"}
+            strokeWidth={stageId === "confirm" ? "2.6" : "1.6"}
+          />
+          <text x="530" y="84" textAnchor="middle" className="vlab-box-title" fontSize="13.5">影像 / 内镜与病理</text>
+          <text x="530" y="108" textAnchor="middle" className="vlab-mini-tag active">超声 · CT · 胃肠镜核实</text>
+          <text x="530" y="128" textAnchor="middle" className="vlab-mini-tag">最终定性以病理为准</text>
+        </g>
+
+        <text x="320" y="186" textAnchor="middle" className="vlab-mini-tag active">
+          提示：良性因素引起的轻度波动远比恶性肿瘤更常见，请带着完整报告由医生综合评估
+        </text>
+      </svg>
+
+      <div className="vlab-explain" aria-live="polite">
+        <span className="vlab-explain-kicker">{st.label} · {st.tag}</span>
+        <p>
+          {st.summary}
+          <Citation ids={st.sourceIds} references={detail.references} prefix="article-source" />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Unified Dispatcher (14 Specialized Interactive Visual Labs)                */
 /* -------------------------------------------------------------------------- */
 const LABS = {
   ecg: {
@@ -957,6 +1798,48 @@ const LABS = {
     title: "看懂超声形态词与 BI-RADS 行动分类逻辑",
     boundary: "本图仅用于帮助理解乳腺超声常见描述词及 BI-RADS 行动分类含义，不含恶性概率数字、穿刺门槛或筛查年龄处方。",
     render: (detail) => <UltrasoundTierLab detail={detail} isBreast={true} />,
+  },
+  cbc: {
+    kicker: "专项交互图解 · 血常规",
+    title: "一滴血里的三支队伍：红细胞、白细胞与血小板",
+    boundary: "本图为血细胞三系分工的简化显微概念示意，不按真实细胞比例或计数参考区间绘制。",
+    render: (detail) => <CbcCellsLab detail={detail} />,
+  },
+  urinalysis: {
+    kicker: "专项交互图解 · 尿常规",
+    title: "同一份尿样怎么查？外观、试纸与显微镜三层分工",
+    boundary: "本图仅说明尿常规三个检测层面的递进关系，不替代规范中段尿留取要求或临床解读。",
+    render: (detail) => <UrinalysisLayersLab detail={detail} />,
+  },
+  "uric-acid": {
+    kicker: "专项交互图解 · 尿酸",
+    title: "尿酸动态天平：为什么不只和「吃了什么」有关？",
+    boundary: "本图仅演示尿酸生成与排泄两端动态平衡概念，不含血尿酸数值门槛、痛风诊断或饮食/降尿酸用药方案。",
+    render: (detail) => <UricAcidBalanceLab detail={detail} />,
+  },
+  "h-pylori": {
+    kicker: "专项交互图解 · 幽门螺杆菌",
+    title: "吹气试验怎么查感染？为什么近期吃药容易测不准？",
+    boundary: "本图仅演示幽门螺杆菌检测原理与常见查法分工，不构成根除治疗或停药处方，具体停药时长以检查机构和医生说明为准。",
+    render: (detail) => <HPyloriBreathLab detail={detail} />,
+  },
+  "fatty-liver": {
+    kicker: "专项交互图解 · 脂肪肝",
+    title: "B 超为什么能看见脂肪肝？为什么不能只看超声轻重？",
+    boundary: "本图仅示意肝细胞脂滴对超声回声的影响及多检查互补关系，不展示脂肪肝临床分期或治疗标准。",
+    render: (detail) => <FattyLiverEchoLab detail={detail} />,
+  },
+  gallbladder: {
+    kicker: "专项交互图解 · 胆囊超声",
+    title: "翻个身就分清：结石会滚落，附壁息肉原地不动",
+    boundary: "本图仅演示空腹状态下胆囊结石与附壁息肉在体位变化时的典型影像概念差异，不替代专业超声诊断或手术/随访门槛。",
+    render: (detail) => <GallbladderPostureLab detail={detail} />,
+  },
+  "tumor-markers": {
+    kicker: "专项交互图解 · 肿瘤标志物",
+    title: "单次箭头为什么不等于确诊癌症？看懂三步核实逻辑",
+    boundary: "本图仅解释肿瘤标志物的多种非肿瘤来源与临床核实路径，不提供任何标志物数值解读、肿瘤排除承诺或筛查处方。",
+    render: (detail) => <TumorMarkersFunnelLab detail={detail} />,
   },
 };
 

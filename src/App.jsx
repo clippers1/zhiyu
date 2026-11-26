@@ -21,6 +21,7 @@ import { useRoute } from "./hooks";
 import { useReading } from "./useReading";
 import ToolsModal from "./components/ToolsModal";
 import ReportGuide from "./components/ReportGuide";
+import Glossary from "./components/Glossary";
 import "./reading.css";
 import "./discovery.css";
 import "./topics.css";
@@ -43,13 +44,13 @@ function ReaderApp() {
     setSearchOpen(false);
     setToolsOpen(false);
     setTour(null);
-    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "体检项目" : route.page === "guide" ? "单子怎么读" : nav.find((n) => n.id === route.page)?.title || "读体检单"} · 知愈`;
+    if (!runtime.serverRendered) document.title = `${route.page === "not-found" ? "页面不存在" : route.page === "topics" ? "专题阅读路线" : route.page === "article" ? "体检项目" : route.page === "guide" ? "单子怎么读" : route.page === "glossary" ? "体检缩写 A–Z 速查" : nav.find((n) => n.id === route.page)?.title || "读体检单"} · 知愈`;
   }, [route.page, route.id, runtime.serverRendered]);
   const onOpen = (id) => navigate("article", id);
   const onOrgan = (id) => navigate("organs", id);
   // The guide is part of reading a report, so it keeps 读体检单 highlighted
   // instead of leaving the navigation with no current item.
-  const activePage = route.page === "guide" ? "map" : ["article", "topics"].includes(route.page) ? "indicators" : route.page;
+  const activePage = route.page === "guide" ? "map" : ["article", "topics", "glossary"].includes(route.page) ? "indicators" : route.page;
   return (
     <div className={`app${route.page === "article" ? " article-view" : ""}${reading.large ? " reading-large" : ""}`}>
       <header className="header">
@@ -104,6 +105,7 @@ function ReaderApp() {
       <main id="main-content">
         {route.page === "topics" && <TopicRoute key={route.id} id={route.id} />}
         {route.page === "guide" && <ReportGuide go={navigate} />}
+        {route.page === "glossary" && <Glossary go={navigate} onOpen={onOpen} />}
         {route.page === "not-found" && (
           <section className="empty-state">
             <h1>这个页面不存在</h1>

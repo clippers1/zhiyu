@@ -179,7 +179,11 @@ function ReportRowsIndex({ go }) {
         ))}
       </ul>
       <p className="guide-rows-note">
-        单子上的写法因机构而异，没列出的名称也可以到项目目录里按缩写查找。
+        单子上的写法因机构而异，如果只看到英文缩写，也可以直接用
+        <RouteLink page="glossary" className="text-link" onNavigate={() => go && go("glossary")}>
+          体检缩写 A–Z 速查词典 <ArrowRight size={13} aria-hidden="true" />
+        </RouteLink>
+        按字母查找。
       </p>
     </section>
   );

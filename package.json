@@ -16,6 +16,7 @@
     "test:topics": "node --test scripts/topics.test.mjs",
     "test:share": "node --test scripts/share.test.mjs",
     "test:guide": "node --test scripts/reading-guide.test.mjs",
+    "test:glossary": "node --test scripts/glossary.test.mjs",
     "test:learning": "node scripts/visual-learning-smoke.mjs",
     "test:expansion": "node scripts/content-expansion-smoke.mjs",
     "test:figure": "node scripts/figure-smoke.mjs",

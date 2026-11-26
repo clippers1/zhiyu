@@ -75,11 +75,20 @@ export const loadPage = cache(buildPage);
 
 export function pageMetadata(page: Awaited<ReturnType<typeof buildPage>>): Metadata {
   if (!page) return { title: '内容不存在或已撤回 · 知愈', robots: { index: false, follow: false } };
-  const titles: Record<string, string> = { map: '读体检单 · 知愈', indicators: '体检项目 · 知愈', topics: '从体检单开始 · 知愈', saved: '读体检单 · 知愈', guide: '单子怎么读 · 知愈' };
+  const titles: Record<string, string> = {
+    map: '读体检单 · 知愈',
+    indicators: '体检项目 · 知愈',
+    topics: '从体检单开始 · 知愈',
+    saved: '读体检单 · 知愈',
+    guide: '单子怎么读 · 知愈',
+    glossary: '体检英文缩写 A–Z 速查 · 知愈',
+  };
   const title = page.route.page === 'topics' && page.route.id ? `认识${page.detail.title}的阅读路线 · 知愈` : page.detail ? `${page.detail.title || page.detail.name}：${page.detail.subtitle || page.detail.headline} · 知愈` : titles[page.route.page];
   const description = page.route.page === 'guide'
     ? `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}检验报告单上的项目名、结果、单位与参考区间分别是什么意思；不解读个人数值。`
-    : `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}${page.detail?.subtitle || page.detail?.headline || '用有来源的图文和互动认识体检指标、器官与身体之间的联系。'}内容用于健康科普，不替代医生诊断。`;
+    : page.route.page === 'glossary'
+      ? `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}体检报告常见 50+ 英文缩写（ALT、eGFR、TSH、HbA1c、TI-RADS、BI-RADS 等）A–Z 速查词典，快速对照中文全称与对应专题。`
+      : `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}${page.detail?.subtitle || page.detail?.headline || '用有来源的图文和互动认识体检指标、器官与身体之间的联系。'}内容用于健康科普，不替代医生诊断。`;
   const index = page.channel === 'official' && page.route.page !== 'saved';
   return {
     title, description, alternates: { canonical: page.canonical }, robots: { index, follow: true },
@@ -100,7 +109,7 @@ export async function sitemapXML() {
       where: { and: [{ channel: { equals: 'official' } }, { withdrawn: { equals: false } }] },
       select: { kind: true, slug: true, updatedAt: true }, sort: 'id',
     });
-    entries.push({ url: `${siteOrigin()}/` }, { url: `${siteOrigin()}/indicators` }, { url: `${siteOrigin()}/guide` });
+    entries.push({ url: `${siteOrigin()}/` }, { url: `${siteOrigin()}/indicators` }, { url: `${siteOrigin()}/guide` }, { url: `${siteOrigin()}/glossary` });
     for (const doc of publications.docs) {
       entries.push({ url: `${siteOrigin()}${doc.kind === 'organ' ? '/organs/' : '/article/'}${doc.slug}`, modified: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined });
       if (doc.kind === 'indicator') entries.push({ url: `${siteOrigin()}/topics/${doc.slug}`, modified: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined });

@@ -106,7 +106,7 @@ try {
     }
   }
 
-  // 5. Specialized Interactive Visual Labs across top 7 checkup indicators
+  // 5. Specialized Interactive Visual Labs across all 14 featured checkup indicators
   for (const [slug, btnRegex, shotName] of [
     ["ecg", /P 波/, "vlab-ecg.png"],
     ["pressure", /舒张压/, "vlab-pressure.png"],
@@ -115,6 +115,13 @@ try {
     ["glucose", /餐后 \/ OGTT/, "vlab-glucose.png"],
     ["thyroid-nodule", /多条可疑特征组合/, "vlab-thyroid-nodule.png"],
     ["breast-ultrasound", /规整实性/, "vlab-breast-ultrasound.png"],
+    ["cbc", /白细胞与分类/, "vlab-cbc.png"],
+    ["urinalysis", /显微镜沉渣检查/, "vlab-urinalysis.png"],
+    ["uric-acid", /肾脏排出减慢/, "vlab-uric-acid.png"],
+    ["h-pylori", /假阴性/, "vlab-h-pylori.png"],
+    ["fatty-liver", /超声之外还要看什么/, "vlab-fatty-liver.png"],
+    ["gallbladder", /胆囊结石/, "vlab-gallbladder.png"],
+    ["tumor-markers", /动态趋势比单次值更关键/, "vlab-tumor-markers.png"],
   ]) {
     await page.goto(`${base}/article/${slug}`, { waitUntil: "networkidle" });
     const vlab = page.locator("#article-visual-lab");
@@ -124,20 +131,43 @@ try {
     if (slug === "ecg") {
       await vlab.getByRole("button", { name: /偶发早搏/ }).click();
     }
+    if (slug === "gallbladder") {
+      await vlab.getByRole("button", { name: /左侧卧/ }).click();
+    }
     if (screenshotDir) {
-      await page.waitForTimeout(220);
+      await page.waitForTimeout(200);
       await vlab.screenshot({ path: `${screenshotDir}/${shotName}` });
     }
   }
 
-  // 6. Mobile 320px/390px overflow safety check with 3D + visual lab + flowchart open
+  // 5b. A-Z Checkup Abbreviation Glossary (/glossary)
+  await page.goto(`${base}/glossary`, { waitUntil: "networkidle" });
+  await expect(page.locator(".glossary-card").first()).toBeVisible();
+  if (screenshotDir) {
+    await page.waitForTimeout(200);
+    await page.screenshot({ path: `${screenshotDir}/glossary-az.png`, fullPage: false });
+  }
+  await page.locator("#glossary-search").fill("eGFR");
+  await expect(page.locator(".glossary-card").first()).toContainText("eGFR");
+  await expect(page.locator(".glossary-card").first()).toContainText("估算肾小球滤过率");
+  await page.locator(".glossary-clear-input").click();
+  await page.locator(".glossary-alpha").getByRole("button", { name: "T", exact: true }).click();
+  await expect(page.locator(".glossary-letter-heading span")).toHaveText("T");
+
+  // 6. Mobile 320px/390px overflow safety check with 3D + visual lab + glossary open
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
-    await page.goto(`${base}/article/ecg`, { waitUntil: "networkidle" });
+    await page.goto(`${base}/glossary`, { waitUntil: "networkidle" });
+    await expect(page.locator(".glossary-card").first()).toBeVisible();
+    assert.ok(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      `Glossary overflow at ${width}px`,
+    );
+    await page.goto(`${base}/article/gallbladder`, { waitUntil: "networkidle" });
     await expect(page.locator("#article-visual-lab")).toBeVisible();
     assert.ok(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-      `ECG visual lab overflow at ${width}px`,
+      `Gallbladder visual lab overflow at ${width}px`,
     );
     await page.goto(`${base}/article/lung-nodule`, { waitUntil: "networkidle" });
     await page.locator("#article-concept-3d").getByRole("button", { name: /打开 3D 观察/ }).click();
@@ -150,7 +180,7 @@ try {
 
   assert.deepEqual(failedModels, [], `Failed GLB model requests: ${failedModels.join(", ")}`);
   assert.deepEqual(errors, []);
-  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 7 specialized indicator visual labs, indicator flowcharts and 320px responsive layout.");
+  console.log("PASS NIH HuBMAP GLB models, lazy loading, 6/6 organ 3D sandboxes, 3D body map, 3 article concept slices, 14 specialized indicator visual labs, A-Z glossary, indicator flowcharts and 320px responsive layout.");
 } finally {
   await browser.close();
 }

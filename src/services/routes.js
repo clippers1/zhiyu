@@ -1,4 +1,4 @@
-const pages = new Set(["map", "indicators", "organs", "saved", "article", "topics", "guide"]);
+const pages = new Set(["map", "indicators", "organs", "saved", "article", "topics", "guide", "glossary"]);
 const validId = /^[a-z0-9-]+$/;
 
 export function parseRoute(pathname) {
