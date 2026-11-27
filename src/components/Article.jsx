@@ -34,6 +34,7 @@ import IndicatorVisualLab, { hasIndicatorVisualLab } from "./IndicatorVisualLab"
 import ConceptSlice3D from "./three/ConceptSlice3D";
 import InlineGlossaryText from "./InlineGlossaryText";
 import FigureLightbox from "./FigureLightbox";
+import DoctorChecklist from "./DoctorChecklist";
 
 function FigureBlock({ figure, id = "article-figure", onZoom }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -235,6 +236,7 @@ export default function Article({
       : []),
     ...(!longForm && detail.chain?.length > 0 ? [{ href: "#article-process", label: "理解过程" }] : []),
     ...(detail.tip ? [{ href: "#article-reminder", label: "不能说明什么" }] : []),
+    ...(!isStory && !isOrgan ? [{ href: "#article-doctor-checklist", label: "复诊提问清单" }] : []),
     { href: "#article-source-panel", label: "核对来源" },
   ] : [];
 
@@ -432,6 +434,7 @@ export default function Article({
             {questions.length > 0 && <a href="#article-questions">{longForm && detail.faq?.length ? "常见问题" : "术语问答"}</a>}
             {!longForm && detail.chain?.length > 0 && <a href="#article-process">理解过程</a>}
             {detail.tip && <a href="#article-reminder">不能说明什么</a>}
+            {!isStory && !isOrgan && <a href="#article-doctor-checklist">复诊提问清单</a>}
             <a href="#article-source-panel">核对来源</a>
           </nav>
           <div className="detail-body">
@@ -531,6 +534,9 @@ export default function Article({
                   ))}
                 </div>
               </section>
+            )}
+            {!isStory && !isOrgan && (
+              <DoctorChecklist detail={detail} relatedIndicators={relatedIndicators} />
             )}
             <SourceReferences content={detail} prefix="article-source" />
             <FeedbackBox content={detail} />

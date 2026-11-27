@@ -4,6 +4,7 @@ import { getPayload } from 'payload';
 import config from './payload.config';
 import { publicContent } from './public-api';
 import { parseRoute, routePath } from '../reader/services/routes.js';
+import { buildStructuredData, serializeJsonLd } from '../reader/services/structured-data.js';
 
 export function siteChannel(): 'official' | 'demo' {
   const value = process.env.SITE_CONTENT_CHANNEL || 'official';
@@ -87,16 +88,29 @@ export function pageMetadata(page: Awaited<ReturnType<typeof buildPage>>): Metad
   const description = page.route.page === 'guide'
     ? `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}检验报告单上的项目名、结果、单位与参考区间分别是什么意思；不解读个人数值。`
     : page.route.page === 'glossary'
-      ? `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}体检报告常见 50+ 英文缩写（ALT、eGFR、TSH、HbA1c、TI-RADS、BI-RADS 等）A–Z 速查词典，快速对照中文全称与对应专题。`
+      ? `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}体检报告常见 68 条英文缩写（ALT、eGFR、TSH、HbA1c、HBsAg、TCT、HPV、TI-RADS、BI-RADS 等）A–Z 速查词典，快速对照中文全称与对应专题。`
       : `${page.channel === 'demo' ? 'Beta 科普内容，来源与表达待完整核对。' : ''}${page.detail?.subtitle || page.detail?.headline || '用有来源的图文和互动认识体检指标、器官与身体之间的联系。'}内容用于健康科普，不替代医生诊断。`;
   const index = page.channel === 'official' && page.route.page !== 'saved';
+  const openingFigure = Array.isArray(page.detail?.figures) ? page.detail.figures.find((fig: any) => fig?.src) : page.detail?.figure;
+  const ogImage = page.route.page === 'guide'
+    ? `${siteOrigin()}/media/fig-report-guide.webp`
+    : openingFigure?.src
+      ? `${siteOrigin()}${openingFigure.src}`
+      : page.route.page === 'organs' && page.detail?.id
+        ? `${siteOrigin()}/media/organ-${page.detail.id}.webp`
+        : undefined;
   return {
     title, description, alternates: { canonical: page.canonical }, robots: { index, follow: true },
     openGraph: { title, description, url: page.canonical, siteName: '知愈', locale: 'zh_CN', type: page.detail ? 'article' : 'website',
       ...(page.detail ? { modifiedTime: page.detail.updatedAt } : {}),
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
     },
-    twitter: { card: 'summary', title, description },
+    twitter: { card: ogImage ? 'summary_large_image' : 'summary', title, description, ...(ogImage ? { images: [ogImage] } : {}) },
   };
+}
+
+export function pageJsonLd(page: Awaited<ReturnType<typeof buildPage>>): string {
+  return serializeJsonLd(buildStructuredData(page, siteOrigin()));
 }
 
 const escapeXML = (value: string) => value.replace(/[<>&"']/g, char => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' })[char]!);

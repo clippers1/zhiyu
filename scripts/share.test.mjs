@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import jsQR from 'jsqr';
-import { shareCardModel, qrMatrix, wrapCardText } from '../src/services/share.js';
+import { shareCardModel, familyPosterModel, qrMatrix, wrapCardText } from '../src/services/share.js';
 import { createContentRepository } from '../src/services/content.js';
 
 const content = { kind: 'indicator', id: 'glucose', title: '血糖', subtitle: '认识概念', version: 1, updatedAt: '2026-09-19', reviewStatus: 'pending', references: [{ id: 'a' }] };
@@ -70,4 +70,22 @@ test('QR matrix is independently decodable with a four-module quiet zone', () =>
     }
   }));
   assert.equal(jsQR(rgba, size, size)?.data, url);
+});
+test('family poster model builds clean elder-friendly summary without leaking private fields', () => {
+  const poster = familyPosterModel({
+    ...content,
+    question: '血糖项目主要看什么？',
+    questionAnswer: '空腹与糖化血红蛋白看的是不同时间窗口。',
+    tip: '一次偏高先核对采样背景。',
+    metrics: [{ name: '空腹血糖', text: '反映安静状态基线' }, { name: '糖化血红蛋白', text: '反映两三个月平均水平' }],
+    figures: [{ key: 'flow', src: '/media/fig-glucose-flow.webp', attribution: { kind: 'ai-generated', name: 'AI' } }],
+    references: [{ id: 'a', publisher: 'NLM · MedlinePlus' }],
+    search: 'private secret query',
+  }, 'https://example.test', new Date('2026-11-27T00:00:00Z'));
+  assert.equal(poster.variant, 'family');
+  assert.equal(poster.filename, 'zhiyu-family-indicator-glucose.png');
+  assert.equal(poster.figureSrc, '/media/fig-glucose-flow.webp');
+  assert.equal(poster.points.length, 2);
+  assert.deepEqual(poster.publishers, ['NLM · MedlinePlus']);
+  assert.ok(!JSON.stringify(poster).includes('secret'));
 });

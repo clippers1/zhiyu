@@ -1,0 +1,230 @@
+/* 复诊提问清单生成器 · 零隐私上传 */
+
+.doctor-checklist {
+  margin-top: var(--s-8);
+  scroll-margin-top: calc(var(--header-h, 64px) + 20px);
+  padding: 20px;
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f5fbfa 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.checklist-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.checklist-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.doctor-checklist .checklist-head h2 {
+  margin-top: 4px;
+  padding-top: 0;
+  border-top: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.checklist-count {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-wash);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.checklist-lead {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.72;
+  color: var(--ink-2);
+}
+
+.checklist-group {
+  margin-top: 16px;
+}
+
+.checklist-group h3 {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+
+.checklist-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.checklist-list li {
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: #ffffff;
+  transition: border-color 0.14s ease, background 0.14s ease;
+}
+
+.checklist-list li.checked {
+  border-color: var(--accent-border);
+  background: #f9fdfc;
+}
+
+.checklist-list label {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 12px 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checklist-list input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.checklist-box {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 6px;
+  border: 1.5px solid var(--rule-strong);
+  background: #ffffff;
+  color: #ffffff;
+  transition: background 0.14s ease, border-color 0.14s ease;
+}
+
+.checklist-list li.checked .checklist-box {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.checklist-list input[type="checkbox"]:focus-visible + .checklist-box {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.checklist-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.checklist-item-body small {
+  display: inline-block;
+  width: fit-content;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.checklist-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.checklist-copy-btn,
+.checklist-print-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: var(--r-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checklist-copy-btn {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.checklist-copy-btn:hover {
+  background: var(--accent-deep);
+}
+
+.checklist-print-btn {
+  border: 1px solid var(--rule-strong);
+  background: #ffffff;
+  color: var(--ink-2);
+}
+
+.checklist-print-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.checklist-status {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.checklist-fallback {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 12px;
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+@media print {
+  .reading-bar,
+  .reading-progress-track,
+  .reading-toc,
+  .checklist-actions,
+  .article-share-entry,
+  .topic-followup,
+  .feedback-box,
+  .bottom-nav,
+  .site-header {
+    display: none !important;
+  }
+  .doctor-checklist {
+    break-inside: avoid;
+    box-shadow: none;
+    border-color: #94a3b8;
+  }
+}

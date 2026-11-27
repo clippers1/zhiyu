@@ -1,27 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { ImageDown } from "lucide-react";
+import { HeartHandshake, ImageDown } from "lucide-react";
 import Modal from "./Modal";
 import { useReader } from "../reader-context";
-import { shareCardModel } from "../services/share";
+import { familyPosterModel, shareCardModel } from "../services/share";
 import "./share-card.css";
 
 export default function ShareCardButton({ content }) {
-  const [open, setOpen] = useState(false);
+  const [openVariant, setOpenVariant] = useState("");
   const [ready, setReady] = useState(false);
   useEffect(() => { setReady(true); }, []);
-  useEffect(() => { setOpen(false); }, [content.kind, content.id]);
+  useEffect(() => { setOpenVariant(""); }, [content.kind, content.id]);
   return <>
-    <button className="share-card-trigger" disabled={!ready} onClick={() => setOpen(true)}><ImageDown size={17} />生成分享卡片</button>
-    {open && <Modal className="share-card-modal" onClose={() => setOpen(false)}><ShareCard kind={content.kind} id={content.id} /></Modal>}
+    <div className="share-card-triggers">
+      <button className="share-card-trigger" disabled={!ready} onClick={() => setOpenVariant("card")}>
+        <ImageDown size={17} />生成分享卡片
+      </button>
+      <button className="share-family-trigger" disabled={!ready} onClick={() => setOpenVariant("family")}>
+        <HeartHandshake size={17} />发给家人 · 一图读懂
+      </button>
+    </div>
+    {openVariant && (
+      <Modal className="share-card-modal" onClose={() => setOpenVariant("")}>
+        <ShareCard kind={content.kind} id={content.id} initialVariant={openVariant} />
+      </Modal>
+    )}
   </>;
 }
 
-function ShareCard({ kind, id }) {
+function ShareCard({ kind, id, initialVariant = "card" }) {
   const { repository } = useReader();
+  const [variant, setVariant] = useState(initialVariant);
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState({ loading: true, error: "", data: null });
   const [message, setMessage] = useState("");
   const [sharing, setSharing] = useState(false);
+
+  useEffect(() => { setVariant(initialVariant); }, [initialVariant]);
+
   useEffect(() => {
     let active = true;
     let imageURL;
@@ -32,19 +47,24 @@ function ShareCard({ kind, id }) {
       try {
         // Bypass SSR bootstrap: recheck current publication before generating.
         const current = await repository.get(kind, id, { signal: controller.signal, refresh: true });
-        const model = shareCardModel(current, window.location.origin);
-        const { drawShareCard } = await import("../services/share-image");
-        const blob = await drawShareCard(model);
+        const model = variant === "family"
+          ? familyPosterModel(current, window.location.origin)
+          : shareCardModel(current, window.location.origin);
+        const { drawFamilyPoster, drawShareCard } = await import("../services/share-image");
+        const blob = variant === "family" ? await drawFamilyPoster(model) : await drawShareCard(model);
         if (!active) return;
         imageURL = URL.createObjectURL(blob);
-        setState({ loading: false, error: "", data: { model, blob, imageURL } });
+        setState({ loading: false, error: "", data: { model, blob, imageURL, variant } });
       } catch (error) {
         if (active && error.name !== "AbortError") setState({ loading: false, data: null, error: error.message || "卡片生成失败，请稍后重试。" });
       }
     })();
     return () => { active = false; controller.abort(); if (imageURL) URL.revokeObjectURL(imageURL); };
-  }, [kind, id, attempt, repository]);
+  }, [kind, id, variant, attempt, repository]);
+
   const data = state.data;
+  const isFamily = variant === "family";
+
   async function copy() {
     try { await navigator.clipboard.writeText(data.model.url); setMessage("阅读链接已复制"); }
     catch { setMessage("自动复制不可用，请选中下方阅读链接复制。"); }
@@ -64,12 +84,42 @@ function ShareCard({ kind, id }) {
     } finally { setSharing(false); }
   }
   return <>
-    <h2 id="dialog-title">把知识入口分享出去</h2>
-    <p className="share-card-note">卡片在当前浏览器生成，不上传图片；转发前请确认内容和核对状态。</p>
+    <h2 id="dialog-title">{isFamily ? "发给家人看 · 大字一图读懂" : "把知识入口分享出去"}</h2>
+    <div className="share-mode-switch" role="group" aria-label="选择分享卡片版式">
+      <button
+        type="button"
+        className={!isFamily ? "active" : ""}
+        aria-pressed={!isFamily}
+        disabled={sharing}
+        onClick={() => setVariant("card")}
+      >
+        简洁入口卡
+      </button>
+      <button
+        type="button"
+        className={isFamily ? "active" : ""}
+        aria-pressed={isFamily}
+        disabled={sharing}
+        onClick={() => setVariant("family")}
+      >
+        发给家人 · 大字长图
+      </button>
+    </div>
+    <p className="share-card-note">
+      {isFamily
+        ? "专为发给父母长辈设计：大字白话结论 + 3 个重点 + 不必恐慌提示，均取自已核对正文，在本地浏览器生成。"
+        : "卡片在当前浏览器生成，不上传图片；转发前请确认内容和核对状态。"}
+    </p>
     {state.loading && <p role="status">正在核对当前内容并生成卡片…</p>}
     {state.error && <div role="alert"><p>{state.error}</p><p>未生成旧内容卡片。可关闭后重新打开文章，确认内容是否已更新或撤回。</p></div>}
     {data && <>
-      <img className="share-card-preview" src={data.imageURL} width="1080" height="1440" alt={`${data.model.title}分享卡片；${data.model.status}；${data.model.disclaimer}`} />
+      <img
+        className={`share-card-preview${data.variant === "family" ? " family" : ""}`}
+        src={data.imageURL}
+        width="1080"
+        height={data.variant === "family" ? "1920" : "1440"}
+        alt={`${data.model.title}${data.variant === "family" ? "给家人看的一图读懂长图" : "分享卡片"}；${data.model.status}；${data.model.disclaimer}`}
+      />
       <p className="share-card-status">{data.model.status} · {data.model.referenceCount} 份参考资料</p>
       <div className="share-card-actions">
         <a href={data.imageURL} download={data.model.filename}>下载 PNG 图片</a>

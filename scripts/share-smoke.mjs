@@ -98,6 +98,50 @@ try {
   await page.locator('.organ-bookmark .share-card-trigger').click();
   await expect(modal.locator('img')).toHaveAttribute('alt', /肝脏/);
   assert.equal((await decode()).url, `${base}/organs/liver`);
+  await page.keyboard.press('Escape');
+
+  // Family-friendly "one-glance poster" (1080x1920) mode with embedded 3D illustration + decodable QR
+  await page.goto(`${base}/article/hepatitis-b`, { waitUntil: 'networkidle' });
+  await page.locator('.article-share-entry .share-family-trigger').click();
+  const famModal = page.getByRole('dialog');
+  await expect(famModal.locator('.share-card-preview.family')).toBeVisible({ timeout: 15000 });
+  const famDecoded = await decode();
+  assert.deepEqual(famDecoded, { width: 1080, height: 1920, url: `${base}/article/hepatitis-b` });
+  const famDownloadEvent = page.waitForEvent('download');
+  await famModal.getByRole('link', { name: '下载 PNG 图片' }).click();
+  const famDownload = await famDownloadEvent;
+  assert.equal(famDownload.suggestedFilename(), 'zhiyu-family-indicator-hepatitis-b.png');
+  const shotDir = process.env.SCREENSHOT_DIR || 'artifacts';
+  await mkdir(shotDir, { recursive: true });
+  await famDownload.saveAs(`${shotDir}/family-poster-hepatitis-b.png`);
+  // Switch mode inside the same modal back to compact card
+  await famModal.getByRole('button', { name: '简洁入口卡' }).click();
+  await expect(famModal.locator('.share-card-preview:not(.family)')).toBeVisible({ timeout: 15000 });
+  assert.equal((await decode()).height, 1440);
+  await page.keyboard.press('Escape');
+
+  // Doctor visit checklist interaction + copy + 320px responsive check
+  const checklist = page.locator('#article-doctor-checklist');
+  await checklist.scrollIntoViewIfNeeded();
+  await expect(checklist).toBeVisible();
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async text => { window.copiedChecklist = text; } } });
+  });
+  await checklist.getByRole('button', { name: /复制提问清单/ }).click();
+  await expect(checklist.locator('.checklist-status')).toContainText('已复制');
+  const copiedChecklist = await page.evaluate(() => window.copiedChecklist);
+  assert.match(copiedChecklist, /乙肝两对半/);
+  assert.match(copiedChecklist, /不含个人检查数值或医学诊断结论/);
+  if (process.env.SCREENSHOT_DIR) {
+    await page.setViewportSize({ width: 900, height: 1100 });
+    await checklist.evaluate(el => el.scrollIntoView({ block: 'center' }));
+    await page.waitForTimeout(150);
+    await checklist.screenshot({ path: `${shotDir}/doctor-checklist.png` });
+    await page.setViewportSize({ width: 390, height: 844 });
+  }
+  await page.setViewportSize({ width: 320, height: 844 });
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Checklist + family share buttons overflow at 320px');
+  await page.setViewportSize({ width: 390, height: 844 });
   if (ssr) {
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(`${base}/article/glucose`);

@@ -1,5 +1,5 @@
 import { notFound, permanentRedirect } from 'next/navigation';
-import { loadPage, pageMetadata } from '../../../site';
+import { loadPage, pageJsonLd, pageMetadata } from '../../../site';
 import Reader from '../Reader';
 
 export const dynamic = 'force-dynamic';
@@ -16,5 +16,9 @@ export default async function Page(props: Props) {
   if (path === '/organs') permanentRedirect('/organs/heart');
   const page = await loadPage(path);
   if (!page) notFound();
-  return <Reader initialRoute={page.route} runtime={page.runtime} preloaded={page.preloaded} />;
+  const jsonLd = pageJsonLd(page);
+  return <>
+    {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />}
+    <Reader initialRoute={page.route} runtime={page.runtime} preloaded={page.preloaded} />
+  </>;
 }

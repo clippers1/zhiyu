@@ -1,4 +1,10 @@
-.share-card-trigger {
+.share-card-triggers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.share-card-trigger,
+.share-family-trigger {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
@@ -9,13 +15,53 @@
   background: var(--surface);
   color: var(--accent);
   font-size: var(--t-13);
+  font-weight: 500;
+  cursor: pointer;
 }
-.share-card-trigger:hover {
+.share-family-trigger {
+  border-color: var(--accent-border);
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.share-card-trigger:hover,
+.share-family-trigger:hover {
   border-color: var(--accent);
   color: var(--accent-deep);
 }
-.share-card-trigger:disabled {
+.share-card-trigger:disabled,
+.share-family-trigger:disabled {
   opacity: .5;
+}
+.share-mode-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--s-2);
+  padding: 4px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+}
+.share-mode-switch button {
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.share-mode-switch button.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+.share-card-preview.family {
+  max-height: 560px;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .article-share-entry {
   display: flex;
